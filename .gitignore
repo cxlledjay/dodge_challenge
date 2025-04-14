@@ -1,0 +1,5 @@
+bin
+build
+manual
+overlay/**
+!overlay/dodge_challenge.png
