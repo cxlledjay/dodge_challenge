@@ -1,0 +1,36 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	stop_explosion.c
+                              6 	.area	.text
+                              7 	.globl	_stop_explosion
+   0000                       8 _stop_explosion:
+   0000 7F`00`00      [ 7]    9 	clr	_Vec_Expl_Timer
+   0003 7F`00`00      [ 7]   10 	clr	_Vec_Expl_Flag
+   0006 BD`00`00      [ 8]   11 	jsr	___Clear_Sound
+   0009 8E`00`00      [ 3]   12 	ldx	#_explosion_off
+   000C BF`00`00      [ 6]   13 	stx	_current_explosion
+   000F 39            [ 5]   14 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:34 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+    _Vec_Expl_Flag     **** GX  |     _Vec_Expl_Time     **** GX
+    ___Clear_Sound     **** GX  |     _current_explo     **** GX
+    _explosion_off     **** GX  |   2 _stop_explosio     0000 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:34 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   10   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

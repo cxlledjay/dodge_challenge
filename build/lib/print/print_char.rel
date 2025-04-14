@@ -1,0 +1,27 @@
+XH2
+H 3 areas 6 global symbols 2 banks 1 modes
+M print_char.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S _dp_VIA_t1_cnt_lo Ref0000
+S .__.ABS. Def0000
+S __Print_Str Ref0000
+S ___Reset0Ref Ref0000
+S __Moveto_d Ref0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .text size 3E flags D00
+S _print_char Def0000
+T 00 00
+R 00 00 00 02
+T 00 00 32 77 E7 E4 E6 6C E7 61 C6 20 E7 62 C6
+R 00 00 00 02
+T 00 0D 20 E7 63 C6 80 E7 64 E6 E4 E7 66 E6 6B
+R 00 00 00 02
+T 00 1A E7 65 BD 00 00 C6 7F D7 00 00 E6 66 E7
+R 00 00 00 02 81 05 00 03 A0 0A 00 00
+T 00 26 68 E6 65 E7 67 E6 68 E7 E2 E6 68 BD
+R 00 00 00 02
+T 00 32 00 00 32 61 30 61 BD 00 00 32 69 39
+R 00 00 00 02 81 02 00 04 81 09 00 02

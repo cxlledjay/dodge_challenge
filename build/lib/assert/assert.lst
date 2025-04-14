@@ -1,0 +1,393 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	assert.c
+                              6 	.globl	_yy0
+                              7 	.area	.text
+   0000                       8 _yy0:
+   0000 5A                    9 	.byte	90
+                             10 	.globl	_xx0
+   0001                      11 _xx0:
+   0001 88                   12 	.byte	-120
+                             13 	.globl	_mm0
+   0002                      14 _mm0:
+   0002 41 53 53 45 52 54    15 	.byte	65,83,83,69,82,84,32,70
+        20 46
+   000A 41 49 4C 45 44 3A    16 	.byte	65,73,76,69,68,58,-128,0
+        80 00
+                             17 ;----- asm -----
+                     0011    18 	. = . - 1
+                             19 	
+                             20 ;--- end asm ---
+                             21 	.globl	_yy1
+   0011                      22 _yy1:
+   0011 28                   23 	.byte	40
+                             24 	.globl	_xx1
+   0012                      25 _xx1:
+   0012 88                   26 	.byte	-120
+                             27 	.globl	_mm1
+   0013                      28 _mm1:
+   0013 46 49 4C 45 3A 80    29 	.byte	70,73,76,69,58,-128,0
+        00
+                             30 ;----- asm -----
+                     0019    31 	. = . - 1
+                             32 	
+                             33 ;--- end asm ---
+                             34 	.globl	_yy2
+   0019                      35 _yy2:
+   0019 F6                   36 	.byte	-10
+                             37 	.globl	_xx2
+   001A                      38 _xx2:
+   001A 88                   39 	.byte	-120
+                             40 	.globl	_mm2
+   001B                      41 _mm2:
+   001B 46 55 4E 43 54 49    42 	.byte	70,85,78,67,84,73,79,78
+        4F 4E
+   0023 3A 80 00             43 	.byte	58,-128,0
+                             44 ;----- asm -----
+                     0025    45 	. = . - 1
+                             46 	
+                             47 ;--- end asm ---
+                             48 	.globl	_yy3
+   0025                      49 _yy3:
+   0025 C4                   50 	.byte	-60
+                             51 	.globl	_xx3
+   0026                      52 _xx3:
+   0026 88                   53 	.byte	-120
+                             54 	.globl	_mm3
+   0027                      55 _mm3:
+   0027 4C 49 4E 45 3A 80    56 	.byte	76,73,78,69,58,-128,0
+        00
+                             57 	.globl	__f_assert_failed
+   002E                      58 __f_assert_failed:
+   002E 34 60         [ 7]   59 	pshs	y,u
+   0030 32 E8 D4      [ 5]   60 	leas	-44,s
+   0033 33 E4         [ 4]   61 	leau	,s
+   0035 AF 4E         [ 6]   62 	stx	14,u
+   0037 E7 4D         [ 5]   63 	stb	13,u
+   0039 10 EF 42      [ 7]   64 	sts	2,u
+   003C 30 E4         [ 4]   65 	leax	,s
+   003E AF 4B         [ 6]   66 	stx	11,u
+   0040 BE`00`00      [ 6]   67 	ldx	_Vec_Text_HW
+   0043 AF C8 1D      [ 6]   68 	stx	29,u
+   0046 8E F8 50      [ 3]   69 	ldx	#-1968
+   0049 BF`00`00      [ 6]   70 	stx	_Vec_Text_HW
+   004C BD`00`00      [ 8]   71 	jsr	___Clear_Sound
+   004F E6 4D         [ 5]   72 	ldb	13,u
+   0051 4F            [ 2]   73 	clra		;zero_extendqihi: R:b -> R:d
+   0052 ED C4         [ 5]   74 	std	,u
+   0054 EC C4         [ 5]   75 	ldd	,u
+   0056 E3 4E         [ 7]   76 	addd	14,u; addhi3,3
+   0058 ED C8 1F      [ 6]   77 	std	31,u
+   005B 6F 4D         [ 7]   78 	clr	13,u
+   005D 20 02         [ 3]   79 	bra	L2
+   005F                      80 L4:
+   005F 6C 4D         [ 7]   81 	inc	13,u
+   0061                      82 L2:
+   0061 EC C8 1F      [ 6]   83 	ldd	31,u
+   0064 C3 FF FF      [ 4]   84 	addd	#-1; addhi3,3
+   0067 ED C8 1F      [ 6]   85 	std	31,u
+   006A E6 D8 1F      [ 8]   86 	ldb	[31,u]
+   006D C1 5C         [ 2]   87 	cmpb	#92	;cmpqi:
+   006F 27 0E         [ 3]   88 	beq	L3
+   0071 E6 D8 1F      [ 8]   89 	ldb	[31,u]
+   0074 C1 2F         [ 2]   90 	cmpb	#47	;cmpqi:
+   0076 27 07         [ 3]   91 	beq	L3
+   0078 AE C8 1F      [ 6]   92 	ldx	31,u
+   007B AC 4E         [ 7]   93 	cmpx	14,u	;cmphi:
+   007D 26 E0         [ 3]   94 	bne	L4
+   007F                      95 L3:
+   007F E6 4D         [ 5]   96 	ldb	13,u
+   0081 6A 4D         [ 7]   97 	dec	13,u
+   0083 4F            [ 2]   98 	clra		;zero_extendqihi: R:b -> R:d
+   0084 ED C4         [ 5]   99 	std	,u
+   0086 1F 40         [ 6]  100 	tfr	s,d
+   0088 A3 C4         [ 6]  101 	subd	,u	;subhi: R:d -= ,u
+   008A 1F 04         [ 6]  102 	tfr	d,s
+   008C 10 EF 45      [ 7]  103 	sts	5,u
+   008F 8E 00 00      [ 3]  104 	ldx	#0
+   0092 1E 01         [ 8]  105 	exg	d,x
+   0094 E3 45         [ 7]  106 	addd	5,u; addhi3,3
+   0096 1E 01         [ 8]  107 	exg	d,x
+   0098 AF 45         [ 6]  108 	stx	5,u
+   009A AE 45         [ 6]  109 	ldx	5,u
+   009C AF C8 17      [ 6]  110 	stx	23,u
+   009F 6F C8 21      [ 7]  111 	clr	33,u
+   00A2 20 37         [ 3]  112 	bra	L5
+   00A4                     113 L7:
+   00A4 EC C8 1F      [ 6]  114 	ldd	31,u
+   00A7 C3 00 01      [ 4]  115 	addd	#1; addhi3,3
+   00AA ED C8 1F      [ 6]  116 	std	31,u
+   00AD E6 D8 1F      [ 8]  117 	ldb	[31,u]
+   00B0 E7 C8 22      [ 5]  118 	stb	34,u
+   00B3 E6 C8 22      [ 5]  119 	ldb	34,u
+   00B6 C1 60         [ 2]  120 	cmpb	#96	;cmpqi:
+   00B8 23 0F         [ 3]  121 	bls	L6
+   00BA E6 C8 22      [ 5]  122 	ldb	34,u
+   00BD C1 7A         [ 2]  123 	cmpb	#122	;cmpqi:
+   00BF 22 08         [ 3]  124 	bhi	L6
+   00C1 E6 C8 22      [ 5]  125 	ldb	34,u
+   00C4 CB E0         [ 2]  126 	addb	#-32
+   00C6 E7 C8 22      [ 5]  127 	stb	34,u
+   00C9                     128 L6:
+   00C9 E6 C8 21      [ 5]  129 	ldb	33,u
+   00CC 4F            [ 2]  130 	clra		;zero_extendqihi: R:b -> R:d
+   00CD 10 AE C8 17   [ 7]  131 	ldy	23,u
+   00D1 30 AB         [ 8]  132 	leax	d,y
+   00D3 E6 C8 22      [ 5]  133 	ldb	34,u
+   00D6 E7 84         [ 4]  134 	stb	,x
+   00D8 6C C8 21      [ 7]  135 	inc	33,u
+   00DB                     136 L5:
+   00DB E6 C8 21      [ 5]  137 	ldb	33,u
+   00DE E1 4D         [ 5]  138 	cmpb	13,u	;cmpqi:
+   00E0 25 C2         [ 3]  139 	blo	L7
+   00E2 E6 4D         [ 5]  140 	ldb	13,u
+   00E4 4F            [ 2]  141 	clra		;zero_extendqihi: R:b -> R:d
+   00E5 10 AE C8 17   [ 7]  142 	ldy	23,u
+   00E9 30 AB         [ 8]  143 	leax	d,y
+   00EB C6 80         [ 2]  144 	ldb	#-128
+   00ED E7 84         [ 4]  145 	stb	,x
+   00EF 30 C8 10      [ 5]  146 	leax	16,u
+   00F2 BD`00`00      [ 8]  147 	jsr	___Clear_Score
+   00F5 20 11         [ 3]  148 	bra	L8
+   00F7                     149 L9:
+   00F7 30 C8 10      [ 5]  150 	leax	16,u
+   00FA C6 FF         [ 2]  151 	ldb	#-1
+   00FC BD`00`00      [ 8]  152 	jsr	__Add_Score_a
+   00FF EC C8 32      [ 6]  153 	ldd	50,u
+   0102 C3 FF 01      [ 4]  154 	addd	#-255; addhi3,3
+   0105 ED C8 32      [ 6]  155 	std	50,u
+   0108                     156 L8:
+   0108 AE C8 32      [ 6]  157 	ldx	50,u
+   010B 8C 00 FF      [ 4]  158 	cmpx	#255	;cmphi:
+   010E 22 E7         [ 3]  159 	bhi	L9
+   0110 AE C8 32      [ 6]  160 	ldx	50,u
+   0113 1F 10         [ 6]  161 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   0115 E7 C8 25      [ 5]  162 	stb	37,u
+   0118 30 C8 10      [ 5]  163 	leax	16,u
+   011B E6 C8 25      [ 5]  164 	ldb	37,u
+   011E BD`00`00      [ 8]  165 	jsr	__Add_Score_a
+   0121 6F C8 21      [ 7]  166 	clr	33,u
+   0124                     167 L11:
+   0124 E6 C8 21      [ 5]  168 	ldb	33,u
+   0127 4F            [ 2]  169 	clra		;zero_extendqihi: R:b -> R:d
+   0128 ED C4         [ 5]  170 	std	,u
+   012A AE C4         [ 5]  171 	ldx	,u
+   012C 1E 01         [ 8]  172 	exg	d,x
+   012E E3 C8 34      [ 7]  173 	addd	52,u; addhi3,3
+   0131 1E 01         [ 8]  174 	exg	d,x
+   0133 E6 84         [ 4]  175 	ldb	,x
+   0135 E7 44         [ 5]  176 	stb	4,u
+   0137 6D 44         [ 7]  177 	tst	4,u
+   0139 27 04         [ 3]  178 	beq	L10
+   013B C6 01         [ 2]  179 	ldb	#1
+   013D E7 44         [ 5]  180 	stb	4,u
+   013F                     181 L10:
+   013F E6 44         [ 5]  182 	ldb	4,u
+   0141 6C C8 21      [ 7]  183 	inc	33,u
+   0144 5D            [ 2]  184 	tstb
+   0145 26 DD         [ 3]  185 	bne	L11
+   0147 E6 C8 21      [ 5]  186 	ldb	33,u
+   014A 4F            [ 2]  187 	clra		;zero_extendqihi: R:b -> R:d
+   014B ED C4         [ 5]  188 	std	,u
+   014D 1F 40         [ 6]  189 	tfr	s,d
+   014F A3 C4         [ 6]  190 	subd	,u	;subhi: R:d -= ,u
+   0151 1F 04         [ 6]  191 	tfr	d,s
+   0153 10 EF 47      [ 7]  192 	sts	7,u
+   0156 8E 00 00      [ 3]  193 	ldx	#0
+   0159 1E 01         [ 8]  194 	exg	d,x
+   015B E3 47         [ 7]  195 	addd	7,u; addhi3,3
+   015D 1E 01         [ 8]  196 	exg	d,x
+   015F AF 47         [ 6]  197 	stx	7,u
+   0161 AE 47         [ 6]  198 	ldx	7,u
+   0163 AF C8 19      [ 6]  199 	stx	25,u
+   0166 6A C8 21      [ 7]  200 	dec	33,u
+   0169 E6 C8 21      [ 5]  201 	ldb	33,u
+   016C 4F            [ 2]  202 	clra		;zero_extendqihi: R:b -> R:d
+   016D 10 AE C8 19   [ 7]  203 	ldy	25,u
+   0171 30 AB         [ 8]  204 	leax	d,y
+   0173 C6 80         [ 2]  205 	ldb	#-128
+   0175 E7 84         [ 4]  206 	stb	,x
+   0177 20 39         [ 3]  207 	bra	L12
+   0179                     208 L14:
+   0179 E6 C8 21      [ 5]  209 	ldb	33,u
+   017C 4F            [ 2]  210 	clra		;zero_extendqihi: R:b -> R:d
+   017D ED C4         [ 5]  211 	std	,u
+   017F AE C4         [ 5]  212 	ldx	,u
+   0181 1E 01         [ 8]  213 	exg	d,x
+   0183 E3 C8 34      [ 7]  214 	addd	52,u; addhi3,3
+   0186 1E 01         [ 8]  215 	exg	d,x
+   0188 E6 84         [ 4]  216 	ldb	,x
+   018A E7 C8 23      [ 5]  217 	stb	35,u
+   018D E6 C8 23      [ 5]  218 	ldb	35,u
+   0190 C1 60         [ 2]  219 	cmpb	#96	;cmpqi:
+   0192 23 0F         [ 3]  220 	bls	L13
+   0194 E6 C8 23      [ 5]  221 	ldb	35,u
+   0197 C1 7A         [ 2]  222 	cmpb	#122	;cmpqi:
+   0199 22 08         [ 3]  223 	bhi	L13
+   019B E6 C8 23      [ 5]  224 	ldb	35,u
+   019E CB E0         [ 2]  225 	addb	#-32
+   01A0 E7 C8 23      [ 5]  226 	stb	35,u
+   01A3                     227 L13:
+   01A3 E6 C8 21      [ 5]  228 	ldb	33,u
+   01A6 4F            [ 2]  229 	clra		;zero_extendqihi: R:b -> R:d
+   01A7 10 AE C8 19   [ 7]  230 	ldy	25,u
+   01AB 30 AB         [ 8]  231 	leax	d,y
+   01AD E6 C8 23      [ 5]  232 	ldb	35,u
+   01B0 E7 84         [ 4]  233 	stb	,x
+   01B2                     234 L12:
+   01B2 6A C8 21      [ 7]  235 	dec	33,u
+   01B5 E6 C8 21      [ 5]  236 	ldb	33,u
+   01B8 C1 FF         [ 2]  237 	cmpb	#-1	;cmpqi:
+   01BA 26 BD         [ 3]  238 	bne	L14
+   01BC E6 C8 38      [ 5]  239 	ldb	56,u
+   01BF 4F            [ 2]  240 	clra		;zero_extendqihi: R:b -> R:d
+   01C0 ED C4         [ 5]  241 	std	,u
+   01C2 1F 40         [ 6]  242 	tfr	s,d
+   01C4 A3 C4         [ 6]  243 	subd	,u	;subhi: R:d -= ,u
+   01C6 1F 04         [ 6]  244 	tfr	d,s
+   01C8 10 EF 49      [ 7]  245 	sts	9,u
+   01CB 8E 00 00      [ 3]  246 	ldx	#0
+   01CE 1E 01         [ 8]  247 	exg	d,x
+   01D0 E3 49         [ 7]  248 	addd	9,u; addhi3,3
+   01D2 1E 01         [ 8]  249 	exg	d,x
+   01D4 AF 49         [ 6]  250 	stx	9,u
+   01D6 AE 49         [ 6]  251 	ldx	9,u
+   01D8 AF C8 1B      [ 6]  252 	stx	27,u
+   01DB 6F C8 21      [ 7]  253 	clr	33,u
+   01DE 20 4F         [ 3]  254 	bra	L15
+   01E0                     255 L19:
+   01E0 E6 C8 21      [ 5]  256 	ldb	33,u
+   01E3 4F            [ 2]  257 	clra		;zero_extendqihi: R:b -> R:d
+   01E4 ED C4         [ 5]  258 	std	,u
+   01E6 AE C4         [ 5]  259 	ldx	,u
+   01E8 1E 01         [ 8]  260 	exg	d,x
+   01EA E3 C8 36      [ 7]  261 	addd	54,u; addhi3,3
+   01ED 1E 01         [ 8]  262 	exg	d,x
+   01EF E6 84         [ 4]  263 	ldb	,x
+   01F1 E7 C8 24      [ 5]  264 	stb	36,u
+   01F4 E6 C8 24      [ 5]  265 	ldb	36,u
+   01F7 C1 60         [ 2]  266 	cmpb	#96	;cmpqi:
+   01F9 23 0F         [ 3]  267 	bls	L16
+   01FB E6 C8 24      [ 5]  268 	ldb	36,u
+   01FE C1 7A         [ 2]  269 	cmpb	#122	;cmpqi:
+   0200 22 08         [ 3]  270 	bhi	L16
+   0202 E6 C8 24      [ 5]  271 	ldb	36,u
+   0205 CB E0         [ 2]  272 	addb	#-32
+   0207 E7 C8 24      [ 5]  273 	stb	36,u
+   020A                     274 L16:
+   020A E6 C8 24      [ 5]  275 	ldb	36,u
+   020D C1 1F         [ 2]  276 	cmpb	#31	;cmpqi:
+   020F 23 07         [ 3]  277 	bls	L17
+   0211 E6 C8 24      [ 5]  278 	ldb	36,u
+   0214 C1 5F         [ 2]  279 	cmpb	#95	;cmpqi:
+   0216 23 05         [ 3]  280 	bls	L18
+   0218                     281 L17:
+   0218 C6 66         [ 2]  282 	ldb	#102
+   021A E7 C8 24      [ 5]  283 	stb	36,u
+   021D                     284 L18:
+   021D E6 C8 21      [ 5]  285 	ldb	33,u
+   0220 4F            [ 2]  286 	clra		;zero_extendqihi: R:b -> R:d
+   0221 10 AE C8 1B   [ 7]  287 	ldy	27,u
+   0225 30 AB         [ 8]  288 	leax	d,y
+   0227 E6 C8 24      [ 5]  289 	ldb	36,u
+   022A E7 84         [ 4]  290 	stb	,x
+   022C 6C C8 21      [ 7]  291 	inc	33,u
+   022F                     292 L15:
+   022F E6 C8 21      [ 5]  293 	ldb	33,u
+   0232 E1 C8 38      [ 5]  294 	cmpb	56,u	;cmpqi:
+   0235 25 A9         [ 3]  295 	blo	L19
+   0237 E6 C8 38      [ 5]  296 	ldb	56,u
+   023A 5A            [ 2]  297 	decb
+   023B 4F            [ 2]  298 	clra		;zero_extendqihi: R:b -> R:d
+   023C 10 AE C8 1B   [ 7]  299 	ldy	27,u
+   0240 30 AB         [ 8]  300 	leax	d,y
+   0242 C6 80         [ 2]  301 	ldb	#-128
+   0244 E7 84         [ 4]  302 	stb	,x
+   0246                     303 L20:
+   0246 BD`00`00      [ 8]  304 	jsr	___Wait_Recal
+   0249 BD`00`00      [ 8]  305 	jsr	___Intensity_5F
+   024C 8E`00`00      [ 3]  306 	ldx	#_yy0
+   024F BD`00`00      [ 8]  307 	jsr	__Print_List
+   0252 AE C8 1B      [ 6]  308 	ldx	27,u
+   0255 AF C8 26      [ 6]  309 	stx	38,u
+   0258 C6 46         [ 2]  310 	ldb	#70
+   025A E7 E2         [ 6]  311 	stb	,-s
+   025C AE C8 26      [ 6]  312 	ldx	38,u
+   025F C6 88         [ 2]  313 	ldb	#-120
+   0261 BD`00`00      [ 8]  314 	jsr	__Print_Str_d
+   0264 32 61         [ 5]  315 	leas	1,s
+   0266 AE C8 17      [ 6]  316 	ldx	23,u
+   0269 AF C8 28      [ 6]  317 	stx	40,u
+   026C C6 14         [ 2]  318 	ldb	#20
+   026E E7 E2         [ 6]  319 	stb	,-s
+   0270 AE C8 28      [ 6]  320 	ldx	40,u
+   0273 C6 88         [ 2]  321 	ldb	#-120
+   0275 BD`00`00      [ 8]  322 	jsr	__Print_Str_d
+   0278 32 61         [ 5]  323 	leas	1,s
+   027A AE C8 19      [ 6]  324 	ldx	25,u
+   027D AF C8 2A      [ 6]  325 	stx	42,u
+   0280 C6 E2         [ 2]  326 	ldb	#-30
+   0282 E7 E2         [ 6]  327 	stb	,-s
+   0284 AE C8 2A      [ 6]  328 	ldx	42,u
+   0287 C6 88         [ 2]  329 	ldb	#-120
+   0289 BD`00`00      [ 8]  330 	jsr	__Print_Str_d
+   028C 32 61         [ 5]  331 	leas	1,s
+   028E 30 C8 10      [ 5]  332 	leax	16,u
+   0291 C6 B0         [ 2]  333 	ldb	#-80
+   0293 E7 E2         [ 6]  334 	stb	,-s
+   0295 C6 88         [ 2]  335 	ldb	#-120
+   0297 BD`00`00      [ 8]  336 	jsr	__Print_Str_d
+   029A 32 61         [ 5]  337 	leas	1,s
+   029C BD`00`00      [ 8]  338 	jsr	___Read_Btns
+   029F F6`00`00      [ 5]  339 	ldb	_Vec_Buttons
+   02A2 C4 01         [ 2]  340 	andb	#1
+   02A4 5D            [ 2]  341 	tstb
+   02A5 10 27 FF 9D   [ 6]  342 	lbeq	L20
+   02A9 AE C8 1D      [ 6]  343 	ldx	29,u
+   02AC BF`00`00      [ 6]  344 	stx	_Vec_Text_HW
+   02AF 10 EE 4B      [ 7]  345 	lds	11,u
+   02B2 10 EE 42      [ 7]  346 	lds	2,u
+   02B5 32 E8 2C      [ 5]  347 	leas	44,s
+   02B8 35 E0         [ 8]  348 	puls	y,u,pc
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 L10                013F R   |   2 L11                0124 R
+  2 L12                01B2 R   |   2 L13                01A3 R
+  2 L14                0179 R   |   2 L15                022F R
+  2 L16                020A R   |   2 L17                0218 R
+  2 L18                021D R   |   2 L19                01E0 R
+  2 L2                 0061 R   |   2 L20                0246 R
+  2 L3                 007F R   |   2 L4                 005F R
+  2 L5                 00DB R   |   2 L6                 00C9 R
+  2 L7                 00A4 R   |   2 L8                 0108 R
+  2 L9                 00F7 R   |     _Vec_Buttons       **** GX
+    _Vec_Text_HW       **** GX  |     __Add_Score_a      **** GX
+    __Print_List       **** GX  |     __Print_Str_d      **** GX
+    ___Clear_Score     **** GX  |     ___Clear_Sound     **** GX
+    ___Intensity_5     **** GX  |     ___Read_Btns       **** GX
+    ___Wait_Recal      **** GX  |   2 __f_assert_fai     002E GR
+  2 _mm0               0002 GR  |   2 _mm1               0013 GR
+  2 _mm2               001B GR  |   2 _mm3               0027 GR
+  2 _xx0               0001 GR  |   2 _xx1               0012 GR
+  2 _xx2               001A GR  |   2 _xx3               0026 GR
+  2 _yy0               0000 GR  |   2 _yy1               0011 GR
+  2 _yy2               0019 GR  |   2 _yy3               0025 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size  2BA   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

@@ -1,0 +1,77 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	print_binary.c
+                              6 	.area	.text
+                              7 	.globl	_print_binary
+   0000                       8 _print_binary:
+   0000 32 E8 EE      [ 5]    9 	leas	-18,s
+   0003 E7 65         [ 5]   10 	stb	5,s
+   0005 C6 80         [ 2]   11 	ldb	#-128
+   0007 E7 6E         [ 5]   12 	stb	14,s
+   0009 C6 07         [ 2]   13 	ldb	#7
+   000B E7 6F         [ 5]   14 	stb	15,s
+   000D                      15 L2:
+   000D E6 6F         [ 5]   16 	ldb	15,s
+   000F E7 63         [ 5]   17 	stb	3,s
+   0011 E6 E8 15      [ 5]   18 	ldb	21,s
+   0014 E7 E4         [ 4]   19 	stb	,s
+   0016 C6 01         [ 2]   20 	ldb	#1
+   0018 E4 E4         [ 4]   21 	andb	,s
+   001A E7 62         [ 5]   22 	stb	2,s
+   001C E6 62         [ 5]   23 	ldb	2,s
+   001E CB 30         [ 2]   24 	addb	#48
+   0020 E7 64         [ 5]   25 	stb	4,s
+   0022 E6 63         [ 5]   26 	ldb	3,s
+   0024 4F            [ 2]   27 	clra		;zero_extendqihi: R:b -> R:d
+   0025 ED E4         [ 5]   28 	std	,s
+   0027 30 66         [ 5]   29 	leax	6,s
+   0029 1E 01         [ 8]   30 	exg	d,x
+   002B E3 E4         [ 6]   31 	addd	,s; addhi3,3
+   002D 1E 01         [ 8]   32 	exg	d,x
+   002F E6 64         [ 5]   33 	ldb	4,s
+   0031 E7 84         [ 4]   34 	stb	,x
+   0033 6A 6F         [ 7]   35 	dec	15,s
+   0035 64 E8 15      [ 7]   36 	lsr	21,s
+   0038 E6 6F         [ 5]   37 	ldb	15,s
+   003A C1 FF         [ 2]   38 	cmpb	#-1	;cmpqi:
+   003C 26 CF         [ 3]   39 	bne	L2
+   003E C6 CC         [ 2]   40 	ldb	#-52
+   0040 D7`00         [ 4]   41 	stb	*_dp_VIA_cntl
+   0042 C6 7F         [ 2]   42 	ldb	#127
+   0044 D7`00         [ 4]   43 	stb	*_dp_VIA_t1_cnt_lo
+   0046 E6 65         [ 5]   44 	ldb	5,s
+   0048 E7 E8 11      [ 5]   45 	stb	17,s
+   004B E6 E8 14      [ 5]   46 	ldb	20,s
+   004E E7 E8 10      [ 5]   47 	stb	16,s
+   0051 30 66         [ 5]   48 	leax	6,s
+   0053 E6 E8 11      [ 5]   49 	ldb	17,s
+   0056 E7 E2         [ 6]   50 	stb	,-s
+   0058 E6 E8 11      [ 5]   51 	ldb	17,s
+   005B BD`00`00      [ 8]   52 	jsr	__Print_Str_d
+   005E 32 61         [ 5]   53 	leas	1,s
+   0060 32 E8 12      [ 5]   54 	leas	18,s
+   0063 39            [ 5]   55 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 L2                 000D R   |     __Print_Str_d      **** GX
+    _dp_VIA_cntl       **** GX  |     _dp_VIA_t1_cnt     **** GX
+  2 _print_binary      0000 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   64   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

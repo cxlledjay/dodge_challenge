@@ -1,0 +1,78 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	play_tune.c
+                              6 	.area	.text
+                              7 	.globl	_play_tune
+   0000                       8 _play_tune:
+   0000 32 73         [ 5]    9 	leas	-13,s
+   0002 E7 62         [ 5]   10 	stb	2,s
+   0004 AF E4         [ 5]   11 	stx	,s
+   0006 E6 62         [ 5]   12 	ldb	2,s
+   0008 58            [ 2]   13 	aslb
+   0009 E7 63         [ 5]   14 	stb	3,s
+   000B EC E4         [ 5]   15 	ldd	,s
+   000D E7 64         [ 5]   16 	stb	4,s	;movlsbqihi: R:d -> 4,s
+   000F E6 63         [ 5]   17 	ldb	3,s
+   0011 6C 63         [ 7]   18 	inc	3,s
+   0013 E7 68         [ 5]   19 	stb	8,s
+   0015 E6 64         [ 5]   20 	ldb	4,s
+   0017 E7 67         [ 5]   21 	stb	7,s
+   0019 E6 68         [ 5]   22 	ldb	8,s
+   001B E7 E2         [ 6]   23 	stb	,-s
+   001D E6 68         [ 5]   24 	ldb	8,s
+   001F BD`00`00      [ 8]   25 	jsr	__Sound_Byte
+   0022 32 61         [ 5]   26 	leas	1,s
+   0024 EC E4         [ 5]   27 	ldd	,s
+   0026 1F 89         [ 6]   28 	tfr	a,b
+   0028 4F            [ 2]   29 	clra		;zero_extendqihi: R:b -> R:d
+   0029 E7 65         [ 5]   30 	stb	5,s	;movlsbqihi: R:d -> 5,s
+   002B E6 63         [ 5]   31 	ldb	3,s
+   002D E7 6A         [ 5]   32 	stb	10,s
+   002F E6 65         [ 5]   33 	ldb	5,s
+   0031 E7 69         [ 5]   34 	stb	9,s
+   0033 E6 6A         [ 5]   35 	ldb	10,s
+   0035 E7 E2         [ 6]   36 	stb	,-s
+   0037 E6 6A         [ 5]   37 	ldb	10,s
+   0039 BD`00`00      [ 8]   38 	jsr	__Sound_Byte
+   003C 32 61         [ 5]   39 	leas	1,s
+   003E E6 62         [ 5]   40 	ldb	2,s
+   0040 CB 08         [ 2]   41 	addb	#8
+   0042 E7 66         [ 5]   42 	stb	6,s
+   0044 E6 66         [ 5]   43 	ldb	6,s
+   0046 E7 6C         [ 5]   44 	stb	12,s
+   0048 E6 6F         [ 5]   45 	ldb	15,s
+   004A E7 6B         [ 5]   46 	stb	11,s
+   004C E6 6C         [ 5]   47 	ldb	12,s
+   004E E7 E2         [ 6]   48 	stb	,-s
+   0050 E6 6C         [ 5]   49 	ldb	12,s
+   0052 BD`00`00      [ 8]   50 	jsr	__Sound_Byte
+   0055 32 61         [ 5]   51 	leas	1,s
+   0057 C6 07         [ 2]   52 	ldb	#7
+   0059 E7 E2         [ 6]   53 	stb	,-s
+   005B C6 F8         [ 2]   54 	ldb	#-8
+   005D BD`00`00      [ 8]   55 	jsr	__Sound_Byte
+   0060 32 61         [ 5]   56 	leas	1,s
+   0062 32 6D         [ 5]   57 	leas	13,s
+   0064 39            [ 5]   58 	rts
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:34 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+    __Sound_Byte       **** GX  |   2 _play_tune         0000 GR
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:34 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   65   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

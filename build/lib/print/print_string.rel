@@ -1,0 +1,24 @@
+XH2
+H 3 areas 5 global symbols 2 banks 1 modes
+M print_string.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S _dp_VIA_cntl Ref0000
+S _dp_VIA_t1_cnt_lo Ref0000
+S .__.ABS. Def0000
+S __Print_Str_d Ref0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .text size 2A flags D00
+S _print_string Def0000
+T 00 00
+R 00 00 00 02
+T 00 00 32 79 E7 62 AF E4 C6 CC D7 00 00 C6 7F
+R 00 00 00 02 A0 0B 00 00
+T 00 0C D7 00 00 E6 62 E7 66 E6 69 E7 65 AE E4
+R 00 00 00 02 A0 03 00 01
+T 00 18 AF 63 E6 66 E7 E2 AE 64 E6 66 BD 00 00
+R 00 00 00 02 81 0D 00 03
+T 00 25 32 61 32 67 39
+R 00 00 00 02

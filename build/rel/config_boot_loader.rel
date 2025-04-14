@@ -1,0 +1,56 @@
+XH2
+H 3 areas D global symbols 2 banks 1 modes
+M boot_loader.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S l_.bss Ref0000
+S _main Ref0000
+S a_.data Ref0000
+S l_.data Ref0000
+S l_.text.unlikely Ref0000
+S .__.ABS. Def0000
+S ___Reset Ref0000
+S a_.text Ref0000
+S a_.bss Ref0000
+S _Vec_Cold_Flag Ref0000
+S l_.text.hot Ref0000
+S l_.text Ref0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .boot size 3F flags D00
+S _boot Def0000
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 02
+T 00 00 8E 00 00 27 1B CE 00 00 33 C9
+R 00 00 00 02 81 03 00 03 81 08 00 07
+T 00 0A 00 00 33 C9 00 00 33 C9
+R 00 00 00 02 81 02 00 0B 81 06 00 0A
+T 00 12 00 00 10 8E 00 00
+R 00 00 00 02 81 02 00 04 81 06 00 02
+T 00 18
+R 00 00 00 02
+T 00 18 A6 C0 A7 A0 30 1F 26 F8
+R 00 00 00 02
+T 00 20
+R 00 00 00 02
+T 00 20
+R 00 00 00 02
+T 00 20 8E 00 00 27 0A 10 8E 00 00
+R 00 00 00 02 81 03 00 00 81 09 00 08
+T 00 29
+R 00 00 00 02
+T 00 29 6F A0 30 1F 26 FA
+R 00 00 00 02
+T 00 2F
+R 00 00 00 02
+T 00 2F BD 00 00 5D 27 06 8E 00 00 BF 00 00
+R 00 00 00 02 81 03 00 01 81 0C 00 09
+T 00 3B
+R 00 00 00 02
+T 00 3B BD 00 00 39
+R 00 00 00 02 81 03 00 06

@@ -1,5 +1,14 @@
-bin
-build
+#bin
+#build
+# -> for the script to work we need the /bin and the /build/rel folder (empty)
+# so why dont include bin and build...
+
+# coming soon?
 manual
+
+# i have multiple versions...
 overlay/**
 !overlay/dodge_challenge.png
+
+# in case vscode does stuff...
+.vscode

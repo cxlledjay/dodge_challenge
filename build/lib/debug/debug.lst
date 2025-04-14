@@ -1,0 +1,314 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	debug.c
+                              6 	.area	.text
+   0000                       7 LC0:
+   0000 46 49 4C 45 3A 80     8 	.byte	70,73,76,69,58,-128,0
+        00
+   0007                       9 LC1:
+   0007 4C 49 4E 45 3A 80    10 	.byte	76,73,78,69,58,-128,0
+        00
+   000E                      11 LC2:
+   000E 56 41 4C 55 45 3A    12 	.byte	86,65,76,85,69,58,-128,0
+        80 00
+                             13 	.globl	__f_debug
+   0016                      14 __f_debug:
+   0016 34 60         [ 7]   15 	pshs	y,u
+   0018 32 E8 EC      [ 5]   16 	leas	-20,s
+   001B 33 E4         [ 4]   17 	leau	,s
+   001D AF 49         [ 6]   18 	stx	9,u
+   001F E7 48         [ 5]   19 	stb	8,u
+   0021 10 EF 42      [ 7]   20 	sts	2,u
+   0024 30 E4         [ 4]   21 	leax	,s
+   0026 AF 46         [ 6]   22 	stx	6,u
+   0028 BD`00`00      [ 8]   23 	jsr	___Clear_Sound
+   002B BE`00`00      [ 6]   24 	ldx	_Vec_Text_HW
+   002E AF 4D         [ 6]   25 	stx	13,u
+   0030 8E F8 50      [ 3]   26 	ldx	#-1968
+   0033 BF`00`00      [ 6]   27 	stx	_Vec_Text_HW
+   0036 EC C8 1C      [ 6]   28 	ldd	28,u
+   0039 E3 C8 1E      [ 7]   29 	addd	30,u; addhi3,3
+   003C ED 4F         [ 6]   30 	std	15,u
+   003E 8E 00 00      [ 3]   31 	ldx	#0
+   0041 AF C8 1E      [ 6]   32 	stx	30,u
+   0044 20 09         [ 3]   33 	bra	L2
+   0046                      34 L4:
+   0046 EC C8 1E      [ 6]   35 	ldd	30,u
+   0049 C3 00 01      [ 4]   36 	addd	#1; addhi3,3
+   004C ED C8 1E      [ 6]   37 	std	30,u
+   004F                      38 L2:
+   004F EC 4F         [ 6]   39 	ldd	15,u
+   0051 C3 FF FF      [ 4]   40 	addd	#-1; addhi3,3
+   0054 ED 4F         [ 6]   41 	std	15,u
+   0056 E6 D8 0F      [ 8]   42 	ldb	[15,u]
+   0059 C1 5C         [ 2]   43 	cmpb	#92	;cmpqi:
+   005B 27 07         [ 3]   44 	beq	L3
+   005D AE 4F         [ 6]   45 	ldx	15,u
+   005F AC C8 1C      [ 7]   46 	cmpx	28,u	;cmphi:
+   0062 26 E2         [ 3]   47 	bne	L4
+   0064                      48 L3:
+   0064 AE C8 1E      [ 6]   49 	ldx	30,u
+   0067 EC C8 1E      [ 6]   50 	ldd	30,u
+   006A C3 FF FF      [ 4]   51 	addd	#-1; addhi3,3
+   006D ED C8 1E      [ 6]   52 	std	30,u
+   0070 1F 40         [ 6]   53 	tfr	s,d
+   0072 34 10         [ 6]   54 	pshs	x	;subhi: R:d -= R:x
+   0074 A3 E1         [ 9]   55 	subd	,s++
+   0076 1F 04         [ 6]   56 	tfr	d,s
+   0078 10 EF 44      [ 7]   57 	sts	4,u
+   007B 8E 00 00      [ 3]   58 	ldx	#0
+   007E 1E 01         [ 8]   59 	exg	d,x
+   0080 E3 44         [ 7]   60 	addd	4,u; addhi3,3
+   0082 1E 01         [ 8]   61 	exg	d,x
+   0084 AF 44         [ 6]   62 	stx	4,u
+   0086 AE 44         [ 6]   63 	ldx	4,u
+   0088 AF 4B         [ 6]   64 	stx	11,u
+   008A 8E 00 00      [ 3]   65 	ldx	#0
+   008D AF C8 11      [ 6]   66 	stx	17,u
+   0090 20 3A         [ 3]   67 	bra	L5
+   0092                      68 L7:
+   0092 EC 4F         [ 6]   69 	ldd	15,u
+   0094 C3 00 01      [ 4]   70 	addd	#1; addhi3,3
+   0097 ED 4F         [ 6]   71 	std	15,u
+   0099 E6 D8 0F      [ 8]   72 	ldb	[15,u]
+   009C E7 C8 13      [ 5]   73 	stb	19,u
+   009F E6 C8 13      [ 5]   74 	ldb	19,u
+   00A2 C1 60         [ 2]   75 	cmpb	#96	;cmpqi:
+   00A4 23 0F         [ 3]   76 	bls	L6
+   00A6 E6 C8 13      [ 5]   77 	ldb	19,u
+   00A9 C1 7A         [ 2]   78 	cmpb	#122	;cmpqi:
+   00AB 22 08         [ 3]   79 	bhi	L6
+   00AD E6 C8 13      [ 5]   80 	ldb	19,u
+   00B0 CB E0         [ 2]   81 	addb	#-32
+   00B2 E7 C8 13      [ 5]   82 	stb	19,u
+   00B5                      83 L6:
+   00B5 AE C8 11      [ 6]   84 	ldx	17,u
+   00B8 1E 01         [ 8]   85 	exg	d,x
+   00BA E3 4B         [ 7]   86 	addd	11,u; addhi3,3
+   00BC 1E 01         [ 8]   87 	exg	d,x
+   00BE E6 C8 13      [ 5]   88 	ldb	19,u
+   00C1 E7 84         [ 4]   89 	stb	,x
+   00C3 EC C8 11      [ 6]   90 	ldd	17,u
+   00C6 C3 00 01      [ 4]   91 	addd	#1; addhi3,3
+   00C9 ED C8 11      [ 6]   92 	std	17,u
+   00CC                      93 L5:
+   00CC AE C8 11      [ 6]   94 	ldx	17,u
+   00CF AC C8 1E      [ 7]   95 	cmpx	30,u	;cmphi:
+   00D2 25 BE         [ 3]   96 	blo	L7
+   00D4 AE C8 1E      [ 6]   97 	ldx	30,u
+   00D7 1E 01         [ 8]   98 	exg	d,x
+   00D9 E3 4B         [ 7]   99 	addd	11,u; addhi3,3
+   00DB 1E 01         [ 8]  100 	exg	d,x
+   00DD C6 80         [ 2]  101 	ldb	#-128
+   00DF E7 84         [ 4]  102 	stb	,x
+   00E1                     103 L20:
+   00E1 BD`00`00      [ 8]  104 	jsr	___DP_to_C8
+   00E4 BD`00`00      [ 8]  105 	jsr	___Wait_Recal
+   00E7 BD`00`00      [ 8]  106 	jsr	___Intensity_5F
+   00EA C6 88         [ 2]  107 	ldb	#-120
+   00EC E7 E2         [ 6]  108 	stb	,-s
+   00EE AE 49         [ 6]  109 	ldx	9,u
+   00F0 C6 5A         [ 2]  110 	ldb	#90
+   00F2 BD`00`00      [ 8]  111 	jsr	_print_string
+   00F5 32 61         [ 5]  112 	leas	1,s
+   00F7 C6 88         [ 2]  113 	ldb	#-120
+   00F9 E7 E2         [ 6]  114 	stb	,-s
+   00FB 8E`00`00      [ 3]  115 	ldx	#LC0
+   00FE C6 32         [ 2]  116 	ldb	#50
+   0100 BD`00`00      [ 8]  117 	jsr	_print_string
+   0103 32 61         [ 5]  118 	leas	1,s
+   0105 AE 4B         [ 6]  119 	ldx	11,u
+   0107 C6 88         [ 2]  120 	ldb	#-120
+   0109 E7 E2         [ 6]  121 	stb	,-s
+   010B C6 1E         [ 2]  122 	ldb	#30
+   010D BD`00`00      [ 8]  123 	jsr	_print_string
+   0110 32 61         [ 5]  124 	leas	1,s
+   0112 C6 88         [ 2]  125 	ldb	#-120
+   0114 E7 E2         [ 6]  126 	stb	,-s
+   0116 8E`00`07      [ 3]  127 	ldx	#LC1
+   0119 5F            [ 2]  128 	clrb
+   011A BD`00`00      [ 8]  129 	jsr	_print_string
+   011D 32 61         [ 5]  130 	leas	1,s
+   011F C6 88         [ 2]  131 	ldb	#-120
+   0121 E7 E2         [ 6]  132 	stb	,-s
+   0123 AE C8 20      [ 6]  133 	ldx	32,u
+   0126 C6 EC         [ 2]  134 	ldb	#-20
+   0128 BD`00`00      [ 8]  135 	jsr	_print_long_unsigned_int
+   012B 32 61         [ 5]  136 	leas	1,s
+   012D C6 88         [ 2]  137 	ldb	#-120
+   012F E7 E2         [ 6]  138 	stb	,-s
+   0131 8E`00`0E      [ 3]  139 	ldx	#LC2
+   0134 C6 CE         [ 2]  140 	ldb	#-50
+   0136 BD`00`00      [ 8]  141 	jsr	_print_string
+   0139 32 61         [ 5]  142 	leas	1,s
+   013B E6 48         [ 5]  143 	ldb	8,u
+   013D C1 09         [ 2]  144 	cmpb	#9	;cmpqi:
+   013F 10 22 00 E8   [ 6]  145 	lbhi	L8
+   0143 E6 48         [ 5]  146 	ldb	8,u
+   0145 4F            [ 2]  147 	clra		;zero_extendqihi: R:b -> R:d
+   0146 ED C4         [ 5]  148 	std	,u
+   0148 EC C4         [ 5]  149 	ldd	,u
+   014A 58            [ 2]  150 	aslb
+   014B 49            [ 2]  151 	rola
+   014C 10 8E`01`56   [ 4]  152 	ldy	#L19
+   0150 30 AB         [ 8]  153 	leax	d,y
+   0152 AE 84         [ 5]  154 	ldx	,x
+   0154 6E 84         [ 3]  155 	jmp	,x
+   0156                     156 L19:
+   0156`01`6A               157 	.word	L9
+   0158`01`7F               158 	.word	L10
+   015A`01`94               159 	.word	L11
+   015C`01`A7               160 	.word	L12
+   015E`01`BA               161 	.word	L13
+   0160`01`CF               162 	.word	L14
+   0162`01`E1               163 	.word	L15
+   0164`01`F5               164 	.word	L16
+   0166`02`07               165 	.word	L17
+   0168`02`1B               166 	.word	L18
+   016A                     167 L9:
+   016A AE C8 1A      [ 6]  168 	ldx	26,u
+   016D E6 84         [ 4]  169 	ldb	,x
+   016F 34 04         [ 6]  170 	pshs	b
+   0171 C6 88         [ 2]  171 	ldb	#-120
+   0173 E7 E2         [ 6]  172 	stb	,-s
+   0175 C6 BA         [ 2]  173 	ldb	#-70
+   0177 BD`00`00      [ 8]  174 	jsr	_print_unsigned_int
+   017A 32 62         [ 5]  175 	leas	2,s
+   017C 16 00 AC      [ 5]  176 	lbra	L8
+   017F                     177 L10:
+   017F AE C8 1A      [ 6]  178 	ldx	26,u
+   0182 E6 84         [ 4]  179 	ldb	,x
+   0184 34 04         [ 6]  180 	pshs	b
+   0186 C6 88         [ 2]  181 	ldb	#-120
+   0188 E7 E2         [ 6]  182 	stb	,-s
+   018A C6 BA         [ 2]  183 	ldb	#-70
+   018C BD`00`00      [ 8]  184 	jsr	_print_signed_int
+   018F 32 62         [ 5]  185 	leas	2,s
+   0191 16 00 97      [ 5]  186 	lbra	L8
+   0194                     187 L11:
+   0194 AE C8 1A      [ 6]  188 	ldx	26,u
+   0197 AE 84         [ 5]  189 	ldx	,x
+   0199 C6 88         [ 2]  190 	ldb	#-120
+   019B E7 E2         [ 6]  191 	stb	,-s
+   019D C6 BA         [ 2]  192 	ldb	#-70
+   019F BD`00`00      [ 8]  193 	jsr	_print_long_unsigned_int
+   01A2 32 61         [ 5]  194 	leas	1,s
+   01A4 16 00 84      [ 5]  195 	lbra	L8
+   01A7                     196 L12:
+   01A7 AE C8 1A      [ 6]  197 	ldx	26,u
+   01AA AE 84         [ 5]  198 	ldx	,x
+   01AC C6 88         [ 2]  199 	ldb	#-120
+   01AE E7 E2         [ 6]  200 	stb	,-s
+   01B0 C6 BA         [ 2]  201 	ldb	#-70
+   01B2 BD`00`00      [ 8]  202 	jsr	_print_long_signed_int
+   01B5 32 61         [ 5]  203 	leas	1,s
+   01B7 16 00 71      [ 5]  204 	lbra	L8
+   01BA                     205 L13:
+   01BA AE C8 1A      [ 6]  206 	ldx	26,u
+   01BD E6 84         [ 4]  207 	ldb	,x
+   01BF 34 04         [ 6]  208 	pshs	b
+   01C1 C6 88         [ 2]  209 	ldb	#-120
+   01C3 E7 E2         [ 6]  210 	stb	,-s
+   01C5 C6 BA         [ 2]  211 	ldb	#-70
+   01C7 BD`00`00      [ 8]  212 	jsr	_print_char
+   01CA 32 62         [ 5]  213 	leas	2,s
+   01CC 16 00 5C      [ 5]  214 	lbra	L8
+   01CF                     215 L14:
+   01CF AE C8 1A      [ 6]  216 	ldx	26,u
+   01D2 AE 84         [ 5]  217 	ldx	,x
+   01D4 C6 88         [ 2]  218 	ldb	#-120
+   01D6 E7 E2         [ 6]  219 	stb	,-s
+   01D8 C6 BA         [ 2]  220 	ldb	#-70
+   01DA BD`00`00      [ 8]  221 	jsr	_print_long_hex
+   01DD 32 61         [ 5]  222 	leas	1,s
+   01DF 20 4A         [ 3]  223 	bra	L8
+   01E1                     224 L15:
+   01E1 AE C8 1A      [ 6]  225 	ldx	26,u
+   01E4 E6 84         [ 4]  226 	ldb	,x
+   01E6 34 04         [ 6]  227 	pshs	b
+   01E8 C6 88         [ 2]  228 	ldb	#-120
+   01EA E7 E2         [ 6]  229 	stb	,-s
+   01EC C6 BA         [ 2]  230 	ldb	#-70
+   01EE BD`00`00      [ 8]  231 	jsr	_print_hex
+   01F1 32 62         [ 5]  232 	leas	2,s
+   01F3 20 36         [ 3]  233 	bra	L8
+   01F5                     234 L16:
+   01F5 AE C8 1A      [ 6]  235 	ldx	26,u
+   01F8 AE 84         [ 5]  236 	ldx	,x
+   01FA C6 88         [ 2]  237 	ldb	#-120
+   01FC E7 E2         [ 6]  238 	stb	,-s
+   01FE C6 BA         [ 2]  239 	ldb	#-70
+   0200 BD`00`00      [ 8]  240 	jsr	_print_long_hex
+   0203 32 61         [ 5]  241 	leas	1,s
+   0205 20 24         [ 3]  242 	bra	L8
+   0207                     243 L17:
+   0207 AE C8 1A      [ 6]  244 	ldx	26,u
+   020A E6 84         [ 4]  245 	ldb	,x
+   020C 34 04         [ 6]  246 	pshs	b
+   020E C6 88         [ 2]  247 	ldb	#-120
+   0210 E7 E2         [ 6]  248 	stb	,-s
+   0212 C6 BA         [ 2]  249 	ldb	#-70
+   0214 BD`00`00      [ 8]  250 	jsr	_print_binary
+   0217 32 62         [ 5]  251 	leas	2,s
+   0219 20 10         [ 3]  252 	bra	L8
+   021B                     253 L18:
+   021B AE C8 1A      [ 6]  254 	ldx	26,u
+   021E AE 84         [ 5]  255 	ldx	,x
+   0220 C6 88         [ 2]  256 	ldb	#-120
+   0222 E7 E2         [ 6]  257 	stb	,-s
+   0224 C6 BA         [ 2]  258 	ldb	#-70
+   0226 BD`00`00      [ 8]  259 	jsr	_print_long_binary
+   0229 32 61         [ 5]  260 	leas	1,s
+   022B                     261 L8:
+   022B BD`00`00      [ 8]  262 	jsr	___Read_Btns
+   022E F6`00`00      [ 5]  263 	ldb	_Vec_Buttons
+   0231 C4 01         [ 2]  264 	andb	#1
+   0233 5D            [ 2]  265 	tstb
+   0234 10 27 FE A9   [ 6]  266 	lbeq	L20
+   0238 AE 4D         [ 6]  267 	ldx	13,u
+   023A BF`00`00      [ 6]  268 	stx	_Vec_Text_HW
+   023D 10 EE 46      [ 7]  269 	lds	6,u
+   0240 10 EE 42      [ 7]  270 	lds	2,u
+   0243 32 E8 14      [ 5]  271 	leas	20,s
+   0246 35 E0         [ 8]  272 	puls	y,u,pc
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 L10                017F R   |   2 L11                0194 R
+  2 L12                01A7 R   |   2 L13                01BA R
+  2 L14                01CF R   |   2 L15                01E1 R
+  2 L16                01F5 R   |   2 L17                0207 R
+  2 L18                021B R   |   2 L19                0156 R
+  2 L2                 004F R   |   2 L20                00E1 R
+  2 L3                 0064 R   |   2 L4                 0046 R
+  2 L5                 00CC R   |   2 L6                 00B5 R
+  2 L7                 0092 R   |   2 L8                 022B R
+  2 L9                 016A R   |   2 LC0                0000 R
+  2 LC1                0007 R   |   2 LC2                000E R
+    _Vec_Buttons       **** GX  |     _Vec_Text_HW       **** GX
+    ___Clear_Sound     **** GX  |     ___DP_to_C8        **** GX
+    ___Intensity_5     **** GX  |     ___Read_Btns       **** GX
+    ___Wait_Recal      **** GX  |   2 __f_debug          0016 GR
+    _print_binary      **** GX  |     _print_char        **** GX
+    _print_hex         **** GX  |     _print_long_bi     **** GX
+    _print_long_he     **** GX  |     _print_long_si     **** GX
+    _print_long_un     **** GX  |     _print_signed_     **** GX
+    _print_string      **** GX  |     _print_unsigne     **** GX
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size  248   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+
