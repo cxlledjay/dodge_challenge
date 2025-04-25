@@ -224,26 +224,61 @@
    00D2 FE                  224 	.byte	-2
    00D3                     225 _vl_term_1_109:
    00D3 01                  226 	.byte	1
-                            227 	.globl	_vectors_obstacle_truck_s
-   00D4                     228 _vectors_obstacle_truck_s:
-                            229 	.globl	_temp_draw
-   00D4                     230 _temp_draw:
-   00D4 BD`00`00      [ 8]  231 	jsr	___Wait_Recal
-   00D7 BD`00`00      [ 8]  232 	jsr	___Intensity_5F
-   00DA BD`00`00      [ 8]  233 	jsr	___Reset0Ref
-   00DD C6 7F         [ 2]  234 	ldb	#127
-   00DF D7`00         [ 4]  235 	stb	*_dp_VIA_t1_cnt_lo
-   00E1 6F E2         [ 8]  236 	clr	,-s
-   00E3 5F            [ 2]  237 	clrb
-   00E4 BD`00`00      [ 8]  238 	jsr	__Moveto_d
-   00E7 32 61         [ 5]  239 	leas	1,s
-   00E9 C6 FF         [ 2]  240 	ldb	#-1
-   00EB D7`00         [ 4]  241 	stb	*_dp_VIA_t1_cnt_lo
-   00ED 8E`00`4F      [ 3]  242 	ldx	#_vectors_player
-   00F0 BD`00`00      [ 8]  243 	jsr	___Draw_VLp
-   00F3 39            [ 5]  244 	rts
+                            227 	.globl	_vectors_horizon
+   00D4                     228 _vectors_horizon:
+   00D4 FF                  229 	.byte	-1
+   00D5 00                  230 	.byte	0
+   00D6 7F                  231 	.byte	127
+   00D7                     232 _vl_term_2_117:
+   00D7 01                  233 	.byte	1
+                            234 	.globl	_vectors_road_outer_line_l
+   00D8                     235 _vectors_road_outer_line_l:
+   00D8 FF                  236 	.byte	-1
+   00D9 B0                  237 	.byte	-80
+   00DA CB                  238 	.byte	-53
+   00DB                     239 _vl_term_3_125:
+   00DB 01                  240 	.byte	1
+                            241 	.globl	_vectors_road_inner_line_l
+   00DC                     242 _vectors_road_inner_line_l:
+   00DC FF                  243 	.byte	-1
+   00DD A6                  244 	.byte	-90
+   00DE EC                  245 	.byte	-20
+   00DF                     246 _vl_term_4_131:
+   00DF 01                  247 	.byte	1
+                            248 	.globl	_vectors_road_inner_line_r
+   00E0                     249 _vectors_road_inner_line_r:
+   00E0 FF                  250 	.byte	-1
+   00E1 A6                  251 	.byte	-90
+   00E2 14                  252 	.byte	20
+   00E3                     253 _vl_term_5_137:
+   00E3 01                  254 	.byte	1
+                            255 	.globl	_vectors_road_outer_line_r
+   00E4                     256 _vectors_road_outer_line_r:
+   00E4 FF                  257 	.byte	-1
+   00E5 B0                  258 	.byte	-80
+   00E6 35                  259 	.byte	53
+   00E7                     260 _vl_term_6_143:
+   00E7 01                  261 	.byte	1
+                            262 	.globl	_vectors_obstacle_truck_s
+   00E8                     263 _vectors_obstacle_truck_s:
+                            264 	.globl	_temp_draw
+   00E8                     265 _temp_draw:
+   00E8 BD`00`00      [ 8]  266 	jsr	___Wait_Recal
+   00EB BD`00`00      [ 8]  267 	jsr	___Intensity_5F
+   00EE BD`00`00      [ 8]  268 	jsr	___Reset0Ref
+   00F1 C6 7F         [ 2]  269 	ldb	#127
+   00F3 D7`00         [ 4]  270 	stb	*_dp_VIA_t1_cnt_lo
+   00F5 6F E2         [ 8]  271 	clr	,-s
+   00F7 5F            [ 2]  272 	clrb
+   00F8 BD`00`00      [ 8]  273 	jsr	__Moveto_d
+   00FB 32 61         [ 5]  274 	leas	1,s
+   00FD C6 FF         [ 2]  275 	ldb	#-1
+   00FF D7`00         [ 4]  276 	stb	*_dp_VIA_t1_cnt_lo
+   0101 8E`00`4F      [ 3]  277 	ldx	#_vectors_player
+   0104 BD`00`00      [ 8]  278 	jsr	___Draw_VLp
+   0107 39            [ 5]  279 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Apr 25 17:08:29 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 23:10:58 2025
 
 Symbol Table
 
@@ -252,19 +287,24 @@ Symbol Table
     __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
     ___Intensity_5     **** GX  |     ___Reset0Ref       **** GX
     ___Wait_Recal      **** GX  |     _dp_VIA_t1_cnt     **** GX
-  2 _temp_draw         00D4 GR  |   2 _vectors_ballo     0027 GR
-  2 _vectors_man       0000 GR  |   2 _vectors_obsta     00D4 GR
-  2 _vectors_playe     004F GR  |   2 _vl_term_0_46      004E R
-  2 _vl_term_1_109     00D3 R
+  2 _temp_draw         00E8 GR  |   2 _vectors_ballo     0027 GR
+  2 _vectors_horiz     00D4 GR  |   2 _vectors_man       0000 GR
+  2 _vectors_obsta     00E8 GR  |   2 _vectors_playe     004F GR
+  2 _vectors_road_     00DC GR  |   2 _vectors_road_     00E0 GR
+  2 _vectors_road_     00D8 GR  |   2 _vectors_road_     00E4 GR
+  2 _vl_term_0_46      004E R   |   2 _vl_term_1_109     00D3 R
+  2 _vl_term_2_117     00D7 R   |   2 _vl_term_3_125     00DB R
+  2 _vl_term_4_131     00DF R   |   2 _vl_term_5_137     00E3 R
+  2 _vl_term_6_143     00E7 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Apr 25 17:08:29 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 23:10:58 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   F4   flags  100
+   2 .text            size  108   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

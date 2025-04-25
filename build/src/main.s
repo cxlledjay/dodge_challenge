@@ -35,32 +35,97 @@ L2:
 L4:
 	leas	1,s
 	rts
+	.globl	_draw_road
+_draw_road:
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-128
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_horizon
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-15
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_road_outer_line_l
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-5
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_road_inner_line_l
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#5
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_road_inner_line_r
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#15
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#-1
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_road_outer_line_r
+	jsr	___Draw_VLp
+	rts
 	.globl	_lookup_player_lane_x_pos
 _lookup_player_lane_x_pos:
-	.byte	-48
+	.byte	-71
 	.byte	0
-	.byte	48
+	.byte	71
 	.globl	_main
 _main:
 	leas	-1,s
-L8:
+L10:
 	jsr	___Wait_Recal
+	jsr	_draw_road
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
 	andb	#1
 	tstb
-	beq	L6
+	beq	L8
 	ldb	#-1
 	jsr	_change_lane
-	bra	L7
-L6:
+	bra	L9
+L8:
 	ldb	_Vec_Buttons
 	andb	#4
 	tstb
-	beq	L7
+	beq	L9
 	ldb	#1
 	jsr	_change_lane
-L7:
+L9:
 	ldb	_player_lane
 	pshs	b
 	ldb	#-80
@@ -77,7 +142,7 @@ L7:
 	tfr	d,x
 	ldb	_lookup_player_lane_x_pos,x
 	stb	,s
-	ldb	#-100
+	ldb	#-112
 	stb	,-s
 	ldb	1,s
 	jsr	__Moveto_d
@@ -86,4 +151,4 @@ L7:
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vectors_player
 	jsr	___Draw_VLp
-	lbra	L8
+	lbra	L10

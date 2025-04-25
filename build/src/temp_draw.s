@@ -224,6 +224,41 @@ _vectors_player:
 	.byte	-2
 _vl_term_1_109:
 	.byte	1
+	.globl	_vectors_horizon
+_vectors_horizon:
+	.byte	-1
+	.byte	0
+	.byte	127
+_vl_term_2_117:
+	.byte	1
+	.globl	_vectors_road_outer_line_l
+_vectors_road_outer_line_l:
+	.byte	-1
+	.byte	-80
+	.byte	-53
+_vl_term_3_125:
+	.byte	1
+	.globl	_vectors_road_inner_line_l
+_vectors_road_inner_line_l:
+	.byte	-1
+	.byte	-90
+	.byte	-20
+_vl_term_4_131:
+	.byte	1
+	.globl	_vectors_road_inner_line_r
+_vectors_road_inner_line_r:
+	.byte	-1
+	.byte	-90
+	.byte	20
+_vl_term_5_137:
+	.byte	1
+	.globl	_vectors_road_outer_line_r
+_vectors_road_outer_line_r:
+	.byte	-1
+	.byte	-80
+	.byte	53
+_vl_term_6_143:
+	.byte	1
 	.globl	_vectors_obstacle_truck_s
 _vectors_obstacle_truck_s:
 	.globl	_temp_draw

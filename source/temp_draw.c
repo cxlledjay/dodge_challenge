@@ -110,6 +110,40 @@ const struct packet_t vectors_player[] =
 };
 
 
+
+const struct packet_t vectors_horizon[] =
+{
+	{DRAW, {0,127}}
+	VL_END
+};
+
+
+
+const struct packet_t vectors_road_outer_line_l[] =
+{
+	{DRAW, {-80,-53}},
+	VL_END
+};
+
+const struct packet_t vectors_road_inner_line_l[] =
+{
+	{DRAW, {-90,-20}}
+	VL_END
+};
+
+const struct packet_t vectors_road_inner_line_r[] =
+{
+	{DRAW, {-90,20}}
+	VL_END
+};
+
+const struct packet_t vectors_road_outer_line_r[] =
+{
+	{DRAW, {-80,53}}
+	VL_END
+};
+
+
 const struct packet_t vectors_obstacle_truck_s[] =
 {
 	

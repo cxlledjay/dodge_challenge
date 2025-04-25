@@ -41,11 +41,50 @@ void change_lane(int direction)
 	}
 }
 
+void draw_road(){		
+	Intensity_5F();
+	
+	//draw horizon
+	//Reset0Ref();
+	//dp_VIA_t1_cnt_lo = 0x7f;
+	//Moveto_d(36, -128);
+	//dp_VIA_t1_cnt_lo = 255;
+	//Draw_VLp(&vectors_horizon);
+	
+	//draw road
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, -15);
+	dp_VIA_t1_cnt_lo = 255;
+	Draw_VLp(&vectors_road_outer_line_l);
+	
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, -5);
+	dp_VIA_t1_cnt_lo = 255;
+	Draw_VLp(&vectors_road_inner_line_l);
+	
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, 5);
+	dp_VIA_t1_cnt_lo = 255;
+	Draw_VLp(&vectors_road_inner_line_r);
+	
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, 15);
+	dp_VIA_t1_cnt_lo = 255;
+	Draw_VLp(&vectors_road_outer_line_r);
+}
+
+
+
+
 const int lookup_player_lane_x_pos[3] =
 {
-	-48,
+	-71,
 	0,
-	48
+	71
 };
 
 
@@ -56,9 +95,12 @@ int main(void)
 	{
 		Wait_Recal();					// synchronize frame rate to 50 Hz
 		
+		//build road
+		draw_road();
 		
+		
+		//io management
 		check_buttons();
-		
 		if(button_1_1_pressed())
 		{
 			change_lane(-1);
@@ -71,13 +113,11 @@ int main(void)
 		print_unsigned_int(120,-80,player_lane);
 		
 
-		//draw player
-		
-		
+		//draw player		
 		Intensity_5F();					// set brightness of the electron beam
 		Reset0Ref();					// reset beam to center
 		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(-100, lookup_player_lane_x_pos[player_lane]);				// move beam to object coordinates
+		Moveto_d(-112, lookup_player_lane_x_pos[player_lane]);				// move beam to object coordinates
 		dp_VIA_t1_cnt_lo = 64;			// set scaling factor for drawing
 		Draw_VLp(&vectors_player);			// draw vector list
 	}
