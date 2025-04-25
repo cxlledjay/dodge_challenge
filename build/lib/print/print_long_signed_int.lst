@@ -102,7 +102,7 @@
    00AC 32 6C         [ 5]  102 	leas	12,s
    00AE 39            [ 5]  103 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
 
 Symbol Table
 
@@ -117,7 +117,7 @@ Symbol Table
   2 _print_long_si     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Apr 14 13:54:33 2025
+Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
 
 Area Table
 
