@@ -46,9 +46,9 @@ const struct packet_t vectors_balloon[] =
 	VL_END
 };
 
-const struct packet_t vectors_player_b[] = 
+const struct packet_t vectors_player[] = 
 {
-	{MOVE, {-24,-20}}, //mov to left back wheel
+	{MOVE, {-24,-20}}, //move to left back wheel
 	
 	//wheel1
 	{DRAW, {0,-20}},
@@ -129,7 +129,7 @@ void temp_draw(void)
 	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 	Moveto_d(0, 0);				// move beam to object coordinates
 	dp_VIA_t1_cnt_lo = 255;			// set scaling factor for drawing
-	Draw_VLp(&vectors_player_b);			// draw vector list
+	Draw_VLp(&vectors_player);			// draw vector list
 
 
 

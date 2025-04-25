@@ -15,7 +15,7 @@ A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
 A .text size F4 flags D00
 S _vectors_man Def0000
-S _vectors_player_b Def004F
+S _vectors_player Def004F
 S _temp_draw Def00D4
 S _vectors_obstacle_truck_s Def00D4
 S _vectors_balloon Def0027

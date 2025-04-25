@@ -88,8 +88,8 @@ _vectors_balloon:
 	.byte	-10
 _vl_term_0_46:
 	.byte	1
-	.globl	_vectors_player_b
-_vectors_player_b:
+	.globl	_vectors_player
+_vectors_player:
 	.byte	0
 	.byte	-24
 	.byte	-20
@@ -239,6 +239,6 @@ _temp_draw:
 	leas	1,s
 	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vectors_player_b
+	ldx	#_vectors_player
 	jsr	___Draw_VLp
 	rts

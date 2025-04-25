@@ -24,7 +24,7 @@
    001C                      24 L3:
    001C E6 6B         [ 5]   25 	ldb	11,s
    001E C1 63         [ 2]   26 	cmpb	#99	;cmpqi:
-   0020 2E 06         [ 3]   27 	bgt	L4
+   0020 22 06         [ 3]   27 	bhi	L4
    0022 C6 30         [ 2]   28 	ldb	#48
    0024 E7 62         [ 5]   29 	stb	2,s
    0026 20 17         [ 3]   30 	bra	L6
@@ -66,7 +66,7 @@
    0068 32 68         [ 5]   66 	leas	8,s
    006A 39            [ 5]   67 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Symbol Table
 
@@ -79,7 +79,7 @@ Symbol Table
   2 _print_signed_     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Area Table
 

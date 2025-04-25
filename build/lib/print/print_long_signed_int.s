@@ -44,7 +44,7 @@ L5:
 L4:
 	ldx	,s
 	cmpx	#9999	;cmphi:
-	bgt	L5
+	bhi	L5
 	bra	L6
 L7:
 	ldb	5,s

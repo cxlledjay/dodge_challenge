@@ -3,30 +3,117 @@
                               3 ;;; ABI version 1
                               4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
                               5 	.module	main.c
-                              6 	.area	.text
-                              7 	.globl	_main
-   0000                       8 _main:
-   0000                       9 L2:
-   0000 BD`00`00      [ 8]   10 	jsr	_temp_draw
-   0003 20 FB         [ 3]   11 	bra	L2
+                              6 	.globl	_player_lane
+                              7 	.area	.data
+   0000                       8 _player_lane:
+   0000 01                    9 	.byte	1
+                             10 	.area	.text
+                             11 	.globl	_change_lane
+   0000                      12 _change_lane:
+   0000 32 7F         [ 5]   13 	leas	-1,s
+   0002 E7 E4         [ 4]   14 	stb	,s
+   0004 E6 E4         [ 4]   15 	ldb	,s
+   0006 C1 01         [ 2]   16 	cmpb	#1	;cmpqi:
+   0008 26 10         [ 3]   17 	bne	L2
+   000A F6`00`00      [ 5]   18 	ldb	_player_lane
+   000D C1 02         [ 2]   19 	cmpb	#2	;cmpqi:
+   000F 27 1C         [ 3]   20 	beq	L4
+   0011 F6`00`00      [ 5]   21 	ldb	_player_lane
+   0014 5C            [ 2]   22 	incb
+   0015 F7`00`00      [ 5]   23 	stb	_player_lane
+   0018 20 13         [ 3]   24 	bra	L4
+   001A                      25 L2:
+   001A E6 E4         [ 4]   26 	ldb	,s
+   001C C1 FF         [ 2]   27 	cmpb	#-1	;cmpqi:
+   001E 26 0D         [ 3]   28 	bne	L4
+   0020 F6`00`00      [ 5]   29 	ldb	_player_lane
+   0023 5D            [ 2]   30 	tstb
+   0024 27 07         [ 3]   31 	beq	L4
+   0026 F6`00`00      [ 5]   32 	ldb	_player_lane
+   0029 5A            [ 2]   33 	decb
+   002A F7`00`00      [ 5]   34 	stb	_player_lane
+   002D                      35 L4:
+   002D 32 61         [ 5]   36 	leas	1,s
+   002F 39            [ 5]   37 	rts
+                             38 	.globl	_lookup_player_lane_x_pos
+   0030                      39 _lookup_player_lane_x_pos:
+   0030 D0                   40 	.byte	-48
+   0031 00                   41 	.byte	0
+   0032 30                   42 	.byte	48
+                             43 	.globl	_main
+   0033                      44 _main:
+   0033 32 7F         [ 5]   45 	leas	-1,s
+   0035                      46 L8:
+   0035 BD`00`00      [ 8]   47 	jsr	___Wait_Recal
+   0038 BD`00`00      [ 8]   48 	jsr	___Read_Btns
+   003B F6`00`00      [ 5]   49 	ldb	_Vec_Buttons
+   003E C4 01         [ 2]   50 	andb	#1
+   0040 5D            [ 2]   51 	tstb
+   0041 27 07         [ 3]   52 	beq	L6
+   0043 C6 FF         [ 2]   53 	ldb	#-1
+   0045 BD`00`00      [ 8]   54 	jsr	_change_lane
+   0048 20 0D         [ 3]   55 	bra	L7
+   004A                      56 L6:
+   004A F6`00`00      [ 5]   57 	ldb	_Vec_Buttons
+   004D C4 02         [ 2]   58 	andb	#2
+   004F 5D            [ 2]   59 	tstb
+   0050 27 05         [ 3]   60 	beq	L7
+   0052 C6 01         [ 2]   61 	ldb	#1
+   0054 BD`00`00      [ 8]   62 	jsr	_change_lane
+   0057                      63 L7:
+   0057 F6`00`00      [ 5]   64 	ldb	_player_lane
+   005A 34 04         [ 6]   65 	pshs	b
+   005C C6 B0         [ 2]   66 	ldb	#-80
+   005E E7 E2         [ 6]   67 	stb	,-s
+   0060 C6 78         [ 2]   68 	ldb	#120
+   0062 BD`00`00      [ 8]   69 	jsr	_print_unsigned_int
+   0065 32 62         [ 5]   70 	leas	2,s
+   0067 BD`00`00      [ 8]   71 	jsr	___Intensity_5F
+   006A BD`00`00      [ 8]   72 	jsr	___Reset0Ref
+   006D C6 7F         [ 2]   73 	ldb	#127
+   006F D7`00         [ 4]   74 	stb	*_dp_VIA_t1_cnt_lo
+   0071 F6`00`00      [ 5]   75 	ldb	_player_lane
+   0074 4F            [ 2]   76 	clra		;zero_extendqihi: R:b -> R:d
+   0075 1F 01         [ 6]   77 	tfr	d,x
+   0077 E6 89`00`30   [ 8]   78 	ldb	_lookup_player_lane_x_pos,x
+   007B E7 E4         [ 4]   79 	stb	,s
+   007D C6 C0         [ 2]   80 	ldb	#-64
+   007F E7 E2         [ 6]   81 	stb	,-s
+   0081 E6 61         [ 5]   82 	ldb	1,s
+   0083 BD`00`00      [ 8]   83 	jsr	__Moveto_d
+   0086 32 61         [ 5]   84 	leas	1,s
+   0088 C6 40         [ 2]   85 	ldb	#64
+   008A D7`00         [ 4]   86 	stb	*_dp_VIA_t1_cnt_lo
+   008C 8E`00`00      [ 3]   87 	ldx	#_vectors_player
+   008F BD`00`00      [ 8]   88 	jsr	___Draw_VLp
+   0092 16 FF A0      [ 5]   89 	lbra	L8
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:32 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 0000 R   |   2 _main              0000 GR
-    _temp_draw         **** GX
+  3 L2                 001A R   |   3 L4                 002D R
+  3 L6                 004A R   |   3 L7                 0057 R
+  3 L8                 0035 R   |     _Vec_Buttons       **** GX
+    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
+    ___Intensity_5     **** GX  |     ___Read_Btns       **** GX
+    ___Reset0Ref       **** GX  |     ___Wait_Recal      **** GX
+  3 _change_lane       0000 GR  |     _dp_VIA_t1_cnt     **** GX
+  3 _lookup_player     0030 GR  |   3 _main              0033 GR
+  2 _player_lane       0000 GR  |     _print_unsigne     **** GX
+    _vectors_playe     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:32 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size    5   flags  100
+   2 .data            size    1   flags  100
+   3 .text            size   95   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

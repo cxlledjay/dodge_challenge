@@ -24,7 +24,7 @@ L2:
 L3:
 	ldb	11,s
 	cmpb	#99	;cmpqi:
-	bgt	L4
+	bhi	L4
 	ldb	#48
 	stb	2,s
 	bra	L6

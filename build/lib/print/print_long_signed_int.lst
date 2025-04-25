@@ -44,7 +44,7 @@
    0041                      44 L4:
    0041 AE E4         [ 5]   45 	ldx	,s
    0043 8C 27 0F      [ 4]   46 	cmpx	#9999	;cmphi:
-   0046 2E ED         [ 3]   47 	bgt	L5
+   0046 22 ED         [ 3]   47 	bhi	L5
    0048 20 0C         [ 3]   48 	bra	L6
    004A                      49 L7:
    004A E6 65         [ 5]   50 	ldb	5,s
@@ -102,7 +102,7 @@
    00AC 32 6C         [ 5]  102 	leas	12,s
    00AE 39            [ 5]  103 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Symbol Table
 
@@ -117,7 +117,7 @@ Symbol Table
   2 _print_long_si     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon Apr 14 14:04:31 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
 
 Area Table
 
