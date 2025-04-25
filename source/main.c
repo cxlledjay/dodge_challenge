@@ -63,13 +63,12 @@ int main(void)
 		{
 			change_lane(-1);
 		}
-		else if(button_1_2_pressed())
+		else if(button_1_3_pressed())
 		{
 			change_lane(1);
 		}
 		
 		print_unsigned_int(120,-80,player_lane);
-		
 		
 
 		//draw player
@@ -78,7 +77,7 @@ int main(void)
 		Intensity_5F();					// set brightness of the electron beam
 		Reset0Ref();					// reset beam to center
 		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(-64, lookup_player_lane_x_pos[player_lane]);				// move beam to object coordinates
+		Moveto_d(-100, lookup_player_lane_x_pos[player_lane]);				// move beam to object coordinates
 		dp_VIA_t1_cnt_lo = 64;			// set scaling factor for drawing
 		Draw_VLp(&vectors_player);			// draw vector list
 	}

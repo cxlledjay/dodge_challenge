@@ -55,7 +55,7 @@ L8:
 	bra	L7
 L6:
 	ldb	_Vec_Buttons
-	andb	#2
+	andb	#4
 	tstb
 	beq	L7
 	ldb	#1
@@ -77,7 +77,7 @@ L7:
 	tfr	d,x
 	ldb	_lookup_player_lane_x_pos,x
 	stb	,s
-	ldb	#-64
+	ldb	#-100
 	stb	,-s
 	ldb	1,s
 	jsr	__Moveto_d

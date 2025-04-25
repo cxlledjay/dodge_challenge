@@ -55,7 +55,7 @@
    00A9 20 0D         [ 3]   55 	bra	L7
    00AB                      56 L6:
    00AB F6 C8 11      [ 5]   57 	ldb	_Vec_Buttons
-   00AE C4 02         [ 2]   58 	andb	#2
+   00AE C4 04         [ 2]   58 	andb	#4
    00B0 5D            [ 2]   59 	tstb
    00B1 27 05         [ 3]   60 	beq	L7
    00B3 C6 01         [ 2]   61 	ldb	#1
@@ -77,7 +77,7 @@
    00D6 1F 01         [ 6]   77 	tfr	d,x
    00D8 E6 89 00 91   [ 8]   78 	ldb	_lookup_player_lane_x_pos,x
    00DC E7 E4         [ 4]   79 	stb	,s
-   00DE C6 C0         [ 2]   80 	ldb	#-64
+   00DE C6 9C         [ 2]   80 	ldb	#-100
    00E0 E7 E2         [ 6]   81 	stb	,-s
    00E2 E6 61         [ 5]   82 	ldb	1,s
    00E4 BD 02 46      [ 8]   83 	jsr	__Moveto_d
@@ -88,7 +88,7 @@
    00F0 BD F4 10      [ 8]   88 	jsr	___Draw_VLp
    00F3 16 FF A0      [ 5]   89 	lbra	L8
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 17:08:29 2025
 
 Symbol Table
 
@@ -106,7 +106,7 @@ Symbol Table
     _vectors_playe     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Apr 25 13:33:54 2025
+Hexadecimal [16-Bits]                                 Fri Apr 25 17:08:29 2025
 
 Area Table
 
