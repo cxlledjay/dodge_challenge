@@ -1,5 +1,5 @@
 XH2
-H 3 areas 11 global symbols 2 banks 1 modes
+H 3 areas 10 global symbols 2 banks 1 modes
 M temp_draw.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
@@ -13,17 +13,16 @@ S __Moveto_d Ref0000
 S ___Intensity_5F Ref0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .text size 108 flags D00
+A .text size 170 flags D00
 S _vectors_man Def0000
-S _vectors_road_outer_line_l Def00D8
 S _vectors_horizon Def00D4
-S _vectors_road_outer_line_r Def00E4
 S _vectors_player Def004F
-S _temp_draw Def00E8
-S _vectors_obstacle_truck_s Def00E8
+S _vectors_debug_car Def0140
+S _temp_draw Def0150
+S _vectors_obstacle_truck_s Def0150
 S _vectors_balloon Def0027
-S _vectors_road_inner_line_l Def00DC
-S _vectors_road_inner_line_r Def00E0
+S _vectors_road_inner_line_l Def00D8
+S _vectors_road_inner_line_r Def010C
 T 00 00
 R 00 00 00 02
 T 00 00 00 30 F0 FF 00 20 FF E0 00 FF 00 E0 FF
@@ -82,45 +81,51 @@ T 00 D7 01
 R 00 00 00 02
 T 00 D8
 R 00 00 00 02
-T 00 D8 FF B0 CB
+T 00 D8 FF FC FF 00 FC FF FF FC FF 00 FC FF FF
 R 00 00 00 02
-T 00 DB
+T 00 E5 F8 FE 00 F8 FE FF F8 FE 00 F8 FE FF F4
 R 00 00 00 02
-T 00 DB 01
+T 00 F2 FD 00 F4 FD FF F4 FD 00 F4 FD FF F0 FC
 R 00 00 00 02
-T 00 DC
+T 00 FF 00 F0 FC FF F0 FC 00 F0 FC FF EC FB
 R 00 00 00 02
-T 00 DC FF A6 EC
+T 01 0B
 R 00 00 00 02
-T 00 DF
+T 01 0B 01
 R 00 00 00 02
-T 00 DF 01
+T 01 0C
 R 00 00 00 02
-T 00 E0
+T 01 0C FF FC 01 00 FC 01 FF FC 01 00 FC 01 FF
 R 00 00 00 02
-T 00 E0 FF A6 14
+T 01 19 F8 02 00 F8 02 FF F8 02 00 F8 02 FF F4
 R 00 00 00 02
-T 00 E3
+T 01 26 03 00 F4 03 FF F4 03 00 F4 03 FF F0 04
 R 00 00 00 02
-T 00 E3 01
+T 01 33 00 F0 04 FF F0 04 00 F0 04 FF EC 05
 R 00 00 00 02
-T 00 E4
+T 01 3F
 R 00 00 00 02
-T 00 E4 FF B0 35
+T 01 3F 01
 R 00 00 00 02
-T 00 E7
+T 01 40
 R 00 00 00 02
-T 00 E7 01
+T 01 40 00 08 FA FF F4 00 FF 00 0C FF 0C 00 FF
 R 00 00 00 02
-T 00 E8
+T 01 4D 00 F4
 R 00 00 00 02
-T 00 E8
+T 01 4F
 R 00 00 00 02
-T 00 E8 BD 00 00 BD 00 00 BD
+T 01 4F 01
+R 00 00 00 02
+T 01 50
+R 00 00 00 02
+T 01 50
+R 00 00 00 02
+T 01 50 BD 00 00 BD 00 00 BD
 R 00 00 00 02 81 03 00 04 81 06 00 06
-T 00 EF 00 00 C6 7F D7 00 00 6F E2 5F BD
+T 01 57 00 00 C6 7F D7 00 00 6F E2 5F BD
 R 00 00 00 02 81 02 00 03 A0 07 00 00
-T 00 F9 00 00 32 61 C6 FF D7 00 00 8E
+T 01 61 00 00 32 61 C6 FF D7 00 00 8E
 R 00 00 00 02 81 02 00 05 A0 09 00 00
-T 01 02 00 4F BD 00 00 39
+T 01 6A 00 4F BD 00 00 39
 R 00 00 00 02 01 02 00 02 81 05 00 01

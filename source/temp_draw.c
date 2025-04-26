@@ -118,36 +118,71 @@ const struct packet_t vectors_horizon[] =
 };
 
 
-
-const struct packet_t vectors_road_outer_line_l[] =
-{
-	{DRAW, {-80,-53}},
-	VL_END
-};
-
 const struct packet_t vectors_road_inner_line_l[] =
 {
-	{DRAW, {-90,-20}}
+	//{DRAW, {-92,-23}},
+	{DRAW, {-4,-1}},
+	{MOVE, {-4,-1}},
+	{DRAW, {-4,-1}},
+	{MOVE, {-4,-1}},
+	{DRAW, {-8,-2}},
+	{MOVE, {-8,-2}},
+	{DRAW, {-8,-2}},
+	{MOVE, {-8,-2}},
+	{DRAW, {-12,-3}},
+	{MOVE, {-12,-3}},
+	{DRAW, {-12,-3}},
+	{MOVE, {-12,-3}},
+	{DRAW, {-16,-4}},
+	{MOVE, {-16,-4}},
+	{DRAW, {-16,-4}},
+	{MOVE, {-16,-4}},
+	{DRAW, {-20,-5}},
 	VL_END
 };
 
 const struct packet_t vectors_road_inner_line_r[] =
 {
-	{DRAW, {-90,20}}
+	{DRAW, {-4,1}},
+	{MOVE, {-4,1}},
+	{DRAW, {-4,1}},
+	{MOVE, {-4,1}},
+	{DRAW, {-8,2}},
+	{MOVE, {-8,2}},
+	{DRAW, {-8,2}},
+	{MOVE, {-8,2}},
+	{DRAW, {-12,3}},
+	{MOVE, {-12,3}},
+	{DRAW, {-12,3}},
+	{MOVE, {-12,3}},
+	{DRAW, {-16,4}},
+	{MOVE, {-16,4}},
+	{DRAW, {-16,4}},
+	{MOVE, {-16,4}},
+	{DRAW, {-20,5}},
 	VL_END
 };
 
-const struct packet_t vectors_road_outer_line_r[] =
+
+const struct packet_t vectors_debug_car[] =
 {
-	{DRAW, {-80,53}}
+	{MOVE, {8,-6}},
+	{DRAW, {-12,0}},
+	{DRAW, {0,12}},
+	{DRAW, {12,0}},
+	{DRAW, {0,-12}},
 	VL_END
 };
+
+
 
 
 const struct packet_t vectors_obstacle_truck_s[] =
 {
 	
 };
+
+
 // ---------------------------------------------------------------------------
 // draw objects on screen
 

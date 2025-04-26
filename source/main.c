@@ -41,40 +41,91 @@ void change_lane(int direction)
 	}
 }
 
+int temp_steps = 0;
+unsigned int temp_speed = 10;
+unsigned int temp_time = 10;
+
+void calculate_animation()
+{
+	
+	if(temp_time == 0)
+	{
+		//tracking		
+		temp_steps = temp_steps + 1;
+		if(temp_steps == 3) temp_steps = 0;
+		//and reset
+		temp_time = temp_speed;
+	}
+	else
+	{
+		temp_time = temp_time - 1;
+	}
+}
+
+
+
 void draw_road(){		
 	Intensity_5F();
 	
-	//draw horizon
-	//Reset0Ref();
-	//dp_VIA_t1_cnt_lo = 0x7f;
-	//Moveto_d(36, -128);
-	//dp_VIA_t1_cnt_lo = 255;
-	//Draw_VLp(&vectors_horizon);
+	//animation recalculation
+	calculate_animation();
 	
-	//draw road
+	//left border
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
 	Moveto_d(36, -15);
 	dp_VIA_t1_cnt_lo = 255;
-	Draw_VLp(&vectors_road_outer_line_l);
+	Draw_Line_d(-80,-52);
 	
+	//animate left inner line
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, -5);
-	dp_VIA_t1_cnt_lo = 255;
+	if(temp_steps == 2)
+	{
+		Moveto_d(36, -5);
+		Draw_Line_d(-4,-1);
+		Moveto_d(-4,-1);
+	}
+	else
+	{
+		Moveto_d(36 - ( 4 * temp_steps ), -5 - temp_steps);
+	}
 	Draw_VLp(&vectors_road_inner_line_l);
 	
+	//animate right inner line
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, 5);
-	dp_VIA_t1_cnt_lo = 255;
+	if(temp_steps == 2)
+	{
+		Moveto_d(36, 5);
+		Draw_Line_d(-4,1);
+		Moveto_d(-4,1);
+	}
+	else
+	{
+		Moveto_d(36 - ( 4 * temp_steps ), 5 + temp_steps);
+	}
 	Draw_VLp(&vectors_road_inner_line_r);
 	
+	//right border
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
 	Moveto_d(36, 15);
 	dp_VIA_t1_cnt_lo = 255;
-	Draw_VLp(&vectors_road_outer_line_r);
+	Draw_Line_d(-80,52);
+}
+
+
+void draw_debug_car(void)
+{
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(0, 0);
+	
+	//scaling
+	dp_VIA_t1_cnt_lo = 50 + temp_speed * 10;
+	
+	Draw_VLp(&vectors_debug_car);
 }
 
 
@@ -110,8 +161,22 @@ int main(void)
 			change_lane(1);
 		}
 		
-		print_unsigned_int(120,-80,player_lane);
+		//debug
+		if(button_1_2_pressed())
+		{
+			if(temp_speed == 1) temp_speed = 50;
+			else temp_speed = temp_speed - 1;
+		}
+		else if (button_1_4_pressed())
+		{
+			if(temp_speed == 50) temp_speed = 1;
+			else temp_speed = temp_speed + 1;
+		}
 		
+		print_unsigned_int(120,-80,player_lane);
+		print_unsigned_int(120,60,temp_speed);
+		
+		//draw_debug_car();
 
 		//draw player		
 		Intensity_5F();					// set brightness of the electron beam

@@ -231,33 +231,134 @@ _vectors_horizon:
 	.byte	127
 _vl_term_2_117:
 	.byte	1
-	.globl	_vectors_road_outer_line_l
-_vectors_road_outer_line_l:
-	.byte	-1
-	.byte	-80
-	.byte	-53
-_vl_term_3_125:
-	.byte	1
 	.globl	_vectors_road_inner_line_l
 _vectors_road_inner_line_l:
 	.byte	-1
-	.byte	-90
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	-4
+	.byte	-1
+	.byte	-1
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	-4
+	.byte	-1
+	.byte	-1
+	.byte	-8
+	.byte	-2
+	.byte	0
+	.byte	-8
+	.byte	-2
+	.byte	-1
+	.byte	-8
+	.byte	-2
+	.byte	0
+	.byte	-8
+	.byte	-2
+	.byte	-1
+	.byte	-12
+	.byte	-3
+	.byte	0
+	.byte	-12
+	.byte	-3
+	.byte	-1
+	.byte	-12
+	.byte	-3
+	.byte	0
+	.byte	-12
+	.byte	-3
+	.byte	-1
+	.byte	-16
+	.byte	-4
+	.byte	0
+	.byte	-16
+	.byte	-4
+	.byte	-1
+	.byte	-16
+	.byte	-4
+	.byte	0
+	.byte	-16
+	.byte	-4
+	.byte	-1
 	.byte	-20
-_vl_term_4_131:
+	.byte	-5
+_vl_term_3_141:
 	.byte	1
 	.globl	_vectors_road_inner_line_r
 _vectors_road_inner_line_r:
 	.byte	-1
-	.byte	-90
-	.byte	20
-_vl_term_5_137:
+	.byte	-4
 	.byte	1
-	.globl	_vectors_road_outer_line_r
-_vectors_road_outer_line_r:
+	.byte	0
+	.byte	-4
+	.byte	1
 	.byte	-1
-	.byte	-80
-	.byte	53
-_vl_term_6_143:
+	.byte	-4
+	.byte	1
+	.byte	0
+	.byte	-4
+	.byte	1
+	.byte	-1
+	.byte	-8
+	.byte	2
+	.byte	0
+	.byte	-8
+	.byte	2
+	.byte	-1
+	.byte	-8
+	.byte	2
+	.byte	0
+	.byte	-8
+	.byte	2
+	.byte	-1
+	.byte	-12
+	.byte	3
+	.byte	0
+	.byte	-12
+	.byte	3
+	.byte	-1
+	.byte	-12
+	.byte	3
+	.byte	0
+	.byte	-12
+	.byte	3
+	.byte	-1
+	.byte	-16
+	.byte	4
+	.byte	0
+	.byte	-16
+	.byte	4
+	.byte	-1
+	.byte	-16
+	.byte	4
+	.byte	0
+	.byte	-16
+	.byte	4
+	.byte	-1
+	.byte	-20
+	.byte	5
+_vl_term_4_163:
+	.byte	1
+	.globl	_vectors_debug_car
+_vectors_debug_car:
+	.byte	0
+	.byte	8
+	.byte	-6
+	.byte	-1
+	.byte	-12
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	12
+	.byte	-1
+	.byte	12
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	-12
+_vl_term_5_174:
 	.byte	1
 	.globl	_vectors_obstacle_truck_s
 _vectors_obstacle_truck_s:
