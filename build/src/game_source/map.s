@@ -7,112 +7,118 @@
 	.area	.text
 _vl_misc_roadline_left:
 	.byte	-1
-	.byte	-4
-	.byte	-1
-	.byte	0
-	.byte	-4
-	.byte	-1
-	.byte	-1
-	.byte	-4
-	.byte	-1
-	.byte	0
-	.byte	-4
-	.byte	-1
-	.byte	-1
+	.byte	-32
 	.byte	-8
-	.byte	-2
 	.byte	0
+	.byte	-32
 	.byte	-8
-	.byte	-2
 	.byte	-1
+	.byte	-32
 	.byte	-8
-	.byte	-2
 	.byte	0
+	.byte	-32
 	.byte	-8
-	.byte	-2
 	.byte	-1
-	.byte	-12
-	.byte	-3
-	.byte	0
-	.byte	-12
-	.byte	-3
-	.byte	-1
-	.byte	-12
-	.byte	-3
-	.byte	0
-	.byte	-12
-	.byte	-3
-	.byte	-1
+	.byte	-64
 	.byte	-16
-	.byte	-4
 	.byte	0
+	.byte	-64
 	.byte	-16
-	.byte	-4
 	.byte	-1
+	.byte	-64
 	.byte	-16
-	.byte	-4
 	.byte	0
+	.byte	-64
 	.byte	-16
-	.byte	-4
 	.byte	-1
-	.byte	-20
-	.byte	-5
+	.byte	-96
+	.byte	-24
+	.byte	0
+	.byte	-96
+	.byte	-24
+	.byte	-1
+	.byte	-96
+	.byte	-24
+	.byte	0
+	.byte	-96
+	.byte	-24
+	.byte	-1
+	.byte	-128
+	.byte	-32
+	.byte	0
+	.byte	-128
+	.byte	-32
+	.byte	-1
+	.byte	-128
+	.byte	-32
+	.byte	0
+	.byte	-128
+	.byte	-32
+	.byte	-1
+	.byte	-128
+	.byte	-32
+	.byte	-1
+	.byte	-32
+	.byte	-8
 _vl_term_0_35:
 	.byte	1
 	.globl	_vl_misc_roadline_right
 _vl_misc_roadline_right:
 	.byte	-1
-	.byte	-4
-	.byte	1
+	.byte	-32
+	.byte	8
 	.byte	0
-	.byte	-4
-	.byte	1
+	.byte	-32
+	.byte	8
 	.byte	-1
-	.byte	-4
-	.byte	1
+	.byte	-32
+	.byte	8
 	.byte	0
-	.byte	-4
-	.byte	1
+	.byte	-32
+	.byte	8
 	.byte	-1
-	.byte	-8
-	.byte	2
+	.byte	-64
+	.byte	16
 	.byte	0
-	.byte	-8
-	.byte	2
+	.byte	-64
+	.byte	16
 	.byte	-1
-	.byte	-8
-	.byte	2
+	.byte	-64
+	.byte	16
 	.byte	0
-	.byte	-8
-	.byte	2
+	.byte	-64
+	.byte	16
 	.byte	-1
-	.byte	-12
-	.byte	3
+	.byte	-96
+	.byte	24
 	.byte	0
-	.byte	-12
-	.byte	3
+	.byte	-96
+	.byte	24
 	.byte	-1
-	.byte	-12
-	.byte	3
+	.byte	-96
+	.byte	24
 	.byte	0
-	.byte	-12
-	.byte	3
+	.byte	-96
+	.byte	24
 	.byte	-1
-	.byte	-16
-	.byte	4
+	.byte	-128
+	.byte	32
 	.byte	0
-	.byte	-16
-	.byte	4
+	.byte	-128
+	.byte	32
 	.byte	-1
-	.byte	-16
-	.byte	4
+	.byte	-128
+	.byte	32
 	.byte	0
-	.byte	-16
-	.byte	4
+	.byte	-128
+	.byte	32
 	.byte	-1
-	.byte	-20
-	.byte	5
-_vl_term_1_59:
+	.byte	-128
+	.byte	32
+	.byte	-1
+	.byte	-32
+	.byte	8
+_vl_term_1_60:
 	.byte	1
 	.globl	_local_lu_animation_interval
 _local_lu_animation_interval:
@@ -201,6 +207,8 @@ _map_draw_road:
 	jsr	__Moveto_d
 	leas	1,s
 L7:
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_misc_roadline_left
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
@@ -221,6 +229,8 @@ L7:
 	jsr	__Moveto_d
 	leas	1,s
 L9:
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_misc_roadline_right
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref

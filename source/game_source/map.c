@@ -57,6 +57,7 @@ void map_draw_road(void){
 	{
 		Moveto_d(36 - ( 4 * animation_step ), -5 - animation_step);
 	}
+	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_misc_roadline_left);
 	
 	//animate right inner line
@@ -72,6 +73,7 @@ void map_draw_road(void){
 	{
 		Moveto_d(36 - ( 4 * animation_step ), 5 + animation_step);
 	}
+	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_misc_roadline_right);
 	
 	//right border
