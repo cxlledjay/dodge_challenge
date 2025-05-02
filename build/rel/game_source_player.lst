@@ -207,93 +207,92 @@
    00DC F6`00`00      [ 5]  207 	ldb	_Vec_Buttons
    00DF C4 02         [ 2]  208 	andb	#2
    00E1 5D            [ 2]  209 	tstb
-   00E2 27 17         [ 3]  210 	beq	L8
+   00E2 27 16         [ 3]  210 	beq	L8
    00E4 F6`00`00      [ 5]  211 	ldb	_lvl_speed
-   00E7 C1 01         [ 2]  212 	cmpb	#1	;cmpqi:
-   00E9 26 07         [ 3]  213 	bne	L9
-   00EB C6 0A         [ 2]  214 	ldb	#10
-   00ED F7`00`00      [ 5]  215 	stb	_lvl_speed
-   00F0 20 26         [ 3]  216 	bra	L13
-   00F2                     217 L9:
-   00F2 F6`00`00      [ 5]  218 	ldb	_lvl_speed
-   00F5 5A            [ 2]  219 	decb
-   00F6 F7`00`00      [ 5]  220 	stb	_lvl_speed
-   00F9 20 1D         [ 3]  221 	bra	L13
-   00FB                     222 L8:
-   00FB F6`00`00      [ 5]  223 	ldb	_Vec_Buttons
-   00FE C4 08         [ 2]  224 	andb	#8
-   0100 5D            [ 2]  225 	tstb
-   0101 27 15         [ 3]  226 	beq	L13
-   0103 F6`00`00      [ 5]  227 	ldb	_lvl_speed
-   0106 C1 0A         [ 2]  228 	cmpb	#10	;cmpqi:
-   0108 26 07         [ 3]  229 	bne	L12
-   010A C6 01         [ 2]  230 	ldb	#1
-   010C F7`00`00      [ 5]  231 	stb	_lvl_speed
-   010F 20 07         [ 3]  232 	bra	L13
-   0111                     233 L12:
-   0111 F6`00`00      [ 5]  234 	ldb	_lvl_speed
-   0114 5C            [ 2]  235 	incb
-   0115 F7`00`00      [ 5]  236 	stb	_lvl_speed
-   0118                     237 L13:
-   0118 39            [ 5]  238 	rts
-                            239 	.globl	_local_lu_player_x_pos
-   0119                     240 _local_lu_player_x_pos:
-   0119 B9                  241 	.byte	-71
-   011A 00                  242 	.byte	0
-   011B 47                  243 	.byte	71
-                            244 	.globl	_player_draw
-   011C                     245 _player_draw:
-   011C 32 7F         [ 5]  246 	leas	-1,s
-   011E BD`00`00      [ 8]  247 	jsr	___Intensity_5F
-   0121 BD`00`00      [ 8]  248 	jsr	___Reset0Ref
-   0124 C6 7F         [ 2]  249 	ldb	#127
-   0126 D7`00         [ 4]  250 	stb	*_dp_VIA_t1_cnt_lo
-   0128 F6`00`00      [ 5]  251 	ldb	_player_lane
-   012B 4F            [ 2]  252 	clra		;zero_extendqihi: R:b -> R:d
-   012C 1F 01         [ 6]  253 	tfr	d,x
-   012E E6 89`01`19   [ 8]  254 	ldb	_local_lu_player_x_pos,x
-   0132 E7 E4         [ 4]  255 	stb	,s
-   0134 C6 90         [ 2]  256 	ldb	#-112
-   0136 E7 E2         [ 6]  257 	stb	,-s
-   0138 E6 61         [ 5]  258 	ldb	1,s
-   013A BD`00`00      [ 8]  259 	jsr	__Moveto_d
-   013D 32 61         [ 5]  260 	leas	1,s
-   013F C6 40         [ 2]  261 	ldb	#64
-   0141 D7`00         [ 4]  262 	stb	*_dp_VIA_t1_cnt_lo
-   0143 8E`00`00      [ 3]  263 	ldx	#_vl_player_mid
-   0146 BD`00`00      [ 8]  264 	jsr	___Draw_VLp
-   0149 32 61         [ 5]  265 	leas	1,s
-   014B 39            [ 5]  266 	rts
+   00E7 5D            [ 2]  212 	tstb
+   00E8 26 07         [ 3]  213 	bne	L9
+   00EA C6 06         [ 2]  214 	ldb	#6
+   00EC F7`00`00      [ 5]  215 	stb	_lvl_speed
+   00EF 20 24         [ 3]  216 	bra	L13
+   00F1                     217 L9:
+   00F1 F6`00`00      [ 5]  218 	ldb	_lvl_speed
+   00F4 5A            [ 2]  219 	decb
+   00F5 F7`00`00      [ 5]  220 	stb	_lvl_speed
+   00F8 20 1B         [ 3]  221 	bra	L13
+   00FA                     222 L8:
+   00FA F6`00`00      [ 5]  223 	ldb	_Vec_Buttons
+   00FD C4 08         [ 2]  224 	andb	#8
+   00FF 5D            [ 2]  225 	tstb
+   0100 27 13         [ 3]  226 	beq	L13
+   0102 F6`00`00      [ 5]  227 	ldb	_lvl_speed
+   0105 C1 06         [ 2]  228 	cmpb	#6	;cmpqi:
+   0107 26 05         [ 3]  229 	bne	L12
+   0109 7F`00`00      [ 7]  230 	clr	_lvl_speed
+   010C 20 07         [ 3]  231 	bra	L13
+   010E                     232 L12:
+   010E F6`00`00      [ 5]  233 	ldb	_lvl_speed
+   0111 5C            [ 2]  234 	incb
+   0112 F7`00`00      [ 5]  235 	stb	_lvl_speed
+   0115                     236 L13:
+   0115 39            [ 5]  237 	rts
+                            238 	.globl	_local_lu_player_x_pos
+   0116                     239 _local_lu_player_x_pos:
+   0116 B9                  240 	.byte	-71
+   0117 00                  241 	.byte	0
+   0118 47                  242 	.byte	71
+                            243 	.globl	_player_draw
+   0119                     244 _player_draw:
+   0119 32 7F         [ 5]  245 	leas	-1,s
+   011B BD`00`00      [ 8]  246 	jsr	___Intensity_5F
+   011E BD`00`00      [ 8]  247 	jsr	___Reset0Ref
+   0121 C6 7F         [ 2]  248 	ldb	#127
+   0123 D7`00         [ 4]  249 	stb	*_dp_VIA_t1_cnt_lo
+   0125 F6`00`00      [ 5]  250 	ldb	_player_lane
+   0128 4F            [ 2]  251 	clra		;zero_extendqihi: R:b -> R:d
+   0129 1F 01         [ 6]  252 	tfr	d,x
+   012B E6 89`01`16   [ 8]  253 	ldb	_local_lu_player_x_pos,x
+   012F E7 E4         [ 4]  254 	stb	,s
+   0131 C6 90         [ 2]  255 	ldb	#-112
+   0133 E7 E2         [ 6]  256 	stb	,-s
+   0135 E6 61         [ 5]  257 	ldb	1,s
+   0137 BD`00`00      [ 8]  258 	jsr	__Moveto_d
+   013A 32 61         [ 5]  259 	leas	1,s
+   013C C6 40         [ 2]  260 	ldb	#64
+   013E D7`00         [ 4]  261 	stb	*_dp_VIA_t1_cnt_lo
+   0140 8E`00`00      [ 3]  262 	ldx	#_vl_player_mid
+   0143 BD`00`00      [ 8]  263 	jsr	___Draw_VLp
+   0146 32 61         [ 5]  264 	leas	1,s
+   0148 39            [ 5]  265 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L12                0111 R   |   2 L13                0118 R
+  2 L12                010E R   |   2 L13                0115 R
   2 L2                 00A7 R   |   2 L4                 00BA R
   2 L6                 00CF R   |   2 L7                 00DC R
-  2 L8                 00FB R   |   2 L9                 00F2 R
+  2 L8                 00FA R   |   2 L9                 00F1 R
     _Vec_Buttons       **** GX  |     __Moveto_d         **** GX
     ___Draw_VLp        **** GX  |     ___Intensity_5     **** GX
     ___Read_Btns       **** GX  |     ___Reset0Ref       **** GX
   2 _change_lane       008D GR  |     _dp_VIA_t1_cnt     **** GX
-  2 _local_lu_play     0119 GR  |     _lvl_speed         **** GX
-  2 _player_draw       011C GR  |   2 _player_handle     00BD GR
+  2 _local_lu_play     0116 GR  |     _lvl_speed         **** GX
+  2 _player_draw       0119 GR  |   2 _player_handle     00BD GR
   3 _player_lane       0000 GR  |   2 _vl_player_lef     0085 GR
   2 _vl_player_mid     0000 GR  |   2 _vl_player_rig     0089 GR
   2 _vl_term_0_75      0084 R   |   2 _vl_term_1_84      0088 R
   2 _vl_term_2_93      008C R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size  14C   flags  100
+   2 .text            size  149   flags  100
    3 .data            size    1   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0

@@ -1,8 +1,8 @@
 #pragma once
 
 
-#define LVL_MAX_SPEED (10)
+#define LVL_MAX_SPEED (6u) //test out what is too fast
 
-extern int lvl_speed;
+extern unsigned int lvl_speed;
 
 void lvl_init();

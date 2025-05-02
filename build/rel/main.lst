@@ -18,7 +18,7 @@
    0017 C6 3C         [ 2]   18 	ldb	#60
    0019 E7 E2         [ 6]   19 	stb	,-s
    001B C6 78         [ 2]   20 	ldb	#120
-   001D BD`00`00      [ 8]   21 	jsr	_print_signed_int
+   001D BD`00`00      [ 8]   21 	jsr	_print_unsigned_int
    0020 32 62         [ 5]   22 	leas	2,s
    0022 BD`00`00      [ 8]   23 	jsr	_player_draw
    0025 20 DF         [ 3]   24 	bra	L2
@@ -26,7 +26,7 @@
    0027                      26 _main:
    0027 BD`00`00      [ 8]   27 	jsr	_run_game
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Symbol Table
 
@@ -37,10 +37,10 @@ Symbol Table
     _lvl_init          **** GX  |     _lvl_speed         **** GX
   2 _main              0027 GR  |     _map_draw_road     **** GX
     _player_draw       **** GX  |     _player_handle     **** GX
-    _print_signed_     **** GX  |   2 _run_game          0000 GR
+    _print_unsigne     **** GX  |   2 _run_game          0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Area Table
 

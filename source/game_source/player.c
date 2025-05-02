@@ -60,12 +60,12 @@ void player_handle_input(void)
 	//debug
 	if(button_1_2_pressed())
 	{
-		if(lvl_speed == 1) lvl_speed = 10;
+		if(lvl_speed == 0) lvl_speed = LVL_MAX_SPEED;
 		else lvl_speed = lvl_speed - 1;
 	}
 	else if (button_1_4_pressed())
 	{
-		if(lvl_speed == 10) lvl_speed = 1;
+		if(lvl_speed == LVL_MAX_SPEED) lvl_speed = 0;
 		else lvl_speed = lvl_speed + 1;
 	}
 }

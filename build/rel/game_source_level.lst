@@ -9,11 +9,10 @@
                               9 	.area	.text
                              10 	.globl	_lvl_init
    0000                      11 _lvl_init:
-   0000 C6 01         [ 2]   12 	ldb	#1
-   0002 F7`00`00      [ 5]   13 	stb	_lvl_speed
-   0005 39            [ 5]   14 	rts
+   0000 7F`00`00      [ 7]   12 	clr	_lvl_speed
+   0003 39            [ 5]   13 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Symbol Table
 
@@ -22,14 +21,14 @@ Symbol Table
   3 _lvl_init          0000 GR  |   2 _lvl_speed         0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
+Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    1   flags    0
-   3 .text            size    6   flags  100
+   3 .text            size    4   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

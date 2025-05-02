@@ -18,7 +18,7 @@ L2:
 	ldb	#60
 	stb	,-s
 	ldb	#120
-	jsr	_print_signed_int
+	jsr	_print_unsigned_int
 	leas	2,s
 	jsr	_player_draw
 	bra	L2

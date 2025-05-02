@@ -38,8 +38,11 @@ __attribute__((noreturn)) void run_debug(void)
 		Reset0Ref();					// reset beam to center
 		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 		Moveto_d(0, 0);				// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = 255;			// set scaling factor for drawing
+		dp_VIA_t1_cnt_lo = 63;			// set scaling factor for drawing
 		Draw_VLp(&vl_player_mid);			// draw vector list
+		unsigned int x = 42;
+		unsigned int y = x % 4;
+		print_unsigned_int(100,0,y);
 	}
 	while(1);
 }
@@ -69,7 +72,7 @@ __attribute__((noreturn)) void run_game(void)
 		player_handle_input();
 
 		//debug
-		print_signed_int(120,60,lvl_speed);
+		print_unsigned_int(120,60,lvl_speed);
 
 		//draw player
 		player_draw();

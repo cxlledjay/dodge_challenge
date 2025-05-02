@@ -114,16 +114,18 @@ _vl_misc_roadline_right:
 	.byte	5
 _vl_term_1_59:
 	.byte	1
-	.globl	_local_cnt
-	.area	.data
-_local_cnt:
-	.byte	0
-	.globl	_animation_step
-_animation_step:
-	.byte	0
-	.area	.text
+	.globl	_local_lu_animation_interval
+_local_lu_animation_interval:
+	.byte	93
+	.byte	81
+	.byte	69
+	.byte	58
+	.byte	49
+	.byte	42
+	.byte	34
 	.globl	_map_draw_road
 _map_draw_road:
+	pshs	u
 	leas	-12,s
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
@@ -141,37 +143,47 @@ _map_draw_road:
 	ldb	#-52
 	jsr	__Draw_Line_d
 	leas	1,s
+	ldb	_clk_frames
+	stb	3,s
 	ldb	_lvl_speed
-	stb	1,s
-	ldb	#10
-	subb	1,s
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_local_lu_animation_interval,x
+	clra		;zero_extendqihi: R:b -> R:d
+	ldx	#3
+	pshs	x
+	tfr	d,x
+	jsr	_udivhi3
+	leas	2,s
+	tfr	x,d	;movlsbqihi: R:x -> R:b
+	stb	2,s
+	ldb	3,s
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	2,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	,s
+	ldu	,s
+	pshs	u
+	jsr	_udivhi3
+	leas	2,s
+	tfr	x,d	;movlsbqihi: R:x -> R:b
+	clra		;zero_extendqihi: R:b -> R:d
+	ldx	#3
+	pshs	x
+	tfr	d,x
+	jsr	_umodhi3
+	leas	2,s
+	tfr	x,d
+	stb	6,s	;movlsbqihi: R:d -> 6,s
+	ldb	6,s
 	stb	7,s
-	ldb	_local_cnt
-	cmpb	7,s	;cmpqi:
-	bne	L2
-	ldb	_animation_step
-	cmpb	#2	;cmpqi:
-	bne	L3
-	clr	_animation_step
-	bra	L4
-L3:
-	ldb	_animation_step
-	incb
-	stb	_animation_step
-L4:
-	clr	_local_cnt
-	bra	L5
-L2:
-	ldb	_local_cnt
-	incb
-	stb	_local_cnt
-L5:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_animation_step
+	ldb	7,s
 	cmpb	#2	;cmpqi:
-	bne	L6
+	bne	L2
 	ldb	#36
 	stb	,-s
 	ldb	#-5
@@ -187,38 +199,34 @@ L5:
 	ldb	#-1
 	jsr	__Moveto_d
 	leas	1,s
-	bra	L7
-L6:
-	ldb	_animation_step
-	stb	2,s
+	bra	L3
+L2:
 	ldb	#-5
-	stb	,s
-	ldb	,s
-	subb	2,s
-	stb	3,s
-	ldb	_animation_step
+	stb	2,s
+	ldb	2,s
+	subb	7,s
 	stb	4,s
 	ldb	#9
-	subb	4,s
+	subb	7,s
 	aslb
 	aslb
 	stb	9,s
-	ldb	3,s
+	ldb	4,s
 	stb	8,s
 	ldb	9,s
 	stb	,-s
 	ldb	9,s
 	jsr	__Moveto_d
 	leas	1,s
-L7:
+L3:
 	ldx	#_vl_misc_roadline_left
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_animation_step
+	ldb	7,s
 	cmpb	#2	;cmpqi:
-	bne	L8
+	bne	L4
 	ldb	#36
 	stb	,-s
 	ldb	#5
@@ -234,17 +242,13 @@ L7:
 	ldb	#1
 	jsr	__Moveto_d
 	leas	1,s
-	bra	L9
-L8:
-	ldb	_animation_step
-	stb	,s
-	ldb	,s
+	bra	L5
+L4:
+	ldb	7,s
 	addb	#5
 	stb	5,s
-	ldb	_animation_step
-	stb	6,s
 	ldb	#9
-	subb	6,s
+	subb	7,s
 	aslb
 	aslb
 	stb	11,s
@@ -255,7 +259,7 @@ L8:
 	ldb	11,s
 	jsr	__Moveto_d
 	leas	1,s
-L9:
+L5:
 	ldx	#_vl_misc_roadline_right
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
@@ -274,4 +278,4 @@ L9:
 	jsr	__Draw_Line_d
 	leas	1,s
 	leas	12,s
-	rts
+	puls	u,pc

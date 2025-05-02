@@ -209,9 +209,9 @@ L7:
 	tstb
 	beq	L8
 	ldb	_lvl_speed
-	cmpb	#1	;cmpqi:
+	tstb
 	bne	L9
-	ldb	#10
+	ldb	#6
 	stb	_lvl_speed
 	bra	L13
 L9:
@@ -225,10 +225,9 @@ L8:
 	tstb
 	beq	L13
 	ldb	_lvl_speed
-	cmpb	#10	;cmpqi:
+	cmpb	#6	;cmpqi:
 	bne	L12
-	ldb	#1
-	stb	_lvl_speed
+	clr	_lvl_speed
 	bra	L13
 L12:
 	ldb	_lvl_speed

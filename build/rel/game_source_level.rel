@@ -9,11 +9,11 @@ A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
 A .bss size 1 flags C00
 S _lvl_speed Def0000
-A .text size 6 flags D00
+A .text size 4 flags D00
 S _lvl_init Def0000
 T 00 00
 R 00 00 00 02
 T 00 00
 R 00 00 00 03
-T 00 00 C6 01 F7 00 00 39
-R 00 00 00 03 01 05 00 02
+T 00 00 7F 00 00 39
+R 00 00 00 03 01 03 00 02

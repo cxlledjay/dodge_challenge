@@ -4,9 +4,21 @@
 
 #include "game_include/graphics/g_misc.h"
 #include "game_include/level.h"
+#include "game_include/clock.h"
 
-int local_cnt = 0;
-int animation_step = 0; // can be 0, 1, 2
+const unsigned int local_lu_animation_interval[] =
+{
+	93,
+	81,
+	69,
+	58,
+	49,
+	42,
+	34
+};
+
+
+
 
 void map_draw_road(){
 
@@ -21,25 +33,8 @@ void map_draw_road(){
 	Draw_Line_d(-80,-52);
 	
 	//calculate animation
-	int cnt_limiter = LVL_MAX_SPEED - lvl_speed; //cnt_limiter = {0,...,MAX_SPEED-1}
-
-	//clock animation
-	if(local_cnt == cnt_limiter)
-	{
-		if(animation_step == 2)
-		{
-			animation_step = 0;
-		}
-		else
-		{
-			animation_step = animation_step + 1;
-		}
-		local_cnt = 0;
-	}
-	else
-	{
-		local_cnt = local_cnt + 1;
-	}
+	unsigned int animation_step_ui = (clk_frames / (local_lu_animation_interval[lvl_speed]/3)) % 3;
+	int animation_step = (int) animation_step_ui;
 
 	//animation of inner lines
 	Reset0Ref();

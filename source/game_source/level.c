@@ -2,9 +2,9 @@
 
 
 
-int lvl_speed;
+unsigned int lvl_speed;
 
 void lvl_init()
 {
-    lvl_speed = 1;
+    lvl_speed = 0;
 }

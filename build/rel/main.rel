@@ -6,11 +6,11 @@ B _CSEG base 0 size 0 map 0 flags 0
 B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
 S _lvl_init Ref0000
 S _player_handle_input Ref0000
-S _print_signed_int Ref0000
 S _lvl_speed Ref0000
 S .__.ABS. Def0000
 S _clk_init Ref0000
 S _map_draw_road Ref0000
+S _print_unsigned_int Ref0000
 S ___Wait_Recal Ref0000
 S _player_draw Ref0000
 S _clk_update Ref0000
@@ -22,15 +22,15 @@ S _run_game Def0000
 T 00 00
 R 00 00 00 02
 T 00 00 BD 00 00 BD 00 00
-R 00 00 00 02 81 03 00 05 81 06 00 00
+R 00 00 00 02 81 03 00 04 81 06 00 00
 T 00 06
 R 00 00 00 02
 T 00 06 BD 00 00 BD 00 00 BD
 R 00 00 00 02 81 03 00 07 81 06 00 09
 T 00 0D 00 00 BD 00 00 F6
-R 00 00 00 02 81 02 00 06 81 05 00 01
+R 00 00 00 02 81 02 00 05 81 05 00 01
 T 00 13 00 00 34 04 C6 3C E7 E2 C6 78 BD 00 00
-R 00 00 00 02 81 02 00 03 81 0D 00 02
+R 00 00 00 02 81 02 00 02 81 0D 00 06
 T 00 20 32 62 BD 00 00 20 DF
 R 00 00 00 02 81 05 00 08
 T 00 27

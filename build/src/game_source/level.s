@@ -9,6 +9,5 @@ _lvl_speed:	.blkb	1
 	.area	.text
 	.globl	_lvl_init
 _lvl_init:
-	ldb	#1
-	stb	_lvl_speed
+	clr	_lvl_speed
 	rts
