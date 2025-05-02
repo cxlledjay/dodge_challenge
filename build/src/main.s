@@ -220,75 +220,59 @@ _lookup_player_lane_x_pos:
 	.byte	-71
 	.byte	0
 	.byte	71
-	.globl	_debug_sprites
-_debug_sprites:
-L19:
-	jsr	___Intensity_5F
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	clr	,-s
-	clrb
-	jsr	__Moveto_d
-	leas	1,s
-	ldb	#-1
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid
-	jsr	___Draw_VLp
-	bra	L19
-	.globl	_main
-_main:
+	.globl	_game_loop
+_game_loop:
 	leas	-1,s
-L29:
+L26:
 	jsr	___Wait_Recal
 	jsr	_draw_road
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
 	andb	#1
 	tstb
-	beq	L22
+	beq	L19
 	ldb	#-1
 	jsr	_change_lane
-	bra	L23
-L22:
+	bra	L20
+L19:
 	ldb	_Vec_Buttons
 	andb	#4
 	tstb
-	beq	L23
+	beq	L20
 	ldb	#1
 	jsr	_change_lane
-L23:
+L20:
 	ldb	_Vec_Buttons
 	andb	#2
 	tstb
-	beq	L24
+	beq	L21
 	ldb	_temp_speed
 	cmpb	#1	;cmpqi:
-	bne	L25
+	bne	L22
 	ldb	#50
 	stb	_temp_speed
-	bra	L27
-L25:
+	bra	L24
+L22:
 	ldb	_temp_speed
 	decb
 	stb	_temp_speed
-	bra	L27
-L24:
+	bra	L24
+L21:
 	ldb	_Vec_Buttons
 	andb	#8
 	tstb
-	beq	L27
+	beq	L24
 	ldb	_temp_speed
 	cmpb	#50	;cmpqi:
-	bne	L28
+	bne	L25
 	ldb	#1
 	stb	_temp_speed
-	bra	L27
-L28:
+	bra	L24
+L25:
 	ldb	_temp_speed
 	incb
 	stb	_temp_speed
-L27:
+L24:
 	ldb	_player_lane
 	pshs	b
 	ldb	#-80
@@ -321,4 +305,7 @@ L27:
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vectors_player
 	jsr	___Draw_VLp
-	lbra	L29
+	lbra	L26
+	.globl	_main
+_main:
+	jsr	_game_loop
