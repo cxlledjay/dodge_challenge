@@ -28,6 +28,7 @@
 // debug loop, used to test stuff, without altering the game loop
 // (e.g. drawing new sprites)
 // *************************************
+#include "game_include/graphics/g_player.h"
 __attribute__((noreturn)) void run_debug(void)
 {
 	do

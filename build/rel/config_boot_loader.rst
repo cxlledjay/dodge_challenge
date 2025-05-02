@@ -10,10 +10,10 @@
                              10 ; 21 "source\config\boot_loader.c" 1
    0022                      11 	_crt0:							
    0022                      12 	_crt0_data:					
-   0022 8E 00 04      [ 3]   13 		ldx		#l_.data			
+   0022 8E 00 03      [ 3]   13 		ldx		#l_.data			
    0025 27 1B         [ 3]   14 		beq		_crt0_data_done		
    0027 CE 00 61      [ 3]   15 		ldu		#a_.text			
-   002A 33 C9 05 0D   [ 8]   16 		leau	l_.text,u			
+   002A 33 C9 03 C5   [ 8]   16 		leau	l_.text,u			
    002E 33 C9 00 00   [ 8]   17 		leau	l_.text.hot,u		
    0032 33 C9 00 00   [ 8]   18 		leau	l_.text.unlikely,u	
    0036 10 8E C8 80   [ 4]   19 		ldy		#a_.data			
@@ -24,9 +24,9 @@
    0040 26 F8         [ 3]   24 		bne		_crt0_data_copy		
    0042                      25 	_crt0_data_done:				
    0042                      26 	_crt0_bss:						
-   0042 8E 00 00      [ 3]   27 		ldx		#l_.bss				
+   0042 8E 00 04      [ 3]   27 		ldx		#l_.bss				
    0045 27 0A         [ 3]   28 		beq		_crt0_bss_done		
-   0047 10 8E C8 84   [ 4]   29 		ldy		#a_.bss				
+   0047 10 8E C8 83   [ 4]   29 		ldy		#a_.bss				
    004B                      30 	_crt0_bss_zero:				
    004B 6F A0         [ 8]   31 		clr		,y+					
    004D 30 1F         [ 5]   32 		leax	-1,x				
@@ -34,7 +34,7 @@
    0051                      34 	_crt0_bss_done:				
                              35 	
                              36 ;--- end asm ---
-   0051 BD 03 8A      [ 8]   37 	jsr	_main
+   0051 BD 03 A3      [ 8]   37 	jsr	_main
    0054 5D            [ 2]   38 	tstb
    0055 27 06         [ 3]   39 	beq	L2
    0057 8E 00 00      [ 3]   40 	ldx	#0
@@ -43,7 +43,7 @@
    005D BD F0 00      [ 8]   43 	jsr	___Reset
    0060 39            [ 5]   44 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 16:45:27 2025
+Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
 
 Symbol Table
 
@@ -61,7 +61,7 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 16:45:27 2025
+Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
 
 Area Table
 

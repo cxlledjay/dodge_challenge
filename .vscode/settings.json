@@ -6,6 +6,13 @@
         "vectrex.h": "c",
         "vectrex_ram.h": "c",
         "vectrex_rom.h": "c",
-        "vectrex_rum.h": "c"
+        "vectrex_rum.h": "c",
+        "clock.h": "c",
+        "level.h": "c",
+        "vector.h": "c",
+        "player.h": "c",
+        "score.h": "c",
+        "map.h": "c",
+        "misc.h": "c"
     }
 }

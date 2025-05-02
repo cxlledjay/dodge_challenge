@@ -6,7 +6,7 @@
 
 #include "game_include/map.h"
 #include "game_include/level.h"
-#include "game_include/graphics/player.h"
+#include "game_include/graphics/g_player.h"
 
 //**************************************************
 // tracking
@@ -60,12 +60,12 @@ void player_handle_input(void)
 	//debug
 	if(button_1_2_pressed())
 	{
-		if(lvl_speed == 1) lvl_speed = 50;
+		if(lvl_speed == 1) lvl_speed = 10;
 		else lvl_speed = lvl_speed - 1;
 	}
 	else if (button_1_4_pressed())
 	{
-		if(lvl_speed == 50) lvl_speed = 1;
+		if(lvl_speed == 10) lvl_speed = 1;
 		else lvl_speed = lvl_speed + 1;
 	}
 }

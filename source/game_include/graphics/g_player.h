@@ -1,11 +1,15 @@
 // ***************************************************************************
-// graphics/player.c
+// graphics/player.h
 //
 // all vector lists to draw the player
 // ***************************************************************************
-#include "game_include/graphics/player.h"
+#pragma once
 
 #include "utils/vector.h"
+
+// ***************************************************************************
+// vector list pointer to different perspectives of player model
+// ***************************************************************************
 
 
 const struct packet_t vl_player_mid[] = 
@@ -71,6 +75,14 @@ const struct packet_t vl_player_mid[] =
 	VL_END
 };
 
+
+
+const struct packet_t vl_player_left[] = 
+{
+	{MOVE, {-24,-20}}, //move to left back wheel
+	
+	VL_END
+};
 
 
 

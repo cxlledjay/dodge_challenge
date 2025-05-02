@@ -3,350 +3,50 @@
                               3 ;;; ABI version 1
                               4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
                               5 	.module	main.c
-                              6 	.globl	_player_lane
-                              7 	.area	.data
-   C880                       8 _player_lane:
-   C880 01                    9 	.byte	1
-                             10 	.area	.text
-                             11 	.globl	_change_lane
-   0152                      12 _change_lane:
-   0152 32 7F         [ 5]   13 	leas	-1,s
-   0154 E7 E4         [ 4]   14 	stb	,s
-   0156 E6 E4         [ 4]   15 	ldb	,s
-   0158 C1 01         [ 2]   16 	cmpb	#1	;cmpqi:
-   015A 26 10         [ 3]   17 	bne	L2
-   015C F6 C8 80      [ 5]   18 	ldb	_player_lane
-   015F C1 02         [ 2]   19 	cmpb	#2	;cmpqi:
-   0161 27 1C         [ 3]   20 	beq	L4
-   0163 F6 C8 80      [ 5]   21 	ldb	_player_lane
-   0166 5C            [ 2]   22 	incb
-   0167 F7 C8 80      [ 5]   23 	stb	_player_lane
-   016A 20 13         [ 3]   24 	bra	L4
-   016C                      25 L2:
-   016C E6 E4         [ 4]   26 	ldb	,s
-   016E C1 FF         [ 2]   27 	cmpb	#-1	;cmpqi:
-   0170 26 0D         [ 3]   28 	bne	L4
-   0172 F6 C8 80      [ 5]   29 	ldb	_player_lane
-   0175 5D            [ 2]   30 	tstb
-   0176 27 07         [ 3]   31 	beq	L4
-   0178 F6 C8 80      [ 5]   32 	ldb	_player_lane
-   017B 5A            [ 2]   33 	decb
-   017C F7 C8 80      [ 5]   34 	stb	_player_lane
-   017F                      35 L4:
-   017F 32 61         [ 5]   36 	leas	1,s
-   0181 39            [ 5]   37 	rts
-                             38 	.globl	_temp_steps
-                             39 	.area	.data
-   C881                      40 _temp_steps:
-   C881 00                   41 	.byte	0
-                             42 	.globl	_temp_speed
-   C882                      43 _temp_speed:
-   C882 0A                   44 	.byte	10
-                             45 	.globl	_temp_time
-   C883                      46 _temp_time:
-   C883 0A                   47 	.byte	10
-                             48 	.area	.text
-                             49 	.globl	_calculate_animation
-   0182                      50 _calculate_animation:
-   0182 F6 C8 83      [ 5]   51 	ldb	_temp_time
-   0185 5D            [ 2]   52 	tstb
-   0186 26 19         [ 3]   53 	bne	L6
-   0188 F6 C8 81      [ 5]   54 	ldb	_temp_steps
-   018B 5C            [ 2]   55 	incb
-   018C F7 C8 81      [ 5]   56 	stb	_temp_steps
-   018F F6 C8 81      [ 5]   57 	ldb	_temp_steps
-   0192 C1 03         [ 2]   58 	cmpb	#3	;cmpqi:
-   0194 26 03         [ 3]   59 	bne	L7
-   0196 7F C8 81      [ 7]   60 	clr	_temp_steps
-   0199                      61 L7:
-   0199 F6 C8 82      [ 5]   62 	ldb	_temp_speed
-   019C F7 C8 83      [ 5]   63 	stb	_temp_time
-   019F 20 07         [ 3]   64 	bra	L9
-   01A1                      65 L6:
-   01A1 F6 C8 83      [ 5]   66 	ldb	_temp_time
-   01A4 5A            [ 2]   67 	decb
-   01A5 F7 C8 83      [ 5]   68 	stb	_temp_time
-   01A8                      69 L9:
-   01A8 39            [ 5]   70 	rts
-                             71 	.globl	_draw_road
-   01A9                      72 _draw_road:
-   01A9 32 76         [ 5]   73 	leas	-10,s
-   01AB BD F2 A5      [ 8]   74 	jsr	___Intensity_5F
-   01AE BD 01 82      [ 8]   75 	jsr	_calculate_animation
-   01B1 BD F3 54      [ 8]   76 	jsr	___Reset0Ref
-   01B4 C6 7F         [ 2]   77 	ldb	#127
-   01B6 D7 04         [ 4]   78 	stb	*_dp_VIA_t1_cnt_lo
-   01B8 C6 24         [ 2]   79 	ldb	#36
-   01BA E7 E2         [ 6]   80 	stb	,-s
-   01BC C6 F1         [ 2]   81 	ldb	#-15
-   01BE BD 05 5E      [ 8]   82 	jsr	__Moveto_d
-   01C1 32 61         [ 5]   83 	leas	1,s
-   01C3 C6 FF         [ 2]   84 	ldb	#-1
-   01C5 D7 04         [ 4]   85 	stb	*_dp_VIA_t1_cnt_lo
-   01C7 C6 B0         [ 2]   86 	ldb	#-80
-   01C9 E7 E2         [ 6]   87 	stb	,-s
-   01CB C6 CC         [ 2]   88 	ldb	#-52
-   01CD BD 05 59      [ 8]   89 	jsr	__Draw_Line_d
-   01D0 32 61         [ 5]   90 	leas	1,s
-   01D2 BD F3 54      [ 8]   91 	jsr	___Reset0Ref
-   01D5 C6 7F         [ 2]   92 	ldb	#127
-   01D7 D7 04         [ 4]   93 	stb	*_dp_VIA_t1_cnt_lo
-   01D9 F6 C8 81      [ 5]   94 	ldb	_temp_steps
-   01DC C1 02         [ 2]   95 	cmpb	#2	;cmpqi:
-   01DE 26 23         [ 3]   96 	bne	L11
-   01E0 C6 24         [ 2]   97 	ldb	#36
-   01E2 E7 E2         [ 6]   98 	stb	,-s
-   01E4 C6 FB         [ 2]   99 	ldb	#-5
-   01E6 BD 05 5E      [ 8]  100 	jsr	__Moveto_d
-   01E9 32 61         [ 5]  101 	leas	1,s
-   01EB C6 FC         [ 2]  102 	ldb	#-4
-   01ED E7 E2         [ 6]  103 	stb	,-s
-   01EF C6 FF         [ 2]  104 	ldb	#-1
-   01F1 BD 05 59      [ 8]  105 	jsr	__Draw_Line_d
-   01F4 32 61         [ 5]  106 	leas	1,s
-   01F6 C6 FC         [ 2]  107 	ldb	#-4
-   01F8 E7 E2         [ 6]  108 	stb	,-s
-   01FA C6 FF         [ 2]  109 	ldb	#-1
-   01FC BD 05 5E      [ 8]  110 	jsr	__Moveto_d
-   01FF 32 61         [ 5]  111 	leas	1,s
-   0201 20 2B         [ 3]  112 	bra	L12
-   0203                     113 L11:
-   0203 F6 C8 81      [ 5]  114 	ldb	_temp_steps
-   0206 E7 61         [ 5]  115 	stb	1,s
-   0208 C6 FB         [ 2]  116 	ldb	#-5
-   020A E7 E4         [ 4]  117 	stb	,s
-   020C E6 E4         [ 4]  118 	ldb	,s
-   020E E0 61         [ 5]  119 	subb	1,s
-   0210 E7 62         [ 5]  120 	stb	2,s
-   0212 F6 C8 81      [ 5]  121 	ldb	_temp_steps
-   0215 E7 63         [ 5]  122 	stb	3,s
-   0217 C6 09         [ 2]  123 	ldb	#9
-   0219 E0 63         [ 5]  124 	subb	3,s
-   021B 58            [ 2]  125 	aslb
-   021C 58            [ 2]  126 	aslb
-   021D E7 67         [ 5]  127 	stb	7,s
-   021F E6 62         [ 5]  128 	ldb	2,s
-   0221 E7 66         [ 5]  129 	stb	6,s
-   0223 E6 67         [ 5]  130 	ldb	7,s
-   0225 E7 E2         [ 6]  131 	stb	,-s
-   0227 E6 67         [ 5]  132 	ldb	7,s
-   0229 BD 05 5E      [ 8]  133 	jsr	__Moveto_d
-   022C 32 61         [ 5]  134 	leas	1,s
-   022E                     135 L12:
-   022E 8E 04 65      [ 3]  136 	ldx	#_vectors_road_inner_line_l
-   0231 BD F4 10      [ 8]  137 	jsr	___Draw_VLp
-   0234 BD F3 54      [ 8]  138 	jsr	___Reset0Ref
-   0237 C6 7F         [ 2]  139 	ldb	#127
-   0239 D7 04         [ 4]  140 	stb	*_dp_VIA_t1_cnt_lo
-   023B F6 C8 81      [ 5]  141 	ldb	_temp_steps
-   023E C1 02         [ 2]  142 	cmpb	#2	;cmpqi:
-   0240 26 23         [ 3]  143 	bne	L13
-   0242 C6 24         [ 2]  144 	ldb	#36
-   0244 E7 E2         [ 6]  145 	stb	,-s
-   0246 C6 05         [ 2]  146 	ldb	#5
-   0248 BD 05 5E      [ 8]  147 	jsr	__Moveto_d
-   024B 32 61         [ 5]  148 	leas	1,s
-   024D C6 FC         [ 2]  149 	ldb	#-4
-   024F E7 E2         [ 6]  150 	stb	,-s
-   0251 C6 01         [ 2]  151 	ldb	#1
-   0253 BD 05 59      [ 8]  152 	jsr	__Draw_Line_d
-   0256 32 61         [ 5]  153 	leas	1,s
-   0258 C6 FC         [ 2]  154 	ldb	#-4
-   025A E7 E2         [ 6]  155 	stb	,-s
-   025C C6 01         [ 2]  156 	ldb	#1
-   025E BD 05 5E      [ 8]  157 	jsr	__Moveto_d
-   0261 32 61         [ 5]  158 	leas	1,s
-   0263 20 27         [ 3]  159 	bra	L14
-   0265                     160 L13:
-   0265 F6 C8 81      [ 5]  161 	ldb	_temp_steps
-   0268 E7 E4         [ 4]  162 	stb	,s
-   026A E6 E4         [ 4]  163 	ldb	,s
-   026C CB 05         [ 2]  164 	addb	#5
-   026E E7 64         [ 5]  165 	stb	4,s
-   0270 F6 C8 81      [ 5]  166 	ldb	_temp_steps
-   0273 E7 65         [ 5]  167 	stb	5,s
-   0275 C6 09         [ 2]  168 	ldb	#9
-   0277 E0 65         [ 5]  169 	subb	5,s
-   0279 58            [ 2]  170 	aslb
-   027A 58            [ 2]  171 	aslb
-   027B E7 69         [ 5]  172 	stb	9,s
-   027D E6 64         [ 5]  173 	ldb	4,s
-   027F E7 68         [ 5]  174 	stb	8,s
-   0281 E6 69         [ 5]  175 	ldb	9,s
-   0283 E7 E2         [ 6]  176 	stb	,-s
-   0285 E6 69         [ 5]  177 	ldb	9,s
-   0287 BD 05 5E      [ 8]  178 	jsr	__Moveto_d
-   028A 32 61         [ 5]  179 	leas	1,s
-   028C                     180 L14:
-   028C 8E 04 99      [ 3]  181 	ldx	#_vectors_road_inner_line_r
-   028F BD F4 10      [ 8]  182 	jsr	___Draw_VLp
-   0292 BD F3 54      [ 8]  183 	jsr	___Reset0Ref
-   0295 C6 7F         [ 2]  184 	ldb	#127
-   0297 D7 04         [ 4]  185 	stb	*_dp_VIA_t1_cnt_lo
-   0299 C6 24         [ 2]  186 	ldb	#36
-   029B E7 E2         [ 6]  187 	stb	,-s
-   029D C6 0F         [ 2]  188 	ldb	#15
-   029F BD 05 5E      [ 8]  189 	jsr	__Moveto_d
-   02A2 32 61         [ 5]  190 	leas	1,s
-   02A4 C6 FF         [ 2]  191 	ldb	#-1
-   02A6 D7 04         [ 4]  192 	stb	*_dp_VIA_t1_cnt_lo
-   02A8 C6 B0         [ 2]  193 	ldb	#-80
-   02AA E7 E2         [ 6]  194 	stb	,-s
-   02AC C6 34         [ 2]  195 	ldb	#52
-   02AE BD 05 59      [ 8]  196 	jsr	__Draw_Line_d
-   02B1 32 61         [ 5]  197 	leas	1,s
-   02B3 32 6A         [ 5]  198 	leas	10,s
-   02B5 39            [ 5]  199 	rts
-                            200 	.globl	_draw_debug_car
-   02B6                     201 _draw_debug_car:
-   02B6 BD F3 54      [ 8]  202 	jsr	___Reset0Ref
-   02B9 C6 7F         [ 2]  203 	ldb	#127
-   02BB D7 04         [ 4]  204 	stb	*_dp_VIA_t1_cnt_lo
-   02BD 6F E2         [ 8]  205 	clr	,-s
-   02BF 5F            [ 2]  206 	clrb
-   02C0 BD 05 5E      [ 8]  207 	jsr	__Moveto_d
-   02C3 32 61         [ 5]  208 	leas	1,s
-   02C5 F6 C8 82      [ 5]  209 	ldb	_temp_speed
-   02C8 86 0A         [ 2]  210 	lda	#10	;umulqihi3
-   02CA 3D            [11]  211 	mul
-                            212 		;movlsbqihi: D->B
-   02CB CB 32         [ 2]  213 	addb	#50
-   02CD D7 04         [ 4]  214 	stb	*_dp_VIA_t1_cnt_lo
-   02CF 8E 04 CD      [ 3]  215 	ldx	#_vectors_debug_car
-   02D2 BD F4 10      [ 8]  216 	jsr	___Draw_VLp
-   02D5 39            [ 5]  217 	rts
-                            218 	.globl	_lookup_player_lane_x_pos
-   02D6                     219 _lookup_player_lane_x_pos:
-   02D6 B9                  220 	.byte	-71
-   02D7 00                  221 	.byte	0
-   02D8 47                  222 	.byte	71
-                            223 	.globl	_game_loop
-   02D9                     224 _game_loop:
-   02D9 32 7F         [ 5]  225 	leas	-1,s
-   02DB                     226 L26:
-   02DB BD F1 92      [ 8]  227 	jsr	___Wait_Recal
-   02DE BD 01 A9      [ 8]  228 	jsr	_draw_road
-   02E1 BD F1 BA      [ 8]  229 	jsr	___Read_Btns
-   02E4 F6 C8 11      [ 5]  230 	ldb	_Vec_Buttons
-   02E7 C4 01         [ 2]  231 	andb	#1
-   02E9 5D            [ 2]  232 	tstb
-   02EA 27 07         [ 3]  233 	beq	L19
-   02EC C6 FF         [ 2]  234 	ldb	#-1
-   02EE BD 01 52      [ 8]  235 	jsr	_change_lane
-   02F1 20 0D         [ 3]  236 	bra	L20
-   02F3                     237 L19:
-   02F3 F6 C8 11      [ 5]  238 	ldb	_Vec_Buttons
-   02F6 C4 04         [ 2]  239 	andb	#4
-   02F8 5D            [ 2]  240 	tstb
-   02F9 27 05         [ 3]  241 	beq	L20
-   02FB C6 01         [ 2]  242 	ldb	#1
-   02FD BD 01 52      [ 8]  243 	jsr	_change_lane
-   0300                     244 L20:
-   0300 F6 C8 11      [ 5]  245 	ldb	_Vec_Buttons
-   0303 C4 02         [ 2]  246 	andb	#2
-   0305 5D            [ 2]  247 	tstb
-   0306 27 17         [ 3]  248 	beq	L21
-   0308 F6 C8 82      [ 5]  249 	ldb	_temp_speed
-   030B C1 01         [ 2]  250 	cmpb	#1	;cmpqi:
-   030D 26 07         [ 3]  251 	bne	L22
-   030F C6 32         [ 2]  252 	ldb	#50
-   0311 F7 C8 82      [ 5]  253 	stb	_temp_speed
-   0314 20 26         [ 3]  254 	bra	L24
-   0316                     255 L22:
-   0316 F6 C8 82      [ 5]  256 	ldb	_temp_speed
-   0319 5A            [ 2]  257 	decb
-   031A F7 C8 82      [ 5]  258 	stb	_temp_speed
-   031D 20 1D         [ 3]  259 	bra	L24
-   031F                     260 L21:
-   031F F6 C8 11      [ 5]  261 	ldb	_Vec_Buttons
-   0322 C4 08         [ 2]  262 	andb	#8
-   0324 5D            [ 2]  263 	tstb
-   0325 27 15         [ 3]  264 	beq	L24
-   0327 F6 C8 82      [ 5]  265 	ldb	_temp_speed
-   032A C1 32         [ 2]  266 	cmpb	#50	;cmpqi:
-   032C 26 07         [ 3]  267 	bne	L25
-   032E C6 01         [ 2]  268 	ldb	#1
-   0330 F7 C8 82      [ 5]  269 	stb	_temp_speed
-   0333 20 07         [ 3]  270 	bra	L24
-   0335                     271 L25:
-   0335 F6 C8 82      [ 5]  272 	ldb	_temp_speed
-   0338 5C            [ 2]  273 	incb
-   0339 F7 C8 82      [ 5]  274 	stb	_temp_speed
-   033C                     275 L24:
-   033C F6 C8 80      [ 5]  276 	ldb	_player_lane
-   033F 34 04         [ 6]  277 	pshs	b
-   0341 C6 B0         [ 2]  278 	ldb	#-80
-   0343 E7 E2         [ 6]  279 	stb	,-s
-   0345 C6 78         [ 2]  280 	ldb	#120
-   0347 BD 04 FD      [ 8]  281 	jsr	_print_unsigned_int
-   034A 32 62         [ 5]  282 	leas	2,s
-   034C F6 C8 82      [ 5]  283 	ldb	_temp_speed
-   034F 34 04         [ 6]  284 	pshs	b
-   0351 C6 3C         [ 2]  285 	ldb	#60
-   0353 E7 E2         [ 6]  286 	stb	,-s
-   0355 C6 78         [ 2]  287 	ldb	#120
-   0357 BD 04 FD      [ 8]  288 	jsr	_print_unsigned_int
-   035A 32 62         [ 5]  289 	leas	2,s
-   035C BD F2 A5      [ 8]  290 	jsr	___Intensity_5F
-   035F BD F3 54      [ 8]  291 	jsr	___Reset0Ref
-   0362 C6 7F         [ 2]  292 	ldb	#127
-   0364 D7 04         [ 4]  293 	stb	*_dp_VIA_t1_cnt_lo
-   0366 F6 C8 80      [ 5]  294 	ldb	_player_lane
-   0369 4F            [ 2]  295 	clra		;zero_extendqihi: R:b -> R:d
-   036A 1F 01         [ 6]  296 	tfr	d,x
-   036C E6 89 02 D6   [ 8]  297 	ldb	_lookup_player_lane_x_pos,x
-   0370 E7 E4         [ 4]  298 	stb	,s
-   0372 C6 90         [ 2]  299 	ldb	#-112
-   0374 E7 E2         [ 6]  300 	stb	,-s
-   0376 E6 61         [ 5]  301 	ldb	1,s
-   0378 BD 05 5E      [ 8]  302 	jsr	__Moveto_d
-   037B 32 61         [ 5]  303 	leas	1,s
-   037D C6 40         [ 2]  304 	ldb	#64
-   037F D7 04         [ 4]  305 	stb	*_dp_VIA_t1_cnt_lo
-   0381 8E 03 DC      [ 3]  306 	ldx	#_vectors_player
-   0384 BD F4 10      [ 8]  307 	jsr	___Draw_VLp
-   0387 16 FF 51      [ 5]  308 	lbra	L26
-                            309 	.globl	_main
-   038A                     310 _main:
-   038A BD 02 D9      [ 8]  311 	jsr	_game_loop
+                              6 	.area	.text
+                              7 	.globl	_run_game
+   037C                       8 _run_game:
+   037C BD 00 61      [ 8]    9 	jsr	_clk_init
+   037F BD 00 87      [ 8]   10 	jsr	_lvl_init
+   0382                      11 L2:
+   0382 BD F1 92      [ 8]   12 	jsr	___Wait_Recal
+   0385 BD 00 6B      [ 8]   13 	jsr	_clk_update
+   0388 BD 00 F5      [ 8]   14 	jsr	_map_draw_road
+   038B BD 02 ED      [ 8]   15 	jsr	_player_handle_input
+   038E F6 C8 86      [ 5]   16 	ldb	_lvl_speed
+   0391 34 04         [ 6]   17 	pshs	b
+   0393 C6 3C         [ 2]   18 	ldb	#60
+   0395 E7 E2         [ 6]   19 	stb	,-s
+   0397 C6 78         [ 2]   20 	ldb	#120
+   0399 BD 03 A6      [ 8]   21 	jsr	_print_signed_int
+   039C 32 62         [ 5]   22 	leas	2,s
+   039E BD 03 4C      [ 8]   23 	jsr	_player_draw
+   03A1 20 DF         [ 3]   24 	bra	L2
+                             25 	.globl	_main
+   03A3                      26 _main:
+   03A3 BD 03 7C      [ 8]   27 	jsr	_run_game
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 16:45:27 2025
+Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L11                00B1 R   |   3 L12                00DC R
-  3 L13                0113 R   |   3 L14                013A R
-  3 L19                01A1 R   |   3 L2                 001A R
-  3 L20                01AE R   |   3 L21                01CD R
-  3 L22                01C4 R   |   3 L24                01EA R
-  3 L25                01E3 R   |   3 L26                0189 R
-  3 L4                 002D R   |   3 L6                 004F R
-  3 L7                 0047 R   |   3 L9                 0056 R
-    _Vec_Buttons       **** GX  |     __Draw_Line_d      **** GX
-    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
-    ___Intensity_5     **** GX  |     ___Read_Btns       **** GX
-    ___Reset0Ref       **** GX  |     ___Wait_Recal      **** GX
-  3 _calculate_ani     0030 GR  |   3 _change_lane       0000 GR
-    _dp_VIA_t1_cnt     **** GX  |   3 _draw_debug_ca     0164 GR
-  3 _draw_road         0057 GR  |   3 _game_loop         0187 GR
-  3 _lookup_player     0184 GR  |   3 _main              0238 GR
-  2 _player_lane       0000 GR  |     _print_unsigne     **** GX
-  2 _temp_speed        0002 GR  |   2 _temp_steps        0001 GR
-  2 _temp_time         0003 GR  |     _vectors_debug     **** GX
-    _vectors_playe     **** GX  |     _vectors_road_     **** GX
-    _vectors_road_     **** GX
+  2 L2                 0006 R   |     ___Wait_Recal      **** GX
+    _clk_init          **** GX  |     _clk_update        **** GX
+    _lvl_init          **** GX  |     _lvl_speed         **** GX
+  2 _main              0027 GR  |     _map_draw_road     **** GX
+    _player_draw       **** GX  |     _player_handle     **** GX
+    _print_signed_     **** GX  |   2 _run_game          0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 16:45:27 2025
+Hexadecimal [16-Bits]                                 Fri May  2 18:56:42 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .data            size    4   flags  100
-   3 .text            size  23B   flags  100
+   2 .text            size   2A   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

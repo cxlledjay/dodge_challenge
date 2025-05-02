@@ -2,7 +2,7 @@
 
 #include <vectrex.h>
 
-#include "game_include/graphics/misc.h"
+#include "game_include/graphics/g_misc.h"
 #include "game_include/level.h"
 
 int local_cnt = 0;
