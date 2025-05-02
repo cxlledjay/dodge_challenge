@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "controller.h": "c",
+        "print.h": "c",
+        "temp_draw.h": "c",
+        "vectrex.h": "c",
+        "vectrex_ram.h": "c",
+        "vectrex_rom.h": "c",
+        "vectrex_rum.h": "c"
+    }
+}

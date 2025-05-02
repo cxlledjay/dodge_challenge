@@ -154,7 +154,7 @@ __attribute__((noreturn)) void debug_sprites(void)
 	while(1);
 }
 
-#define DEBUG_SPRITES (1u)
+#define DEBUG_SPRITES (0u)
 
 int main(void)
 {	

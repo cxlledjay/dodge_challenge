@@ -238,4 +238,87 @@ L19:
 	bra	L19
 	.globl	_main
 _main:
-	jsr	_debug_sprites
+	leas	-1,s
+L29:
+	jsr	___Wait_Recal
+	jsr	_draw_road
+	jsr	___Read_Btns
+	ldb	_Vec_Buttons
+	andb	#1
+	tstb
+	beq	L22
+	ldb	#-1
+	jsr	_change_lane
+	bra	L23
+L22:
+	ldb	_Vec_Buttons
+	andb	#4
+	tstb
+	beq	L23
+	ldb	#1
+	jsr	_change_lane
+L23:
+	ldb	_Vec_Buttons
+	andb	#2
+	tstb
+	beq	L24
+	ldb	_temp_speed
+	cmpb	#1	;cmpqi:
+	bne	L25
+	ldb	#50
+	stb	_temp_speed
+	bra	L27
+L25:
+	ldb	_temp_speed
+	decb
+	stb	_temp_speed
+	bra	L27
+L24:
+	ldb	_Vec_Buttons
+	andb	#8
+	tstb
+	beq	L27
+	ldb	_temp_speed
+	cmpb	#50	;cmpqi:
+	bne	L28
+	ldb	#1
+	stb	_temp_speed
+	bra	L27
+L28:
+	ldb	_temp_speed
+	incb
+	stb	_temp_speed
+L27:
+	ldb	_player_lane
+	pshs	b
+	ldb	#-80
+	stb	,-s
+	ldb	#120
+	jsr	_print_unsigned_int
+	leas	2,s
+	ldb	_temp_speed
+	pshs	b
+	ldb	#60
+	stb	,-s
+	ldb	#120
+	jsr	_print_unsigned_int
+	leas	2,s
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_player_lane
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_lookup_player_lane_x_pos,x
+	stb	,s
+	ldb	#-112
+	stb	,-s
+	ldb	1,s
+	jsr	__Moveto_d
+	leas	1,s
+	ldb	#64
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vectors_player
+	jsr	___Draw_VLp
+	lbra	L29
