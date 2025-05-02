@@ -1,12 +1,18 @@
-#include <vectrex.h>
-#include "graphics/misc.h"
+#include "game_include/map.h"
 
-void draw_road(){		
+#include <vectrex.h>
+
+#include "game_include/graphics/misc.h"
+#include "game_include/level.h"
+
+int local_cnt = 0;
+int animation_step = 0; // can be 0, 1, 2
+
+void map_draw_road(){
+
 	Intensity_5F();
-	
-	//animation recalculation
-	calculate_animation();
-	
+
+
 	//left border
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
@@ -14,10 +20,31 @@ void draw_road(){
 	dp_VIA_t1_cnt_lo = 255;
 	Draw_Line_d(-80,-52);
 	
-	//animate left inner line
+	//calculate animation
+	int cnt_limiter = LVL_MAX_SPEED - lvl_speed; //cnt_limiter = {0,...,MAX_SPEED-1}
+
+	//clock animation
+	if(local_cnt == cnt_limiter)
+	{
+		if(animation_step == 2)
+		{
+			animation_step = 0;
+		}
+		else
+		{
+			animation_step = animation_step + 1;
+		}
+		local_cnt = 0;
+	}
+	else
+	{
+		local_cnt = local_cnt + 1;
+	}
+
+	//animation of inner lines
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
-	if(temp_steps == 2)
+	if(animation_step == 2)
 	{
 		Moveto_d(36, -5);
 		Draw_Line_d(-4,-1);
@@ -25,14 +52,14 @@ void draw_road(){
 	}
 	else
 	{
-		Moveto_d(36 - ( 4 * temp_steps ), -5 - temp_steps);
+		Moveto_d(36 - ( 4 * animation_step ), -5 - animation_step);
 	}
 	Draw_VLp(&vl_misc_roadline_left);
 	
 	//animate right inner line
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
-	if(temp_steps == 2)
+	if(animation_step == 2)
 	{
 		Moveto_d(36, 5);
 		Draw_Line_d(-4,1);
@@ -40,7 +67,7 @@ void draw_road(){
 	}
 	else
 	{
-		Moveto_d(36 - ( 4 * temp_steps ), 5 + temp_steps);
+		Moveto_d(36 - ( 4 * animation_step ), 5 + animation_step);
 	}
 	Draw_VLp(&vl_misc_roadline_right);
 	

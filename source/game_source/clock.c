@@ -1,23 +1,26 @@
+#include "game_include/clock.h"
 
 
+int clk_frames; // increments in frequency of 50Hz
+long int clk_seconds; // increments in frequency of 1Hz
 
-int temp_steps = 0;
-unsigned int temp_speed = 10;
-unsigned int temp_time = 10;
-
-void calculate_animation()
+void clk_init(void)
 {
-	
-	if(temp_time == 0)
+	clk_frames = 0;
+	clk_seconds = 0;
+}
+
+void clk_update(void)
+{
+	if(clk_frames == 49)
 	{
-		//tracking		
-		temp_steps = temp_steps + 1;
-		if(temp_steps == 3) temp_steps = 0;
-		//and reset
-		temp_time = temp_speed;
+		//executed each second
+		clk_frames = 0;
+		clk_seconds = clk_seconds + 1;
+		//call to "each second events" -> e.g. update score
 	}
 	else
 	{
-		temp_time = temp_time - 1;
+		clk_frames = clk_frames + 1;
 	}
 }

@@ -4,13 +4,10 @@
 // collection of used miscellaneous sprites
 // ***************************************************************************
 
-#include "utils/vector.h"
 
 
+#include "utils/vector.h" // provides a C data type for vector lists
 
-// ***************************************************************************
-// animated middle line (left)
-// ***************************************************************************
 
 const struct packet_t vl_misc_roadline_left[] =
 {
@@ -35,12 +32,6 @@ const struct packet_t vl_misc_roadline_left[] =
 	VL_END
 };
 
-
-// ***************************************************************************
-// animated middle line (right)
-// ***************************************************************************
-
-
 const struct packet_t vl_misc_roadline_right[] =
 {
 	{DRAW, {-4,1}},
@@ -62,4 +53,3 @@ const struct packet_t vl_misc_roadline_right[] =
 	{DRAW, {-20,5}},
 	VL_END
 };
-

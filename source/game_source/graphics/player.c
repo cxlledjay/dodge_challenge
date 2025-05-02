@@ -3,6 +3,7 @@
 //
 // all vector lists to draw the player
 // ***************************************************************************
+#include "game_include/graphics/player.h"
 
 #include "utils/vector.h"
 

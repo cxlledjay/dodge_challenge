@@ -1,8 +1,9 @@
 // ***************************************************************************
 // main
 // ***************************************************************************
+#include "temp_draw.h"
 
-#include <vectrex.h>
+//#include <vectrex.h>
 #include "utils/vector.h" // provides a C data type for vector lists
 
 // ---------------------------------------------------------------------------
@@ -182,78 +183,6 @@ const struct packet_t vectors_obstacle_truck_s[] =
 	
 };
 
-
-// ---------------------------------------------------------------------------
-// draw objects on screen
-
-void temp_draw(void)
-{
-	Wait_Recal();					// synchronize frame rate to 50 Hz
-
-	//draw player
-	
-	
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(0, 0);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 255;			// set scaling factor for drawing
-	Draw_VLp(&vectors_player);			// draw vector list
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-	// draw man
-	
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(64, -64);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 32;			// set scaling factor for drawing
-	Draw_VLp(&vectors_man);			// draw vector list
-
-	// draw same man with smaller scale
-
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(64, 0);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 16;			// set scaling factor for drawing
-	Draw_VLp(&vectors_man);			// draw vector list
-
-	// draw same man with larger scale
-
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(64, 64);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 48;			// set scaling factor for drawing
-	Draw_VLp(&vectors_man);			// draw vector list
-
-	// draw balloon
-
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(-64, 0);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 64;			// set scaling factor for drawing
-	Draw_VLp(&vectors_balloon);		// draw vector list
-	*/
-}
 
 // ***************************************************************************
 // end of file

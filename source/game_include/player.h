@@ -1,6 +1,6 @@
+#pragma once
 
 
+void player_handle_input(void);
 
-void handle_input(void);
-
-void draw_player(void);
+void player_draw(void);
