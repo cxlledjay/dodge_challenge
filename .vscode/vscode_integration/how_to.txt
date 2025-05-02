@@ -1,0 +1,9 @@
+install extension "shortcut menu bar"
+(https://marketplace.visualstudio.com/items?itemName=jerrygoyal.shortcut-menu-bar)
+
+add custom buttons (01 and 02) with command:
+
+01: workbench.action.tasks.runTask | vt_build
+02: workbench.action.tasks.runTask | vt_run_jve
+
+optionally replace icons with icons in this folder (follow guide in extionion description)

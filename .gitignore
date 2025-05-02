@@ -9,6 +9,3 @@ manual
 # no presets or so on
 overlay/**
 !overlay/dodge_challenge.*
-
-# in case vscode does stuff...
-.vscode

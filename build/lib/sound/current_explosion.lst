@@ -8,7 +8,7 @@
    0000                       8 _current_explosion:
    0000`00`00                 9 	.word	_explosion_off
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 15:00:18 2025
+Hexadecimal [16-Bits]                                 Fri May  2 15:29:23 2025
 
 Symbol Table
 
@@ -17,7 +17,7 @@ Symbol Table
   2 _current_explo     0000 GR  |     _explosion_off     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 15:00:18 2025
+Hexadecimal [16-Bits]                                 Fri May  2 15:29:23 2025
 
 Area Table
 

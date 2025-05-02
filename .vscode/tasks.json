@@ -1,0 +1,34 @@
+
+
+{
+    //local tasks for best possible integration into vscode workflow
+
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            //hello world
+            "label": "echotest",
+            "command": "echo", // Could be any other shell command
+            "args": ["test"],
+            "type": "shell"
+        },
+
+        
+        {
+            //build
+            "label": "vt_build",
+            "command": ".\\make_c.bat build",
+            "type": "shell"
+        },
+
+        
+        {
+            //run JVE
+            "label": "vt_run_jve",
+            "command": ".\\make_c.bat run",
+            "type": "shell"
+        }
+
+    ]
+}
