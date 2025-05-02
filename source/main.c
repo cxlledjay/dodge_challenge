@@ -6,7 +6,8 @@
 #include "print/print.h"
 #include "temp_draw.h"
 
-#include "utils/controller.h"
+#include "utils/controller.h" // buttons input
+#include "graphics/player.h"  // player sprites
 
 // ---------------------------------------------------------------------------
 
@@ -138,10 +139,28 @@ const int lookup_player_lane_x_pos[3] =
 	71
 };
 
+__attribute__((noreturn)) void debug_sprites(void)
+{
+	do
+	{
+		//draw player		
+		Intensity_5F();					// set brightness of the electron beam
+		Reset0Ref();					// reset beam to center
+		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
+		Moveto_d(0, 0);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 255;			// set scaling factor for drawing
+		Draw_VLp(&vl_player_mid);			// draw vector list
+	}
+	while(1);
+}
+
+#define DEBUG_SPRITES (1u)
 
 int main(void)
 {	
-	
+	#if DEBUG_SPRITES
+	debug_sprites();
+	#else
 	do
 	{
 		Wait_Recal();					// synchronize frame rate to 50 Hz
@@ -187,16 +206,7 @@ int main(void)
 		Draw_VLp(&vectors_player);			// draw vector list
 	}
 	while(1);
-	
-	/*
-	do
-	{
-		Wait_Recal();
-		Intensity_5F();
-		Print_Str_d(0, -64, "HELLO ROBIN\x80");
-	}
-	while(1);
-	*/
+	#endif
 }
 
 // ***************************************************************************

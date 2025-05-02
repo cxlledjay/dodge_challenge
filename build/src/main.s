@@ -220,89 +220,22 @@ _lookup_player_lane_x_pos:
 	.byte	-71
 	.byte	0
 	.byte	71
-	.globl	_main
-_main:
-	leas	-1,s
-L26:
-	jsr	___Wait_Recal
-	jsr	_draw_road
-	jsr	___Read_Btns
-	ldb	_Vec_Buttons
-	andb	#1
-	tstb
-	beq	L19
-	ldb	#-1
-	jsr	_change_lane
-	bra	L20
+	.globl	_debug_sprites
+_debug_sprites:
 L19:
-	ldb	_Vec_Buttons
-	andb	#4
-	tstb
-	beq	L20
-	ldb	#1
-	jsr	_change_lane
-L20:
-	ldb	_Vec_Buttons
-	andb	#2
-	tstb
-	beq	L21
-	ldb	_temp_speed
-	cmpb	#1	;cmpqi:
-	bne	L22
-	ldb	#50
-	stb	_temp_speed
-	bra	L24
-L22:
-	ldb	_temp_speed
-	decb
-	stb	_temp_speed
-	bra	L24
-L21:
-	ldb	_Vec_Buttons
-	andb	#8
-	tstb
-	beq	L24
-	ldb	_temp_speed
-	cmpb	#50	;cmpqi:
-	bne	L25
-	ldb	#1
-	stb	_temp_speed
-	bra	L24
-L25:
-	ldb	_temp_speed
-	incb
-	stb	_temp_speed
-L24:
-	ldb	_player_lane
-	pshs	b
-	ldb	#-80
-	stb	,-s
-	ldb	#120
-	jsr	_print_unsigned_int
-	leas	2,s
-	ldb	_temp_speed
-	pshs	b
-	ldb	#60
-	stb	,-s
-	ldb	#120
-	jsr	_print_unsigned_int
-	leas	2,s
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_player_lane
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	_lookup_player_lane_x_pos,x
-	stb	,s
-	ldb	#-112
-	stb	,-s
-	ldb	1,s
+	clr	,-s
+	clrb
 	jsr	__Moveto_d
 	leas	1,s
-	ldb	#64
+	ldb	#-1
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vectors_player
+	ldx	#_vl_player_mid
 	jsr	___Draw_VLp
-	lbra	L26
+	bra	L19
+	.globl	_main
+_main:
+	jsr	_debug_sprites

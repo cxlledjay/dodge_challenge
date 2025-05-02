@@ -1,0 +1,40 @@
+XH2
+H 3 areas 3 global symbols 2 banks 1 modes
+M misc.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S .__.ABS. Def0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .text size 68 flags D00
+S _vl_misc_roadline_left Def0000
+S _vl_misc_roadline_right Def0034
+T 00 00
+R 00 00 00 02
+T 00 00 FF FC FF 00 FC FF FF FC FF 00 FC FF FF
+R 00 00 00 02
+T 00 0D F8 FE 00 F8 FE FF F8 FE 00 F8 FE FF F4
+R 00 00 00 02
+T 00 1A FD 00 F4 FD FF F4 FD 00 F4 FD FF F0 FC
+R 00 00 00 02
+T 00 27 00 F0 FC FF F0 FC 00 F0 FC FF EC FB
+R 00 00 00 02
+T 00 33
+R 00 00 00 02
+T 00 33 01
+R 00 00 00 02
+T 00 34
+R 00 00 00 02
+T 00 34 FF FC 01 00 FC 01 FF FC 01 00 FC 01 FF
+R 00 00 00 02
+T 00 41 F8 02 00 F8 02 FF F8 02 00 F8 02 FF F4
+R 00 00 00 02
+T 00 4E 03 00 F4 03 FF F4 03 00 F4 03 FF F0 04
+R 00 00 00 02
+T 00 5B 00 F0 04 FF F0 04 00 F0 04 FF EC 05
+R 00 00 00 02
+T 00 67
+R 00 00 00 02
+T 00 67 01
+R 00 00 00 02

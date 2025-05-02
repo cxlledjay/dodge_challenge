@@ -1,0 +1,137 @@
+                              1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
+                              2 ;;; 4.3.6 (gcc6809)
+                              3 ;;; ABI version 1
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              5 	.module	misc.c
+                              6 	.globl	_vl_misc_roadline_left
+                              7 	.area	.text
+   0000                       8 _vl_misc_roadline_left:
+   0000 FF                    9 	.byte	-1
+   0001 FC                   10 	.byte	-4
+   0002 FF                   11 	.byte	-1
+   0003 00                   12 	.byte	0
+   0004 FC                   13 	.byte	-4
+   0005 FF                   14 	.byte	-1
+   0006 FF                   15 	.byte	-1
+   0007 FC                   16 	.byte	-4
+   0008 FF                   17 	.byte	-1
+   0009 00                   18 	.byte	0
+   000A FC                   19 	.byte	-4
+   000B FF                   20 	.byte	-1
+   000C FF                   21 	.byte	-1
+   000D F8                   22 	.byte	-8
+   000E FE                   23 	.byte	-2
+   000F 00                   24 	.byte	0
+   0010 F8                   25 	.byte	-8
+   0011 FE                   26 	.byte	-2
+   0012 FF                   27 	.byte	-1
+   0013 F8                   28 	.byte	-8
+   0014 FE                   29 	.byte	-2
+   0015 00                   30 	.byte	0
+   0016 F8                   31 	.byte	-8
+   0017 FE                   32 	.byte	-2
+   0018 FF                   33 	.byte	-1
+   0019 F4                   34 	.byte	-12
+   001A FD                   35 	.byte	-3
+   001B 00                   36 	.byte	0
+   001C F4                   37 	.byte	-12
+   001D FD                   38 	.byte	-3
+   001E FF                   39 	.byte	-1
+   001F F4                   40 	.byte	-12
+   0020 FD                   41 	.byte	-3
+   0021 00                   42 	.byte	0
+   0022 F4                   43 	.byte	-12
+   0023 FD                   44 	.byte	-3
+   0024 FF                   45 	.byte	-1
+   0025 F0                   46 	.byte	-16
+   0026 FC                   47 	.byte	-4
+   0027 00                   48 	.byte	0
+   0028 F0                   49 	.byte	-16
+   0029 FC                   50 	.byte	-4
+   002A FF                   51 	.byte	-1
+   002B F0                   52 	.byte	-16
+   002C FC                   53 	.byte	-4
+   002D 00                   54 	.byte	0
+   002E F0                   55 	.byte	-16
+   002F FC                   56 	.byte	-4
+   0030 FF                   57 	.byte	-1
+   0031 EC                   58 	.byte	-20
+   0032 FB                   59 	.byte	-5
+   0033                      60 _vl_term_0_35:
+   0033 01                   61 	.byte	1
+                             62 	.globl	_vl_misc_roadline_right
+   0034                      63 _vl_misc_roadline_right:
+   0034 FF                   64 	.byte	-1
+   0035 FC                   65 	.byte	-4
+   0036 01                   66 	.byte	1
+   0037 00                   67 	.byte	0
+   0038 FC                   68 	.byte	-4
+   0039 01                   69 	.byte	1
+   003A FF                   70 	.byte	-1
+   003B FC                   71 	.byte	-4
+   003C 01                   72 	.byte	1
+   003D 00                   73 	.byte	0
+   003E FC                   74 	.byte	-4
+   003F 01                   75 	.byte	1
+   0040 FF                   76 	.byte	-1
+   0041 F8                   77 	.byte	-8
+   0042 02                   78 	.byte	2
+   0043 00                   79 	.byte	0
+   0044 F8                   80 	.byte	-8
+   0045 02                   81 	.byte	2
+   0046 FF                   82 	.byte	-1
+   0047 F8                   83 	.byte	-8
+   0048 02                   84 	.byte	2
+   0049 00                   85 	.byte	0
+   004A F8                   86 	.byte	-8
+   004B 02                   87 	.byte	2
+   004C FF                   88 	.byte	-1
+   004D F4                   89 	.byte	-12
+   004E 03                   90 	.byte	3
+   004F 00                   91 	.byte	0
+   0050 F4                   92 	.byte	-12
+   0051 03                   93 	.byte	3
+   0052 FF                   94 	.byte	-1
+   0053 F4                   95 	.byte	-12
+   0054 03                   96 	.byte	3
+   0055 00                   97 	.byte	0
+   0056 F4                   98 	.byte	-12
+   0057 03                   99 	.byte	3
+   0058 FF                  100 	.byte	-1
+   0059 F0                  101 	.byte	-16
+   005A 04                  102 	.byte	4
+   005B 00                  103 	.byte	0
+   005C F0                  104 	.byte	-16
+   005D 04                  105 	.byte	4
+   005E FF                  106 	.byte	-1
+   005F F0                  107 	.byte	-16
+   0060 04                  108 	.byte	4
+   0061 00                  109 	.byte	0
+   0062 F0                  110 	.byte	-16
+   0063 04                  111 	.byte	4
+   0064 FF                  112 	.byte	-1
+   0065 EC                  113 	.byte	-20
+   0066 05                  114 	.byte	5
+   0067                     115 _vl_term_1_63:
+   0067 01                  116 	.byte	1
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
+Hexadecimal [16-Bits]                                 Fri May  2 15:00:18 2025
+
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+  2 _vl_misc_roadl     0000 GR  |   2 _vl_misc_roadl     0034 GR
+  2 _vl_term_0_35      0033 R   |   2 _vl_term_1_63      0067 R
+
+ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
+Hexadecimal [16-Bits]                                 Fri May  2 15:00:18 2025
+
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 .text            size   68   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+
