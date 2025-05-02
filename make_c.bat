@@ -20,7 +20,7 @@ setlocal enableextensions enabledelayedexpansion
 
 set ENABLE_PREPROCESSING=no
 set ENABLE_C_DEBUGGING=yes
-set ENABLE_C_OPTIMIZATION=no
+set ENABLE_C_OPTIMIZATION=yes
 set ENABLE_ASSEMBLY_OPTIMIZATION=no
 set C_OPTIMIZATION_LEVEL=-O2
 

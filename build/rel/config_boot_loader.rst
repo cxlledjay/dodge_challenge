@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	boot_loader.c
                               6 	.area	.boot
                               7 	.globl	_boot
@@ -10,9 +10,9 @@
                              10 ; 21 "source\config\boot_loader.c" 1
    0022                      11 	_crt0:							
    0022                      12 	_crt0_data:					
-   0022 8E 00 01      [ 3]   13 		ldx		#l_.data			
+   0022 8E 00 06      [ 3]   13 		ldx		#l_.data			
    0025 27 1B         [ 3]   14 		beq		_crt0_data_done		
-   0027 CE 00 61      [ 3]   15 		ldu		#a_.text			
+   0027 CE 00 60      [ 3]   15 		ldu		#a_.text			
    002A 33 C9 04 02   [ 8]   16 		leau	l_.text,u			
    002E 33 C9 00 00   [ 8]   17 		leau	l_.text.hot,u		
    0032 33 C9 00 00   [ 8]   18 		leau	l_.text.unlikely,u	
@@ -24,9 +24,9 @@
    0040 26 F8         [ 3]   24 		bne		_crt0_data_copy		
    0042                      25 	_crt0_data_done:				
    0042                      26 	_crt0_bss:						
-   0042 8E 00 02      [ 3]   27 		ldx		#l_.bss				
+   0042 8E 00 04      [ 3]   27 		ldx		#l_.bss				
    0045 27 0A         [ 3]   28 		beq		_crt0_bss_done		
-   0047 10 8E C8 81   [ 4]   29 		ldy		#a_.bss				
+   0047 10 8E C8 86   [ 4]   29 		ldy		#a_.bss				
    004B                      30 	_crt0_bss_zero:				
    004B 6F A0         [ 8]   31 		clr		,y+					
    004D 30 1F         [ 5]   32 		leax	-1,x				
@@ -34,16 +34,15 @@
    0051                      34 	_crt0_bss_done:				
                              35 	
                              36 ;--- end asm ---
-   0051 BD 03 9E      [ 8]   37 	jsr	_main
+   0051 BD 04 04      [ 8]   37 	jsr	_main
    0054 5D            [ 2]   38 	tstb
    0055 27 06         [ 3]   39 	beq	L2
-   0057 8E 00 00      [ 3]   40 	ldx	#0
-   005A BF CB FE      [ 6]   41 	stx	_Vec_Cold_Flag
+   0057 CC 00 00      [ 3]   40 	ldd	#0
+   005A FD CB FE      [ 6]   41 	std	_Vec_Cold_Flag
    005D                      42 L2:
-   005D BD F0 00      [ 8]   43 	jsr	___Reset
-   0060 39            [ 5]   44 	rts
+   005D 7E F0 00      [ 4]   43 	jmp	___Reset
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Symbol Table
 
@@ -61,13 +60,13 @@ Symbol Table
     l_.text.hot        **** GX  |     l_.text.unlike     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .boot            size   3F   flags  100
+   2 .boot            size   3E   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

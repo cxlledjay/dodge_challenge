@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	boot_loader.c
 	.area	.boot
 	.globl	_boot
@@ -37,8 +37,7 @@ _boot:
 	jsr	_main
 	tstb
 	beq	L2
-	ldx	#0
-	stx	_Vec_Cold_Flag
+	ldd	#0
+	std	_Vec_Cold_Flag
 L2:
-	jsr	___Reset
-	rts
+	jmp	___Reset

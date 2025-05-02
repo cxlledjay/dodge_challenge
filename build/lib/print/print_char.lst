@@ -1,43 +1,33 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	print_char.c
                               6 	.area	.text
                               7 	.globl	_print_char
    0000                       8 _print_char:
-   0000 32 77         [ 5]    9 	leas	-9,s
+   0000 32 7B         [ 5]    9 	leas	-5,s
    0002 E7 E4         [ 4]   10 	stb	,s
-   0004 E6 6C         [ 5]   11 	ldb	12,s
+   0004 E6 68         [ 5]   11 	ldb	8,s
    0006 E7 61         [ 5]   12 	stb	1,s
    0008 C6 20         [ 2]   13 	ldb	#32
    000A E7 62         [ 5]   14 	stb	2,s
-   000C C6 20         [ 2]   15 	ldb	#32
-   000E E7 63         [ 5]   16 	stb	3,s
-   0010 C6 80         [ 2]   17 	ldb	#-128
-   0012 E7 64         [ 5]   18 	stb	4,s
-   0014 E6 E4         [ 4]   19 	ldb	,s
-   0016 E7 66         [ 5]   20 	stb	6,s
-   0018 E6 6B         [ 5]   21 	ldb	11,s
-   001A E7 65         [ 5]   22 	stb	5,s
-   001C BD`00`00      [ 8]   23 	jsr	___Reset0Ref
-   001F C6 7F         [ 2]   24 	ldb	#127
-   0021 D7`00         [ 4]   25 	stb	*_dp_VIA_t1_cnt_lo
-   0023 E6 66         [ 5]   26 	ldb	6,s
-   0025 E7 68         [ 5]   27 	stb	8,s
-   0027 E6 65         [ 5]   28 	ldb	5,s
-   0029 E7 67         [ 5]   29 	stb	7,s
-   002B E6 68         [ 5]   30 	ldb	8,s
-   002D E7 E2         [ 6]   31 	stb	,-s
-   002F E6 68         [ 5]   32 	ldb	8,s
-   0031 BD`00`00      [ 8]   33 	jsr	__Moveto_d
-   0034 32 61         [ 5]   34 	leas	1,s
-   0036 30 61         [ 5]   35 	leax	1,s
-   0038 BD`00`00      [ 8]   36 	jsr	__Print_Str
-   003B 32 69         [ 5]   37 	leas	9,s
-   003D 39            [ 5]   38 	rts
+   000C E7 63         [ 5]   15 	stb	3,s
+   000E C6 80         [ 2]   16 	ldb	#-128
+   0010 E7 64         [ 5]   17 	stb	4,s
+   0012 BD`00`00      [ 8]   18 	jsr	___Reset0Ref
+   0015 C6 7F         [ 2]   19 	ldb	#127
+   0017 D7`00         [ 4]   20 	stb	*_dp_VIA_t1_cnt_lo
+   0019 E6 E4         [ 4]   21 	ldb	,s
+   001B 34 04         [ 6]   22 	pshs	b
+   001D E6 68         [ 5]   23 	ldb	8,s
+   001F BD`00`00      [ 8]   24 	jsr	__Moveto_d
+   0022 30 62         [ 5]   25 	leax	2,s
+   0024 BD`00`00      [ 8]   26 	jsr	__Print_Str
+   0027 32 66         [ 5]   27 	leas	6,s
+   0029 39            [ 5]   28 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Symbol Table
 
@@ -48,13 +38,13 @@ Symbol Table
   2 _print_char        0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   3E   flags  100
+   2 .text            size   2A   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

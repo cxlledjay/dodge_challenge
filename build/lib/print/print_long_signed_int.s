@@ -1,103 +1,79 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	print_long_signed_int.c
 	.area	.text
 	.globl	_print_long_signed_int
 _print_long_signed_int:
-	leas	-12,s
-	stb	2,s
-	stx	,s
+	leas	-8,s
+	stb	,s
 	ldb	#-128
-	stb	9,s
-	ldb	#48
 	stb	7,s
 	ldb	#48
-	stb	6,s
-	ldb	#48
 	stb	5,s
-	ldb	#48
 	stb	4,s
-	ldx	,s
+	stb	3,s
+	stb	2,s
 	cmpx	#0
-	blt	L2
+	lblt	L2
 	ldb	#43
-	stb	3,s
-	bra	L4
-L2:
-	ldb	#45
-	stb	3,s
-	ldd	,s
-	nega
-	negb
-	sbca	#0
-	std	,s
-	bra	L4
-L5:
-	ldb	4,s
-	incb
-	stb	4,s
-	ldd	,s
-	addd	#-10000; addhi3,3
-	std	,s
-L4:
-	ldx	,s
+	stb	1,s
+	bra	L21
+L16:
+	inc	2,s
+	ldb	2,s
+	leax	-10000,x
+L21:
 	cmpx	#9999	;cmphi:
-	bhi	L5
-	bra	L6
-L7:
-	ldb	5,s
-	incb
-	stb	5,s
-	ldd	,s
-	addd	#-1000; addhi3,3
-	std	,s
-L6:
-	ldx	,s
+	bhi	L16
 	cmpx	#999	;cmphi:
-	bgt	L7
-	bra	L8
-L9:
-	ldb	6,s
-	incb
-	stb	6,s
-	ldd	,s
-	addd	#-100; addhi3,3
-	std	,s
-L8:
-	ldx	,s
+	ble	L23
+L15:
+	inc	3,s
+	ldb	3,s
+	leax	-1000,x
+	cmpx	#999	;cmphi:
+	bgt	L15
 	cmpx	#99	;cmphi:
-	bgt	L9
-	bra	L10
-L11:
-	ldb	7,s
-	incb
-	stb	7,s
-	ldd	,s
-	addd	#-10; addhi3,3
-	std	,s
-L10:
-	ldx	,s
+	ble	L24
+L14:
+	inc	4,s
+	ldb	4,s
+	leax	-100,x
+L23:
+	cmpx	#99	;cmphi:
+	bgt	L14
 	cmpx	#9	;cmphi:
-	bgt	L11
-	ldx	,s
+	ble	L26
+L13:
+	inc	5,s
+	ldb	5,s
+	leax	-10,x
+L24:
+	cmpx	#9	;cmphi:
+	bgt	L13
+L26:
 	tfr	x,d	;movlsbqihi: R:x -> R:b
 	addb	#48
-	stb	8,s
+	stb	6,s
 	ldb	#-52
 	stb	*_dp_VIA_cntl
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	2,s
-	stb	11,s
-	ldb	14,s
-	stb	10,s
-	leax	3,s
-	ldb	11,s
-	stb	,-s
+	ldb	,s
+	pshs	b
+	leax	2,s
 	ldb	11,s
 	jsr	__Print_Str_d
-	leas	1,s
-	leas	12,s
+	leas	9,s
 	rts
+L2:
+	ldb	#45
+	stb	1,s
+	exg	d,x
+	nega
+	negb
+	sbca	#0
+	exg	d,x
+	lbra	L21

@@ -1,58 +1,38 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	play_tune.c
 	.area	.text
 	.globl	_play_tune
 _play_tune:
-	leas	-13,s
-	stb	2,s
-	stx	,s
-	ldb	2,s
-	aslb
+	leas	-5,s
 	stb	3,s
-	ldd	,s
-	stb	4,s	;movlsbqihi: R:d -> 4,s
+	stx	1,s
+	ldb	7,s
+	stb	,s
 	ldb	3,s
-	inc	3,s
-	stb	8,s
-	ldb	4,s
-	stb	7,s
-	ldb	8,s
-	stb	,-s
-	ldb	8,s
+	aslb
+	stb	4,s
+	pshs	b
+	ldb	3,s	;movlsbqihi: msb:2,s -> R:b
 	jsr	__Sound_Byte
-	leas	1,s
-	ldd	,s
+	ldd	2,s
 	tfr	a,b
 	clra		;zero_extendqihi: R:b -> R:d
-	stb	5,s	;movlsbqihi: R:d -> 5,s
-	ldb	3,s
-	stb	10,s
+	tfr	d,x
 	ldb	5,s
-	stb	9,s
-	ldb	10,s
-	stb	,-s
-	ldb	10,s
+	incb
+	pshs	b
+	tfr	x,d	;movlsbqihi: R:x -> R:b
 	jsr	__Sound_Byte
-	leas	1,s
-	ldb	2,s
+	ldb	5,s
 	addb	#8
-	stb	6,s
-	ldb	6,s
-	stb	12,s
-	ldb	15,s
-	stb	11,s
-	ldb	12,s
-	stb	,-s
-	ldb	12,s
+	pshs	b
+	ldb	3,s
 	jsr	__Sound_Byte
-	leas	1,s
 	ldb	#7
-	stb	,-s
+	stb	10,s
 	ldb	#-8
-	jsr	__Sound_Byte
-	leas	1,s
-	leas	13,s
-	rts
+	leas	8,s
+	jmp	__Sound_Byte

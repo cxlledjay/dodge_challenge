@@ -18,7 +18,7 @@ S l_.text.hot Ref0000
 S l_.text Ref0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .boot size 3F flags D00
+A .boot size 3E flags D00
 S _boot Def0000
 T 00 00
 R 00 00 00 02
@@ -48,9 +48,9 @@ T 00 29 6F A0 30 1F 26 FA
 R 00 00 00 02
 T 00 2F
 R 00 00 00 02
-T 00 2F BD 00 00 5D 27 06 8E 00 00 BF 00 00
+T 00 2F BD 00 00 5D 27 06 CC 00 00 FD 00 00
 R 00 00 00 02 81 03 00 01 81 0C 00 09
 T 00 3B
 R 00 00 00 02
-T 00 3B BD 00 00 39
+T 00 3B 7E 00 00
 R 00 00 00 02 81 03 00 06

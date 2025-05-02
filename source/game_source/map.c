@@ -17,10 +17,21 @@ const unsigned int local_lu_animation_interval[] =
 	34
 };
 
+int animation_step;
+
+void map_init(void)
+{
+	animation_step = 0;
+}
+
+void map_calculate_animation(void)
+{
+	unsigned int animation_step_ui = (clk_frames / (local_lu_animation_interval[lvl_speed]/3)) % 3;
+	animation_step = (int) animation_step_ui;
+}
 
 
-
-void map_draw_road(){
+void map_draw_road(void){
 
 	Intensity_5F();
 
@@ -32,9 +43,6 @@ void map_draw_road(){
 	dp_VIA_t1_cnt_lo = 255;
 	Draw_Line_d(-80,-52);
 	
-	//calculate animation
-	unsigned int animation_step_ui = (clk_frames / (local_lu_animation_interval[lvl_speed]/3)) % 3;
-	int animation_step = (int) animation_step_ui;
 
 	//animation of inner lines
 	Reset0Ref();

@@ -1,39 +1,40 @@
 XH2
-H 3 areas C global symbols 2 banks 1 modes
+H 3 areas D global symbols 2 banks 1 modes
 M main.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
 B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
 S _lvl_init Ref0000
 S _player_handle_input Ref0000
-S _lvl_speed Ref0000
+S _map_calculate_animation Ref0000
 S .__.ABS. Def0000
 S _clk_init Ref0000
 S _map_draw_road Ref0000
-S _print_unsigned_int Ref0000
+S _map_init Ref0000
 S ___Wait_Recal Ref0000
 S _player_draw Ref0000
 S _clk_update Ref0000
+S _player_init Ref0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .text size 2A flags D00
-S _main Def0027
+A .text size 23 flags D00
+S _main Def0020
 S _run_game Def0000
 T 00 00
 R 00 00 00 02
-T 00 00 BD 00 00 BD 00 00
+T 00 00 BD 00 00 BD 00 00 BD
 R 00 00 00 02 81 03 00 04 81 06 00 00
-T 00 06
+T 00 07 00 00 BD 00 00
+R 00 00 00 02 81 02 00 06 81 05 00 0A
+T 00 0C
 R 00 00 00 02
-T 00 06 BD 00 00 BD 00 00 BD
+T 00 0C BD 00 00 BD 00 00 BD
 R 00 00 00 02 81 03 00 07 81 06 00 09
-T 00 0D 00 00 BD 00 00 F6
-R 00 00 00 02 81 02 00 05 81 05 00 01
-T 00 13 00 00 34 04 C6 3C E7 E2 C6 78 BD 00 00
-R 00 00 00 02 81 02 00 02 81 0D 00 06
-T 00 20 32 62 BD 00 00 20 DF
-R 00 00 00 02 81 05 00 08
-T 00 27
+T 00 13 00 00 BD 00 00 BD
+R 00 00 00 02 81 02 00 02 81 05 00 05
+T 00 19 00 00 BD 00 00 20 EC
+R 00 00 00 02 81 02 00 01 81 05 00 08
+T 00 20
 R 00 00 00 02
-T 00 27 BD 00 00
+T 00 20 BD 00 00
 R 00 00 00 02 01 03 00 02

@@ -1,23 +1,21 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	play_explosion.c
                               6 	.area	.text
                               7 	.globl	_play_explosion
    0000                       8 _play_explosion:
-   0000 32 7E         [ 5]    9 	leas	-2,s
-   0002 AF E4         [ 5]   10 	stx	,s
+   0000 34 20         [ 6]    9 	pshs	y
+   0002 31 84         [ 4]   10 	leay	,x
    0004 BD`00`00      [ 8]   11 	jsr	___Stop_Sound
    0007 BD`00`00      [ 8]   12 	jsr	_stop_music
-   000A AE E4         [ 5]   13 	ldx	,s
-   000C BF`00`00      [ 6]   14 	stx	_current_explosion
-   000F C6 80         [ 2]   15 	ldb	#-128
-   0011 F7`00`00      [ 5]   16 	stb	_Vec_Expl_Flag
-   0014 32 62         [ 5]   17 	leas	2,s
-   0016 39            [ 5]   18 	rts
+   000A 10 BF`00`00   [ 7]   13 	sty	_current_explosion
+   000E C6 80         [ 2]   14 	ldb	#-128
+   0010 F7`00`00      [ 5]   15 	stb	_Vec_Expl_Flag
+   0013 35 A0         [ 7]   16 	puls	y,pc
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Symbol Table
 
@@ -28,13 +26,13 @@ Symbol Table
     _stop_music        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   17   flags  100
+   2 .text            size   15   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

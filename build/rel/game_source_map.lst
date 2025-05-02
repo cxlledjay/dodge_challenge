@@ -1,7 +1,7 @@
                               1 ;;; gcc for m6809 : Mar 17 2019 13:25:32
                               2 ;;; 4.3.6 (gcc6809)
                               3 ;;; ABI version 1
-                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+                              4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	map.c
                               6 	.globl	_vl_misc_roadline_left
                               7 	.area	.text
@@ -123,188 +123,180 @@
    006C 31                  123 	.byte	49
    006D 2A                  124 	.byte	42
    006E 22                  125 	.byte	34
-                            126 	.globl	_map_draw_road
-   006F                     127 _map_draw_road:
-   006F 34 40         [ 6]  128 	pshs	u
-   0071 32 74         [ 5]  129 	leas	-12,s
-   0073 BD`00`00      [ 8]  130 	jsr	___Intensity_5F
-   0076 BD`00`00      [ 8]  131 	jsr	___Reset0Ref
-   0079 C6 7F         [ 2]  132 	ldb	#127
-   007B D7`00         [ 4]  133 	stb	*_dp_VIA_t1_cnt_lo
-   007D C6 24         [ 2]  134 	ldb	#36
-   007F E7 E2         [ 6]  135 	stb	,-s
-   0081 C6 F1         [ 2]  136 	ldb	#-15
-   0083 BD`00`00      [ 8]  137 	jsr	__Moveto_d
-   0086 32 61         [ 5]  138 	leas	1,s
-   0088 C6 FF         [ 2]  139 	ldb	#-1
-   008A D7`00         [ 4]  140 	stb	*_dp_VIA_t1_cnt_lo
-   008C C6 B0         [ 2]  141 	ldb	#-80
-   008E E7 E2         [ 6]  142 	stb	,-s
-   0090 C6 CC         [ 2]  143 	ldb	#-52
-   0092 BD`00`00      [ 8]  144 	jsr	__Draw_Line_d
-   0095 32 61         [ 5]  145 	leas	1,s
-   0097 F6`00`00      [ 5]  146 	ldb	_clk_frames
-   009A E7 63         [ 5]  147 	stb	3,s
-   009C F6`00`00      [ 5]  148 	ldb	_lvl_speed
-   009F 4F            [ 2]  149 	clra		;zero_extendqihi: R:b -> R:d
-   00A0 1F 01         [ 6]  150 	tfr	d,x
-   00A2 E6 89`00`68   [ 8]  151 	ldb	_local_lu_animation_interval,x
-   00A6 4F            [ 2]  152 	clra		;zero_extendqihi: R:b -> R:d
-   00A7 8E 00 03      [ 3]  153 	ldx	#3
-   00AA 34 10         [ 6]  154 	pshs	x
-   00AC 1F 01         [ 6]  155 	tfr	d,x
-   00AE BD`00`00      [ 8]  156 	jsr	_udivhi3
-   00B1 32 62         [ 5]  157 	leas	2,s
-   00B3 1F 10         [ 6]  158 	tfr	x,d	;movlsbqihi: R:x -> R:b
-   00B5 E7 62         [ 5]  159 	stb	2,s
-   00B7 E6 63         [ 5]  160 	ldb	3,s
-   00B9 4F            [ 2]  161 	clra		;zero_extendqihi: R:b -> R:d
-   00BA 1F 01         [ 6]  162 	tfr	d,x
-   00BC E6 62         [ 5]  163 	ldb	2,s
-   00BE 4F            [ 2]  164 	clra		;zero_extendqihi: R:b -> R:d
-   00BF ED E4         [ 5]  165 	std	,s
-   00C1 EE E4         [ 5]  166 	ldu	,s
-   00C3 34 40         [ 6]  167 	pshs	u
-   00C5 BD`00`00      [ 8]  168 	jsr	_udivhi3
-   00C8 32 62         [ 5]  169 	leas	2,s
-   00CA 1F 10         [ 6]  170 	tfr	x,d	;movlsbqihi: R:x -> R:b
-   00CC 4F            [ 2]  171 	clra		;zero_extendqihi: R:b -> R:d
-   00CD 8E 00 03      [ 3]  172 	ldx	#3
-   00D0 34 10         [ 6]  173 	pshs	x
-   00D2 1F 01         [ 6]  174 	tfr	d,x
-   00D4 BD`00`00      [ 8]  175 	jsr	_umodhi3
-   00D7 32 62         [ 5]  176 	leas	2,s
-   00D9 1F 10         [ 6]  177 	tfr	x,d
-   00DB E7 66         [ 5]  178 	stb	6,s	;movlsbqihi: R:d -> 6,s
-   00DD E6 66         [ 5]  179 	ldb	6,s
-   00DF E7 67         [ 5]  180 	stb	7,s
-   00E1 BD`00`00      [ 8]  181 	jsr	___Reset0Ref
-   00E4 C6 7F         [ 2]  182 	ldb	#127
-   00E6 D7`00         [ 4]  183 	stb	*_dp_VIA_t1_cnt_lo
-   00E8 E6 67         [ 5]  184 	ldb	7,s
-   00EA C1 02         [ 2]  185 	cmpb	#2	;cmpqi:
-   00EC 26 23         [ 3]  186 	bne	L2
-   00EE C6 24         [ 2]  187 	ldb	#36
-   00F0 E7 E2         [ 6]  188 	stb	,-s
-   00F2 C6 FB         [ 2]  189 	ldb	#-5
-   00F4 BD`00`00      [ 8]  190 	jsr	__Moveto_d
-   00F7 32 61         [ 5]  191 	leas	1,s
-   00F9 C6 FC         [ 2]  192 	ldb	#-4
-   00FB E7 E2         [ 6]  193 	stb	,-s
-   00FD C6 FF         [ 2]  194 	ldb	#-1
-   00FF BD`00`00      [ 8]  195 	jsr	__Draw_Line_d
-   0102 32 61         [ 5]  196 	leas	1,s
-   0104 C6 FC         [ 2]  197 	ldb	#-4
-   0106 E7 E2         [ 6]  198 	stb	,-s
-   0108 C6 FF         [ 2]  199 	ldb	#-1
-   010A BD`00`00      [ 8]  200 	jsr	__Moveto_d
-   010D 32 61         [ 5]  201 	leas	1,s
-   010F 20 21         [ 3]  202 	bra	L3
-   0111                     203 L2:
-   0111 C6 FB         [ 2]  204 	ldb	#-5
-   0113 E7 62         [ 5]  205 	stb	2,s
-   0115 E6 62         [ 5]  206 	ldb	2,s
-   0117 E0 67         [ 5]  207 	subb	7,s
-   0119 E7 64         [ 5]  208 	stb	4,s
-   011B C6 09         [ 2]  209 	ldb	#9
-   011D E0 67         [ 5]  210 	subb	7,s
-   011F 58            [ 2]  211 	aslb
-   0120 58            [ 2]  212 	aslb
-   0121 E7 69         [ 5]  213 	stb	9,s
-   0123 E6 64         [ 5]  214 	ldb	4,s
-   0125 E7 68         [ 5]  215 	stb	8,s
-   0127 E6 69         [ 5]  216 	ldb	9,s
-   0129 E7 E2         [ 6]  217 	stb	,-s
-   012B E6 69         [ 5]  218 	ldb	9,s
-   012D BD`00`00      [ 8]  219 	jsr	__Moveto_d
-   0130 32 61         [ 5]  220 	leas	1,s
-   0132                     221 L3:
-   0132 8E`00`00      [ 3]  222 	ldx	#_vl_misc_roadline_left
-   0135 BD`00`00      [ 8]  223 	jsr	___Draw_VLp
-   0138 BD`00`00      [ 8]  224 	jsr	___Reset0Ref
-   013B C6 7F         [ 2]  225 	ldb	#127
-   013D D7`00         [ 4]  226 	stb	*_dp_VIA_t1_cnt_lo
-   013F E6 67         [ 5]  227 	ldb	7,s
-   0141 C1 02         [ 2]  228 	cmpb	#2	;cmpqi:
-   0143 26 23         [ 3]  229 	bne	L4
-   0145 C6 24         [ 2]  230 	ldb	#36
-   0147 E7 E2         [ 6]  231 	stb	,-s
-   0149 C6 05         [ 2]  232 	ldb	#5
-   014B BD`00`00      [ 8]  233 	jsr	__Moveto_d
-   014E 32 61         [ 5]  234 	leas	1,s
-   0150 C6 FC         [ 2]  235 	ldb	#-4
-   0152 E7 E2         [ 6]  236 	stb	,-s
-   0154 C6 01         [ 2]  237 	ldb	#1
-   0156 BD`00`00      [ 8]  238 	jsr	__Draw_Line_d
-   0159 32 61         [ 5]  239 	leas	1,s
-   015B C6 FC         [ 2]  240 	ldb	#-4
-   015D E7 E2         [ 6]  241 	stb	,-s
-   015F C6 01         [ 2]  242 	ldb	#1
-   0161 BD`00`00      [ 8]  243 	jsr	__Moveto_d
-   0164 32 61         [ 5]  244 	leas	1,s
-   0166 20 1D         [ 3]  245 	bra	L5
-   0168                     246 L4:
-   0168 E6 67         [ 5]  247 	ldb	7,s
-   016A CB 05         [ 2]  248 	addb	#5
-   016C E7 65         [ 5]  249 	stb	5,s
-   016E C6 09         [ 2]  250 	ldb	#9
-   0170 E0 67         [ 5]  251 	subb	7,s
-   0172 58            [ 2]  252 	aslb
-   0173 58            [ 2]  253 	aslb
-   0174 E7 6B         [ 5]  254 	stb	11,s
-   0176 E6 65         [ 5]  255 	ldb	5,s
-   0178 E7 6A         [ 5]  256 	stb	10,s
-   017A E6 6B         [ 5]  257 	ldb	11,s
-   017C E7 E2         [ 6]  258 	stb	,-s
-   017E E6 6B         [ 5]  259 	ldb	11,s
-   0180 BD`00`00      [ 8]  260 	jsr	__Moveto_d
-   0183 32 61         [ 5]  261 	leas	1,s
-   0185                     262 L5:
-   0185 8E`00`34      [ 3]  263 	ldx	#_vl_misc_roadline_right
-   0188 BD`00`00      [ 8]  264 	jsr	___Draw_VLp
-   018B BD`00`00      [ 8]  265 	jsr	___Reset0Ref
-   018E C6 7F         [ 2]  266 	ldb	#127
-   0190 D7`00         [ 4]  267 	stb	*_dp_VIA_t1_cnt_lo
-   0192 C6 24         [ 2]  268 	ldb	#36
-   0194 E7 E2         [ 6]  269 	stb	,-s
-   0196 C6 0F         [ 2]  270 	ldb	#15
-   0198 BD`00`00      [ 8]  271 	jsr	__Moveto_d
-   019B 32 61         [ 5]  272 	leas	1,s
-   019D C6 FF         [ 2]  273 	ldb	#-1
-   019F D7`00         [ 4]  274 	stb	*_dp_VIA_t1_cnt_lo
-   01A1 C6 B0         [ 2]  275 	ldb	#-80
-   01A3 E7 E2         [ 6]  276 	stb	,-s
-   01A5 C6 34         [ 2]  277 	ldb	#52
-   01A7 BD`00`00      [ 8]  278 	jsr	__Draw_Line_d
-   01AA 32 61         [ 5]  279 	leas	1,s
-   01AC 32 6C         [ 5]  280 	leas	12,s
-   01AE 35 C0         [ 7]  281 	puls	u,pc
+                            126 	.area	.bss
+                            127 	.globl	_animation_step
+   0000                     128 _animation_step:	.blkb	1
+                            129 	.area	.text
+                            130 	.globl	_map_init
+   006F                     131 _map_init:
+   006F 7F`00`00      [ 7]  132 	clr	_animation_step
+   0072 39            [ 5]  133 	rts
+                            134 	.globl	_map_calculate_animation
+   0073                     135 _map_calculate_animation:
+   0073 34 20         [ 6]  136 	pshs	y
+   0075 32 7C         [ 5]  137 	leas	-4,s
+   0077 F6`00`00      [ 5]  138 	ldb	_lvl_speed
+   007A 4F            [ 2]  139 	clra		;zero_extendqihi: R:b -> R:d
+   007B 1F 01         [ 6]  140 	tfr	d,x
+   007D E6 89`00`68   [ 8]  141 	ldb	_local_lu_animation_interval,x
+   0081 4F            [ 2]  142 	clra		;zero_extendqihi: R:b -> R:d
+   0082 ED E4         [ 5]  143 	std	,s
+   0084 10 8E 00 03   [ 4]  144 	ldy	#3
+   0088 34 20         [ 6]  145 	pshs	y
+   008A AE 62         [ 6]  146 	ldx	2,s
+   008C BD`00`00      [ 8]  147 	jsr	_udivhi3
+   008F 32 62         [ 5]  148 	leas	2,s
+   0091 AF E4         [ 5]  149 	stx	,s
+   0093 F6`00`00      [ 5]  150 	ldb	_clk_frames
+   0096 4F            [ 2]  151 	clra		;zero_extendqihi: R:b -> R:d
+   0097 ED 62         [ 6]  152 	std	2,s
+   0099 1F 10         [ 6]  153 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   009B 4F            [ 2]  154 	clra		;zero_extendqihi: R:b -> R:d
+   009C 34 06         [ 7]  155 	pshs	d
+   009E AE 64         [ 6]  156 	ldx	4,s
+   00A0 BD`00`00      [ 8]  157 	jsr	_udivhi3
+   00A3 1F 10         [ 6]  158 	tfr	x,d
+   00A5 4F            [ 2]  159 	clra		;zero_extendqihi: R:b -> R:d
+   00A6 10 AF E4      [ 6]  160 	sty	,s
+   00A9 1F 01         [ 6]  161 	tfr	d,x
+   00AB BD`00`00      [ 8]  162 	jsr	_umodhi3
+   00AE 1F 10         [ 6]  163 	tfr	x,d
+   00B0 F7`00`00      [ 5]  164 	stb	_animation_step	;movlsbqihi: R:d -> _animation_step
+   00B3 32 66         [ 5]  165 	leas	6,s
+   00B5 35 A0         [ 7]  166 	puls	y,pc
+                            167 	.globl	_map_draw_road
+   00B7                     168 _map_draw_road:
+   00B7 32 7D         [ 5]  169 	leas	-3,s
+   00B9 BD`00`00      [ 8]  170 	jsr	___Intensity_5F
+   00BC BD`00`00      [ 8]  171 	jsr	___Reset0Ref
+   00BF C6 7F         [ 2]  172 	ldb	#127
+   00C1 D7`00         [ 4]  173 	stb	*_dp_VIA_t1_cnt_lo
+   00C3 C6 24         [ 2]  174 	ldb	#36
+   00C5 E7 E2         [ 6]  175 	stb	,-s
+   00C7 C6 F1         [ 2]  176 	ldb	#-15
+   00C9 BD`00`00      [ 8]  177 	jsr	__Moveto_d
+   00CC C6 FF         [ 2]  178 	ldb	#-1
+   00CE D7`00         [ 4]  179 	stb	*_dp_VIA_t1_cnt_lo
+   00D0 C6 B0         [ 2]  180 	ldb	#-80
+   00D2 E7 E2         [ 6]  181 	stb	,-s
+   00D4 CB 1C         [ 2]  182 	addb	#28
+   00D6 BD`00`00      [ 8]  183 	jsr	__Draw_Line_d
+   00D9 BD`00`00      [ 8]  184 	jsr	___Reset0Ref
+   00DC C6 7F         [ 2]  185 	ldb	#127
+   00DE D7`00         [ 4]  186 	stb	*_dp_VIA_t1_cnt_lo
+   00E0 F6`00`00      [ 5]  187 	ldb	_animation_step
+   00E3 E7 63         [ 5]  188 	stb	3,s
+   00E5 32 62         [ 5]  189 	leas	2,s
+   00E7 C1 02         [ 2]  190 	cmpb	#2	;cmpqi:
+   00E9 10 27 00 66   [ 6]  191 	lbeq	L12
+   00ED C6 FB         [ 2]  192 	ldb	#-5
+   00EF E0 61         [ 5]  193 	subb	1,s
+   00F1 E7 E4         [ 4]  194 	stb	,s
+   00F3 C6 09         [ 2]  195 	ldb	#9
+   00F5 E0 61         [ 5]  196 	subb	1,s
+   00F7 58            [ 2]  197 	aslb
+   00F8 58            [ 2]  198 	aslb
+   00F9 34 04         [ 6]  199 	pshs	b
+   00FB E6 61         [ 5]  200 	ldb	1,s
+   00FD BD`00`00      [ 8]  201 	jsr	__Moveto_d
+   0100 32 61         [ 5]  202 	leas	1,s
+   0102                     203 L7:
+   0102 8E`00`00      [ 3]  204 	ldx	#_vl_misc_roadline_left
+   0105 BD`00`00      [ 8]  205 	jsr	___Draw_VLp
+   0108 BD`00`00      [ 8]  206 	jsr	___Reset0Ref
+   010B C6 7F         [ 2]  207 	ldb	#127
+   010D D7`00         [ 4]  208 	stb	*_dp_VIA_t1_cnt_lo
+   010F F6`00`00      [ 5]  209 	ldb	_animation_step
+   0112 E7 62         [ 5]  210 	stb	2,s
+   0114 C1 02         [ 2]  211 	cmpb	#2	;cmpqi:
+   0116 10 27 00 59   [ 6]  212 	lbeq	L13
+   011A C6 09         [ 2]  213 	ldb	#9
+   011C E0 62         [ 5]  214 	subb	2,s
+   011E 58            [ 2]  215 	aslb
+   011F 58            [ 2]  216 	aslb
+   0120 34 04         [ 6]  217 	pshs	b
+   0122 E6 63         [ 5]  218 	ldb	3,s
+   0124 CB 05         [ 2]  219 	addb	#5
+   0126 E7 63         [ 5]  220 	stb	3,s
+   0128 BD`00`00      [ 8]  221 	jsr	__Moveto_d
+   012B 32 61         [ 5]  222 	leas	1,s
+   012D                     223 L9:
+   012D 8E`00`34      [ 3]  224 	ldx	#_vl_misc_roadline_right
+   0130 BD`00`00      [ 8]  225 	jsr	___Draw_VLp
+   0133 BD`00`00      [ 8]  226 	jsr	___Reset0Ref
+   0136 C6 7F         [ 2]  227 	ldb	#127
+   0138 D7`00         [ 4]  228 	stb	*_dp_VIA_t1_cnt_lo
+   013A C6 24         [ 2]  229 	ldb	#36
+   013C E7 E2         [ 6]  230 	stb	,-s
+   013E C6 0F         [ 2]  231 	ldb	#15
+   0140 BD`00`00      [ 8]  232 	jsr	__Moveto_d
+   0143 C6 FF         [ 2]  233 	ldb	#-1
+   0145 D7`00         [ 4]  234 	stb	*_dp_VIA_t1_cnt_lo
+   0147 C6 B0         [ 2]  235 	ldb	#-80
+   0149 E7 E2         [ 6]  236 	stb	,-s
+   014B C6 34         [ 2]  237 	ldb	#52
+   014D BD`00`00      [ 8]  238 	jsr	__Draw_Line_d
+   0150 32 65         [ 5]  239 	leas	5,s
+   0152 39            [ 5]  240 	rts
+   0153                     241 L12:
+   0153 C6 24         [ 2]  242 	ldb	#36
+   0155 E7 E2         [ 6]  243 	stb	,-s
+   0157 C6 FB         [ 2]  244 	ldb	#-5
+   0159 BD`00`00      [ 8]  245 	jsr	__Moveto_d
+   015C C6 FC         [ 2]  246 	ldb	#-4
+   015E E7 E2         [ 6]  247 	stb	,-s
+   0160 CB 03         [ 2]  248 	addb	#3
+   0162 BD`00`00      [ 8]  249 	jsr	__Draw_Line_d
+   0165 C6 FC         [ 2]  250 	ldb	#-4
+   0167 E7 E2         [ 6]  251 	stb	,-s
+   0169 CB 03         [ 2]  252 	addb	#3
+   016B BD`00`00      [ 8]  253 	jsr	__Moveto_d
+   016E 32 63         [ 5]  254 	leas	3,s
+   0170 16 FF 8F      [ 5]  255 	lbra	L7
+   0173                     256 L13:
+   0173 C6 24         [ 2]  257 	ldb	#36
+   0175 E7 E2         [ 6]  258 	stb	,-s
+   0177 C6 05         [ 2]  259 	ldb	#5
+   0179 BD`00`00      [ 8]  260 	jsr	__Moveto_d
+   017C C6 FC         [ 2]  261 	ldb	#-4
+   017E E7 E2         [ 6]  262 	stb	,-s
+   0180 C6 01         [ 2]  263 	ldb	#1
+   0182 BD`00`00      [ 8]  264 	jsr	__Draw_Line_d
+   0185 C6 FC         [ 2]  265 	ldb	#-4
+   0187 E7 E2         [ 6]  266 	stb	,-s
+   0189 C6 01         [ 2]  267 	ldb	#1
+   018B BD`00`00      [ 8]  268 	jsr	__Moveto_d
+   018E 32 63         [ 5]  269 	leas	3,s
+   0190 16 FF 9A      [ 5]  270 	lbra	L9
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 0111 R   |   2 L3                 0132 R
-  2 L4                 0168 R   |   2 L5                 0185 R
+  2 L12                0153 R   |   2 L13                0173 R
+  2 L7                 0102 R   |   2 L9                 012D R
     __Draw_Line_d      **** GX  |     __Moveto_d         **** GX
     ___Draw_VLp        **** GX  |     ___Intensity_5     **** GX
-    ___Reset0Ref       **** GX  |     _clk_frames        **** GX
-    _dp_VIA_t1_cnt     **** GX  |   2 _local_lu_anim     0068 GR
-    _lvl_speed         **** GX  |   2 _map_draw_road     006F GR
-    _udivhi3           **** GX  |     _umodhi3           **** GX
-  2 _vl_misc_roadl     0000 GR  |   2 _vl_misc_roadl     0034 GR
-  2 _vl_term_0_35      0033 R   |   2 _vl_term_1_59      0067 R
+    ___Reset0Ref       **** GX  |   3 _animation_ste     0000 GR
+    _clk_frames        **** GX  |     _dp_VIA_t1_cnt     **** GX
+  2 _local_lu_anim     0068 GR  |     _lvl_speed         **** GX
+  2 _map_calculate     0073 GR  |   2 _map_draw_road     00B7 GR
+  2 _map_init          006F GR  |     _udivhi3           **** GX
+    _umodhi3           **** GX  |   2 _vl_misc_roadl     0000 GR
+  2 _vl_misc_roadl     0034 GR  |   2 _vl_term_0_35      0033 R
+  2 _vl_term_1_59      0067 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 21:41:29 2025
+Hexadecimal [16-Bits]                                 Fri May  2 23:13:12 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size  1B0   flags  100
+   2 .text            size  193   flags  100
+   3 .bss             size    1   flags    0
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

@@ -1,58 +1,47 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	print_long_binary.c
 	.area	.text
 	.globl	_print_long_binary
 _print_long_binary:
-	leas	-28,s
-	stb	7,s
-	stx	5,s
+	pshs	u
+	leas	-24,s
+	stb	5,s
+	stx	3,s
 	ldb	#-128
-	stb	24,s
+	stb	23,s
 	ldb	#15
-	stb	25,s
+	stb	6,s
 L2:
-	ldb	25,s
-	stb	3,s
-	ldx	5,s
-	tfr	x,d	;movlsbqihi: R:x -> R:b
-	stb	,s
+	ldd	3,s
+	stb	,s	;movlsbqihi: R:d -> ,s
 	ldb	#1
 	andb	,s
-	stb	2,s
-	ldb	2,s
 	addb	#48
-	stb	4,s
-	ldb	3,s
+	stb	,s
+	ldb	6,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	,s
-	leax	8,s
-	exg	d,x
-	addd	,s; addhi3,3
-	exg	d,x
-	ldb	4,s
+	std	1,s
+	leau	7,s
+	leax	d,u
+	ldb	,s
 	stb	,x
-	dec	25,s
-	lsr	5,s
-	ror	6,s
-	ldb	25,s
+	dec	6,s
+	lsr	3,s
+	ror	4,s
+	ldb	6,s
 	cmpb	#-1	;cmpqi:
 	bne	L2
 	ldb	#-52
 	stb	*_dp_VIA_cntl
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	7,s
-	stb	27,s
-	ldb	30,s
-	stb	26,s
-	leax	8,s
-	ldb	27,s
-	stb	,-s
-	ldb	27,s
+	ldb	5,s
+	pshs	b
+	leax	,u
+	ldb	29,s
 	jsr	__Print_Str_d
-	leas	1,s
-	leas	28,s
-	rts
+	leas	25,s
+	puls	u,pc

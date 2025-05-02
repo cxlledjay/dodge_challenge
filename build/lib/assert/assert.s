@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	assert.c
 	.globl	_yy0
 	.area	.text
@@ -57,292 +57,281 @@ _mm3:
 	.globl	__f_assert_failed
 __f_assert_failed:
 	pshs	y,u
-	leas	-44,s
+	leas	-36,s
 	leau	,s
-	stx	14,u
-	stb	13,u
-	sts	2,u
-	leax	,s
-	stx	11,u
+	stx	2,u
+	stb	9,u
+	sts	5,u
 	ldx	_Vec_Text_HW
-	stx	29,u
-	ldx	#-1968
-	stx	_Vec_Text_HW
+	stx	16,u
+	ldy	#-1968
+	sty	_Vec_Text_HW
 	jsr	___Clear_Sound
-	ldb	13,u
+	ldb	9,u
 	clra		;zero_extendqihi: R:b -> R:d
-	std	,u
-	ldd	,u
-	addd	14,u; addhi3,3
-	std	31,u
-	clr	13,u
-	bra	L2
-L4:
-	inc	13,u
-L2:
-	ldd	31,u
-	addd	#-1; addhi3,3
-	std	31,u
-	ldb	[31,u]
+	tfr	d,x
+	ldd	2,u
+	leay	d,x
+	ldb	,-y
 	cmpb	#92	;cmpqi:
-	beq	L3
-	ldb	[31,u]
+	lbeq	L2
+	cmpb	#47	;cmpqi:
+	lbeq	L2
+	cmpy	2,u	;cmphi:
+	lbeq	L2
+	leax	,y
+	bra	L4
+L31:
 	cmpb	#47	;cmpqi:
 	beq	L3
-	ldx	31,u
-	cmpx	14,u	;cmphi:
-	bne	L4
+	cmpx	2,u	;cmphi:
+	beq	L3
+L4:
+	tfr	y,d	;movlsbqihi: R:y -> R:b
+	stb	4,u
+	tfr	x,d	;movlsbqihi: R:x -> R:b
+	stb	23,u
+	ldb	4,u
+	subb	23,u
+	stb	24,u
+	inc	4,u
+	ldb	4,u
+	subb	23,u
+	stb	25,u
+	ldb	,-x
+	cmpb	#92	;cmpqi:
+	bne	L31
 L3:
-	ldb	13,u
-	dec	13,u
+	ldb	25,u
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,y
+	tfr	s,d
+	pshs	y	;subhi: R:d -= R:y
+	subd	,s++
+	tfr	d,s
+	sts	10,u
+	tst	24,u
+	beq	L5
+	leay	,x
+L6:
+	sty	2,u
+L8:
+	tfr	y,d	;movlsbqihi: R:y -> R:b
+	stb	22,u
+	ldb	3,u	;movlsbqihi: msb:2,u -> R:b
+	subb	22,u
+	stb	28,u
+	ldx	2,u
+	leax	1,x
+	stx	2,u
+	ldb	,x
+	stb	19,u
+	addb	#-97
+	cmpb	#25	;cmpqi:
+	bhi	L7
+	ldb	19,u
+	addb	#-32
+	stb	19,u
+L7:
+	ldb	28,u
 	clra		;zero_extendqihi: R:b -> R:d
 	std	,u
-	tfr	s,d
-	subd	,u	;subhi: R:d -= ,u
-	tfr	d,s
-	sts	5,u
-	ldx	#0
+	tfr	d,x
 	exg	d,x
-	addd	5,u; addhi3,3
+	addd	10,u; addhi3,3
 	exg	d,x
-	stx	5,u
-	ldx	5,u
-	stx	23,u
-	clr	33,u
-	bra	L5
-L7:
-	ldd	31,u
-	addd	#1; addhi3,3
-	std	31,u
-	ldb	[31,u]
-	stb	34,u
-	ldb	34,u
-	cmpb	#96	;cmpqi:
-	bls	L6
-	ldb	34,u
-	cmpb	#122	;cmpqi:
-	bhi	L6
-	ldb	34,u
-	addb	#-32
-	stb	34,u
-L6:
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	ldy	23,u
-	leax	d,y
-	ldb	34,u
+	ldb	19,u
 	stb	,x
-	inc	33,u
+	ldb	3,u	;movlsbqihi: msb:2,u -> R:b
+	subb	22,u
+	stb	22,u
+	ldb	24,u
+	cmpb	22,u	;cmpqi:
+	bhi	L8
 L5:
-	ldb	33,u
-	cmpb	13,u	;cmpqi:
-	blo	L7
-	ldb	13,u
+	ldb	24,u
 	clra		;zero_extendqihi: R:b -> R:d
-	ldy	23,u
-	leax	d,y
+	std	,u
+	tfr	d,x
+	exg	d,x
+	addd	10,u; addhi3,3
+	exg	d,x
 	ldb	#-128
 	stb	,x
-	leax	16,u
+	leax	29,u
 	jsr	___Clear_Score
-	bra	L8
-L9:
-	leax	16,u
+	ldx	42,u
+	cmpx	#255	;cmphi:
+	bls	L9
+L23:
+	leax	29,u
 	ldb	#-1
 	jsr	__Add_Score_a
-	ldd	50,u
+	ldd	42,u
 	addd	#-255; addhi3,3
-	std	50,u
-L8:
-	ldx	50,u
-	cmpx	#255	;cmphi:
-	bhi	L9
-	ldx	50,u
-	tfr	x,d	;movlsbqihi: R:x -> R:b
-	stb	37,u
-	leax	16,u
-	ldb	37,u
+	std	42,u
+	cmpd	#255	;cmphi:
+	bhi	L23
+L9:
+	leax	29,u
+	ldb	43,u	;movlsbqihi: msb:42,u -> R:b
 	jsr	__Add_Score_a
-	clr	33,u
-L11:
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	std	,u
-	ldx	,u
-	exg	d,x
-	addd	52,u; addhi3,3
-	exg	d,x
-	ldb	,x
-	stb	4,u
-	tst	4,u
-	beq	L10
-	ldb	#1
-	stb	4,u
-L10:
-	ldb	4,u
-	inc	33,u
-	tstb
-	bne	L11
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	std	,u
-	tfr	s,d
-	subd	,u	;subhi: R:d -= ,u
-	tfr	d,s
-	sts	7,u
-	ldx	#0
-	exg	d,x
-	addd	7,u; addhi3,3
-	exg	d,x
-	stx	7,u
-	ldx	7,u
-	stx	25,u
-	dec	33,u
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	ldy	25,u
-	leax	d,y
-	ldb	#-128
-	stb	,x
+	clr	18,u
 	bra	L12
-L14:
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	std	,u
-	ldx	,u
-	exg	d,x
-	addd	52,u; addhi3,3
-	exg	d,x
-	ldb	,x
-	stb	35,u
-	ldb	35,u
-	cmpb	#96	;cmpqi:
-	bls	L13
-	ldb	35,u
-	cmpb	#122	;cmpqi:
-	bhi	L13
-	ldb	35,u
-	addb	#-32
-	stb	35,u
-L13:
-	ldb	33,u
-	clra		;zero_extendqihi: R:b -> R:d
-	ldy	25,u
-	leax	d,y
-	ldb	35,u
-	stb	,x
+L32:
+	ldb	4,u
+	stb	18,u
 L12:
-	dec	33,u
-	ldb	33,u
-	cmpb	#-1	;cmpqi:
-	bne	L14
-	ldb	56,u
+	ldb	18,u
+	incb
+	stb	4,u
+	ldb	18,u
 	clra		;zero_extendqihi: R:b -> R:d
-	std	,u
+	std	7,u
+	ldx	44,u
+	leax	d,x
+	tst	,x
+	bne	L32
+	ldb	4,u
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
 	tfr	s,d
-	subd	,u	;subhi: R:d -= ,u
+	pshs	x	;subhi: R:d -= R:x
+	subd	,s++
 	tfr	d,s
-	sts	9,u
-	ldx	#0
-	exg	d,x
-	addd	9,u; addhi3,3
-	exg	d,x
-	stx	9,u
-	ldx	9,u
-	stx	27,u
-	clr	33,u
-	bra	L15
-L19:
-	ldb	33,u
+	sts	12,u
+	ldd	7,u
+	leax	d,s
+	ldb	#-128
+	stb	,x
+	ldb	18,u
+	decb
+	stb	26,u
+	cmpb	#-1	;cmpqi:
+	beq	L13
+L22:
+	ldb	26,u
 	clra		;zero_extendqihi: R:b -> R:d
 	std	,u
-	ldx	,u
-	exg	d,x
-	addd	54,u; addhi3,3
-	exg	d,x
+	ldx	44,u
+	leax	d,x
 	ldb	,x
-	stb	36,u
-	ldb	36,u
-	cmpb	#96	;cmpqi:
-	bls	L16
-	ldb	36,u
-	cmpb	#122	;cmpqi:
-	bhi	L16
-	ldb	36,u
+	stb	20,u
+	addb	#-97
+	cmpb	#25	;cmpqi:
+	bhi	L14
+	ldb	20,u
 	addb	#-32
-	stb	36,u
-L16:
-	ldb	36,u
-	cmpb	#31	;cmpqi:
-	bls	L17
-	ldb	36,u
-	cmpb	#95	;cmpqi:
-	bls	L18
-L17:
-	ldb	#102
-	stb	36,u
-L18:
-	ldb	33,u
+	stb	20,u
+L14:
+	ldb	26,u
 	clra		;zero_extendqihi: R:b -> R:d
-	ldy	27,u
-	leax	d,y
-	ldb	36,u
+	std	,u
+	tfr	d,x
+	exg	d,x
+	addd	12,u; addhi3,3
+	exg	d,x
+	ldb	20,u
 	stb	,x
-	inc	33,u
-L15:
-	ldb	33,u
-	cmpb	56,u	;cmpqi:
-	blo	L19
-	ldb	56,u
-	decb
+	dec	26,u
+	ldb	26,u
+	cmpb	#-1	;cmpqi:
+	bne	L22
+L13:
+	ldb	48,u
 	clra		;zero_extendqihi: R:b -> R:d
-	ldy	27,u
+	tfr	d,x
+	tfr	s,d
+	pshs	x	;subhi: R:d -= R:x
+	subd	,s++
+	tfr	d,s
+	leay	,s
+	tst	48,u
+	beq	L16
+	ldx	#0
+	stx	2,u
+L19:
+	ldd	2,u
+	stb	27,u	;movlsbqihi: R:d -> 27,u
+	ldx	46,u
+	leax	d,x
+	ldb	,x
+	stb	21,u
+	addb	#-97
+	cmpb	#25	;cmpqi:
+	bhi	L17
+	ldb	21,u
+	addb	#-32
+	stb	21,u
+L17:
+	ldb	21,u
+	addb	#-32
+	cmpb	#63	;cmpqi:
+	bls	L18
+	ldb	#102
+	stb	21,u
+L18:
+	ldb	27,u
+	clra		;zero_extendqihi: R:b -> R:d
+	std	,u
+	leax	d,y
+	ldb	21,u
+	stb	,x
+	ldd	2,u
+	addd	#1; addhi3,3
+	std	2,u
+		;movlsbqihi: D->B
+	cmpb	48,u	;cmpqi:(R)
+	blo	L19
+L16:
+	dec	48,u
+	ldb	48,u
+	clra		;zero_extendqihi: R:b -> R:d
+	std	,u
 	leax	d,y
 	ldb	#-128
 	stb	,x
+	sty	14,u
+	ldy	10,u
+	ldx	12,u
+	stx	2,u
 L20:
 	jsr	___Wait_Recal
 	jsr	___Intensity_5F
 	ldx	#_yy0
 	jsr	__Print_List
-	ldx	27,u
-	stx	38,u
 	ldb	#70
 	stb	,-s
-	ldx	38,u
+	ldx	14,u
 	ldb	#-120
 	jsr	__Print_Str_d
-	leas	1,s
-	ldx	23,u
-	stx	40,u
 	ldb	#20
 	stb	,-s
-	ldx	40,u
+	leax	,y
 	ldb	#-120
 	jsr	__Print_Str_d
-	leas	1,s
-	ldx	25,u
-	stx	42,u
 	ldb	#-30
 	stb	,-s
-	ldx	42,u
+	ldx	2,u
 	ldb	#-120
 	jsr	__Print_Str_d
-	leas	1,s
-	leax	16,u
 	ldb	#-80
 	stb	,-s
+	leax	29,u
 	ldb	#-120
 	jsr	__Print_Str_d
-	leas	1,s
 	jsr	___Read_Btns
+	leas	4,s
 	ldb	_Vec_Buttons
-	andb	#1
-	tstb
-	lbeq	L20
-	ldx	29,u
+	bitb	#1
+	beq	L20
+	ldx	16,u
 	stx	_Vec_Text_HW
-	lds	11,u
-	lds	2,u
-	leas	44,s
+	lds	5,u
+	leas	36,s
 	puls	y,u,pc
+L2:
+	sts	10,u
+	ldb	#-1
+	stb	24,u
+	lbra	L6

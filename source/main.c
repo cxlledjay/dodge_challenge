@@ -55,15 +55,16 @@ __attribute__((noreturn)) void run_game(void)
 	//init section
 	clk_init();
 	lvl_init();
+	map_init();
+	player_init();
 
 	//game loop section
 	do
 	{
 		// synchronize frame rate to 50 Hz
 		Wait_Recal();
-		
-		// update game clock
 		clk_update();
+		map_calculate_animation();
 		
 		//build road
 		map_draw_road();
@@ -72,7 +73,7 @@ __attribute__((noreturn)) void run_game(void)
 		player_handle_input();
 
 		//debug
-		print_unsigned_int(120,60,lvl_speed);
+		//print_unsigned_int(120,60,lvl_speed);
 
 		//draw player
 		player_draw();

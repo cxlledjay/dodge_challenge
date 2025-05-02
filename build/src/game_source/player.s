@@ -1,7 +1,7 @@
 ;;; gcc for m6809 : Mar 17 2019 13:25:32
 ;;; 4.3.6 (gcc6809)
 ;;; ABI version 1
-;;; -mabi=bx -mint8 -fomit-frame-pointer -O0
+;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	player.c
 	.globl	_vl_player_mid
 	.area	.text
@@ -143,106 +143,258 @@ _vl_term_0_75:
 	.globl	_vl_player_left
 _vl_player_left:
 	.byte	0
+	.byte	-96
+	.byte	-80
+	.byte	-1
+	.byte	0
+	.byte	-80
+	.byte	-1
+	.byte	127
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	-1
+	.byte	-128
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	0
+	.byte	-1
+	.byte	16
+	.byte	60
+	.byte	0
+	.byte	0
+	.byte	40
+	.byte	-1
+	.byte	-16
+	.byte	60
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	-1
+	.byte	127
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	-80
+	.byte	-1
+	.byte	-128
+	.byte	0
+	.byte	0
+	.byte	32
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	-80
+	.byte	-1
+	.byte	0
+	.byte	-80
+	.byte	0
+	.byte	64
+	.byte	0
+	.byte	-1
+	.byte	16
+	.byte	60
+	.byte	-1
+	.byte	0
+	.byte	40
+	.byte	-1
+	.byte	-16
+	.byte	60
+	.byte	-1
+	.byte	112
+	.byte	-64
+	.byte	-1
+	.byte	0
+	.byte	-32
+	.byte	0
+	.byte	-28
+	.byte	48
+	.byte	-1
+	.byte	0
+	.byte	48
+	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-48
+	.byte	0
+	.byte	0
+	.byte	-48
+	.byte	-1
+	.byte	0
+	.byte	-48
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	48
+	.byte	0
+	.byte	28
+	.byte	16
+	.byte	-1
+	.byte	-112
+	.byte	-64
+	.byte	0
+	.byte	32
+	.byte	-40
+	.byte	-1
+	.byte	40
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	60
+	.byte	-1
+	.byte	-36
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	120
+	.byte	-1
+	.byte	36
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	60
+	.byte	-1
+	.byte	-40
+	.byte	0
+	.byte	0
+	.byte	20
+	.byte	-100
+	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	0
 	.byte	-24
-	.byte	-20
-_vl_term_1_84:
+	.byte	-1
+	.byte	-16
+	.byte	-8
+_vl_term_1_141:
 	.byte	1
 	.globl	_vl_player_right
 _vl_player_right:
 	.byte	0
 	.byte	-24
-	.byte	-20
-_vl_term_2_93:
+	.byte	-24
+_vl_term_2_149:
 	.byte	1
+	.area	.bss
 	.globl	_player_lane
-	.area	.data
-_player_lane:
-	.byte	1
+_player_lane:	.blkb	1
 	.area	.text
+	.globl	_player_init
+_player_init:
+	ldb	#1
+	stb	_player_lane
+	rts
 	.globl	_change_lane
 _change_lane:
-	leas	-1,s
-	stb	,s
-	ldb	,s
 	cmpb	#1	;cmpqi:
-	bne	L2
-	ldb	_player_lane
-	cmpb	#2	;cmpqi:
-	beq	L4
-	ldb	_player_lane
-	incb
-	stb	_player_lane
-	bra	L4
-L2:
-	ldb	,s
+	beq	L8
 	cmpb	#-1	;cmpqi:
-	bne	L4
+	beq	L9
+L6:
+	rts
+L9:
 	ldb	_player_lane
-	tstb
-	beq	L4
-	ldb	_player_lane
+	beq	L6
 	decb
 	stb	_player_lane
-L4:
-	leas	1,s
+	rts
+L8:
+	ldb	_player_lane
+	cmpb	#2	;cmpqi:
+	beq	L6
+	incb
+	stb	_player_lane
 	rts
 	.globl	_player_handle_input
 _player_handle_input:
+	leas	-1,s
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
-	andb	#1
-	tstb
-	beq	L6
-	ldb	#-1
-	jsr	_change_lane
-	bra	L7
-L6:
-	ldb	_Vec_Buttons
-	andb	#4
-	tstb
-	beq	L7
-	ldb	#1
-	jsr	_change_lane
-L7:
-	ldb	_Vec_Buttons
-	andb	#2
-	tstb
-	beq	L8
-	ldb	_lvl_speed
-	tstb
-	bne	L9
-	ldb	#6
-	stb	_lvl_speed
-	bra	L13
-L9:
-	ldb	_lvl_speed
-	decb
-	stb	_lvl_speed
-	bra	L13
-L8:
-	ldb	_Vec_Buttons
-	andb	#8
-	tstb
+	stb	,s
+	bitb	#1
+	beq	L11
+	ldb	_player_lane
+	bne	L16
+L12:
+	ldb	#2
+	andb	,s
 	beq	L13
 	ldb	_lvl_speed
-	cmpb	#6	;cmpqi:
-	bne	L12
-	clr	_lvl_speed
-	bra	L13
-L12:
+	beq	L15
+	decb
+	stb	_lvl_speed
+L15:
+	leas	1,s
+	rts
+L13:
+	ldb	#8
+	andb	,s
+	beq	L15
 	ldb	_lvl_speed
+	cmpb	#6	;cmpqi:
+	beq	L15
 	incb
 	stb	_lvl_speed
-L13:
+	leas	1,s
 	rts
+L11:
+	ldb	#4
+	andb	,s
+	beq	L12
+	ldb	_player_lane
+	cmpb	#2	;cmpqi:
+	beq	L12
+	incb
+	stb	_player_lane
+	bra	L12
+L16:
+	decb
+	stb	_player_lane
+	bra	L12
 	.globl	_local_lu_player_x_pos
 _local_lu_player_x_pos:
 	.byte	-71
 	.byte	0
 	.byte	71
+	.globl	_local_player_draw_left
+_local_player_draw_left:
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left
+	jmp	___Draw_VLp
+	.globl	_local_player_draw_mid
+_local_player_draw_mid:
+	ldb	#64
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid
+	jmp	___Draw_VLp
+	.globl	_local_player_draw_right
+_local_player_draw_right:
+	ldb	#64
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid
+	jmp	___Draw_VLp
+	.globl	_local_lu_player_draw_func_ptr
+	.area	.data
+_local_lu_player_draw_func_ptr:
+	.word	_local_player_draw_left
+	.word	_local_player_draw_mid
+	.word	_local_player_draw_right
+	.area	.text
 	.globl	_player_draw
 _player_draw:
-	leas	-1,s
+	leas	-2,s
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -250,16 +402,16 @@ _player_draw:
 	ldb	_player_lane
 	clra		;zero_extendqihi: R:b -> R:d
 	tfr	d,x
-	ldb	_local_lu_player_x_pos,x
-	stb	,s
 	ldb	#-112
 	stb	,-s
-	ldb	1,s
+	ldb	_local_lu_player_x_pos,x
 	jsr	__Moveto_d
-	leas	1,s
-	ldb	#64
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid
-	jsr	___Draw_VLp
-	leas	1,s
+	ldb	_player_lane
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	aslb
+	rola
+	tfr	d,x
+	jsr	[_local_lu_player_draw_func_ptr,x]
+	leas	3,s
 	rts
