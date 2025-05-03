@@ -12,7 +12,7 @@
    0075 7F C8 87      [ 7]   12 	clr	_lvl_speed
    0078 39            [ 5]   13 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Symbol Table
 
@@ -21,7 +21,7 @@ Symbol Table
   3 _lvl_init          0000 GR  |   2 _lvl_speed         0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Area Table
 

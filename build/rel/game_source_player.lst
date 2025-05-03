@@ -416,7 +416,7 @@
    01D4 32 63         [ 5]  416 	leas	3,s
    01D6 39            [ 5]  417 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:06 2025
 
 Symbol Table
 
@@ -440,7 +440,7 @@ Symbol Table
   2 _vl_term_1_141     010C R   |   2 _vl_term_2_149     0110 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:06 2025
 
 Area Table
 

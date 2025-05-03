@@ -181,11 +181,11 @@
    0144 E7 E2         [ 6]  181 	stb	,-s
    0146 C6 F1         [ 2]  182 	ldb	#-15
    0148 BD 04 39      [ 8]  183 	jsr	__Moveto_d
-   014B C6 FF         [ 2]  184 	ldb	#-1
+   014B C6 A8         [ 2]  184 	ldb	#-88
    014D D7 04         [ 4]  185 	stb	*_dp_VIA_t1_cnt_lo
-   014F C6 B0         [ 2]  186 	ldb	#-80
+   014F C6 80         [ 2]  186 	ldb	#-128
    0151 E7 E2         [ 6]  187 	stb	,-s
-   0153 CB 1C         [ 2]  188 	addb	#28
+   0153 CB 2E         [ 2]  188 	addb	#46
    0155 BD 04 34      [ 8]  189 	jsr	__Draw_Line_d
    0158 BD F3 54      [ 8]  190 	jsr	___Reset0Ref
    015B C6 7F         [ 2]  191 	ldb	#127
@@ -279,7 +279,7 @@
    0215 32 63         [ 5]  279 	leas	3,s
    0217 16 FF 96      [ 5]  280 	lbra	L9
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Symbol Table
 
@@ -299,7 +299,7 @@ Symbol Table
   2 _vl_term_1_60      006D R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Area Table
 

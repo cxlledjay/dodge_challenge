@@ -181,11 +181,11 @@ _map_draw_road:
 	stb	,-s
 	ldb	#-15
 	jsr	__Moveto_d
-	ldb	#-1
+	ldb	#-88
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-80
+	ldb	#-128
 	stb	,-s
-	addb	#28
+	addb	#46
 	jsr	__Draw_Line_d
 	jsr	___Reset0Ref
 	ldb	#127

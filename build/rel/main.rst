@@ -22,7 +22,7 @@
    0412                      22 _main:
    0412 BD 03 F2      [ 8]   23 	jsr	_run_game
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Symbol Table
 
@@ -37,7 +37,7 @@ Symbol Table
   2 _run_game          0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri May  2 23:22:15 2025
+Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
 
 Area Table
 

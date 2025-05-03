@@ -40,8 +40,8 @@ void map_draw_road(void){
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
 	Moveto_d(36, -15);
-	dp_VIA_t1_cnt_lo = 255;
-	Draw_Line_d(-80,-52);
+	dp_VIA_t1_cnt_lo = 168;
+	Draw_Line_d(-128,-82);
 	
 
 	//animation of inner lines
@@ -80,6 +80,6 @@ void map_draw_road(void){
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
 	Moveto_d(36, 15);
-	dp_VIA_t1_cnt_lo = 255;
-	Draw_Line_d(-80,52);
+	dp_VIA_t1_cnt_lo = 168;
+	Draw_Line_d(-128,82);
 }
