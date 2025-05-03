@@ -5,33 +5,33 @@
                               5 	.module	clock.c
                               6 	.area	.bss
                               7 	.globl	_clk_frames
-   C894                       8 _clk_frames:	.blkb	1
+   C880                       8 _clk_frames:	.blkb	1
                               9 	.globl	_clk_seconds
-   C895                      10 _clk_seconds:	.blkb	2
+   C881                      10 _clk_seconds:	.blkb	2
                              11 	.area	.text
                              12 	.globl	_clk_init
    0060                      13 _clk_init:
-   0060 7F C8 94      [ 7]   14 	clr	_clk_frames
+   0060 7F C8 80      [ 7]   14 	clr	_clk_frames
    0063 CC 00 00      [ 3]   15 	ldd	#0
-   0066 FD C8 95      [ 6]   16 	std	_clk_seconds
+   0066 FD C8 81      [ 6]   16 	std	_clk_seconds
    0069 39            [ 5]   17 	rts
                              18 	.globl	_clk_update
    006A                      19 _clk_update:
-   006A F6 C8 94      [ 5]   20 	ldb	_clk_frames
+   006A F6 C8 80      [ 5]   20 	ldb	_clk_frames
    006D C1 F0         [ 2]   21 	cmpb	#-16	;cmpqi:
    006F 22 06         [ 3]   22 	bhi	L8
    0071 CB 05         [ 2]   23 	addb	#5
-   0073 F7 C8 94      [ 5]   24 	stb	_clk_frames
+   0073 F7 C8 80      [ 5]   24 	stb	_clk_frames
    0076 39            [ 5]   25 	rts
    0077                      26 L8:
-   0077 7F C8 94      [ 7]   27 	clr	_clk_frames
-   007A 7C C8 96      [ 7]   28 	inc	_clk_seconds+1
+   0077 7F C8 80      [ 7]   27 	clr	_clk_frames
+   007A 7C C8 82      [ 7]   28 	inc	_clk_seconds+1
    007D 26 03         [ 3]   29 	bne	__IL28
-   007F 7C C8 95      [ 7]   30 	inc	_clk_seconds
+   007F 7C C8 81      [ 7]   30 	inc	_clk_seconds
    0082                      31 	__IL28:
    0082 39            [ 5]   32 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:02:55 2025
 
 Symbol Table
 
@@ -42,7 +42,7 @@ Symbol Table
   2 _clk_seconds       0001 GR  |   3 _clk_update        000A GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:02:55 2025
 
 Area Table
 

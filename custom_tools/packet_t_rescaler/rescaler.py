@@ -1,7 +1,8 @@
 
 new_lines = []
 
-factor = 8
+x_factor = 8
+y_factor = 8
 
 if __name__ == "__main__":
     # Open the file in read mode
@@ -27,8 +28,8 @@ if __name__ == "__main__":
                         substr = substr.replace("}", "")
                         if substr != '\n':
                             coords.append(substr)
-                y = int(coords[0]) * factor
-                x = int(coords[1]) * factor
+                y = int(coords[0]) * y_factor
+                x = int(coords[1]) * x_factor
                 new_lines.append(f"{{{cmd}, {{{y},{x}}}}},\n")
                         
         file.close()

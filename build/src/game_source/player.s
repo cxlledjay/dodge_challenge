@@ -147,6 +147,239 @@ _vl_term_0_76:
 _vl_player_left:
 	.globl	_vl_player_right
 _vl_player_right:
+	.byte	0
+	.byte	2
+	.byte	-20
+	.byte	-1
+	.byte	-20
+	.byte	0
+	.byte	-1
+	.byte	-6
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	-20
+	.byte	-1
+	.byte	6
+	.byte	-4
+	.byte	-1
+	.byte	20
+	.byte	0
+	.byte	-1
+	.byte	6
+	.byte	4
+	.byte	-1
+	.byte	0
+	.byte	20
+	.byte	-1
+	.byte	-6
+	.byte	4
+	.byte	0
+	.byte	-2
+	.byte	0
+	.byte	-1
+	.byte	4
+	.byte	15
+	.byte	-1
+	.byte	0
+	.byte	10
+	.byte	-1
+	.byte	-4
+	.byte	15
+	.byte	0
+	.byte	2
+	.byte	0
+	.byte	-1
+	.byte	-20
+	.byte	0
+	.byte	-1
+	.byte	-6
+	.byte	-4
+	.byte	-1
+	.byte	6
+	.byte	-4
+	.byte	-1
+	.byte	2
+	.byte	0
+	.byte	0
+	.byte	-4
+	.byte	6
+	.byte	-1
+	.byte	4
+	.byte	-13
+	.byte	0
+	.byte	0
+	.byte	15
+	.byte	-1
+	.byte	0
+	.byte	-40
+	.byte	0
+	.byte	0
+	.byte	15
+	.byte	-1
+	.byte	-4
+	.byte	-16
+	.byte	0
+	.byte	-4
+	.byte	-23
+	.byte	-1
+	.byte	6
+	.byte	4
+	.byte	-1
+	.byte	20
+	.byte	0
+	.byte	-1
+	.byte	6
+	.byte	-4
+	.byte	0
+	.byte	-8
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	-5
+	.byte	-1
+	.byte	4
+	.byte	-2
+	.byte	-1
+	.byte	14
+	.byte	0
+	.byte	-1
+	.byte	4
+	.byte	2
+	.byte	-1
+	.byte	-4
+	.byte	2
+	.byte	-1
+	.byte	-14
+	.byte	0
+	.byte	-1
+	.byte	-4
+	.byte	-2
+	.byte	0
+	.byte	22
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	18
+	.byte	-1
+	.byte	-4
+	.byte	2
+	.byte	-1
+	.byte	-10
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	5
+	.byte	-1
+	.byte	7
+	.byte	-5
+	.byte	0
+	.byte	7
+	.byte	-4
+	.byte	-1
+	.byte	10
+	.byte	-7
+	.byte	0
+	.byte	-2
+	.byte	2
+	.byte	-1
+	.byte	0
+	.byte	-8
+	.byte	-1
+	.byte	-4
+	.byte	2
+	.byte	-1
+	.byte	0
+	.byte	8
+	.byte	0
+	.byte	6
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	10
+	.byte	0
+	.byte	-2
+	.byte	3
+	.byte	-1
+	.byte	0
+	.byte	8
+	.byte	-1
+	.byte	-4
+	.byte	6
+	.byte	-1
+	.byte	0
+	.byte	-7
+	.byte	0
+	.byte	6
+	.byte	-10
+	.byte	-1
+	.byte	-32
+	.byte	54
+	.byte	0
+	.byte	2
+	.byte	0
+	.byte	-1
+	.byte	6
+	.byte	-4
+	.byte	-1
+	.byte	-4
+	.byte	-3
+	.byte	0
+	.byte	-28
+	.byte	3
+	.byte	-1
+	.byte	0
+	.byte	20
+	.byte	-1
+	.byte	6
+	.byte	4
+	.byte	-1
+	.byte	20
+	.byte	0
+	.byte	-1
+	.byte	6
+	.byte	-4
+	.byte	-1
+	.byte	0
+	.byte	-20
+	.byte	0
+	.byte	-1
+	.byte	-7
+	.byte	-1
+	.byte	12
+	.byte	0
+	.byte	-1
+	.byte	4
+	.byte	-2
+	.byte	-1
+	.byte	0
+	.byte	-18
+	.byte	-1
+	.byte	-4
+	.byte	2
+	.byte	-1
+	.byte	-2
+	.byte	0
+	.byte	0
+	.byte	6
+	.byte	-2
+	.byte	-1
+	.byte	-3
+	.byte	-2
+	.byte	0
+	.byte	-9
+	.byte	5
+	.byte	-1
+	.byte	6
+	.byte	-11
+	.byte	-1
+	.byte	0
+	.byte	-7
+	.byte	-1
+	.byte	-6
+	.byte	4
+_vl_term_1_190:
+	.byte	1
 	.area	.bss
 	.globl	_player_lane
 _player_lane:	.blkb	1
@@ -230,20 +463,14 @@ _local_lu_player_x_pos:
 	.byte	71
 	.globl	_local_player_draw_left
 _local_player_draw_left:
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_left
 	jmp	___Draw_VLp
 	.globl	_local_player_draw_mid
 _local_player_draw_mid:
-	ldb	#64
-	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_mid
 	jmp	___Draw_VLp
 	.globl	_local_player_draw_right
 _local_player_draw_right:
-	ldb	#8
-	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_right
 	jmp	___Draw_VLp
 	.globl	_local_lu_player_draw_func_ptr
@@ -265,6 +492,8 @@ _player_draw:
 	stb	,-s
 	ldb	_local_lu_player_x_pos,x
 	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
 	ldb	_player_lane
 	clra		;zero_extendqihi: R:b -> R:d
 	std	1,s

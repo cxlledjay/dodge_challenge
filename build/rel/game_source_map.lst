@@ -279,7 +279,7 @@
    019C 32 63         [ 5]  279 	leas	3,s
    019E 16 FF 96      [ 5]  280 	lbra	L9
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:02:56 2025
 
 Symbol Table
 
@@ -299,7 +299,7 @@ Symbol Table
   2 _vl_term_1_60      006D R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:02:56 2025
 
 Area Table
 

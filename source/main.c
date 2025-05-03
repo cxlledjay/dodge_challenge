@@ -28,7 +28,7 @@
 // debug loop, used to test stuff, without altering the game loop
 // (e.g. drawing new sprites)
 // *************************************
-#include "game_include/graphics/g_misc.h"
+#include "game_include/graphics/g_player.h"
 __attribute__((noreturn)) void run_debug(void)
 {
 	clk_init();
@@ -40,12 +40,17 @@ __attribute__((noreturn)) void run_debug(void)
 		clk_update();
 
 		Intensity_5F();					// set brightness of the electron beam
+		dp_VIA_t1_cnt_lo = 0x7f;			// set scaling factor for drawing
+		Moveto_d(64, 0);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 16;			// set scaling factor for drawing
+		Draw_VLp(&vl_player_mid);
+		//Draw_VLp((void*)vl_digits[clk_seconds % 10]);			// draw vector list
+		//print_long_unsigned_int(110,-60,clk_seconds);
 		Reset0Ref();					// reset beam to center
 		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-		Moveto_d(0, 0);				// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = 64;			// set scaling factor for drawing
-		Draw_VLp((void*)vl_digits[clk_seconds % 10]);			// draw vector list
-		print_long_unsigned_int(110,-60,clk_seconds);
+		Moveto_d(-64, 32);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 255;			// set scaling factor for drawing
+		Draw_VLp(&vl_player_right);
 	}
 	while(1);
 }
