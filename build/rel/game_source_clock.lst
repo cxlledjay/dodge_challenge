@@ -6,41 +6,50 @@
                               6 	.area	.bss
                               7 	.globl	_clk_frames
    0000                       8 _clk_frames:	.blkb	1
-                              9 	.area	.text
-                             10 	.globl	_clk_init
-   0000                      11 _clk_init:
-   0000 7F`00`00      [ 7]   12 	clr	_clk_frames
-   0003 39            [ 5]   13 	rts
-                             14 	.globl	_clk_update
-   0004                      15 _clk_update:
-   0004 F6`00`00      [ 5]   16 	ldb	_clk_frames
-   0007 C1 F0         [ 2]   17 	cmpb	#-16	;cmpqi:
-   0009 22 06         [ 3]   18 	bhi	L8
-   000B CB 05         [ 2]   19 	addb	#5
-   000D F7`00`00      [ 5]   20 	stb	_clk_frames
-   0010 39            [ 5]   21 	rts
-   0011                      22 L8:
-   0011 7F`00`00      [ 7]   23 	clr	_clk_frames
-   0014 39            [ 5]   24 	rts
+                              9 	.globl	_clk_seconds
+   0001                      10 _clk_seconds:	.blkb	2
+                             11 	.area	.text
+                             12 	.globl	_clk_init
+   0000                      13 _clk_init:
+   0000 7F`00`00      [ 7]   14 	clr	_clk_frames
+   0003 CC 00 00      [ 3]   15 	ldd	#0
+   0006 FD`00`01      [ 6]   16 	std	_clk_seconds
+   0009 39            [ 5]   17 	rts
+                             18 	.globl	_clk_update
+   000A                      19 _clk_update:
+   000A F6`00`00      [ 5]   20 	ldb	_clk_frames
+   000D C1 F0         [ 2]   21 	cmpb	#-16	;cmpqi:
+   000F 22 06         [ 3]   22 	bhi	L8
+   0011 CB 05         [ 2]   23 	addb	#5
+   0013 F7`00`00      [ 5]   24 	stb	_clk_frames
+   0016 39            [ 5]   25 	rts
+   0017                      26 L8:
+   0017 7F`00`00      [ 7]   27 	clr	_clk_frames
+   001A 7C`00`02      [ 7]   28 	inc	_clk_seconds+1
+   001D 26 03         [ 3]   29 	bne	__IL28
+   001F 7C`00`01      [ 7]   30 	inc	_clk_seconds
+   0022                      31 	__IL28:
+   0022 39            [ 5]   32 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
+Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L8                 0011 R   |   2 _clk_frames        0000 GR
-  3 _clk_init          0000 GR  |   3 _clk_update        0004 GR
+  3 L8                 0017 R   |   3 __IL28             0022 R
+  2 _clk_frames        0000 GR  |   3 _clk_init          0000 GR
+  2 _clk_seconds       0001 GR  |   3 _clk_update        000A GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 02:34:05 2025
+Hexadecimal [16-Bits]                                 Sat May  3 04:10:25 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .bss             size    1   flags    0
-   3 .text            size   15   flags  100
+   2 .bss             size    3   flags    0
+   3 .text            size   23   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

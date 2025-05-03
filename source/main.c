@@ -15,7 +15,7 @@
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 
 
@@ -28,21 +28,24 @@
 // debug loop, used to test stuff, without altering the game loop
 // (e.g. drawing new sprites)
 // *************************************
-#include "game_include/graphics/g_player.h"
+#include "game_include/graphics/g_misc.h"
 __attribute__((noreturn)) void run_debug(void)
 {
+	clk_init();
+	player_init();
 	do
 	{
-		//draw player		
+		// synchronize frame rate to 50 Hz
+		Wait_Recal();
+		clk_update();
+
 		Intensity_5F();					// set brightness of the electron beam
 		Reset0Ref();					// reset beam to center
 		dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 		Moveto_d(0, 0);				// move beam to object coordinates
-		dp_VIA_t1_cnt_lo = 63;			// set scaling factor for drawing
-		Draw_VLp(&vl_player_mid);			// draw vector list
-		unsigned int x = 42;
-		unsigned int y = x % 4;
-		print_unsigned_int(100,0,y);
+		dp_VIA_t1_cnt_lo = 64;			// set scaling factor for drawing
+		Draw_VLp((void*)vl_digits[clk_seconds % 10]);			// draw vector list
+		print_long_unsigned_int(110,-60,clk_seconds);
 	}
 	while(1);
 }

@@ -1,7 +1,7 @@
 
 new_lines = []
 
-factor = 1
+factor = 8
 
 if __name__ == "__main__":
     # Open the file in read mode

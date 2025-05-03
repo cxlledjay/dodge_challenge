@@ -1,5 +1,5 @@
 XH2
-H 4 areas 4 global symbols 2 banks 1 modes
+H 4 areas 5 global symbols 2 banks 1 modes
 M clock.c
 G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
 B _CSEG base 0 size 0 map 0 flags 0
@@ -7,22 +7,31 @@ B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
 S .__.ABS. Def0000
 A _CODE size 0 flags CC80 bank 0
 A _DATA size 0 flags CCC0 bank 1
-A .bss size 1 flags C00
+A .bss size 3 flags C00
+S _clk_seconds Def0001
 S _clk_frames Def0000
-A .text size 15 flags D00
+A .text size 23 flags D00
 S _clk_init Def0000
-S _clk_update Def0004
+S _clk_update Def000A
 T 00 00
+R 00 00 00 02
+T 00 01
 R 00 00 00 02
 T 00 00
 R 00 00 00 03
-T 00 00 7F 00 00 39
-R 00 00 00 03 01 03 00 02
-T 00 04
+T 00 00 7F 00 00 CC 00 00 FD 00 01 39
+R 00 00 00 03 01 03 00 02 01 09 00 02
+T 00 0A
 R 00 00 00 03
-T 00 04 F6 00 00 C1 F0 22 06 CB 05 F7 00 00 39
+T 00 0A F6 00 00 C1 F0 22 06 CB 05 F7 00 00 39
 R 00 00 00 03 01 03 00 02 01 0C 00 02
-T 00 11
+T 00 17
 R 00 00 00 03
-T 00 11 7F 00 00 39
-R 00 00 00 03 01 03 00 02
+T 00 17 7F 00 00 7C 00 02 26 03 7C
+R 00 00 00 03 01 03 00 02 01 06 00 02
+T 00 20 00 01
+R 00 00 00 03 01 02 00 02
+T 00 22
+R 00 00 00 03
+T 00 22 39
+R 00 00 00 03

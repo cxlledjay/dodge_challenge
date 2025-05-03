@@ -3,21 +3,377 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	main.c
+	.globl	__vl_digit_zero
 	.area	.text
-	.globl	_run_game
-_run_game:
+__vl_digit_zero:
+	.byte	0
+	.byte	126
+	.byte	-55
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	8
+	.byte	-8
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	0
+	.byte	-1
+	.byte	110
+	.byte	0
+_vl_term_0_29:
+	.byte	1
+	.globl	__vl_digit_one
+__vl_digit_one:
+	.byte	0
+	.byte	118
+	.byte	63
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+_vl_term_1_40:
+	.byte	1
+	.globl	__vl_digit_two
+__vl_digit_two:
+	.byte	0
+	.byte	126
+	.byte	-55
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+_vl_term_2_57:
+	.byte	1
+	.globl	__vl_digit_three
+__vl_digit_three:
+	.byte	0
+	.byte	126
+	.byte	-55
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	126
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	110
+_vl_term_3_74:
+	.byte	1
+	.globl	__vl_digit_four
+__vl_digit_four:
+	.byte	0
+	.byte	118
+	.byte	-63
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	118
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+_vl_term_4_89:
+	.byte	1
+	.globl	__vl_digit_five
+__vl_digit_five:
+	.byte	0
+	.byte	126
+	.byte	55
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+_vl_term_5_106:
+	.byte	1
+	.globl	__vl_digit_six
+__vl_digit_six:
+	.byte	0
+	.byte	118
+	.byte	-63
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	8
+	.byte	8
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+_vl_term_6_123:
+	.byte	1
+	.globl	__vl_digit_seven
+__vl_digit_seven:
+	.byte	0
+	.byte	126
+	.byte	-55
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+_vl_term_7_136:
+	.byte	1
+	.globl	__vl_digit_eight
+__vl_digit_eight:
+	.byte	0
+	.byte	126
+	.byte	-55
+	.byte	-1
+	.byte	0
+	.byte	110
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-16
+	.byte	0
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	8
+	.byte	-8
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	0
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	-118
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+_vl_term_8_157:
+	.byte	1
+	.globl	__vl_digit_nine
+__vl_digit_nine:
+	.byte	0
+	.byte	-118
+	.byte	63
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	16
+	.byte	0
+	.byte	-1
+	.byte	110
+	.byte	0
+	.byte	0
+	.byte	8
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-110
+	.byte	0
+	.byte	-8
+	.byte	-8
+	.byte	-1
+	.byte	-110
+	.byte	0
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	110
+_vl_term_9_174:
+	.byte	1
+	.globl	_vl_digits
+	.area	.data
+_vl_digits:
+	.word	__vl_digit_zero
+	.word	__vl_digit_one
+	.word	__vl_digit_two
+	.word	__vl_digit_three
+	.word	__vl_digit_four
+	.word	__vl_digit_five
+	.word	__vl_digit_six
+	.word	__vl_digit_seven
+	.word	__vl_digit_eight
+	.word	__vl_digit_nine
+	.area	.text
+	.globl	_run_debug
+_run_debug:
 	jsr	_clk_init
-	jsr	_lvl_init
-	jsr	_map_init
 	jsr	_player_init
 L2:
 	jsr	___Wait_Recal
 	jsr	_clk_update
-	jsr	_map_calculate_animation
-	jsr	_map_draw_road
-	jsr	_player_handle_input
-	jsr	_player_draw
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	clr	,-s
+	clrb
+	jsr	__Moveto_d
+	ldb	#64
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	_clk_seconds
+	ldd	#10
+	std	,--s
+	jsr	_umodhi3
+	leas	2,s
+	tfr	x,d
+	aslb
+	rola
+	tfr	d,x
+	ldx	_vl_digits,x
+	jsr	___Draw_VLp
+	ldb	#-60
+	stb	,-s
+	ldx	_clk_seconds
+	ldb	#110
+	jsr	_print_long_unsigned_int
+	leas	2,s
 	bra	L2
 	.globl	_main
 _main:
-	jsr	_run_game
+	jsr	_run_debug

@@ -99,13 +99,13 @@ void local_player_draw_mid(void)
 
 void local_player_draw_right(void)
 {
-	dp_VIA_t1_cnt_lo = 64;
-	Draw_VLp(&vl_player_mid);
+	dp_VIA_t1_cnt_lo = 8;
+	Draw_VLp(&vl_player_right);
 }
 
 
 typedef void (*local_player_draw_func)(void);
-local_player_draw_func local_lu_player_draw_func_ptr[3] = 
+const local_player_draw_func local_lu_player_draw_func_ptr[3] = 
 {
 	local_player_draw_left,
 	local_player_draw_mid,

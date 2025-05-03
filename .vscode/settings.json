@@ -13,6 +13,7 @@
         "player.h": "c",
         "score.h": "c",
         "map.h": "c",
-        "misc.h": "c"
+        "misc.h": "c",
+        "g_misc.h": "c"
     }
 }

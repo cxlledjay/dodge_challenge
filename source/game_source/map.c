@@ -2,7 +2,7 @@
 
 #include <vectrex.h>
 
-#include "game_include/graphics/g_misc.h"
+#include "game_include/graphics/g_map.h"
 #include "game_include/level.h"
 #include "game_include/clock.h"
 

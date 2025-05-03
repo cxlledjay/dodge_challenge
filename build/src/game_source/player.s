@@ -7,142 +7,6 @@
 	.area	.text
 _vl_player_mid:
 	.byte	0
-	.byte	-24
-	.byte	-20
-	.byte	-1
-	.byte	0
-	.byte	-20
-	.byte	-1
-	.byte	32
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	20
-	.byte	-1
-	.byte	-32
-	.byte	0
-	.byte	0
-	.byte	4
-	.byte	0
-	.byte	-1
-	.byte	4
-	.byte	15
-	.byte	0
-	.byte	0
-	.byte	10
-	.byte	-1
-	.byte	-4
-	.byte	15
-	.byte	0
-	.byte	-4
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	20
-	.byte	-1
-	.byte	32
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	-20
-	.byte	-1
-	.byte	-32
-	.byte	0
-	.byte	0
-	.byte	8
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	-40
-	.byte	0
-	.byte	16
-	.byte	0
-	.byte	-1
-	.byte	4
-	.byte	15
-	.byte	-1
-	.byte	0
-	.byte	10
-	.byte	-1
-	.byte	-4
-	.byte	15
-	.byte	-1
-	.byte	28
-	.byte	-16
-	.byte	-1
-	.byte	0
-	.byte	-8
-	.byte	0
-	.byte	-7
-	.byte	12
-	.byte	-1
-	.byte	0
-	.byte	12
-	.byte	-1
-	.byte	4
-	.byte	-2
-	.byte	-1
-	.byte	0
-	.byte	-12
-	.byte	0
-	.byte	0
-	.byte	-12
-	.byte	-1
-	.byte	0
-	.byte	-12
-	.byte	-1
-	.byte	-4
-	.byte	-2
-	.byte	-1
-	.byte	0
-	.byte	12
-	.byte	0
-	.byte	7
-	.byte	4
-	.byte	-1
-	.byte	-28
-	.byte	-16
-	.byte	0
-	.byte	8
-	.byte	-10
-	.byte	-1
-	.byte	10
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	15
-	.byte	-1
-	.byte	-9
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	30
-	.byte	-1
-	.byte	9
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	15
-	.byte	-1
-	.byte	-10
-	.byte	0
-	.byte	0
-	.byte	5
-	.byte	-25
-	.byte	-1
-	.byte	4
-	.byte	-2
-	.byte	-1
-	.byte	0
-	.byte	-6
-	.byte	-1
-	.byte	-4
-	.byte	-2
-_vl_term_0_75:
-	.byte	1
-	.globl	_vl_player_left
-_vl_player_left:
-	.byte	0
 	.byte	-96
 	.byte	-80
 	.byte	-1
@@ -277,15 +141,12 @@ _vl_player_left:
 	.byte	-1
 	.byte	-16
 	.byte	-8
-_vl_term_1_141:
+_vl_term_0_76:
 	.byte	1
+	.globl	_vl_player_left
+_vl_player_left:
 	.globl	_vl_player_right
 _vl_player_right:
-	.byte	0
-	.byte	-24
-	.byte	-24
-_vl_term_2_149:
-	.byte	1
 	.area	.bss
 	.globl	_player_lane
 _player_lane:	.blkb	1
@@ -381,17 +242,15 @@ _local_player_draw_mid:
 	jmp	___Draw_VLp
 	.globl	_local_player_draw_right
 _local_player_draw_right:
-	ldb	#64
+	ldb	#8
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid
+	ldx	#_vl_player_right
 	jmp	___Draw_VLp
 	.globl	_local_lu_player_draw_func_ptr
-	.area	.data
 _local_lu_player_draw_func_ptr:
 	.word	_local_player_draw_left
 	.word	_local_player_draw_mid
 	.word	_local_player_draw_right
-	.area	.text
 	.globl	_player_draw
 _player_draw:
 	leas	-2,s

@@ -240,11 +240,11 @@ L9:
 	stb	,-s
 	ldb	#15
 	jsr	__Moveto_d
-	ldb	#-1
+	ldb	#-88
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-80
+	ldb	#-128
 	stb	,-s
-	ldb	#52
+	ldb	#82
 	jsr	__Draw_Line_d
 	leas	5,s
 	rts
