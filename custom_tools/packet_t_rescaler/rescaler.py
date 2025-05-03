@@ -1,8 +1,8 @@
 
 new_lines = []
 
-x_factor = 8
-y_factor = 8
+x_factor = -1
+y_factor = 1
 
 if __name__ == "__main__":
     # Open the file in read mode

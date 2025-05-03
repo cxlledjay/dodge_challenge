@@ -15,7 +15,7 @@
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 
 

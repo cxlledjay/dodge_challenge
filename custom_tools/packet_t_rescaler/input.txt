@@ -1,60 +1,107 @@
+{MOVE, {12,-120}},
 
-{MOVE, {-24,-20}}, //move to left back wheel
+//left wheel
+{DRAW, {-120,0}},
+{DRAW, {-36,-24}},
+{DRAW, {0,-120}},
+{DRAW, {36,-24}},
+{DRAW, {120,0}},
+{DRAW, {36,24}},
+{DRAW, {0,120}},
+{DRAW, {-36,24}},
 
-//wheel1
-{DRAW, {0,-20}},
-{DRAW, {32,0}},
-{DRAW, {0,20}},
-{DRAW, {-32,0}},
-//axles
-{MOVE, {4,0}},
-{DRAW, {4,15}},
-{MOVE, {0,10}},
-{DRAW, {-4,15}},
-{MOVE, {-4,0}},
-//wheel2
-{DRAW, {0,20}},
-{DRAW, {32,0}},
-{DRAW, {0,-20}},
-{DRAW, {-32,0}},
-//back
-{MOVE, {8,0}},
-{DRAW, {0,-40}},
-{MOVE, {16,0}},
-//back top (angles like axle)
-{DRAW, {4,15}},
-{DRAW, {0,10}},
-{DRAW, {-4,15}},
+//backview
+{MOVE, {-12,0}},
+{DRAW, {24,90}},
+{DRAW, {0,60}},
+{DRAW, {-24,90}},
+
+//right wheel
+{MOVE, {12,0}},
+{DRAW, {-120,0}},
+{DRAW, {-36,-24}},
+{DRAW, {36,-24}},
+{DRAW, {12,0}},
+
+//back bottom
+{MOVE, {-24,36}},
+{DRAW, {24,-78}},
+{MOVE, {0,90}},
+{DRAW, {0,-120}},
+{DRAW, {0,-120}},
+{MOVE, {0,90}},
+{DRAW, {-24,-96}},
+
+//left wheel finish
+{MOVE, {-12,-69}},
+{MOVE, {-12,-69}},
+{DRAW, {36,24}},
+{DRAW, {120,0}},
+{DRAW, {36,-24}},
+
+//left front wheel
+{MOVE, {-48,-24}},
+{DRAW, {0,-30}},
+{DRAW, {24,-12}},
+{DRAW, {84,0}},
+{DRAW, {24,12}},
+{DRAW, {-24,12}},
+{DRAW, {-84,0}},
+{DRAW, {-24,-12}},
+{MOVE, {69,0}},
+{MOVE, {69,0}},
+{DRAW, {0,108}},
+{DRAW, {-24,12}},
+{DRAW, {-60,0}},
+
 //chassis
-{DRAW, {28,-16}},
-{DRAW, {0,-8}},
-//front wing right
-{MOVE, {-7,12}},
-{DRAW, {0,12}},
-{DRAW, {4,-2}},
-{DRAW, {0,-12}},
-//front wing left
-{MOVE, {0,-12}},
-{DRAW, {0,-12}},
-{DRAW, {-4,-2}},
-{DRAW, {0,12}},
-//continue chassis
-{MOVE, {7,4}},
-{DRAW, {-28,-16}},
-//front wheel left
-{MOVE, {8,-10}},
-{DRAW, {10,0}},
-{DRAW, {0,15}},
-{DRAW, {-9,0}},
-//front wheel right side
 {MOVE, {0,30}},
-{DRAW, {9,0}},
-{DRAW, {0,15}},
-{DRAW, {-10,0}},
+{DRAW, {42,-30}},
+{MOVE, {42,-24}},
+{DRAW, {60,-42}},
+
+{MOVE, {-12,12}},
+{DRAW, {0,-48}},
+{DRAW, {-24,12}},
+{DRAW, {0,48}},
+{MOVE, {36,-24}},
+{DRAW, {0,60}},
+
+{MOVE, {-12,18}},
+{DRAW, {0,48}},
+{DRAW, {-24,36}},
+{DRAW, {0,-42}},
+{MOVE, {36,-60}},
+{DRAW, {-64,108}},
+{DRAW, {-64,108}},
+{DRAW, {-64,108}},
+
+//right wheel finish
+{MOVE, {12,0}},
+{DRAW, {36,-24}},
+{DRAW, {-24,-18}},
+{MOVE, {-84,9}},
+{MOVE, {-84,9}},
+{DRAW, {0,120}},
+{DRAW, {36,24}},
+{DRAW, {120,0}},
+{DRAW, {36,-24}},
+{DRAW, {0,-120}},
+
+//right front wheel
+{MOVE, {-6,-42}},
+{DRAW, {72,0}},
+{DRAW, {24,-12}},
+{DRAW, {0,-108}},
+{DRAW, {-24,12}},
+{DRAW, {-12,0}},
+{MOVE, {36,-12}},
+{DRAW, {-18,-12}},
+
 //driver
-{MOVE, {5,-25}},
-{DRAW, {4,-2}},
-{DRAW, {0,-6}},
-{DRAW, {-4,-2}},
-//done
+{MOVE, {-54,30}},
+{DRAW, {36,-66}},
+{DRAW, {0,-42}},
+{DRAW, {-36,24}},
+
 VL_END

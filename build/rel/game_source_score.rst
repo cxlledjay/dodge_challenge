@@ -5,10 +5,10 @@
                               5 	.module	score.c
                               6 	.area	.text
                               7 	.globl	_score_init
-   045C                       8 _score_init:
-   045C 39            [ 5]    9 	rts
+   0570                       8 _score_init:
+   0570 39            [ 5]    9 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 16:02:56 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:19:22 2025
 
 Symbol Table
 
@@ -17,7 +17,7 @@ Symbol Table
   2 _score_init        0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 16:02:56 2025
+Hexadecimal [16-Bits]                                 Sat May  3 16:19:22 2025
 
 Area Table
 

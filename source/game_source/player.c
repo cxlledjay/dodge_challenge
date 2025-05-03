@@ -79,24 +79,27 @@ void player_handle_input(void)
 
 const int local_lu_player_x_pos[3] =
 {
-	-71,
+	-82,
 	0,
-	71
+	82
 };
 
 
 void local_player_draw_left(void)
 {
+	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_left);
 }
 
 void local_player_draw_mid(void)
 {
+	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_player_mid);
 }
 
 void local_player_draw_right(void)
 {
+	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_right);
 }
 
@@ -118,6 +121,5 @@ void player_draw(void)
 	Reset0Ref();					// reset beam to center
 	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
 	Moveto_d(-112, local_lu_player_x_pos[player_lane]);				// move beam to object coordinates
-	dp_VIA_t1_cnt_lo = 16;
 	(* local_lu_player_draw_func_ptr[player_lane])();		// draw vector list
 }
