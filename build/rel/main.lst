@@ -17,12 +17,13 @@
    0015 BD`00`00      [ 8]   17 	jsr	_map_draw_road
    0018 BD`00`00      [ 8]   18 	jsr	_player_handle_input
    001B BD`00`00      [ 8]   19 	jsr	_player_draw
-   001E 20 EC         [ 3]   20 	bra	L2
-                             21 	.globl	_main
-   0020                      22 _main:
-   0020 BD`00`00      [ 8]   23 	jsr	_run_game
+   001E BD`00`00      [ 8]   20 	jsr	_score_draw
+   0021 20 E9         [ 3]   21 	bra	L2
+                             22 	.globl	_main
+   0023                      23 _main:
+   0023 BD`00`00      [ 8]   24 	jsr	_run_game
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat May  3 16:19:21 2025
+Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
 
 Symbol Table
 
@@ -30,20 +31,20 @@ Symbol Table
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
   2 L2                 000C R   |     ___Wait_Recal      **** GX
     _clk_init          **** GX  |     _clk_update        **** GX
-    _lvl_init          **** GX  |   2 _main              0020 GR
+    _lvl_init          **** GX  |   2 _main              0023 GR
     _map_calculate     **** GX  |     _map_draw_road     **** GX
     _map_init          **** GX  |     _player_draw       **** GX
     _player_handle     **** GX  |     _player_init       **** GX
-  2 _run_game          0000 GR
+  2 _run_game          0000 GR  |     _score_draw        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat May  3 16:19:21 2025
+Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   23   flags  100
+   2 .text            size   26   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

@@ -123,3 +123,8 @@ void player_draw(void)
 	Moveto_d(-112, local_lu_player_x_pos[player_lane]);				// move beam to object coordinates
 	(* local_lu_player_draw_func_ptr[player_lane])();		// draw vector list
 }
+
+
+//spawn animation?
+
+//hit object / "death" animation?

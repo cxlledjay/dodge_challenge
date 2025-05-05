@@ -17,6 +17,7 @@ L2:
 	jsr	_map_draw_road
 	jsr	_player_handle_input
 	jsr	_player_draw
+	jsr	_score_draw
 	bra	L2
 	.globl	_main
 _main:

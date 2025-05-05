@@ -12,6 +12,7 @@
 #include "game_include/level.h"
 #include "game_include/player.h"
 #include "game_include/map.h"
+#include "game_include/score.h"
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
@@ -54,6 +55,96 @@ __attribute__((noreturn)) void run_debug(void)
 	}
 	while(1);
 }
+
+#include "game_include/graphics/g_misc.h"
+__attribute__((noreturn)) void draw_font(void)
+{
+	clk_init();
+	do
+	{
+		// synchronize frame rate to 50 Hz
+		Wait_Recal();
+		clk_update();
+
+		Intensity_5F();					// set brightness of the electron beam
+		Reset0Ref();					// reset beam to center
+		dp_VIA_t1_cnt_lo = 0x7f;			// set scaling factor for drawing
+		Moveto_d(0, -111);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 16;			// set scaling factor for drawing
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[1]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[2]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[3]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[4]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[5]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[6]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[7]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[8]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[9]);
+
+
+		//reference
+		Intensity_5F();					// set brightness of the electron beam
+		Reset0Ref();					// reset beam to center
+		dp_VIA_t1_cnt_lo = 0x7f;			// set scaling factor for drawing
+		Moveto_d(-42, -111);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 16;			// set scaling factor for drawing
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+		Moveto_d(0, 127);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[0]);
+	}
+	while(1);
+}
+
+
+__attribute__((noreturn)) void draw_speed(void)
+{
+	do
+	{
+		// synchronize frame rate to 50 Hz
+		Wait_Recal();
+		clk_update();
+
+		Intensity_5F();					// set brightness of the electron beam
+		Reset0Ref();					// reset beam to center
+		dp_VIA_t1_cnt_lo = 0x7f;			// set scaling factor for drawing
+		Moveto_d(0, -64);				// move beam to object coordinates
+		dp_VIA_t1_cnt_lo = 15;			// set scaling factor for drawing
+		Draw_VLp(&vl_speed_display);
+		dp_VIA_t1_cnt_lo = 8;			// set scaling factor for drawing
+		Draw_VLp((void*)vl_digits[2]);
+		Moveto_d(-118, 24);				// move beam to object coordinates
+		Dot_here();
+		Moveto_d(118, 103);				// move beam to object coordinates
+		Draw_VLp((void*)vl_digits[5]);
+	}
+	while(1);
+}
 #else
 // *************************************
 // game loop, called by main
@@ -86,6 +177,7 @@ __attribute__((noreturn)) void run_game(void)
 		//draw player
 		player_draw();
 
+		score_draw();
 	}
 	while(1);
 }
@@ -95,7 +187,9 @@ __attribute__((noreturn)) void run_game(void)
 int main(void)
 {	
 	#if DEBUG_MODE
-	run_debug();
+	//run_debug();
+	//draw_font();
+	draw_speed();
 	#else
 	run_game();
 	#endif
