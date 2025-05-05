@@ -5,107 +5,271 @@
                               5 	.module	score.c
                               6 	.area	.bss
                               7 	.globl	_score
-   0000                       8 _score:	.blkb	2
+   0000                       8 _score:	.blkb	5
                               9 	.area	.text
                              10 	.globl	_score_init
    0000                      11 _score_init:
-   0000 CC 00 00      [ 3]   12 	ldd	#0
-   0003 FD`00`00      [ 6]   13 	std	_score
-   0006 39            [ 5]   14 	rts
-                             15 	.globl	_score_update
-   0007                      16 _score_update:
-   0007 7C`00`01      [ 7]   17 	inc	_score+1
-   000A 26 03         [ 3]   18 	bne	__IL15
-   000C 7C`00`00      [ 7]   19 	inc	_score
-   000F                      20 	__IL15:
-   000F 39            [ 5]   21 	rts
-                             22 	.globl	_score_draw
-   0010                      23 _score_draw:
-   0010 34 20         [ 6]   24 	pshs	y
-   0012 BD`00`00      [ 8]   25 	jsr	___Intensity_5F
-   0015 BD`00`00      [ 8]   26 	jsr	___Reset0Ref
-   0018 C6 7F         [ 2]   27 	ldb	#127
-   001A D7`00         [ 4]   28 	stb	*_dp_VIA_t1_cnt_lo
-   001C C6 6E         [ 2]   29 	ldb	#110
-   001E E7 E2         [ 6]   30 	stb	,-s
-   0020 CB 2E         [ 2]   31 	addb	#46
-   0022 BD`00`00      [ 8]   32 	jsr	__Moveto_d
-   0025 C6 09         [ 2]   33 	ldb	#9
-   0027 D7`00         [ 4]   34 	stb	*_dp_VIA_t1_cnt_lo
-   0029 10 BE`00`00   [ 7]   35 	ldy	_vl_digits
-   002D 30 A4         [ 4]   36 	leax	,y
-   002F BD`00`00      [ 8]   37 	jsr	___Draw_VLp
-   0032 6F E2         [ 8]   38 	clr	,-s
-   0034 C6 7F         [ 2]   39 	ldb	#127
-   0036 BD`00`00      [ 8]   40 	jsr	__Moveto_d
-   0039 30 A4         [ 4]   41 	leax	,y
-   003B BD`00`00      [ 8]   42 	jsr	___Draw_VLp
-   003E 6F E2         [ 8]   43 	clr	,-s
-   0040 C6 7F         [ 2]   44 	ldb	#127
-   0042 BD`00`00      [ 8]   45 	jsr	__Moveto_d
-   0045 30 A4         [ 4]   46 	leax	,y
-   0047 BD`00`00      [ 8]   47 	jsr	___Draw_VLp
-   004A 6F E2         [ 8]   48 	clr	,-s
-   004C C6 7F         [ 2]   49 	ldb	#127
-   004E BD`00`00      [ 8]   50 	jsr	__Moveto_d
-   0051 30 A4         [ 4]   51 	leax	,y
-   0053 BD`00`00      [ 8]   52 	jsr	___Draw_VLp
-   0056 6F E2         [ 8]   53 	clr	,-s
-   0058 C6 7F         [ 2]   54 	ldb	#127
-   005A BD`00`00      [ 8]   55 	jsr	__Moveto_d
-   005D 30 A4         [ 4]   56 	leax	,y
-   005F BD`00`00      [ 8]   57 	jsr	___Draw_VLp
-   0062 C6 42         [ 2]   58 	ldb	#66
-   0064 D7`00         [ 4]   59 	stb	*_dp_VIA_t1_cnt_lo
-   0066 C6 D4         [ 2]   60 	ldb	#-44
-   0068 E7 E2         [ 6]   61 	stb	,-s
-   006A C6 81         [ 2]   62 	ldb	#-127
-   006C BD`00`00      [ 8]   63 	jsr	__Moveto_d
-   006F C6 06         [ 2]   64 	ldb	#6
-   0071 D7`00         [ 4]   65 	stb	*_dp_VIA_t1_cnt_lo
-   0073 8E`00`00      [ 3]   66 	ldx	#_vl_speed_display
-   0076 BD`00`00      [ 8]   67 	jsr	___Draw_VLp
-   0079 C6 06         [ 2]   68 	ldb	#6
-   007B D7`00         [ 4]   69 	stb	*_dp_VIA_t1_cnt_lo
-   007D BE`00`04      [ 6]   70 	ldx	_vl_digits+4
-   0080 BD`00`00      [ 8]   71 	jsr	___Draw_VLp
-   0083 C6 8A         [ 2]   72 	ldb	#-118
-   0085 E7 E2         [ 6]   73 	stb	,-s
-   0087 C6 18         [ 2]   74 	ldb	#24
-   0089 BD`00`00      [ 8]   75 	jsr	__Moveto_d
-   008C BD`00`00      [ 8]   76 	jsr	___Dot_here
-   008F C6 76         [ 2]   77 	ldb	#118
-   0091 E7 E2         [ 6]   78 	stb	,-s
-   0093 C6 67         [ 2]   79 	ldb	#103
-   0095 BD`00`00      [ 8]   80 	jsr	__Moveto_d
-   0098 32 68         [ 5]   81 	leas	8,s
-   009A BE`00`0A      [ 6]   82 	ldx	_vl_digits+10
-   009D 35 20         [ 6]   83 	puls	y
-   009F 7E`00`00      [ 4]   84 	jmp	___Draw_VLp
+   0000 7F`00`00      [ 7]   12 	clr	_score
+   0003 7F`00`01      [ 7]   13 	clr	_score+1
+   0006 7F`00`02      [ 7]   14 	clr	_score+2
+   0009 7F`00`03      [ 7]   15 	clr	_score+3
+   000C 7F`00`04      [ 7]   16 	clr	_score+4
+   000F 39            [ 5]   17 	rts
+                             18 	.globl	_local_lu_score_addition
+   0010                      19 _local_lu_score_addition:
+   0010 01                   20 	.byte	1
+   0011 02                   21 	.byte	2
+   0012 03                   22 	.byte	3
+   0013 04                   23 	.byte	4
+   0014 05                   24 	.byte	5
+   0015 06                   25 	.byte	6
+   0016 07                   26 	.byte	7
+                             27 	.globl	_score_update
+   0017                      28 _score_update:
+   0017 32 76         [ 5]   29 	leas	-10,s
+   0019 F6`00`00      [ 5]   30 	ldb	_lvl_speed
+   001C 4F            [ 2]   31 	clra		;zero_extendqihi: R:b -> R:d
+   001D 1F 01         [ 6]   32 	tfr	d,x
+   001F E6 89`00`10   [ 8]   33 	ldb	_local_lu_score_addition,x
+   0023 FB`00`00      [ 5]   34 	addb	_score
+   0026 E7 66         [ 5]   35 	stb	6,s
+   0028 C1 09         [ 2]   36 	cmpb	#9	;cmpqi:
+   002A 10 2F 00 C0   [ 6]   37 	lble	L10
+   002E E6 66         [ 5]   38 	ldb	6,s
+   0030 86 67         [ 2]   39 	lda	#103	;mulqihi3
+   0032 3D            [11]   40 	mul
+   0033 ED E4         [ 5]   41 	std	,s
+   0035 1F 89         [ 6]   42 	tfr	a,b
+   0037 4F            [ 2]   43 	clra		;zero_extendqihi: R:b -> R:d
+   0038 57            [ 2]   44 	asrb
+   0039 57            [ 2]   45 	asrb
+   003A E7 65         [ 5]   46 	stb	5,s
+   003C E6 66         [ 5]   47 	ldb	6,s
+   003E 59            [ 2]   48 	rolb
+   003F 59            [ 2]   49 	rolb
+   0040 C4 01         [ 2]   50 	andb	#1
+   0042 50            [ 2]   51 	negb
+   0043 E7 62         [ 5]   52 	stb	2,s
+   0045 E6 65         [ 5]   53 	ldb	5,s
+   0047 E0 62         [ 5]   54 	subb	2,s
+   0049 E7 62         [ 5]   55 	stb	2,s
+   004B FB`00`01      [ 5]   56 	addb	_score+1
+   004E E7 67         [ 5]   57 	stb	7,s
+   0050 E6 62         [ 5]   58 	ldb	2,s
+   0052 86 0A         [ 2]   59 	lda	#10	;mulqihi3
+   0054 3D            [11]   60 	mul
+   0055 1F 01         [ 6]   61 	tfr	d,x
+   0057 1F 10         [ 6]   62 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   0059 E0 66         [ 5]   63 	subb	6,s
+   005B 50            [ 2]   64 	negb
+   005C F7`00`00      [ 5]   65 	stb	_score
+   005F E6 67         [ 5]   66 	ldb	7,s
+   0061 C1 09         [ 2]   67 	cmpb	#9	;cmpqi:
+   0063 10 2F 00 81   [ 6]   68 	lble	L11
+   0067 E6 67         [ 5]   69 	ldb	7,s
+   0069 86 67         [ 2]   70 	lda	#103	;mulqihi3
+   006B 3D            [11]   71 	mul
+   006C ED E4         [ 5]   72 	std	,s
+   006E 1F 89         [ 6]   73 	tfr	a,b
+   0070 4F            [ 2]   74 	clra		;zero_extendqihi: R:b -> R:d
+   0071 57            [ 2]   75 	asrb
+   0072 57            [ 2]   76 	asrb
+   0073 E7 64         [ 5]   77 	stb	4,s
+   0075 E6 67         [ 5]   78 	ldb	7,s
+   0077 59            [ 2]   79 	rolb
+   0078 59            [ 2]   80 	rolb
+   0079 C4 01         [ 2]   81 	andb	#1
+   007B 50            [ 2]   82 	negb
+   007C E7 E4         [ 4]   83 	stb	,s
+   007E E6 64         [ 5]   84 	ldb	4,s
+   0080 E0 E4         [ 4]   85 	subb	,s
+   0082 E7 E4         [ 4]   86 	stb	,s
+   0084 FB`00`02      [ 5]   87 	addb	_score+2
+   0087 E7 68         [ 5]   88 	stb	8,s
+   0089 E6 E4         [ 4]   89 	ldb	,s
+   008B 86 0A         [ 2]   90 	lda	#10	;mulqihi3
+   008D 3D            [11]   91 	mul
+   008E 1F 01         [ 6]   92 	tfr	d,x
+   0090 1F 10         [ 6]   93 	tfr	x,d	;movlsbqihi: R:x -> R:b
+   0092 E0 67         [ 5]   94 	subb	7,s
+   0094 50            [ 2]   95 	negb
+   0095 F7`00`01      [ 5]   96 	stb	_score+1
+   0098 E6 68         [ 5]   97 	ldb	8,s
+   009A C1 09         [ 2]   98 	cmpb	#9	;cmpqi:
+   009C 2F 56         [ 3]   99 	ble	L12
+   009E E6 68         [ 5]  100 	ldb	8,s
+   00A0 86 67         [ 2]  101 	lda	#103	;mulqihi3
+   00A2 3D            [11]  102 	mul
+   00A3 ED E4         [ 5]  103 	std	,s
+   00A5 1F 89         [ 6]  104 	tfr	a,b
+   00A7 4F            [ 2]  105 	clra		;zero_extendqihi: R:b -> R:d
+   00A8 57            [ 2]  106 	asrb
+   00A9 57            [ 2]  107 	asrb
+   00AA E7 E4         [ 4]  108 	stb	,s
+   00AC E6 68         [ 5]  109 	ldb	8,s
+   00AE 59            [ 2]  110 	rolb
+   00AF 59            [ 2]  111 	rolb
+   00B0 C4 01         [ 2]  112 	andb	#1
+   00B2 50            [ 2]  113 	negb
+   00B3 E7 69         [ 5]  114 	stb	9,s
+   00B5 E6 E4         [ 4]  115 	ldb	,s
+   00B7 E0 69         [ 5]  116 	subb	9,s
+   00B9 FB`00`03      [ 5]  117 	addb	_score+3
+   00BC E7 69         [ 5]  118 	stb	9,s
+   00BE 86 67         [ 2]  119 	lda	#103	;mulqihi3
+   00C0 3D            [11]  120 	mul
+   00C1 ED E4         [ 5]  121 	std	,s
+   00C3 1F 89         [ 6]  122 	tfr	a,b
+   00C5 4F            [ 2]  123 	clra		;zero_extendqihi: R:b -> R:d
+   00C6 57            [ 2]  124 	asrb
+   00C7 57            [ 2]  125 	asrb
+   00C8 E7 63         [ 5]  126 	stb	3,s
+   00CA E6 69         [ 5]  127 	ldb	9,s
+   00CC 59            [ 2]  128 	rolb
+   00CD 59            [ 2]  129 	rolb
+   00CE C4 01         [ 2]  130 	andb	#1
+   00D0 50            [ 2]  131 	negb
+   00D1 E0 63         [ 5]  132 	subb	3,s
+   00D3 50            [ 2]  133 	negb
+   00D4 86 0A         [ 2]  134 	lda	#10	;mulqihi3
+   00D6 3D            [11]  135 	mul
+                            136 		;movlsbqihi: D->B
+   00D7 E0 69         [ 5]  137 	subb	9,s
+   00D9 50            [ 2]  138 	negb
+   00DA F7`00`02      [ 5]  139 	stb	_score+2
+   00DD E6 69         [ 5]  140 	ldb	9,s
+   00DF C1 09         [ 2]  141 	cmpb	#9	;cmpqi:
+   00E1 2E 08         [ 3]  142 	bgt	L8
+   00E3 F7`00`03      [ 5]  143 	stb	_score+3
+   00E6 20 03         [ 3]  144 	bra	L8
+   00E8                     145 L11:
+   00E8 F7`00`01      [ 5]  146 	stb	_score+1
+   00EB                     147 L8:
+   00EB 32 6A         [ 5]  148 	leas	10,s
+   00ED 39            [ 5]  149 	rts
+   00EE                     150 L10:
+   00EE F7`00`00      [ 5]  151 	stb	_score
+   00F1 32 6A         [ 5]  152 	leas	10,s
+   00F3 39            [ 5]  153 	rts
+   00F4                     154 L12:
+   00F4 F7`00`02      [ 5]  155 	stb	_score+2
+   00F7 32 6A         [ 5]  156 	leas	10,s
+   00F9 39            [ 5]  157 	rts
+                            158 	.globl	_local_lu_speed_digit_1
+   00FA                     159 _local_lu_speed_digit_1:
+   00FA 01                  160 	.byte	1
+   00FB 01                  161 	.byte	1
+   00FC 02                  162 	.byte	2
+   00FD 02                  163 	.byte	2
+   00FE 03                  164 	.byte	3
+   00FF 03                  165 	.byte	3
+   0100 04                  166 	.byte	4
+                            167 	.globl	_local_lu_speed_digit_2
+   0101                     168 _local_lu_speed_digit_2:
+   0101 00                  169 	.byte	0
+   0102 05                  170 	.byte	5
+   0103 00                  171 	.byte	0
+   0104 05                  172 	.byte	5
+   0105 00                  173 	.byte	0
+   0106 05                  174 	.byte	5
+   0107 00                  175 	.byte	0
+                            176 	.globl	_score_draw
+   0108                     177 _score_draw:
+   0108 32 7E         [ 5]  178 	leas	-2,s
+   010A BD`00`00      [ 8]  179 	jsr	___Intensity_5F
+   010D BD`00`00      [ 8]  180 	jsr	___Reset0Ref
+   0110 C6 7F         [ 2]  181 	ldb	#127
+   0112 D7`00         [ 4]  182 	stb	*_dp_VIA_t1_cnt_lo
+   0114 C6 6E         [ 2]  183 	ldb	#110
+   0116 E7 E2         [ 6]  184 	stb	,-s
+   0118 CB 2E         [ 2]  185 	addb	#46
+   011A BD`00`00      [ 8]  186 	jsr	__Moveto_d
+   011D C6 09         [ 2]  187 	ldb	#9
+   011F D7`00         [ 4]  188 	stb	*_dp_VIA_t1_cnt_lo
+   0121 F6`00`03      [ 5]  189 	ldb	_score+3
+   0124 1D            [ 2]  190 	sex		;extendqihi2: R:b -> R:d
+   0125 58            [ 2]  191 	aslb
+   0126 49            [ 2]  192 	rola
+   0127 1F 01         [ 6]  193 	tfr	d,x
+   0129 AE 89`00`00   [ 9]  194 	ldx	_vl_digits,x
+   012D BD`00`00      [ 8]  195 	jsr	___Draw_VLp
+   0130 6F E2         [ 8]  196 	clr	,-s
+   0132 C6 7F         [ 2]  197 	ldb	#127
+   0134 BD`00`00      [ 8]  198 	jsr	__Moveto_d
+   0137 F6`00`02      [ 5]  199 	ldb	_score+2
+   013A 1D            [ 2]  200 	sex		;extendqihi2: R:b -> R:d
+   013B 58            [ 2]  201 	aslb
+   013C 49            [ 2]  202 	rola
+   013D 1F 01         [ 6]  203 	tfr	d,x
+   013F AE 89`00`00   [ 9]  204 	ldx	_vl_digits,x
+   0143 BD`00`00      [ 8]  205 	jsr	___Draw_VLp
+   0146 6F E2         [ 8]  206 	clr	,-s
+   0148 C6 7F         [ 2]  207 	ldb	#127
+   014A BD`00`00      [ 8]  208 	jsr	__Moveto_d
+   014D F6`00`01      [ 5]  209 	ldb	_score+1
+   0150 1D            [ 2]  210 	sex		;extendqihi2: R:b -> R:d
+   0151 58            [ 2]  211 	aslb
+   0152 49            [ 2]  212 	rola
+   0153 1F 01         [ 6]  213 	tfr	d,x
+   0155 AE 89`00`00   [ 9]  214 	ldx	_vl_digits,x
+   0159 BD`00`00      [ 8]  215 	jsr	___Draw_VLp
+   015C 6F E2         [ 8]  216 	clr	,-s
+   015E C6 7F         [ 2]  217 	ldb	#127
+   0160 BD`00`00      [ 8]  218 	jsr	__Moveto_d
+   0163 F6`00`00      [ 5]  219 	ldb	_score
+   0166 1D            [ 2]  220 	sex		;extendqihi2: R:b -> R:d
+   0167 ED 64         [ 6]  221 	std	4,s
+   0169 58            [ 2]  222 	aslb
+   016A 49            [ 2]  223 	rola
+   016B 1F 01         [ 6]  224 	tfr	d,x
+   016D AE 89`00`00   [ 9]  225 	ldx	_vl_digits,x
+   0171 BD`00`00      [ 8]  226 	jsr	___Draw_VLp
+   0174 6F E2         [ 8]  227 	clr	,-s
+   0176 C6 7F         [ 2]  228 	ldb	#127
+   0178 BD`00`00      [ 8]  229 	jsr	__Moveto_d
+   017B BE`00`00      [ 6]  230 	ldx	_vl_digits
+   017E BD`00`00      [ 8]  231 	jsr	___Draw_VLp
+   0181 C6 42         [ 2]  232 	ldb	#66
+   0183 D7`00         [ 4]  233 	stb	*_dp_VIA_t1_cnt_lo
+   0185 C6 D4         [ 2]  234 	ldb	#-44
+   0187 E7 E2         [ 6]  235 	stb	,-s
+   0189 C6 81         [ 2]  236 	ldb	#-127
+   018B BD`00`00      [ 8]  237 	jsr	__Moveto_d
+   018E C6 06         [ 2]  238 	ldb	#6
+   0190 D7`00         [ 4]  239 	stb	*_dp_VIA_t1_cnt_lo
+   0192 8E`00`00      [ 3]  240 	ldx	#_vl_speed_display
+   0195 BD`00`00      [ 8]  241 	jsr	___Draw_VLp
+   0198 C6 06         [ 2]  242 	ldb	#6
+   019A D7`00         [ 4]  243 	stb	*_dp_VIA_t1_cnt_lo
+   019C 32 68         [ 5]  244 	leas	8,s
+   019E 39            [ 5]  245 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 __IL15             000F R   |     __Moveto_d         **** GX
-    ___Dot_here        **** GX  |     ___Draw_VLp        **** GX
+  3 L10                00EE R   |   3 L11                00E8 R
+  3 L12                00F4 R   |   3 L8                 00EB R
+    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
     ___Intensity_5     **** GX  |     ___Reset0Ref       **** GX
-    _dp_VIA_t1_cnt     **** GX  |   2 _score             0000 GR
-  3 _score_draw        0010 GR  |   3 _score_init        0000 GR
-  3 _score_update      0007 GR  |     _vl_digits         **** GX
+    _dp_VIA_t1_cnt     **** GX  |   3 _local_lu_scor     0010 GR
+  3 _local_lu_spee     00FA GR  |   3 _local_lu_spee     0101 GR
+    _lvl_speed         **** GX  |   2 _score             0000 GR
+  3 _score_draw        0108 GR  |   3 _score_init        0000 GR
+  3 _score_update      0017 GR  |     _vl_digits         **** GX
     _vl_speed_disp     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .bss             size    2   flags    0
-   3 .text            size   A2   flags  100
+   2 .bss             size    5   flags    0
+   3 .text            size  19F   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 
