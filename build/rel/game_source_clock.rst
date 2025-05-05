@@ -31,7 +31,7 @@
    0082                      31 	__IL28:
    0082 39            [ 5]   32 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
 
 Symbol Table
 
@@ -42,7 +42,7 @@ Symbol Table
   2 _clk_seconds       0001 GR  |   3 _clk_update        000A GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
 
 Area Table
 

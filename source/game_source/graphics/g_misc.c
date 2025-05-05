@@ -215,22 +215,23 @@ const void* const vl_digits[10] =
 const struct packet_t vl_speed_display[] =
 {
     //speed sign
-    {DRAW, {-63,96}},
-    {DRAW, {-63,-96}},
-    {MOVE, {126,112}},
-    {DRAW, {-63,96}},
-    {DRAW, {-63,-96}},
-    {MOVE, {126,112}},
-    {DRAW, {-63,96}},
-    {DRAW, {-63,-96}},
+    {DRAW, {-64,112}},
+    {DRAW, {-64,-112}},
+    {MOVE, {0,127}},
+    {DRAW, {64,112}},
+    {DRAW, {64,-112}},
+    {MOVE, {0,127}},
+    {DRAW, {-64,112}},
+    {DRAW, {-64,-112}},
 
     //multi symbol
     {MOVE, {0,127}},
-    {MOVE, {0,64}},
-    {DRAW, {63,63}},
-    {MOVE, {0,-63}},
-    {DRAW, {-63,63}},
+    {MOVE, {0,127}},
+    {DRAW, {127,127}},
+    {MOVE, {0,-127}},
+    {DRAW, {-127,127}},
 
-    {MOVE, {69,69}},
+    {MOVE, {96,127}},
+    {MOVE, {0,57}},
     VL_END
 };

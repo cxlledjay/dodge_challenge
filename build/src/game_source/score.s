@@ -55,17 +55,17 @@ _score_draw:
 	jsr	__Moveto_d
 	leax	,y
 	jsr	___Draw_VLp
-	ldb	#100
+	ldb	#66
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#-42
+	ldb	#-44
 	stb	,-s
 	ldb	#-127
 	jsr	__Moveto_d
-	ldb	#15
+	ldb	#6
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_speed_display
 	jsr	___Draw_VLp
-	ldb	#8
+	ldb	#6
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	_vl_digits+4
 	jsr	___Draw_VLp

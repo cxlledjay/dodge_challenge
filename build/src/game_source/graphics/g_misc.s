@@ -371,46 +371,49 @@ _vl_digits:
 	.globl	_vl_speed_display
 _vl_speed_display:
 	.byte	-1
-	.byte	-63
-	.byte	96
-	.byte	-1
-	.byte	-63
-	.byte	-96
-	.byte	0
-	.byte	126
+	.byte	-64
 	.byte	112
 	.byte	-1
-	.byte	-63
-	.byte	96
-	.byte	-1
-	.byte	-63
-	.byte	-96
+	.byte	-64
+	.byte	-112
 	.byte	0
-	.byte	126
+	.byte	0
+	.byte	127
+	.byte	-1
+	.byte	64
 	.byte	112
 	.byte	-1
-	.byte	-63
-	.byte	96
+	.byte	64
+	.byte	-112
+	.byte	0
+	.byte	0
+	.byte	127
 	.byte	-1
-	.byte	-63
-	.byte	-96
+	.byte	-64
+	.byte	112
+	.byte	-1
+	.byte	-64
+	.byte	-112
 	.byte	0
 	.byte	0
 	.byte	127
 	.byte	0
 	.byte	0
-	.byte	64
+	.byte	127
 	.byte	-1
-	.byte	63
-	.byte	63
+	.byte	127
+	.byte	127
 	.byte	0
 	.byte	0
-	.byte	-63
+	.byte	-127
 	.byte	-1
-	.byte	-63
-	.byte	63
+	.byte	-127
+	.byte	127
 	.byte	0
-	.byte	69
-	.byte	69
-_vl_term_10_235:
+	.byte	96
+	.byte	127
+	.byte	0
+	.byte	0
+	.byte	57
+_vl_term_10_236:
 	.byte	1

@@ -371,51 +371,54 @@
                             371 	.globl	_vl_speed_display
    01D9                     372 _vl_speed_display:
    01D9 FF                  373 	.byte	-1
-   01DA C1                  374 	.byte	-63
-   01DB 60                  375 	.byte	96
+   01DA C0                  374 	.byte	-64
+   01DB 70                  375 	.byte	112
    01DC FF                  376 	.byte	-1
-   01DD C1                  377 	.byte	-63
-   01DE A0                  378 	.byte	-96
+   01DD C0                  377 	.byte	-64
+   01DE 90                  378 	.byte	-112
    01DF 00                  379 	.byte	0
-   01E0 7E                  380 	.byte	126
-   01E1 70                  381 	.byte	112
+   01E0 00                  380 	.byte	0
+   01E1 7F                  381 	.byte	127
    01E2 FF                  382 	.byte	-1
-   01E3 C1                  383 	.byte	-63
-   01E4 60                  384 	.byte	96
+   01E3 40                  383 	.byte	64
+   01E4 70                  384 	.byte	112
    01E5 FF                  385 	.byte	-1
-   01E6 C1                  386 	.byte	-63
-   01E7 A0                  387 	.byte	-96
+   01E6 40                  386 	.byte	64
+   01E7 90                  387 	.byte	-112
    01E8 00                  388 	.byte	0
-   01E9 7E                  389 	.byte	126
-   01EA 70                  390 	.byte	112
+   01E9 00                  389 	.byte	0
+   01EA 7F                  390 	.byte	127
    01EB FF                  391 	.byte	-1
-   01EC C1                  392 	.byte	-63
-   01ED 60                  393 	.byte	96
+   01EC C0                  392 	.byte	-64
+   01ED 70                  393 	.byte	112
    01EE FF                  394 	.byte	-1
-   01EF C1                  395 	.byte	-63
-   01F0 A0                  396 	.byte	-96
+   01EF C0                  395 	.byte	-64
+   01F0 90                  396 	.byte	-112
    01F1 00                  397 	.byte	0
    01F2 00                  398 	.byte	0
    01F3 7F                  399 	.byte	127
    01F4 00                  400 	.byte	0
    01F5 00                  401 	.byte	0
-   01F6 40                  402 	.byte	64
+   01F6 7F                  402 	.byte	127
    01F7 FF                  403 	.byte	-1
-   01F8 3F                  404 	.byte	63
-   01F9 3F                  405 	.byte	63
+   01F8 7F                  404 	.byte	127
+   01F9 7F                  405 	.byte	127
    01FA 00                  406 	.byte	0
    01FB 00                  407 	.byte	0
-   01FC C1                  408 	.byte	-63
+   01FC 81                  408 	.byte	-127
    01FD FF                  409 	.byte	-1
-   01FE C1                  410 	.byte	-63
-   01FF 3F                  411 	.byte	63
+   01FE 81                  410 	.byte	-127
+   01FF 7F                  411 	.byte	127
    0200 00                  412 	.byte	0
-   0201 45                  413 	.byte	69
-   0202 45                  414 	.byte	69
-   0203                     415 _vl_term_10_235:
-   0203 01                  416 	.byte	1
+   0201 60                  413 	.byte	96
+   0202 7F                  414 	.byte	127
+   0203 00                  415 	.byte	0
+   0204 00                  416 	.byte	0
+   0205 39                  417 	.byte	57
+   0206                     418 _vl_term_10_236:
+   0206 01                  419 	.byte	1
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
 
 Symbol Table
 
@@ -427,7 +430,7 @@ Symbol Table
   2 __vl_digit_six     00BA GR  |   2 __vl_digit_thr     005A GR
   2 __vl_digit_two     0038 GR  |   2 __vl_digit_zer     0000 GR
   2 _vl_digits         0142 GR  |   2 _vl_speed_disp     0156 GR
-  2 _vl_term_0_30      0027 R   |   2 _vl_term_10_23     0180 R
+  2 _vl_term_0_30      0027 R   |   2 _vl_term_10_23     0183 R
   2 _vl_term_1_43      0037 R   |   2 _vl_term_2_62      0059 R
   2 _vl_term_3_81      007B R   |   2 _vl_term_4_98      0097 R
   2 _vl_term_5_117     00B9 R   |   2 _vl_term_6_136     00DB R
@@ -435,13 +438,13 @@ Symbol Table
   2 _vl_term_9_193     0141 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:43 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size  181   flags  100
+   2 .text            size  184   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

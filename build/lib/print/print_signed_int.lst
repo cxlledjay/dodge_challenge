@@ -62,7 +62,7 @@
    005E 60 69         [ 7]   62 	neg	9,s
    0060 20 B2         [ 3]   63 	bra	L3
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:42 2025
 
 Symbol Table
 
@@ -75,7 +75,7 @@ Symbol Table
     _dp_VIA_t1_cnt     **** GX  |   2 _print_signed_     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 18:50:34 2025
+Hexadecimal [16-Bits]                                 Mon May  5 19:02:42 2025
 
 Area Table
 
