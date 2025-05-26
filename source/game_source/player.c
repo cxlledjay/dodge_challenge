@@ -104,6 +104,7 @@ void local_player_draw_right(void)
 }
 
 
+
 typedef void (*local_player_draw_func)(void);
 const local_player_draw_func local_lu_player_draw_func_ptr[3] = 
 {

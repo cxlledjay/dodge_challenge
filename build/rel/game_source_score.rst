@@ -183,7 +183,7 @@
    0821 C6 6E         [ 2]  183 	ldb	#110
    0823 E7 E2         [ 6]  184 	stb	,-s
    0825 CB 2E         [ 2]  185 	addb	#46
-   0827 BD 08 F6      [ 8]  186 	jsr	__Moveto_d
+   0827 BD 09 36      [ 8]  186 	jsr	__Moveto_d
    082A C6 09         [ 2]  187 	ldb	#9
    082C D7 04         [ 4]  188 	stb	*_dp_VIA_t1_cnt_lo
    082E F6 C8 89      [ 5]  189 	ldb	_score+3
@@ -195,7 +195,7 @@
    083A BD F4 10      [ 8]  195 	jsr	___Draw_VLp
    083D 6F E2         [ 8]  196 	clr	,-s
    083F C6 7F         [ 2]  197 	ldb	#127
-   0841 BD 08 F6      [ 8]  198 	jsr	__Moveto_d
+   0841 BD 09 36      [ 8]  198 	jsr	__Moveto_d
    0844 F6 C8 88      [ 5]  199 	ldb	_score+2
    0847 1D            [ 2]  200 	sex		;extendqihi2: R:b -> R:d
    0848 58            [ 2]  201 	aslb
@@ -205,7 +205,7 @@
    0850 BD F4 10      [ 8]  205 	jsr	___Draw_VLp
    0853 6F E2         [ 8]  206 	clr	,-s
    0855 C6 7F         [ 2]  207 	ldb	#127
-   0857 BD 08 F6      [ 8]  208 	jsr	__Moveto_d
+   0857 BD 09 36      [ 8]  208 	jsr	__Moveto_d
    085A F6 C8 87      [ 5]  209 	ldb	_score+1
    085D 1D            [ 2]  210 	sex		;extendqihi2: R:b -> R:d
    085E 58            [ 2]  211 	aslb
@@ -215,36 +215,64 @@
    0866 BD F4 10      [ 8]  215 	jsr	___Draw_VLp
    0869 6F E2         [ 8]  216 	clr	,-s
    086B C6 7F         [ 2]  217 	ldb	#127
-   086D BD 08 F6      [ 8]  218 	jsr	__Moveto_d
+   086D BD 09 36      [ 8]  218 	jsr	__Moveto_d
    0870 F6 C8 86      [ 5]  219 	ldb	_score
    0873 1D            [ 2]  220 	sex		;extendqihi2: R:b -> R:d
-   0874 ED 64         [ 6]  221 	std	4,s
-   0876 58            [ 2]  222 	aslb
-   0877 49            [ 2]  223 	rola
-   0878 1F 01         [ 6]  224 	tfr	d,x
-   087A AE 89 01 DE   [ 9]  225 	ldx	_vl_digits,x
-   087E BD F4 10      [ 8]  226 	jsr	___Draw_VLp
-   0881 6F E2         [ 8]  227 	clr	,-s
-   0883 C6 7F         [ 2]  228 	ldb	#127
-   0885 BD 08 F6      [ 8]  229 	jsr	__Moveto_d
-   0888 BE 01 DE      [ 6]  230 	ldx	_vl_digits
-   088B BD F4 10      [ 8]  231 	jsr	___Draw_VLp
-   088E C6 42         [ 2]  232 	ldb	#66
-   0890 D7 04         [ 4]  233 	stb	*_dp_VIA_t1_cnt_lo
-   0892 C6 D4         [ 2]  234 	ldb	#-44
-   0894 E7 E2         [ 6]  235 	stb	,-s
-   0896 C6 81         [ 2]  236 	ldb	#-127
-   0898 BD 08 F6      [ 8]  237 	jsr	__Moveto_d
-   089B C6 06         [ 2]  238 	ldb	#6
-   089D D7 04         [ 4]  239 	stb	*_dp_VIA_t1_cnt_lo
-   089F 8E 01 F2      [ 3]  240 	ldx	#_vl_speed_display
-   08A2 BD F4 10      [ 8]  241 	jsr	___Draw_VLp
-   08A5 C6 06         [ 2]  242 	ldb	#6
-   08A7 D7 04         [ 4]  243 	stb	*_dp_VIA_t1_cnt_lo
-   08A9 32 68         [ 5]  244 	leas	8,s
-   08AB 39            [ 5]  245 	rts
+   0874 58            [ 2]  221 	aslb
+   0875 49            [ 2]  222 	rola
+   0876 1F 01         [ 6]  223 	tfr	d,x
+   0878 AE 89 01 DE   [ 9]  224 	ldx	_vl_digits,x
+   087C BD F4 10      [ 8]  225 	jsr	___Draw_VLp
+   087F 6F E2         [ 8]  226 	clr	,-s
+   0881 C6 7F         [ 2]  227 	ldb	#127
+   0883 BD 09 36      [ 8]  228 	jsr	__Moveto_d
+   0886 BE 01 DE      [ 6]  229 	ldx	_vl_digits
+   0889 BD F4 10      [ 8]  230 	jsr	___Draw_VLp
+   088C C6 42         [ 2]  231 	ldb	#66
+   088E D7 04         [ 4]  232 	stb	*_dp_VIA_t1_cnt_lo
+   0890 C6 D4         [ 2]  233 	ldb	#-44
+   0892 E7 E2         [ 6]  234 	stb	,-s
+   0894 C6 81         [ 2]  235 	ldb	#-127
+   0896 BD 09 36      [ 8]  236 	jsr	__Moveto_d
+   0899 C6 06         [ 2]  237 	ldb	#6
+   089B D7 04         [ 4]  238 	stb	*_dp_VIA_t1_cnt_lo
+   089D 8E 01 F2      [ 3]  239 	ldx	#_vl_speed_display
+   08A0 BD F4 10      [ 8]  240 	jsr	___Draw_VLp
+   08A3 C6 06         [ 2]  241 	ldb	#6
+   08A5 D7 04         [ 4]  242 	stb	*_dp_VIA_t1_cnt_lo
+   08A7 F6 C8 83      [ 5]  243 	ldb	_lvl_speed
+   08AA 4F            [ 2]  244 	clra		;zero_extendqihi: R:b -> R:d
+   08AB 1F 01         [ 6]  245 	tfr	d,x
+   08AD E6 89 08 07   [ 8]  246 	ldb	_local_lu_speed_digit_1,x
+   08B1 1D            [ 2]  247 	sex		;extendqihi2: R:b -> R:d
+   08B2 58            [ 2]  248 	aslb
+   08B3 49            [ 2]  249 	rola
+   08B4 1F 01         [ 6]  250 	tfr	d,x
+   08B6 AE 89 01 DE   [ 9]  251 	ldx	_vl_digits,x
+   08BA BD F4 10      [ 8]  252 	jsr	___Draw_VLp
+   08BD C6 8A         [ 2]  253 	ldb	#-118
+   08BF E7 E2         [ 6]  254 	stb	,-s
+   08C1 C6 2A         [ 2]  255 	ldb	#42
+   08C3 BD 09 36      [ 8]  256 	jsr	__Moveto_d
+   08C6 BD F2 C5      [ 8]  257 	jsr	___Dot_here
+   08C9 C6 76         [ 2]  258 	ldb	#118
+   08CB E7 E2         [ 6]  259 	stb	,-s
+   08CD C6 67         [ 2]  260 	ldb	#103
+   08CF BD 09 36      [ 8]  261 	jsr	__Moveto_d
+   08D2 F6 C8 83      [ 5]  262 	ldb	_lvl_speed
+   08D5 4F            [ 2]  263 	clra		;zero_extendqihi: R:b -> R:d
+   08D6 1F 01         [ 6]  264 	tfr	d,x
+   08D8 E6 89 08 0E   [ 8]  265 	ldb	_local_lu_speed_digit_2,x
+   08DC 1D            [ 2]  266 	sex		;extendqihi2: R:b -> R:d
+   08DD ED 68         [ 6]  267 	std	8,s
+   08DF 58            [ 2]  268 	aslb
+   08E0 49            [ 2]  269 	rola
+   08E1 1F 01         [ 6]  270 	tfr	d,x
+   08E3 AE 89 01 DE   [ 9]  271 	ldx	_vl_digits,x
+   08E7 32 6A         [ 5]  272 	leas	10,s
+   08E9 7E F4 10      [ 4]  273 	jmp	___Draw_VLp
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Symbol Table
 
@@ -252,24 +280,24 @@ Symbol Table
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
   3 L10                00EE R   |   3 L11                00E8 R
   3 L12                00F4 R   |   3 L8                 00EB R
-    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
-    ___Intensity_5     **** GX  |     ___Reset0Ref       **** GX
-    _dp_VIA_t1_cnt     **** GX  |   3 _local_lu_scor     0010 GR
-  3 _local_lu_spee     00FA GR  |   3 _local_lu_spee     0101 GR
-    _lvl_speed         **** GX  |   2 _score             0000 GR
-  3 _score_draw        0108 GR  |   3 _score_init        0000 GR
-  3 _score_update      0017 GR  |     _vl_digits         **** GX
-    _vl_speed_disp     **** GX
+    __Moveto_d         **** GX  |     ___Dot_here        **** GX
+    ___Draw_VLp        **** GX  |     ___Intensity_5     **** GX
+    ___Reset0Ref       **** GX  |     _dp_VIA_t1_cnt     **** GX
+  3 _local_lu_scor     0010 GR  |   3 _local_lu_spee     00FA GR
+  3 _local_lu_spee     0101 GR  |     _lvl_speed         **** GX
+  2 _score             0000 GR  |   3 _score_draw        0108 GR
+  3 _score_init        0000 GR  |   3 _score_update      0017 GR
+    _vl_digits         **** GX  |     _vl_speed_disp     **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    5   flags    0
-   3 .text            size  19F   flags  100
+   3 .text            size  1DF   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

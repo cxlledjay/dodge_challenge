@@ -766,7 +766,7 @@
    06F1 C6 90         [ 2]  766 	ldb	#-112
    06F3 E7 E2         [ 6]  767 	stb	,-s
    06F5 E6 89 06 B8   [ 8]  768 	ldb	_local_lu_player_x_pos,x
-   06F9 BD 08 F6      [ 8]  769 	jsr	__Moveto_d
+   06F9 BD 09 36      [ 8]  769 	jsr	__Moveto_d
    06FC F6 C8 85      [ 5]  770 	ldb	_player_lane
    06FF 4F            [ 2]  771 	clra		;zero_extendqihi: R:b -> R:d
    0700 ED 61         [ 6]  772 	std	1,s
@@ -777,7 +777,7 @@
    070A 32 63         [ 5]  777 	leas	3,s
    070C 39            [ 5]  778 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Symbol Table
 
@@ -801,7 +801,7 @@ Symbol Table
   2 _vl_term_1_189     0181 R   |   2 _vl_term_2_302     027B R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:09 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Area Table
 

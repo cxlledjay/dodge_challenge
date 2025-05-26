@@ -42,7 +42,7 @@
    0098 F7 C8 80      [ 5]   42 	stb	_clk_frames
    009B 39            [ 5]   43 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:08 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Symbol Table
 
@@ -54,7 +54,7 @@ Symbol Table
   3 _clk_update        000A GR  |     _score_update      **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May  5 19:48:08 2025
+Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
 
 Area Table
 

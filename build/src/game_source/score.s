@@ -218,7 +218,6 @@ _score_draw:
 	jsr	__Moveto_d
 	ldb	_score
 	sex		;extendqihi2: R:b -> R:d
-	std	4,s
 	aslb
 	rola
 	tfr	d,x
@@ -241,5 +240,34 @@ _score_draw:
 	jsr	___Draw_VLp
 	ldb	#6
 	stb	*_dp_VIA_t1_cnt_lo
-	leas	8,s
-	rts
+	ldb	_lvl_speed
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_local_lu_speed_digit_1,x
+	sex		;extendqihi2: R:b -> R:d
+	aslb
+	rola
+	tfr	d,x
+	ldx	_vl_digits,x
+	jsr	___Draw_VLp
+	ldb	#-118
+	stb	,-s
+	ldb	#42
+	jsr	__Moveto_d
+	jsr	___Dot_here
+	ldb	#118
+	stb	,-s
+	ldb	#103
+	jsr	__Moveto_d
+	ldb	_lvl_speed
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_local_lu_speed_digit_2,x
+	sex		;extendqihi2: R:b -> R:d
+	std	8,s
+	aslb
+	rola
+	tfr	d,x
+	ldx	_vl_digits,x
+	leas	10,s
+	jmp	___Draw_VLp
