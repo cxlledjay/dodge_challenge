@@ -34,15 +34,15 @@
    0088 26 03         [ 3]   34 	bne	__IL35
    008A 7C C8 81      [ 7]   35 	inc	_clk_seconds
    008D                      36 	__IL35:
-   008D 7E 07 24      [ 4]   37 	jmp	_score_update
+   008D 7E 07 6E      [ 4]   37 	jmp	_score_update
    0090                      38 L8:
-   0090 BD 07 24      [ 8]   39 	jsr	_score_update
+   0090 BD 07 6E      [ 8]   39 	jsr	_score_update
    0093 F6 C8 80      [ 5]   40 	ldb	_clk_frames
    0096 CB 05         [ 2]   41 	addb	#5
    0098 F7 C8 80      [ 5]   42 	stb	_clk_frames
    009B 39            [ 5]   43 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
+Hexadecimal [16-Bits]                                 Wed Jun 11 20:47:45 2025
 
 Symbol Table
 
@@ -54,7 +54,7 @@ Symbol Table
   3 _clk_update        000A GR  |     _score_update      **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Mon May 26 12:40:53 2025
+Hexadecimal [16-Bits]                                 Wed Jun 11 20:47:45 2025
 
 Area Table
 

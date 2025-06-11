@@ -1,0 +1,53 @@
+XH2
+H 4 areas 7 global symbols 2 banks 1 modes
+M enemy.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S .__.ABS. Def0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .bss size 1B flags C00
+S _enemy_list Def0000
+S _queue_ptr Def0019
+A .text size 4A flags D00
+S _enemy_try_spawn Def001F
+S _enemy_init Def0000
+S _tick_dummy Def0049
+S _idle Def0048
+T 00 00
+R 00 00 00 02
+T 00 19
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00 34 40 8E 00 02
+R 00 00 00 03 01 05 00 02
+T 00 05
+R 00 00 00 03
+T 00 05 6F 84 6F 1F 6F 1E CE 00 48 EF 01 30 05
+R 00 00 00 03 01 09 00 03
+T 00 12 8C 00 1B 26 EE 8E 00 00 BF
+R 00 00 00 03 01 03 00 02 01 08 00 02
+T 00 1B 00 19 35 C0
+R 00 00 00 03 01 02 00 02
+T 00 1F
+R 00 00 00 03
+T 00 1F 34 40 34 04 BE 00 19 C6 FF EE 03 11 83
+R 00 00 00 03 01 07 00 02
+T 00 2C 00 48 27 04 32 61 35 C0
+R 00 00 00 03 01 02 00 03
+T 00 34
+R 00 00 00 03
+T 00 34 CE 00 49 EF 03 6F 02 C6 1E E7 01 E6 E4
+R 00 00 00 03 01 03 00 03
+T 00 41 E7 84 5F 32 61 35 C0
+R 00 00 00 03
+T 00 48
+R 00 00 00 03
+T 00 48 39
+R 00 00 00 03
+T 00 49
+R 00 00 00 03
+T 00 49 39
+R 00 00 00 03

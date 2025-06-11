@@ -1,3 +1,5 @@
+#dirty hack, but i am young and need the fps 
+
 
 new_lines = []
 
