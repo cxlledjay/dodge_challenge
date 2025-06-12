@@ -1,0 +1,90 @@
+XH2
+H 4 areas 14 global symbols 2 banks 1 modes
+M game.c
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S _Vec_Buttons Ref0000
+S _the_player Ref0000
+S ___Read_Btns Ref0000
+S _enemy_init Ref0000
+S .__.ABS. Def0000
+S _ability_init Ref0000
+S _clk_init Ref0000
+S _map_init Ref0000
+S ___Wait_Recal Ref0000
+S _player_change_left Ref0000
+S _clk_update Ref0000
+S _the_map Ref0000
+S _player_init Ref0000
+A _CODE size 0 flags CC80 bank 0
+A _DATA size 0 flags CCC0 bank 1
+A .bss size 5 flags C00
+S _the_game Def0000
+A .text size 73 flags D00
+S _play_start_animation Def0026
+S _game_init Def0000
+S _pause_menu Def0071
+S _game_over Def0072
+S _start_menu Def001F
+S _game_run Def002D
+T 00 00
+R 00 00 00 02
+T 00 00
+R 00 00 00 03
+T 00 00 CC 00 00 FD 00 00 7F 00 02 BD
+R 00 00 00 03 01 06 00 02 01 09 00 02
+T 00 0A 00 00 BD 00 00 BD
+R 00 00 00 03 81 02 00 06 81 05 00 07
+T 00 10 00 00 BD 00 00 BD
+R 00 00 00 03 81 02 00 0C 81 05 00 05
+T 00 16 00 00 8E 00 1F BF
+R 00 00 00 03 81 02 00 03 01 05 00 03
+T 00 1C 00 03 39
+R 00 00 00 03 01 02 00 02
+T 00 1F
+R 00 00 00 03
+T 00 1F 8E 00 26 BF 00 03 39
+R 00 00 00 03 01 03 00 03 01 06 00 02
+T 00 26
+R 00 00 00 03
+T 00 26 8E 00 2D BF 00 03 39
+R 00 00 00 03 01 03 00 03 01 06 00 02
+T 00 2D
+R 00 00 00 03
+T 00 2D 32 7E BD 00 00 BD 00 00 F6
+R 00 00 00 03 81 05 00 08 81 08 00 02
+T 00 36 00 00 E7 E4 C5 01 26 22 E6 E4 C5 06 27
+R 00 00 00 03 81 02 00 00
+T 00 43 0E
+R 00 00 00 03
+T 00 44
+R 00 00 00 03
+T 00 44 BD 00 00 AD 9F 00 01 AD 9F
+R 00 00 00 03 81 03 00 0A 81 07 00 0B
+T 00 4D 00 02 32 62 39
+R 00 00 00 03 81 02 00 01
+T 00 52
+R 00 00 00 03
+T 00 52 C6 02 E4 E4 27 11
+R 00 00 00 03
+T 00 58
+R 00 00 00 03
+T 00 58 8E 00 00 BF 00 02 20 E4
+R 00 00 00 03 81 03 00 09 81 06 00 01
+T 00 60
+R 00 00 00 03
+T 00 60 8E 00 71 BF 00 03 32 62 39
+R 00 00 00 03 01 03 00 03 01 06 00 02
+T 00 69
+R 00 00 00 03
+T 00 69 C6 04 E4 E4 27 D5 20 E7
+R 00 00 00 03
+T 00 71
+R 00 00 00 03
+T 00 71 39
+R 00 00 00 03
+T 00 72
+R 00 00 00 03
+T 00 72 39
+R 00 00 00 03

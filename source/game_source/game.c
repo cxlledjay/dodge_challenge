@@ -6,6 +6,7 @@
 game_t the_game;
 
 
+#include "game_include/ability.h"
 #include "game_include/clock.h"
 #include "game_include/enemy.h"
 #include "game_include/map.h"
@@ -15,6 +16,7 @@ game_t the_game;
 void start_menu(void);
 void play_start_animation(void);
 void pause_menu(void);
+void game_run(void);
 
 /*****************************************************************************
  * init part
@@ -28,9 +30,10 @@ void game_init(void)
 
     /// trigger all other init routines
     clk_init();
-    enemy_init();
     map_init();
     player_init();
+    ability_init();
+    enemy_init();
 
     /// go to select screen
     the_game.execute_state = start_menu;
@@ -50,7 +53,7 @@ void start_menu(void)
     //sync to 50 fps
     //get input
     //if settings confirmed -> start animation
-    the_game.execute_state == play_start_animation;
+    the_game.execute_state = play_start_animation;
     //draw selection screen
 
     /// done
@@ -76,49 +79,66 @@ void play_start_animation(void)
  * game loop
  ****************************************************************************/
 
+#include "utils/controller.h"
+
+
 void game_run(void)
 {
+
     /// sync to 50 fps
     Wait_Recal();
-
+    
+    /// ----------------------------------< calculations >----------------------------------
 
     /// get input
     check_buttons();
-	if(button_1_1_pressed())
-	{
-		change_lane(-1);
-	}
-	else if(button_1_3_pressed())
-	{
-		change_lane(1);
-	}
+    unsigned int input = buttons_pressed();
 
-	
-	//debug
-	if(button_1_2_pressed())
-	{
-		if(lvl_speed != 0) lvl_speed = lvl_speed - 1;
-	}
-	else if (button_1_4_pressed())
-	{
-		if(lvl_speed != LVL_MAX_SPEED) lvl_speed = lvl_speed + 1;
-	}
+    /// process input
+    /** pause */
+    if(input & 0b00000001)
+    {
+        the_game.execute_state = pause_menu;
+        return;
+    }
 
-    /// calculations
-    clk_update();
-    map_calculate_animation();
+    /** ability */
+    if(input & 0b00001000)
+    {
+        /// TODO: trigger ability code
+    }
+
+    /** movment input */
+    if(input & 0b00000110) //< go left + go right
+    {
+        ; //< stay in current lane
+    }
+    else if(input & 0b00000010) //< go left
+    {
+        the_player.tick = player_change_left;
+    }
+    else if(input & 0b00000100) //< go right
+    {
+        the_player.tick = player_change_left;
+    }
     
-    //build road
-    map_draw_road();
+    /// call clock update handler
+    clk_update(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
     
-    //io management
-    player_handle_input();
+    /// ----------------------------------< draw screen >----------------------------------
+    
+    /// draw the road
+    the_map.tick();
 
-    //debug
-    //print_unsigned_int(120,60,lvl_speed);
+    /// TODO: draw enemies
 
-    //draw player
-    player_draw();
+    /// TODO: draw powerups
+
+    /// draw the player
+    the_player.tick();
+
+    /// done
+    return;
 }
 
 
@@ -132,6 +152,12 @@ void game_run(void)
 
 
 void pause_menu(void)
+{
+    /// TODO: implement!
+    return;
+}
+
+void game_over(void)
 {
     /// TODO: implement!
     return;

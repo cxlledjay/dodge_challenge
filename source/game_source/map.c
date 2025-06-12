@@ -1,11 +1,19 @@
 #include "game_include/map.h"
 
-// thats the map:
+
+// one road is enough...
 map_t the_map;
 
 
 
-//old
+void map_init(void)
+{
+	map_t new_map = {.cnt = 0, .tick = 0};
+	the_map = new_map;
+}
+
+
+#if 0
 #include <vectrex.h>
 
 #include "game_include/graphics/g_map.h"
@@ -89,3 +97,5 @@ void map_draw_road(void){
 	dp_VIA_t1_cnt_lo = 168;
 	Draw_Line_d(-128,82);
 }
+
+#endif

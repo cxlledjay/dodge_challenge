@@ -19,25 +19,14 @@ _clk_init:
 _clk_update:
 	ldb	_clk_frames
 	cmpb	#-16	;cmpqi:
-	bhi	L10
-	cmpb	#80	;cmpqi:
-	beq	L8
-	cmpb	#-91	;cmpqi:
-	beq	L8
-	ldb	_clk_frames
+	bhi	L8
 	addb	#5
 	stb	_clk_frames
 	rts
-L10:
+L8:
 	clr	_clk_frames
 	inc	_clk_seconds+1
-	bne	__IL35
+	bne	__IL28
 	inc	_clk_seconds
-	__IL35:
-	jmp	_score_update
-L8:
-	jsr	_score_update
-	ldb	_clk_frames
-	addb	#5
-	stb	_clk_frames
+	__IL28:
 	rts

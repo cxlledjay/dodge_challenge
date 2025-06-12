@@ -4,47 +4,34 @@
                               4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	main.c
                               6 	.area	.text
-                              7 	.globl	_run_game
-   0936                       8 _run_game:
-   0936 BD 00 60      [ 8]    9 	jsr	_clk_init
-   0939 BD 02 6A      [ 8]   10 	jsr	_lvl_init
-   093C BD 02 E3      [ 8]   11 	jsr	_map_init
-   093F BD 06 8B      [ 8]   12 	jsr	_player_init
-   0942                      13 L2:
-   0942 BD F1 92      [ 8]   14 	jsr	___Wait_Recal
-   0945 BD 00 6A      [ 8]   15 	jsr	_clk_update
-   0948 BD 02 E7      [ 8]   16 	jsr	_map_calculate_animation
-   094B BD 03 2B      [ 8]   17 	jsr	_map_draw_road
-   094E BD 06 B0      [ 8]   18 	jsr	_player_handle_input
-   0951 BD 07 29      [ 8]   19 	jsr	_player_draw
-   0954 BD 08 5F      [ 8]   20 	jsr	_score_draw
-   0957 20 E9         [ 3]   21 	bra	L2
-                             22 	.globl	_main
-   0959                      23 _main:
-   0959 BD 09 36      [ 8]   24 	jsr	_run_game
+                              7 	.globl	_main
+   05E5                       8 _main:
+   05E5 7F C8 A4      [ 7]    9 	clr	_the_game+2
+   05E8 CC 00 00      [ 3]   10 	ldd	#0
+   05EB FD C8 A2      [ 6]   11 	std	_the_game
+   05EE 8E 00 DB      [ 3]   12 	ldx	#_game_init
+   05F1 BF C8 A5      [ 6]   13 	stx	_the_game+3
+   05F4                      14 L2:
+   05F4 AD 9F C8 A5   [12]   15 	jsr	[_the_game+3]
+   05F8 20 FA         [ 3]   16 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Wed Jun 11 20:47:45 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  2 L2                 000C R   |     ___Wait_Recal      **** GX
-    _clk_init          **** GX  |     _clk_update        **** GX
-    _lvl_init          **** GX  |   2 _main              0023 GR
-    _map_calculate     **** GX  |     _map_draw_road     **** GX
-    _map_init          **** GX  |     _player_draw       **** GX
-    _player_handle     **** GX  |     _player_init       **** GX
-  2 _run_game          0000 GR  |     _score_draw        **** GX
+  2 L2                 000F R   |     _game_init         **** GX
+  2 _main              0000 GR  |     _the_game          **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Wed Jun 11 20:47:45 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .text            size   26   flags  100
+   2 .text            size   15   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

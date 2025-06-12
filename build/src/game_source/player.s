@@ -3,8 +3,78 @@
 ;;; ABI version 1
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	player.c
-	.globl	_vl_player_mid
+	.area	.bss
+	.globl	_the_player
+_the_player:	.blkb	4
+	.globl	_PLAYER_X_LUT
 	.area	.text
+_PLAYER_X_LUT:
+	.byte	-82
+	.byte	0
+	.byte	82
+	.globl	_PLAYER_DRAW_LUT
+_PLAYER_DRAW_LUT:
+	.word	__player_draw_left
+	.word	__player_draw_mid
+	.word	__player_draw_right
+	.globl	_player_init
+_player_init:
+	ldx	#_player_draw
+	stx	_the_player+2
+	clr	_the_player+1
+	ldb	#1
+	stb	_the_player
+	rts
+	.globl	_player_draw
+_player_draw:
+	leas	-2,s
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	aslb
+	rola
+	tfr	d,x
+	jsr	[_PLAYER_DRAW_LUT,x]
+	leas	3,s
+	rts
+	.globl	_player_change_left
+_player_change_left:
+	ldb	_the_player
+	bne	L9
+	rts
+L9:
+	decb
+	stb	_the_player
+	ldx	#_player_draw
+	stx	_the_player+2
+	jmp	_player_draw
+	.globl	_player_change_right
+_player_change_right:
+	ldb	_the_player
+	cmpb	#2	;cmpqi:
+	beq	L12
+	incb
+	stb	_the_player
+	ldx	#_player_draw
+	stx	_the_player+2
+	jmp	_player_draw
+L12:
+	rts
+	.globl	_check_collision
+_check_collision:
+	rts
+	.globl	_vl_player_mid
 _vl_player_mid:
 	.byte	0
 	.byte	-96
@@ -649,130 +719,21 @@ _vl_player_right:
 	.byte	24
 _vl_term_2_302:
 	.byte	1
-	.area	.bss
-	.globl	_player_lane
-_player_lane:	.blkb	1
-	.area	.text
-	.globl	_player_init
-_player_init:
-	ldb	#1
-	stb	_player_lane
-	rts
-	.globl	_change_lane
-_change_lane:
-	cmpb	#1	;cmpqi:
-	beq	L8
-	cmpb	#-1	;cmpqi:
-	beq	L9
-L6:
-	rts
-L9:
-	ldb	_player_lane
-	beq	L6
-	decb
-	stb	_player_lane
-	rts
-L8:
-	ldb	_player_lane
-	cmpb	#2	;cmpqi:
-	beq	L6
-	incb
-	stb	_player_lane
-	rts
-	.globl	_player_handle_input
-_player_handle_input:
-	leas	-1,s
-	jsr	___Read_Btns
-	ldb	_Vec_Buttons
-	stb	,s
-	bitb	#1
-	beq	L11
-	ldb	_player_lane
-	bne	L16
-L12:
-	ldb	#2
-	andb	,s
-	beq	L13
-	ldb	_lvl_speed
-	beq	L15
-	decb
-	stb	_lvl_speed
-L15:
-	leas	1,s
-	rts
-L13:
-	ldb	#8
-	andb	,s
-	beq	L15
-	ldb	_lvl_speed
-	cmpb	#6	;cmpqi:
-	beq	L15
-	incb
-	stb	_lvl_speed
-	leas	1,s
-	rts
-L11:
-	ldb	#4
-	andb	,s
-	beq	L12
-	ldb	_player_lane
-	cmpb	#2	;cmpqi:
-	beq	L12
-	incb
-	stb	_player_lane
-	bra	L12
-L16:
-	decb
-	stb	_player_lane
-	bra	L12
-	.globl	_local_lu_player_x_pos
-_local_lu_player_x_pos:
-	.byte	-82
-	.byte	0
-	.byte	82
-	.globl	_local_player_draw_left
-_local_player_draw_left:
+	.globl	__player_draw_left
+__player_draw_left:
 	ldb	#10
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_left
 	jmp	___Draw_VLp
-	.globl	_local_player_draw_mid
-_local_player_draw_mid:
+	.globl	__player_draw_mid
+__player_draw_mid:
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_mid
 	jmp	___Draw_VLp
-	.globl	_local_player_draw_right
-_local_player_draw_right:
+	.globl	__player_draw_right
+__player_draw_right:
 	ldb	#10
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_right
 	jmp	___Draw_VLp
-	.globl	_local_lu_player_draw_func_ptr
-_local_lu_player_draw_func_ptr:
-	.word	_local_player_draw_left
-	.word	_local_player_draw_mid
-	.word	_local_player_draw_right
-	.globl	_player_draw
-_player_draw:
-	leas	-2,s
-	jsr	___Intensity_5F
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_player_lane
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_local_lu_player_x_pos,x
-	jsr	__Moveto_d
-	ldb	_player_lane
-	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	aslb
-	rola
-	tfr	d,x
-	jsr	[_local_lu_player_draw_func_ptr,x]
-	leas	3,s
-	rts

@@ -1,174 +1,164 @@
 #include "game_include/player.h"
 
-/**
- * includes
- */
-#include <vectrex.h>
 
-
-
-
-/**
- * @brief singleton instance of the player
- */
+// singleplayer
 player_t the_player;
 
+
+// fw declarations:
+void check_collision(void);
+const int PLAYER_X_LUT[];
+typedef void (*_player_draw_func)(void);
+const _player_draw_func PLAYER_DRAW_LUT[];
+
+
+
+
 /**
- * @brief init method, [TODO: add animation at game start]
+ * @brief init method
  */
-void dummy(player_t * me);
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .cnt = 0, .tick = dummy};
+	player_t fresh_player = {.lane = MID_LANE, .cnt = 0, .tick = player_draw};
 	the_player = fresh_player;
-}
-
-
-/****************************************************
- * subroutines
- ***************************************************/
-
-void check_collision(void)
-{
-	//check if bounding box is colliding with objects (enemy / powerup)
 }
 
 
  
 /****************************************************
- * tick functions
+ * tick functions 
  ***************************************************/
 
- void dummy(__attribute__((unused)) player_t * me)
+
+#include <vectrex.h>
+
+ void player_draw(void)
  {
+	/// drawing settings
+	Intensity_5F();					//< set brightness of the electron beam
+	Reset0Ref();					//< reset beam to center
+	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
+
+	/// move to correct lane
+	#define PLAYER_Y		(-112)
+	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
+
+	/// draw player vector list (based on lane)
+	(* PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
+	
+	/// dont forget to check for collisions
+	check_collision();
+	
+	/// done
 	return;
  }
 
 
 
 
-
-
-
-
-
-
-//old:
-#include "utils/controller.h"
-#include "utils/vector.h"
-
-#include "game_include/map.h"
-#include "game_include/level.h"
-#include "game_include/graphics/g_player.h"
-
-
-//**************************************************
-// handle input
-//**************************************************
-
-
-// input direction := -1 or 1
-// -1 : to the left
-// 1 to the right
-void change_lane(int direction)
-{
-	if(direction == 1) //to the right
+ void player_change_left(void)
+ {
+	if(the_player.lane == LEFT_LANE)
 	{
-		if(player_lane == RIGHT_LANE)
-		{
-			return; //can't go further
-		}
-		player_lane = player_lane + 1;
+		; //< cannot change lane...
 	}
-	else if(direction == -1)
+	else
 	{
-		if(player_lane == LEFT_LANE)
-		{
-			return; //can't go further
-		}
-		player_lane = player_lane - 1;
+		/// TODO: implement animation
+		the_player.lane--;
+		the_player.tick = player_draw;
+		the_player.tick(); //< temp!
 	}
-}
-
-
-void player_handle_input(void)
-{
-	check_buttons();
-	if(button_1_1_pressed())
-	{
-		change_lane(-1);
-	}
-	else if(button_1_3_pressed())
-	{
-		change_lane(1);
-	}
-
 	
-	//debug
-	if(button_1_2_pressed())
+	/// dont forget to check for collisions
+	check_collision();
+	
+	/// done
+	return;
+ }
+
+
+
+
+ void player_change_right(void)
+ {
+	if(the_player.lane == RIGHT_LANE)
 	{
-		if(lvl_speed != 0) lvl_speed = lvl_speed - 1;
+		; //< cannot change lane...
 	}
-	else if (button_1_4_pressed())
+	else
 	{
-		if(lvl_speed != LVL_MAX_SPEED) lvl_speed = lvl_speed + 1;
+		/// TODO: implement animation
+		the_player.lane++;
+		the_player.tick = player_draw;
+		the_player.tick(); //< temp!
 	}
+	
+	/// dont forget to check for collisions
+	check_collision();
+
+	/// done
+	return;
+ }
+
+
+
+ 
+
+/****************************************************
+ * subroutines
+ ***************************************************/
+
+ /**
+  * @brief checking if player collides with an object
+  * 
+  * possible collisions:
+  *  1) ability -> pick it up (call dedicated handler...)
+  *  2) enemy   -> game over! (just change game state...)
+  */
+void check_collision(void)
+{
+	/// TODO: check if bounding box is colliding with objects (enemy / powerup)
 }
 
 
-//**************************************************
-// draw player
-//**************************************************
 
-const int local_lu_player_x_pos[3] =
+ 
+/****************************************************
+ * drawing utils 
+ ***************************************************/
+
+const int PLAYER_X_LUT[3] =
 {
 	-82,
 	0,
 	82
 };
 
+#include <vectrex.h>
+#include "game_include/graphics/g_player.h"
 
-void local_player_draw_left(void)
+void _player_draw_left(void)
 {
 	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_left);
 }
 
-void local_player_draw_mid(void)
+void _player_draw_mid(void)
 {
 	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_player_mid);
 }
 
-void local_player_draw_right(void)
+void _player_draw_right(void)
 {
 	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_right);
 }
 
-
-
-typedef void (*local_player_draw_func)(void);
-const local_player_draw_func local_lu_player_draw_func_ptr[3] = 
+const _player_draw_func PLAYER_DRAW_LUT[3] = 
 {
-	local_player_draw_left,
-	local_player_draw_mid,
-	local_player_draw_right
+	_player_draw_left,
+	_player_draw_mid,
+	_player_draw_right
 };
-
-
-
-void player_draw(void)
-{
-	//draw player		
-	Intensity_5F();					// set brightness of the electron beam
-	Reset0Ref();					// reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		// set scaling factor for positioning
-	Moveto_d(-112, local_lu_player_x_pos[player_lane]);				// move beam to object coordinates
-	(* local_lu_player_draw_func_ptr[player_lane])();		// draw vector list
-}
-
-
-//spawn animation?
-
-//hit object / "death" animation?
