@@ -1,28 +1,23 @@
 // ***************************************************************************
-// main
+// main -> entry point & endless loop
 // ***************************************************************************
 
-//std
-#include <vectrex.h>
-#include "print/print.h"		// printf() equivalent
-#include "utils/controller.h" 	// buttons input
-
-//dodge_challenge
-#include "game_include/clock.h"
-#include "game_include/level.h"
-#include "game_include/player.h"
-#include "game_include/map.h"
-#include "game_include/score.h"
+#include "game_include/game.h"
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
 #define DEBUG_MODE 0
 
+//debug
+#include <vectrex.h>
+#include "print/print.h"		// printf() equivalent
+#include "utils/controller.h" 	// buttons input
 
 
 
 
-// ---------------------------------------------------------------------------
+
+// -----------------------------< d e b u g >------------------------------------
 
 #if DEBUG_MODE
 // *************************************
@@ -145,43 +140,9 @@ __attribute__((noreturn)) void draw_speed(void)
 	}
 	while(1);
 }
-#else
-// *************************************
-// game loop, called by main
-// *************************************
-__attribute__((noreturn)) void run_game(void)
-{
-	//init section
-	clk_init();
-	lvl_init();
-	map_init();
-	player_init();
-
-	//game loop section
-	do
-	{
-		// synchronize frame rate to 50 Hz
-		Wait_Recal();
-		clk_update();
-		map_calculate_animation();
-		
-		//build road
-		map_draw_road();
-		
-		//io management
-		player_handle_input();
-
-		//debug
-		//print_unsigned_int(120,60,lvl_speed);
-
-		//draw player
-		player_draw();
-
-		score_draw();
-	}
-	while(1);
-}
 #endif
+
+// -----------------------------< / d e b u g >------------------------------------
 
 
 int main(void)
@@ -191,10 +152,19 @@ int main(void)
 	//draw_font();
 	draw_speed();
 	#else
-	run_game();
+	
+	/**
+	 * @brief endless game loop
+	 * the few only important lines in this file...
+	 */
+
+	/// bootstrap init
+	game_t new_game = {.execute_state = game_init};
+	the_game = new_game;
+
+	/// main loop
+	while(1) the_game.execute_state();
+	
+
 	#endif
 }
-
-// ***************************************************************************
-// end of file
-// ***************************************************************************

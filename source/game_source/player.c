@@ -1,6 +1,59 @@
 #include "game_include/player.h"
 
+/**
+ * includes
+ */
 #include <vectrex.h>
+
+
+
+
+/**
+ * @brief singleton instance of the player
+ */
+player_t the_player;
+
+/**
+ * @brief init method, [TODO: add animation at game start]
+ */
+void dummy(player_t * me);
+void player_init(void)
+{
+	player_t fresh_player = {.lane = MID_LANE, .cnt = 0, .tick = dummy};
+	the_player = fresh_player;
+}
+
+
+/****************************************************
+ * subroutines
+ ***************************************************/
+
+void check_collision(void)
+{
+	//check if bounding box is colliding with objects (enemy / powerup)
+}
+
+
+ 
+/****************************************************
+ * tick functions
+ ***************************************************/
+
+ void dummy(__attribute__((unused)) player_t * me)
+ {
+	return;
+ }
+
+
+
+
+
+
+
+
+
+
+//old:
 #include "utils/controller.h"
 #include "utils/vector.h"
 
@@ -8,16 +61,6 @@
 #include "game_include/level.h"
 #include "game_include/graphics/g_player.h"
 
-//**************************************************
-// tracking
-//**************************************************
-unsigned int player_lane;
-
-
-void player_init(void)
-{
-	player_lane = MID_LANE;
-}
 
 //**************************************************
 // handle input

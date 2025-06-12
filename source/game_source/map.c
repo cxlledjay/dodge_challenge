@@ -1,5 +1,11 @@
 #include "game_include/map.h"
 
+// thats the map:
+map_t the_map;
+
+
+
+//old
 #include <vectrex.h>
 
 #include "game_include/graphics/g_map.h"
