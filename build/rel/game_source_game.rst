@@ -14,7 +14,7 @@
    00E3 7F C8 A5      [ 7]   14 	clr	_the_game+2
    00E6 BD 00 6E      [ 8]   15 	jsr	_clock_init
    00E9 BD 02 D2      [ 8]   16 	jsr	_map_init
-   00EC BD 04 FC      [ 8]   17 	jsr	_player_init
+   00EC BD 05 C5      [ 8]   17 	jsr	_player_init
    00EF BD 00 61      [ 8]   18 	jsr	_ability_init
    00F2 BD 00 93      [ 8]   19 	jsr	_enemy_init
    00F5 8E 00 FC      [ 3]   20 	ldx	#_start_menu
@@ -49,7 +49,7 @@
    0129 C6 04         [ 2]   49 	ldb	#4
    012B E4 E4         [ 4]   50 	andb	,s
    012D 27 06         [ 3]   51 	beq	L9
-   012F 8E 05 4B      [ 3]   52 	ldx	#_player_change_right
+   012F 8E 06 14      [ 3]   52 	ldx	#_player_change_right
    0132 BF C8 AD      [ 6]   53 	stx	_the_player+2
    0135                      54 L9:
    0135 BD 00 7A      [ 8]   55 	jsr	_clock_tick
@@ -59,7 +59,7 @@
    0140 32 61         [ 5]   59 	leas	1,s
    0142 39            [ 5]   60 	rts
    0143                      61 L13:
-   0143 8E 05 39      [ 3]   62 	ldx	#_player_change_left
+   0143 8E 06 02      [ 3]   62 	ldx	#_player_change_left
    0146 BF C8 AD      [ 6]   63 	stx	_the_player+2
    0149 20 EA         [ 3]   64 	bra	L9
                              65 	.globl	_pause_menu
@@ -69,7 +69,7 @@
    014C                      69 _game_over:
    014C 39            [ 5]   70 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:40 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
 
 Symbol Table
 
@@ -89,7 +89,7 @@ Symbol Table
     _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:40 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
 
 Area Table
 

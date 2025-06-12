@@ -43,7 +43,7 @@ void draw_step1(void)
 	if(the_map.cnt == 0){
 		if(step >2) step = 0;
 		else step++;
-		the_map.cnt = 25;
+		the_map.cnt = 10;
 	}
 
 	Reset0Ref();
@@ -65,6 +65,31 @@ void draw_step1(void)
 			break;
 		case 3:
 			Draw_VLp(&vl_map_roadline_left_4);
+			break;
+		default:
+			break;
+	}
+
+	
+
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, 5);
+	dp_VIA_t1_cnt_lo = 16;
+
+	switch (step)
+	{
+		case 0:
+			Draw_VLp(&vl_map_roadline_right_1);
+			break;
+		case 1:
+			Draw_VLp(&vl_map_roadline_right_2);
+			break;
+		case 2:
+			Draw_VLp(&vl_map_roadline_right_3);
+			break;
+		case 3:
+			Draw_VLp(&vl_map_roadline_right_4);
 			break;
 		default:
 			break;

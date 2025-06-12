@@ -29,7 +29,7 @@
    008F FD C8 86      [ 6]   29 	std	_the_clock+1
    0092 39            [ 5]   30 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:39 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
 
 Symbol Table
 
@@ -39,7 +39,7 @@ Symbol Table
   3 _clock_tick        000C GR  |   2 _the_clock         0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:39 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
 
 Area Table
 
