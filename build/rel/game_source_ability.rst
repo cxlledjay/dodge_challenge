@@ -5,7 +5,7 @@
                               5 	.module	ability.c
                               6 	.area	.bss
                               7 	.globl	_the_ability
-   C880                       8 _the_ability:	.blkb	4
+   C881                       8 _the_ability:	.blkb	4
                               9 	.area	.text
                              10 	.globl	_dummy_tick
    0060                      11 _dummy_tick:
@@ -13,12 +13,12 @@
                              13 	.globl	_ability_init
    0061                      14 _ability_init:
    0061 8E 00 60      [ 3]   15 	ldx	#_dummy_tick
-   0064 BF C8 82      [ 6]   16 	stx	_the_ability+2
-   0067 7F C8 81      [ 7]   17 	clr	_the_ability+1
-   006A 7F C8 80      [ 7]   18 	clr	_the_ability
+   0064 BF C8 83      [ 6]   16 	stx	_the_ability+2
+   0067 7F C8 82      [ 7]   17 	clr	_the_ability+1
+   006A 7F C8 81      [ 7]   18 	clr	_the_ability
    006D 39            [ 5]   19 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:39 2025
 
 Symbol Table
 
@@ -28,7 +28,7 @@ Symbol Table
   2 _the_ability       0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 22:57:39 2025
 
 Area Table
 

@@ -8,11 +8,12 @@ map_t the_map;
 void dummy_tick(void){return;}
 void draw_left(void);
 void draw_right(void);
+void draw_step1(void);
 
 // init func
 void map_init(void)
 {
-	map_t new_map = {.cnt = 0, .tick = dummy_tick};
+	map_t new_map = {.cnt = 0, .tick = draw_step1};
 	the_map = new_map;
 	return;
 }
@@ -24,11 +25,11 @@ void map_init(void)
  * tick functions 
  ***************************************************/
 
-#if 0
 #include <vectrex.h>
 #include "game_include/graphics/g_map.h"
 #include "game_include/game.h"
 
+unsigned int step = 0; //< temp
 
 void draw_step1(void)
 {
@@ -36,7 +37,43 @@ void draw_step1(void)
 	Intensity_5F();
 	
 	//left
+	draw_left();
 
+	//testing
+	if(the_map.cnt == 0){
+		if(step >2) step = 0;
+		else step++;
+		the_map.cnt = 25;
+	}
+
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(36, -5);
+	dp_VIA_t1_cnt_lo = 16;
+	
+
+	switch (step)
+	{
+		case 0:
+			Draw_VLp(&vl_map_roadline_left_1);
+			break;
+		case 1:
+			Draw_VLp(&vl_map_roadline_left_2);
+			break;
+		case 2:
+			Draw_VLp(&vl_map_roadline_left_3);
+			break;
+		case 3:
+			Draw_VLp(&vl_map_roadline_left_4);
+			break;
+		default:
+			break;
+	}
+
+	
+	the_map.cnt--;
+
+#if 0
 	//animation of inner lines
 	Reset0Ref();
 	dp_VIA_t1_cnt_lo = 0x7f;
@@ -68,9 +105,10 @@ void draw_step1(void)
 	}
 	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_misc_roadline_right);
-	
+#endif
+
 	//right border
-	
+	draw_right();
 }
 
 
@@ -106,7 +144,6 @@ void draw_step1(void)
 
  };
  
-#endif
 
 #if 0
 #include <vectrex.h>
