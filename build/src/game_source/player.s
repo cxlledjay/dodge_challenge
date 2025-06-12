@@ -51,11 +51,10 @@ _player_draw:
 	.globl	_player_change_left
 _player_change_left:
 	ldb	_the_player
-	bne	L9
-	rts
-L9:
+	beq	L6
 	decb
 	stb	_the_player
+L6:
 	ldx	#_player_draw
 	stx	_the_player+2
 	jmp	_player_draw
@@ -63,14 +62,13 @@ L9:
 _player_change_right:
 	ldb	_the_player
 	cmpb	#2	;cmpqi:
-	beq	L12
+	beq	L10
 	incb
 	stb	_the_player
+L10:
 	ldx	#_player_draw
 	stx	_the_player+2
 	jmp	_player_draw
-L12:
-	rts
 	.globl	_check_collision
 _check_collision:
 	rts

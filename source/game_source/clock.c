@@ -1,27 +1,27 @@
 #include "game_include/clock.h"
 
 
-unsigned int clk_frames; // increments in frequency of 50Hz, scaled up by 5
-unsigned long int clk_seconds; // increments in frequency of 1Hz
+// tick tack
+clock_t the_clock;
 
-void clk_init(void)
+
+void clock_init(void)
 {
-	clk_frames = 0;
-	clk_seconds = 0;
+	clock_t new_clock = {.frames = 49, .seconds = 0};
+	the_clock = new_clock;
+	return;
 }
 
-void clk_update(void)
-{
-	//score update 3 times per second
 
-	if(clk_frames > 240)
+void clock_tick(void)
+{
+	if(the_clock.frames == 0)
 	{
-		//executed each second
-		clk_frames = 0;
-		clk_seconds = clk_seconds + 1;
+		the_clock.frames = 49;
+		the_clock.seconds++;
 	}
 	else
 	{
-		clk_frames = clk_frames + 5;
+		the_clock.frames--;
 	}
 }

@@ -29,7 +29,7 @@ void game_init(void)
     the_game.speed = 0; ///< ??
 
     /// trigger all other init routines
-    clk_init();
+    clock_init();
     map_init();
     player_init();
     ability_init();
@@ -84,7 +84,6 @@ void play_start_animation(void)
 
 void game_run(void)
 {
-
     /// sync to 50 fps
     Wait_Recal();
     
@@ -98,7 +97,7 @@ void game_run(void)
     /** pause */
     if(input & 0b00000001)
     {
-        the_game.execute_state = pause_menu;
+        // the_game.execute_state = pause_menu; //< TODO: implement later on
         return;
     }
 
@@ -109,7 +108,7 @@ void game_run(void)
     }
 
     /** movment input */
-    if(input & 0b00000110) //< go left + go right
+    if((input & 0b00000110) == 0b00000110) //< go left + go right
     {
         ; //< stay in current lane
     }
@@ -119,11 +118,11 @@ void game_run(void)
     }
     else if(input & 0b00000100) //< go right
     {
-        the_player.tick = player_change_left;
+        the_player.tick = player_change_right;
     }
     
     /// call clock update handler
-    clk_update(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
+    clock_tick(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
     
     /// ----------------------------------< draw screen >----------------------------------
     

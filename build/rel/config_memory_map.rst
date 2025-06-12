@@ -17,7 +17,7 @@
                              17 	.area .bss             (BANK=ram)
                              18 	
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Symbol Table
 
@@ -25,7 +25,7 @@ Symbol Table
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Area Table
 

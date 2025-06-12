@@ -1,8 +1,23 @@
 #pragma once
 
 
-extern unsigned int clk_frames;
-extern unsigned long int clk_seconds;
+typedef struct _clock_t
+{
+    unsigned int frames;        //< in wich frame in a second am i?
+    unsigned long seconds;      //< seconds since game started
+}clock_t;
 
-void clk_init(void);
-void clk_update(void);
+/**
+ * @brief singleton clock instance
+ */
+extern clock_t the_clock;
+
+/**
+ * @brief init function
+ */
+void clock_init(void);
+
+/**
+ * ticks the clock (executed in every frame)
+ */
+void clock_tick(void);

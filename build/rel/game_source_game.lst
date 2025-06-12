@@ -12,7 +12,7 @@
    0000 CC 00 00      [ 3]   12 	ldd	#0
    0003 FD`00`00      [ 6]   13 	std	_the_game
    0006 7F`00`02      [ 7]   14 	clr	_the_game+2
-   0009 BD`00`00      [ 8]   15 	jsr	_clk_init
+   0009 BD`00`00      [ 8]   15 	jsr	_clock_init
    000C BD`00`00      [ 8]   16 	jsr	_map_init
    000F BD`00`00      [ 8]   17 	jsr	_player_init
    0012 BD`00`00      [ 8]   18 	jsr	_ability_init
@@ -32,75 +32,71 @@
    002C 39            [ 5]   32 	rts
                              33 	.globl	_game_run
    002D                      34 _game_run:
-   002D 32 7E         [ 5]   35 	leas	-2,s
+   002D 32 7F         [ 5]   35 	leas	-1,s
    002F BD`00`00      [ 8]   36 	jsr	___Wait_Recal
    0032 BD`00`00      [ 8]   37 	jsr	___Read_Btns
    0035 F6`00`00      [ 5]   38 	ldb	_Vec_Buttons
    0038 E7 E4         [ 4]   39 	stb	,s
    003A C5 01         [ 2]   40 	bitb	#1
-   003C 26 22         [ 3]   41 	bne	L15
-   003E E6 E4         [ 4]   42 	ldb	,s
-   0040 C5 06         [ 2]   43 	bitb	#6
-   0042 27 0E         [ 3]   44 	beq	L16
-   0044                      45 L10:
-   0044 BD`00`00      [ 8]   46 	jsr	_clk_update
-   0047 AD 9F`00`01   [12]   47 	jsr	[_the_map+1]
-   004B AD 9F`00`02   [12]   48 	jsr	[_the_player+2]
-   004F 32 62         [ 5]   49 	leas	2,s
-   0051 39            [ 5]   50 	rts
-   0052                      51 L16:
-   0052 C6 02         [ 2]   52 	ldb	#2
-   0054 E4 E4         [ 4]   53 	andb	,s
-   0056 27 11         [ 3]   54 	beq	L11
-   0058                      55 L13:
-   0058 8E`00`00      [ 3]   56 	ldx	#_player_change_left
-   005B BF`00`02      [ 6]   57 	stx	_the_player+2
-   005E 20 E4         [ 3]   58 	bra	L10
-   0060                      59 L15:
-   0060 8E`00`71      [ 3]   60 	ldx	#_pause_menu
-   0063 BF`00`03      [ 6]   61 	stx	_the_game+3
-   0066 32 62         [ 5]   62 	leas	2,s
-   0068 39            [ 5]   63 	rts
-   0069                      64 L11:
-   0069 C6 04         [ 2]   65 	ldb	#4
-   006B E4 E4         [ 4]   66 	andb	,s
-   006D 27 D5         [ 3]   67 	beq	L10
-   006F 20 E7         [ 3]   68 	bra	L13
-                             69 	.globl	_pause_menu
-   0071                      70 _pause_menu:
-   0071 39            [ 5]   71 	rts
-                             72 	.globl	_game_over
-   0072                      73 _game_over:
-   0072 39            [ 5]   74 	rts
+   003C 26 25         [ 3]   41 	bne	L11
+   003E C6 06         [ 2]   42 	ldb	#6
+   0040 E4 E4         [ 4]   43 	andb	,s
+   0042 C1 06         [ 2]   44 	cmpb	#6	;cmpqi:
+   0044 27 12         [ 3]   45 	beq	L9
+   0046 C6 02         [ 2]   46 	ldb	#2
+   0048 E4 E4         [ 4]   47 	andb	,s
+   004A 26 1A         [ 3]   48 	bne	L13
+   004C C6 04         [ 2]   49 	ldb	#4
+   004E E4 E4         [ 4]   50 	andb	,s
+   0050 27 06         [ 3]   51 	beq	L9
+   0052 8E`00`00      [ 3]   52 	ldx	#_player_change_right
+   0055 BF`00`02      [ 6]   53 	stx	_the_player+2
+   0058                      54 L9:
+   0058 BD`00`00      [ 8]   55 	jsr	_clock_tick
+   005B AD 9F`00`01   [12]   56 	jsr	[_the_map+1]
+   005F AD 9F`00`02   [12]   57 	jsr	[_the_player+2]
+   0063                      58 L11:
+   0063 32 61         [ 5]   59 	leas	1,s
+   0065 39            [ 5]   60 	rts
+   0066                      61 L13:
+   0066 8E`00`00      [ 3]   62 	ldx	#_player_change_left
+   0069 BF`00`02      [ 6]   63 	stx	_the_player+2
+   006C 20 EA         [ 3]   64 	bra	L9
+                             65 	.globl	_pause_menu
+   006E                      66 _pause_menu:
+   006E 39            [ 5]   67 	rts
+                             68 	.globl	_game_over
+   006F                      69 _game_over:
+   006F 39            [ 5]   70 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L10                0044 R   |   3 L11                0069 R
-  3 L13                0058 R   |   3 L15                0060 R
-  3 L16                0052 R   |     _Vec_Buttons       **** GX
+  3 L11                0063 R   |   3 L13                0066 R
+  3 L9                 0058 R   |     _Vec_Buttons       **** GX
     ___Read_Btns       **** GX  |     ___Wait_Recal      **** GX
-    _ability_init      **** GX  |     _clk_init          **** GX
-    _clk_update        **** GX  |     _enemy_init        **** GX
-  3 _game_init         0000 GR  |   3 _game_over         0072 GR
+    _ability_init      **** GX  |     _clock_init        **** GX
+    _clock_tick        **** GX  |     _enemy_init        **** GX
+  3 _game_init         0000 GR  |   3 _game_over         006F GR
   3 _game_run          002D GR  |     _map_init          **** GX
-  3 _pause_menu        0071 GR  |   3 _play_start_an     0026 GR
-    _player_change     **** GX  |     _player_init       **** GX
-  3 _start_menu        001F GR  |   2 _the_game          0000 GR
-    _the_map           **** GX  |     _the_player        **** GX
+  3 _pause_menu        006E GR  |   3 _play_start_an     0026 GR
+    _player_change     **** GX  |     _player_change     **** GX
+    _player_init       **** GX  |   3 _start_menu        001F GR
+  2 _the_game          0000 GR  |     _the_map           **** GX
+    _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    5   flags    0
-   3 .text            size   73   flags  100
+   3 .text            size   70   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

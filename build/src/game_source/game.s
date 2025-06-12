@@ -12,7 +12,7 @@ _game_init:
 	ldd	#0
 	std	_the_game
 	clr	_the_game+2
-	jsr	_clk_init
+	jsr	_clock_init
 	jsr	_map_init
 	jsr	_player_init
 	jsr	_ability_init
@@ -32,40 +32,36 @@ _play_start_animation:
 	rts
 	.globl	_game_run
 _game_run:
-	leas	-2,s
+	leas	-1,s
 	jsr	___Wait_Recal
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
 	stb	,s
 	bitb	#1
-	bne	L15
-	ldb	,s
-	bitb	#6
-	beq	L16
-L10:
-	jsr	_clk_update
-	jsr	[_the_map+1]
-	jsr	[_the_player+2]
-	leas	2,s
-	rts
-L16:
+	bne	L11
+	ldb	#6
+	andb	,s
+	cmpb	#6	;cmpqi:
+	beq	L9
 	ldb	#2
 	andb	,s
-	beq	L11
+	bne	L13
+	ldb	#4
+	andb	,s
+	beq	L9
+	ldx	#_player_change_right
+	stx	_the_player+2
+L9:
+	jsr	_clock_tick
+	jsr	[_the_map+1]
+	jsr	[_the_player+2]
+L11:
+	leas	1,s
+	rts
 L13:
 	ldx	#_player_change_left
 	stx	_the_player+2
-	bra	L10
-L15:
-	ldx	#_pause_menu
-	stx	_the_game+3
-	leas	2,s
-	rts
-L11:
-	ldb	#4
-	andb	,s
-	beq	L10
-	bra	L13
+	bra	L9
 	.globl	_pause_menu
 _pause_menu:
 	rts

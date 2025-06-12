@@ -5,17 +5,17 @@
                               5 	.module	main.c
                               6 	.area	.text
                               7 	.globl	_main
-   05E5                       8 _main:
-   05E5 7F C8 A4      [ 7]    9 	clr	_the_game+2
-   05E8 CC 00 00      [ 3]   10 	ldd	#0
-   05EB FD C8 A2      [ 6]   11 	std	_the_game
-   05EE 8E 00 DB      [ 3]   12 	ldx	#_game_init
-   05F1 BF C8 A5      [ 6]   13 	stx	_the_game+3
-   05F4                      14 L2:
-   05F4 AD 9F C8 A5   [12]   15 	jsr	[_the_game+3]
-   05F8 20 FA         [ 3]   16 	bra	L2
+   05E3                       8 _main:
+   05E3 7F C8 A4      [ 7]    9 	clr	_the_game+2
+   05E6 CC 00 00      [ 3]   10 	ldd	#0
+   05E9 FD C8 A2      [ 6]   11 	std	_the_game
+   05EC 8E 00 DD      [ 3]   12 	ldx	#_game_init
+   05EF BF C8 A5      [ 6]   13 	stx	_the_game+3
+   05F2                      14 L2:
+   05F2 AD 9F C8 A5   [12]   15 	jsr	[_the_game+3]
+   05F6 20 FA         [ 3]   16 	bra	L2
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Symbol Table
 
@@ -25,7 +25,7 @@ Symbol Table
   2 _main              0000 GR  |     _the_game          **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:09 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Area Table
 

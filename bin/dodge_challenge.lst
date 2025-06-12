@@ -1,5 +1,5 @@
 ASxxxx Linker V05.50                                                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
@@ -10,7 +10,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0000  .__.ABS.                           vec_rum_13_07_Moveto_d.c
 
 ASxxxx Linker V05.50                                                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -23,7 +23,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0021  end_of_cartridge_header:
 
 ASxxxx Linker V05.50                                                                Page 3
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -35,60 +35,60 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           0022  boot:
 
 ASxxxx Linker V05.50                                                                Page 4
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == rom ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-.text                      0060        059F =        1439. bytes (REL,CON,CSEG)
+.text                      0060        059D =        1437. bytes (REL,CON,CSEG)
 
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
-          0060  dummy_tick:
           0061  ability_init:
-          006E  clk_init:
-          0078  clk_update:
-          0091  enemy_init:
-          00B0  enemy_try_spawn:
-          00D9  idle:
-          00DA  tick_dummy:
-          00DB  game_init:
-          00FA  start_menu:
-          0101  play_start_animation:
-          0108  game_run:
-          014C  pause_menu:
-          014D  game_over:
-          014E  _vl_digit_zero:
-          0176  _vl_digit_one:
-          0186  _vl_digit_two:
-          01A8  _vl_digit_three:
-          01CA  _vl_digit_four:
-          01E6  _vl_digit_five:
-          0208  _vl_digit_six:
-          022A  _vl_digit_seven:
-          0240  _vl_digit_eight:
-          026E  _vl_digit_nine:
-          0290  vl_digits:
-          02A4  vl_speed_display:
+          006E  clock_init:
+          007A  clock_tick:
+          0093  enemy_init:
+          00B2  enemy_try_spawn:
+          00DB  idle:
+          00DC  tick_dummy:
+          00DD  game_init:
+          00FC  start_menu:
+          0103  play_start_animation:
+          010A  game_run:
+          014B  pause_menu:
+          014C  game_over:
+          014D  _vl_digit_zero:
+          0175  _vl_digit_one:
+          0185  _vl_digit_two:
+          01A7  _vl_digit_three:
+          01C9  _vl_digit_four:
+          01E5  _vl_digit_five:
+          0207  _vl_digit_six:
+          0229  _vl_digit_seven:
+          023F  _vl_digit_eight:
+          026D  _vl_digit_nine:
+          028F  vl_digits:
+          02A3  vl_speed_display:
+          02D1  dummy_tick:
           02D2  map_init:
           02DC  PLAYER_X_LUT:
           02DF  PLAYER_DRAW_LUT:
           02E5  player_init:
           02F4  player_draw:
           0322  player_change_left:
-          0335  player_change_right:
-          034A  check_collision:
-          034B  vl_player_mid:
-          03D3  vl_player_left:
-          04CD  vl_player_right:
-          05C7  _player_draw_left:
-          05D1  _player_draw_mid:
-          05DB  _player_draw_right:
-          05E5  main:
-          05FA  _Moveto_d:
+          0334  player_change_right:
+          0348  check_collision:
+          0349  vl_player_mid:
+          03D1  vl_player_left:
+          04CB  vl_player_right:
+          05C5  _player_draw_left:
+          05CF  _player_draw_mid:
+          05D9  _player_draw_right:
+          05E3  main:
+          05F8  _Moveto_d:
 
 ASxxxx Linker V05.50                                                                Page 5
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == ram ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -98,15 +98,15 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
          Value  Global                             Global Defined In Module
          -----  --------------------------------   ------------------------
           C880  the_ability:
-          C884  clk_frames:
-          C885  clk_seconds:
+          C884  the_clock:
           C887  enemy_list:
           C8A0  queue_ptr:
           C8A2  the_game:
           C8A7  the_map:
           C8AA  the_player:
+
 ASxxxx Linker V05.50                                                                Page 6
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -163,7 +163,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C836  Vec_Angle:
           C837  Vec_Run_Index:
 ASxxxx Linker V05.50                                                                Page 7
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -221,7 +221,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C86A  Vec_XXX_12:
           C86B  Vec_XXX_13:
 ASxxxx Linker V05.50                                                                Page 8
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_c8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -252,7 +252,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           C87F  Vec_Random_Seed2:
 
 ASxxxx Linker V05.50                                                                Page 9
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_cb ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -278,7 +278,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           CBFB  Vec_NWI_vector:
           CBFE  Vec_Cold_Flag:
 ASxxxx Linker V05.50                                                                 Page 10
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_d0 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -312,7 +312,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           D00F  VIA_port_a_nohs:
 
 ASxxxx Linker V05.50                                                                 Page 11
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -369,7 +369,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
 
 
 ASxxxx Linker V05.50                                                                 Page 12
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -427,7 +427,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
 
 
 ASxxxx Linker V05.50                                                                 Page 13
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -485,7 +485,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
 
 
 ASxxxx Linker V05.50                                                                 Page 14
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_00 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -535,7 +535,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
 
 
 ASxxxx Linker V05.50                                                                 Page 15
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_ed ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -548,7 +548,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           ED8F  Vec_ADSR_FADE66:
 
 ASxxxx Linker V05.50                                                                 Page 16
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_fc ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -562,7 +562,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FC8D  Vec_Note_Table:
 
 ASxxxx Linker V05.50                                                                 Page 17
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_fd ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -580,7 +580,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FDD3  Vec_Music_4:
 
 ASxxxx Linker V05.50                                                                 Page 18
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_fe ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -601,7 +601,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FEF8  Vec_Music_8:
 
 ASxxxx Linker V05.50                                                                 Page 19
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_ff ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -618,7 +618,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FF8F  Vec_Music_d:
 
 ASxxxx Linker V05.50                                                                 Page 20
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_e7 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -631,7 +631,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           E7D2  __Displ16_xy:
 
 ASxxxx Linker V05.50                                                                 Page 21
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_e9 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -643,7 +643,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           E98A  __Ranpos:
 
 ASxxxx Linker V05.50                                                                 Page 22
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_ea ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -663,7 +663,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           EAF0  __Wait_Bound:
 
 ASxxxx Linker V05.50                                                                 Page 23
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f0 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -675,7 +675,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F000  __Reset:
 
 ASxxxx Linker V05.50                                                                 Page 24
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f1 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -696,7 +696,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F1F8  __Joy_Digital:
 
 ASxxxx Linker V05.50                                                                 Page 25
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f2 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -728,7 +728,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F2FC  __Moveto_d_7F:
 
 ASxxxx Linker V05.50                                                                 Page 26
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f3 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -770,7 +770,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F3DD  __Draw_VL:
           F3DF  __Draw_Line_d:
 ASxxxx Linker V05.50                                                                 Page 27
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f4 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -792,7 +792,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F495  __Print_Str:
           F498  __Print_MRast:
 ASxxxx Linker V05.50                                                                 Page 28
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f5 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -829,7 +829,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F5FF  __Rise_Run_X:
 
 ASxxxx Linker V05.50                                                                 Page 29
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f6 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -858,7 +858,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F692  __Init_Music_x:
 
 ASxxxx Linker V05.50                                                                 Page 30
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f7 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -871,7 +871,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F7A9  __Select_Game:
 
 ASxxxx Linker V05.50                                                                 Page 31
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f8 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -892,7 +892,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F8FF  __Obj_Hit:
 
 ASxxxx Linker V05.50                                                                 Page 32
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_f9 ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -905,7 +905,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           F9CA  __Set_Amp:
 
 ASxxxx Linker V05.50                                                                 Page 33
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 [ Bank == page_ffx ]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -917,7 +917,7 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
           FF9F  __Draw_Grid_VL:
 
 ASxxxx Linker V05.50                                                                 Page 34
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:46 2025
 
 Files Linked                              [ module(s) ]
 

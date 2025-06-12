@@ -14,9 +14,7 @@ const _player_draw_func PLAYER_DRAW_LUT[];
 
 
 
-/**
- * @brief init method
- */
+// init func
 void player_init(void)
 {
 	player_t fresh_player = {.lane = MID_LANE, .cnt = 0, .tick = player_draw};
@@ -66,9 +64,11 @@ void player_init(void)
 	{
 		/// TODO: implement animation
 		the_player.lane--;
-		the_player.tick = player_draw;
-		the_player.tick(); //< temp!
 	}
+	
+	/// done changing
+	the_player.tick = player_draw;
+	the_player.tick(); //< temp!
 	
 	/// dont forget to check for collisions
 	check_collision();
@@ -90,9 +90,11 @@ void player_init(void)
 	{
 		/// TODO: implement animation
 		the_player.lane++;
-		the_player.tick = player_draw;
-		the_player.tick(); //< temp!
 	}
+	
+	/// done changing
+	the_player.tick = player_draw;
+	the_player.tick(); //< temp!
 	
 	/// dont forget to check for collisions
 	check_collision();

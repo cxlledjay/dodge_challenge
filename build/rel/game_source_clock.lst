@@ -4,52 +4,49 @@
                               4 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
                               5 	.module	clock.c
                               6 	.area	.bss
-                              7 	.globl	_clk_frames
-   0000                       8 _clk_frames:	.blkb	1
-                              9 	.globl	_clk_seconds
-   0001                      10 _clk_seconds:	.blkb	2
-                             11 	.area	.text
-                             12 	.globl	_clk_init
-   0000                      13 _clk_init:
-   0000 7F`00`00      [ 7]   14 	clr	_clk_frames
-   0003 CC 00 00      [ 3]   15 	ldd	#0
-   0006 FD`00`01      [ 6]   16 	std	_clk_seconds
-   0009 39            [ 5]   17 	rts
-                             18 	.globl	_clk_update
-   000A                      19 _clk_update:
-   000A F6`00`00      [ 5]   20 	ldb	_clk_frames
-   000D C1 F0         [ 2]   21 	cmpb	#-16	;cmpqi:
-   000F 22 06         [ 3]   22 	bhi	L8
-   0011 CB 05         [ 2]   23 	addb	#5
-   0013 F7`00`00      [ 5]   24 	stb	_clk_frames
-   0016 39            [ 5]   25 	rts
-   0017                      26 L8:
-   0017 7F`00`00      [ 7]   27 	clr	_clk_frames
-   001A 7C`00`02      [ 7]   28 	inc	_clk_seconds+1
-   001D 26 03         [ 3]   29 	bne	__IL28
-   001F 7C`00`01      [ 7]   30 	inc	_clk_seconds
-   0022                      31 	__IL28:
-   0022 39            [ 5]   32 	rts
+                              7 	.globl	_the_clock
+   0000                       8 _the_clock:	.blkb	3
+                              9 	.area	.text
+                             10 	.globl	_clock_init
+   0000                      11 _clock_init:
+   0000 CC 00 00      [ 3]   12 	ldd	#0
+   0003 FD`00`01      [ 6]   13 	std	_the_clock+1
+   0006 C6 31         [ 2]   14 	ldb	#49
+   0008 F7`00`00      [ 5]   15 	stb	_the_clock
+   000B 39            [ 5]   16 	rts
+                             17 	.globl	_clock_tick
+   000C                      18 _clock_tick:
+   000C F6`00`00      [ 5]   19 	ldb	_the_clock
+   000F 27 05         [ 3]   20 	beq	L8
+   0011 5A            [ 2]   21 	decb
+   0012 F7`00`00      [ 5]   22 	stb	_the_clock
+   0015 39            [ 5]   23 	rts
+   0016                      24 L8:
+   0016 C6 31         [ 2]   25 	ldb	#49
+   0018 F7`00`00      [ 5]   26 	stb	_the_clock
+   001B FC`00`01      [ 6]   27 	ldd	_the_clock+1
+   001E C3 00 01      [ 4]   28 	addd	#1; addhi3,3
+   0021 FD`00`01      [ 6]   29 	std	_the_clock+1
+   0024 39            [ 5]   30 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L8                 0017 R   |   3 __IL28             0022 R
-  2 _clk_frames        0000 GR  |   3 _clk_init          0000 GR
-  2 _clk_seconds       0001 GR  |   3 _clk_update        000A GR
+  3 L8                 0016 R   |   3 _clock_init        0000 GR
+  3 _clock_tick        000C GR  |   2 _the_clock         0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 18:40:10 2025
+Hexadecimal [16-Bits]                                 Thu Jun 12 20:59:45 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    3   flags    0
-   3 .text            size   23   flags  100
+   3 .text            size   25   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

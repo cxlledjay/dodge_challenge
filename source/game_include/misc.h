@@ -7,4 +7,3 @@ typedef enum
     RIGHT_LANE = 2,
     CHANGEING = 3
 } lane_t;
-

@@ -4,29 +4,27 @@
 ;;; -mabi=bx -mint8 -fomit-frame-pointer -O2
 	.module	clock.c
 	.area	.bss
-	.globl	_clk_frames
-_clk_frames:	.blkb	1
-	.globl	_clk_seconds
-_clk_seconds:	.blkb	2
+	.globl	_the_clock
+_the_clock:	.blkb	3
 	.area	.text
-	.globl	_clk_init
-_clk_init:
-	clr	_clk_frames
+	.globl	_clock_init
+_clock_init:
 	ldd	#0
-	std	_clk_seconds
+	std	_the_clock+1
+	ldb	#49
+	stb	_the_clock
 	rts
-	.globl	_clk_update
-_clk_update:
-	ldb	_clk_frames
-	cmpb	#-16	;cmpqi:
-	bhi	L8
-	addb	#5
-	stb	_clk_frames
+	.globl	_clock_tick
+_clock_tick:
+	ldb	_the_clock
+	beq	L8
+	decb
+	stb	_the_clock
 	rts
 L8:
-	clr	_clk_frames
-	inc	_clk_seconds+1
-	bne	__IL28
-	inc	_clk_seconds
-	__IL28:
+	ldb	#49
+	stb	_the_clock
+	ldd	_the_clock+1
+	addd	#1; addhi3,3
+	std	_the_clock+1
 	rts

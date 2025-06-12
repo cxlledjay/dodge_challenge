@@ -7,9 +7,12 @@
 	.globl	_the_map
 _the_map:	.blkb	3
 	.area	.text
+	.globl	_dummy_tick
+_dummy_tick:
+	rts
 	.globl	_map_init
 _map_init:
-	ldd	#0
-	std	_the_map+1
+	ldx	#_dummy_tick
+	stx	_the_map+1
 	clr	_the_map
 	rts
