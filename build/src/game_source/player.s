@@ -209,7 +209,7 @@ _vl_player_mid:
 	.byte	-1
 	.byte	-16
 	.byte	-8
-_vl_term_0_76:
+_vl_term_0_79:
 	.byte	1
 	.globl	_vl_player_left
 _vl_player_left:
@@ -462,7 +462,7 @@ _vl_player_left:
 	.byte	-1
 	.byte	-36
 	.byte	-24
-_vl_term_1_189:
+_vl_term_1_192:
 	.byte	1
 	.globl	_vl_player_right
 _vl_player_right:
@@ -715,7 +715,7 @@ _vl_player_right:
 	.byte	-1
 	.byte	-36
 	.byte	24
-_vl_term_2_302:
+_vl_term_2_305:
 	.byte	1
 	.globl	__player_draw_left
 __player_draw_left:

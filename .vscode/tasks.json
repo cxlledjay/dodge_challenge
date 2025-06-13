@@ -18,7 +18,7 @@
         {
             //build
             "label": "vt_build",
-            "command": ".\\make_c.bat build",
+            "command": ".\\make_c.bat build; xcopy /y bin\\dodge_challenge.bin ..\\..\\..\\..\\Vide2.5.1.w64\\Vide.w64\\cartridges",
             "type": "shell"
         },
 

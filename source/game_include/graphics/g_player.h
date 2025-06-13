@@ -41,6 +41,9 @@ const struct packet_t vl_player_mid[] =
 	{DRAW, {16,60}},
 	{DRAW, {0,40}},
 	{DRAW, {-16,60}},
+
+	/// split?
+
 	//chassis
 	{DRAW, {112,-64}},
 	{DRAW, {0,-32}},

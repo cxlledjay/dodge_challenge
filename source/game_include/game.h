@@ -5,7 +5,7 @@
  * 
  * game.h/c handles the
  *  a) current game state (starting, running, stopped, game over)
- *  b) reached score(s)
+ *  b) reached score(s) + highscore
  *  c) current speed (aka. level/stage/...)
  *  d) game loop
  */

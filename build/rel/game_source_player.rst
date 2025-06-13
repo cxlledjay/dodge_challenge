@@ -209,7 +209,7 @@
    083F FF                  209 	.byte	-1
    0840 F0                  210 	.byte	-16
    0841 F8                  211 	.byte	-8
-   0842                     212 _vl_term_0_76:
+   0842                     212 _vl_term_0_79:
    0842 01                  213 	.byte	1
                             214 	.globl	_vl_player_left
    0843                     215 _vl_player_left:
@@ -462,7 +462,7 @@
    0939 FF                  462 	.byte	-1
    093A DC                  463 	.byte	-36
    093B E8                  464 	.byte	-24
-   093C                     465 _vl_term_1_189:
+   093C                     465 _vl_term_1_192:
    093C 01                  466 	.byte	1
                             467 	.globl	_vl_player_right
    093D                     468 _vl_player_right:
@@ -715,7 +715,7 @@
    0A33 FF                  715 	.byte	-1
    0A34 DC                  716 	.byte	-36
    0A35 18                  717 	.byte	24
-   0A36                     718 _vl_term_2_302:
+   0A36                     718 _vl_term_2_305:
    0A36 01                  719 	.byte	1
                             720 	.globl	__player_draw_left
    0A37                     721 __player_draw_left:
@@ -736,7 +736,7 @@
    0A4F 8E 09 3D      [ 3]  736 	ldx	#_vl_player_right
    0A52 7E F4 10      [ 4]  737 	jmp	___Draw_VLp
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
 
 Symbol Table
 
@@ -752,11 +752,11 @@ Symbol Table
   3 _player_change     0058 GR  |   3 _player_draw       0018 GR
   3 _player_init       0009 GR  |   2 _the_player        0000 GR
   3 _vl_player_lef     00F5 GR  |   3 _vl_player_mid     006D GR
-  3 _vl_player_rig     01EF GR  |   3 _vl_term_0_76      00F4 R
-  3 _vl_term_1_189     01EE R   |   3 _vl_term_2_302     02E8 R
+  3 _vl_player_rig     01EF GR  |   3 _vl_term_0_79      00F4 R
+  3 _vl_term_1_192     01EE R   |   3 _vl_term_2_305     02E8 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
 
 Area Table
 
