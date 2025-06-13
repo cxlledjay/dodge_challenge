@@ -1,101 +1,28 @@
-{MOVE, {2,-20}},
+{MOVE, {8,80}},
 
-	//left wheel
-	{DRAW, {-20,0}},
-	{DRAW, {-6,-4}},
-	{DRAW, {0,-20}},
-	{DRAW, {6,-4}},
-	{DRAW, {20,0}},
-	{DRAW, {6,4}},
-	{DRAW, {0,20}},
-	{DRAW, {-6,4}},
+/// right wheel finish
+{DRAW, {24,-16}},
+{DRAW, {-16,-12}},
+{MOVE, {-112,12}},
+{DRAW, {0,80}},
+{DRAW, {24,16}},
+{DRAW, {80,0}},
+{DRAW, {24,-16}},
+{DRAW, {0,-80}},
 
-	//backview
-	{MOVE, {-2,0}},
-	{DRAW, {4,15}},
-	{DRAW, {0,10}},
-	{DRAW, {-4,15}},
+/// right front wheel
+{MOVE, {-4,-28}},
+{DRAW, {48,0}},
+{DRAW, {16,-8}},
+{DRAW, {0,-72}},
+{DRAW, {-16,8}},
+{DRAW, {-8,0}},
+{MOVE, {24,-8}},
+{DRAW, {-12,-8}},
 
-	//right wheel
-	{MOVE, {2,0}},
-	{DRAW, {-20,0}},
-	{DRAW, {-6,-4}},
-	{DRAW, {6,-4}},
-	{DRAW, {2,0}},
-
-	//back bottom
-	{MOVE, {-4,6}},
-	{DRAW, {4,-13}},
-	{MOVE, {0,15}},
-	{DRAW, {0,-40}},
-	{MOVE, {0,15}},
-	{DRAW, {-4,-16}},
-
-	//left wheel finish
-	{MOVE, {-4,-23}},
-	{DRAW, {6,4}},
-	{DRAW, {20,0}},
-	{DRAW, {6,-4}},
-
-	//left front wheel
-	{MOVE, {-8,-4}},
-	{DRAW, {0,-5}},
-	{DRAW, {4,-2}},
-	{DRAW, {14,0}},
-	{DRAW, {4,2}},
-	{DRAW, {-4,2}},
-	{DRAW, {-14,0}},
-	{DRAW, {-4,-2}},
-	{MOVE, {22,0}},
-	{DRAW, {0,18}},
-	{DRAW, {-4,2}},
-	{DRAW, {-10,0}},
-
-	//chassis
-	{MOVE, {0,5}},
-	{DRAW, {7,-5}}, //EDIT 7 is in real 7.5
-	{MOVE, {7,-4}},//CARE FOR 7.5 movement (this 7 must be 6.5)
-	{DRAW, {10,-7}},
-
-	{MOVE, {-2,2}}, //x only 1.5
-	{DRAW, {0,-8}}, //x is 8.5 rather
-	{DRAW, {-4,2}},
-	{DRAW, {0,8}},
-	{MOVE, {6,-4}},
-	{DRAW, {0,10}},
-
-	{MOVE, {-2,3}},
-	{DRAW, {0,8}},
-	{DRAW, {-4,6}},
-	{DRAW, {0,-7}},
-	{MOVE, {6,-10}},
-	{DRAW, {-32,54}},
-
-	//right wheel finish
-	{MOVE, {2,0}},
-	{DRAW, {6,-4}},
-	{DRAW, {-4,-3}},
-	{MOVE, {-28,3}},
-	{DRAW, {0,20}},
-	{DRAW, {6,4}},
-	{DRAW, {20,0}},
-	{DRAW, {6,-4}},
-	{DRAW, {0,-20}},
-
-	//right front wheel
-	{MOVE, {-1,-7}},
-	{DRAW, {12,0}},
-	{DRAW, {4,-2}},
-	{DRAW, {0,-18}},
-	{DRAW, {-4,2}},
-	{DRAW, {-2,0}},
-	{MOVE, {6,-2}},
-	{DRAW, {-3,-2}},
-
-	//driver
-	{MOVE, {-9,5}},
-	{DRAW, {6,-11}},
-	{DRAW, {0,-7}},
-	{DRAW, {-6,4}},
-
-	VL_END
+/// driver
+{MOVE, {-36,20}},
+{DRAW, {24,-44}},
+{DRAW, {0,-28}},
+{DRAW, {-24,16}},
+VL_END

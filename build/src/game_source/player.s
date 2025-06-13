@@ -129,8 +129,8 @@ _vl_player_mid1:
 	.byte	60
 _vl_term_0_46:
 	.byte	1
-	.globl	_vl_player_mid2_enhanced
-_vl_player_mid2_enhanced:
+	.globl	_vl_player_mid2
+_vl_player_mid2:
 	.byte	0
 	.byte	32
 	.byte	-120
@@ -203,263 +203,259 @@ _vl_player_mid2_enhanced:
 	.byte	-1
 	.byte	-16
 	.byte	8
-_vl_term_1_127:
+_vl_term_1_83:
 	.byte	1
-	.globl	_vl_player_left
-_vl_player_left:
+	.globl	_vl_player_left1
+_vl_player_left1:
 	.byte	0
-	.byte	12
-	.byte	120
+	.byte	8
+	.byte	80
 	.byte	-1
-	.byte	-120
+	.byte	-80
 	.byte	0
 	.byte	-1
-	.byte	-36
+	.byte	-24
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	-1
 	.byte	24
+	.byte	16
 	.byte	-1
+	.byte	80
 	.byte	0
-	.byte	120
 	.byte	-1
-	.byte	36
 	.byte	24
+	.byte	-16
 	.byte	-1
-	.byte	120
+	.byte	0
+	.byte	-80
+	.byte	-1
+	.byte	-24
+	.byte	-16
+	.byte	0
+	.byte	-8
 	.byte	0
 	.byte	-1
-	.byte	36
+	.byte	16
+	.byte	-60
+	.byte	-1
+	.byte	0
+	.byte	-40
+	.byte	-1
+	.byte	-16
+	.byte	-60
+	.byte	0
+	.byte	8
+	.byte	0
+	.byte	-1
+	.byte	-80
+	.byte	0
+	.byte	-1
+	.byte	-24
+	.byte	16
+	.byte	-1
+	.byte	24
+	.byte	16
+	.byte	-1
+	.byte	8
+	.byte	0
+	.byte	0
+	.byte	-16
 	.byte	-24
 	.byte	-1
+	.byte	16
+	.byte	52
 	.byte	0
-	.byte	-120
-	.byte	-1
-	.byte	-36
-	.byte	-24
-	.byte	0
-	.byte	-12
-	.byte	0
-	.byte	-1
-	.byte	24
-	.byte	-90
-	.byte	-1
 	.byte	0
 	.byte	-60
 	.byte	-1
-	.byte	-24
-	.byte	-90
 	.byte	0
-	.byte	12
-	.byte	0
-	.byte	-1
-	.byte	-120
-	.byte	0
-	.byte	-1
-	.byte	-36
-	.byte	24
-	.byte	-1
-	.byte	36
-	.byte	24
-	.byte	-1
-	.byte	12
-	.byte	0
-	.byte	0
-	.byte	-24
-	.byte	-36
-	.byte	-1
-	.byte	24
-	.byte	78
-	.byte	0
-	.byte	0
-	.byte	-90
+	.byte	80
 	.byte	-1
 	.byte	0
-	.byte	120
+	.byte	80
+	.byte	0
+	.byte	0
+	.byte	-60
 	.byte	-1
-	.byte	0
-	.byte	120
-	.byte	0
-	.byte	0
-	.byte	-90
-	.byte	-1
-	.byte	-24
-	.byte	96
-	.byte	0
-	.byte	-12
-	.byte	69
-	.byte	0
-	.byte	-12
-	.byte	69
-	.byte	-1
-	.byte	36
-	.byte	-24
-	.byte	-1
-	.byte	120
-	.byte	0
-	.byte	-1
-	.byte	36
-	.byte	24
+	.byte	-16
+	.byte	64
+_vl_term_2_123:
+	.byte	1
+	.globl	_vl_player_left2
+_vl_player_left2:
 	.byte	0
 	.byte	-48
-	.byte	24
-	.byte	-1
+	.byte	88
 	.byte	0
-	.byte	30
-	.byte	-1
-	.byte	24
-	.byte	12
-	.byte	-1
-	.byte	84
-	.byte	0
+	.byte	-48
+	.byte	88
 	.byte	-1
 	.byte	24
-	.byte	-12
+	.byte	-16
 	.byte	-1
-	.byte	-24
-	.byte	-12
-	.byte	-1
-	.byte	-84
+	.byte	80
 	.byte	0
 	.byte	-1
-	.byte	-24
-	.byte	12
+	.byte	24
+	.byte	16
 	.byte	0
-	.byte	69
+	.byte	-32
+	.byte	16
+	.byte	-1
 	.byte	0
+	.byte	20
+	.byte	-1
+	.byte	16
+	.byte	8
+	.byte	-1
+	.byte	56
 	.byte	0
-	.byte	69
+	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	-56
+	.byte	0
+	.byte	-1
+	.byte	-16
+	.byte	8
+	.byte	0
+	.byte	88
 	.byte	0
 	.byte	-1
 	.byte	0
+	.byte	-72
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	-40
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	-20
+	.byte	-1
+	.byte	28
+	.byte	20
+	.byte	0
+	.byte	28
+	.byte	16
+	.byte	-1
+	.byte	40
+	.byte	28
+	.byte	-1
+	.byte	0
+	.byte	-40
+	.byte	-1
+	.byte	-64
 	.byte	-108
 	.byte	-1
-	.byte	-24
-	.byte	-12
+	.byte	-64
+	.byte	-108
+	.byte	0
+	.byte	52
+	.byte	88
+	.byte	0
+	.byte	52
+	.byte	88
 	.byte	-1
-	.byte	-60
 	.byte	0
-	.byte	0
-	.byte	0
-	.byte	-30
+	.byte	-28
 	.byte	-1
-	.byte	42
-	.byte	30
-	.byte	0
-	.byte	42
+	.byte	16
 	.byte	24
 	.byte	-1
-	.byte	60
-	.byte	42
 	.byte	0
-	.byte	-12
+	.byte	32
+	.byte	0
+	.byte	0
+	.byte	46
+	.byte	-1
+	.byte	0
+	.byte	32
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-32
+_vl_term_3_170:
+	.byte	1
+	.globl	_vl_player_left3
+_vl_player_left3:
+	.byte	0
+	.byte	8
+	.byte	-80
+	.byte	-1
+	.byte	24
+	.byte	16
+	.byte	-1
+	.byte	-16
+	.byte	12
+	.byte	0
+	.byte	-112
 	.byte	-12
 	.byte	-1
 	.byte	0
+	.byte	-80
+	.byte	-1
+	.byte	24
+	.byte	-16
+	.byte	-1
+	.byte	80
+	.byte	0
+	.byte	-1
+	.byte	24
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	0
+	.byte	-4
+	.byte	28
+	.byte	-1
 	.byte	48
-	.byte	-1
-	.byte	-24
-	.byte	-12
-	.byte	-1
-	.byte	0
-	.byte	-48
-	.byte	0
-	.byte	36
-	.byte	24
-	.byte	-1
-	.byte	0
-	.byte	-60
-	.byte	0
-	.byte	-12
-	.byte	-18
-	.byte	-1
-	.byte	0
-	.byte	-48
-	.byte	-1
-	.byte	-24
-	.byte	-36
-	.byte	-1
-	.byte	0
-	.byte	42
-	.byte	0
-	.byte	36
-	.byte	60
-	.byte	-1
-	.byte	-64
-	.byte	-108
-	.byte	-1
-	.byte	-64
-	.byte	-108
-	.byte	-1
-	.byte	-64
-	.byte	-108
-	.byte	0
-	.byte	12
 	.byte	0
 	.byte	-1
-	.byte	36
-	.byte	24
-	.byte	-1
-	.byte	-24
-	.byte	18
-	.byte	0
-	.byte	-84
-	.byte	-9
-	.byte	0
-	.byte	-84
-	.byte	-9
+	.byte	16
+	.byte	8
 	.byte	-1
 	.byte	0
-	.byte	-120
-	.byte	-1
-	.byte	36
-	.byte	-24
-	.byte	-1
-	.byte	120
-	.byte	0
-	.byte	-1
-	.byte	36
-	.byte	24
-	.byte	-1
-	.byte	0
-	.byte	120
-	.byte	0
-	.byte	-6
-	.byte	42
-	.byte	-1
 	.byte	72
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	-8
 	.byte	0
+	.byte	0
+	.byte	24
+	.byte	8
+	.byte	-1
+	.byte	-12
+	.byte	8
+	.byte	0
+	.byte	-36
+	.byte	-20
 	.byte	-1
 	.byte	24
-	.byte	12
+	.byte	44
 	.byte	-1
 	.byte	0
-	.byte	108
+	.byte	28
 	.byte	-1
 	.byte	-24
-	.byte	-12
-	.byte	-1
-	.byte	-12
-	.byte	0
-	.byte	0
-	.byte	36
-	.byte	12
-	.byte	-1
-	.byte	-18
-	.byte	12
-	.byte	0
-	.byte	-54
-	.byte	-30
-	.byte	-1
-	.byte	36
-	.byte	66
-	.byte	-1
-	.byte	0
-	.byte	42
-	.byte	-1
-	.byte	-36
-	.byte	-24
-_vl_term_2_240:
+	.byte	-16
+_vl_term_4_203:
 	.byte	1
-	.globl	_vl_player_right
-_vl_player_right:
+	.globl	_vl_player_right1
+_vl_player_right1:
 	.byte	0
 	.byte	8
 	.byte	-80
@@ -535,9 +531,16 @@ _vl_player_right:
 	.byte	-1
 	.byte	-16
 	.byte	-64
+_vl_term_5_243:
+	.byte	1
+	.globl	_vl_player_right2
+_vl_player_right2:
 	.byte	0
-	.byte	-16
-	.byte	-92
+	.byte	-48
+	.byte	-88
+	.byte	0
+	.byte	-48
+	.byte	-88
 	.byte	-1
 	.byte	24
 	.byte	16
@@ -595,9 +598,33 @@ _vl_player_right:
 	.byte	-1
 	.byte	40
 	.byte	-28
+	.byte	-1
 	.byte	0
-	.byte	-8
-	.byte	8
+	.byte	40
+	.byte	-1
+	.byte	-64
+	.byte	108
+	.byte	-1
+	.byte	-64
+	.byte	108
+	.byte	0
+	.byte	52
+	.byte	-88
+	.byte	0
+	.byte	52
+	.byte	-88
+	.byte	-1
+	.byte	0
+	.byte	28
+	.byte	-1
+	.byte	16
+	.byte	-24
+	.byte	-1
+	.byte	0
+	.byte	-32
+	.byte	0
+	.byte	0
+	.byte	-46
 	.byte	-1
 	.byte	0
 	.byte	-32
@@ -607,36 +634,13 @@ _vl_player_right:
 	.byte	-1
 	.byte	0
 	.byte	32
-	.byte	0
-	.byte	24
-	.byte	-16
-	.byte	-1
-	.byte	0
-	.byte	40
-	.byte	0
-	.byte	-8
-	.byte	12
-	.byte	-1
-	.byte	0
-	.byte	32
-	.byte	-1
-	.byte	-16
-	.byte	24
-	.byte	-1
-	.byte	0
-	.byte	-28
-	.byte	0
-	.byte	24
-	.byte	-40
-	.byte	-1
-	.byte	-64
-	.byte	108
-	.byte	-1
-	.byte	-64
-	.byte	108
+_vl_term_6_290:
+	.byte	1
+	.globl	_vl_player_right3
+_vl_player_right3:
 	.byte	0
 	.byte	8
-	.byte	0
+	.byte	80
 	.byte	-1
 	.byte	24
 	.byte	-16
@@ -697,25 +701,8 @@ _vl_player_right:
 	.byte	-1
 	.byte	-24
 	.byte	16
-_vl_term_3_349:
+_vl_term_7_323:
 	.byte	1
-	.globl	__player_draw_left
-__player_draw_left:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_PLAYER_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#10
-	stb	*_dp_VIA_t1_cnt_lo
-	leas	1,s
-	ldx	#_vl_player_left
-	jmp	___Draw_VLp
 	.globl	__player_draw_mid
 __player_draw_mid:
 	jsr	___Reset0Ref
@@ -745,7 +732,52 @@ __player_draw_mid:
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	leas	2,s
-	ldx	#_vl_player_mid2_enhanced
+	ldx	#_vl_player_mid2
+	jmp	___Draw_VLp
+	.globl	__player_draw_left
+__player_draw_left:
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	leas	3,s
+	ldx	#_vl_player_left3
 	jmp	___Draw_VLp
 	.globl	__player_draw_right
 __player_draw_right:
@@ -761,6 +793,34 @@ __player_draw_right:
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	leas	1,s
-	ldx	#_vl_player_right
+	ldx	#_vl_player_right1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_right2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	leas	3,s
+	ldx	#_vl_player_right3
 	jmp	___Draw_VLp

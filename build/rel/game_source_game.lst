@@ -84,7 +84,7 @@
    008E                      84 _game_over:
    008E 39            [ 5]   85 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
 
 Symbol Table
 
@@ -105,7 +105,7 @@ Symbol Table
     _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
 
 Area Table
 

@@ -11,7 +11,7 @@
 // vector list pointer to different perspectives of player model
 // ***************************************************************************
 
-
+/// mid
 const struct packet_t vl_player_mid1[] = 
 {
 	{MOVE, {-96,-80}}, //move to left back wheel
@@ -46,51 +46,7 @@ const struct packet_t vl_player_mid1[] =
 	VL_END
 };
 
-#if 0
-
 const struct packet_t vl_player_mid2[] = 
-{
-	/// starting from mid again
-	{MOVE, {0,80}},
-	//chassis
-	{DRAW, {112,-64}},
-	{DRAW, {0,-32}},
-	//front wing right
-	{MOVE, {-28,48}},
-	{DRAW, {0,48}},
-	{DRAW, {16,-8}},
-	{DRAW, {0,-48}},
-	//front wing left
-	{MOVE, {0,-48}},
-	{DRAW, {0,-48}},
-	{DRAW, {-16,-8}},
-	{DRAW, {0,48}},
-	//continue chassis
-	{MOVE, {28,16}},
-	{DRAW, {-112,-64}},
-	//front wheel left
-	{MOVE, {32,-40}},
-	{DRAW, {40,0}},
-	{DRAW, {0,60}},
-	{DRAW, {-36,0}},
-	//front wheel right side
-	{MOVE, {0,120}},
-	{DRAW, {36,0}},
-	{DRAW, {0,60}},
-	{DRAW, {-40,0}},
-	//driver
-	{MOVE, {20,-100}},
-	{DRAW, {16,-8}},
-	{DRAW, {0,-24}},
-	{DRAW, {-16,-8}},
-	//done
-	VL_END
-};
-
-#endif
-
-
-const struct packet_t vl_player_mid2_enhanced[] = 
 {
 	/// starting from mid again
 	{MOVE, {32,-120}},
@@ -128,125 +84,132 @@ const struct packet_t vl_player_mid2_enhanced[] =
 };
 
 
-
-const struct packet_t vl_player_left[] = 
+/// left
+const struct packet_t vl_player_left1[] = 
 {
-	{MOVE, {12,120}},
+	{MOVE, {8,80}},
 
-	//left wheel
-	{DRAW, {-120,0}},
-	{DRAW, {-36,24}},
-	{DRAW, {0,120}},
-	{DRAW, {36,24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,-24}},
-	{DRAW, {0,-120}},
-	{DRAW, {-36,-24}},
+	/// left wheel
+	{DRAW, {-80,0}},
+	{DRAW, {-24,16}},
+	{DRAW, {0,80}},
+	{DRAW, {24,16}},
+	{DRAW, {80,0}},
+	{DRAW, {24,-16}},
+	{DRAW, {0,-80}},
+	{DRAW, {-24,-16}},
 
-	//backview
-	{MOVE, {-12,0}}, //10
-	{DRAW, {24,-90}},
-	{DRAW, {0,-60}},
-	{DRAW, {-24,-90}},
+	/// backview
+	{MOVE, {-8,0}},
+	{DRAW, {16,-60}},
+	{DRAW, {0,-40}},
+	{DRAW, {-16,-60}},
 
-	//right wheel
-	{MOVE, {12,0}},
-	{DRAW, {-120,0}},
-	{DRAW, {-36,24}},
-	{DRAW, {36,24}},
-	{DRAW, {12,0}},
+	/// right wheel
+	{MOVE, {8,0}},
+	{DRAW, {-80,0}},
+	{DRAW, {-24,16}},
+	{DRAW, {24,16}},
+	{DRAW, {8,0}},
 
-	//back bottom
-	{MOVE, {-24,-36}},
-	{DRAW, {24,78}}, //20
-	{MOVE, {0,-90}},
-	{DRAW, {0,120}},
-	{DRAW, {0,120}},
-	{MOVE, {0,-90}},
-	{DRAW, {-24,96}},
-
-	//left wheel finish
-	{MOVE, {-12,69}},
-	{MOVE, {-12,69}},
-	{DRAW, {36,-24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,24}}, //30
-
-	//left front wheel
-	{MOVE, {-48,24}},
-	{DRAW, {0,30}},
-	{DRAW, {24,12}},
-	{DRAW, {84,0}},
-	{DRAW, {24,-12}},
-	{DRAW, {-24,-12}},
-	{DRAW, {-84,0}},
-	{DRAW, {-24,12}},
-	{MOVE, {69,0}},
-	{MOVE, {69,0}}, //40
-	{DRAW, {0,-108}},
-	{DRAW, {-24,-12}},
-	{DRAW, {-60,0}},
-
-	//chassis
-	{MOVE, {0,-30}},
-	{DRAW, {42,30}},
-	{MOVE, {42,24}},
-	{DRAW, {60,42}},
-
-	{MOVE, {-12,-12}},
-	{DRAW, {0,48}},
-	{DRAW, {-24,-12}}, //50
-	{DRAW, {0,-48}},
-	{MOVE, {36,24}},
-	{DRAW, {0,-60}},
-
-	{MOVE, {-12,-18}},
-	{DRAW, {0,-48}},
-	{DRAW, {-24,-36}},
-	{DRAW, {0,42}},
-	{MOVE, {36,60}},
-	{DRAW, {-64,-108}},
-	{DRAW, {-64,-108}}, //60
-	{DRAW, {-64,-108}},
-
-	//right wheel finish
-	{MOVE, {12,0}},
-	{DRAW, {36,24}},
-	{DRAW, {-24,18}},
-	{MOVE, {-84,-9}},
-	{MOVE, {-84,-9}},
-	{DRAW, {0,-120}},
-	{DRAW, {36,-24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,24}}, //70
-	{DRAW, {0,120}},
-
-	//right front wheel
-	{MOVE, {-6,42}},
-	{DRAW, {72,0}},
-	{DRAW, {24,12}},
-	{DRAW, {0,108}},
-	{DRAW, {-24,-12}},
-	{DRAW, {-12,0}},
-	{MOVE, {36,12}},
-	{DRAW, {-18,12}},
-
-	//driver
-	{MOVE, {-54,-30}}, //80
-	{DRAW, {36,66}},
-	{DRAW, {0,42}},
-	{DRAW, {-36,-24}},
-
+	/// back bottom
+	{MOVE, {-16,-24}},
+	{DRAW, {16,52}},
+	{MOVE, {0,-60}},
+	{DRAW, {0,80}},
+	{DRAW, {0,80}},
+	{MOVE, {0,-60}},
+	{DRAW, {-16,64}},
 	VL_END
 };
 
+const struct packet_t vl_player_left2[] = 
+{
+	/// starting from mid again
+	{MOVE, {-48,88}},
+	{MOVE, {-48,88}},
+
+	/// left wheel finish
+	{DRAW, {24,-16}},
+	{DRAW, {80,0}},
+	{DRAW, {24,16}},
+
+	/// left front wheel
+	{MOVE, {-32,16}},
+	{DRAW, {0,20}},
+	{DRAW, {16,8}},
+	{DRAW, {56,0}},
+	{DRAW, {16,-8}},
+	{DRAW, {-16,-8}},
+	{DRAW, {-56,0}},
+	{DRAW, {-16,8}},
+	{MOVE, {88,0}},
+	{DRAW, {0,-72}},
+	{DRAW, {-16,-8}},
+	{DRAW, {-40,0}},
+
+	/// chassis
+	{MOVE, {0,-20}},
+	{DRAW, {28,20}},
+	{MOVE, {28,16}},
+	{DRAW, {40,28}},
+	{DRAW, {0,-40}},
+	{DRAW, {-64,-108}},
+	{DRAW, {-64,-108}},
+
+	/// front wing
+	{MOVE, {52,88}},
+	{MOVE, {52,88}},
+	{DRAW, {0,-28}},
+	{DRAW, {16,24}},
+	{DRAW, {0,32}},
+	{MOVE, {0,46}},
+	{DRAW, {0,32}},
+	{DRAW, {-16,-8}},
+	{DRAW, {0,-32}},
+	VL_END
+};
+
+const struct packet_t vl_player_left3[] = 
+{
+	/// start from mid again
+	    {MOVE, {8,-80}},
+
+    /// right wheel finish
+    {DRAW, {24,16}},
+    {DRAW, {-16,12}},
+    {MOVE, {-112,-12}},
+    {DRAW, {0,-80}},
+    {DRAW, {24,-16}},
+    {DRAW, {80,0}},
+    {DRAW, {24,16}},
+    {DRAW, {0,80}},
+
+    /// right front wheel
+    {MOVE, {-4,28}},
+    {DRAW, {48,0}},
+    {DRAW, {16,8}},
+    {DRAW, {0,72}},
+    {DRAW, {-16,-8}},
+    {DRAW, {-8,0}},
+    {MOVE, {24,8}},
+    {DRAW, {-12,8}},
+
+    /// driver
+    {MOVE, {-36,-20}},
+    {DRAW, {24,44}},
+    {DRAW, {0,28}},
+    {DRAW, {-24,-16}},
+    VL_END
+};
 
 
-const struct packet_t vl_player_right[] = 
+/// right
+const struct packet_t vl_player_right1[] = 
 {
 	{MOVE, {8,-80}},
 
-	//left wheel
+	/// left wheel
 	{DRAW, {-80,0}},
 	{DRAW, {-24,-16}},
 	{DRAW, {0,-80}},
@@ -256,20 +219,20 @@ const struct packet_t vl_player_right[] =
 	{DRAW, {0,80}},
 	{DRAW, {-24,16}},
 
-	//backview
+	/// backview
 	{MOVE, {-8,0}},
 	{DRAW, {16,60}},
 	{DRAW, {0,40}},
 	{DRAW, {-16,60}},
 
-	//right wheel
+	/// right wheel
 	{MOVE, {8,0}},
 	{DRAW, {-80,0}},
 	{DRAW, {-24,-16}},
 	{DRAW, {24,-16}},
 	{DRAW, {8,0}},
 
-	//back bottom
+	/// back bottom
 	{MOVE, {-16,24}},
 	{DRAW, {16,-52}},
 	{MOVE, {0,60}},
@@ -277,14 +240,21 @@ const struct packet_t vl_player_right[] =
 	{DRAW, {0,-80}},
 	{MOVE, {0,60}},
 	{DRAW, {-16,-64}},
+	VL_END
+};
 
-	//left wheel finish
-	{MOVE, {-16,-92}},
+const struct packet_t vl_player_right2[] = 
+{
+	/// starting from mid again
+	{MOVE, {-48,-88}},
+	{MOVE, {-48,-88}},	
+
+	/// left wheel finish
 	{DRAW, {24,16}},
 	{DRAW, {80,0}},
 	{DRAW, {24,-16}},
 
-	//left front wheel
+	/// left front wheel
 	{MOVE, {-32,-16}},
 	{DRAW, {0,-20}},
 	{DRAW, {16,-8}},
@@ -298,29 +268,34 @@ const struct packet_t vl_player_right[] =
 	{DRAW, {-16,8}},
 	{DRAW, {-40,0}},
 
-	//chassis
+	/// chassis
 	{MOVE, {0,20}},
 	{DRAW, {28,-20}},
 	{MOVE, {28,-16}},
 	{DRAW, {40,-28}},
+	{DRAW, {0,40}},
+	{DRAW, {-64,108}},
+	{DRAW, {-64,108}},
 
-	{MOVE, {-8,8}},
+	/// front wing
+	{MOVE, {52,-88}},
+	{MOVE, {52,-88}},
+	{DRAW, {0,28}},
+	{DRAW, {16,-24}},
+	{DRAW, {0,-32}},
+	{MOVE, {0,-46}}, //< this one might be off
 	{DRAW, {0,-32}},
 	{DRAW, {-16,8}},
 	{DRAW, {0,32}},
-	{MOVE, {24,-16}},
-	{DRAW, {0,40}},
+	VL_END
+};
 
-	{MOVE, {-8,12}},
-	{DRAW, {0,32}},
-	{DRAW, {-16,24}},
-	{DRAW, {0,-28}},
-	{MOVE, {24,-40}},
-	{DRAW, {-64,108}},
-	{DRAW, {-64,108}},
+const struct packet_t vl_player_right3[] = 
+{
+	/// start from mid again
+	{MOVE, {8,80}},
 
-	//right wheel finish
-	{MOVE, {8,0}},
+	/// right wheel finish
 	{DRAW, {24,-16}},
 	{DRAW, {-16,-12}},
 	{MOVE, {-112,12}},
@@ -330,7 +305,7 @@ const struct packet_t vl_player_right[] =
 	{DRAW, {24,-16}},
 	{DRAW, {0,-80}},
 
-	//right front wheel
+	/// right front wheel
 	{MOVE, {-4,-28}},
 	{DRAW, {48,0}},
 	{DRAW, {16,-8}},
@@ -340,11 +315,10 @@ const struct packet_t vl_player_right[] =
 	{MOVE, {24,-8}},
 	{DRAW, {-12,-8}},
 
-	//driver
+	/// driver
 	{MOVE, {-36,20}},
 	{DRAW, {24,-44}},
 	{DRAW, {0,-28}},
 	{DRAW, {-24,16}},
-
 	VL_END
 };

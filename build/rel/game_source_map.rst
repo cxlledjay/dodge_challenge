@@ -572,20 +572,20 @@
    0510 C6 24         [ 2]  572 	ldb	#36
    0512 E7 E2         [ 6]  573 	stb	,-s
    0514 C6 F1         [ 2]  574 	ldb	#-15
-   0516 BD 0B 0E      [ 8]  575 	jsr	__Moveto_d
+   0516 BD 0B 8E      [ 8]  575 	jsr	__Moveto_d
    0519 C6 A8         [ 2]  576 	ldb	#-88
    051B D7 04         [ 4]  577 	stb	*_dp_VIA_t1_cnt_lo
    051D C6 80         [ 2]  578 	ldb	#-128
    051F E7 E2         [ 6]  579 	stb	,-s
    0521 CB 2E         [ 2]  580 	addb	#46
-   0523 BD 0B 09      [ 8]  581 	jsr	__Draw_Line_d
+   0523 BD 0B 89      [ 8]  581 	jsr	__Draw_Line_d
    0526 BD F3 54      [ 8]  582 	jsr	___Reset0Ref
    0529 C6 7F         [ 2]  583 	ldb	#127
    052B D7 04         [ 4]  584 	stb	*_dp_VIA_t1_cnt_lo
    052D C6 24         [ 2]  585 	ldb	#36
    052F E7 E2         [ 6]  586 	stb	,-s
    0531 C6 FB         [ 2]  587 	ldb	#-5
-   0533 BD 0B 0E      [ 8]  588 	jsr	__Moveto_d
+   0533 BD 0B 8E      [ 8]  588 	jsr	__Moveto_d
    0536 C6 10         [ 2]  589 	ldb	#16
    0538 D7 04         [ 4]  590 	stb	*_dp_VIA_t1_cnt_lo
    053A 8E 03 30      [ 3]  591 	ldx	#_vl_map_roadline_left_1
@@ -596,7 +596,7 @@
    0547 C6 24         [ 2]  596 	ldb	#36
    0549 E7 E2         [ 6]  597 	stb	,-s
    054B C6 05         [ 2]  598 	ldb	#5
-   054D BD 0B 0E      [ 8]  599 	jsr	__Moveto_d
+   054D BD 0B 8E      [ 8]  599 	jsr	__Moveto_d
    0550 C6 10         [ 2]  600 	ldb	#16
    0552 D7 04         [ 4]  601 	stb	*_dp_VIA_t1_cnt_lo
    0554 8E 04 1B      [ 3]  602 	ldx	#_vl_map_roadline_right_1
@@ -607,13 +607,13 @@
    0561 C6 24         [ 2]  607 	ldb	#36
    0563 E7 E2         [ 6]  608 	stb	,-s
    0565 C6 0F         [ 2]  609 	ldb	#15
-   0567 BD 0B 0E      [ 8]  610 	jsr	__Moveto_d
+   0567 BD 0B 8E      [ 8]  610 	jsr	__Moveto_d
    056A C6 A8         [ 2]  611 	ldb	#-88
    056C D7 04         [ 4]  612 	stb	*_dp_VIA_t1_cnt_lo
    056E C6 80         [ 2]  613 	ldb	#-128
    0570 E7 E2         [ 6]  614 	stb	,-s
    0572 C6 52         [ 2]  615 	ldb	#82
-   0574 BD 0B 09      [ 8]  616 	jsr	__Draw_Line_d
+   0574 BD 0B 89      [ 8]  616 	jsr	__Draw_Line_d
    0577 F6 C8 A7      [ 5]  617 	ldb	_the_map
    057A 32 66         [ 5]  618 	leas	6,s
    057C 5D            [ 2]  619 	tstb
@@ -639,20 +639,20 @@
    05A2 C6 24         [ 2]  639 	ldb	#36
    05A4 E7 E2         [ 6]  640 	stb	,-s
    05A6 C6 F1         [ 2]  641 	ldb	#-15
-   05A8 BD 0B 0E      [ 8]  642 	jsr	__Moveto_d
+   05A8 BD 0B 8E      [ 8]  642 	jsr	__Moveto_d
    05AB C6 A8         [ 2]  643 	ldb	#-88
    05AD D7 04         [ 4]  644 	stb	*_dp_VIA_t1_cnt_lo
    05AF C6 80         [ 2]  645 	ldb	#-128
    05B1 E7 E2         [ 6]  646 	stb	,-s
    05B3 CB 2E         [ 2]  647 	addb	#46
-   05B5 BD 0B 09      [ 8]  648 	jsr	__Draw_Line_d
+   05B5 BD 0B 89      [ 8]  648 	jsr	__Draw_Line_d
    05B8 BD F3 54      [ 8]  649 	jsr	___Reset0Ref
    05BB C6 7F         [ 2]  650 	ldb	#127
    05BD D7 04         [ 4]  651 	stb	*_dp_VIA_t1_cnt_lo
    05BF C6 24         [ 2]  652 	ldb	#36
    05C1 E7 E2         [ 6]  653 	stb	,-s
    05C3 C6 FB         [ 2]  654 	ldb	#-5
-   05C5 BD 0B 0E      [ 8]  655 	jsr	__Moveto_d
+   05C5 BD 0B 8E      [ 8]  655 	jsr	__Moveto_d
    05C8 C6 10         [ 2]  656 	ldb	#16
    05CA D7 04         [ 4]  657 	stb	*_dp_VIA_t1_cnt_lo
    05CC 8E 03 6A      [ 3]  658 	ldx	#_vl_map_roadline_left_2
@@ -663,7 +663,7 @@
    05D9 C6 24         [ 2]  663 	ldb	#36
    05DB E7 E2         [ 6]  664 	stb	,-s
    05DD C6 05         [ 2]  665 	ldb	#5
-   05DF BD 0B 0E      [ 8]  666 	jsr	__Moveto_d
+   05DF BD 0B 8E      [ 8]  666 	jsr	__Moveto_d
    05E2 C6 10         [ 2]  667 	ldb	#16
    05E4 D7 04         [ 4]  668 	stb	*_dp_VIA_t1_cnt_lo
    05E6 8E 04 55      [ 3]  669 	ldx	#_vl_map_roadline_right_2
@@ -674,13 +674,13 @@
    05F3 C6 24         [ 2]  674 	ldb	#36
    05F5 E7 E2         [ 6]  675 	stb	,-s
    05F7 C6 0F         [ 2]  676 	ldb	#15
-   05F9 BD 0B 0E      [ 8]  677 	jsr	__Moveto_d
+   05F9 BD 0B 8E      [ 8]  677 	jsr	__Moveto_d
    05FC C6 A8         [ 2]  678 	ldb	#-88
    05FE D7 04         [ 4]  679 	stb	*_dp_VIA_t1_cnt_lo
    0600 C6 80         [ 2]  680 	ldb	#-128
    0602 E7 E2         [ 6]  681 	stb	,-s
    0604 C6 52         [ 2]  682 	ldb	#82
-   0606 BD 0B 09      [ 8]  683 	jsr	__Draw_Line_d
+   0606 BD 0B 89      [ 8]  683 	jsr	__Draw_Line_d
    0609 F6 C8 A7      [ 5]  684 	ldb	_the_map
    060C 32 66         [ 5]  685 	leas	6,s
    060E 5D            [ 2]  686 	tstb
@@ -706,20 +706,20 @@
    0634 C6 24         [ 2]  706 	ldb	#36
    0636 E7 E2         [ 6]  707 	stb	,-s
    0638 C6 F1         [ 2]  708 	ldb	#-15
-   063A BD 0B 0E      [ 8]  709 	jsr	__Moveto_d
+   063A BD 0B 8E      [ 8]  709 	jsr	__Moveto_d
    063D C6 A8         [ 2]  710 	ldb	#-88
    063F D7 04         [ 4]  711 	stb	*_dp_VIA_t1_cnt_lo
    0641 C6 80         [ 2]  712 	ldb	#-128
    0643 E7 E2         [ 6]  713 	stb	,-s
    0645 CB 2E         [ 2]  714 	addb	#46
-   0647 BD 0B 09      [ 8]  715 	jsr	__Draw_Line_d
+   0647 BD 0B 89      [ 8]  715 	jsr	__Draw_Line_d
    064A BD F3 54      [ 8]  716 	jsr	___Reset0Ref
    064D C6 7F         [ 2]  717 	ldb	#127
    064F D7 04         [ 4]  718 	stb	*_dp_VIA_t1_cnt_lo
    0651 C6 24         [ 2]  719 	ldb	#36
    0653 E7 E2         [ 6]  720 	stb	,-s
    0655 C6 FB         [ 2]  721 	ldb	#-5
-   0657 BD 0B 0E      [ 8]  722 	jsr	__Moveto_d
+   0657 BD 0B 8E      [ 8]  722 	jsr	__Moveto_d
    065A C6 10         [ 2]  723 	ldb	#16
    065C D7 04         [ 4]  724 	stb	*_dp_VIA_t1_cnt_lo
    065E 8E 03 AA      [ 3]  725 	ldx	#_vl_map_roadline_left_3
@@ -730,7 +730,7 @@
    066B C6 24         [ 2]  730 	ldb	#36
    066D E7 E2         [ 6]  731 	stb	,-s
    066F C6 05         [ 2]  732 	ldb	#5
-   0671 BD 0B 0E      [ 8]  733 	jsr	__Moveto_d
+   0671 BD 0B 8E      [ 8]  733 	jsr	__Moveto_d
    0674 C6 10         [ 2]  734 	ldb	#16
    0676 D7 04         [ 4]  735 	stb	*_dp_VIA_t1_cnt_lo
    0678 8E 04 95      [ 3]  736 	ldx	#_vl_map_roadline_right_3
@@ -741,13 +741,13 @@
    0685 C6 24         [ 2]  741 	ldb	#36
    0687 E7 E2         [ 6]  742 	stb	,-s
    0689 C6 0F         [ 2]  743 	ldb	#15
-   068B BD 0B 0E      [ 8]  744 	jsr	__Moveto_d
+   068B BD 0B 8E      [ 8]  744 	jsr	__Moveto_d
    068E C6 A8         [ 2]  745 	ldb	#-88
    0690 D7 04         [ 4]  746 	stb	*_dp_VIA_t1_cnt_lo
    0692 C6 80         [ 2]  747 	ldb	#-128
    0694 E7 E2         [ 6]  748 	stb	,-s
    0696 C6 52         [ 2]  749 	ldb	#82
-   0698 BD 0B 09      [ 8]  750 	jsr	__Draw_Line_d
+   0698 BD 0B 89      [ 8]  750 	jsr	__Draw_Line_d
    069B F6 C8 A7      [ 5]  751 	ldb	_the_map
    069E 32 66         [ 5]  752 	leas	6,s
    06A0 5D            [ 2]  753 	tstb
@@ -773,20 +773,20 @@
    06C6 C6 24         [ 2]  773 	ldb	#36
    06C8 E7 E2         [ 6]  774 	stb	,-s
    06CA C6 F1         [ 2]  775 	ldb	#-15
-   06CC BD 0B 0E      [ 8]  776 	jsr	__Moveto_d
+   06CC BD 0B 8E      [ 8]  776 	jsr	__Moveto_d
    06CF C6 A8         [ 2]  777 	ldb	#-88
    06D1 D7 04         [ 4]  778 	stb	*_dp_VIA_t1_cnt_lo
    06D3 C6 80         [ 2]  779 	ldb	#-128
    06D5 E7 E2         [ 6]  780 	stb	,-s
    06D7 CB 2E         [ 2]  781 	addb	#46
-   06D9 BD 0B 09      [ 8]  782 	jsr	__Draw_Line_d
+   06D9 BD 0B 89      [ 8]  782 	jsr	__Draw_Line_d
    06DC BD F3 54      [ 8]  783 	jsr	___Reset0Ref
    06DF C6 7F         [ 2]  784 	ldb	#127
    06E1 D7 04         [ 4]  785 	stb	*_dp_VIA_t1_cnt_lo
    06E3 C6 24         [ 2]  786 	ldb	#36
    06E5 E7 E2         [ 6]  787 	stb	,-s
    06E7 C6 FB         [ 2]  788 	ldb	#-5
-   06E9 BD 0B 0E      [ 8]  789 	jsr	__Moveto_d
+   06E9 BD 0B 8E      [ 8]  789 	jsr	__Moveto_d
    06EC C6 10         [ 2]  790 	ldb	#16
    06EE D7 04         [ 4]  791 	stb	*_dp_VIA_t1_cnt_lo
    06F0 8E 03 E1      [ 3]  792 	ldx	#_vl_map_roadline_left_4
@@ -797,7 +797,7 @@
    06FD C6 24         [ 2]  797 	ldb	#36
    06FF E7 E2         [ 6]  798 	stb	,-s
    0701 C6 05         [ 2]  799 	ldb	#5
-   0703 BD 0B 0E      [ 8]  800 	jsr	__Moveto_d
+   0703 BD 0B 8E      [ 8]  800 	jsr	__Moveto_d
    0706 C6 10         [ 2]  801 	ldb	#16
    0708 D7 04         [ 4]  802 	stb	*_dp_VIA_t1_cnt_lo
    070A 8E 04 CC      [ 3]  803 	ldx	#_vl_map_roadline_right_4
@@ -808,13 +808,13 @@
    0717 C6 24         [ 2]  808 	ldb	#36
    0719 E7 E2         [ 6]  809 	stb	,-s
    071B C6 0F         [ 2]  810 	ldb	#15
-   071D BD 0B 0E      [ 8]  811 	jsr	__Moveto_d
+   071D BD 0B 8E      [ 8]  811 	jsr	__Moveto_d
    0720 C6 A8         [ 2]  812 	ldb	#-88
    0722 D7 04         [ 4]  813 	stb	*_dp_VIA_t1_cnt_lo
    0724 C6 80         [ 2]  814 	ldb	#-128
    0726 E7 E2         [ 6]  815 	stb	,-s
    0728 C6 52         [ 2]  816 	ldb	#82
-   072A BD 0B 09      [ 8]  817 	jsr	__Draw_Line_d
+   072A BD 0B 89      [ 8]  817 	jsr	__Draw_Line_d
    072D F6 C8 A7      [ 5]  818 	ldb	_the_map
    0730 32 66         [ 5]  819 	leas	6,s
    0732 5D            [ 2]  820 	tstb
@@ -832,7 +832,7 @@
    074A F7 C8 A7      [ 5]  832 	stb	_the_map
    074D 39            [ 5]  833 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
 
 Symbol Table
 
@@ -859,7 +859,7 @@ Symbol Table
   3 _vl_term_7_221     0215 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
 
 Area Table
 

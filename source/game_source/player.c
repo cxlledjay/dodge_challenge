@@ -17,6 +17,29 @@ const _player_draw_func PLAYER_DRAW_LUT[];
  ***************************************************/
 #define PLAYER_Y		(-112)
 
+/**
+ * @brief draw one part of the playermodel at (y,x)
+ * 
+ * used for lane change animation
+ */
+#define DRAW_PLAYER_VL(Y, X, VECLIST_PTR) 													\
+	Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(Y, X);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 16;			/* set scaling factor for drawing */					\
+	Draw_VLp(VECLIST_PTR);
+
+/**
+ * @brief draw one part of the playermodel in his current lane
+ * 
+ * used for non lane change (default)
+ */
+#define DRAW_PLAYER_STATIC_VL(VECLIST_PTR)													\
+	DRAW_PLAYER_VL(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane], VECLIST_PTR)
+
+
+
+
 
 // init func
 void player_init(void)
@@ -49,9 +72,6 @@ void player_init(void)
 	return;
  }
 
-
-
-
  void player_change_left(void)
  {
 	if(the_player.lane == LEFT_LANE)
@@ -74,9 +94,6 @@ void player_init(void)
 	/// done
 	return;
  }
-
-
-
 
  void player_change_right(void)
  {
@@ -138,41 +155,24 @@ const int PLAYER_X_LUT[3] =
 #include <vectrex.h>
 #include "game_include/graphics/g_player.h"
 
-void _player_draw_left(void)
-{
-	Reset0Ref();					//< reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
-	/// move to correct lane
-	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
-	dp_VIA_t1_cnt_lo = 10;
-	Draw_VLp(&vl_player_left);
-}
-
 void _player_draw_mid(void)
 {
-	/// draw first part
-	Reset0Ref();					//< reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
-	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
-	dp_VIA_t1_cnt_lo = 16;			//< set scaling factor for drawing
-	Draw_VLp(&vl_player_mid1);
+	DRAW_PLAYER_STATIC_VL(&vl_player_mid1);
+	DRAW_PLAYER_STATIC_VL(&vl_player_mid2); //< need to execute drawing function multiple times because of increasing analog offset
+}
 
-	/// draw second part
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]);
-	dp_VIA_t1_cnt_lo = 16;
-	Draw_VLp(&vl_player_mid2_enhanced);
+void _player_draw_left(void)
+{
+	DRAW_PLAYER_STATIC_VL(&vl_player_left1);
+	DRAW_PLAYER_STATIC_VL(&vl_player_left2);
+	DRAW_PLAYER_STATIC_VL(&vl_player_left3);
 }
 
 void _player_draw_right(void)
 {
-	Reset0Ref();					//< reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
-	/// move to correct lane
-	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
-	dp_VIA_t1_cnt_lo = 16;
-	Draw_VLp(&vl_player_right);
+	DRAW_PLAYER_STATIC_VL(&vl_player_right1);
+	DRAW_PLAYER_STATIC_VL(&vl_player_right2);
+	DRAW_PLAYER_STATIC_VL(&vl_player_right3);
 }
 
 const _player_draw_func PLAYER_DRAW_LUT[3] = 
