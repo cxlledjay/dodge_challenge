@@ -6,36 +6,36 @@ player_t the_player;
 
 
 
-//different lane swap animation times (in frames) for different speed stages
-const unsigned int PLAYER_ANIMATION_FRAME_CNT_LUT[11] =
+//fist animation step
+const unsigned int PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[11] =
 {
-	14,
-	14,
-	14,
-	11,
-	11,
-	11,
-	8,
-	8,
-	5,
-	5,
-	2
+	7,
+	7,
+	7,
+	7,
+	7,
+	7,
+	7,
+	7,
+	7,
+	7,
+	7
 };
 
-//half the values for smooth transition keeping
-const unsigned int PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT[11] =
+//second animation step
+const unsigned int PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT[11] =
 {
-	7,
-	7,
-	7,
 	6,
 	6,
 	6,
-	4,
-	4,
-	3,
-	3,
-	1
+	6,
+	6,
+	6,
+	6,
+	6,
+	6,
+	6,
+	6
 };
 
 
@@ -44,10 +44,16 @@ void check_collision(void);
 const int PLAYER_STATIC_X_LUT[];
 typedef void (*_player_draw_func)(void);
 const _player_draw_func PLAYER_DRAW_LUT[];
-const int SP1_MID_LEFT_X_LUT[];
-const int SP1_RIGHT_MID_X_LUT[];
-const int SP1_MID_RIGHT_X_LUT[];
-const int SP1_LEFT_MID_X_LUT[];
+
+void player_change_left_to_mid_step2(void);
+void player_change_mid_to_right_step2(void);
+void player_change_right_to_mid_step2(void);
+void player_change_mid_to_left_step2(void);
+
+const int _SP1_LEFT_MID_X_LUT_2[];
+const int _SP1_MID_RIGHT_X_LUT_2[];
+const int _SP1_RIGHT_MID_X_LUT_2[];
+const int _SP1_MID_LEFT_X_LUT_2[];
 
 
 /****************************************************
@@ -56,33 +62,51 @@ const int SP1_LEFT_MID_X_LUT[];
 #define PLAYER_Y		(-112)
 
 /**
- * @brief draw one part of the playermodel at (y,x)
+ * @brief draw one part of the playermodel at the_player.x
  * 
- * used for lane change animation
+ * @param VECLIST_PTR pointer to list of packet_t (graphic)
  */
-#define DRAW_PLAYER_VL(Y, X, VECLIST_PTR) 													\
+#define _DRAW_PLAYER_VL(VECLIST_PTR) 													\
 	Reset0Ref();					/* reset beam to center	*/								\
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
-	Moveto_d(Y, X);					/* move to player pos */								\
+	Moveto_d(PLAYER_Y, the_player.x);					/* move to player pos */								\
 	dp_VIA_t1_cnt_lo = 16;			/* set scaling factor for drawing */					\
 	Draw_VLp(VECLIST_PTR);
 
-/**
- * @brief draw one part of the playermodel in his current lane
- * 
- * used for non lane change (default)
- */
-#define DRAW_PLAYER_STATIC_VL(VECLIST_PTR)													\
-	DRAW_PLAYER_VL(PLAYER_Y, PLAYER_STATIC_X_LUT[(unsigned int) the_player.lane], VECLIST_PTR)
+
+/// @brief draw leftlane model of player at (PLAYER_Y,the_player.x)
+#define PLAYER_DRAW_LEFT()				\
+	_DRAW_PLAYER_VL(&vl_player_left1);	\
+	_DRAW_PLAYER_VL(&vl_player_left2);	\
+	_DRAW_PLAYER_VL(&vl_player_left3);
+	
+/// @brief draw leftlane model of player at (PLAYER_Y,the_player.x)
+#define PLAYER_DRAW_MID()				\
+	_DRAW_PLAYER_VL(&vl_player_mid1);	\
+	_DRAW_PLAYER_VL(&vl_player_mid2);
+	
+/// @brief draw leftlane model of player at (PLAYER_Y,the_player.x)
+#define PLAYER_DRAW_RIGHT()				\
+	_DRAW_PLAYER_VL(&vl_player_right1);	\
+	_DRAW_PLAYER_VL(&vl_player_right2);	\
+	_DRAW_PLAYER_VL(&vl_player_right3);
+
+/** the above has to be done in order to accomodate analog errors when drawing big vector lists */
 
 
 
 
 
-// init func
+
+
+/****************************************************
+ * functions 
+ ***************************************************/
+
+/// @brief init function
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .cnt = 0, .tick = player_draw};
+	player_t fresh_player = {.lane = MID_LANE, .x = PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0,  .cnt = 0, .tick = player_draw};
 	the_player = fresh_player;
 }
 
@@ -95,150 +119,188 @@ void player_init(void)
 
 #include <vectrex.h>
 
+/// @brief default drawing function in case of no active lane change
 void player_draw(void)
 {
+	/// check for collision
+	check_collision(); //< if collision occurs -> wont reach rest of function
+
 	/// drawing settings
 	Intensity_5F();					//< set brightness of the electron beam
 
 	/// draw player vector list (based on lane)
 	(* PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
 
-	/// dont forget to check for collisions
-	check_collision();
-
 	/// done
 	return;
 }
+
+
+
+/// ---------------------------------< lane changes >---------------------------------
+
 
 #include "game_include/graphics/g_player.h"
 #include "game_include/game.h"
-void player_change_left(void)
+
+/**
+ * @brief generic part for all lane change functions
+ */
+#define LANE_CHANGE_UPDATE_VARS()													\
+	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */		\
+	check_collision(); /* check for collisions */									\
+	the_player.cnt--; /* count down counter for next frame */						\
+	Intensity_5F();
+
+
+
+
+/// actual lane change functions: .......................................................
+
+
+/// left -> mid .................................../
+
+void player_change_left_to_mid_step1(void)
 {
-	if(the_player.lane == LEFT_LANE)
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_LEFT();
+
+	/// check if first half of animation is done
+	if(the_player.cnt == 0)
 	{
-		/// cannot change lane -> behave as usual
-		the_player.tick = player_draw;
-		the_player.tick(); //< we still need to draw the player in this frame
+		/// transition to second half
+		the_player.tick = player_change_left_to_mid_step2;
+		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT[the_game.stage];
+		the_player.x_LUT = _SP1_LEFT_MID_X_LUT_2;
 	}
-	else
-	{
-		/// animation part
-		if(the_player.lane == MID_LANE)
-		{
-			/// mid -> left
-
-			if(the_player.cnt > PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT[the_game.stage])
-			{
-				/// first part of animation
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_LEFT_X_LUT[the_player.cnt], &vl_player_mid1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_LEFT_X_LUT[the_player.cnt], &vl_player_mid2);
-			}
-			else
-			{
-				/// second part
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_LEFT_X_LUT[the_player.cnt], &vl_player_left1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_LEFT_X_LUT[the_player.cnt], &vl_player_left2);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_LEFT_X_LUT[the_player.cnt], &vl_player_left3);
-			}
-		}
-		else
-		{
-			/// right -> mid
-
-			if(the_player.cnt > PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT[the_game.stage])
-			{
-				/// first part of animation
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_RIGHT_MID_X_LUT[the_player.cnt], &vl_player_right1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_RIGHT_MID_X_LUT[the_player.cnt], &vl_player_right2);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_RIGHT_MID_X_LUT[the_player.cnt], &vl_player_right3);
-			}
-			else
-			{
-				/// second part
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_RIGHT_MID_X_LUT[the_player.cnt], &vl_player_mid1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_RIGHT_MID_X_LUT[the_player.cnt], &vl_player_mid2);
-			}
-		}
-
-
-		the_player.cnt--; //< one frame of animation is completed
-		if(the_player.cnt == 0)
-		{
-			the_player.lane--; //< keep track of new lane the player is now on
-			the_player.tick = player_draw; //< done with animation, next frame is normal again
-		}
-	
-		/// dont forget to check for collisions
-		check_collision();
-	}
-
-	/// done
-	return;
 }
 
-void player_change_right(void)
+void player_change_left_to_mid_step2(void)
 {
-	if(the_player.lane == RIGHT_LANE)
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_MID();
+
+	/// check if second half of animation is done
+	if(the_player.cnt == 0)
 	{
-		/// cannot change lane -> behave as usual
+		/// transition to normal again
+		the_player.lane = MID_LANE;
+		the_player.x = PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
-		the_player.tick(); //< we still need to draw the player in this frame
 	}
-	else
-	{
-		/// animation part
-		if(the_player.lane == MID_LANE)
-		{
-			///        mid -> right
-
-			if(the_player.cnt > PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT[the_game.stage])
-			{
-				/// first part of animation
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_RIGHT_X_LUT[the_player.cnt], &vl_player_mid1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_RIGHT_X_LUT[the_player.cnt], &vl_player_mid2);
-			}
-			else
-			{
-				/// second part
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_RIGHT_X_LUT[the_player.cnt], &vl_player_right1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_RIGHT_X_LUT[the_player.cnt], &vl_player_right2);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_MID_RIGHT_X_LUT[the_player.cnt], &vl_player_right3);
-			}
-		}
-		else
-		{
-			/// left -> mid
-
-			if(the_player.cnt > PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT[the_game.stage])
-			{
-				/// first part of animation
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_LEFT_MID_X_LUT[the_player.cnt], &vl_player_left1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_LEFT_MID_X_LUT[the_player.cnt], &vl_player_left2);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_LEFT_MID_X_LUT[the_player.cnt], &vl_player_left3);
-			}
-			else
-			{
-				/// second part
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_LEFT_MID_X_LUT[the_player.cnt], &vl_player_mid1);
-				DRAW_PLAYER_VL(PLAYER_Y, SP1_LEFT_MID_X_LUT[the_player.cnt], &vl_player_mid2);
-			}
-		}
-
-
-		the_player.cnt--; //< one frame of animation is completed
-		if(the_player.cnt == 0)
-		{
-			the_player.lane++; //< keep track of new lane the player is now on
-			the_player.tick = player_draw; //< done with animation, next frame is normal again
-		}
-	
-		/// dont forget to check for collisions
-		check_collision();
-	}
-
-	/// done
-	return;
 }
+
+
+
+/// mid -> right .................................../
+
+void player_change_mid_to_right_step1(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_MID();
+
+	/// check if first half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to second half
+		the_player.tick = player_change_mid_to_right_step2;
+		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT[the_game.stage];
+		the_player.x_LUT = _SP1_MID_RIGHT_X_LUT_2;
+	}
+}
+
+void player_change_mid_to_right_step2(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_RIGHT();
+
+	/// check if second half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to normal again
+		the_player.lane = RIGHT_LANE;
+		the_player.x = PLAYER_STATIC_X_LUT[RIGHT_LANE];
+		the_player.tick = player_draw;
+	}
+}
+
+
+
+/// right -> mid .................................../
+
+void player_change_right_to_mid_step1(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_RIGHT();
+
+	/// check if first half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to second half
+		the_player.tick = player_change_right_to_mid_step2;
+		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT[the_game.stage];
+		the_player.x_LUT = _SP1_RIGHT_MID_X_LUT_2;
+	}
+}
+
+void player_change_right_to_mid_step2(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_MID();
+
+	/// check if second half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to normal again
+		the_player.lane = MID_LANE;
+		the_player.x = PLAYER_STATIC_X_LUT[MID_LANE];
+		the_player.tick = player_draw;
+	}
+}
+
+
+
+/// mid -> left .................................../
+
+void player_change_mid_to_left_step1(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_MID();
+
+	/// check if first half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to second half
+		the_player.tick = player_change_mid_to_left_step2;
+		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT[the_game.stage];
+		the_player.x_LUT = _SP1_MID_LEFT_X_LUT_2;
+	}
+}
+
+void player_change_mid_to_left_step2(void)
+{
+	LANE_CHANGE_UPDATE_VARS();
+	PLAYER_DRAW_LEFT();
+
+	/// check if second half of animation is done
+	if(the_player.cnt == 0)
+	{
+		/// transition to normal again
+		the_player.lane = LEFT_LANE;
+		the_player.x = PLAYER_STATIC_X_LUT[LEFT_LANE];
+		the_player.tick = player_draw;
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -257,22 +319,17 @@ void player_change_right(void)
 
 void _player_draw_mid(void)
 {
-	DRAW_PLAYER_STATIC_VL(&vl_player_mid1);
-	DRAW_PLAYER_STATIC_VL(&vl_player_mid2); //< need to execute drawing function multiple times because of increasing analog offset
+	PLAYER_DRAW_MID();
 }
 
 void _player_draw_left(void)
 {
-	DRAW_PLAYER_STATIC_VL(&vl_player_left1);
-	DRAW_PLAYER_STATIC_VL(&vl_player_left2);
-	DRAW_PLAYER_STATIC_VL(&vl_player_left3);
+	PLAYER_DRAW_LEFT();
 }
 
 void _player_draw_right(void)
 {
-	DRAW_PLAYER_STATIC_VL(&vl_player_right1);
-	DRAW_PLAYER_STATIC_VL(&vl_player_right2);
-	DRAW_PLAYER_STATIC_VL(&vl_player_right3);
+	PLAYER_DRAW_RIGHT();
 }
 
 const _player_draw_func PLAYER_DRAW_LUT[3] = 
@@ -286,7 +343,7 @@ const _player_draw_func PLAYER_DRAW_LUT[3] =
  
 
 /****************************************************
- * subroutines
+ * collision detection
  ***************************************************/
 
  /**
@@ -321,14 +378,17 @@ const int PLAYER_STATIC_X_LUT[3] =
  * !!! the LUTs are read beackwards !!!
  */
 
-const int SP1_LEFT_MID_X_LUT[13] = //< [speed1] left -> mid
+const int _SP1_LEFT_MID_X_LUT_2[6] = //< [speed1] left -> mid (2)
 {
 	-6,
 	-12,
 	-18,
 	-23,
 	-29,
-	-35,
+	-35
+};
+const int _SP1_LEFT_MID_X_LUT_1[7] = //< [speed1] left -> mid (1)
+{
 	-41,
 	-47,
 	-53,
@@ -337,14 +397,19 @@ const int SP1_LEFT_MID_X_LUT[13] = //< [speed1] left -> mid
 	-70,
 	-76
 };
-const int SP1_MID_RIGHT_X_LUT[13] = //< [speed1] mid -> right
+
+
+const int _SP1_MID_RIGHT_X_LUT_2[6] = //< [speed1] mid -> right (2)
 {
 	76,
 	70,
 	64,
 	59,
 	53,
-	47,
+	47
+};
+const int _SP1_MID_RIGHT_X_LUT_1[7] = //< [speed1] mid -> right (1)
+{
 	41,
 	35,
 	29,
@@ -355,14 +420,17 @@ const int SP1_MID_RIGHT_X_LUT[13] = //< [speed1] mid -> right
 };
 
 
-const int SP1_RIGHT_MID_X_LUT[13] = //< [speed1] right -> mid
+const int _SP1_RIGHT_MID_X_LUT_2[6] = //< [speed1] right -> mid (2)
 {
 	6,
 	12,
 	18,
 	23,
 	29,
-	35,
+	35
+};
+const int _SP1_RIGHT_MID_X_LUT_1[7] = //< [speed1] right -> mid (1)
+{
 	41,
 	47,
 	53,
@@ -371,14 +439,19 @@ const int SP1_RIGHT_MID_X_LUT[13] = //< [speed1] right -> mid
 	70,
 	76
 };
-const int SP1_MID_LEFT_X_LUT[13] = //< [speed1] mid -> left
+
+
+const int _SP1_MID_LEFT_X_LUT_2[6] = //< [speed1] mid -> left (2)
 {
 	-76,
 	-70,
 	-64,
 	-59,
 	-53,
-	-47,
+	-47
+};
+const int _SP1_MID_LEFT_X_LUT_1[7] = //< [speed1] mid -> left (1)
+{
 	-41,
 	-35,
 	-29,

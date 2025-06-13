@@ -5,34 +5,34 @@
 	.module	player.c
 	.area	.bss
 	.globl	_the_player
-_the_player:	.blkb	4
-	.globl	_PLAYER_ANIMATION_FRAME_CNT_LUT
+_the_player:	.blkb	7
+	.globl	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT
 	.area	.text
-_PLAYER_ANIMATION_FRAME_CNT_LUT:
-	.byte	14
-	.byte	14
-	.byte	14
-	.byte	11
-	.byte	11
-	.byte	11
-	.byte	8
-	.byte	8
-	.byte	5
-	.byte	5
-	.byte	2
-	.globl	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT
-_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT:
+_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT:
 	.byte	7
 	.byte	7
 	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.byte	7
+	.globl	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT
+_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT:
 	.byte	6
 	.byte	6
 	.byte	6
-	.byte	4
-	.byte	4
-	.byte	3
-	.byte	3
-	.byte	1
+	.byte	6
+	.byte	6
+	.byte	6
+	.byte	6
+	.byte	6
+	.byte	6
+	.byte	6
+	.byte	6
 	.globl	_PLAYER_STATIC_X_LUT
 _PLAYER_STATIC_X_LUT:
 	.byte	-82
@@ -43,70 +43,45 @@ _PLAYER_DRAW_LUT:
 	.word	__player_draw_left
 	.word	__player_draw_mid
 	.word	__player_draw_right
-	.globl	_SP1_MID_LEFT_X_LUT
-_SP1_MID_LEFT_X_LUT:
-	.byte	-76
-	.byte	-70
-	.byte	-64
-	.byte	-59
-	.byte	-53
-	.byte	-47
-	.byte	-41
-	.byte	-35
-	.byte	-29
-	.byte	-23
-	.byte	-18
-	.byte	-12
-	.byte	-6
-	.globl	_SP1_RIGHT_MID_X_LUT
-_SP1_RIGHT_MID_X_LUT:
-	.byte	6
-	.byte	12
-	.byte	18
-	.byte	23
-	.byte	29
-	.byte	35
-	.byte	41
-	.byte	47
-	.byte	53
-	.byte	59
-	.byte	64
-	.byte	70
-	.byte	76
-	.globl	_SP1_MID_RIGHT_X_LUT
-_SP1_MID_RIGHT_X_LUT:
-	.byte	76
-	.byte	70
-	.byte	64
-	.byte	59
-	.byte	53
-	.byte	47
-	.byte	41
-	.byte	35
-	.byte	29
-	.byte	23
-	.byte	18
-	.byte	12
-	.byte	6
-	.globl	_SP1_LEFT_MID_X_LUT
-_SP1_LEFT_MID_X_LUT:
+	.globl	__SP1_LEFT_MID_X_LUT_2
+__SP1_LEFT_MID_X_LUT_2:
 	.byte	-6
 	.byte	-12
 	.byte	-18
 	.byte	-23
 	.byte	-29
 	.byte	-35
-	.byte	-41
-	.byte	-47
-	.byte	-53
-	.byte	-59
-	.byte	-64
-	.byte	-70
+	.globl	__SP1_MID_RIGHT_X_LUT_2
+__SP1_MID_RIGHT_X_LUT_2:
+	.byte	76
+	.byte	70
+	.byte	64
+	.byte	59
+	.byte	53
+	.byte	47
+	.globl	__SP1_RIGHT_MID_X_LUT_2
+__SP1_RIGHT_MID_X_LUT_2:
+	.byte	6
+	.byte	12
+	.byte	18
+	.byte	23
+	.byte	29
+	.byte	35
+	.globl	__SP1_MID_LEFT_X_LUT_2
+__SP1_MID_LEFT_X_LUT_2:
 	.byte	-76
+	.byte	-70
+	.byte	-64
+	.byte	-59
+	.byte	-53
+	.byte	-47
 	.globl	_player_init
 _player_init:
 	ldx	#_player_draw
-	stx	_the_player+2
+	stx	_the_player+5
+	clr	_the_player+4
+	ldd	#0
+	std	_the_player+2
 	clr	_the_player+1
 	ldb	#1
 	stb	_the_player
@@ -765,27 +740,198 @@ _vl_player_right3:
 	.byte	16
 _vl_term_7_323:
 	.byte	1
-	.globl	_player_change_left
-_player_change_left:
-	ldb	_the_player
-	lbeq	L15
-	cmpb	#1	;cmpqi:
-	lbeq	L16
-	ldb	_the_game+2
+	.globl	_player_change_left_to_mid_step1
+_player_change_left_to_mid_step1:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
 	tfr	d,x
-	ldb	_the_player+1
-	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-	lbls	L10
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
 	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left3
+	jsr	___Draw_VLp
+	leas	3,s
+	tst	_the_player+4
+	bne	L7
+	ldx	#_player_change_left_to_mid_step2
+	stx	_the_player+5
+	ldb	_the_game+2
 	clra		;zero_extendqihi: R:b -> R:d
 	tfr	d,x
-	ldb	#-112
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+	stb	_the_player+4
+	ldx	#__SP1_LEFT_MID_X_LUT_2
+	stx	_the_player+2
+L7:
+	leas	3,s
+	rts
+	.globl	_player_change_left_to_mid_step2
+_player_change_left_to_mid_step2:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
 	stb	,-s
-	ldb	_SP1_RIGHT_MID_X_LUT,x
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid2
+	jsr	___Draw_VLp
+	leas	2,s
+	tst	_the_player+4
+	bne	L11
+	ldb	#1
+	stb	_the_player
+	clr	_the_player+1
+	ldx	#_player_draw
+	stx	_the_player+5
+L11:
+	leas	3,s
+	rts
+	.globl	_player_change_mid_to_right_step1
+_player_change_mid_to_right_step1:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid2
+	jsr	___Draw_VLp
+	leas	2,s
+	tst	_the_player+4
+	bne	L14
+	ldx	#_player_change_mid_to_right_step2
+	stx	_the_player+5
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+	stb	_the_player+4
+	ldx	#__SP1_MID_RIGHT_X_LUT_2
+	stx	_the_player+2
+L14:
+	leas	3,s
+	rts
+	.globl	_player_change_mid_to_right_step2
+_player_change_mid_to_right_step2:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -794,12 +940,9 @@ _player_change_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_RIGHT_MID_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -808,327 +951,264 @@ _player_change_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_RIGHT_MID_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	ldx	#_vl_player_right3
 	jsr	___Draw_VLp
 	leas	3,s
-L9:
-	dec	_the_player+1
-	ldb	_the_player+1
-	bne	L12
-	dec	_the_player
+	tst	_the_player+4
+	bne	L17
+	ldb	#2
+	stb	_the_player
+	ldb	#82
+	stb	_the_player+1
 	ldx	#_player_draw
-	stx	_the_player+2
-L12:
+	stx	_the_player+5
+L17:
+	leas	3,s
 	rts
-L16:
-	ldb	_the_game+2
+	.globl	_player_change_right_to_mid_step1
+_player_change_right_to_mid_step1:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
 	tfr	d,x
-	ldb	_the_player+1
-	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-	lbls	L8
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_MID_LEFT_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid1
+	ldx	#_vl_player_right1
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_MID_LEFT_X_LUT,x
-	bra	L13
-L15:
-	ldx	#_player_draw
-	stx	_the_player+2
-	jmp	_player_draw
-L10:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
 	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_RIGHT_MID_X_LUT,x
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid1
+	ldx	#_vl_player_right2
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_RIGHT_MID_X_LUT,x
-L13:
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid2
-	jsr	___Draw_VLp
-	leas	2,s
-	lbra	L9
-L8:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_MID_LEFT_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left1
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_MID_LEFT_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left2
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_MID_LEFT_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left3
+	ldx	#_vl_player_right3
 	jsr	___Draw_VLp
 	leas	3,s
-	lbra	L9
-	.globl	_player_change_right
-_player_change_right:
-	ldb	_the_player
-	cmpb	#2	;cmpqi:
-	lbeq	L26
-	cmpb	#1	;cmpqi:
-	lbeq	L27
+	tst	_the_player+4
+	bne	L20
+	ldx	#_player_change_right_to_mid_step2
+	stx	_the_player+5
 	ldb	_the_game+2
 	clra		;zero_extendqihi: R:b -> R:d
 	tfr	d,x
-	ldb	_the_player+1
-	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-	bhi	L28
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_LEFT_MID_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid1
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_LEFT_MID_X_LUT,x
-L25:
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid2
-	jsr	___Draw_VLp
-	leas	2,s
-L21:
-	dec	_the_player+1
-	ldb	_the_player+1
-	bne	L24
-	inc	_the_player
-	ldx	#_player_draw
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+	stb	_the_player+4
+	ldx	#__SP1_RIGHT_MID_X_LUT_2
 	stx	_the_player+2
-L24:
-	rts
-L28:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_LEFT_MID_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left1
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_LEFT_MID_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left2
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_LEFT_MID_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_left3
-	jsr	___Draw_VLp
-	leas	3,s
-	lbra	L21
-L27:
-	ldb	_the_game+2
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	_the_player+1
-	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-	bls	L20
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_MID_RIGHT_X_LUT,x
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid1
-	jsr	___Draw_VLp
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_SP1_MID_RIGHT_X_LUT,x
-	lbra	L25
 L20:
+	leas	3,s
+	rts
+	.globl	_player_change_right_to_mid_step2
+_player_change_right_to_mid_step2:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_MID_RIGHT_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_right1
+	ldx	#_vl_player_mid1
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_MID_RIGHT_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_right2
+	ldx	#_vl_player_mid2
+	jsr	___Draw_VLp
+	leas	2,s
+	tst	_the_player+4
+	bne	L23
+	ldb	#1
+	stb	_the_player
+	clr	_the_player+1
+	ldx	#_player_draw
+	stx	_the_player+5
+L23:
+	leas	3,s
+	rts
+	.globl	_player_change_mid_to_left_step1
+_player_change_mid_to_left_step1:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_mid1
 	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player+1
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_SP1_MID_RIGHT_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_right3
+	ldx	#_vl_player_mid2
+	jsr	___Draw_VLp
+	leas	2,s
+	tst	_the_player+4
+	bne	L26
+	ldx	#_player_change_mid_to_left_step2
+	stx	_the_player+5
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+	stb	_the_player+4
+	ldx	#__SP1_MID_LEFT_X_LUT_2
+	stx	_the_player+2
+L26:
+	leas	3,s
+	rts
+	.globl	_player_change_mid_to_left_step2
+_player_change_mid_to_left_step2:
+	leas	-3,s
+	ldb	_the_player+4
+	stb	,s
+	clra		;zero_extendqihi: R:b -> R:d
+	std	1,s
+	tfr	d,x
+	exg	d,x
+	addd	_the_player+2; addhi3,3
+	exg	d,x
+	ldb	,x
+	stb	_the_player+1
+	ldb	,s
+	decb
+	stb	_the_player+4
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	addb	#17
+	stb	,-s
+	ldb	_the_player+1
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_player_left3
 	jsr	___Draw_VLp
 	leas	3,s
-	lbra	L21
-L26:
+	tst	_the_player+4
+	bne	L29
+	clr	_the_player
+	ldb	#-82
+	stb	_the_player+1
 	ldx	#_player_draw
-	stx	_the_player+2
-	jmp	_player_draw
+	stx	_the_player+5
+L29:
+	leas	3,s
+	rts
 	.globl	__player_draw_mid
 __player_draw_mid:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1137,12 +1217,9 @@ __player_draw_mid:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1154,12 +1231,9 @@ __player_draw_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1168,12 +1242,9 @@ __player_draw_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1182,12 +1253,9 @@ __player_draw_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1199,12 +1267,9 @@ __player_draw_right:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1213,12 +1278,9 @@ __player_draw_right:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1227,12 +1289,9 @@ __player_draw_right:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
+	addb	#17
 	stb	,-s
-	ldb	_PLAYER_STATIC_X_LUT,x
+	ldb	_the_player+1
 	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
@@ -1242,3 +1301,39 @@ __player_draw_right:
 	.globl	_check_collision
 _check_collision:
 	rts
+	.globl	__SP1_LEFT_MID_X_LUT_1
+__SP1_LEFT_MID_X_LUT_1:
+	.byte	-41
+	.byte	-47
+	.byte	-53
+	.byte	-59
+	.byte	-64
+	.byte	-70
+	.byte	-76
+	.globl	__SP1_MID_RIGHT_X_LUT_1
+__SP1_MID_RIGHT_X_LUT_1:
+	.byte	41
+	.byte	35
+	.byte	29
+	.byte	23
+	.byte	18
+	.byte	12
+	.byte	6
+	.globl	__SP1_RIGHT_MID_X_LUT_1
+__SP1_RIGHT_MID_X_LUT_1:
+	.byte	41
+	.byte	47
+	.byte	53
+	.byte	59
+	.byte	64
+	.byte	70
+	.byte	76
+	.globl	__SP1_MID_LEFT_X_LUT_1
+__SP1_MID_LEFT_X_LUT_1:
+	.byte	-41
+	.byte	-35
+	.byte	-29
+	.byte	-23
+	.byte	-18
+	.byte	-12
+	.byte	-6

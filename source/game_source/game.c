@@ -84,13 +84,24 @@ void play_start_animation(void)
 //debug
 #include "lib/print/print.h"
 
+unsigned int temp = 0;
 
 void game_run(void)
 {
     /// sync to 50 fps
     Wait_Recal();
 
-    print_unsigned_int(100,-20,the_game.stage);
+    if(temp == 0)
+    {
+        temp = 10;
+    }
+    else
+    {
+        temp--;
+        return;
+    }
+
+    print_signed_int(100,-20,the_player.x);
     
     /// ----------------------------------< calculations >----------------------------------
 
@@ -132,19 +143,61 @@ void game_run(void)
     else if(input & 0b00000010) //< go left
     {
         /// only allow lange change if there is no active lane change
-        if(the_player.cnt == 0)
+        if(the_player.tick == player_draw)
         {
-            the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_LUT[the_game.stage];
-            the_player.tick = player_change_left;
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case RIGHT_LANE: //< right -> mid
+                    the_player.tick = player_change_right_to_mid_step1;
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
+                    the_player.x_LUT = _SP1_RIGHT_MID_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.lane = CHANGE;
+                    break;
+                case MID_LANE: //< mid -> left
+                    the_player.tick = player_change_mid_to_left_step1;
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
+                    the_player.x_LUT = _SP1_MID_LEFT_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.lane = CHANGE;
+                    break;
+                case LEFT_LANE: //< in left lane
+                    break; //< cant go further left
+                case CHANGE:
+                case NA:
+                default:
+                    /// should never happen!
+                    break;
+            }
         } 
     }
     else if(input & 0b00000100) //< go right
     {
         /// only allow lange change if there is no active lane change
-        if(the_player.cnt == 0)
+        if(the_player.tick == player_draw)
         {
-            the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_LUT[the_game.stage];
-            the_player.tick = player_change_right;
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case LEFT_LANE: //< left -> mid
+                    the_player.tick = player_change_left_to_mid_step1;
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
+                    the_player.x_LUT = _SP1_LEFT_MID_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.lane = CHANGE;
+                    break;
+                case MID_LANE: //< mid -> right
+                    the_player.tick = player_change_mid_to_right_step1;
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
+                    the_player.x_LUT = _SP1_MID_RIGHT_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.lane = CHANGE;
+                    break;
+                case RIGHT_LANE: //< in right lane
+                    break; //< cant go further right
+                case CHANGE:
+                case NA:
+                default:
+                    /// should never happen!
+                    break;
+            }
         }
     }
     
@@ -156,12 +209,12 @@ void game_run(void)
     /// draw the road
     the_map.tick();
 
-    /// TODO: draw enemies
+    /// draw the player & check collisions etc.
+    the_player.tick(); //< keep sequence so the game seems more fair!
+    
+    /// TODO: draw new position of enemies
 
-    /// TODO: draw powerups
-
-    /// draw the player
-    the_player.tick();
+    /// TODO: draw new position of powerups
 
     /// done
     return;

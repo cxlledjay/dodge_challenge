@@ -15,6 +15,7 @@
         "map.h": "c",
         "misc.h": "c",
         "g_misc.h": "c",
-        "g_map.h": "c"
+        "g_map.h": "c",
+        "g_player.h": "c"
     }
 }

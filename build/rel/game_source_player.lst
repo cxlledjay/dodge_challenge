@@ -5,34 +5,34 @@
                               5 	.module	player.c
                               6 	.area	.bss
                               7 	.globl	_the_player
-   0000                       8 _the_player:	.blkb	4
-                              9 	.globl	_PLAYER_ANIMATION_FRAME_CNT_LUT
+   0000                       8 _the_player:	.blkb	7
+                              9 	.globl	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT
                              10 	.area	.text
-   0000                      11 _PLAYER_ANIMATION_FRAME_CNT_LUT:
-   0000 0E                   12 	.byte	14
-   0001 0E                   13 	.byte	14
-   0002 0E                   14 	.byte	14
-   0003 0B                   15 	.byte	11
-   0004 0B                   16 	.byte	11
-   0005 0B                   17 	.byte	11
-   0006 08                   18 	.byte	8
-   0007 08                   19 	.byte	8
-   0008 05                   20 	.byte	5
-   0009 05                   21 	.byte	5
-   000A 02                   22 	.byte	2
-                             23 	.globl	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT
-   000B                      24 _PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT:
-   000B 07                   25 	.byte	7
-   000C 07                   26 	.byte	7
-   000D 07                   27 	.byte	7
+   0000                      11 _PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT:
+   0000 07                   12 	.byte	7
+   0001 07                   13 	.byte	7
+   0002 07                   14 	.byte	7
+   0003 07                   15 	.byte	7
+   0004 07                   16 	.byte	7
+   0005 07                   17 	.byte	7
+   0006 07                   18 	.byte	7
+   0007 07                   19 	.byte	7
+   0008 07                   20 	.byte	7
+   0009 07                   21 	.byte	7
+   000A 07                   22 	.byte	7
+                             23 	.globl	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT
+   000B                      24 _PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT:
+   000B 06                   25 	.byte	6
+   000C 06                   26 	.byte	6
+   000D 06                   27 	.byte	6
    000E 06                   28 	.byte	6
    000F 06                   29 	.byte	6
    0010 06                   30 	.byte	6
-   0011 04                   31 	.byte	4
-   0012 04                   32 	.byte	4
-   0013 03                   33 	.byte	3
-   0014 03                   34 	.byte	3
-   0015 01                   35 	.byte	1
+   0011 06                   31 	.byte	6
+   0012 06                   32 	.byte	6
+   0013 06                   33 	.byte	6
+   0014 06                   34 	.byte	6
+   0015 06                   35 	.byte	6
                              36 	.globl	_PLAYER_STATIC_X_LUT
    0016                      37 _PLAYER_STATIC_X_LUT:
    0016 AE                   38 	.byte	-82
@@ -40,1252 +40,1349 @@
    0018 52                   40 	.byte	82
                              41 	.globl	_PLAYER_DRAW_LUT
    0019                      42 _PLAYER_DRAW_LUT:
-   0019`06`64                43 	.word	__player_draw_left
-   001B`06`1E                44 	.word	__player_draw_mid
-   001D`06`CC                45 	.word	__player_draw_right
-                             46 	.globl	_SP1_MID_LEFT_X_LUT
-   001F                      47 _SP1_MID_LEFT_X_LUT:
-   001F B4                   48 	.byte	-76
-   0020 BA                   49 	.byte	-70
-   0021 C0                   50 	.byte	-64
-   0022 C5                   51 	.byte	-59
-   0023 CB                   52 	.byte	-53
-   0024 D1                   53 	.byte	-47
-   0025 D7                   54 	.byte	-41
-   0026 DD                   55 	.byte	-35
-   0027 E3                   56 	.byte	-29
-   0028 E9                   57 	.byte	-23
-   0029 EE                   58 	.byte	-18
-   002A F4                   59 	.byte	-12
-   002B FA                   60 	.byte	-6
-                             61 	.globl	_SP1_RIGHT_MID_X_LUT
-   002C                      62 _SP1_RIGHT_MID_X_LUT:
-   002C 06                   63 	.byte	6
-   002D 0C                   64 	.byte	12
-   002E 12                   65 	.byte	18
-   002F 17                   66 	.byte	23
-   0030 1D                   67 	.byte	29
-   0031 23                   68 	.byte	35
-   0032 29                   69 	.byte	41
-   0033 2F                   70 	.byte	47
-   0034 35                   71 	.byte	53
-   0035 3B                   72 	.byte	59
-   0036 40                   73 	.byte	64
-   0037 46                   74 	.byte	70
-   0038 4C                   75 	.byte	76
-                             76 	.globl	_SP1_MID_RIGHT_X_LUT
-   0039                      77 _SP1_MID_RIGHT_X_LUT:
-   0039 4C                   78 	.byte	76
-   003A 46                   79 	.byte	70
-   003B 40                   80 	.byte	64
-   003C 3B                   81 	.byte	59
-   003D 35                   82 	.byte	53
-   003E 2F                   83 	.byte	47
-   003F 29                   84 	.byte	41
-   0040 23                   85 	.byte	35
-   0041 1D                   86 	.byte	29
-   0042 17                   87 	.byte	23
-   0043 12                   88 	.byte	18
-   0044 0C                   89 	.byte	12
-   0045 06                   90 	.byte	6
-                             91 	.globl	_SP1_LEFT_MID_X_LUT
-   0046                      92 _SP1_LEFT_MID_X_LUT:
-   0046 FA                   93 	.byte	-6
-   0047 F4                   94 	.byte	-12
-   0048 EE                   95 	.byte	-18
-   0049 E9                   96 	.byte	-23
-   004A E3                   97 	.byte	-29
-   004B DD                   98 	.byte	-35
-   004C D7                   99 	.byte	-41
-   004D D1                  100 	.byte	-47
-   004E CB                  101 	.byte	-53
-   004F C5                  102 	.byte	-59
-   0050 C0                  103 	.byte	-64
-   0051 BA                  104 	.byte	-70
-   0052 B4                  105 	.byte	-76
-                            106 	.globl	_player_init
-   0053                     107 _player_init:
-   0053 8E`00`62      [ 3]  108 	ldx	#_player_draw
-   0056 BF`00`02      [ 6]  109 	stx	_the_player+2
-   0059 7F`00`01      [ 7]  110 	clr	_the_player+1
-   005C C6 01         [ 2]  111 	ldb	#1
-   005E F7`00`00      [ 5]  112 	stb	_the_player
-   0061 39            [ 5]  113 	rts
-                            114 	.globl	_player_draw
-   0062                     115 _player_draw:
-   0062 32 7E         [ 5]  116 	leas	-2,s
-   0064 BD`00`00      [ 8]  117 	jsr	___Intensity_5F
-   0067 F6`00`00      [ 5]  118 	ldb	_the_player
-   006A 4F            [ 2]  119 	clra		;zero_extendqihi: R:b -> R:d
-   006B ED E4         [ 5]  120 	std	,s
-   006D 58            [ 2]  121 	aslb
-   006E 49            [ 2]  122 	rola
-   006F 1F 01         [ 6]  123 	tfr	d,x
-   0071 AD 99`00`19   [14]  124 	jsr	[_PLAYER_DRAW_LUT,x]
-   0075 32 62         [ 5]  125 	leas	2,s
-   0077 39            [ 5]  126 	rts
-                            127 	.globl	_vl_player_mid1
-   0078                     128 _vl_player_mid1:
-   0078 00                  129 	.byte	0
-   0079 A0                  130 	.byte	-96
-   007A B0                  131 	.byte	-80
-   007B FF                  132 	.byte	-1
-   007C 00                  133 	.byte	0
-   007D B0                  134 	.byte	-80
-   007E FF                  135 	.byte	-1
-   007F 7F                  136 	.byte	127
-   0080 00                  137 	.byte	0
-   0081 FF                  138 	.byte	-1
-   0082 00                  139 	.byte	0
-   0083 50                  140 	.byte	80
-   0084 FF                  141 	.byte	-1
-   0085 80                  142 	.byte	-128
-   0086 00                  143 	.byte	0
-   0087 00                  144 	.byte	0
-   0088 10                  145 	.byte	16
-   0089 00                  146 	.byte	0
-   008A FF                  147 	.byte	-1
-   008B 10                  148 	.byte	16
-   008C 3C                  149 	.byte	60
-   008D 00                  150 	.byte	0
-   008E 00                  151 	.byte	0
-   008F 28                  152 	.byte	40
-   0090 FF                  153 	.byte	-1
-   0091 F0                  154 	.byte	-16
-   0092 3C                  155 	.byte	60
-   0093 00                  156 	.byte	0
-   0094 F0                  157 	.byte	-16
-   0095 00                  158 	.byte	0
-   0096 FF                  159 	.byte	-1
-   0097 00                  160 	.byte	0
-   0098 50                  161 	.byte	80
-   0099 FF                  162 	.byte	-1
-   009A 7F                  163 	.byte	127
-   009B 00                  164 	.byte	0
-   009C FF                  165 	.byte	-1
-   009D 00                  166 	.byte	0
-   009E B0                  167 	.byte	-80
-   009F FF                  168 	.byte	-1
-   00A0 80                  169 	.byte	-128
-   00A1 00                  170 	.byte	0
-   00A2 00                  171 	.byte	0
-   00A3 20                  172 	.byte	32
-   00A4 00                  173 	.byte	0
-   00A5 FF                  174 	.byte	-1
-   00A6 00                  175 	.byte	0
-   00A7 B0                  176 	.byte	-80
-   00A8 FF                  177 	.byte	-1
-   00A9 00                  178 	.byte	0
-   00AA B0                  179 	.byte	-80
-   00AB 00                  180 	.byte	0
-   00AC 40                  181 	.byte	64
-   00AD 00                  182 	.byte	0
-   00AE FF                  183 	.byte	-1
-   00AF 10                  184 	.byte	16
-   00B0 3C                  185 	.byte	60
-   00B1 FF                  186 	.byte	-1
-   00B2 00                  187 	.byte	0
-   00B3 28                  188 	.byte	40
-   00B4 FF                  189 	.byte	-1
-   00B5 F0                  190 	.byte	-16
-   00B6 3C                  191 	.byte	60
-   00B7                     192 _vl_term_0_46:
-   00B7 01                  193 	.byte	1
-                            194 	.globl	_vl_player_mid2
-   00B8                     195 _vl_player_mid2:
-   00B8 00                  196 	.byte	0
-   00B9 20                  197 	.byte	32
-   00BA 88                  198 	.byte	-120
-   00BB FF                  199 	.byte	-1
-   00BC 28                  200 	.byte	40
-   00BD 00                  201 	.byte	0
-   00BE FF                  202 	.byte	-1
-   00BF 00                  203 	.byte	0
-   00C0 3C                  204 	.byte	60
-   00C1 FF                  205 	.byte	-1
-   00C2 DC                  206 	.byte	-36
-   00C3 00                  207 	.byte	0
-   00C4 00                  208 	.byte	0
-   00C5 E0                  209 	.byte	-32
-   00C6 EC                  210 	.byte	-20
-   00C7 FF                  211 	.byte	-1
-   00C8 70                  212 	.byte	112
-   00C9 40                  213 	.byte	64
-   00CA FF                  214 	.byte	-1
-   00CB 00                  215 	.byte	0
-   00CC 20                  216 	.byte	32
-   00CD FF                  217 	.byte	-1
-   00CE 90                  218 	.byte	-112
-   00CF 40                  219 	.byte	64
-   00D0 00                  220 	.byte	0
-   00D1 20                  221 	.byte	32
-   00D2 28                  222 	.byte	40
-   00D3 FF                  223 	.byte	-1
-   00D4 28                  224 	.byte	40
-   00D5 00                  225 	.byte	0
-   00D6 FF                  226 	.byte	-1
-   00D7 00                  227 	.byte	0
-   00D8 C4                  228 	.byte	-60
-   00D9 FF                  229 	.byte	-1
-   00DA DC                  230 	.byte	-36
-   00DB 00                  231 	.byte	0
-   00DC 00                  232 	.byte	0
-   00DD 2D                  233 	.byte	45
-   00DE E4                  234 	.byte	-28
-   00DF FF                  235 	.byte	-1
-   00E0 00                  236 	.byte	0
-   00E1 30                  237 	.byte	48
-   00E2 FF                  238 	.byte	-1
-   00E3 10                  239 	.byte	16
-   00E4 F8                  240 	.byte	-8
-   00E5 FF                  241 	.byte	-1
-   00E6 00                  242 	.byte	0
-   00E7 D0                  243 	.byte	-48
-   00E8 00                  244 	.byte	0
-   00E9 00                  245 	.byte	0
-   00EA D0                  246 	.byte	-48
-   00EB FF                  247 	.byte	-1
-   00EC 00                  248 	.byte	0
-   00ED D0                  249 	.byte	-48
-   00EE FF                  250 	.byte	-1
-   00EF F0                  251 	.byte	-16
-   00F0 F8                  252 	.byte	-8
-   00F1 FF                  253 	.byte	-1
-   00F2 00                  254 	.byte	0
-   00F3 30                  255 	.byte	48
-   00F4 00                  256 	.byte	0
-   00F5 E4                  257 	.byte	-28
-   00F6 0C                  258 	.byte	12
-   00F7 FF                  259 	.byte	-1
-   00F8 10                  260 	.byte	16
-   00F9 08                  261 	.byte	8
-   00FA FF                  262 	.byte	-1
-   00FB 00                  263 	.byte	0
-   00FC 18                  264 	.byte	24
-   00FD FF                  265 	.byte	-1
-   00FE F0                  266 	.byte	-16
-   00FF 08                  267 	.byte	8
-   0100                     268 _vl_term_1_83:
-   0100 01                  269 	.byte	1
-                            270 	.globl	_vl_player_left1
-   0101                     271 _vl_player_left1:
-   0101 00                  272 	.byte	0
-   0102 08                  273 	.byte	8
-   0103 50                  274 	.byte	80
-   0104 FF                  275 	.byte	-1
-   0105 B0                  276 	.byte	-80
-   0106 00                  277 	.byte	0
-   0107 FF                  278 	.byte	-1
-   0108 E8                  279 	.byte	-24
-   0109 10                  280 	.byte	16
-   010A FF                  281 	.byte	-1
-   010B 00                  282 	.byte	0
-   010C 50                  283 	.byte	80
-   010D FF                  284 	.byte	-1
-   010E 18                  285 	.byte	24
-   010F 10                  286 	.byte	16
-   0110 FF                  287 	.byte	-1
-   0111 50                  288 	.byte	80
-   0112 00                  289 	.byte	0
-   0113 FF                  290 	.byte	-1
-   0114 18                  291 	.byte	24
-   0115 F0                  292 	.byte	-16
-   0116 FF                  293 	.byte	-1
-   0117 00                  294 	.byte	0
-   0118 B0                  295 	.byte	-80
-   0119 FF                  296 	.byte	-1
-   011A E8                  297 	.byte	-24
-   011B F0                  298 	.byte	-16
-   011C 00                  299 	.byte	0
-   011D F8                  300 	.byte	-8
-   011E 00                  301 	.byte	0
-   011F FF                  302 	.byte	-1
-   0120 10                  303 	.byte	16
-   0121 C4                  304 	.byte	-60
-   0122 FF                  305 	.byte	-1
-   0123 00                  306 	.byte	0
-   0124 D8                  307 	.byte	-40
-   0125 FF                  308 	.byte	-1
-   0126 F0                  309 	.byte	-16
-   0127 C4                  310 	.byte	-60
-   0128 00                  311 	.byte	0
-   0129 08                  312 	.byte	8
-   012A 00                  313 	.byte	0
-   012B FF                  314 	.byte	-1
-   012C B0                  315 	.byte	-80
-   012D 00                  316 	.byte	0
-   012E FF                  317 	.byte	-1
-   012F E8                  318 	.byte	-24
-   0130 10                  319 	.byte	16
-   0131 FF                  320 	.byte	-1
-   0132 18                  321 	.byte	24
-   0133 10                  322 	.byte	16
-   0134 FF                  323 	.byte	-1
-   0135 08                  324 	.byte	8
-   0136 00                  325 	.byte	0
-   0137 00                  326 	.byte	0
-   0138 F0                  327 	.byte	-16
-   0139 E8                  328 	.byte	-24
-   013A FF                  329 	.byte	-1
-   013B 10                  330 	.byte	16
-   013C 34                  331 	.byte	52
-   013D 00                  332 	.byte	0
-   013E 00                  333 	.byte	0
-   013F C4                  334 	.byte	-60
-   0140 FF                  335 	.byte	-1
-   0141 00                  336 	.byte	0
-   0142 50                  337 	.byte	80
-   0143 FF                  338 	.byte	-1
-   0144 00                  339 	.byte	0
-   0145 50                  340 	.byte	80
-   0146 00                  341 	.byte	0
-   0147 00                  342 	.byte	0
-   0148 C4                  343 	.byte	-60
-   0149 FF                  344 	.byte	-1
-   014A F0                  345 	.byte	-16
-   014B 40                  346 	.byte	64
-   014C                     347 _vl_term_2_123:
-   014C 01                  348 	.byte	1
-                            349 	.globl	_vl_player_left2
-   014D                     350 _vl_player_left2:
-   014D 00                  351 	.byte	0
-   014E D0                  352 	.byte	-48
-   014F 58                  353 	.byte	88
-   0150 00                  354 	.byte	0
-   0151 D0                  355 	.byte	-48
-   0152 58                  356 	.byte	88
-   0153 FF                  357 	.byte	-1
-   0154 18                  358 	.byte	24
-   0155 F0                  359 	.byte	-16
-   0156 FF                  360 	.byte	-1
-   0157 50                  361 	.byte	80
-   0158 00                  362 	.byte	0
-   0159 FF                  363 	.byte	-1
-   015A 18                  364 	.byte	24
-   015B 10                  365 	.byte	16
-   015C 00                  366 	.byte	0
-   015D E0                  367 	.byte	-32
-   015E 10                  368 	.byte	16
-   015F FF                  369 	.byte	-1
-   0160 00                  370 	.byte	0
-   0161 14                  371 	.byte	20
-   0162 FF                  372 	.byte	-1
-   0163 10                  373 	.byte	16
-   0164 08                  374 	.byte	8
-   0165 FF                  375 	.byte	-1
-   0166 38                  376 	.byte	56
-   0167 00                  377 	.byte	0
-   0168 FF                  378 	.byte	-1
-   0169 10                  379 	.byte	16
-   016A F8                  380 	.byte	-8
-   016B FF                  381 	.byte	-1
-   016C F0                  382 	.byte	-16
-   016D F8                  383 	.byte	-8
-   016E FF                  384 	.byte	-1
-   016F C8                  385 	.byte	-56
-   0170 00                  386 	.byte	0
-   0171 FF                  387 	.byte	-1
-   0172 F0                  388 	.byte	-16
-   0173 08                  389 	.byte	8
-   0174 00                  390 	.byte	0
-   0175 58                  391 	.byte	88
-   0176 00                  392 	.byte	0
-   0177 FF                  393 	.byte	-1
-   0178 00                  394 	.byte	0
-   0179 B8                  395 	.byte	-72
-   017A FF                  396 	.byte	-1
-   017B F0                  397 	.byte	-16
-   017C F8                  398 	.byte	-8
-   017D FF                  399 	.byte	-1
-   017E D8                  400 	.byte	-40
-   017F 00                  401 	.byte	0
-   0180 00                  402 	.byte	0
-   0181 00                  403 	.byte	0
-   0182 EC                  404 	.byte	-20
-   0183 FF                  405 	.byte	-1
-   0184 1C                  406 	.byte	28
-   0185 14                  407 	.byte	20
-   0186 00                  408 	.byte	0
-   0187 1C                  409 	.byte	28
-   0188 10                  410 	.byte	16
-   0189 FF                  411 	.byte	-1
-   018A 28                  412 	.byte	40
-   018B 1C                  413 	.byte	28
-   018C FF                  414 	.byte	-1
-   018D 00                  415 	.byte	0
-   018E D8                  416 	.byte	-40
-   018F FF                  417 	.byte	-1
-   0190 C0                  418 	.byte	-64
-   0191 94                  419 	.byte	-108
-   0192 FF                  420 	.byte	-1
-   0193 C0                  421 	.byte	-64
-   0194 94                  422 	.byte	-108
-   0195 00                  423 	.byte	0
-   0196 34                  424 	.byte	52
-   0197 58                  425 	.byte	88
-   0198 00                  426 	.byte	0
-   0199 34                  427 	.byte	52
-   019A 58                  428 	.byte	88
-   019B FF                  429 	.byte	-1
-   019C 00                  430 	.byte	0
-   019D E4                  431 	.byte	-28
-   019E FF                  432 	.byte	-1
-   019F 10                  433 	.byte	16
-   01A0 18                  434 	.byte	24
-   01A1 FF                  435 	.byte	-1
-   01A2 00                  436 	.byte	0
-   01A3 20                  437 	.byte	32
-   01A4 00                  438 	.byte	0
-   01A5 00                  439 	.byte	0
-   01A6 2E                  440 	.byte	46
-   01A7 FF                  441 	.byte	-1
-   01A8 00                  442 	.byte	0
-   01A9 20                  443 	.byte	32
-   01AA FF                  444 	.byte	-1
-   01AB F0                  445 	.byte	-16
-   01AC F8                  446 	.byte	-8
-   01AD FF                  447 	.byte	-1
-   01AE 00                  448 	.byte	0
-   01AF E0                  449 	.byte	-32
-   01B0                     450 _vl_term_3_170:
-   01B0 01                  451 	.byte	1
-                            452 	.globl	_vl_player_left3
-   01B1                     453 _vl_player_left3:
-   01B1 00                  454 	.byte	0
-   01B2 08                  455 	.byte	8
-   01B3 B0                  456 	.byte	-80
-   01B4 FF                  457 	.byte	-1
-   01B5 18                  458 	.byte	24
-   01B6 10                  459 	.byte	16
-   01B7 FF                  460 	.byte	-1
-   01B8 F0                  461 	.byte	-16
-   01B9 0C                  462 	.byte	12
-   01BA 00                  463 	.byte	0
-   01BB 90                  464 	.byte	-112
-   01BC F4                  465 	.byte	-12
-   01BD FF                  466 	.byte	-1
-   01BE 00                  467 	.byte	0
-   01BF B0                  468 	.byte	-80
-   01C0 FF                  469 	.byte	-1
-   01C1 18                  470 	.byte	24
-   01C2 F0                  471 	.byte	-16
-   01C3 FF                  472 	.byte	-1
-   01C4 50                  473 	.byte	80
-   01C5 00                  474 	.byte	0
-   01C6 FF                  475 	.byte	-1
-   01C7 18                  476 	.byte	24
-   01C8 10                  477 	.byte	16
-   01C9 FF                  478 	.byte	-1
-   01CA 00                  479 	.byte	0
-   01CB 50                  480 	.byte	80
-   01CC 00                  481 	.byte	0
-   01CD FC                  482 	.byte	-4
-   01CE 1C                  483 	.byte	28
-   01CF FF                  484 	.byte	-1
-   01D0 30                  485 	.byte	48
-   01D1 00                  486 	.byte	0
-   01D2 FF                  487 	.byte	-1
-   01D3 10                  488 	.byte	16
-   01D4 08                  489 	.byte	8
-   01D5 FF                  490 	.byte	-1
-   01D6 00                  491 	.byte	0
-   01D7 48                  492 	.byte	72
-   01D8 FF                  493 	.byte	-1
-   01D9 F0                  494 	.byte	-16
-   01DA F8                  495 	.byte	-8
-   01DB FF                  496 	.byte	-1
-   01DC F8                  497 	.byte	-8
-   01DD 00                  498 	.byte	0
-   01DE 00                  499 	.byte	0
-   01DF 18                  500 	.byte	24
-   01E0 08                  501 	.byte	8
-   01E1 FF                  502 	.byte	-1
-   01E2 F4                  503 	.byte	-12
-   01E3 08                  504 	.byte	8
-   01E4 00                  505 	.byte	0
-   01E5 DC                  506 	.byte	-36
-   01E6 EC                  507 	.byte	-20
-   01E7 FF                  508 	.byte	-1
-   01E8 18                  509 	.byte	24
-   01E9 2C                  510 	.byte	44
-   01EA FF                  511 	.byte	-1
-   01EB 00                  512 	.byte	0
-   01EC 1C                  513 	.byte	28
-   01ED FF                  514 	.byte	-1
-   01EE E8                  515 	.byte	-24
-   01EF F0                  516 	.byte	-16
-   01F0                     517 _vl_term_4_203:
-   01F0 01                  518 	.byte	1
-                            519 	.globl	_vl_player_right1
-   01F1                     520 _vl_player_right1:
-   01F1 00                  521 	.byte	0
-   01F2 08                  522 	.byte	8
-   01F3 B0                  523 	.byte	-80
-   01F4 FF                  524 	.byte	-1
-   01F5 B0                  525 	.byte	-80
-   01F6 00                  526 	.byte	0
-   01F7 FF                  527 	.byte	-1
-   01F8 E8                  528 	.byte	-24
-   01F9 F0                  529 	.byte	-16
-   01FA FF                  530 	.byte	-1
-   01FB 00                  531 	.byte	0
-   01FC B0                  532 	.byte	-80
-   01FD FF                  533 	.byte	-1
-   01FE 18                  534 	.byte	24
-   01FF F0                  535 	.byte	-16
-   0200 FF                  536 	.byte	-1
-   0201 50                  537 	.byte	80
-   0202 00                  538 	.byte	0
-   0203 FF                  539 	.byte	-1
-   0204 18                  540 	.byte	24
-   0205 10                  541 	.byte	16
-   0206 FF                  542 	.byte	-1
-   0207 00                  543 	.byte	0
-   0208 50                  544 	.byte	80
-   0209 FF                  545 	.byte	-1
-   020A E8                  546 	.byte	-24
-   020B 10                  547 	.byte	16
-   020C 00                  548 	.byte	0
-   020D F8                  549 	.byte	-8
-   020E 00                  550 	.byte	0
-   020F FF                  551 	.byte	-1
-   0210 10                  552 	.byte	16
-   0211 3C                  553 	.byte	60
-   0212 FF                  554 	.byte	-1
-   0213 00                  555 	.byte	0
-   0214 28                  556 	.byte	40
-   0215 FF                  557 	.byte	-1
-   0216 F0                  558 	.byte	-16
-   0217 3C                  559 	.byte	60
-   0218 00                  560 	.byte	0
-   0219 08                  561 	.byte	8
-   021A 00                  562 	.byte	0
-   021B FF                  563 	.byte	-1
-   021C B0                  564 	.byte	-80
-   021D 00                  565 	.byte	0
-   021E FF                  566 	.byte	-1
-   021F E8                  567 	.byte	-24
-   0220 F0                  568 	.byte	-16
-   0221 FF                  569 	.byte	-1
-   0222 18                  570 	.byte	24
-   0223 F0                  571 	.byte	-16
-   0224 FF                  572 	.byte	-1
-   0225 08                  573 	.byte	8
-   0226 00                  574 	.byte	0
-   0227 00                  575 	.byte	0
-   0228 F0                  576 	.byte	-16
-   0229 18                  577 	.byte	24
-   022A FF                  578 	.byte	-1
-   022B 10                  579 	.byte	16
-   022C CC                  580 	.byte	-52
-   022D 00                  581 	.byte	0
-   022E 00                  582 	.byte	0
-   022F 3C                  583 	.byte	60
-   0230 FF                  584 	.byte	-1
-   0231 00                  585 	.byte	0
-   0232 B0                  586 	.byte	-80
-   0233 FF                  587 	.byte	-1
-   0234 00                  588 	.byte	0
-   0235 B0                  589 	.byte	-80
-   0236 00                  590 	.byte	0
-   0237 00                  591 	.byte	0
-   0238 3C                  592 	.byte	60
-   0239 FF                  593 	.byte	-1
-   023A F0                  594 	.byte	-16
-   023B C0                  595 	.byte	-64
-   023C                     596 _vl_term_5_243:
-   023C 01                  597 	.byte	1
-                            598 	.globl	_vl_player_right2
-   023D                     599 _vl_player_right2:
-   023D 00                  600 	.byte	0
-   023E D0                  601 	.byte	-48
-   023F A8                  602 	.byte	-88
-   0240 00                  603 	.byte	0
-   0241 D0                  604 	.byte	-48
-   0242 A8                  605 	.byte	-88
-   0243 FF                  606 	.byte	-1
-   0244 18                  607 	.byte	24
-   0245 10                  608 	.byte	16
-   0246 FF                  609 	.byte	-1
-   0247 50                  610 	.byte	80
-   0248 00                  611 	.byte	0
-   0249 FF                  612 	.byte	-1
-   024A 18                  613 	.byte	24
-   024B F0                  614 	.byte	-16
-   024C 00                  615 	.byte	0
-   024D E0                  616 	.byte	-32
-   024E F0                  617 	.byte	-16
-   024F FF                  618 	.byte	-1
-   0250 00                  619 	.byte	0
-   0251 EC                  620 	.byte	-20
-   0252 FF                  621 	.byte	-1
-   0253 10                  622 	.byte	16
-   0254 F8                  623 	.byte	-8
-   0255 FF                  624 	.byte	-1
-   0256 38                  625 	.byte	56
-   0257 00                  626 	.byte	0
-   0258 FF                  627 	.byte	-1
-   0259 10                  628 	.byte	16
-   025A 08                  629 	.byte	8
-   025B FF                  630 	.byte	-1
-   025C F0                  631 	.byte	-16
-   025D 08                  632 	.byte	8
-   025E FF                  633 	.byte	-1
-   025F C8                  634 	.byte	-56
-   0260 00                  635 	.byte	0
-   0261 FF                  636 	.byte	-1
-   0262 F0                  637 	.byte	-16
-   0263 F8                  638 	.byte	-8
-   0264 00                  639 	.byte	0
-   0265 58                  640 	.byte	88
-   0266 00                  641 	.byte	0
-   0267 FF                  642 	.byte	-1
-   0268 00                  643 	.byte	0
-   0269 48                  644 	.byte	72
-   026A FF                  645 	.byte	-1
-   026B F0                  646 	.byte	-16
-   026C 08                  647 	.byte	8
-   026D FF                  648 	.byte	-1
-   026E D8                  649 	.byte	-40
-   026F 00                  650 	.byte	0
-   0270 00                  651 	.byte	0
-   0271 00                  652 	.byte	0
-   0272 14                  653 	.byte	20
-   0273 FF                  654 	.byte	-1
-   0274 1C                  655 	.byte	28
-   0275 EC                  656 	.byte	-20
-   0276 00                  657 	.byte	0
-   0277 1C                  658 	.byte	28
-   0278 F0                  659 	.byte	-16
-   0279 FF                  660 	.byte	-1
-   027A 28                  661 	.byte	40
-   027B E4                  662 	.byte	-28
-   027C FF                  663 	.byte	-1
-   027D 00                  664 	.byte	0
-   027E 28                  665 	.byte	40
-   027F FF                  666 	.byte	-1
-   0280 C0                  667 	.byte	-64
-   0281 6C                  668 	.byte	108
-   0282 FF                  669 	.byte	-1
-   0283 C0                  670 	.byte	-64
-   0284 6C                  671 	.byte	108
-   0285 00                  672 	.byte	0
-   0286 34                  673 	.byte	52
-   0287 A8                  674 	.byte	-88
-   0288 00                  675 	.byte	0
-   0289 34                  676 	.byte	52
-   028A A8                  677 	.byte	-88
-   028B FF                  678 	.byte	-1
-   028C 00                  679 	.byte	0
-   028D 1C                  680 	.byte	28
-   028E FF                  681 	.byte	-1
-   028F 10                  682 	.byte	16
-   0290 E8                  683 	.byte	-24
-   0291 FF                  684 	.byte	-1
-   0292 00                  685 	.byte	0
-   0293 E0                  686 	.byte	-32
-   0294 00                  687 	.byte	0
-   0295 00                  688 	.byte	0
-   0296 D2                  689 	.byte	-46
-   0297 FF                  690 	.byte	-1
-   0298 00                  691 	.byte	0
-   0299 E0                  692 	.byte	-32
-   029A FF                  693 	.byte	-1
-   029B F0                  694 	.byte	-16
-   029C 08                  695 	.byte	8
-   029D FF                  696 	.byte	-1
-   029E 00                  697 	.byte	0
-   029F 20                  698 	.byte	32
-   02A0                     699 _vl_term_6_290:
-   02A0 01                  700 	.byte	1
-                            701 	.globl	_vl_player_right3
-   02A1                     702 _vl_player_right3:
-   02A1 00                  703 	.byte	0
-   02A2 08                  704 	.byte	8
-   02A3 50                  705 	.byte	80
-   02A4 FF                  706 	.byte	-1
-   02A5 18                  707 	.byte	24
-   02A6 F0                  708 	.byte	-16
-   02A7 FF                  709 	.byte	-1
-   02A8 F0                  710 	.byte	-16
-   02A9 F4                  711 	.byte	-12
-   02AA 00                  712 	.byte	0
-   02AB 90                  713 	.byte	-112
-   02AC 0C                  714 	.byte	12
-   02AD FF                  715 	.byte	-1
-   02AE 00                  716 	.byte	0
-   02AF 50                  717 	.byte	80
-   02B0 FF                  718 	.byte	-1
-   02B1 18                  719 	.byte	24
-   02B2 10                  720 	.byte	16
-   02B3 FF                  721 	.byte	-1
-   02B4 50                  722 	.byte	80
-   02B5 00                  723 	.byte	0
-   02B6 FF                  724 	.byte	-1
-   02B7 18                  725 	.byte	24
-   02B8 F0                  726 	.byte	-16
-   02B9 FF                  727 	.byte	-1
-   02BA 00                  728 	.byte	0
-   02BB B0                  729 	.byte	-80
-   02BC 00                  730 	.byte	0
-   02BD FC                  731 	.byte	-4
-   02BE E4                  732 	.byte	-28
-   02BF FF                  733 	.byte	-1
-   02C0 30                  734 	.byte	48
-   02C1 00                  735 	.byte	0
-   02C2 FF                  736 	.byte	-1
-   02C3 10                  737 	.byte	16
-   02C4 F8                  738 	.byte	-8
-   02C5 FF                  739 	.byte	-1
-   02C6 00                  740 	.byte	0
-   02C7 B8                  741 	.byte	-72
-   02C8 FF                  742 	.byte	-1
-   02C9 F0                  743 	.byte	-16
-   02CA 08                  744 	.byte	8
-   02CB FF                  745 	.byte	-1
-   02CC F8                  746 	.byte	-8
-   02CD 00                  747 	.byte	0
-   02CE 00                  748 	.byte	0
-   02CF 18                  749 	.byte	24
-   02D0 F8                  750 	.byte	-8
-   02D1 FF                  751 	.byte	-1
-   02D2 F4                  752 	.byte	-12
-   02D3 F8                  753 	.byte	-8
-   02D4 00                  754 	.byte	0
-   02D5 DC                  755 	.byte	-36
-   02D6 14                  756 	.byte	20
-   02D7 FF                  757 	.byte	-1
-   02D8 18                  758 	.byte	24
-   02D9 D4                  759 	.byte	-44
-   02DA FF                  760 	.byte	-1
-   02DB 00                  761 	.byte	0
-   02DC E4                  762 	.byte	-28
-   02DD FF                  763 	.byte	-1
-   02DE E8                  764 	.byte	-24
-   02DF 10                  765 	.byte	16
-   02E0                     766 _vl_term_7_323:
-   02E0 01                  767 	.byte	1
-                            768 	.globl	_player_change_left
-   02E1                     769 _player_change_left:
-   02E1 F6`00`00      [ 5]  770 	ldb	_the_player
-   02E4 10 27 00 DB   [ 6]  771 	lbeq	L15
-   02E8 C1 01         [ 2]  772 	cmpb	#1	;cmpqi:
-   02EA 10 27 00 8B   [ 6]  773 	lbeq	L16
-   02EE F6`00`02      [ 5]  774 	ldb	_the_game+2
-   02F1 4F            [ 2]  775 	clra		;zero_extendqihi: R:b -> R:d
-   02F2 1F 01         [ 6]  776 	tfr	d,x
-   02F4 F6`00`01      [ 5]  777 	ldb	_the_player+1
-   02F7 E1 89`00`0B   [ 8]  778 	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-   02FB 10 23 00 CD   [ 6]  779 	lbls	L10
-   02FF BD`00`00      [ 8]  780 	jsr	___Reset0Ref
-   0302 C6 7F         [ 2]  781 	ldb	#127
-   0304 D7`00         [ 4]  782 	stb	*_dp_VIA_t1_cnt_lo
-   0306 F6`00`01      [ 5]  783 	ldb	_the_player+1
-   0309 4F            [ 2]  784 	clra		;zero_extendqihi: R:b -> R:d
-   030A 1F 01         [ 6]  785 	tfr	d,x
-   030C C6 90         [ 2]  786 	ldb	#-112
-   030E E7 E2         [ 6]  787 	stb	,-s
-   0310 E6 89`00`2C   [ 8]  788 	ldb	_SP1_RIGHT_MID_X_LUT,x
-   0314 BD`00`00      [ 8]  789 	jsr	__Moveto_d
-   0317 C6 10         [ 2]  790 	ldb	#16
-   0319 D7`00         [ 4]  791 	stb	*_dp_VIA_t1_cnt_lo
-   031B 8E`01`F1      [ 3]  792 	ldx	#_vl_player_right1
-   031E BD`00`00      [ 8]  793 	jsr	___Draw_VLp
-   0321 BD`00`00      [ 8]  794 	jsr	___Reset0Ref
-   0324 C6 7F         [ 2]  795 	ldb	#127
-   0326 D7`00         [ 4]  796 	stb	*_dp_VIA_t1_cnt_lo
-   0328 F6`00`01      [ 5]  797 	ldb	_the_player+1
-   032B 4F            [ 2]  798 	clra		;zero_extendqihi: R:b -> R:d
-   032C 1F 01         [ 6]  799 	tfr	d,x
-   032E C6 90         [ 2]  800 	ldb	#-112
-   0330 E7 E2         [ 6]  801 	stb	,-s
-   0332 E6 89`00`2C   [ 8]  802 	ldb	_SP1_RIGHT_MID_X_LUT,x
-   0336 BD`00`00      [ 8]  803 	jsr	__Moveto_d
-   0339 C6 10         [ 2]  804 	ldb	#16
-   033B D7`00         [ 4]  805 	stb	*_dp_VIA_t1_cnt_lo
-   033D 8E`02`3D      [ 3]  806 	ldx	#_vl_player_right2
-   0340 BD`00`00      [ 8]  807 	jsr	___Draw_VLp
-   0343 BD`00`00      [ 8]  808 	jsr	___Reset0Ref
-   0346 C6 7F         [ 2]  809 	ldb	#127
-   0348 D7`00         [ 4]  810 	stb	*_dp_VIA_t1_cnt_lo
-   034A F6`00`01      [ 5]  811 	ldb	_the_player+1
-   034D 4F            [ 2]  812 	clra		;zero_extendqihi: R:b -> R:d
-   034E 1F 01         [ 6]  813 	tfr	d,x
-   0350 C6 90         [ 2]  814 	ldb	#-112
-   0352 E7 E2         [ 6]  815 	stb	,-s
-   0354 E6 89`00`2C   [ 8]  816 	ldb	_SP1_RIGHT_MID_X_LUT,x
-   0358 BD`00`00      [ 8]  817 	jsr	__Moveto_d
-   035B C6 10         [ 2]  818 	ldb	#16
-   035D D7`00         [ 4]  819 	stb	*_dp_VIA_t1_cnt_lo
-   035F 8E`02`A1      [ 3]  820 	ldx	#_vl_player_right3
-   0362 BD`00`00      [ 8]  821 	jsr	___Draw_VLp
-   0365 32 63         [ 5]  822 	leas	3,s
-   0367                     823 L9:
-   0367 7A`00`01      [ 7]  824 	dec	_the_player+1
-   036A F6`00`01      [ 5]  825 	ldb	_the_player+1
-   036D 26 09         [ 3]  826 	bne	L12
-   036F 7A`00`00      [ 7]  827 	dec	_the_player
-   0372 8E`00`62      [ 3]  828 	ldx	#_player_draw
-   0375 BF`00`02      [ 6]  829 	stx	_the_player+2
-   0378                     830 L12:
-   0378 39            [ 5]  831 	rts
-   0379                     832 L16:
-   0379 F6`00`02      [ 5]  833 	ldb	_the_game+2
-   037C 4F            [ 2]  834 	clra		;zero_extendqihi: R:b -> R:d
-   037D 1F 01         [ 6]  835 	tfr	d,x
-   037F F6`00`01      [ 5]  836 	ldb	_the_player+1
-   0382 E1 89`00`0B   [ 8]  837 	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-   0386 10 23 00 8B   [ 6]  838 	lbls	L8
-   038A BD`00`00      [ 8]  839 	jsr	___Reset0Ref
-   038D C6 7F         [ 2]  840 	ldb	#127
-   038F D7`00         [ 4]  841 	stb	*_dp_VIA_t1_cnt_lo
-   0391 F6`00`01      [ 5]  842 	ldb	_the_player+1
-   0394 4F            [ 2]  843 	clra		;zero_extendqihi: R:b -> R:d
-   0395 1F 01         [ 6]  844 	tfr	d,x
-   0397 C6 90         [ 2]  845 	ldb	#-112
-   0399 E7 E2         [ 6]  846 	stb	,-s
-   039B E6 89`00`1F   [ 8]  847 	ldb	_SP1_MID_LEFT_X_LUT,x
-   039F BD`00`00      [ 8]  848 	jsr	__Moveto_d
-   03A2 C6 10         [ 2]  849 	ldb	#16
-   03A4 D7`00         [ 4]  850 	stb	*_dp_VIA_t1_cnt_lo
-   03A6 8E`00`78      [ 3]  851 	ldx	#_vl_player_mid1
-   03A9 BD`00`00      [ 8]  852 	jsr	___Draw_VLp
-   03AC BD`00`00      [ 8]  853 	jsr	___Reset0Ref
-   03AF C6 7F         [ 2]  854 	ldb	#127
-   03B1 D7`00         [ 4]  855 	stb	*_dp_VIA_t1_cnt_lo
-   03B3 F6`00`01      [ 5]  856 	ldb	_the_player+1
-   03B6 4F            [ 2]  857 	clra		;zero_extendqihi: R:b -> R:d
-   03B7 1F 01         [ 6]  858 	tfr	d,x
-   03B9 C6 90         [ 2]  859 	ldb	#-112
-   03BB E7 E2         [ 6]  860 	stb	,-s
-   03BD E6 89`00`1F   [ 8]  861 	ldb	_SP1_MID_LEFT_X_LUT,x
-   03C1 20 40         [ 3]  862 	bra	L13
-   03C3                     863 L15:
-   03C3 8E`00`62      [ 3]  864 	ldx	#_player_draw
-   03C6 BF`00`02      [ 6]  865 	stx	_the_player+2
-   03C9 7E`00`62      [ 4]  866 	jmp	_player_draw
-   03CC                     867 L10:
-   03CC BD`00`00      [ 8]  868 	jsr	___Reset0Ref
-   03CF C6 7F         [ 2]  869 	ldb	#127
-   03D1 D7`00         [ 4]  870 	stb	*_dp_VIA_t1_cnt_lo
-   03D3 F6`00`01      [ 5]  871 	ldb	_the_player+1
-   03D6 4F            [ 2]  872 	clra		;zero_extendqihi: R:b -> R:d
-   03D7 1F 01         [ 6]  873 	tfr	d,x
-   03D9 C6 90         [ 2]  874 	ldb	#-112
-   03DB E7 E2         [ 6]  875 	stb	,-s
-   03DD E6 89`00`2C   [ 8]  876 	ldb	_SP1_RIGHT_MID_X_LUT,x
-   03E1 BD`00`00      [ 8]  877 	jsr	__Moveto_d
-   03E4 C6 10         [ 2]  878 	ldb	#16
-   03E6 D7`00         [ 4]  879 	stb	*_dp_VIA_t1_cnt_lo
-   03E8 8E`00`78      [ 3]  880 	ldx	#_vl_player_mid1
-   03EB BD`00`00      [ 8]  881 	jsr	___Draw_VLp
-   03EE BD`00`00      [ 8]  882 	jsr	___Reset0Ref
-   03F1 C6 7F         [ 2]  883 	ldb	#127
-   03F3 D7`00         [ 4]  884 	stb	*_dp_VIA_t1_cnt_lo
-   03F5 F6`00`01      [ 5]  885 	ldb	_the_player+1
-   03F8 4F            [ 2]  886 	clra		;zero_extendqihi: R:b -> R:d
-   03F9 1F 01         [ 6]  887 	tfr	d,x
-   03FB C6 90         [ 2]  888 	ldb	#-112
-   03FD E7 E2         [ 6]  889 	stb	,-s
-   03FF E6 89`00`2C   [ 8]  890 	ldb	_SP1_RIGHT_MID_X_LUT,x
-   0403                     891 L13:
-   0403 BD`00`00      [ 8]  892 	jsr	__Moveto_d
-   0406 C6 10         [ 2]  893 	ldb	#16
-   0408 D7`00         [ 4]  894 	stb	*_dp_VIA_t1_cnt_lo
-   040A 8E`00`B8      [ 3]  895 	ldx	#_vl_player_mid2
-   040D BD`00`00      [ 8]  896 	jsr	___Draw_VLp
-   0410 32 62         [ 5]  897 	leas	2,s
-   0412 16 FF 52      [ 5]  898 	lbra	L9
-   0415                     899 L8:
-   0415 BD`00`00      [ 8]  900 	jsr	___Reset0Ref
-   0418 C6 7F         [ 2]  901 	ldb	#127
-   041A D7`00         [ 4]  902 	stb	*_dp_VIA_t1_cnt_lo
-   041C F6`00`01      [ 5]  903 	ldb	_the_player+1
-   041F 4F            [ 2]  904 	clra		;zero_extendqihi: R:b -> R:d
-   0420 1F 01         [ 6]  905 	tfr	d,x
-   0422 C6 90         [ 2]  906 	ldb	#-112
-   0424 E7 E2         [ 6]  907 	stb	,-s
-   0426 E6 89`00`1F   [ 8]  908 	ldb	_SP1_MID_LEFT_X_LUT,x
-   042A BD`00`00      [ 8]  909 	jsr	__Moveto_d
-   042D C6 10         [ 2]  910 	ldb	#16
-   042F D7`00         [ 4]  911 	stb	*_dp_VIA_t1_cnt_lo
-   0431 8E`01`01      [ 3]  912 	ldx	#_vl_player_left1
-   0434 BD`00`00      [ 8]  913 	jsr	___Draw_VLp
-   0437 BD`00`00      [ 8]  914 	jsr	___Reset0Ref
-   043A C6 7F         [ 2]  915 	ldb	#127
-   043C D7`00         [ 4]  916 	stb	*_dp_VIA_t1_cnt_lo
-   043E F6`00`01      [ 5]  917 	ldb	_the_player+1
-   0441 4F            [ 2]  918 	clra		;zero_extendqihi: R:b -> R:d
-   0442 1F 01         [ 6]  919 	tfr	d,x
-   0444 C6 90         [ 2]  920 	ldb	#-112
-   0446 E7 E2         [ 6]  921 	stb	,-s
-   0448 E6 89`00`1F   [ 8]  922 	ldb	_SP1_MID_LEFT_X_LUT,x
-   044C BD`00`00      [ 8]  923 	jsr	__Moveto_d
-   044F C6 10         [ 2]  924 	ldb	#16
-   0451 D7`00         [ 4]  925 	stb	*_dp_VIA_t1_cnt_lo
-   0453 8E`01`4D      [ 3]  926 	ldx	#_vl_player_left2
-   0456 BD`00`00      [ 8]  927 	jsr	___Draw_VLp
-   0459 BD`00`00      [ 8]  928 	jsr	___Reset0Ref
-   045C C6 7F         [ 2]  929 	ldb	#127
-   045E D7`00         [ 4]  930 	stb	*_dp_VIA_t1_cnt_lo
-   0460 F6`00`01      [ 5]  931 	ldb	_the_player+1
-   0463 4F            [ 2]  932 	clra		;zero_extendqihi: R:b -> R:d
-   0464 1F 01         [ 6]  933 	tfr	d,x
-   0466 C6 90         [ 2]  934 	ldb	#-112
-   0468 E7 E2         [ 6]  935 	stb	,-s
-   046A E6 89`00`1F   [ 8]  936 	ldb	_SP1_MID_LEFT_X_LUT,x
-   046E BD`00`00      [ 8]  937 	jsr	__Moveto_d
-   0471 C6 10         [ 2]  938 	ldb	#16
-   0473 D7`00         [ 4]  939 	stb	*_dp_VIA_t1_cnt_lo
-   0475 8E`01`B1      [ 3]  940 	ldx	#_vl_player_left3
-   0478 BD`00`00      [ 8]  941 	jsr	___Draw_VLp
-   047B 32 63         [ 5]  942 	leas	3,s
-   047D 16 FE E7      [ 5]  943 	lbra	L9
-                            944 	.globl	_player_change_right
-   0480                     945 _player_change_right:
-   0480 F6`00`00      [ 5]  946 	ldb	_the_player
-   0483 C1 02         [ 2]  947 	cmpb	#2	;cmpqi:
-   0485 10 27 01 8C   [ 6]  948 	lbeq	L26
-   0489 C1 01         [ 2]  949 	cmpb	#1	;cmpqi:
-   048B 10 27 00 D2   [ 6]  950 	lbeq	L27
-   048F F6`00`02      [ 5]  951 	ldb	_the_game+2
-   0492 4F            [ 2]  952 	clra		;zero_extendqihi: R:b -> R:d
-   0493 1F 01         [ 6]  953 	tfr	d,x
-   0495 F6`00`01      [ 5]  954 	ldb	_the_player+1
-   0498 E1 89`00`0B   [ 8]  955 	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-   049C 22 58         [ 3]  956 	bhi	L28
-   049E BD`00`00      [ 8]  957 	jsr	___Reset0Ref
-   04A1 C6 7F         [ 2]  958 	ldb	#127
-   04A3 D7`00         [ 4]  959 	stb	*_dp_VIA_t1_cnt_lo
-   04A5 F6`00`01      [ 5]  960 	ldb	_the_player+1
-   04A8 4F            [ 2]  961 	clra		;zero_extendqihi: R:b -> R:d
-   04A9 1F 01         [ 6]  962 	tfr	d,x
-   04AB C6 90         [ 2]  963 	ldb	#-112
-   04AD E7 E2         [ 6]  964 	stb	,-s
-   04AF E6 89`00`46   [ 8]  965 	ldb	_SP1_LEFT_MID_X_LUT,x
-   04B3 BD`00`00      [ 8]  966 	jsr	__Moveto_d
-   04B6 C6 10         [ 2]  967 	ldb	#16
-   04B8 D7`00         [ 4]  968 	stb	*_dp_VIA_t1_cnt_lo
-   04BA 8E`00`78      [ 3]  969 	ldx	#_vl_player_mid1
-   04BD BD`00`00      [ 8]  970 	jsr	___Draw_VLp
-   04C0 BD`00`00      [ 8]  971 	jsr	___Reset0Ref
-   04C3 C6 7F         [ 2]  972 	ldb	#127
-   04C5 D7`00         [ 4]  973 	stb	*_dp_VIA_t1_cnt_lo
-   04C7 F6`00`01      [ 5]  974 	ldb	_the_player+1
-   04CA 4F            [ 2]  975 	clra		;zero_extendqihi: R:b -> R:d
-   04CB 1F 01         [ 6]  976 	tfr	d,x
-   04CD C6 90         [ 2]  977 	ldb	#-112
-   04CF E7 E2         [ 6]  978 	stb	,-s
-   04D1 E6 89`00`46   [ 8]  979 	ldb	_SP1_LEFT_MID_X_LUT,x
-   04D5                     980 L25:
-   04D5 BD`00`00      [ 8]  981 	jsr	__Moveto_d
-   04D8 C6 10         [ 2]  982 	ldb	#16
-   04DA D7`00         [ 4]  983 	stb	*_dp_VIA_t1_cnt_lo
-   04DC 8E`00`B8      [ 3]  984 	ldx	#_vl_player_mid2
-   04DF BD`00`00      [ 8]  985 	jsr	___Draw_VLp
-   04E2 32 62         [ 5]  986 	leas	2,s
-   04E4                     987 L21:
-   04E4 7A`00`01      [ 7]  988 	dec	_the_player+1
-   04E7 F6`00`01      [ 5]  989 	ldb	_the_player+1
-   04EA 26 09         [ 3]  990 	bne	L24
-   04EC 7C`00`00      [ 7]  991 	inc	_the_player
-   04EF 8E`00`62      [ 3]  992 	ldx	#_player_draw
-   04F2 BF`00`02      [ 6]  993 	stx	_the_player+2
-   04F5                     994 L24:
-   04F5 39            [ 5]  995 	rts
-   04F6                     996 L28:
-   04F6 BD`00`00      [ 8]  997 	jsr	___Reset0Ref
-   04F9 C6 7F         [ 2]  998 	ldb	#127
-   04FB D7`00         [ 4]  999 	stb	*_dp_VIA_t1_cnt_lo
-   04FD F6`00`01      [ 5] 1000 	ldb	_the_player+1
-   0500 4F            [ 2] 1001 	clra		;zero_extendqihi: R:b -> R:d
-   0501 1F 01         [ 6] 1002 	tfr	d,x
-   0503 C6 90         [ 2] 1003 	ldb	#-112
-   0505 E7 E2         [ 6] 1004 	stb	,-s
-   0507 E6 89`00`46   [ 8] 1005 	ldb	_SP1_LEFT_MID_X_LUT,x
-   050B BD`00`00      [ 8] 1006 	jsr	__Moveto_d
-   050E C6 10         [ 2] 1007 	ldb	#16
-   0510 D7`00         [ 4] 1008 	stb	*_dp_VIA_t1_cnt_lo
-   0512 8E`01`01      [ 3] 1009 	ldx	#_vl_player_left1
-   0515 BD`00`00      [ 8] 1010 	jsr	___Draw_VLp
-   0518 BD`00`00      [ 8] 1011 	jsr	___Reset0Ref
-   051B C6 7F         [ 2] 1012 	ldb	#127
-   051D D7`00         [ 4] 1013 	stb	*_dp_VIA_t1_cnt_lo
-   051F F6`00`01      [ 5] 1014 	ldb	_the_player+1
-   0522 4F            [ 2] 1015 	clra		;zero_extendqihi: R:b -> R:d
-   0523 1F 01         [ 6] 1016 	tfr	d,x
-   0525 C6 90         [ 2] 1017 	ldb	#-112
-   0527 E7 E2         [ 6] 1018 	stb	,-s
-   0529 E6 89`00`46   [ 8] 1019 	ldb	_SP1_LEFT_MID_X_LUT,x
-   052D BD`00`00      [ 8] 1020 	jsr	__Moveto_d
-   0530 C6 10         [ 2] 1021 	ldb	#16
-   0532 D7`00         [ 4] 1022 	stb	*_dp_VIA_t1_cnt_lo
-   0534 8E`01`4D      [ 3] 1023 	ldx	#_vl_player_left2
-   0537 BD`00`00      [ 8] 1024 	jsr	___Draw_VLp
-   053A BD`00`00      [ 8] 1025 	jsr	___Reset0Ref
-   053D C6 7F         [ 2] 1026 	ldb	#127
-   053F D7`00         [ 4] 1027 	stb	*_dp_VIA_t1_cnt_lo
-   0541 F6`00`01      [ 5] 1028 	ldb	_the_player+1
-   0544 4F            [ 2] 1029 	clra		;zero_extendqihi: R:b -> R:d
-   0545 1F 01         [ 6] 1030 	tfr	d,x
-   0547 C6 90         [ 2] 1031 	ldb	#-112
-   0549 E7 E2         [ 6] 1032 	stb	,-s
-   054B E6 89`00`46   [ 8] 1033 	ldb	_SP1_LEFT_MID_X_LUT,x
-   054F BD`00`00      [ 8] 1034 	jsr	__Moveto_d
-   0552 C6 10         [ 2] 1035 	ldb	#16
-   0554 D7`00         [ 4] 1036 	stb	*_dp_VIA_t1_cnt_lo
-   0556 8E`01`B1      [ 3] 1037 	ldx	#_vl_player_left3
-   0559 BD`00`00      [ 8] 1038 	jsr	___Draw_VLp
-   055C 32 63         [ 5] 1039 	leas	3,s
-   055E 16 FF 83      [ 5] 1040 	lbra	L21
-   0561                    1041 L27:
-   0561 F6`00`02      [ 5] 1042 	ldb	_the_game+2
-   0564 4F            [ 2] 1043 	clra		;zero_extendqihi: R:b -> R:d
-   0565 1F 01         [ 6] 1044 	tfr	d,x
-   0567 F6`00`01      [ 5] 1045 	ldb	_the_player+1
-   056A E1 89`00`0B   [ 8] 1046 	cmpb	_PLAYER_ANIMATION_FRAME_CNT_HALFED_LUT,x	;cmpqi:
-   056E 23 3A         [ 3] 1047 	bls	L20
-   0570 BD`00`00      [ 8] 1048 	jsr	___Reset0Ref
-   0573 C6 7F         [ 2] 1049 	ldb	#127
-   0575 D7`00         [ 4] 1050 	stb	*_dp_VIA_t1_cnt_lo
-   0577 F6`00`01      [ 5] 1051 	ldb	_the_player+1
-   057A 4F            [ 2] 1052 	clra		;zero_extendqihi: R:b -> R:d
-   057B 1F 01         [ 6] 1053 	tfr	d,x
-   057D C6 90         [ 2] 1054 	ldb	#-112
-   057F E7 E2         [ 6] 1055 	stb	,-s
-   0581 E6 89`00`39   [ 8] 1056 	ldb	_SP1_MID_RIGHT_X_LUT,x
-   0585 BD`00`00      [ 8] 1057 	jsr	__Moveto_d
-   0588 C6 10         [ 2] 1058 	ldb	#16
-   058A D7`00         [ 4] 1059 	stb	*_dp_VIA_t1_cnt_lo
-   058C 8E`00`78      [ 3] 1060 	ldx	#_vl_player_mid1
-   058F BD`00`00      [ 8] 1061 	jsr	___Draw_VLp
-   0592 BD`00`00      [ 8] 1062 	jsr	___Reset0Ref
-   0595 C6 7F         [ 2] 1063 	ldb	#127
-   0597 D7`00         [ 4] 1064 	stb	*_dp_VIA_t1_cnt_lo
-   0599 F6`00`01      [ 5] 1065 	ldb	_the_player+1
-   059C 4F            [ 2] 1066 	clra		;zero_extendqihi: R:b -> R:d
-   059D 1F 01         [ 6] 1067 	tfr	d,x
-   059F C6 90         [ 2] 1068 	ldb	#-112
-   05A1 E7 E2         [ 6] 1069 	stb	,-s
-   05A3 E6 89`00`39   [ 8] 1070 	ldb	_SP1_MID_RIGHT_X_LUT,x
-   05A7 16 FF 2B      [ 5] 1071 	lbra	L25
-   05AA                    1072 L20:
-   05AA BD`00`00      [ 8] 1073 	jsr	___Reset0Ref
-   05AD C6 7F         [ 2] 1074 	ldb	#127
-   05AF D7`00         [ 4] 1075 	stb	*_dp_VIA_t1_cnt_lo
-   05B1 F6`00`01      [ 5] 1076 	ldb	_the_player+1
-   05B4 4F            [ 2] 1077 	clra		;zero_extendqihi: R:b -> R:d
-   05B5 1F 01         [ 6] 1078 	tfr	d,x
-   05B7 C6 90         [ 2] 1079 	ldb	#-112
-   05B9 E7 E2         [ 6] 1080 	stb	,-s
-   05BB E6 89`00`39   [ 8] 1081 	ldb	_SP1_MID_RIGHT_X_LUT,x
-   05BF BD`00`00      [ 8] 1082 	jsr	__Moveto_d
-   05C2 C6 10         [ 2] 1083 	ldb	#16
-   05C4 D7`00         [ 4] 1084 	stb	*_dp_VIA_t1_cnt_lo
-   05C6 8E`01`F1      [ 3] 1085 	ldx	#_vl_player_right1
-   05C9 BD`00`00      [ 8] 1086 	jsr	___Draw_VLp
-   05CC BD`00`00      [ 8] 1087 	jsr	___Reset0Ref
-   05CF C6 7F         [ 2] 1088 	ldb	#127
-   05D1 D7`00         [ 4] 1089 	stb	*_dp_VIA_t1_cnt_lo
-   05D3 F6`00`01      [ 5] 1090 	ldb	_the_player+1
-   05D6 4F            [ 2] 1091 	clra		;zero_extendqihi: R:b -> R:d
-   05D7 1F 01         [ 6] 1092 	tfr	d,x
-   05D9 C6 90         [ 2] 1093 	ldb	#-112
-   05DB E7 E2         [ 6] 1094 	stb	,-s
-   05DD E6 89`00`39   [ 8] 1095 	ldb	_SP1_MID_RIGHT_X_LUT,x
-   05E1 BD`00`00      [ 8] 1096 	jsr	__Moveto_d
-   05E4 C6 10         [ 2] 1097 	ldb	#16
-   05E6 D7`00         [ 4] 1098 	stb	*_dp_VIA_t1_cnt_lo
-   05E8 8E`02`3D      [ 3] 1099 	ldx	#_vl_player_right2
-   05EB BD`00`00      [ 8] 1100 	jsr	___Draw_VLp
-   05EE BD`00`00      [ 8] 1101 	jsr	___Reset0Ref
-   05F1 C6 7F         [ 2] 1102 	ldb	#127
-   05F3 D7`00         [ 4] 1103 	stb	*_dp_VIA_t1_cnt_lo
-   05F5 F6`00`01      [ 5] 1104 	ldb	_the_player+1
-   05F8 4F            [ 2] 1105 	clra		;zero_extendqihi: R:b -> R:d
-   05F9 1F 01         [ 6] 1106 	tfr	d,x
-   05FB C6 90         [ 2] 1107 	ldb	#-112
-   05FD E7 E2         [ 6] 1108 	stb	,-s
-   05FF E6 89`00`39   [ 8] 1109 	ldb	_SP1_MID_RIGHT_X_LUT,x
-   0603 BD`00`00      [ 8] 1110 	jsr	__Moveto_d
-   0606 C6 10         [ 2] 1111 	ldb	#16
-   0608 D7`00         [ 4] 1112 	stb	*_dp_VIA_t1_cnt_lo
-   060A 8E`02`A1      [ 3] 1113 	ldx	#_vl_player_right3
-   060D BD`00`00      [ 8] 1114 	jsr	___Draw_VLp
-   0610 32 63         [ 5] 1115 	leas	3,s
-   0612 16 FE CF      [ 5] 1116 	lbra	L21
-   0615                    1117 L26:
-   0615 8E`00`62      [ 3] 1118 	ldx	#_player_draw
-   0618 BF`00`02      [ 6] 1119 	stx	_the_player+2
-   061B 7E`00`62      [ 4] 1120 	jmp	_player_draw
-                           1121 	.globl	__player_draw_mid
-   061E                    1122 __player_draw_mid:
-   061E BD`00`00      [ 8] 1123 	jsr	___Reset0Ref
-   0621 C6 7F         [ 2] 1124 	ldb	#127
-   0623 D7`00         [ 4] 1125 	stb	*_dp_VIA_t1_cnt_lo
-   0625 F6`00`00      [ 5] 1126 	ldb	_the_player
-   0628 4F            [ 2] 1127 	clra		;zero_extendqihi: R:b -> R:d
-   0629 1F 01         [ 6] 1128 	tfr	d,x
-   062B C6 90         [ 2] 1129 	ldb	#-112
-   062D E7 E2         [ 6] 1130 	stb	,-s
-   062F E6 89`00`16   [ 8] 1131 	ldb	_PLAYER_STATIC_X_LUT,x
-   0633 BD`00`00      [ 8] 1132 	jsr	__Moveto_d
-   0636 C6 10         [ 2] 1133 	ldb	#16
-   0638 D7`00         [ 4] 1134 	stb	*_dp_VIA_t1_cnt_lo
-   063A 8E`00`78      [ 3] 1135 	ldx	#_vl_player_mid1
-   063D BD`00`00      [ 8] 1136 	jsr	___Draw_VLp
-   0640 BD`00`00      [ 8] 1137 	jsr	___Reset0Ref
-   0643 C6 7F         [ 2] 1138 	ldb	#127
-   0645 D7`00         [ 4] 1139 	stb	*_dp_VIA_t1_cnt_lo
-   0647 F6`00`00      [ 5] 1140 	ldb	_the_player
-   064A 4F            [ 2] 1141 	clra		;zero_extendqihi: R:b -> R:d
-   064B 1F 01         [ 6] 1142 	tfr	d,x
-   064D C6 90         [ 2] 1143 	ldb	#-112
-   064F E7 E2         [ 6] 1144 	stb	,-s
-   0651 E6 89`00`16   [ 8] 1145 	ldb	_PLAYER_STATIC_X_LUT,x
-   0655 BD`00`00      [ 8] 1146 	jsr	__Moveto_d
-   0658 C6 10         [ 2] 1147 	ldb	#16
-   065A D7`00         [ 4] 1148 	stb	*_dp_VIA_t1_cnt_lo
-   065C 32 62         [ 5] 1149 	leas	2,s
-   065E 8E`00`B8      [ 3] 1150 	ldx	#_vl_player_mid2
-   0661 7E`00`00      [ 4] 1151 	jmp	___Draw_VLp
-                           1152 	.globl	__player_draw_left
-   0664                    1153 __player_draw_left:
-   0664 BD`00`00      [ 8] 1154 	jsr	___Reset0Ref
-   0667 C6 7F         [ 2] 1155 	ldb	#127
-   0669 D7`00         [ 4] 1156 	stb	*_dp_VIA_t1_cnt_lo
-   066B F6`00`00      [ 5] 1157 	ldb	_the_player
-   066E 4F            [ 2] 1158 	clra		;zero_extendqihi: R:b -> R:d
-   066F 1F 01         [ 6] 1159 	tfr	d,x
-   0671 C6 90         [ 2] 1160 	ldb	#-112
-   0673 E7 E2         [ 6] 1161 	stb	,-s
-   0675 E6 89`00`16   [ 8] 1162 	ldb	_PLAYER_STATIC_X_LUT,x
-   0679 BD`00`00      [ 8] 1163 	jsr	__Moveto_d
-   067C C6 10         [ 2] 1164 	ldb	#16
-   067E D7`00         [ 4] 1165 	stb	*_dp_VIA_t1_cnt_lo
-   0680 8E`01`01      [ 3] 1166 	ldx	#_vl_player_left1
-   0683 BD`00`00      [ 8] 1167 	jsr	___Draw_VLp
-   0686 BD`00`00      [ 8] 1168 	jsr	___Reset0Ref
-   0689 C6 7F         [ 2] 1169 	ldb	#127
-   068B D7`00         [ 4] 1170 	stb	*_dp_VIA_t1_cnt_lo
-   068D F6`00`00      [ 5] 1171 	ldb	_the_player
-   0690 4F            [ 2] 1172 	clra		;zero_extendqihi: R:b -> R:d
-   0691 1F 01         [ 6] 1173 	tfr	d,x
-   0693 C6 90         [ 2] 1174 	ldb	#-112
-   0695 E7 E2         [ 6] 1175 	stb	,-s
-   0697 E6 89`00`16   [ 8] 1176 	ldb	_PLAYER_STATIC_X_LUT,x
-   069B BD`00`00      [ 8] 1177 	jsr	__Moveto_d
-   069E C6 10         [ 2] 1178 	ldb	#16
-   06A0 D7`00         [ 4] 1179 	stb	*_dp_VIA_t1_cnt_lo
-   06A2 8E`01`4D      [ 3] 1180 	ldx	#_vl_player_left2
-   06A5 BD`00`00      [ 8] 1181 	jsr	___Draw_VLp
-   06A8 BD`00`00      [ 8] 1182 	jsr	___Reset0Ref
-   06AB C6 7F         [ 2] 1183 	ldb	#127
-   06AD D7`00         [ 4] 1184 	stb	*_dp_VIA_t1_cnt_lo
-   06AF F6`00`00      [ 5] 1185 	ldb	_the_player
-   06B2 4F            [ 2] 1186 	clra		;zero_extendqihi: R:b -> R:d
-   06B3 1F 01         [ 6] 1187 	tfr	d,x
-   06B5 C6 90         [ 2] 1188 	ldb	#-112
-   06B7 E7 E2         [ 6] 1189 	stb	,-s
-   06B9 E6 89`00`16   [ 8] 1190 	ldb	_PLAYER_STATIC_X_LUT,x
-   06BD BD`00`00      [ 8] 1191 	jsr	__Moveto_d
-   06C0 C6 10         [ 2] 1192 	ldb	#16
-   06C2 D7`00         [ 4] 1193 	stb	*_dp_VIA_t1_cnt_lo
-   06C4 32 63         [ 5] 1194 	leas	3,s
-   06C6 8E`01`B1      [ 3] 1195 	ldx	#_vl_player_left3
-   06C9 7E`00`00      [ 4] 1196 	jmp	___Draw_VLp
-                           1197 	.globl	__player_draw_right
-   06CC                    1198 __player_draw_right:
-   06CC BD`00`00      [ 8] 1199 	jsr	___Reset0Ref
-   06CF C6 7F         [ 2] 1200 	ldb	#127
-   06D1 D7`00         [ 4] 1201 	stb	*_dp_VIA_t1_cnt_lo
-   06D3 F6`00`00      [ 5] 1202 	ldb	_the_player
-   06D6 4F            [ 2] 1203 	clra		;zero_extendqihi: R:b -> R:d
-   06D7 1F 01         [ 6] 1204 	tfr	d,x
-   06D9 C6 90         [ 2] 1205 	ldb	#-112
-   06DB E7 E2         [ 6] 1206 	stb	,-s
-   06DD E6 89`00`16   [ 8] 1207 	ldb	_PLAYER_STATIC_X_LUT,x
-   06E1 BD`00`00      [ 8] 1208 	jsr	__Moveto_d
-   06E4 C6 10         [ 2] 1209 	ldb	#16
-   06E6 D7`00         [ 4] 1210 	stb	*_dp_VIA_t1_cnt_lo
-   06E8 8E`01`F1      [ 3] 1211 	ldx	#_vl_player_right1
-   06EB BD`00`00      [ 8] 1212 	jsr	___Draw_VLp
-   06EE BD`00`00      [ 8] 1213 	jsr	___Reset0Ref
-   06F1 C6 7F         [ 2] 1214 	ldb	#127
-   06F3 D7`00         [ 4] 1215 	stb	*_dp_VIA_t1_cnt_lo
-   06F5 F6`00`00      [ 5] 1216 	ldb	_the_player
-   06F8 4F            [ 2] 1217 	clra		;zero_extendqihi: R:b -> R:d
-   06F9 1F 01         [ 6] 1218 	tfr	d,x
-   06FB C6 90         [ 2] 1219 	ldb	#-112
-   06FD E7 E2         [ 6] 1220 	stb	,-s
-   06FF E6 89`00`16   [ 8] 1221 	ldb	_PLAYER_STATIC_X_LUT,x
-   0703 BD`00`00      [ 8] 1222 	jsr	__Moveto_d
-   0706 C6 10         [ 2] 1223 	ldb	#16
-   0708 D7`00         [ 4] 1224 	stb	*_dp_VIA_t1_cnt_lo
-   070A 8E`02`3D      [ 3] 1225 	ldx	#_vl_player_right2
-   070D BD`00`00      [ 8] 1226 	jsr	___Draw_VLp
-   0710 BD`00`00      [ 8] 1227 	jsr	___Reset0Ref
-   0713 C6 7F         [ 2] 1228 	ldb	#127
-   0715 D7`00         [ 4] 1229 	stb	*_dp_VIA_t1_cnt_lo
-   0717 F6`00`00      [ 5] 1230 	ldb	_the_player
-   071A 4F            [ 2] 1231 	clra		;zero_extendqihi: R:b -> R:d
-   071B 1F 01         [ 6] 1232 	tfr	d,x
-   071D C6 90         [ 2] 1233 	ldb	#-112
-   071F E7 E2         [ 6] 1234 	stb	,-s
-   0721 E6 89`00`16   [ 8] 1235 	ldb	_PLAYER_STATIC_X_LUT,x
-   0725 BD`00`00      [ 8] 1236 	jsr	__Moveto_d
-   0728 C6 10         [ 2] 1237 	ldb	#16
-   072A D7`00         [ 4] 1238 	stb	*_dp_VIA_t1_cnt_lo
-   072C 32 63         [ 5] 1239 	leas	3,s
-   072E 8E`02`A1      [ 3] 1240 	ldx	#_vl_player_right3
-   0731 7E`00`00      [ 4] 1241 	jmp	___Draw_VLp
-                           1242 	.globl	_check_collision
-   0734                    1243 _check_collision:
-   0734 39            [ 5] 1244 	rts
+   0019`07`18                43 	.word	__player_draw_left
+   001B`06`E0                44 	.word	__player_draw_mid
+   001D`07`6B                45 	.word	__player_draw_right
+                             46 	.globl	__SP1_LEFT_MID_X_LUT_2
+   001F                      47 __SP1_LEFT_MID_X_LUT_2:
+   001F FA                   48 	.byte	-6
+   0020 F4                   49 	.byte	-12
+   0021 EE                   50 	.byte	-18
+   0022 E9                   51 	.byte	-23
+   0023 E3                   52 	.byte	-29
+   0024 DD                   53 	.byte	-35
+                             54 	.globl	__SP1_MID_RIGHT_X_LUT_2
+   0025                      55 __SP1_MID_RIGHT_X_LUT_2:
+   0025 4C                   56 	.byte	76
+   0026 46                   57 	.byte	70
+   0027 40                   58 	.byte	64
+   0028 3B                   59 	.byte	59
+   0029 35                   60 	.byte	53
+   002A 2F                   61 	.byte	47
+                             62 	.globl	__SP1_RIGHT_MID_X_LUT_2
+   002B                      63 __SP1_RIGHT_MID_X_LUT_2:
+   002B 06                   64 	.byte	6
+   002C 0C                   65 	.byte	12
+   002D 12                   66 	.byte	18
+   002E 17                   67 	.byte	23
+   002F 1D                   68 	.byte	29
+   0030 23                   69 	.byte	35
+                             70 	.globl	__SP1_MID_LEFT_X_LUT_2
+   0031                      71 __SP1_MID_LEFT_X_LUT_2:
+   0031 B4                   72 	.byte	-76
+   0032 BA                   73 	.byte	-70
+   0033 C0                   74 	.byte	-64
+   0034 C5                   75 	.byte	-59
+   0035 CB                   76 	.byte	-53
+   0036 D1                   77 	.byte	-47
+                             78 	.globl	_player_init
+   0037                      79 _player_init:
+   0037 8E`00`4F      [ 3]   80 	ldx	#_player_draw
+   003A BF`00`05      [ 6]   81 	stx	_the_player+5
+   003D 7F`00`04      [ 7]   82 	clr	_the_player+4
+   0040 CC 00 00      [ 3]   83 	ldd	#0
+   0043 FD`00`02      [ 6]   84 	std	_the_player+2
+   0046 7F`00`01      [ 7]   85 	clr	_the_player+1
+   0049 C6 01         [ 2]   86 	ldb	#1
+   004B F7`00`00      [ 5]   87 	stb	_the_player
+   004E 39            [ 5]   88 	rts
+                             89 	.globl	_player_draw
+   004F                      90 _player_draw:
+   004F 32 7E         [ 5]   91 	leas	-2,s
+   0051 BD`00`00      [ 8]   92 	jsr	___Intensity_5F
+   0054 F6`00`00      [ 5]   93 	ldb	_the_player
+   0057 4F            [ 2]   94 	clra		;zero_extendqihi: R:b -> R:d
+   0058 ED E4         [ 5]   95 	std	,s
+   005A 58            [ 2]   96 	aslb
+   005B 49            [ 2]   97 	rola
+   005C 1F 01         [ 6]   98 	tfr	d,x
+   005E AD 99`00`19   [14]   99 	jsr	[_PLAYER_DRAW_LUT,x]
+   0062 32 62         [ 5]  100 	leas	2,s
+   0064 39            [ 5]  101 	rts
+                            102 	.globl	_vl_player_mid1
+   0065                     103 _vl_player_mid1:
+   0065 00                  104 	.byte	0
+   0066 A0                  105 	.byte	-96
+   0067 B0                  106 	.byte	-80
+   0068 FF                  107 	.byte	-1
+   0069 00                  108 	.byte	0
+   006A B0                  109 	.byte	-80
+   006B FF                  110 	.byte	-1
+   006C 7F                  111 	.byte	127
+   006D 00                  112 	.byte	0
+   006E FF                  113 	.byte	-1
+   006F 00                  114 	.byte	0
+   0070 50                  115 	.byte	80
+   0071 FF                  116 	.byte	-1
+   0072 80                  117 	.byte	-128
+   0073 00                  118 	.byte	0
+   0074 00                  119 	.byte	0
+   0075 10                  120 	.byte	16
+   0076 00                  121 	.byte	0
+   0077 FF                  122 	.byte	-1
+   0078 10                  123 	.byte	16
+   0079 3C                  124 	.byte	60
+   007A 00                  125 	.byte	0
+   007B 00                  126 	.byte	0
+   007C 28                  127 	.byte	40
+   007D FF                  128 	.byte	-1
+   007E F0                  129 	.byte	-16
+   007F 3C                  130 	.byte	60
+   0080 00                  131 	.byte	0
+   0081 F0                  132 	.byte	-16
+   0082 00                  133 	.byte	0
+   0083 FF                  134 	.byte	-1
+   0084 00                  135 	.byte	0
+   0085 50                  136 	.byte	80
+   0086 FF                  137 	.byte	-1
+   0087 7F                  138 	.byte	127
+   0088 00                  139 	.byte	0
+   0089 FF                  140 	.byte	-1
+   008A 00                  141 	.byte	0
+   008B B0                  142 	.byte	-80
+   008C FF                  143 	.byte	-1
+   008D 80                  144 	.byte	-128
+   008E 00                  145 	.byte	0
+   008F 00                  146 	.byte	0
+   0090 20                  147 	.byte	32
+   0091 00                  148 	.byte	0
+   0092 FF                  149 	.byte	-1
+   0093 00                  150 	.byte	0
+   0094 B0                  151 	.byte	-80
+   0095 FF                  152 	.byte	-1
+   0096 00                  153 	.byte	0
+   0097 B0                  154 	.byte	-80
+   0098 00                  155 	.byte	0
+   0099 40                  156 	.byte	64
+   009A 00                  157 	.byte	0
+   009B FF                  158 	.byte	-1
+   009C 10                  159 	.byte	16
+   009D 3C                  160 	.byte	60
+   009E FF                  161 	.byte	-1
+   009F 00                  162 	.byte	0
+   00A0 28                  163 	.byte	40
+   00A1 FF                  164 	.byte	-1
+   00A2 F0                  165 	.byte	-16
+   00A3 3C                  166 	.byte	60
+   00A4                     167 _vl_term_0_46:
+   00A4 01                  168 	.byte	1
+                            169 	.globl	_vl_player_mid2
+   00A5                     170 _vl_player_mid2:
+   00A5 00                  171 	.byte	0
+   00A6 20                  172 	.byte	32
+   00A7 88                  173 	.byte	-120
+   00A8 FF                  174 	.byte	-1
+   00A9 28                  175 	.byte	40
+   00AA 00                  176 	.byte	0
+   00AB FF                  177 	.byte	-1
+   00AC 00                  178 	.byte	0
+   00AD 3C                  179 	.byte	60
+   00AE FF                  180 	.byte	-1
+   00AF DC                  181 	.byte	-36
+   00B0 00                  182 	.byte	0
+   00B1 00                  183 	.byte	0
+   00B2 E0                  184 	.byte	-32
+   00B3 EC                  185 	.byte	-20
+   00B4 FF                  186 	.byte	-1
+   00B5 70                  187 	.byte	112
+   00B6 40                  188 	.byte	64
+   00B7 FF                  189 	.byte	-1
+   00B8 00                  190 	.byte	0
+   00B9 20                  191 	.byte	32
+   00BA FF                  192 	.byte	-1
+   00BB 90                  193 	.byte	-112
+   00BC 40                  194 	.byte	64
+   00BD 00                  195 	.byte	0
+   00BE 20                  196 	.byte	32
+   00BF 28                  197 	.byte	40
+   00C0 FF                  198 	.byte	-1
+   00C1 28                  199 	.byte	40
+   00C2 00                  200 	.byte	0
+   00C3 FF                  201 	.byte	-1
+   00C4 00                  202 	.byte	0
+   00C5 C4                  203 	.byte	-60
+   00C6 FF                  204 	.byte	-1
+   00C7 DC                  205 	.byte	-36
+   00C8 00                  206 	.byte	0
+   00C9 00                  207 	.byte	0
+   00CA 2D                  208 	.byte	45
+   00CB E4                  209 	.byte	-28
+   00CC FF                  210 	.byte	-1
+   00CD 00                  211 	.byte	0
+   00CE 30                  212 	.byte	48
+   00CF FF                  213 	.byte	-1
+   00D0 10                  214 	.byte	16
+   00D1 F8                  215 	.byte	-8
+   00D2 FF                  216 	.byte	-1
+   00D3 00                  217 	.byte	0
+   00D4 D0                  218 	.byte	-48
+   00D5 00                  219 	.byte	0
+   00D6 00                  220 	.byte	0
+   00D7 D0                  221 	.byte	-48
+   00D8 FF                  222 	.byte	-1
+   00D9 00                  223 	.byte	0
+   00DA D0                  224 	.byte	-48
+   00DB FF                  225 	.byte	-1
+   00DC F0                  226 	.byte	-16
+   00DD F8                  227 	.byte	-8
+   00DE FF                  228 	.byte	-1
+   00DF 00                  229 	.byte	0
+   00E0 30                  230 	.byte	48
+   00E1 00                  231 	.byte	0
+   00E2 E4                  232 	.byte	-28
+   00E3 0C                  233 	.byte	12
+   00E4 FF                  234 	.byte	-1
+   00E5 10                  235 	.byte	16
+   00E6 08                  236 	.byte	8
+   00E7 FF                  237 	.byte	-1
+   00E8 00                  238 	.byte	0
+   00E9 18                  239 	.byte	24
+   00EA FF                  240 	.byte	-1
+   00EB F0                  241 	.byte	-16
+   00EC 08                  242 	.byte	8
+   00ED                     243 _vl_term_1_83:
+   00ED 01                  244 	.byte	1
+                            245 	.globl	_vl_player_left1
+   00EE                     246 _vl_player_left1:
+   00EE 00                  247 	.byte	0
+   00EF 08                  248 	.byte	8
+   00F0 50                  249 	.byte	80
+   00F1 FF                  250 	.byte	-1
+   00F2 B0                  251 	.byte	-80
+   00F3 00                  252 	.byte	0
+   00F4 FF                  253 	.byte	-1
+   00F5 E8                  254 	.byte	-24
+   00F6 10                  255 	.byte	16
+   00F7 FF                  256 	.byte	-1
+   00F8 00                  257 	.byte	0
+   00F9 50                  258 	.byte	80
+   00FA FF                  259 	.byte	-1
+   00FB 18                  260 	.byte	24
+   00FC 10                  261 	.byte	16
+   00FD FF                  262 	.byte	-1
+   00FE 50                  263 	.byte	80
+   00FF 00                  264 	.byte	0
+   0100 FF                  265 	.byte	-1
+   0101 18                  266 	.byte	24
+   0102 F0                  267 	.byte	-16
+   0103 FF                  268 	.byte	-1
+   0104 00                  269 	.byte	0
+   0105 B0                  270 	.byte	-80
+   0106 FF                  271 	.byte	-1
+   0107 E8                  272 	.byte	-24
+   0108 F0                  273 	.byte	-16
+   0109 00                  274 	.byte	0
+   010A F8                  275 	.byte	-8
+   010B 00                  276 	.byte	0
+   010C FF                  277 	.byte	-1
+   010D 10                  278 	.byte	16
+   010E C4                  279 	.byte	-60
+   010F FF                  280 	.byte	-1
+   0110 00                  281 	.byte	0
+   0111 D8                  282 	.byte	-40
+   0112 FF                  283 	.byte	-1
+   0113 F0                  284 	.byte	-16
+   0114 C4                  285 	.byte	-60
+   0115 00                  286 	.byte	0
+   0116 08                  287 	.byte	8
+   0117 00                  288 	.byte	0
+   0118 FF                  289 	.byte	-1
+   0119 B0                  290 	.byte	-80
+   011A 00                  291 	.byte	0
+   011B FF                  292 	.byte	-1
+   011C E8                  293 	.byte	-24
+   011D 10                  294 	.byte	16
+   011E FF                  295 	.byte	-1
+   011F 18                  296 	.byte	24
+   0120 10                  297 	.byte	16
+   0121 FF                  298 	.byte	-1
+   0122 08                  299 	.byte	8
+   0123 00                  300 	.byte	0
+   0124 00                  301 	.byte	0
+   0125 F0                  302 	.byte	-16
+   0126 E8                  303 	.byte	-24
+   0127 FF                  304 	.byte	-1
+   0128 10                  305 	.byte	16
+   0129 34                  306 	.byte	52
+   012A 00                  307 	.byte	0
+   012B 00                  308 	.byte	0
+   012C C4                  309 	.byte	-60
+   012D FF                  310 	.byte	-1
+   012E 00                  311 	.byte	0
+   012F 50                  312 	.byte	80
+   0130 FF                  313 	.byte	-1
+   0131 00                  314 	.byte	0
+   0132 50                  315 	.byte	80
+   0133 00                  316 	.byte	0
+   0134 00                  317 	.byte	0
+   0135 C4                  318 	.byte	-60
+   0136 FF                  319 	.byte	-1
+   0137 F0                  320 	.byte	-16
+   0138 40                  321 	.byte	64
+   0139                     322 _vl_term_2_123:
+   0139 01                  323 	.byte	1
+                            324 	.globl	_vl_player_left2
+   013A                     325 _vl_player_left2:
+   013A 00                  326 	.byte	0
+   013B D0                  327 	.byte	-48
+   013C 58                  328 	.byte	88
+   013D 00                  329 	.byte	0
+   013E D0                  330 	.byte	-48
+   013F 58                  331 	.byte	88
+   0140 FF                  332 	.byte	-1
+   0141 18                  333 	.byte	24
+   0142 F0                  334 	.byte	-16
+   0143 FF                  335 	.byte	-1
+   0144 50                  336 	.byte	80
+   0145 00                  337 	.byte	0
+   0146 FF                  338 	.byte	-1
+   0147 18                  339 	.byte	24
+   0148 10                  340 	.byte	16
+   0149 00                  341 	.byte	0
+   014A E0                  342 	.byte	-32
+   014B 10                  343 	.byte	16
+   014C FF                  344 	.byte	-1
+   014D 00                  345 	.byte	0
+   014E 14                  346 	.byte	20
+   014F FF                  347 	.byte	-1
+   0150 10                  348 	.byte	16
+   0151 08                  349 	.byte	8
+   0152 FF                  350 	.byte	-1
+   0153 38                  351 	.byte	56
+   0154 00                  352 	.byte	0
+   0155 FF                  353 	.byte	-1
+   0156 10                  354 	.byte	16
+   0157 F8                  355 	.byte	-8
+   0158 FF                  356 	.byte	-1
+   0159 F0                  357 	.byte	-16
+   015A F8                  358 	.byte	-8
+   015B FF                  359 	.byte	-1
+   015C C8                  360 	.byte	-56
+   015D 00                  361 	.byte	0
+   015E FF                  362 	.byte	-1
+   015F F0                  363 	.byte	-16
+   0160 08                  364 	.byte	8
+   0161 00                  365 	.byte	0
+   0162 58                  366 	.byte	88
+   0163 00                  367 	.byte	0
+   0164 FF                  368 	.byte	-1
+   0165 00                  369 	.byte	0
+   0166 B8                  370 	.byte	-72
+   0167 FF                  371 	.byte	-1
+   0168 F0                  372 	.byte	-16
+   0169 F8                  373 	.byte	-8
+   016A FF                  374 	.byte	-1
+   016B D8                  375 	.byte	-40
+   016C 00                  376 	.byte	0
+   016D 00                  377 	.byte	0
+   016E 00                  378 	.byte	0
+   016F EC                  379 	.byte	-20
+   0170 FF                  380 	.byte	-1
+   0171 1C                  381 	.byte	28
+   0172 14                  382 	.byte	20
+   0173 00                  383 	.byte	0
+   0174 1C                  384 	.byte	28
+   0175 10                  385 	.byte	16
+   0176 FF                  386 	.byte	-1
+   0177 28                  387 	.byte	40
+   0178 1C                  388 	.byte	28
+   0179 FF                  389 	.byte	-1
+   017A 00                  390 	.byte	0
+   017B D8                  391 	.byte	-40
+   017C FF                  392 	.byte	-1
+   017D C0                  393 	.byte	-64
+   017E 94                  394 	.byte	-108
+   017F FF                  395 	.byte	-1
+   0180 C0                  396 	.byte	-64
+   0181 94                  397 	.byte	-108
+   0182 00                  398 	.byte	0
+   0183 34                  399 	.byte	52
+   0184 58                  400 	.byte	88
+   0185 00                  401 	.byte	0
+   0186 34                  402 	.byte	52
+   0187 58                  403 	.byte	88
+   0188 FF                  404 	.byte	-1
+   0189 00                  405 	.byte	0
+   018A E4                  406 	.byte	-28
+   018B FF                  407 	.byte	-1
+   018C 10                  408 	.byte	16
+   018D 18                  409 	.byte	24
+   018E FF                  410 	.byte	-1
+   018F 00                  411 	.byte	0
+   0190 20                  412 	.byte	32
+   0191 00                  413 	.byte	0
+   0192 00                  414 	.byte	0
+   0193 2E                  415 	.byte	46
+   0194 FF                  416 	.byte	-1
+   0195 00                  417 	.byte	0
+   0196 20                  418 	.byte	32
+   0197 FF                  419 	.byte	-1
+   0198 F0                  420 	.byte	-16
+   0199 F8                  421 	.byte	-8
+   019A FF                  422 	.byte	-1
+   019B 00                  423 	.byte	0
+   019C E0                  424 	.byte	-32
+   019D                     425 _vl_term_3_170:
+   019D 01                  426 	.byte	1
+                            427 	.globl	_vl_player_left3
+   019E                     428 _vl_player_left3:
+   019E 00                  429 	.byte	0
+   019F 08                  430 	.byte	8
+   01A0 B0                  431 	.byte	-80
+   01A1 FF                  432 	.byte	-1
+   01A2 18                  433 	.byte	24
+   01A3 10                  434 	.byte	16
+   01A4 FF                  435 	.byte	-1
+   01A5 F0                  436 	.byte	-16
+   01A6 0C                  437 	.byte	12
+   01A7 00                  438 	.byte	0
+   01A8 90                  439 	.byte	-112
+   01A9 F4                  440 	.byte	-12
+   01AA FF                  441 	.byte	-1
+   01AB 00                  442 	.byte	0
+   01AC B0                  443 	.byte	-80
+   01AD FF                  444 	.byte	-1
+   01AE 18                  445 	.byte	24
+   01AF F0                  446 	.byte	-16
+   01B0 FF                  447 	.byte	-1
+   01B1 50                  448 	.byte	80
+   01B2 00                  449 	.byte	0
+   01B3 FF                  450 	.byte	-1
+   01B4 18                  451 	.byte	24
+   01B5 10                  452 	.byte	16
+   01B6 FF                  453 	.byte	-1
+   01B7 00                  454 	.byte	0
+   01B8 50                  455 	.byte	80
+   01B9 00                  456 	.byte	0
+   01BA FC                  457 	.byte	-4
+   01BB 1C                  458 	.byte	28
+   01BC FF                  459 	.byte	-1
+   01BD 30                  460 	.byte	48
+   01BE 00                  461 	.byte	0
+   01BF FF                  462 	.byte	-1
+   01C0 10                  463 	.byte	16
+   01C1 08                  464 	.byte	8
+   01C2 FF                  465 	.byte	-1
+   01C3 00                  466 	.byte	0
+   01C4 48                  467 	.byte	72
+   01C5 FF                  468 	.byte	-1
+   01C6 F0                  469 	.byte	-16
+   01C7 F8                  470 	.byte	-8
+   01C8 FF                  471 	.byte	-1
+   01C9 F8                  472 	.byte	-8
+   01CA 00                  473 	.byte	0
+   01CB 00                  474 	.byte	0
+   01CC 18                  475 	.byte	24
+   01CD 08                  476 	.byte	8
+   01CE FF                  477 	.byte	-1
+   01CF F4                  478 	.byte	-12
+   01D0 08                  479 	.byte	8
+   01D1 00                  480 	.byte	0
+   01D2 DC                  481 	.byte	-36
+   01D3 EC                  482 	.byte	-20
+   01D4 FF                  483 	.byte	-1
+   01D5 18                  484 	.byte	24
+   01D6 2C                  485 	.byte	44
+   01D7 FF                  486 	.byte	-1
+   01D8 00                  487 	.byte	0
+   01D9 1C                  488 	.byte	28
+   01DA FF                  489 	.byte	-1
+   01DB E8                  490 	.byte	-24
+   01DC F0                  491 	.byte	-16
+   01DD                     492 _vl_term_4_203:
+   01DD 01                  493 	.byte	1
+                            494 	.globl	_vl_player_right1
+   01DE                     495 _vl_player_right1:
+   01DE 00                  496 	.byte	0
+   01DF 08                  497 	.byte	8
+   01E0 B0                  498 	.byte	-80
+   01E1 FF                  499 	.byte	-1
+   01E2 B0                  500 	.byte	-80
+   01E3 00                  501 	.byte	0
+   01E4 FF                  502 	.byte	-1
+   01E5 E8                  503 	.byte	-24
+   01E6 F0                  504 	.byte	-16
+   01E7 FF                  505 	.byte	-1
+   01E8 00                  506 	.byte	0
+   01E9 B0                  507 	.byte	-80
+   01EA FF                  508 	.byte	-1
+   01EB 18                  509 	.byte	24
+   01EC F0                  510 	.byte	-16
+   01ED FF                  511 	.byte	-1
+   01EE 50                  512 	.byte	80
+   01EF 00                  513 	.byte	0
+   01F0 FF                  514 	.byte	-1
+   01F1 18                  515 	.byte	24
+   01F2 10                  516 	.byte	16
+   01F3 FF                  517 	.byte	-1
+   01F4 00                  518 	.byte	0
+   01F5 50                  519 	.byte	80
+   01F6 FF                  520 	.byte	-1
+   01F7 E8                  521 	.byte	-24
+   01F8 10                  522 	.byte	16
+   01F9 00                  523 	.byte	0
+   01FA F8                  524 	.byte	-8
+   01FB 00                  525 	.byte	0
+   01FC FF                  526 	.byte	-1
+   01FD 10                  527 	.byte	16
+   01FE 3C                  528 	.byte	60
+   01FF FF                  529 	.byte	-1
+   0200 00                  530 	.byte	0
+   0201 28                  531 	.byte	40
+   0202 FF                  532 	.byte	-1
+   0203 F0                  533 	.byte	-16
+   0204 3C                  534 	.byte	60
+   0205 00                  535 	.byte	0
+   0206 08                  536 	.byte	8
+   0207 00                  537 	.byte	0
+   0208 FF                  538 	.byte	-1
+   0209 B0                  539 	.byte	-80
+   020A 00                  540 	.byte	0
+   020B FF                  541 	.byte	-1
+   020C E8                  542 	.byte	-24
+   020D F0                  543 	.byte	-16
+   020E FF                  544 	.byte	-1
+   020F 18                  545 	.byte	24
+   0210 F0                  546 	.byte	-16
+   0211 FF                  547 	.byte	-1
+   0212 08                  548 	.byte	8
+   0213 00                  549 	.byte	0
+   0214 00                  550 	.byte	0
+   0215 F0                  551 	.byte	-16
+   0216 18                  552 	.byte	24
+   0217 FF                  553 	.byte	-1
+   0218 10                  554 	.byte	16
+   0219 CC                  555 	.byte	-52
+   021A 00                  556 	.byte	0
+   021B 00                  557 	.byte	0
+   021C 3C                  558 	.byte	60
+   021D FF                  559 	.byte	-1
+   021E 00                  560 	.byte	0
+   021F B0                  561 	.byte	-80
+   0220 FF                  562 	.byte	-1
+   0221 00                  563 	.byte	0
+   0222 B0                  564 	.byte	-80
+   0223 00                  565 	.byte	0
+   0224 00                  566 	.byte	0
+   0225 3C                  567 	.byte	60
+   0226 FF                  568 	.byte	-1
+   0227 F0                  569 	.byte	-16
+   0228 C0                  570 	.byte	-64
+   0229                     571 _vl_term_5_243:
+   0229 01                  572 	.byte	1
+                            573 	.globl	_vl_player_right2
+   022A                     574 _vl_player_right2:
+   022A 00                  575 	.byte	0
+   022B D0                  576 	.byte	-48
+   022C A8                  577 	.byte	-88
+   022D 00                  578 	.byte	0
+   022E D0                  579 	.byte	-48
+   022F A8                  580 	.byte	-88
+   0230 FF                  581 	.byte	-1
+   0231 18                  582 	.byte	24
+   0232 10                  583 	.byte	16
+   0233 FF                  584 	.byte	-1
+   0234 50                  585 	.byte	80
+   0235 00                  586 	.byte	0
+   0236 FF                  587 	.byte	-1
+   0237 18                  588 	.byte	24
+   0238 F0                  589 	.byte	-16
+   0239 00                  590 	.byte	0
+   023A E0                  591 	.byte	-32
+   023B F0                  592 	.byte	-16
+   023C FF                  593 	.byte	-1
+   023D 00                  594 	.byte	0
+   023E EC                  595 	.byte	-20
+   023F FF                  596 	.byte	-1
+   0240 10                  597 	.byte	16
+   0241 F8                  598 	.byte	-8
+   0242 FF                  599 	.byte	-1
+   0243 38                  600 	.byte	56
+   0244 00                  601 	.byte	0
+   0245 FF                  602 	.byte	-1
+   0246 10                  603 	.byte	16
+   0247 08                  604 	.byte	8
+   0248 FF                  605 	.byte	-1
+   0249 F0                  606 	.byte	-16
+   024A 08                  607 	.byte	8
+   024B FF                  608 	.byte	-1
+   024C C8                  609 	.byte	-56
+   024D 00                  610 	.byte	0
+   024E FF                  611 	.byte	-1
+   024F F0                  612 	.byte	-16
+   0250 F8                  613 	.byte	-8
+   0251 00                  614 	.byte	0
+   0252 58                  615 	.byte	88
+   0253 00                  616 	.byte	0
+   0254 FF                  617 	.byte	-1
+   0255 00                  618 	.byte	0
+   0256 48                  619 	.byte	72
+   0257 FF                  620 	.byte	-1
+   0258 F0                  621 	.byte	-16
+   0259 08                  622 	.byte	8
+   025A FF                  623 	.byte	-1
+   025B D8                  624 	.byte	-40
+   025C 00                  625 	.byte	0
+   025D 00                  626 	.byte	0
+   025E 00                  627 	.byte	0
+   025F 14                  628 	.byte	20
+   0260 FF                  629 	.byte	-1
+   0261 1C                  630 	.byte	28
+   0262 EC                  631 	.byte	-20
+   0263 00                  632 	.byte	0
+   0264 1C                  633 	.byte	28
+   0265 F0                  634 	.byte	-16
+   0266 FF                  635 	.byte	-1
+   0267 28                  636 	.byte	40
+   0268 E4                  637 	.byte	-28
+   0269 FF                  638 	.byte	-1
+   026A 00                  639 	.byte	0
+   026B 28                  640 	.byte	40
+   026C FF                  641 	.byte	-1
+   026D C0                  642 	.byte	-64
+   026E 6C                  643 	.byte	108
+   026F FF                  644 	.byte	-1
+   0270 C0                  645 	.byte	-64
+   0271 6C                  646 	.byte	108
+   0272 00                  647 	.byte	0
+   0273 34                  648 	.byte	52
+   0274 A8                  649 	.byte	-88
+   0275 00                  650 	.byte	0
+   0276 34                  651 	.byte	52
+   0277 A8                  652 	.byte	-88
+   0278 FF                  653 	.byte	-1
+   0279 00                  654 	.byte	0
+   027A 1C                  655 	.byte	28
+   027B FF                  656 	.byte	-1
+   027C 10                  657 	.byte	16
+   027D E8                  658 	.byte	-24
+   027E FF                  659 	.byte	-1
+   027F 00                  660 	.byte	0
+   0280 E0                  661 	.byte	-32
+   0281 00                  662 	.byte	0
+   0282 00                  663 	.byte	0
+   0283 D2                  664 	.byte	-46
+   0284 FF                  665 	.byte	-1
+   0285 00                  666 	.byte	0
+   0286 E0                  667 	.byte	-32
+   0287 FF                  668 	.byte	-1
+   0288 F0                  669 	.byte	-16
+   0289 08                  670 	.byte	8
+   028A FF                  671 	.byte	-1
+   028B 00                  672 	.byte	0
+   028C 20                  673 	.byte	32
+   028D                     674 _vl_term_6_290:
+   028D 01                  675 	.byte	1
+                            676 	.globl	_vl_player_right3
+   028E                     677 _vl_player_right3:
+   028E 00                  678 	.byte	0
+   028F 08                  679 	.byte	8
+   0290 50                  680 	.byte	80
+   0291 FF                  681 	.byte	-1
+   0292 18                  682 	.byte	24
+   0293 F0                  683 	.byte	-16
+   0294 FF                  684 	.byte	-1
+   0295 F0                  685 	.byte	-16
+   0296 F4                  686 	.byte	-12
+   0297 00                  687 	.byte	0
+   0298 90                  688 	.byte	-112
+   0299 0C                  689 	.byte	12
+   029A FF                  690 	.byte	-1
+   029B 00                  691 	.byte	0
+   029C 50                  692 	.byte	80
+   029D FF                  693 	.byte	-1
+   029E 18                  694 	.byte	24
+   029F 10                  695 	.byte	16
+   02A0 FF                  696 	.byte	-1
+   02A1 50                  697 	.byte	80
+   02A2 00                  698 	.byte	0
+   02A3 FF                  699 	.byte	-1
+   02A4 18                  700 	.byte	24
+   02A5 F0                  701 	.byte	-16
+   02A6 FF                  702 	.byte	-1
+   02A7 00                  703 	.byte	0
+   02A8 B0                  704 	.byte	-80
+   02A9 00                  705 	.byte	0
+   02AA FC                  706 	.byte	-4
+   02AB E4                  707 	.byte	-28
+   02AC FF                  708 	.byte	-1
+   02AD 30                  709 	.byte	48
+   02AE 00                  710 	.byte	0
+   02AF FF                  711 	.byte	-1
+   02B0 10                  712 	.byte	16
+   02B1 F8                  713 	.byte	-8
+   02B2 FF                  714 	.byte	-1
+   02B3 00                  715 	.byte	0
+   02B4 B8                  716 	.byte	-72
+   02B5 FF                  717 	.byte	-1
+   02B6 F0                  718 	.byte	-16
+   02B7 08                  719 	.byte	8
+   02B8 FF                  720 	.byte	-1
+   02B9 F8                  721 	.byte	-8
+   02BA 00                  722 	.byte	0
+   02BB 00                  723 	.byte	0
+   02BC 18                  724 	.byte	24
+   02BD F8                  725 	.byte	-8
+   02BE FF                  726 	.byte	-1
+   02BF F4                  727 	.byte	-12
+   02C0 F8                  728 	.byte	-8
+   02C1 00                  729 	.byte	0
+   02C2 DC                  730 	.byte	-36
+   02C3 14                  731 	.byte	20
+   02C4 FF                  732 	.byte	-1
+   02C5 18                  733 	.byte	24
+   02C6 D4                  734 	.byte	-44
+   02C7 FF                  735 	.byte	-1
+   02C8 00                  736 	.byte	0
+   02C9 E4                  737 	.byte	-28
+   02CA FF                  738 	.byte	-1
+   02CB E8                  739 	.byte	-24
+   02CC 10                  740 	.byte	16
+   02CD                     741 _vl_term_7_323:
+   02CD 01                  742 	.byte	1
+                            743 	.globl	_player_change_left_to_mid_step1
+   02CE                     744 _player_change_left_to_mid_step1:
+   02CE 32 7D         [ 5]  745 	leas	-3,s
+   02D0 F6`00`04      [ 5]  746 	ldb	_the_player+4
+   02D3 E7 E4         [ 4]  747 	stb	,s
+   02D5 4F            [ 2]  748 	clra		;zero_extendqihi: R:b -> R:d
+   02D6 ED 61         [ 6]  749 	std	1,s
+   02D8 1F 01         [ 6]  750 	tfr	d,x
+   02DA 1E 01         [ 8]  751 	exg	d,x
+   02DC F3`00`02      [ 7]  752 	addd	_the_player+2; addhi3,3
+   02DF 1E 01         [ 8]  753 	exg	d,x
+   02E1 E6 84         [ 4]  754 	ldb	,x
+   02E3 F7`00`01      [ 5]  755 	stb	_the_player+1
+   02E6 E6 E4         [ 4]  756 	ldb	,s
+   02E8 5A            [ 2]  757 	decb
+   02E9 F7`00`04      [ 5]  758 	stb	_the_player+4
+   02EC BD`00`00      [ 8]  759 	jsr	___Intensity_5F
+   02EF BD`00`00      [ 8]  760 	jsr	___Reset0Ref
+   02F2 C6 7F         [ 2]  761 	ldb	#127
+   02F4 D7`00         [ 4]  762 	stb	*_dp_VIA_t1_cnt_lo
+   02F6 CB 11         [ 2]  763 	addb	#17
+   02F8 E7 E2         [ 6]  764 	stb	,-s
+   02FA F6`00`01      [ 5]  765 	ldb	_the_player+1
+   02FD BD`00`00      [ 8]  766 	jsr	__Moveto_d
+   0300 C6 10         [ 2]  767 	ldb	#16
+   0302 D7`00         [ 4]  768 	stb	*_dp_VIA_t1_cnt_lo
+   0304 8E`00`EE      [ 3]  769 	ldx	#_vl_player_left1
+   0307 BD`00`00      [ 8]  770 	jsr	___Draw_VLp
+   030A BD`00`00      [ 8]  771 	jsr	___Reset0Ref
+   030D C6 7F         [ 2]  772 	ldb	#127
+   030F D7`00         [ 4]  773 	stb	*_dp_VIA_t1_cnt_lo
+   0311 CB 11         [ 2]  774 	addb	#17
+   0313 E7 E2         [ 6]  775 	stb	,-s
+   0315 F6`00`01      [ 5]  776 	ldb	_the_player+1
+   0318 BD`00`00      [ 8]  777 	jsr	__Moveto_d
+   031B C6 10         [ 2]  778 	ldb	#16
+   031D D7`00         [ 4]  779 	stb	*_dp_VIA_t1_cnt_lo
+   031F 8E`01`3A      [ 3]  780 	ldx	#_vl_player_left2
+   0322 BD`00`00      [ 8]  781 	jsr	___Draw_VLp
+   0325 BD`00`00      [ 8]  782 	jsr	___Reset0Ref
+   0328 C6 7F         [ 2]  783 	ldb	#127
+   032A D7`00         [ 4]  784 	stb	*_dp_VIA_t1_cnt_lo
+   032C CB 11         [ 2]  785 	addb	#17
+   032E E7 E2         [ 6]  786 	stb	,-s
+   0330 F6`00`01      [ 5]  787 	ldb	_the_player+1
+   0333 BD`00`00      [ 8]  788 	jsr	__Moveto_d
+   0336 C6 10         [ 2]  789 	ldb	#16
+   0338 D7`00         [ 4]  790 	stb	*_dp_VIA_t1_cnt_lo
+   033A 8E`01`9E      [ 3]  791 	ldx	#_vl_player_left3
+   033D BD`00`00      [ 8]  792 	jsr	___Draw_VLp
+   0340 32 63         [ 5]  793 	leas	3,s
+   0342 7D`00`04      [ 7]  794 	tst	_the_player+4
+   0345 26 19         [ 3]  795 	bne	L7
+   0347 8E`03`63      [ 3]  796 	ldx	#_player_change_left_to_mid_step2
+   034A BF`00`05      [ 6]  797 	stx	_the_player+5
+   034D F6`00`02      [ 5]  798 	ldb	_the_game+2
+   0350 4F            [ 2]  799 	clra		;zero_extendqihi: R:b -> R:d
+   0351 1F 01         [ 6]  800 	tfr	d,x
+   0353 E6 89`00`0B   [ 8]  801 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   0357 F7`00`04      [ 5]  802 	stb	_the_player+4
+   035A 8E`00`1F      [ 3]  803 	ldx	#__SP1_LEFT_MID_X_LUT_2
+   035D BF`00`02      [ 6]  804 	stx	_the_player+2
+   0360                     805 L7:
+   0360 32 63         [ 5]  806 	leas	3,s
+   0362 39            [ 5]  807 	rts
+                            808 	.globl	_player_change_left_to_mid_step2
+   0363                     809 _player_change_left_to_mid_step2:
+   0363 32 7D         [ 5]  810 	leas	-3,s
+   0365 F6`00`04      [ 5]  811 	ldb	_the_player+4
+   0368 E7 E4         [ 4]  812 	stb	,s
+   036A 4F            [ 2]  813 	clra		;zero_extendqihi: R:b -> R:d
+   036B ED 61         [ 6]  814 	std	1,s
+   036D 1F 01         [ 6]  815 	tfr	d,x
+   036F 1E 01         [ 8]  816 	exg	d,x
+   0371 F3`00`02      [ 7]  817 	addd	_the_player+2; addhi3,3
+   0374 1E 01         [ 8]  818 	exg	d,x
+   0376 E6 84         [ 4]  819 	ldb	,x
+   0378 F7`00`01      [ 5]  820 	stb	_the_player+1
+   037B E6 E4         [ 4]  821 	ldb	,s
+   037D 5A            [ 2]  822 	decb
+   037E F7`00`04      [ 5]  823 	stb	_the_player+4
+   0381 BD`00`00      [ 8]  824 	jsr	___Intensity_5F
+   0384 BD`00`00      [ 8]  825 	jsr	___Reset0Ref
+   0387 C6 7F         [ 2]  826 	ldb	#127
+   0389 D7`00         [ 4]  827 	stb	*_dp_VIA_t1_cnt_lo
+   038B CB 11         [ 2]  828 	addb	#17
+   038D E7 E2         [ 6]  829 	stb	,-s
+   038F F6`00`01      [ 5]  830 	ldb	_the_player+1
+   0392 BD`00`00      [ 8]  831 	jsr	__Moveto_d
+   0395 C6 10         [ 2]  832 	ldb	#16
+   0397 D7`00         [ 4]  833 	stb	*_dp_VIA_t1_cnt_lo
+   0399 8E`00`65      [ 3]  834 	ldx	#_vl_player_mid1
+   039C BD`00`00      [ 8]  835 	jsr	___Draw_VLp
+   039F BD`00`00      [ 8]  836 	jsr	___Reset0Ref
+   03A2 C6 7F         [ 2]  837 	ldb	#127
+   03A4 D7`00         [ 4]  838 	stb	*_dp_VIA_t1_cnt_lo
+   03A6 CB 11         [ 2]  839 	addb	#17
+   03A8 E7 E2         [ 6]  840 	stb	,-s
+   03AA F6`00`01      [ 5]  841 	ldb	_the_player+1
+   03AD BD`00`00      [ 8]  842 	jsr	__Moveto_d
+   03B0 C6 10         [ 2]  843 	ldb	#16
+   03B2 D7`00         [ 4]  844 	stb	*_dp_VIA_t1_cnt_lo
+   03B4 8E`00`A5      [ 3]  845 	ldx	#_vl_player_mid2
+   03B7 BD`00`00      [ 8]  846 	jsr	___Draw_VLp
+   03BA 32 62         [ 5]  847 	leas	2,s
+   03BC 7D`00`04      [ 7]  848 	tst	_the_player+4
+   03BF 26 0E         [ 3]  849 	bne	L11
+   03C1 C6 01         [ 2]  850 	ldb	#1
+   03C3 F7`00`00      [ 5]  851 	stb	_the_player
+   03C6 7F`00`01      [ 7]  852 	clr	_the_player+1
+   03C9 8E`00`4F      [ 3]  853 	ldx	#_player_draw
+   03CC BF`00`05      [ 6]  854 	stx	_the_player+5
+   03CF                     855 L11:
+   03CF 32 63         [ 5]  856 	leas	3,s
+   03D1 39            [ 5]  857 	rts
+                            858 	.globl	_player_change_mid_to_right_step1
+   03D2                     859 _player_change_mid_to_right_step1:
+   03D2 32 7D         [ 5]  860 	leas	-3,s
+   03D4 F6`00`04      [ 5]  861 	ldb	_the_player+4
+   03D7 E7 E4         [ 4]  862 	stb	,s
+   03D9 4F            [ 2]  863 	clra		;zero_extendqihi: R:b -> R:d
+   03DA ED 61         [ 6]  864 	std	1,s
+   03DC 1F 01         [ 6]  865 	tfr	d,x
+   03DE 1E 01         [ 8]  866 	exg	d,x
+   03E0 F3`00`02      [ 7]  867 	addd	_the_player+2; addhi3,3
+   03E3 1E 01         [ 8]  868 	exg	d,x
+   03E5 E6 84         [ 4]  869 	ldb	,x
+   03E7 F7`00`01      [ 5]  870 	stb	_the_player+1
+   03EA E6 E4         [ 4]  871 	ldb	,s
+   03EC 5A            [ 2]  872 	decb
+   03ED F7`00`04      [ 5]  873 	stb	_the_player+4
+   03F0 BD`00`00      [ 8]  874 	jsr	___Intensity_5F
+   03F3 BD`00`00      [ 8]  875 	jsr	___Reset0Ref
+   03F6 C6 7F         [ 2]  876 	ldb	#127
+   03F8 D7`00         [ 4]  877 	stb	*_dp_VIA_t1_cnt_lo
+   03FA CB 11         [ 2]  878 	addb	#17
+   03FC E7 E2         [ 6]  879 	stb	,-s
+   03FE F6`00`01      [ 5]  880 	ldb	_the_player+1
+   0401 BD`00`00      [ 8]  881 	jsr	__Moveto_d
+   0404 C6 10         [ 2]  882 	ldb	#16
+   0406 D7`00         [ 4]  883 	stb	*_dp_VIA_t1_cnt_lo
+   0408 8E`00`65      [ 3]  884 	ldx	#_vl_player_mid1
+   040B BD`00`00      [ 8]  885 	jsr	___Draw_VLp
+   040E BD`00`00      [ 8]  886 	jsr	___Reset0Ref
+   0411 C6 7F         [ 2]  887 	ldb	#127
+   0413 D7`00         [ 4]  888 	stb	*_dp_VIA_t1_cnt_lo
+   0415 CB 11         [ 2]  889 	addb	#17
+   0417 E7 E2         [ 6]  890 	stb	,-s
+   0419 F6`00`01      [ 5]  891 	ldb	_the_player+1
+   041C BD`00`00      [ 8]  892 	jsr	__Moveto_d
+   041F C6 10         [ 2]  893 	ldb	#16
+   0421 D7`00         [ 4]  894 	stb	*_dp_VIA_t1_cnt_lo
+   0423 8E`00`A5      [ 3]  895 	ldx	#_vl_player_mid2
+   0426 BD`00`00      [ 8]  896 	jsr	___Draw_VLp
+   0429 32 62         [ 5]  897 	leas	2,s
+   042B 7D`00`04      [ 7]  898 	tst	_the_player+4
+   042E 26 19         [ 3]  899 	bne	L14
+   0430 8E`04`4C      [ 3]  900 	ldx	#_player_change_mid_to_right_step2
+   0433 BF`00`05      [ 6]  901 	stx	_the_player+5
+   0436 F6`00`02      [ 5]  902 	ldb	_the_game+2
+   0439 4F            [ 2]  903 	clra		;zero_extendqihi: R:b -> R:d
+   043A 1F 01         [ 6]  904 	tfr	d,x
+   043C E6 89`00`0B   [ 8]  905 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   0440 F7`00`04      [ 5]  906 	stb	_the_player+4
+   0443 8E`00`25      [ 3]  907 	ldx	#__SP1_MID_RIGHT_X_LUT_2
+   0446 BF`00`02      [ 6]  908 	stx	_the_player+2
+   0449                     909 L14:
+   0449 32 63         [ 5]  910 	leas	3,s
+   044B 39            [ 5]  911 	rts
+                            912 	.globl	_player_change_mid_to_right_step2
+   044C                     913 _player_change_mid_to_right_step2:
+   044C 32 7D         [ 5]  914 	leas	-3,s
+   044E F6`00`04      [ 5]  915 	ldb	_the_player+4
+   0451 E7 E4         [ 4]  916 	stb	,s
+   0453 4F            [ 2]  917 	clra		;zero_extendqihi: R:b -> R:d
+   0454 ED 61         [ 6]  918 	std	1,s
+   0456 1F 01         [ 6]  919 	tfr	d,x
+   0458 1E 01         [ 8]  920 	exg	d,x
+   045A F3`00`02      [ 7]  921 	addd	_the_player+2; addhi3,3
+   045D 1E 01         [ 8]  922 	exg	d,x
+   045F E6 84         [ 4]  923 	ldb	,x
+   0461 F7`00`01      [ 5]  924 	stb	_the_player+1
+   0464 E6 E4         [ 4]  925 	ldb	,s
+   0466 5A            [ 2]  926 	decb
+   0467 F7`00`04      [ 5]  927 	stb	_the_player+4
+   046A BD`00`00      [ 8]  928 	jsr	___Intensity_5F
+   046D BD`00`00      [ 8]  929 	jsr	___Reset0Ref
+   0470 C6 7F         [ 2]  930 	ldb	#127
+   0472 D7`00         [ 4]  931 	stb	*_dp_VIA_t1_cnt_lo
+   0474 CB 11         [ 2]  932 	addb	#17
+   0476 E7 E2         [ 6]  933 	stb	,-s
+   0478 F6`00`01      [ 5]  934 	ldb	_the_player+1
+   047B BD`00`00      [ 8]  935 	jsr	__Moveto_d
+   047E C6 10         [ 2]  936 	ldb	#16
+   0480 D7`00         [ 4]  937 	stb	*_dp_VIA_t1_cnt_lo
+   0482 8E`01`DE      [ 3]  938 	ldx	#_vl_player_right1
+   0485 BD`00`00      [ 8]  939 	jsr	___Draw_VLp
+   0488 BD`00`00      [ 8]  940 	jsr	___Reset0Ref
+   048B C6 7F         [ 2]  941 	ldb	#127
+   048D D7`00         [ 4]  942 	stb	*_dp_VIA_t1_cnt_lo
+   048F CB 11         [ 2]  943 	addb	#17
+   0491 E7 E2         [ 6]  944 	stb	,-s
+   0493 F6`00`01      [ 5]  945 	ldb	_the_player+1
+   0496 BD`00`00      [ 8]  946 	jsr	__Moveto_d
+   0499 C6 10         [ 2]  947 	ldb	#16
+   049B D7`00         [ 4]  948 	stb	*_dp_VIA_t1_cnt_lo
+   049D 8E`02`2A      [ 3]  949 	ldx	#_vl_player_right2
+   04A0 BD`00`00      [ 8]  950 	jsr	___Draw_VLp
+   04A3 BD`00`00      [ 8]  951 	jsr	___Reset0Ref
+   04A6 C6 7F         [ 2]  952 	ldb	#127
+   04A8 D7`00         [ 4]  953 	stb	*_dp_VIA_t1_cnt_lo
+   04AA CB 11         [ 2]  954 	addb	#17
+   04AC E7 E2         [ 6]  955 	stb	,-s
+   04AE F6`00`01      [ 5]  956 	ldb	_the_player+1
+   04B1 BD`00`00      [ 8]  957 	jsr	__Moveto_d
+   04B4 C6 10         [ 2]  958 	ldb	#16
+   04B6 D7`00         [ 4]  959 	stb	*_dp_VIA_t1_cnt_lo
+   04B8 8E`02`8E      [ 3]  960 	ldx	#_vl_player_right3
+   04BB BD`00`00      [ 8]  961 	jsr	___Draw_VLp
+   04BE 32 63         [ 5]  962 	leas	3,s
+   04C0 7D`00`04      [ 7]  963 	tst	_the_player+4
+   04C3 26 10         [ 3]  964 	bne	L17
+   04C5 C6 02         [ 2]  965 	ldb	#2
+   04C7 F7`00`00      [ 5]  966 	stb	_the_player
+   04CA C6 52         [ 2]  967 	ldb	#82
+   04CC F7`00`01      [ 5]  968 	stb	_the_player+1
+   04CF 8E`00`4F      [ 3]  969 	ldx	#_player_draw
+   04D2 BF`00`05      [ 6]  970 	stx	_the_player+5
+   04D5                     971 L17:
+   04D5 32 63         [ 5]  972 	leas	3,s
+   04D7 39            [ 5]  973 	rts
+                            974 	.globl	_player_change_right_to_mid_step1
+   04D8                     975 _player_change_right_to_mid_step1:
+   04D8 32 7D         [ 5]  976 	leas	-3,s
+   04DA F6`00`04      [ 5]  977 	ldb	_the_player+4
+   04DD E7 E4         [ 4]  978 	stb	,s
+   04DF 4F            [ 2]  979 	clra		;zero_extendqihi: R:b -> R:d
+   04E0 ED 61         [ 6]  980 	std	1,s
+   04E2 1F 01         [ 6]  981 	tfr	d,x
+   04E4 1E 01         [ 8]  982 	exg	d,x
+   04E6 F3`00`02      [ 7]  983 	addd	_the_player+2; addhi3,3
+   04E9 1E 01         [ 8]  984 	exg	d,x
+   04EB E6 84         [ 4]  985 	ldb	,x
+   04ED F7`00`01      [ 5]  986 	stb	_the_player+1
+   04F0 E6 E4         [ 4]  987 	ldb	,s
+   04F2 5A            [ 2]  988 	decb
+   04F3 F7`00`04      [ 5]  989 	stb	_the_player+4
+   04F6 BD`00`00      [ 8]  990 	jsr	___Intensity_5F
+   04F9 BD`00`00      [ 8]  991 	jsr	___Reset0Ref
+   04FC C6 7F         [ 2]  992 	ldb	#127
+   04FE D7`00         [ 4]  993 	stb	*_dp_VIA_t1_cnt_lo
+   0500 CB 11         [ 2]  994 	addb	#17
+   0502 E7 E2         [ 6]  995 	stb	,-s
+   0504 F6`00`01      [ 5]  996 	ldb	_the_player+1
+   0507 BD`00`00      [ 8]  997 	jsr	__Moveto_d
+   050A C6 10         [ 2]  998 	ldb	#16
+   050C D7`00         [ 4]  999 	stb	*_dp_VIA_t1_cnt_lo
+   050E 8E`01`DE      [ 3] 1000 	ldx	#_vl_player_right1
+   0511 BD`00`00      [ 8] 1001 	jsr	___Draw_VLp
+   0514 BD`00`00      [ 8] 1002 	jsr	___Reset0Ref
+   0517 C6 7F         [ 2] 1003 	ldb	#127
+   0519 D7`00         [ 4] 1004 	stb	*_dp_VIA_t1_cnt_lo
+   051B CB 11         [ 2] 1005 	addb	#17
+   051D E7 E2         [ 6] 1006 	stb	,-s
+   051F F6`00`01      [ 5] 1007 	ldb	_the_player+1
+   0522 BD`00`00      [ 8] 1008 	jsr	__Moveto_d
+   0525 C6 10         [ 2] 1009 	ldb	#16
+   0527 D7`00         [ 4] 1010 	stb	*_dp_VIA_t1_cnt_lo
+   0529 8E`02`2A      [ 3] 1011 	ldx	#_vl_player_right2
+   052C BD`00`00      [ 8] 1012 	jsr	___Draw_VLp
+   052F BD`00`00      [ 8] 1013 	jsr	___Reset0Ref
+   0532 C6 7F         [ 2] 1014 	ldb	#127
+   0534 D7`00         [ 4] 1015 	stb	*_dp_VIA_t1_cnt_lo
+   0536 CB 11         [ 2] 1016 	addb	#17
+   0538 E7 E2         [ 6] 1017 	stb	,-s
+   053A F6`00`01      [ 5] 1018 	ldb	_the_player+1
+   053D BD`00`00      [ 8] 1019 	jsr	__Moveto_d
+   0540 C6 10         [ 2] 1020 	ldb	#16
+   0542 D7`00         [ 4] 1021 	stb	*_dp_VIA_t1_cnt_lo
+   0544 8E`02`8E      [ 3] 1022 	ldx	#_vl_player_right3
+   0547 BD`00`00      [ 8] 1023 	jsr	___Draw_VLp
+   054A 32 63         [ 5] 1024 	leas	3,s
+   054C 7D`00`04      [ 7] 1025 	tst	_the_player+4
+   054F 26 19         [ 3] 1026 	bne	L20
+   0551 8E`05`6D      [ 3] 1027 	ldx	#_player_change_right_to_mid_step2
+   0554 BF`00`05      [ 6] 1028 	stx	_the_player+5
+   0557 F6`00`02      [ 5] 1029 	ldb	_the_game+2
+   055A 4F            [ 2] 1030 	clra		;zero_extendqihi: R:b -> R:d
+   055B 1F 01         [ 6] 1031 	tfr	d,x
+   055D E6 89`00`0B   [ 8] 1032 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   0561 F7`00`04      [ 5] 1033 	stb	_the_player+4
+   0564 8E`00`2B      [ 3] 1034 	ldx	#__SP1_RIGHT_MID_X_LUT_2
+   0567 BF`00`02      [ 6] 1035 	stx	_the_player+2
+   056A                    1036 L20:
+   056A 32 63         [ 5] 1037 	leas	3,s
+   056C 39            [ 5] 1038 	rts
+                           1039 	.globl	_player_change_right_to_mid_step2
+   056D                    1040 _player_change_right_to_mid_step2:
+   056D 32 7D         [ 5] 1041 	leas	-3,s
+   056F F6`00`04      [ 5] 1042 	ldb	_the_player+4
+   0572 E7 E4         [ 4] 1043 	stb	,s
+   0574 4F            [ 2] 1044 	clra		;zero_extendqihi: R:b -> R:d
+   0575 ED 61         [ 6] 1045 	std	1,s
+   0577 1F 01         [ 6] 1046 	tfr	d,x
+   0579 1E 01         [ 8] 1047 	exg	d,x
+   057B F3`00`02      [ 7] 1048 	addd	_the_player+2; addhi3,3
+   057E 1E 01         [ 8] 1049 	exg	d,x
+   0580 E6 84         [ 4] 1050 	ldb	,x
+   0582 F7`00`01      [ 5] 1051 	stb	_the_player+1
+   0585 E6 E4         [ 4] 1052 	ldb	,s
+   0587 5A            [ 2] 1053 	decb
+   0588 F7`00`04      [ 5] 1054 	stb	_the_player+4
+   058B BD`00`00      [ 8] 1055 	jsr	___Intensity_5F
+   058E BD`00`00      [ 8] 1056 	jsr	___Reset0Ref
+   0591 C6 7F         [ 2] 1057 	ldb	#127
+   0593 D7`00         [ 4] 1058 	stb	*_dp_VIA_t1_cnt_lo
+   0595 CB 11         [ 2] 1059 	addb	#17
+   0597 E7 E2         [ 6] 1060 	stb	,-s
+   0599 F6`00`01      [ 5] 1061 	ldb	_the_player+1
+   059C BD`00`00      [ 8] 1062 	jsr	__Moveto_d
+   059F C6 10         [ 2] 1063 	ldb	#16
+   05A1 D7`00         [ 4] 1064 	stb	*_dp_VIA_t1_cnt_lo
+   05A3 8E`00`65      [ 3] 1065 	ldx	#_vl_player_mid1
+   05A6 BD`00`00      [ 8] 1066 	jsr	___Draw_VLp
+   05A9 BD`00`00      [ 8] 1067 	jsr	___Reset0Ref
+   05AC C6 7F         [ 2] 1068 	ldb	#127
+   05AE D7`00         [ 4] 1069 	stb	*_dp_VIA_t1_cnt_lo
+   05B0 CB 11         [ 2] 1070 	addb	#17
+   05B2 E7 E2         [ 6] 1071 	stb	,-s
+   05B4 F6`00`01      [ 5] 1072 	ldb	_the_player+1
+   05B7 BD`00`00      [ 8] 1073 	jsr	__Moveto_d
+   05BA C6 10         [ 2] 1074 	ldb	#16
+   05BC D7`00         [ 4] 1075 	stb	*_dp_VIA_t1_cnt_lo
+   05BE 8E`00`A5      [ 3] 1076 	ldx	#_vl_player_mid2
+   05C1 BD`00`00      [ 8] 1077 	jsr	___Draw_VLp
+   05C4 32 62         [ 5] 1078 	leas	2,s
+   05C6 7D`00`04      [ 7] 1079 	tst	_the_player+4
+   05C9 26 0E         [ 3] 1080 	bne	L23
+   05CB C6 01         [ 2] 1081 	ldb	#1
+   05CD F7`00`00      [ 5] 1082 	stb	_the_player
+   05D0 7F`00`01      [ 7] 1083 	clr	_the_player+1
+   05D3 8E`00`4F      [ 3] 1084 	ldx	#_player_draw
+   05D6 BF`00`05      [ 6] 1085 	stx	_the_player+5
+   05D9                    1086 L23:
+   05D9 32 63         [ 5] 1087 	leas	3,s
+   05DB 39            [ 5] 1088 	rts
+                           1089 	.globl	_player_change_mid_to_left_step1
+   05DC                    1090 _player_change_mid_to_left_step1:
+   05DC 32 7D         [ 5] 1091 	leas	-3,s
+   05DE F6`00`04      [ 5] 1092 	ldb	_the_player+4
+   05E1 E7 E4         [ 4] 1093 	stb	,s
+   05E3 4F            [ 2] 1094 	clra		;zero_extendqihi: R:b -> R:d
+   05E4 ED 61         [ 6] 1095 	std	1,s
+   05E6 1F 01         [ 6] 1096 	tfr	d,x
+   05E8 1E 01         [ 8] 1097 	exg	d,x
+   05EA F3`00`02      [ 7] 1098 	addd	_the_player+2; addhi3,3
+   05ED 1E 01         [ 8] 1099 	exg	d,x
+   05EF E6 84         [ 4] 1100 	ldb	,x
+   05F1 F7`00`01      [ 5] 1101 	stb	_the_player+1
+   05F4 E6 E4         [ 4] 1102 	ldb	,s
+   05F6 5A            [ 2] 1103 	decb
+   05F7 F7`00`04      [ 5] 1104 	stb	_the_player+4
+   05FA BD`00`00      [ 8] 1105 	jsr	___Intensity_5F
+   05FD BD`00`00      [ 8] 1106 	jsr	___Reset0Ref
+   0600 C6 7F         [ 2] 1107 	ldb	#127
+   0602 D7`00         [ 4] 1108 	stb	*_dp_VIA_t1_cnt_lo
+   0604 CB 11         [ 2] 1109 	addb	#17
+   0606 E7 E2         [ 6] 1110 	stb	,-s
+   0608 F6`00`01      [ 5] 1111 	ldb	_the_player+1
+   060B BD`00`00      [ 8] 1112 	jsr	__Moveto_d
+   060E C6 10         [ 2] 1113 	ldb	#16
+   0610 D7`00         [ 4] 1114 	stb	*_dp_VIA_t1_cnt_lo
+   0612 8E`00`65      [ 3] 1115 	ldx	#_vl_player_mid1
+   0615 BD`00`00      [ 8] 1116 	jsr	___Draw_VLp
+   0618 BD`00`00      [ 8] 1117 	jsr	___Reset0Ref
+   061B C6 7F         [ 2] 1118 	ldb	#127
+   061D D7`00         [ 4] 1119 	stb	*_dp_VIA_t1_cnt_lo
+   061F CB 11         [ 2] 1120 	addb	#17
+   0621 E7 E2         [ 6] 1121 	stb	,-s
+   0623 F6`00`01      [ 5] 1122 	ldb	_the_player+1
+   0626 BD`00`00      [ 8] 1123 	jsr	__Moveto_d
+   0629 C6 10         [ 2] 1124 	ldb	#16
+   062B D7`00         [ 4] 1125 	stb	*_dp_VIA_t1_cnt_lo
+   062D 8E`00`A5      [ 3] 1126 	ldx	#_vl_player_mid2
+   0630 BD`00`00      [ 8] 1127 	jsr	___Draw_VLp
+   0633 32 62         [ 5] 1128 	leas	2,s
+   0635 7D`00`04      [ 7] 1129 	tst	_the_player+4
+   0638 26 19         [ 3] 1130 	bne	L26
+   063A 8E`06`56      [ 3] 1131 	ldx	#_player_change_mid_to_left_step2
+   063D BF`00`05      [ 6] 1132 	stx	_the_player+5
+   0640 F6`00`02      [ 5] 1133 	ldb	_the_game+2
+   0643 4F            [ 2] 1134 	clra		;zero_extendqihi: R:b -> R:d
+   0644 1F 01         [ 6] 1135 	tfr	d,x
+   0646 E6 89`00`0B   [ 8] 1136 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   064A F7`00`04      [ 5] 1137 	stb	_the_player+4
+   064D 8E`00`31      [ 3] 1138 	ldx	#__SP1_MID_LEFT_X_LUT_2
+   0650 BF`00`02      [ 6] 1139 	stx	_the_player+2
+   0653                    1140 L26:
+   0653 32 63         [ 5] 1141 	leas	3,s
+   0655 39            [ 5] 1142 	rts
+                           1143 	.globl	_player_change_mid_to_left_step2
+   0656                    1144 _player_change_mid_to_left_step2:
+   0656 32 7D         [ 5] 1145 	leas	-3,s
+   0658 F6`00`04      [ 5] 1146 	ldb	_the_player+4
+   065B E7 E4         [ 4] 1147 	stb	,s
+   065D 4F            [ 2] 1148 	clra		;zero_extendqihi: R:b -> R:d
+   065E ED 61         [ 6] 1149 	std	1,s
+   0660 1F 01         [ 6] 1150 	tfr	d,x
+   0662 1E 01         [ 8] 1151 	exg	d,x
+   0664 F3`00`02      [ 7] 1152 	addd	_the_player+2; addhi3,3
+   0667 1E 01         [ 8] 1153 	exg	d,x
+   0669 E6 84         [ 4] 1154 	ldb	,x
+   066B F7`00`01      [ 5] 1155 	stb	_the_player+1
+   066E E6 E4         [ 4] 1156 	ldb	,s
+   0670 5A            [ 2] 1157 	decb
+   0671 F7`00`04      [ 5] 1158 	stb	_the_player+4
+   0674 BD`00`00      [ 8] 1159 	jsr	___Intensity_5F
+   0677 BD`00`00      [ 8] 1160 	jsr	___Reset0Ref
+   067A C6 7F         [ 2] 1161 	ldb	#127
+   067C D7`00         [ 4] 1162 	stb	*_dp_VIA_t1_cnt_lo
+   067E CB 11         [ 2] 1163 	addb	#17
+   0680 E7 E2         [ 6] 1164 	stb	,-s
+   0682 F6`00`01      [ 5] 1165 	ldb	_the_player+1
+   0685 BD`00`00      [ 8] 1166 	jsr	__Moveto_d
+   0688 C6 10         [ 2] 1167 	ldb	#16
+   068A D7`00         [ 4] 1168 	stb	*_dp_VIA_t1_cnt_lo
+   068C 8E`00`EE      [ 3] 1169 	ldx	#_vl_player_left1
+   068F BD`00`00      [ 8] 1170 	jsr	___Draw_VLp
+   0692 BD`00`00      [ 8] 1171 	jsr	___Reset0Ref
+   0695 C6 7F         [ 2] 1172 	ldb	#127
+   0697 D7`00         [ 4] 1173 	stb	*_dp_VIA_t1_cnt_lo
+   0699 CB 11         [ 2] 1174 	addb	#17
+   069B E7 E2         [ 6] 1175 	stb	,-s
+   069D F6`00`01      [ 5] 1176 	ldb	_the_player+1
+   06A0 BD`00`00      [ 8] 1177 	jsr	__Moveto_d
+   06A3 C6 10         [ 2] 1178 	ldb	#16
+   06A5 D7`00         [ 4] 1179 	stb	*_dp_VIA_t1_cnt_lo
+   06A7 8E`01`3A      [ 3] 1180 	ldx	#_vl_player_left2
+   06AA BD`00`00      [ 8] 1181 	jsr	___Draw_VLp
+   06AD BD`00`00      [ 8] 1182 	jsr	___Reset0Ref
+   06B0 C6 7F         [ 2] 1183 	ldb	#127
+   06B2 D7`00         [ 4] 1184 	stb	*_dp_VIA_t1_cnt_lo
+   06B4 CB 11         [ 2] 1185 	addb	#17
+   06B6 E7 E2         [ 6] 1186 	stb	,-s
+   06B8 F6`00`01      [ 5] 1187 	ldb	_the_player+1
+   06BB BD`00`00      [ 8] 1188 	jsr	__Moveto_d
+   06BE C6 10         [ 2] 1189 	ldb	#16
+   06C0 D7`00         [ 4] 1190 	stb	*_dp_VIA_t1_cnt_lo
+   06C2 8E`01`9E      [ 3] 1191 	ldx	#_vl_player_left3
+   06C5 BD`00`00      [ 8] 1192 	jsr	___Draw_VLp
+   06C8 32 63         [ 5] 1193 	leas	3,s
+   06CA 7D`00`04      [ 7] 1194 	tst	_the_player+4
+   06CD 26 0E         [ 3] 1195 	bne	L29
+   06CF 7F`00`00      [ 7] 1196 	clr	_the_player
+   06D2 C6 AE         [ 2] 1197 	ldb	#-82
+   06D4 F7`00`01      [ 5] 1198 	stb	_the_player+1
+   06D7 8E`00`4F      [ 3] 1199 	ldx	#_player_draw
+   06DA BF`00`05      [ 6] 1200 	stx	_the_player+5
+   06DD                    1201 L29:
+   06DD 32 63         [ 5] 1202 	leas	3,s
+   06DF 39            [ 5] 1203 	rts
+                           1204 	.globl	__player_draw_mid
+   06E0                    1205 __player_draw_mid:
+   06E0 BD`00`00      [ 8] 1206 	jsr	___Reset0Ref
+   06E3 C6 7F         [ 2] 1207 	ldb	#127
+   06E5 D7`00         [ 4] 1208 	stb	*_dp_VIA_t1_cnt_lo
+   06E7 CB 11         [ 2] 1209 	addb	#17
+   06E9 E7 E2         [ 6] 1210 	stb	,-s
+   06EB F6`00`01      [ 5] 1211 	ldb	_the_player+1
+   06EE BD`00`00      [ 8] 1212 	jsr	__Moveto_d
+   06F1 C6 10         [ 2] 1213 	ldb	#16
+   06F3 D7`00         [ 4] 1214 	stb	*_dp_VIA_t1_cnt_lo
+   06F5 8E`00`65      [ 3] 1215 	ldx	#_vl_player_mid1
+   06F8 BD`00`00      [ 8] 1216 	jsr	___Draw_VLp
+   06FB BD`00`00      [ 8] 1217 	jsr	___Reset0Ref
+   06FE C6 7F         [ 2] 1218 	ldb	#127
+   0700 D7`00         [ 4] 1219 	stb	*_dp_VIA_t1_cnt_lo
+   0702 CB 11         [ 2] 1220 	addb	#17
+   0704 E7 E2         [ 6] 1221 	stb	,-s
+   0706 F6`00`01      [ 5] 1222 	ldb	_the_player+1
+   0709 BD`00`00      [ 8] 1223 	jsr	__Moveto_d
+   070C C6 10         [ 2] 1224 	ldb	#16
+   070E D7`00         [ 4] 1225 	stb	*_dp_VIA_t1_cnt_lo
+   0710 32 62         [ 5] 1226 	leas	2,s
+   0712 8E`00`A5      [ 3] 1227 	ldx	#_vl_player_mid2
+   0715 7E`00`00      [ 4] 1228 	jmp	___Draw_VLp
+                           1229 	.globl	__player_draw_left
+   0718                    1230 __player_draw_left:
+   0718 BD`00`00      [ 8] 1231 	jsr	___Reset0Ref
+   071B C6 7F         [ 2] 1232 	ldb	#127
+   071D D7`00         [ 4] 1233 	stb	*_dp_VIA_t1_cnt_lo
+   071F CB 11         [ 2] 1234 	addb	#17
+   0721 E7 E2         [ 6] 1235 	stb	,-s
+   0723 F6`00`01      [ 5] 1236 	ldb	_the_player+1
+   0726 BD`00`00      [ 8] 1237 	jsr	__Moveto_d
+   0729 C6 10         [ 2] 1238 	ldb	#16
+   072B D7`00         [ 4] 1239 	stb	*_dp_VIA_t1_cnt_lo
+   072D 8E`00`EE      [ 3] 1240 	ldx	#_vl_player_left1
+   0730 BD`00`00      [ 8] 1241 	jsr	___Draw_VLp
+   0733 BD`00`00      [ 8] 1242 	jsr	___Reset0Ref
+   0736 C6 7F         [ 2] 1243 	ldb	#127
+   0738 D7`00         [ 4] 1244 	stb	*_dp_VIA_t1_cnt_lo
+   073A CB 11         [ 2] 1245 	addb	#17
+   073C E7 E2         [ 6] 1246 	stb	,-s
+   073E F6`00`01      [ 5] 1247 	ldb	_the_player+1
+   0741 BD`00`00      [ 8] 1248 	jsr	__Moveto_d
+   0744 C6 10         [ 2] 1249 	ldb	#16
+   0746 D7`00         [ 4] 1250 	stb	*_dp_VIA_t1_cnt_lo
+   0748 8E`01`3A      [ 3] 1251 	ldx	#_vl_player_left2
+   074B BD`00`00      [ 8] 1252 	jsr	___Draw_VLp
+   074E BD`00`00      [ 8] 1253 	jsr	___Reset0Ref
+   0751 C6 7F         [ 2] 1254 	ldb	#127
+   0753 D7`00         [ 4] 1255 	stb	*_dp_VIA_t1_cnt_lo
+   0755 CB 11         [ 2] 1256 	addb	#17
+   0757 E7 E2         [ 6] 1257 	stb	,-s
+   0759 F6`00`01      [ 5] 1258 	ldb	_the_player+1
+   075C BD`00`00      [ 8] 1259 	jsr	__Moveto_d
+   075F C6 10         [ 2] 1260 	ldb	#16
+   0761 D7`00         [ 4] 1261 	stb	*_dp_VIA_t1_cnt_lo
+   0763 32 63         [ 5] 1262 	leas	3,s
+   0765 8E`01`9E      [ 3] 1263 	ldx	#_vl_player_left3
+   0768 7E`00`00      [ 4] 1264 	jmp	___Draw_VLp
+                           1265 	.globl	__player_draw_right
+   076B                    1266 __player_draw_right:
+   076B BD`00`00      [ 8] 1267 	jsr	___Reset0Ref
+   076E C6 7F         [ 2] 1268 	ldb	#127
+   0770 D7`00         [ 4] 1269 	stb	*_dp_VIA_t1_cnt_lo
+   0772 CB 11         [ 2] 1270 	addb	#17
+   0774 E7 E2         [ 6] 1271 	stb	,-s
+   0776 F6`00`01      [ 5] 1272 	ldb	_the_player+1
+   0779 BD`00`00      [ 8] 1273 	jsr	__Moveto_d
+   077C C6 10         [ 2] 1274 	ldb	#16
+   077E D7`00         [ 4] 1275 	stb	*_dp_VIA_t1_cnt_lo
+   0780 8E`01`DE      [ 3] 1276 	ldx	#_vl_player_right1
+   0783 BD`00`00      [ 8] 1277 	jsr	___Draw_VLp
+   0786 BD`00`00      [ 8] 1278 	jsr	___Reset0Ref
+   0789 C6 7F         [ 2] 1279 	ldb	#127
+   078B D7`00         [ 4] 1280 	stb	*_dp_VIA_t1_cnt_lo
+   078D CB 11         [ 2] 1281 	addb	#17
+   078F E7 E2         [ 6] 1282 	stb	,-s
+   0791 F6`00`01      [ 5] 1283 	ldb	_the_player+1
+   0794 BD`00`00      [ 8] 1284 	jsr	__Moveto_d
+   0797 C6 10         [ 2] 1285 	ldb	#16
+   0799 D7`00         [ 4] 1286 	stb	*_dp_VIA_t1_cnt_lo
+   079B 8E`02`2A      [ 3] 1287 	ldx	#_vl_player_right2
+   079E BD`00`00      [ 8] 1288 	jsr	___Draw_VLp
+   07A1 BD`00`00      [ 8] 1289 	jsr	___Reset0Ref
+   07A4 C6 7F         [ 2] 1290 	ldb	#127
+   07A6 D7`00         [ 4] 1291 	stb	*_dp_VIA_t1_cnt_lo
+   07A8 CB 11         [ 2] 1292 	addb	#17
+   07AA E7 E2         [ 6] 1293 	stb	,-s
+   07AC F6`00`01      [ 5] 1294 	ldb	_the_player+1
+   07AF BD`00`00      [ 8] 1295 	jsr	__Moveto_d
+   07B2 C6 10         [ 2] 1296 	ldb	#16
+   07B4 D7`00         [ 4] 1297 	stb	*_dp_VIA_t1_cnt_lo
+   07B6 32 63         [ 5] 1298 	leas	3,s
+   07B8 8E`02`8E      [ 3] 1299 	ldx	#_vl_player_right3
+   07BB 7E`00`00      [ 4] 1300 	jmp	___Draw_VLp
+                           1301 	.globl	_check_collision
+   07BE                    1302 _check_collision:
+   07BE 39            [ 5] 1303 	rts
+                           1304 	.globl	__SP1_LEFT_MID_X_LUT_1
+   07BF                    1305 __SP1_LEFT_MID_X_LUT_1:
+   07BF D7                 1306 	.byte	-41
+   07C0 D1                 1307 	.byte	-47
+   07C1 CB                 1308 	.byte	-53
+   07C2 C5                 1309 	.byte	-59
+   07C3 C0                 1310 	.byte	-64
+   07C4 BA                 1311 	.byte	-70
+   07C5 B4                 1312 	.byte	-76
+                           1313 	.globl	__SP1_MID_RIGHT_X_LUT_1
+   07C6                    1314 __SP1_MID_RIGHT_X_LUT_1:
+   07C6 29                 1315 	.byte	41
+   07C7 23                 1316 	.byte	35
+   07C8 1D                 1317 	.byte	29
+   07C9 17                 1318 	.byte	23
+   07CA 12                 1319 	.byte	18
+   07CB 0C                 1320 	.byte	12
+   07CC 06                 1321 	.byte	6
+                           1322 	.globl	__SP1_RIGHT_MID_X_LUT_1
+   07CD                    1323 __SP1_RIGHT_MID_X_LUT_1:
+   07CD 29                 1324 	.byte	41
+   07CE 2F                 1325 	.byte	47
+   07CF 35                 1326 	.byte	53
+   07D0 3B                 1327 	.byte	59
+   07D1 40                 1328 	.byte	64
+   07D2 46                 1329 	.byte	70
+   07D3 4C                 1330 	.byte	76
+                           1331 	.globl	__SP1_MID_LEFT_X_LUT_1
+   07D4                    1332 __SP1_MID_LEFT_X_LUT_1:
+   07D4 D7                 1333 	.byte	-41
+   07D5 DD                 1334 	.byte	-35
+   07D6 E3                 1335 	.byte	-29
+   07D7 E9                 1336 	.byte	-23
+   07D8 EE                 1337 	.byte	-18
+   07D9 F4                 1338 	.byte	-12
+   07DA FA                 1339 	.byte	-6
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L10                03CC R   |   3 L12                0378 R
-  3 L13                0403 R   |   3 L15                03C3 R
-  3 L16                0379 R   |   3 L20                05AA R
-  3 L21                04E4 R   |   3 L24                04F5 R
-  3 L25                04D5 R   |   3 L26                0615 R
-  3 L27                0561 R   |   3 L28                04F6 R
-  3 L8                 0415 R   |   3 L9                 0367 R
-  3 _PLAYER_ANIMAT     000B GR  |   3 _PLAYER_ANIMAT     0000 GR
+  3 L11                03CF R   |   3 L14                0449 R
+  3 L17                04D5 R   |   3 L20                056A R
+  3 L23                05D9 R   |   3 L26                0653 R
+  3 L29                06DD R   |   3 L7                 0360 R
+  3 _PLAYER_ANIMAT     0000 GR  |   3 _PLAYER_ANIMAT     000B GR
   3 _PLAYER_DRAW_L     0019 GR  |   3 _PLAYER_STATIC     0016 GR
-  3 _SP1_LEFT_MID_     0046 GR  |   3 _SP1_MID_LEFT_     001F GR
-  3 _SP1_MID_RIGHT     0039 GR  |   3 _SP1_RIGHT_MID     002C GR
-    __Moveto_d         **** GX  |     ___Draw_VLp        **** GX
+    __Moveto_d         **** GX  |   3 __SP1_LEFT_MID     07BF GR
+  3 __SP1_LEFT_MID     001F GR  |   3 __SP1_MID_LEFT     07D4 GR
+  3 __SP1_MID_LEFT     0031 GR  |   3 __SP1_MID_RIGH     07C6 GR
+  3 __SP1_MID_RIGH     0025 GR  |   3 __SP1_RIGHT_MI     07CD GR
+  3 __SP1_RIGHT_MI     002B GR  |     ___Draw_VLp        **** GX
     ___Intensity_5     **** GX  |     ___Reset0Ref       **** GX
-  3 __player_draw_     0664 GR  |   3 __player_draw_     061E GR
-  3 __player_draw_     06CC GR  |   3 _check_collisi     0734 GR
-    _dp_VIA_t1_cnt     **** GX  |   3 _player_change     02E1 GR
-  3 _player_change     0480 GR  |   3 _player_draw       0062 GR
-  3 _player_init       0053 GR  |     _the_game          **** GX
-  2 _the_player        0000 GR  |   3 _vl_player_lef     0101 GR
-  3 _vl_player_lef     014D GR  |   3 _vl_player_lef     01B1 GR
-  3 _vl_player_mid     0078 GR  |   3 _vl_player_mid     00B8 GR
-  3 _vl_player_rig     01F1 GR  |   3 _vl_player_rig     023D GR
-  3 _vl_player_rig     02A1 GR  |   3 _vl_term_0_46      00B7 R
-  3 _vl_term_1_83      0100 R   |   3 _vl_term_2_123     014C R
-  3 _vl_term_3_170     01B0 R   |   3 _vl_term_4_203     01F0 R
-  3 _vl_term_5_243     023C R   |   3 _vl_term_6_290     02A0 R
-  3 _vl_term_7_323     02E0 R
+  3 __player_draw_     0718 GR  |   3 __player_draw_     06E0 GR
+  3 __player_draw_     076B GR  |   3 _check_collisi     07BE GR
+    _dp_VIA_t1_cnt     **** GX  |   3 _player_change     02CE GR
+  3 _player_change     0363 GR  |   3 _player_change     05DC GR
+  3 _player_change     0656 GR  |   3 _player_change     03D2 GR
+  3 _player_change     044C GR  |   3 _player_change     04D8 GR
+  3 _player_change     056D GR  |   3 _player_draw       004F GR
+  3 _player_init       0037 GR  |     _the_game          **** GX
+  2 _the_player        0000 GR  |   3 _vl_player_lef     00EE GR
+  3 _vl_player_lef     013A GR  |   3 _vl_player_lef     019E GR
+  3 _vl_player_mid     0065 GR  |   3 _vl_player_mid     00A5 GR
+  3 _vl_player_rig     01DE GR  |   3 _vl_player_rig     022A GR
+  3 _vl_player_rig     028E GR  |   3 _vl_term_0_46      00A4 R
+  3 _vl_term_1_83      00ED R   |   3 _vl_term_2_123     0139 R
+  3 _vl_term_3_170     019D R   |   3 _vl_term_4_203     01DD R
+  3 _vl_term_5_243     0229 R   |   3 _vl_term_6_290     028D R
+  3 _vl_term_7_323     02CD R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
-   2 .bss             size    4   flags    0
-   3 .text            size  735   flags  100
+   2 .bss             size    7   flags    0
+   3 .text            size  7DB   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 
