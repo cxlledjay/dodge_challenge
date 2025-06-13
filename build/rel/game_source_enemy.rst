@@ -54,7 +54,7 @@
    00DC                      54 _tick_dummy:
    00DC 39            [ 5]   55 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
 
 Symbol Table
 
@@ -66,7 +66,7 @@ Symbol Table
   2 _queue_ptr         0019 GR  |   3 _tick_dummy        0049 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
 
 Area Table
 

@@ -27,7 +27,7 @@
    0027 32 66         [ 5]   27 	leas	6,s
    0029 39            [ 5]   28 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:58 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:52 2025
 
 Symbol Table
 
@@ -38,7 +38,7 @@ Symbol Table
   2 _print_char        0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:58 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:52 2025
 
 Area Table
 

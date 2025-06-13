@@ -18,7 +18,7 @@
    006A 7F C8 80      [ 7]   18 	clr	_the_ability
    006D 39            [ 5]   19 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
 
 Symbol Table
 
@@ -28,7 +28,7 @@ Symbol Table
   2 _the_ability       0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 22:19:59 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 23:47:53 2025
 
 Area Table
 

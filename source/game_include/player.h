@@ -18,6 +18,14 @@ typedef struct _player_t
  */
 extern player_t the_player;
 
+/**
+ * @brief different lane swap animation times (in frames) for different speed stages
+ * 
+ * @param IN the_game.stage
+ * @returns  the frame count of how long the lane swap animation will last
+ */
+extern const unsigned int PLAYER_ANIMATION_FRAME_CNT_LUT[11];
+
 
 void player_init(void);
 

@@ -131,11 +131,21 @@ void game_run(void)
     }
     else if(input & 0b00000010) //< go left
     {
-        the_player.tick = player_change_left;
+        /// only allow lange change if there is no active lane change
+        if(the_player.cnt == 0)
+        {
+            the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_LUT[the_game.stage];
+            the_player.tick = player_change_left;
+        } 
     }
     else if(input & 0b00000100) //< go right
     {
-        the_player.tick = player_change_right;
+        /// only allow lange change if there is no active lane change
+        if(the_player.cnt == 0)
+        {
+            the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_LUT[the_game.stage];
+            the_player.tick = player_change_right;
+        }
     }
     
     /// call clock update handler

@@ -29,6 +29,8 @@ typedef enum _stage_t
    EXPERT_ONLY    = 10  //< secret speed
 }stage_t;
 
+
+
 #define STAGE_T_SIZE (11u)        //< how many different speed levels
 
 typedef struct _game_t 

@@ -57,11 +57,15 @@ L10:
 	beq	L11
 	ldb	#2
 	andb	,s
-	bne	L16
-	ldb	#4
-	andb	,s
-	beq	L11
-	ldx	#_player_change_right
+	beq	L12
+	tst	_the_player+1
+	bne	L11
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_LUT,x
+	stb	_the_player+1
+	ldx	#_player_change_left
 	stx	_the_player+2
 L11:
 	jsr	_clock_tick
@@ -73,8 +77,18 @@ L15:
 	inc	_the_game+2
 	leas	1,s
 	rts
-L16:
-	ldx	#_player_change_left
+L12:
+	ldb	#4
+	andb	,s
+	beq	L11
+	tst	_the_player+1
+	bne	L11
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_PLAYER_ANIMATION_FRAME_CNT_LUT,x
+	stb	_the_player+1
+	ldx	#_player_change_right
 	stx	_the_player+2
 	bra	L11
 	.globl	_pause_menu
