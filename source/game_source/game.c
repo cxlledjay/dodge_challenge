@@ -108,17 +108,17 @@ void game_run(void)
     if(input & 0b00000001)
     {
         // the_game.execute_state = pause_menu; //< TODO: implement later on
+        // return;
 
         //debug only
-        the_game.stage++;
-        return;
+        if(the_game.stage > 0) the_game.stage--;
     }
 
     /** ability */
     if(input & 0b00001000)
     {
         /// TODO: trigger ability code
-        the_game.stage--;
+        if(the_game.stage < STAGE_T_SIZE-1) the_game.stage++;
     }
 
     /** movment input */
