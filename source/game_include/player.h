@@ -28,7 +28,7 @@ extern player_t the_player;
  * @param IN the_game.stage
  * @returns  the frame count of how long the lane swap animation will last
  */
-extern const unsigned int PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[11];
+extern const unsigned int PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[11];
 
 
 
@@ -73,8 +73,23 @@ void player_init(void);
 /****************************************************************
  * animation LUTs
  ****************************************************************/
-extern const int _SP1_LEFT_MID_X_LUT_1[];
-extern const int _SP1_MID_RIGHT_X_LUT_1[];
 
-extern const int _SP1_RIGHT_MID_X_LUT_1[];
-extern const int _SP1_MID_LEFT_X_LUT_1[];
+/// @brief x pos LUT for left -> mid step 1 animation
+/// @param index the_game.stage
+/// @return pointer to LUT
+extern const int* const PLAYER_LUT_LEFT_MID_STEP1[];
+
+/// @brief x pos LUT for mid -> right step 1 animation
+/// @param index the_game.stage
+/// @return pointer to LUT
+extern const int* const PLAYER_LUT_MID_RIGHT_STEP1[];
+
+/// @brief x pos LUT for right -> mid step 1 animation
+/// @param index the_game.stage
+/// @return pointer to LUT
+extern const int* const PLAYER_LUT_RIGHT_MID_STEP1[];
+
+/// @brief x pos LUT for mid -> left step 1 animation
+/// @param index the_game.stage
+/// @return pointer to LUT
+extern const int* const PLAYER_LUT_MID_LEFT_STEP1[];

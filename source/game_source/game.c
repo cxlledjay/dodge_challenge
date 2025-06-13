@@ -136,14 +136,14 @@ void game_run(void)
             {
                 case RIGHT_LANE: //< right -> mid
                     the_player.tick = player_change_right_to_mid_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
-                    the_player.x_LUT = _SP1_RIGHT_MID_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
+                    the_player.x_LUT = PLAYER_LUT_RIGHT_MID_STEP1[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case MID_LANE: //< mid -> left
                     the_player.tick = player_change_mid_to_left_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
-                    the_player.x_LUT = _SP1_MID_LEFT_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
+                    the_player.x_LUT = PLAYER_LUT_MID_LEFT_STEP1[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case LEFT_LANE: //< in left lane
@@ -166,14 +166,14 @@ void game_run(void)
             {
                 case LEFT_LANE: //< left -> mid
                     the_player.tick = player_change_left_to_mid_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
-                    the_player.x_LUT = _SP1_LEFT_MID_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
+                    the_player.x_LUT = PLAYER_LUT_LEFT_MID_STEP1[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case MID_LANE: //< mid -> right
                     the_player.tick = player_change_mid_to_right_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT[the_game.stage];
-                    the_player.x_LUT = _SP1_MID_RIGHT_X_LUT_1; //< TODO: touch if i add new speeds
+                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
+                    the_player.x_LUT = PLAYER_LUT_MID_RIGHT_STEP1[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case RIGHT_LANE: //< in right lane
