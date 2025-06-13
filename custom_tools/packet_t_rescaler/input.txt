@@ -1,19 +1,101 @@
-{DRAW, {-8,-2}},
-	{MOVE, {-16,-4}},
-	{DRAW, {-32,-8}},
-	{MOVE, {-48,-12}},
-	{DRAW, {-56,-14}},
-	{MOVE, {-72,-18}},
-	{DRAW, {-80,-20}},
-	{MOVE, {-96,-24}},
-	{DRAW, {-104,-26}},
-	{MOVE, {-120,-30}},
-	{DRAW, {-127,-32}},
-	{MOVE, {-124,-31}},
-	{MOVE, {-20,-5}},
-	{DRAW, {-84,-21}},
-	{DRAW, {-68,-17}},
-	{MOVE, {-94,-24}},
-	{MOVE, {-74,-18}},
-	{DRAW, {-96,-24}},
-	{DRAW, {-80,-20}},
+{MOVE, {2,-20}},
+
+	//left wheel
+	{DRAW, {-20,0}},
+	{DRAW, {-6,-4}},
+	{DRAW, {0,-20}},
+	{DRAW, {6,-4}},
+	{DRAW, {20,0}},
+	{DRAW, {6,4}},
+	{DRAW, {0,20}},
+	{DRAW, {-6,4}},
+
+	//backview
+	{MOVE, {-2,0}},
+	{DRAW, {4,15}},
+	{DRAW, {0,10}},
+	{DRAW, {-4,15}},
+
+	//right wheel
+	{MOVE, {2,0}},
+	{DRAW, {-20,0}},
+	{DRAW, {-6,-4}},
+	{DRAW, {6,-4}},
+	{DRAW, {2,0}},
+
+	//back bottom
+	{MOVE, {-4,6}},
+	{DRAW, {4,-13}},
+	{MOVE, {0,15}},
+	{DRAW, {0,-40}},
+	{MOVE, {0,15}},
+	{DRAW, {-4,-16}},
+
+	//left wheel finish
+	{MOVE, {-4,-23}},
+	{DRAW, {6,4}},
+	{DRAW, {20,0}},
+	{DRAW, {6,-4}},
+
+	//left front wheel
+	{MOVE, {-8,-4}},
+	{DRAW, {0,-5}},
+	{DRAW, {4,-2}},
+	{DRAW, {14,0}},
+	{DRAW, {4,2}},
+	{DRAW, {-4,2}},
+	{DRAW, {-14,0}},
+	{DRAW, {-4,-2}},
+	{MOVE, {22,0}},
+	{DRAW, {0,18}},
+	{DRAW, {-4,2}},
+	{DRAW, {-10,0}},
+
+	//chassis
+	{MOVE, {0,5}},
+	{DRAW, {7,-5}}, //EDIT 7 is in real 7.5
+	{MOVE, {7,-4}},//CARE FOR 7.5 movement (this 7 must be 6.5)
+	{DRAW, {10,-7}},
+
+	{MOVE, {-2,2}}, //x only 1.5
+	{DRAW, {0,-8}}, //x is 8.5 rather
+	{DRAW, {-4,2}},
+	{DRAW, {0,8}},
+	{MOVE, {6,-4}},
+	{DRAW, {0,10}},
+
+	{MOVE, {-2,3}},
+	{DRAW, {0,8}},
+	{DRAW, {-4,6}},
+	{DRAW, {0,-7}},
+	{MOVE, {6,-10}},
+	{DRAW, {-32,54}},
+
+	//right wheel finish
+	{MOVE, {2,0}},
+	{DRAW, {6,-4}},
+	{DRAW, {-4,-3}},
+	{MOVE, {-28,3}},
+	{DRAW, {0,20}},
+	{DRAW, {6,4}},
+	{DRAW, {20,0}},
+	{DRAW, {6,-4}},
+	{DRAW, {0,-20}},
+
+	//right front wheel
+	{MOVE, {-1,-7}},
+	{DRAW, {12,0}},
+	{DRAW, {4,-2}},
+	{DRAW, {0,-18}},
+	{DRAW, {-4,2}},
+	{DRAW, {-2,0}},
+	{MOVE, {6,-2}},
+	{DRAW, {-3,-2}},
+
+	//driver
+	{MOVE, {-9,5}},
+	{DRAW, {6,-11}},
+	{DRAW, {0,-7}},
+	{DRAW, {-6,4}},
+
+	VL_END

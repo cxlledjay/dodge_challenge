@@ -99,6 +99,14 @@ void game_run(void)
     unsigned int input = buttons_pressed();
 
     /// process input
+
+    /**
+     *  BUTTON 1 = ability
+     *  BUTTON 2 = go left
+     *  BUTTON 3 = go right
+     *  BUTTON 4 = use ability
+     */
+
     /** pause */
     if(input & 0b00000001)
     {

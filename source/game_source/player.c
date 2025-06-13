@@ -171,7 +171,7 @@ void _player_draw_right(void)
 	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
 	/// move to correct lane
 	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
-	dp_VIA_t1_cnt_lo = 10;
+	dp_VIA_t1_cnt_lo = 16;
 	Draw_VLp(&vl_player_right);
 }
 

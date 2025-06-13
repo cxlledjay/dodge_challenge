@@ -46,6 +46,8 @@ const struct packet_t vl_player_mid1[] =
 	VL_END
 };
 
+#if 0
+
 const struct packet_t vl_player_mid2[] = 
 {
 	/// starting from mid again
@@ -84,6 +86,8 @@ const struct packet_t vl_player_mid2[] =
 	//done
 	VL_END
 };
+
+#endif
 
 
 const struct packet_t vl_player_mid2_enhanced[] = 
@@ -140,7 +144,7 @@ const struct packet_t vl_player_left[] =
 	{DRAW, {-36,-24}},
 
 	//backview
-	{MOVE, {-12,0}},
+	{MOVE, {-12,0}}, //10
 	{DRAW, {24,-90}},
 	{DRAW, {0,-60}},
 	{DRAW, {-24,-90}},
@@ -154,7 +158,7 @@ const struct packet_t vl_player_left[] =
 
 	//back bottom
 	{MOVE, {-24,-36}},
-	{DRAW, {24,78}},
+	{DRAW, {24,78}}, //20
 	{MOVE, {0,-90}},
 	{DRAW, {0,120}},
 	{DRAW, {0,120}},
@@ -166,7 +170,7 @@ const struct packet_t vl_player_left[] =
 	{MOVE, {-12,69}},
 	{DRAW, {36,-24}},
 	{DRAW, {120,0}},
-	{DRAW, {36,24}},
+	{DRAW, {36,24}}, //30
 
 	//left front wheel
 	{MOVE, {-48,24}},
@@ -178,7 +182,7 @@ const struct packet_t vl_player_left[] =
 	{DRAW, {-84,0}},
 	{DRAW, {-24,12}},
 	{MOVE, {69,0}},
-	{MOVE, {69,0}},
+	{MOVE, {69,0}}, //40
 	{DRAW, {0,-108}},
 	{DRAW, {-24,-12}},
 	{DRAW, {-60,0}},
@@ -191,7 +195,7 @@ const struct packet_t vl_player_left[] =
 
 	{MOVE, {-12,-12}},
 	{DRAW, {0,48}},
-	{DRAW, {-24,-12}},
+	{DRAW, {-24,-12}}, //50
 	{DRAW, {0,-48}},
 	{MOVE, {36,24}},
 	{DRAW, {0,-60}},
@@ -202,7 +206,7 @@ const struct packet_t vl_player_left[] =
 	{DRAW, {0,42}},
 	{MOVE, {36,60}},
 	{DRAW, {-64,-108}},
-	{DRAW, {-64,-108}},
+	{DRAW, {-64,-108}}, //60
 	{DRAW, {-64,-108}},
 
 	//right wheel finish
@@ -214,7 +218,7 @@ const struct packet_t vl_player_left[] =
 	{DRAW, {0,-120}},
 	{DRAW, {36,-24}},
 	{DRAW, {120,0}},
-	{DRAW, {36,24}},
+	{DRAW, {36,24}}, //70
 	{DRAW, {0,120}},
 
 	//right front wheel
@@ -228,7 +232,7 @@ const struct packet_t vl_player_left[] =
 	{DRAW, {-18,12}},
 
 	//driver
-	{MOVE, {-54,-30}},
+	{MOVE, {-54,-30}}, //80
 	{DRAW, {36,66}},
 	{DRAW, {0,42}},
 	{DRAW, {-36,-24}},
@@ -240,111 +244,107 @@ const struct packet_t vl_player_left[] =
 
 const struct packet_t vl_player_right[] = 
 {
-	{MOVE, {12,-120}},
-	
+	{MOVE, {8,-80}},
+
 	//left wheel
-	{DRAW, {-120,0}},
-	{DRAW, {-36,-24}},
-	{DRAW, {0,-120}},
-	{DRAW, {36,-24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,24}},
-	{DRAW, {0,120}},
-	{DRAW, {-36,24}},
-	
+	{DRAW, {-80,0}},
+	{DRAW, {-24,-16}},
+	{DRAW, {0,-80}},
+	{DRAW, {24,-16}},
+	{DRAW, {80,0}},
+	{DRAW, {24,16}},
+	{DRAW, {0,80}},
+	{DRAW, {-24,16}},
+
 	//backview
-	{MOVE, {-12,0}},
-	{DRAW, {24,90}},
-	{DRAW, {0,60}},
-	{DRAW, {-24,90}},
-	
+	{MOVE, {-8,0}},
+	{DRAW, {16,60}},
+	{DRAW, {0,40}},
+	{DRAW, {-16,60}},
+
 	//right wheel
-	{MOVE, {12,0}},
-	{DRAW, {-120,0}},
-	{DRAW, {-36,-24}},
-	{DRAW, {36,-24}},
-	{DRAW, {12,0}},
-	
+	{MOVE, {8,0}},
+	{DRAW, {-80,0}},
+	{DRAW, {-24,-16}},
+	{DRAW, {24,-16}},
+	{DRAW, {8,0}},
+
 	//back bottom
-	{MOVE, {-24,36}},
-	{DRAW, {24,-78}},
-	{MOVE, {0,90}},
-	{DRAW, {0,-120}},
-	{DRAW, {0,-120}},
-	{MOVE, {0,90}},
-	{DRAW, {-24,-96}},
-	
+	{MOVE, {-16,24}},
+	{DRAW, {16,-52}},
+	{MOVE, {0,60}},
+	{DRAW, {0,-80}},
+	{DRAW, {0,-80}},
+	{MOVE, {0,60}},
+	{DRAW, {-16,-64}},
+
 	//left wheel finish
-	{MOVE, {-12,-69}},
-	{MOVE, {-12,-69}},
-	{DRAW, {36,24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,-24}},
-	
+	{MOVE, {-16,-92}},
+	{DRAW, {24,16}},
+	{DRAW, {80,0}},
+	{DRAW, {24,-16}},
+
 	//left front wheel
-	{MOVE, {-48,-24}},
-	{DRAW, {0,-30}},
-	{DRAW, {24,-12}},
-	{DRAW, {84,0}},
-	{DRAW, {24,12}},
-	{DRAW, {-24,12}},
-	{DRAW, {-84,0}},
-	{DRAW, {-24,-12}},
-	{MOVE, {69,0}},
-	{MOVE, {69,0}},
-	{DRAW, {0,108}},
-	{DRAW, {-24,12}},
-	{DRAW, {-60,0}},
-	
+	{MOVE, {-32,-16}},
+	{DRAW, {0,-20}},
+	{DRAW, {16,-8}},
+	{DRAW, {56,0}},
+	{DRAW, {16,8}},
+	{DRAW, {-16,8}},
+	{DRAW, {-56,0}},
+	{DRAW, {-16,-8}},
+	{MOVE, {88,0}},
+	{DRAW, {0,72}},
+	{DRAW, {-16,8}},
+	{DRAW, {-40,0}},
+
 	//chassis
-	{MOVE, {0,30}},
-	{DRAW, {42,-30}},
-	{MOVE, {42,-24}},
-	{DRAW, {60,-42}},
-	
-	{MOVE, {-12,12}},
-	{DRAW, {0,-48}},
-	{DRAW, {-24,12}},
-	{DRAW, {0,48}},
-	{MOVE, {36,-24}},
-	{DRAW, {0,60}},
-	
-	{MOVE, {-12,18}},
-	{DRAW, {0,48}},
-	{DRAW, {-24,36}},
-	{DRAW, {0,-42}},
-	{MOVE, {36,-60}},
+	{MOVE, {0,20}},
+	{DRAW, {28,-20}},
+	{MOVE, {28,-16}},
+	{DRAW, {40,-28}},
+
+	{MOVE, {-8,8}},
+	{DRAW, {0,-32}},
+	{DRAW, {-16,8}},
+	{DRAW, {0,32}},
+	{MOVE, {24,-16}},
+	{DRAW, {0,40}},
+
+	{MOVE, {-8,12}},
+	{DRAW, {0,32}},
+	{DRAW, {-16,24}},
+	{DRAW, {0,-28}},
+	{MOVE, {24,-40}},
 	{DRAW, {-64,108}},
 	{DRAW, {-64,108}},
-	{DRAW, {-64,108}},
-	
+
 	//right wheel finish
-	{MOVE, {12,0}},
-	{DRAW, {36,-24}},
-	{DRAW, {-24,-18}},
-	{MOVE, {-84,9}},
-	{MOVE, {-84,9}},
-	{DRAW, {0,120}},
-	{DRAW, {36,24}},
-	{DRAW, {120,0}},
-	{DRAW, {36,-24}},
-	{DRAW, {0,-120}},
-	
+	{MOVE, {8,0}},
+	{DRAW, {24,-16}},
+	{DRAW, {-16,-12}},
+	{MOVE, {-112,12}},
+	{DRAW, {0,80}},
+	{DRAW, {24,16}},
+	{DRAW, {80,0}},
+	{DRAW, {24,-16}},
+	{DRAW, {0,-80}},
+
 	//right front wheel
-	{MOVE, {-6,-42}},
-	{DRAW, {72,0}},
-	{DRAW, {24,-12}},
-	{DRAW, {0,-108}},
-	{DRAW, {-24,12}},
-	{DRAW, {-12,0}},
-	{MOVE, {36,-12}},
-	{DRAW, {-18,-12}},
-	
+	{MOVE, {-4,-28}},
+	{DRAW, {48,0}},
+	{DRAW, {16,-8}},
+	{DRAW, {0,-72}},
+	{DRAW, {-16,8}},
+	{DRAW, {-8,0}},
+	{MOVE, {24,-8}},
+	{DRAW, {-12,-8}},
+
 	//driver
-	{MOVE, {-54,30}},
-	{DRAW, {36,-66}},
-	{DRAW, {0,-42}},
-	{DRAW, {-36,24}},
-	
+	{MOVE, {-36,20}},
+	{DRAW, {24,-44}},
+	{DRAW, {0,-28}},
+	{DRAW, {-24,16}},
+
 	VL_END
 };

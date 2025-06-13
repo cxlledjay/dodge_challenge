@@ -129,85 +129,6 @@ _vl_player_mid1:
 	.byte	60
 _vl_term_0_46:
 	.byte	1
-	.globl	_vl_player_mid2
-_vl_player_mid2:
-	.byte	0
-	.byte	0
-	.byte	80
-	.byte	-1
-	.byte	112
-	.byte	-64
-	.byte	-1
-	.byte	0
-	.byte	-32
-	.byte	0
-	.byte	-28
-	.byte	48
-	.byte	-1
-	.byte	0
-	.byte	48
-	.byte	-1
-	.byte	16
-	.byte	-8
-	.byte	-1
-	.byte	0
-	.byte	-48
-	.byte	0
-	.byte	0
-	.byte	-48
-	.byte	-1
-	.byte	0
-	.byte	-48
-	.byte	-1
-	.byte	-16
-	.byte	-8
-	.byte	-1
-	.byte	0
-	.byte	48
-	.byte	0
-	.byte	28
-	.byte	16
-	.byte	-1
-	.byte	-112
-	.byte	-64
-	.byte	0
-	.byte	32
-	.byte	-40
-	.byte	-1
-	.byte	40
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	60
-	.byte	-1
-	.byte	-36
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	120
-	.byte	-1
-	.byte	36
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	60
-	.byte	-1
-	.byte	-40
-	.byte	0
-	.byte	0
-	.byte	20
-	.byte	-100
-	.byte	-1
-	.byte	16
-	.byte	-8
-	.byte	-1
-	.byte	0
-	.byte	-24
-	.byte	-1
-	.byte	-16
-	.byte	-8
-_vl_term_1_85:
-	.byte	1
 	.globl	_vl_player_mid2_enhanced
 _vl_player_mid2_enhanced:
 	.byte	0
@@ -282,7 +203,7 @@ _vl_player_mid2_enhanced:
 	.byte	-1
 	.byte	-16
 	.byte	8
-_vl_term_2_123:
+_vl_term_1_127:
 	.byte	1
 	.globl	_vl_player_left
 _vl_player_left:
@@ -535,260 +456,248 @@ _vl_player_left:
 	.byte	-1
 	.byte	-36
 	.byte	-24
-_vl_term_3_236:
+_vl_term_2_240:
 	.byte	1
 	.globl	_vl_player_right
 _vl_player_right:
 	.byte	0
-	.byte	12
-	.byte	-120
+	.byte	8
+	.byte	-80
 	.byte	-1
-	.byte	-120
+	.byte	-80
 	.byte	0
 	.byte	-1
-	.byte	-36
 	.byte	-24
+	.byte	-16
 	.byte	-1
 	.byte	0
-	.byte	-120
+	.byte	-80
 	.byte	-1
-	.byte	36
+	.byte	24
+	.byte	-16
+	.byte	-1
+	.byte	80
+	.byte	0
+	.byte	-1
+	.byte	24
+	.byte	16
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	-1
 	.byte	-24
-	.byte	-1
-	.byte	120
+	.byte	16
+	.byte	0
+	.byte	-8
 	.byte	0
 	.byte	-1
-	.byte	36
+	.byte	16
+	.byte	60
+	.byte	-1
+	.byte	0
+	.byte	40
+	.byte	-1
+	.byte	-16
+	.byte	60
+	.byte	0
+	.byte	8
+	.byte	0
+	.byte	-1
+	.byte	-80
+	.byte	0
+	.byte	-1
+	.byte	-24
+	.byte	-16
+	.byte	-1
+	.byte	24
+	.byte	-16
+	.byte	-1
+	.byte	8
+	.byte	0
+	.byte	0
+	.byte	-16
 	.byte	24
 	.byte	-1
+	.byte	16
+	.byte	-52
 	.byte	0
-	.byte	120
-	.byte	-1
-	.byte	-36
-	.byte	24
-	.byte	0
-	.byte	-12
-	.byte	0
-	.byte	-1
-	.byte	24
-	.byte	90
-	.byte	-1
 	.byte	0
 	.byte	60
 	.byte	-1
-	.byte	-24
-	.byte	90
 	.byte	0
-	.byte	12
-	.byte	0
-	.byte	-1
-	.byte	-120
-	.byte	0
-	.byte	-1
-	.byte	-36
-	.byte	-24
-	.byte	-1
-	.byte	36
-	.byte	-24
-	.byte	-1
-	.byte	12
-	.byte	0
-	.byte	0
-	.byte	-24
-	.byte	36
-	.byte	-1
-	.byte	24
-	.byte	-78
-	.byte	0
-	.byte	0
-	.byte	90
+	.byte	-80
 	.byte	-1
 	.byte	0
-	.byte	-120
-	.byte	-1
+	.byte	-80
 	.byte	0
-	.byte	-120
-	.byte	0
-	.byte	0
-	.byte	90
-	.byte	-1
-	.byte	-24
-	.byte	-96
-	.byte	0
-	.byte	-12
-	.byte	-69
-	.byte	0
-	.byte	-12
-	.byte	-69
-	.byte	-1
-	.byte	36
-	.byte	24
-	.byte	-1
-	.byte	120
-	.byte	0
-	.byte	-1
-	.byte	36
-	.byte	-24
-	.byte	0
-	.byte	-48
-	.byte	-24
-	.byte	-1
-	.byte	0
-	.byte	-30
-	.byte	-1
-	.byte	24
-	.byte	-12
-	.byte	-1
-	.byte	84
-	.byte	0
-	.byte	-1
-	.byte	24
-	.byte	12
-	.byte	-1
-	.byte	-24
-	.byte	12
-	.byte	-1
-	.byte	-84
-	.byte	0
-	.byte	-1
-	.byte	-24
-	.byte	-12
-	.byte	0
-	.byte	69
-	.byte	0
-	.byte	0
-	.byte	69
-	.byte	0
-	.byte	-1
-	.byte	0
-	.byte	108
-	.byte	-1
-	.byte	-24
-	.byte	12
-	.byte	-1
-	.byte	-60
-	.byte	0
-	.byte	0
-	.byte	0
-	.byte	30
-	.byte	-1
-	.byte	42
-	.byte	-30
-	.byte	0
-	.byte	42
-	.byte	-24
-	.byte	-1
-	.byte	60
-	.byte	-42
-	.byte	0
-	.byte	-12
-	.byte	12
-	.byte	-1
-	.byte	0
-	.byte	-48
-	.byte	-1
-	.byte	-24
-	.byte	12
-	.byte	-1
-	.byte	0
-	.byte	48
-	.byte	0
-	.byte	36
-	.byte	-24
-	.byte	-1
 	.byte	0
 	.byte	60
-	.byte	0
-	.byte	-12
-	.byte	18
 	.byte	-1
-	.byte	0
-	.byte	48
-	.byte	-1
-	.byte	-24
-	.byte	36
-	.byte	-1
-	.byte	0
-	.byte	-42
-	.byte	0
-	.byte	36
-	.byte	-60
-	.byte	-1
+	.byte	-16
 	.byte	-64
-	.byte	108
-	.byte	-1
-	.byte	-64
-	.byte	108
-	.byte	-1
-	.byte	-64
-	.byte	108
 	.byte	0
-	.byte	12
-	.byte	0
+	.byte	-16
+	.byte	-92
 	.byte	-1
-	.byte	36
-	.byte	-24
-	.byte	-1
-	.byte	-24
-	.byte	-18
-	.byte	0
-	.byte	-84
-	.byte	9
-	.byte	0
-	.byte	-84
-	.byte	9
-	.byte	-1
-	.byte	0
-	.byte	120
-	.byte	-1
-	.byte	36
 	.byte	24
+	.byte	16
 	.byte	-1
-	.byte	120
+	.byte	80
 	.byte	0
 	.byte	-1
-	.byte	36
-	.byte	-24
+	.byte	24
+	.byte	-16
+	.byte	0
+	.byte	-32
+	.byte	-16
 	.byte	-1
 	.byte	0
-	.byte	-120
-	.byte	0
-	.byte	-6
-	.byte	-42
+	.byte	-20
 	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	56
+	.byte	0
+	.byte	-1
+	.byte	16
+	.byte	8
+	.byte	-1
+	.byte	-16
+	.byte	8
+	.byte	-1
+	.byte	-56
+	.byte	0
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	0
+	.byte	88
+	.byte	0
+	.byte	-1
+	.byte	0
 	.byte	72
-	.byte	0
 	.byte	-1
+	.byte	-16
+	.byte	8
+	.byte	-1
+	.byte	-40
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	20
+	.byte	-1
+	.byte	28
+	.byte	-20
+	.byte	0
+	.byte	28
+	.byte	-16
+	.byte	-1
+	.byte	40
+	.byte	-28
+	.byte	0
+	.byte	-8
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	-32
+	.byte	-1
+	.byte	-16
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	32
+	.byte	0
 	.byte	24
-	.byte	-12
+	.byte	-16
 	.byte	-1
 	.byte	0
-	.byte	-108
-	.byte	-1
-	.byte	-24
+	.byte	40
+	.byte	0
+	.byte	-8
 	.byte	12
 	.byte	-1
-	.byte	-12
 	.byte	0
-	.byte	0
-	.byte	36
-	.byte	-12
+	.byte	32
 	.byte	-1
-	.byte	-18
-	.byte	-12
-	.byte	0
-	.byte	-54
-	.byte	30
-	.byte	-1
-	.byte	36
-	.byte	-66
-	.byte	-1
-	.byte	0
-	.byte	-42
-	.byte	-1
-	.byte	-36
+	.byte	-16
 	.byte	24
-_vl_term_4_349:
+	.byte	-1
+	.byte	0
+	.byte	-28
+	.byte	0
+	.byte	24
+	.byte	-40
+	.byte	-1
+	.byte	-64
+	.byte	108
+	.byte	-1
+	.byte	-64
+	.byte	108
+	.byte	0
+	.byte	8
+	.byte	0
+	.byte	-1
+	.byte	24
+	.byte	-16
+	.byte	-1
+	.byte	-16
+	.byte	-12
+	.byte	0
+	.byte	-112
+	.byte	12
+	.byte	-1
+	.byte	0
+	.byte	80
+	.byte	-1
+	.byte	24
+	.byte	16
+	.byte	-1
+	.byte	80
+	.byte	0
+	.byte	-1
+	.byte	24
+	.byte	-16
+	.byte	-1
+	.byte	0
+	.byte	-80
+	.byte	0
+	.byte	-4
+	.byte	-28
+	.byte	-1
+	.byte	48
+	.byte	0
+	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-72
+	.byte	-1
+	.byte	-16
+	.byte	8
+	.byte	-1
+	.byte	-8
+	.byte	0
+	.byte	0
+	.byte	24
+	.byte	-8
+	.byte	-1
+	.byte	-12
+	.byte	-8
+	.byte	0
+	.byte	-36
+	.byte	20
+	.byte	-1
+	.byte	24
+	.byte	-44
+	.byte	-1
+	.byte	0
+	.byte	-28
+	.byte	-1
+	.byte	-24
+	.byte	16
+_vl_term_3_349:
 	.byte	1
 	.globl	__player_draw_left
 __player_draw_left:
@@ -850,7 +759,7 @@ __player_draw_right:
 	stb	,-s
 	ldb	_PLAYER_X_LUT,x
 	jsr	__Moveto_d
-	ldb	#10
+	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
 	leas	1,s
 	ldx	#_vl_player_right

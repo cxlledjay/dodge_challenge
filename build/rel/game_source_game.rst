@@ -39,7 +39,7 @@
    0114 C6 EC         [ 2]   39 	ldb	#-20
    0116 E7 E2         [ 6]   40 	stb	,-s
    0118 C6 64         [ 2]   41 	ldb	#100
-   011A BD 0B 0F      [ 8]   42 	jsr	_print_unsigned_int
+   011A BD 0A B7      [ 8]   42 	jsr	_print_unsigned_int
    011D BD F1 BA      [ 8]   43 	jsr	___Read_Btns
    0120 F6 C8 11      [ 5]   44 	ldb	_Vec_Buttons
    0123 E7 62         [ 5]   45 	stb	2,s
@@ -84,7 +84,7 @@
    016B                      84 _game_over:
    016B 39            [ 5]   85 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
 
 Symbol Table
 
@@ -105,7 +105,7 @@ Symbol Table
     _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:28:25 2025
 
 Area Table
 
