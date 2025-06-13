@@ -6,15 +6,68 @@
 	.area	.bss
 	.globl	_the_map
 _the_map:	.blkb	3
+	.globl	_CNT_DRAW1_LUT
 	.area	.text
-	.globl	_dummy_tick
-_dummy_tick:
-	rts
+_CNT_DRAW1_LUT:
+	.byte	6
+	.byte	5
+	.byte	4
+	.byte	4
+	.byte	3
+	.byte	2
+	.byte	2
+	.byte	2
+	.byte	1
+	.byte	1
+	.byte	0
+	.globl	_CNT_DRAW2_LUT
+_CNT_DRAW2_LUT:
+	.byte	6
+	.byte	5
+	.byte	4
+	.byte	3
+	.byte	2
+	.byte	2
+	.byte	2
+	.byte	1
+	.byte	1
+	.byte	0
+	.byte	0
+	.globl	_CNT_DRAW3_LUT
+_CNT_DRAW3_LUT:
+	.byte	6
+	.byte	5
+	.byte	4
+	.byte	3
+	.byte	3
+	.byte	2
+	.byte	1
+	.byte	2
+	.byte	1
+	.byte	1
+	.byte	0
+	.globl	_CNT_DRAW4_LUT
+_CNT_DRAW4_LUT:
+	.byte	6
+	.byte	5
+	.byte	4
+	.byte	3
+	.byte	2
+	.byte	2
+	.byte	2
+	.byte	1
+	.byte	1
+	.byte	0
+	.byte	0
 	.globl	_map_init
 _map_init:
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_CNT_DRAW1_LUT,x
 	ldx	#_draw_step1
 	stx	_the_map+1
-	clr	_the_map
+	stb	_the_map
 	rts
 	.globl	_vl_map_roadline_left_1
 _vl_map_roadline_left_1:
@@ -510,102 +563,9 @@ _vl_map_roadline_right_4:
 	.byte	20
 _vl_term_7_221:
 	.byte	1
-	.globl	_step
-	.area	.data
-_step:
-	.byte	0
-	.area	.text
 	.globl	_draw_step1
 _draw_step1:
 	jsr	___Intensity_5F
-	jsr	_draw_left
-	tst	_the_map
-	bne	L6
-	ldb	_step
-	cmpb	#2	;cmpqi:
-	lbhi	L21
-	incb
-	stb	_step
-L8:
-	ldb	#10
-	stb	_the_map
-L6:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#36
-	stb	,-s
-	ldb	#-5
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	leas	1,s
-	ldb	_step
-	cmpb	#1	;cmpqi:
-	lbeq	L11
-	bhs	L22
-	ldx	#_vl_map_roadline_left_1
-	jsr	___Draw_VLp
-L9:
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
-	ldb	#36
-	stb	,-s
-	ldb	#5
-	jsr	__Moveto_d
-	ldb	#16
-	stb	*_dp_VIA_t1_cnt_lo
-	leas	1,s
-	ldb	_step
-	cmpb	#1	;cmpqi:
-	beq	L16
-	bhs	L23
-	ldx	#_vl_map_roadline_right_1
-	jsr	___Draw_VLp
-L14:
-	dec	_the_map
-	jmp	_draw_right
-L22:
-	cmpb	#2	;cmpqi:
-	beq	L12
-	cmpb	#3	;cmpqi:
-	bne	L9
-	ldx	#_vl_map_roadline_left_4
-	jsr	___Draw_VLp
-	bra	L9
-L21:
-	clr	_step
-	lbra	L8
-L23:
-	cmpb	#2	;cmpqi:
-	beq	L17
-	cmpb	#3	;cmpqi:
-	bne	L14
-	ldx	#_vl_map_roadline_right_4
-	jsr	___Draw_VLp
-	dec	_the_map
-	jmp	_draw_right
-L17:
-	ldx	#_vl_map_roadline_right_3
-	jsr	___Draw_VLp
-	dec	_the_map
-	jmp	_draw_right
-L16:
-	ldx	#_vl_map_roadline_right_2
-	jsr	___Draw_VLp
-	dec	_the_map
-	jmp	_draw_right
-L11:
-	ldx	#_vl_map_roadline_left_2
-	jsr	___Draw_VLp
-	lbra	L9
-L12:
-	ldx	#_vl_map_roadline_left_3
-	jsr	___Draw_VLp
-	lbra	L9
-	.globl	_draw_left
-_draw_left:
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
@@ -619,10 +579,28 @@ _draw_left:
 	stb	,-s
 	addb	#46
 	jsr	__Draw_Line_d
-	leas	2,s
-	rts
-	.globl	_draw_right
-_draw_right:
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_left_1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_right_1
+	jsr	___Draw_VLp
 	jsr	___Reset0Ref
 	ldb	#127
 	stb	*_dp_VIA_t1_cnt_lo
@@ -636,9 +614,220 @@ _draw_right:
 	stb	,-s
 	ldb	#82
 	jsr	__Draw_Line_d
-	leas	2,s
+	ldb	_the_map
+	leas	6,s
+	tstb
+	beq	L8
+	decb
+	stb	_the_map
 	rts
-	.globl	_CNT_SPEED_LUT
-_CNT_SPEED_LUT:
-	.word	0,0,0
-	.byte	0
+L8:
+	ldx	#_draw_step2
+	stx	_the_map+1
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_CNT_DRAW2_LUT,x
+	stb	_the_map
+	rts
+	.globl	_draw_step2
+_draw_step2:
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	addb	#46
+	jsr	__Draw_Line_d
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_left_2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_right_2
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	ldb	#82
+	jsr	__Draw_Line_d
+	ldb	_the_map
+	leas	6,s
+	tstb
+	beq	L13
+	decb
+	stb	_the_map
+	rts
+L13:
+	ldx	#_draw_step3
+	stx	_the_map+1
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_CNT_DRAW3_LUT,x
+	stb	_the_map
+	rts
+	.globl	_draw_step3
+_draw_step3:
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	addb	#46
+	jsr	__Draw_Line_d
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_left_3
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_right_3
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	ldb	#82
+	jsr	__Draw_Line_d
+	ldb	_the_map
+	leas	6,s
+	tstb
+	beq	L18
+	decb
+	stb	_the_map
+	rts
+L18:
+	ldx	#_draw_step4
+	stx	_the_map+1
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_CNT_DRAW4_LUT,x
+	stb	_the_map
+	rts
+	.globl	_draw_step4
+_draw_step4:
+	jsr	___Intensity_5F
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	addb	#46
+	jsr	__Draw_Line_d
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#-5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_left_4
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#5
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	ldx	#_vl_map_roadline_right_4
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#36
+	stb	,-s
+	ldb	#15
+	jsr	__Moveto_d
+	ldb	#-88
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	#-128
+	stb	,-s
+	ldb	#82
+	jsr	__Draw_Line_d
+	ldb	_the_map
+	leas	6,s
+	tstb
+	beq	L23
+	decb
+	stb	_the_map
+	rts
+L23:
+	ldx	#_draw_step1
+	stx	_the_map+1
+	ldb	_the_game+2
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	_CNT_DRAW1_LUT,x
+	stb	_the_map
+	rts

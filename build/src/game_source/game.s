@@ -34,34 +34,49 @@ _play_start_animation:
 _game_run:
 	leas	-1,s
 	jsr	___Wait_Recal
+	ldb	_the_game+2
+	stb	,-s
+	ldb	#-20
+	stb	,-s
+	ldb	#100
+	jsr	_print_unsigned_int
 	jsr	___Read_Btns
 	ldb	_Vec_Buttons
-	stb	,s
+	stb	2,s
+	leas	2,s
 	bitb	#1
-	bne	L11
+	bne	L15
+	ldb	#8
+	andb	,s
+	beq	L10
+	dec	_the_game+2
+L10:
 	ldb	#6
 	andb	,s
 	cmpb	#6	;cmpqi:
-	beq	L9
+	beq	L11
 	ldb	#2
 	andb	,s
-	bne	L13
+	bne	L16
 	ldb	#4
 	andb	,s
-	beq	L9
+	beq	L11
 	ldx	#_player_change_right
 	stx	_the_player+2
-L9:
+L11:
 	jsr	_clock_tick
 	jsr	[_the_map+1]
 	jsr	[_the_player+2]
-L11:
 	leas	1,s
 	rts
-L13:
+L15:
+	inc	_the_game+2
+	leas	1,s
+	rts
+L16:
 	ldx	#_player_change_left
 	stx	_the_player+2
-	bra	L9
+	bra	L11
 	.globl	_pause_menu
 _pause_menu:
 	rts

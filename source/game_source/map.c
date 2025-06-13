@@ -5,19 +5,60 @@
 map_t the_map;
 
 // fw declarations:
-void dummy_tick(void){return;}
-void draw_left(void);
-void draw_right(void);
 void draw_step1(void);
+void draw_step2(void);
+void draw_step3(void);
+void draw_step4(void);
+const unsigned int CNT_DRAW1_LUT[];
+const unsigned int CNT_DRAW2_LUT[];
+const unsigned int CNT_DRAW3_LUT[];
+const unsigned int CNT_DRAW4_LUT[];
+
+
+
+#include "game_include/game.h"
 
 // init func
 void map_init(void)
 {
-	map_t new_map = {.cnt = 0, .tick = draw_step1};
+	map_t new_map = {.cnt = CNT_DRAW1_LUT[the_game.stage], .tick = draw_step1};
 	the_map = new_map;
 	return;
 }
 
+
+
+/****************************************************
+ * macro utils 
+ ***************************************************/
+
+#define DRAW_LEFT() 				\
+	Reset0Ref(); 					\
+	dp_VIA_t1_cnt_lo = 0x7f;		\
+	Moveto_d(36, -15);				\
+	dp_VIA_t1_cnt_lo = 168;			\
+	Draw_Line_d(-128,-82);	
+	
+#define DRAW_RIGHT() 				\
+	Reset0Ref(); 					\
+	dp_VIA_t1_cnt_lo = 0x7f;		\
+	Moveto_d(36, 15);				\
+	dp_VIA_t1_cnt_lo = 168;			\
+	Draw_Line_d(-128,82);
+
+#define ANIMATE_LEFT(VECLIST_PTR) 	\
+	Reset0Ref();					\
+	dp_VIA_t1_cnt_lo = 0x7f;		\
+	Moveto_d(36, -5);				\
+	dp_VIA_t1_cnt_lo = 16;			\
+	Draw_VLp(VECLIST_PTR);	
+	
+#define ANIMATE_RIGHT(VECLIST_PTR) 	\
+	Reset0Ref();					\
+	dp_VIA_t1_cnt_lo = 0x7f;		\
+	Moveto_d(36, 5);				\
+	dp_VIA_t1_cnt_lo = 16;			\
+	Draw_VLp(VECLIST_PTR);	
 
 
 
@@ -29,144 +70,183 @@ void map_init(void)
 #include "game_include/graphics/g_map.h"
 #include "game_include/game.h"
 
-unsigned int step = 0; //< temp
-
 void draw_step1(void)
 {
 	/// set brightness
 	Intensity_5F();
 	
-	//left
-	draw_left();
+	/// left roadlines
+	DRAW_LEFT();
+	ANIMATE_LEFT(&vl_map_roadline_left_1);
 
-	//testing
-	if(the_map.cnt == 0){
-		if(step >2) step = 0;
-		else step++;
-		the_map.cnt = 10;
-	}
+	/// right roadlines
+	ANIMATE_RIGHT(&vl_map_roadline_right_1);
+	DRAW_RIGHT();
 
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, -5);
-	dp_VIA_t1_cnt_lo = 16;
-	
-
-	switch (step)
+	/// check for state transition
+	if(the_map.cnt == 0)
 	{
-		case 0:
-			Draw_VLp(&vl_map_roadline_left_1);
-			break;
-		case 1:
-			Draw_VLp(&vl_map_roadline_left_2);
-			break;
-		case 2:
-			Draw_VLp(&vl_map_roadline_left_3);
-			break;
-		case 3:
-			Draw_VLp(&vl_map_roadline_left_4);
-			break;
-		default:
-			break;
-	}
+		/// go to next animation
+		the_map.tick = draw_step2;
 
-	
-
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, 5);
-	dp_VIA_t1_cnt_lo = 16;
-
-	switch (step)
-	{
-		case 0:
-			Draw_VLp(&vl_map_roadline_right_1);
-			break;
-		case 1:
-			Draw_VLp(&vl_map_roadline_right_2);
-			break;
-		case 2:
-			Draw_VLp(&vl_map_roadline_right_3);
-			break;
-		case 3:
-			Draw_VLp(&vl_map_roadline_right_4);
-			break;
-		default:
-			break;
-	}
-
-	
-	the_map.cnt--;
-
-#if 0
-	//animation of inner lines
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	if(animation_step == 2)
-	{
-		Moveto_d(36, -5);
-		Draw_Line_d(-4,-1);
-		Moveto_d(-4,-1);
+		/// set animation time according to current stage
+		the_map.cnt = CNT_DRAW2_LUT[the_game.stage];
 	}
 	else
 	{
-		Moveto_d(36 - ( 4 * animation_step ), -5 - animation_step);
+		the_map.cnt--;
 	}
-	dp_VIA_t1_cnt_lo = 16;
-	Draw_VLp(&vl_misc_roadline_left);
+}
+
+void draw_step2(void)
+{
+	/// set brightness
+	Intensity_5F();
 	
-	//animate right inner line
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	if(animation_step == 2)
+	/// left roadlines
+	DRAW_LEFT();
+	ANIMATE_LEFT(&vl_map_roadline_left_2);
+
+	/// right roadlines
+	ANIMATE_RIGHT(&vl_map_roadline_right_2);
+	DRAW_RIGHT();
+
+	/// check for state transition
+	if(the_map.cnt == 0)
 	{
-		Moveto_d(36, 5);
-		Draw_Line_d(-4,1);
-		Moveto_d(-4,1);
+		/// go to next animation
+		the_map.tick = draw_step3;
+
+		/// set animation time according to current stage
+		the_map.cnt = CNT_DRAW3_LUT[the_game.stage];
 	}
 	else
 	{
-		Moveto_d(36 - ( 4 * animation_step ), 5 + animation_step);
+		the_map.cnt--;
 	}
-	dp_VIA_t1_cnt_lo = 16;
-	Draw_VLp(&vl_misc_roadline_right);
-#endif
+}
 
-	//right border
-	draw_right();
+void draw_step3(void)
+{
+	/// set brightness
+	Intensity_5F();
+	
+	/// left roadlines
+	DRAW_LEFT();
+	ANIMATE_LEFT(&vl_map_roadline_left_3);
+
+	/// right roadlines
+	ANIMATE_RIGHT(&vl_map_roadline_right_3);
+	DRAW_RIGHT();
+
+	/// check for state transition
+	if(the_map.cnt == 0)
+	{
+		/// go to next animation
+		the_map.tick = draw_step4;
+
+		/// set animation time according to current stage
+		the_map.cnt = CNT_DRAW4_LUT[the_game.stage];
+	}
+	else
+	{
+		the_map.cnt--;
+	}
+}
+
+void draw_step4(void)
+{
+	/// set brightness
+	Intensity_5F();
+	
+	/// left roadlines
+	DRAW_LEFT();
+	ANIMATE_LEFT(&vl_map_roadline_left_4);
+
+	/// right roadlines
+	ANIMATE_RIGHT(&vl_map_roadline_right_4);
+	DRAW_RIGHT();
+
+	/// check for state transition
+	if(the_map.cnt == 0)
+	{
+		/// go to next animation
+		the_map.tick = draw_step1;
+
+		/// set animation time according to current stage
+		the_map.cnt = CNT_DRAW1_LUT[the_game.stage];
+	}
+	else
+	{
+		the_map.cnt--;
+	}
 }
 
 
 
 
-
-
- 
 /****************************************************
- * utils 
+ * LUTs 
  ***************************************************/
 
- void draw_left(void)
+ const unsigned int CNT_DRAW1_LUT[STAGE_T_SIZE] =
  {
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, -15);
-	dp_VIA_t1_cnt_lo = 168;
-	Draw_Line_d(-128,-82);
- }
+	6,
+	5,
+	4,
+	4,
+	3,
+	2,
+	2,
+	2,
+	1,
+	1,
+	0
+ };
  
- void draw_right(void)
+ const unsigned int CNT_DRAW2_LUT[STAGE_T_SIZE] =
  {
-	Reset0Ref();
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(36, 15);
-	dp_VIA_t1_cnt_lo = 168;
-	Draw_Line_d(-128,82);
- }
-
- const unsigned int CNT_SPEED_LUT[STAGE_COUNT] =
+	6,
+	5,
+	4,
+	3,
+	2,
+	2,
+	2,
+	1,
+	1,
+	0,
+	0
+ };
+ 
+ const unsigned int CNT_DRAW3_LUT[STAGE_T_SIZE] =
  {
-
+	6,
+	5,
+	4,
+	3,
+	3,
+	2,
+	1,
+	2,
+	1,
+	1,
+	0
+ };
+ 
+ const unsigned int CNT_DRAW4_LUT[STAGE_T_SIZE] =
+ {
+	6,
+	5,
+	4,
+	3,
+	2,
+	2,
+	2,
+	1,
+	1,
+	0,
+	0
  };
  
 

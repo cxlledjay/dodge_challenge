@@ -26,7 +26,7 @@ void game_init(void)
 {
     /// set game starting values
     the_game.score = 0;
-    the_game.speed = 0; ///< ??
+    the_game.stage = 0; ///< ??
 
     /// trigger all other init routines
     clock_init();
@@ -81,11 +81,16 @@ void play_start_animation(void)
 
 #include "utils/controller.h"
 
+//debug
+#include "lib/print/print.h"
+
 
 void game_run(void)
 {
     /// sync to 50 fps
     Wait_Recal();
+
+    print_unsigned_int(100,-20,the_game.stage);
     
     /// ----------------------------------< calculations >----------------------------------
 
@@ -98,6 +103,9 @@ void game_run(void)
     if(input & 0b00000001)
     {
         // the_game.execute_state = pause_menu; //< TODO: implement later on
+
+        //debug only
+        the_game.stage++;
         return;
     }
 
@@ -105,6 +113,7 @@ void game_run(void)
     if(input & 0b00001000)
     {
         /// TODO: trigger ability code
+        the_game.stage--;
     }
 
     /** movment input */

@@ -6,681 +6,867 @@
                               6 	.area	.bss
                               7 	.globl	_the_map
    0000                       8 _the_map:	.blkb	3
-                              9 	.area	.text
-                             10 	.globl	_dummy_tick
-   0000                      11 _dummy_tick:
-   0000 39            [ 5]   12 	rts
-                             13 	.globl	_map_init
-   0001                      14 _map_init:
-   0001 8E`01`E1      [ 3]   15 	ldx	#_draw_step1
-   0004 BF`00`01      [ 6]   16 	stx	_the_map+1
-   0007 7F`00`00      [ 7]   17 	clr	_the_map
-   000A 39            [ 5]   18 	rts
-                             19 	.globl	_vl_map_roadline_left_1
-   000B                      20 _vl_map_roadline_left_1:
-   000B FF                   21 	.byte	-1
-   000C F0                   22 	.byte	-16
-   000D FC                   23 	.byte	-4
-   000E 00                   24 	.byte	0
-   000F E4                   25 	.byte	-28
-   0010 F9                   26 	.byte	-7
-   0011 FF                   27 	.byte	-1
-   0012 D8                   28 	.byte	-40
-   0013 F6                   29 	.byte	-10
-   0014 00                   30 	.byte	0
-   0015 CC                   31 	.byte	-52
-   0016 F3                   32 	.byte	-13
-   0017 FF                   33 	.byte	-1
-   0018 C0                   34 	.byte	-64
-   0019 F0                   35 	.byte	-16
-   001A 00                   36 	.byte	0
-   001B B4                   37 	.byte	-76
-   001C ED                   38 	.byte	-19
-   001D FF                   39 	.byte	-1
-   001E A8                   40 	.byte	-88
-   001F EA                   41 	.byte	-22
-   0020 00                   42 	.byte	0
-   0021 9C                   43 	.byte	-100
-   0022 E7                   44 	.byte	-25
-   0023 FF                   45 	.byte	-1
-   0024 90                   46 	.byte	-112
-   0025 E4                   47 	.byte	-28
-   0026 00                   48 	.byte	0
-   0027 84                   49 	.byte	-124
-   0028 E1                   50 	.byte	-31
-   0029 FF                   51 	.byte	-1
-   002A BC                   52 	.byte	-68
-   002B EF                   53 	.byte	-17
-   002C FF                   54 	.byte	-1
-   002D BC                   55 	.byte	-68
-   002E EF                   56 	.byte	-17
-   002F 00                   57 	.byte	0
-   0030 B6                   58 	.byte	-74
-   0031 ED                   59 	.byte	-19
-   0032 00                   60 	.byte	0
-   0033 B6                   61 	.byte	-74
-   0034 EE                   62 	.byte	-18
-   0035 FF                   63 	.byte	-1
-   0036 B0                   64 	.byte	-80
-   0037 EC                   65 	.byte	-20
-   0038 FF                   66 	.byte	-1
-   0039 B0                   67 	.byte	-80
-   003A EC                   68 	.byte	-20
-   003B 00                   69 	.byte	0
-   003C AA                   70 	.byte	-86
-   003D EA                   71 	.byte	-22
-   003E 00                   72 	.byte	0
-   003F AA                   73 	.byte	-86
-   0040 EB                   74 	.byte	-21
-   0041 FF                   75 	.byte	-1
-   0042 84                   76 	.byte	-124
-   0043 E1                   77 	.byte	-31
-   0044                      78 _vl_term_0_37:
-   0044 01                   79 	.byte	1
-                             80 	.globl	_vl_map_roadline_left_2
-   0045                      81 _vl_map_roadline_left_2:
-   0045 00                   82 	.byte	0
-   0046 F8                   83 	.byte	-8
-   0047 FE                   84 	.byte	-2
-   0048 FF                   85 	.byte	-1
-   0049 EC                   86 	.byte	-20
-   004A FB                   87 	.byte	-5
-   004B 00                   88 	.byte	0
-   004C DC                   89 	.byte	-36
-   004D F7                   90 	.byte	-9
-   004E FF                   91 	.byte	-1
-   004F D4                   92 	.byte	-44
-   0050 F5                   93 	.byte	-11
-   0051 00                   94 	.byte	0
-   0052 C4                   95 	.byte	-60
-   0053 F1                   96 	.byte	-15
-   0054 FF                   97 	.byte	-1
-   0055 BC                   98 	.byte	-68
-   0056 EF                   99 	.byte	-17
-   0057 00                  100 	.byte	0
-   0058 AC                  101 	.byte	-84
-   0059 EB                  102 	.byte	-21
-   005A FF                  103 	.byte	-1
-   005B A4                  104 	.byte	-92
-   005C E9                  105 	.byte	-23
-   005D 00                  106 	.byte	0
-   005E 94                  107 	.byte	-108
-   005F E5                  108 	.byte	-27
-   0060 FF                  109 	.byte	-1
-   0061 8C                  110 	.byte	-116
-   0062 E3                  111 	.byte	-29
-   0063 00                  112 	.byte	0
-   0064 84                  113 	.byte	-124
-   0065 E1                  114 	.byte	-31
-   0066 00                  115 	.byte	0
-   0067 F8                  116 	.byte	-8
-   0068 FE                  117 	.byte	-2
-   0069 FF                  118 	.byte	-1
-   006A B8                  119 	.byte	-72
-   006B EE                  120 	.byte	-18
-   006C FF                  121 	.byte	-1
-   006D BC                  122 	.byte	-68
-   006E EF                  123 	.byte	-17
-   006F 00                  124 	.byte	0
-   0070 AE                  125 	.byte	-82
-   0071 EB                  126 	.byte	-21
-   0072 00                  127 	.byte	0
-   0073 B6                  128 	.byte	-74
-   0074 EE                  129 	.byte	-18
-   0075 FF                  130 	.byte	-1
-   0076 AC                  131 	.byte	-84
-   0077 EB                  132 	.byte	-21
-   0078 FF                  133 	.byte	-1
-   0079 B0                  134 	.byte	-80
-   007A EC                  135 	.byte	-20
-   007B 00                  136 	.byte	0
-   007C A2                  137 	.byte	-94
-   007D E8                  138 	.byte	-24
-   007E 00                  139 	.byte	0
-   007F AA                  140 	.byte	-86
-   0080 EB                  141 	.byte	-21
-   0081 FF                  142 	.byte	-1
-   0082 84                  143 	.byte	-124
-   0083 E1                  144 	.byte	-31
-   0084                     145 _vl_term_1_64:
-   0084 01                  146 	.byte	1
-                            147 	.globl	_vl_map_roadline_left_3
-   0085                     148 _vl_map_roadline_left_3:
-   0085 00                  149 	.byte	0
-   0086 F0                  150 	.byte	-16
-   0087 FC                  151 	.byte	-4
-   0088 FF                  152 	.byte	-1
-   0089 E4                  153 	.byte	-28
-   008A F9                  154 	.byte	-7
-   008B 00                  155 	.byte	0
-   008C D8                  156 	.byte	-40
-   008D F6                  157 	.byte	-10
-   008E FF                  158 	.byte	-1
-   008F CC                  159 	.byte	-52
-   0090 F3                  160 	.byte	-13
-   0091 00                  161 	.byte	0
-   0092 C0                  162 	.byte	-64
-   0093 F0                  163 	.byte	-16
-   0094 FF                  164 	.byte	-1
-   0095 B4                  165 	.byte	-76
-   0096 ED                  166 	.byte	-19
-   0097 00                  167 	.byte	0
-   0098 A8                  168 	.byte	-88
-   0099 EA                  169 	.byte	-22
-   009A FF                  170 	.byte	-1
-   009B 9C                  171 	.byte	-100
-   009C E7                  172 	.byte	-25
-   009D 00                  173 	.byte	0
-   009E 90                  174 	.byte	-112
-   009F E4                  175 	.byte	-28
-   00A0 FF                  176 	.byte	-1
-   00A1 84                  177 	.byte	-124
-   00A2 E1                  178 	.byte	-31
-   00A3 00                  179 	.byte	0
-   00A4 84                  180 	.byte	-124
-   00A5 E1                  181 	.byte	-31
-   00A6 00                  182 	.byte	0
-   00A7 F4                  183 	.byte	-12
-   00A8 FD                  184 	.byte	-3
-   00A9 FF                  185 	.byte	-1
-   00AA B0                  186 	.byte	-80
-   00AB EC                  187 	.byte	-20
-   00AC FF                  188 	.byte	-1
-   00AD BC                  189 	.byte	-68
-   00AE EF                  190 	.byte	-17
-   00AF 00                  191 	.byte	0
-   00B0 AA                  192 	.byte	-86
-   00B1 EA                  193 	.byte	-22
-   00B2 00                  194 	.byte	0
-   00B3 B6                  195 	.byte	-74
-   00B4 EE                  196 	.byte	-18
-   00B5 FF                  197 	.byte	-1
-   00B6 A4                  198 	.byte	-92
-   00B7 E9                  199 	.byte	-23
-   00B8 FF                  200 	.byte	-1
-   00B9 B0                  201 	.byte	-80
-   00BA EC                  202 	.byte	-20
-   00BB                     203 _vl_term_2_88:
-   00BB 01                  204 	.byte	1
-                            205 	.globl	_vl_map_roadline_left_4
-   00BC                     206 _vl_map_roadline_left_4:
-   00BC FF                  207 	.byte	-1
-   00BD F8                  208 	.byte	-8
-   00BE FE                  209 	.byte	-2
-   00BF 00                  210 	.byte	0
-   00C0 F0                  211 	.byte	-16
-   00C1 FC                  212 	.byte	-4
-   00C2 FF                  213 	.byte	-1
-   00C3 E0                  214 	.byte	-32
-   00C4 F8                  215 	.byte	-8
-   00C5 00                  216 	.byte	0
-   00C6 D0                  217 	.byte	-48
-   00C7 F4                  218 	.byte	-12
-   00C8 FF                  219 	.byte	-1
-   00C9 C8                  220 	.byte	-56
-   00CA F2                  221 	.byte	-14
-   00CB 00                  222 	.byte	0
-   00CC B8                  223 	.byte	-72
-   00CD EE                  224 	.byte	-18
-   00CE FF                  225 	.byte	-1
-   00CF B0                  226 	.byte	-80
-   00D0 EC                  227 	.byte	-20
-   00D1 00                  228 	.byte	0
-   00D2 A0                  229 	.byte	-96
-   00D3 E8                  230 	.byte	-24
-   00D4 FF                  231 	.byte	-1
-   00D5 98                  232 	.byte	-104
-   00D6 E6                  233 	.byte	-26
-   00D7 00                  234 	.byte	0
-   00D8 88                  235 	.byte	-120
-   00D9 E2                  236 	.byte	-30
-   00DA FF                  237 	.byte	-1
-   00DB 81                  238 	.byte	-127
-   00DC E0                  239 	.byte	-32
-   00DD 00                  240 	.byte	0
-   00DE 84                  241 	.byte	-124
-   00DF E1                  242 	.byte	-31
-   00E0 00                  243 	.byte	0
-   00E1 EC                  244 	.byte	-20
-   00E2 FB                  245 	.byte	-5
-   00E3 FF                  246 	.byte	-1
-   00E4 AC                  247 	.byte	-84
-   00E5 EB                  248 	.byte	-21
-   00E6 FF                  249 	.byte	-1
-   00E7 BC                  250 	.byte	-68
-   00E8 EF                  251 	.byte	-17
-   00E9 00                  252 	.byte	0
-   00EA A2                  253 	.byte	-94
-   00EB E8                  254 	.byte	-24
-   00EC 00                  255 	.byte	0
-   00ED B6                  256 	.byte	-74
-   00EE EE                  257 	.byte	-18
-   00EF FF                  258 	.byte	-1
-   00F0 A0                  259 	.byte	-96
-   00F1 E8                  260 	.byte	-24
-   00F2 FF                  261 	.byte	-1
-   00F3 B0                  262 	.byte	-80
-   00F4 EC                  263 	.byte	-20
-   00F5                     264 _vl_term_3_113:
-   00F5 01                  265 	.byte	1
-                            266 	.globl	_vl_map_roadline_right_1
-   00F6                     267 _vl_map_roadline_right_1:
-   00F6 FF                  268 	.byte	-1
-   00F7 F0                  269 	.byte	-16
-   00F8 04                  270 	.byte	4
-   00F9 00                  271 	.byte	0
-   00FA E4                  272 	.byte	-28
-   00FB 07                  273 	.byte	7
-   00FC FF                  274 	.byte	-1
-   00FD D8                  275 	.byte	-40
-   00FE 0A                  276 	.byte	10
-   00FF 00                  277 	.byte	0
-   0100 CC                  278 	.byte	-52
-   0101 0D                  279 	.byte	13
-   0102 FF                  280 	.byte	-1
-   0103 C0                  281 	.byte	-64
-   0104 10                  282 	.byte	16
-   0105 00                  283 	.byte	0
-   0106 B4                  284 	.byte	-76
-   0107 13                  285 	.byte	19
-   0108 FF                  286 	.byte	-1
-   0109 A8                  287 	.byte	-88
-   010A 16                  288 	.byte	22
-   010B 00                  289 	.byte	0
-   010C 9C                  290 	.byte	-100
-   010D 19                  291 	.byte	25
-   010E FF                  292 	.byte	-1
-   010F 90                  293 	.byte	-112
-   0110 1C                  294 	.byte	28
-   0111 00                  295 	.byte	0
-   0112 84                  296 	.byte	-124
-   0113 1F                  297 	.byte	31
-   0114 FF                  298 	.byte	-1
-   0115 BC                  299 	.byte	-68
-   0116 11                  300 	.byte	17
-   0117 FF                  301 	.byte	-1
-   0118 BC                  302 	.byte	-68
-   0119 11                  303 	.byte	17
-   011A 00                  304 	.byte	0
-   011B B6                  305 	.byte	-74
-   011C 13                  306 	.byte	19
-   011D 00                  307 	.byte	0
-   011E B6                  308 	.byte	-74
-   011F 12                  309 	.byte	18
-   0120 FF                  310 	.byte	-1
-   0121 B0                  311 	.byte	-80
-   0122 14                  312 	.byte	20
-   0123 FF                  313 	.byte	-1
-   0124 B0                  314 	.byte	-80
-   0125 14                  315 	.byte	20
-   0126 00                  316 	.byte	0
-   0127 AA                  317 	.byte	-86
-   0128 16                  318 	.byte	22
-   0129 00                  319 	.byte	0
-   012A AA                  320 	.byte	-86
-   012B 15                  321 	.byte	21
-   012C FF                  322 	.byte	-1
-   012D 84                  323 	.byte	-124
-   012E 1F                  324 	.byte	31
-   012F                     325 _vl_term_4_145:
-   012F 01                  326 	.byte	1
-                            327 	.globl	_vl_map_roadline_right_2
-   0130                     328 _vl_map_roadline_right_2:
-   0130 00                  329 	.byte	0
-   0131 F8                  330 	.byte	-8
-   0132 02                  331 	.byte	2
-   0133 FF                  332 	.byte	-1
-   0134 EC                  333 	.byte	-20
-   0135 05                  334 	.byte	5
-   0136 00                  335 	.byte	0
-   0137 DC                  336 	.byte	-36
-   0138 09                  337 	.byte	9
-   0139 FF                  338 	.byte	-1
-   013A D4                  339 	.byte	-44
-   013B 0B                  340 	.byte	11
-   013C 00                  341 	.byte	0
-   013D C4                  342 	.byte	-60
-   013E 0F                  343 	.byte	15
-   013F FF                  344 	.byte	-1
-   0140 BC                  345 	.byte	-68
-   0141 11                  346 	.byte	17
-   0142 00                  347 	.byte	0
-   0143 AC                  348 	.byte	-84
-   0144 15                  349 	.byte	21
-   0145 FF                  350 	.byte	-1
-   0146 A4                  351 	.byte	-92
-   0147 17                  352 	.byte	23
-   0148 00                  353 	.byte	0
-   0149 94                  354 	.byte	-108
-   014A 1B                  355 	.byte	27
-   014B FF                  356 	.byte	-1
-   014C 8C                  357 	.byte	-116
-   014D 1D                  358 	.byte	29
-   014E 00                  359 	.byte	0
-   014F 84                  360 	.byte	-124
-   0150 1F                  361 	.byte	31
-   0151 00                  362 	.byte	0
-   0152 F8                  363 	.byte	-8
-   0153 02                  364 	.byte	2
-   0154 FF                  365 	.byte	-1
-   0155 B8                  366 	.byte	-72
-   0156 12                  367 	.byte	18
-   0157 FF                  368 	.byte	-1
-   0158 BC                  369 	.byte	-68
-   0159 11                  370 	.byte	17
-   015A 00                  371 	.byte	0
-   015B AE                  372 	.byte	-82
-   015C 15                  373 	.byte	21
-   015D 00                  374 	.byte	0
-   015E B6                  375 	.byte	-74
-   015F 12                  376 	.byte	18
-   0160 FF                  377 	.byte	-1
-   0161 AC                  378 	.byte	-84
-   0162 15                  379 	.byte	21
-   0163 FF                  380 	.byte	-1
-   0164 B0                  381 	.byte	-80
-   0165 14                  382 	.byte	20
-   0166 00                  383 	.byte	0
-   0167 A2                  384 	.byte	-94
-   0168 18                  385 	.byte	24
-   0169 00                  386 	.byte	0
-   016A AA                  387 	.byte	-86
-   016B 15                  388 	.byte	21
-   016C FF                  389 	.byte	-1
-   016D 84                  390 	.byte	-124
-   016E 1F                  391 	.byte	31
-   016F                     392 _vl_term_5_172:
-   016F 01                  393 	.byte	1
-                            394 	.globl	_vl_map_roadline_right_3
-   0170                     395 _vl_map_roadline_right_3:
-   0170 00                  396 	.byte	0
-   0171 F0                  397 	.byte	-16
-   0172 04                  398 	.byte	4
-   0173 FF                  399 	.byte	-1
-   0174 E4                  400 	.byte	-28
-   0175 07                  401 	.byte	7
-   0176 00                  402 	.byte	0
-   0177 D8                  403 	.byte	-40
-   0178 0A                  404 	.byte	10
-   0179 FF                  405 	.byte	-1
-   017A CC                  406 	.byte	-52
-   017B 0D                  407 	.byte	13
-   017C 00                  408 	.byte	0
-   017D C0                  409 	.byte	-64
-   017E 10                  410 	.byte	16
-   017F FF                  411 	.byte	-1
-   0180 B4                  412 	.byte	-76
-   0181 13                  413 	.byte	19
-   0182 00                  414 	.byte	0
-   0183 A8                  415 	.byte	-88
-   0184 16                  416 	.byte	22
-   0185 FF                  417 	.byte	-1
-   0186 9C                  418 	.byte	-100
-   0187 19                  419 	.byte	25
-   0188 00                  420 	.byte	0
-   0189 90                  421 	.byte	-112
-   018A 1C                  422 	.byte	28
-   018B FF                  423 	.byte	-1
-   018C 84                  424 	.byte	-124
-   018D 1F                  425 	.byte	31
-   018E 00                  426 	.byte	0
-   018F 84                  427 	.byte	-124
-   0190 1F                  428 	.byte	31
-   0191 00                  429 	.byte	0
-   0192 F4                  430 	.byte	-12
-   0193 03                  431 	.byte	3
-   0194 FF                  432 	.byte	-1
-   0195 B0                  433 	.byte	-80
-   0196 14                  434 	.byte	20
-   0197 FF                  435 	.byte	-1
-   0198 BC                  436 	.byte	-68
-   0199 11                  437 	.byte	17
-   019A 00                  438 	.byte	0
-   019B AA                  439 	.byte	-86
-   019C 16                  440 	.byte	22
-   019D 00                  441 	.byte	0
-   019E B6                  442 	.byte	-74
-   019F 12                  443 	.byte	18
-   01A0 FF                  444 	.byte	-1
-   01A1 A4                  445 	.byte	-92
-   01A2 17                  446 	.byte	23
-   01A3 FF                  447 	.byte	-1
-   01A4 B0                  448 	.byte	-80
-   01A5 14                  449 	.byte	20
-   01A6                     450 _vl_term_6_196:
-   01A6 01                  451 	.byte	1
-                            452 	.globl	_vl_map_roadline_right_4
-   01A7                     453 _vl_map_roadline_right_4:
-   01A7 FF                  454 	.byte	-1
-   01A8 F8                  455 	.byte	-8
-   01A9 02                  456 	.byte	2
-   01AA 00                  457 	.byte	0
-   01AB F0                  458 	.byte	-16
-   01AC 04                  459 	.byte	4
-   01AD FF                  460 	.byte	-1
-   01AE E0                  461 	.byte	-32
-   01AF 08                  462 	.byte	8
-   01B0 00                  463 	.byte	0
-   01B1 D0                  464 	.byte	-48
-   01B2 0C                  465 	.byte	12
-   01B3 FF                  466 	.byte	-1
-   01B4 C8                  467 	.byte	-56
-   01B5 0E                  468 	.byte	14
-   01B6 00                  469 	.byte	0
-   01B7 B8                  470 	.byte	-72
-   01B8 12                  471 	.byte	18
-   01B9 FF                  472 	.byte	-1
-   01BA B0                  473 	.byte	-80
-   01BB 14                  474 	.byte	20
-   01BC 00                  475 	.byte	0
-   01BD A0                  476 	.byte	-96
-   01BE 18                  477 	.byte	24
-   01BF FF                  478 	.byte	-1
-   01C0 98                  479 	.byte	-104
-   01C1 1A                  480 	.byte	26
-   01C2 00                  481 	.byte	0
-   01C3 88                  482 	.byte	-120
-   01C4 1E                  483 	.byte	30
-   01C5 FF                  484 	.byte	-1
-   01C6 81                  485 	.byte	-127
-   01C7 20                  486 	.byte	32
-   01C8 00                  487 	.byte	0
-   01C9 84                  488 	.byte	-124
-   01CA 1F                  489 	.byte	31
-   01CB 00                  490 	.byte	0
-   01CC EC                  491 	.byte	-20
-   01CD 05                  492 	.byte	5
-   01CE FF                  493 	.byte	-1
-   01CF AC                  494 	.byte	-84
-   01D0 15                  495 	.byte	21
-   01D1 FF                  496 	.byte	-1
-   01D2 BC                  497 	.byte	-68
-   01D3 11                  498 	.byte	17
-   01D4 00                  499 	.byte	0
-   01D5 A2                  500 	.byte	-94
-   01D6 18                  501 	.byte	24
-   01D7 00                  502 	.byte	0
-   01D8 B6                  503 	.byte	-74
-   01D9 12                  504 	.byte	18
-   01DA FF                  505 	.byte	-1
-   01DB A0                  506 	.byte	-96
-   01DC 18                  507 	.byte	24
-   01DD FF                  508 	.byte	-1
-   01DE B0                  509 	.byte	-80
-   01DF 14                  510 	.byte	20
-   01E0                     511 _vl_term_7_221:
-   01E0 01                  512 	.byte	1
-                            513 	.globl	_step
-                            514 	.area	.data
-   0000                     515 _step:
-   0000 00                  516 	.byte	0
-                            517 	.area	.text
-                            518 	.globl	_draw_step1
-   01E1                     519 _draw_step1:
-   01E1 BD`00`00      [ 8]  520 	jsr	___Intensity_5F
-   01E4 BD`02`A4      [ 8]  521 	jsr	_draw_left
-   01E7 7D`00`00      [ 7]  522 	tst	_the_map
-   01EA 26 12         [ 3]  523 	bne	L6
-   01EC F6`00`00      [ 5]  524 	ldb	_step
-   01EF C1 02         [ 2]  525 	cmpb	#2	;cmpqi:
-   01F1 10 22 00 6B   [ 6]  526 	lbhi	L21
-   01F5 5C            [ 2]  527 	incb
-   01F6 F7`00`00      [ 5]  528 	stb	_step
-   01F9                     529 L8:
-   01F9 C6 0A         [ 2]  530 	ldb	#10
-   01FB F7`00`00      [ 5]  531 	stb	_the_map
-   01FE                     532 L6:
-   01FE BD`00`00      [ 8]  533 	jsr	___Reset0Ref
-   0201 C6 7F         [ 2]  534 	ldb	#127
-   0203 D7`00         [ 4]  535 	stb	*_dp_VIA_t1_cnt_lo
-   0205 C6 24         [ 2]  536 	ldb	#36
-   0207 E7 E2         [ 6]  537 	stb	,-s
-   0209 C6 FB         [ 2]  538 	ldb	#-5
-   020B BD`00`00      [ 8]  539 	jsr	__Moveto_d
-   020E C6 10         [ 2]  540 	ldb	#16
-   0210 D7`00         [ 4]  541 	stb	*_dp_VIA_t1_cnt_lo
-   0212 32 61         [ 5]  542 	leas	1,s
-   0214 F6`00`00      [ 5]  543 	ldb	_step
-   0217 C1 01         [ 2]  544 	cmpb	#1	;cmpqi:
-   0219 10 27 00 75   [ 6]  545 	lbeq	L11
-   021D 24 31         [ 3]  546 	bhs	L22
-   021F 8E`00`0B      [ 3]  547 	ldx	#_vl_map_roadline_left_1
-   0222 BD`00`00      [ 8]  548 	jsr	___Draw_VLp
-   0225                     549 L9:
-   0225 BD`00`00      [ 8]  550 	jsr	___Reset0Ref
-   0228 C6 7F         [ 2]  551 	ldb	#127
-   022A D7`00         [ 4]  552 	stb	*_dp_VIA_t1_cnt_lo
-   022C C6 24         [ 2]  553 	ldb	#36
-   022E E7 E2         [ 6]  554 	stb	,-s
-   0230 C6 05         [ 2]  555 	ldb	#5
-   0232 BD`00`00      [ 8]  556 	jsr	__Moveto_d
-   0235 C6 10         [ 2]  557 	ldb	#16
-   0237 D7`00         [ 4]  558 	stb	*_dp_VIA_t1_cnt_lo
-   0239 32 61         [ 5]  559 	leas	1,s
-   023B F6`00`00      [ 5]  560 	ldb	_step
-   023E C1 01         [ 2]  561 	cmpb	#1	;cmpqi:
-   0240 27 44         [ 3]  562 	beq	L16
-   0242 24 22         [ 3]  563 	bhs	L23
-   0244 8E`00`F6      [ 3]  564 	ldx	#_vl_map_roadline_right_1
-   0247 BD`00`00      [ 8]  565 	jsr	___Draw_VLp
-   024A                     566 L14:
-   024A 7A`00`00      [ 7]  567 	dec	_the_map
-   024D 7E`02`C4      [ 4]  568 	jmp	_draw_right
-   0250                     569 L22:
-   0250 C1 02         [ 2]  570 	cmpb	#2	;cmpqi:
-   0252 27 47         [ 3]  571 	beq	L12
-   0254 C1 03         [ 2]  572 	cmpb	#3	;cmpqi:
-   0256 26 CD         [ 3]  573 	bne	L9
-   0258 8E`00`BC      [ 3]  574 	ldx	#_vl_map_roadline_left_4
-   025B BD`00`00      [ 8]  575 	jsr	___Draw_VLp
-   025E 20 C5         [ 3]  576 	bra	L9
-   0260                     577 L21:
-   0260 7F`00`00      [ 7]  578 	clr	_step
-   0263 16 FF 93      [ 5]  579 	lbra	L8
-   0266                     580 L23:
-   0266 C1 02         [ 2]  581 	cmpb	#2	;cmpqi:
-   0268 27 10         [ 3]  582 	beq	L17
-   026A C1 03         [ 2]  583 	cmpb	#3	;cmpqi:
-   026C 26 DC         [ 3]  584 	bne	L14
-   026E 8E`01`A7      [ 3]  585 	ldx	#_vl_map_roadline_right_4
-   0271 BD`00`00      [ 8]  586 	jsr	___Draw_VLp
-   0274 7A`00`00      [ 7]  587 	dec	_the_map
-   0277 7E`02`C4      [ 4]  588 	jmp	_draw_right
-   027A                     589 L17:
-   027A 8E`01`70      [ 3]  590 	ldx	#_vl_map_roadline_right_3
-   027D BD`00`00      [ 8]  591 	jsr	___Draw_VLp
-   0280 7A`00`00      [ 7]  592 	dec	_the_map
-   0283 7E`02`C4      [ 4]  593 	jmp	_draw_right
-   0286                     594 L16:
-   0286 8E`01`30      [ 3]  595 	ldx	#_vl_map_roadline_right_2
-   0289 BD`00`00      [ 8]  596 	jsr	___Draw_VLp
-   028C 7A`00`00      [ 7]  597 	dec	_the_map
-   028F 7E`02`C4      [ 4]  598 	jmp	_draw_right
-   0292                     599 L11:
-   0292 8E`00`45      [ 3]  600 	ldx	#_vl_map_roadline_left_2
-   0295 BD`00`00      [ 8]  601 	jsr	___Draw_VLp
-   0298 16 FF 8A      [ 5]  602 	lbra	L9
-   029B                     603 L12:
-   029B 8E`00`85      [ 3]  604 	ldx	#_vl_map_roadline_left_3
-   029E BD`00`00      [ 8]  605 	jsr	___Draw_VLp
-   02A1 16 FF 81      [ 5]  606 	lbra	L9
-                            607 	.globl	_draw_left
-   02A4                     608 _draw_left:
-   02A4 BD`00`00      [ 8]  609 	jsr	___Reset0Ref
-   02A7 C6 7F         [ 2]  610 	ldb	#127
-   02A9 D7`00         [ 4]  611 	stb	*_dp_VIA_t1_cnt_lo
-   02AB C6 24         [ 2]  612 	ldb	#36
-   02AD E7 E2         [ 6]  613 	stb	,-s
-   02AF C6 F1         [ 2]  614 	ldb	#-15
-   02B1 BD`00`00      [ 8]  615 	jsr	__Moveto_d
-   02B4 C6 A8         [ 2]  616 	ldb	#-88
-   02B6 D7`00         [ 4]  617 	stb	*_dp_VIA_t1_cnt_lo
-   02B8 C6 80         [ 2]  618 	ldb	#-128
-   02BA E7 E2         [ 6]  619 	stb	,-s
-   02BC CB 2E         [ 2]  620 	addb	#46
-   02BE BD`00`00      [ 8]  621 	jsr	__Draw_Line_d
-   02C1 32 62         [ 5]  622 	leas	2,s
-   02C3 39            [ 5]  623 	rts
-                            624 	.globl	_draw_right
-   02C4                     625 _draw_right:
-   02C4 BD`00`00      [ 8]  626 	jsr	___Reset0Ref
-   02C7 C6 7F         [ 2]  627 	ldb	#127
-   02C9 D7`00         [ 4]  628 	stb	*_dp_VIA_t1_cnt_lo
-   02CB C6 24         [ 2]  629 	ldb	#36
-   02CD E7 E2         [ 6]  630 	stb	,-s
-   02CF C6 0F         [ 2]  631 	ldb	#15
-   02D1 BD`00`00      [ 8]  632 	jsr	__Moveto_d
-   02D4 C6 A8         [ 2]  633 	ldb	#-88
-   02D6 D7`00         [ 4]  634 	stb	*_dp_VIA_t1_cnt_lo
-   02D8 C6 80         [ 2]  635 	ldb	#-128
-   02DA E7 E2         [ 6]  636 	stb	,-s
-   02DC C6 52         [ 2]  637 	ldb	#82
-   02DE BD`00`00      [ 8]  638 	jsr	__Draw_Line_d
-   02E1 32 62         [ 5]  639 	leas	2,s
-   02E3 39            [ 5]  640 	rts
-                            641 	.globl	_CNT_SPEED_LUT
-   02E4                     642 _CNT_SPEED_LUT:
-   02E4 00 00 00 00 00 00   643 	.word	0,0,0
-   02EA 00                  644 	.byte	0
+                              9 	.globl	_CNT_DRAW1_LUT
+                             10 	.area	.text
+   0000                      11 _CNT_DRAW1_LUT:
+   0000 06                   12 	.byte	6
+   0001 05                   13 	.byte	5
+   0002 04                   14 	.byte	4
+   0003 04                   15 	.byte	4
+   0004 03                   16 	.byte	3
+   0005 02                   17 	.byte	2
+   0006 02                   18 	.byte	2
+   0007 02                   19 	.byte	2
+   0008 01                   20 	.byte	1
+   0009 01                   21 	.byte	1
+   000A 00                   22 	.byte	0
+                             23 	.globl	_CNT_DRAW2_LUT
+   000B                      24 _CNT_DRAW2_LUT:
+   000B 06                   25 	.byte	6
+   000C 05                   26 	.byte	5
+   000D 04                   27 	.byte	4
+   000E 03                   28 	.byte	3
+   000F 02                   29 	.byte	2
+   0010 02                   30 	.byte	2
+   0011 02                   31 	.byte	2
+   0012 01                   32 	.byte	1
+   0013 01                   33 	.byte	1
+   0014 00                   34 	.byte	0
+   0015 00                   35 	.byte	0
+                             36 	.globl	_CNT_DRAW3_LUT
+   0016                      37 _CNT_DRAW3_LUT:
+   0016 06                   38 	.byte	6
+   0017 05                   39 	.byte	5
+   0018 04                   40 	.byte	4
+   0019 03                   41 	.byte	3
+   001A 03                   42 	.byte	3
+   001B 02                   43 	.byte	2
+   001C 01                   44 	.byte	1
+   001D 02                   45 	.byte	2
+   001E 01                   46 	.byte	1
+   001F 01                   47 	.byte	1
+   0020 00                   48 	.byte	0
+                             49 	.globl	_CNT_DRAW4_LUT
+   0021                      50 _CNT_DRAW4_LUT:
+   0021 06                   51 	.byte	6
+   0022 05                   52 	.byte	5
+   0023 04                   53 	.byte	4
+   0024 03                   54 	.byte	3
+   0025 02                   55 	.byte	2
+   0026 02                   56 	.byte	2
+   0027 02                   57 	.byte	2
+   0028 01                   58 	.byte	1
+   0029 01                   59 	.byte	1
+   002A 00                   60 	.byte	0
+   002B 00                   61 	.byte	0
+                             62 	.globl	_map_init
+   002C                      63 _map_init:
+   002C F6`00`02      [ 5]   64 	ldb	_the_game+2
+   002F 4F            [ 2]   65 	clra		;zero_extendqihi: R:b -> R:d
+   0030 1F 01         [ 6]   66 	tfr	d,x
+   0032 E6 89`00`00   [ 8]   67 	ldb	_CNT_DRAW1_LUT,x
+   0036 8E`02`16      [ 3]   68 	ldx	#_draw_step1
+   0039 BF`00`01      [ 6]   69 	stx	_the_map+1
+   003C F7`00`00      [ 5]   70 	stb	_the_map
+   003F 39            [ 5]   71 	rts
+                             72 	.globl	_vl_map_roadline_left_1
+   0040                      73 _vl_map_roadline_left_1:
+   0040 FF                   74 	.byte	-1
+   0041 F0                   75 	.byte	-16
+   0042 FC                   76 	.byte	-4
+   0043 00                   77 	.byte	0
+   0044 E4                   78 	.byte	-28
+   0045 F9                   79 	.byte	-7
+   0046 FF                   80 	.byte	-1
+   0047 D8                   81 	.byte	-40
+   0048 F6                   82 	.byte	-10
+   0049 00                   83 	.byte	0
+   004A CC                   84 	.byte	-52
+   004B F3                   85 	.byte	-13
+   004C FF                   86 	.byte	-1
+   004D C0                   87 	.byte	-64
+   004E F0                   88 	.byte	-16
+   004F 00                   89 	.byte	0
+   0050 B4                   90 	.byte	-76
+   0051 ED                   91 	.byte	-19
+   0052 FF                   92 	.byte	-1
+   0053 A8                   93 	.byte	-88
+   0054 EA                   94 	.byte	-22
+   0055 00                   95 	.byte	0
+   0056 9C                   96 	.byte	-100
+   0057 E7                   97 	.byte	-25
+   0058 FF                   98 	.byte	-1
+   0059 90                   99 	.byte	-112
+   005A E4                  100 	.byte	-28
+   005B 00                  101 	.byte	0
+   005C 84                  102 	.byte	-124
+   005D E1                  103 	.byte	-31
+   005E FF                  104 	.byte	-1
+   005F BC                  105 	.byte	-68
+   0060 EF                  106 	.byte	-17
+   0061 FF                  107 	.byte	-1
+   0062 BC                  108 	.byte	-68
+   0063 EF                  109 	.byte	-17
+   0064 00                  110 	.byte	0
+   0065 B6                  111 	.byte	-74
+   0066 ED                  112 	.byte	-19
+   0067 00                  113 	.byte	0
+   0068 B6                  114 	.byte	-74
+   0069 EE                  115 	.byte	-18
+   006A FF                  116 	.byte	-1
+   006B B0                  117 	.byte	-80
+   006C EC                  118 	.byte	-20
+   006D FF                  119 	.byte	-1
+   006E B0                  120 	.byte	-80
+   006F EC                  121 	.byte	-20
+   0070 00                  122 	.byte	0
+   0071 AA                  123 	.byte	-86
+   0072 EA                  124 	.byte	-22
+   0073 00                  125 	.byte	0
+   0074 AA                  126 	.byte	-86
+   0075 EB                  127 	.byte	-21
+   0076 FF                  128 	.byte	-1
+   0077 84                  129 	.byte	-124
+   0078 E1                  130 	.byte	-31
+   0079                     131 _vl_term_0_37:
+   0079 01                  132 	.byte	1
+                            133 	.globl	_vl_map_roadline_left_2
+   007A                     134 _vl_map_roadline_left_2:
+   007A 00                  135 	.byte	0
+   007B F8                  136 	.byte	-8
+   007C FE                  137 	.byte	-2
+   007D FF                  138 	.byte	-1
+   007E EC                  139 	.byte	-20
+   007F FB                  140 	.byte	-5
+   0080 00                  141 	.byte	0
+   0081 DC                  142 	.byte	-36
+   0082 F7                  143 	.byte	-9
+   0083 FF                  144 	.byte	-1
+   0084 D4                  145 	.byte	-44
+   0085 F5                  146 	.byte	-11
+   0086 00                  147 	.byte	0
+   0087 C4                  148 	.byte	-60
+   0088 F1                  149 	.byte	-15
+   0089 FF                  150 	.byte	-1
+   008A BC                  151 	.byte	-68
+   008B EF                  152 	.byte	-17
+   008C 00                  153 	.byte	0
+   008D AC                  154 	.byte	-84
+   008E EB                  155 	.byte	-21
+   008F FF                  156 	.byte	-1
+   0090 A4                  157 	.byte	-92
+   0091 E9                  158 	.byte	-23
+   0092 00                  159 	.byte	0
+   0093 94                  160 	.byte	-108
+   0094 E5                  161 	.byte	-27
+   0095 FF                  162 	.byte	-1
+   0096 8C                  163 	.byte	-116
+   0097 E3                  164 	.byte	-29
+   0098 00                  165 	.byte	0
+   0099 84                  166 	.byte	-124
+   009A E1                  167 	.byte	-31
+   009B 00                  168 	.byte	0
+   009C F8                  169 	.byte	-8
+   009D FE                  170 	.byte	-2
+   009E FF                  171 	.byte	-1
+   009F B8                  172 	.byte	-72
+   00A0 EE                  173 	.byte	-18
+   00A1 FF                  174 	.byte	-1
+   00A2 BC                  175 	.byte	-68
+   00A3 EF                  176 	.byte	-17
+   00A4 00                  177 	.byte	0
+   00A5 AE                  178 	.byte	-82
+   00A6 EB                  179 	.byte	-21
+   00A7 00                  180 	.byte	0
+   00A8 B6                  181 	.byte	-74
+   00A9 EE                  182 	.byte	-18
+   00AA FF                  183 	.byte	-1
+   00AB AC                  184 	.byte	-84
+   00AC EB                  185 	.byte	-21
+   00AD FF                  186 	.byte	-1
+   00AE B0                  187 	.byte	-80
+   00AF EC                  188 	.byte	-20
+   00B0 00                  189 	.byte	0
+   00B1 A2                  190 	.byte	-94
+   00B2 E8                  191 	.byte	-24
+   00B3 00                  192 	.byte	0
+   00B4 AA                  193 	.byte	-86
+   00B5 EB                  194 	.byte	-21
+   00B6 FF                  195 	.byte	-1
+   00B7 84                  196 	.byte	-124
+   00B8 E1                  197 	.byte	-31
+   00B9                     198 _vl_term_1_64:
+   00B9 01                  199 	.byte	1
+                            200 	.globl	_vl_map_roadline_left_3
+   00BA                     201 _vl_map_roadline_left_3:
+   00BA 00                  202 	.byte	0
+   00BB F0                  203 	.byte	-16
+   00BC FC                  204 	.byte	-4
+   00BD FF                  205 	.byte	-1
+   00BE E4                  206 	.byte	-28
+   00BF F9                  207 	.byte	-7
+   00C0 00                  208 	.byte	0
+   00C1 D8                  209 	.byte	-40
+   00C2 F6                  210 	.byte	-10
+   00C3 FF                  211 	.byte	-1
+   00C4 CC                  212 	.byte	-52
+   00C5 F3                  213 	.byte	-13
+   00C6 00                  214 	.byte	0
+   00C7 C0                  215 	.byte	-64
+   00C8 F0                  216 	.byte	-16
+   00C9 FF                  217 	.byte	-1
+   00CA B4                  218 	.byte	-76
+   00CB ED                  219 	.byte	-19
+   00CC 00                  220 	.byte	0
+   00CD A8                  221 	.byte	-88
+   00CE EA                  222 	.byte	-22
+   00CF FF                  223 	.byte	-1
+   00D0 9C                  224 	.byte	-100
+   00D1 E7                  225 	.byte	-25
+   00D2 00                  226 	.byte	0
+   00D3 90                  227 	.byte	-112
+   00D4 E4                  228 	.byte	-28
+   00D5 FF                  229 	.byte	-1
+   00D6 84                  230 	.byte	-124
+   00D7 E1                  231 	.byte	-31
+   00D8 00                  232 	.byte	0
+   00D9 84                  233 	.byte	-124
+   00DA E1                  234 	.byte	-31
+   00DB 00                  235 	.byte	0
+   00DC F4                  236 	.byte	-12
+   00DD FD                  237 	.byte	-3
+   00DE FF                  238 	.byte	-1
+   00DF B0                  239 	.byte	-80
+   00E0 EC                  240 	.byte	-20
+   00E1 FF                  241 	.byte	-1
+   00E2 BC                  242 	.byte	-68
+   00E3 EF                  243 	.byte	-17
+   00E4 00                  244 	.byte	0
+   00E5 AA                  245 	.byte	-86
+   00E6 EA                  246 	.byte	-22
+   00E7 00                  247 	.byte	0
+   00E8 B6                  248 	.byte	-74
+   00E9 EE                  249 	.byte	-18
+   00EA FF                  250 	.byte	-1
+   00EB A4                  251 	.byte	-92
+   00EC E9                  252 	.byte	-23
+   00ED FF                  253 	.byte	-1
+   00EE B0                  254 	.byte	-80
+   00EF EC                  255 	.byte	-20
+   00F0                     256 _vl_term_2_88:
+   00F0 01                  257 	.byte	1
+                            258 	.globl	_vl_map_roadline_left_4
+   00F1                     259 _vl_map_roadline_left_4:
+   00F1 FF                  260 	.byte	-1
+   00F2 F8                  261 	.byte	-8
+   00F3 FE                  262 	.byte	-2
+   00F4 00                  263 	.byte	0
+   00F5 F0                  264 	.byte	-16
+   00F6 FC                  265 	.byte	-4
+   00F7 FF                  266 	.byte	-1
+   00F8 E0                  267 	.byte	-32
+   00F9 F8                  268 	.byte	-8
+   00FA 00                  269 	.byte	0
+   00FB D0                  270 	.byte	-48
+   00FC F4                  271 	.byte	-12
+   00FD FF                  272 	.byte	-1
+   00FE C8                  273 	.byte	-56
+   00FF F2                  274 	.byte	-14
+   0100 00                  275 	.byte	0
+   0101 B8                  276 	.byte	-72
+   0102 EE                  277 	.byte	-18
+   0103 FF                  278 	.byte	-1
+   0104 B0                  279 	.byte	-80
+   0105 EC                  280 	.byte	-20
+   0106 00                  281 	.byte	0
+   0107 A0                  282 	.byte	-96
+   0108 E8                  283 	.byte	-24
+   0109 FF                  284 	.byte	-1
+   010A 98                  285 	.byte	-104
+   010B E6                  286 	.byte	-26
+   010C 00                  287 	.byte	0
+   010D 88                  288 	.byte	-120
+   010E E2                  289 	.byte	-30
+   010F FF                  290 	.byte	-1
+   0110 81                  291 	.byte	-127
+   0111 E0                  292 	.byte	-32
+   0112 00                  293 	.byte	0
+   0113 84                  294 	.byte	-124
+   0114 E1                  295 	.byte	-31
+   0115 00                  296 	.byte	0
+   0116 EC                  297 	.byte	-20
+   0117 FB                  298 	.byte	-5
+   0118 FF                  299 	.byte	-1
+   0119 AC                  300 	.byte	-84
+   011A EB                  301 	.byte	-21
+   011B FF                  302 	.byte	-1
+   011C BC                  303 	.byte	-68
+   011D EF                  304 	.byte	-17
+   011E 00                  305 	.byte	0
+   011F A2                  306 	.byte	-94
+   0120 E8                  307 	.byte	-24
+   0121 00                  308 	.byte	0
+   0122 B6                  309 	.byte	-74
+   0123 EE                  310 	.byte	-18
+   0124 FF                  311 	.byte	-1
+   0125 A0                  312 	.byte	-96
+   0126 E8                  313 	.byte	-24
+   0127 FF                  314 	.byte	-1
+   0128 B0                  315 	.byte	-80
+   0129 EC                  316 	.byte	-20
+   012A                     317 _vl_term_3_113:
+   012A 01                  318 	.byte	1
+                            319 	.globl	_vl_map_roadline_right_1
+   012B                     320 _vl_map_roadline_right_1:
+   012B FF                  321 	.byte	-1
+   012C F0                  322 	.byte	-16
+   012D 04                  323 	.byte	4
+   012E 00                  324 	.byte	0
+   012F E4                  325 	.byte	-28
+   0130 07                  326 	.byte	7
+   0131 FF                  327 	.byte	-1
+   0132 D8                  328 	.byte	-40
+   0133 0A                  329 	.byte	10
+   0134 00                  330 	.byte	0
+   0135 CC                  331 	.byte	-52
+   0136 0D                  332 	.byte	13
+   0137 FF                  333 	.byte	-1
+   0138 C0                  334 	.byte	-64
+   0139 10                  335 	.byte	16
+   013A 00                  336 	.byte	0
+   013B B4                  337 	.byte	-76
+   013C 13                  338 	.byte	19
+   013D FF                  339 	.byte	-1
+   013E A8                  340 	.byte	-88
+   013F 16                  341 	.byte	22
+   0140 00                  342 	.byte	0
+   0141 9C                  343 	.byte	-100
+   0142 19                  344 	.byte	25
+   0143 FF                  345 	.byte	-1
+   0144 90                  346 	.byte	-112
+   0145 1C                  347 	.byte	28
+   0146 00                  348 	.byte	0
+   0147 84                  349 	.byte	-124
+   0148 1F                  350 	.byte	31
+   0149 FF                  351 	.byte	-1
+   014A BC                  352 	.byte	-68
+   014B 11                  353 	.byte	17
+   014C FF                  354 	.byte	-1
+   014D BC                  355 	.byte	-68
+   014E 11                  356 	.byte	17
+   014F 00                  357 	.byte	0
+   0150 B6                  358 	.byte	-74
+   0151 13                  359 	.byte	19
+   0152 00                  360 	.byte	0
+   0153 B6                  361 	.byte	-74
+   0154 12                  362 	.byte	18
+   0155 FF                  363 	.byte	-1
+   0156 B0                  364 	.byte	-80
+   0157 14                  365 	.byte	20
+   0158 FF                  366 	.byte	-1
+   0159 B0                  367 	.byte	-80
+   015A 14                  368 	.byte	20
+   015B 00                  369 	.byte	0
+   015C AA                  370 	.byte	-86
+   015D 16                  371 	.byte	22
+   015E 00                  372 	.byte	0
+   015F AA                  373 	.byte	-86
+   0160 15                  374 	.byte	21
+   0161 FF                  375 	.byte	-1
+   0162 84                  376 	.byte	-124
+   0163 1F                  377 	.byte	31
+   0164                     378 _vl_term_4_145:
+   0164 01                  379 	.byte	1
+                            380 	.globl	_vl_map_roadline_right_2
+   0165                     381 _vl_map_roadline_right_2:
+   0165 00                  382 	.byte	0
+   0166 F8                  383 	.byte	-8
+   0167 02                  384 	.byte	2
+   0168 FF                  385 	.byte	-1
+   0169 EC                  386 	.byte	-20
+   016A 05                  387 	.byte	5
+   016B 00                  388 	.byte	0
+   016C DC                  389 	.byte	-36
+   016D 09                  390 	.byte	9
+   016E FF                  391 	.byte	-1
+   016F D4                  392 	.byte	-44
+   0170 0B                  393 	.byte	11
+   0171 00                  394 	.byte	0
+   0172 C4                  395 	.byte	-60
+   0173 0F                  396 	.byte	15
+   0174 FF                  397 	.byte	-1
+   0175 BC                  398 	.byte	-68
+   0176 11                  399 	.byte	17
+   0177 00                  400 	.byte	0
+   0178 AC                  401 	.byte	-84
+   0179 15                  402 	.byte	21
+   017A FF                  403 	.byte	-1
+   017B A4                  404 	.byte	-92
+   017C 17                  405 	.byte	23
+   017D 00                  406 	.byte	0
+   017E 94                  407 	.byte	-108
+   017F 1B                  408 	.byte	27
+   0180 FF                  409 	.byte	-1
+   0181 8C                  410 	.byte	-116
+   0182 1D                  411 	.byte	29
+   0183 00                  412 	.byte	0
+   0184 84                  413 	.byte	-124
+   0185 1F                  414 	.byte	31
+   0186 00                  415 	.byte	0
+   0187 F8                  416 	.byte	-8
+   0188 02                  417 	.byte	2
+   0189 FF                  418 	.byte	-1
+   018A B8                  419 	.byte	-72
+   018B 12                  420 	.byte	18
+   018C FF                  421 	.byte	-1
+   018D BC                  422 	.byte	-68
+   018E 11                  423 	.byte	17
+   018F 00                  424 	.byte	0
+   0190 AE                  425 	.byte	-82
+   0191 15                  426 	.byte	21
+   0192 00                  427 	.byte	0
+   0193 B6                  428 	.byte	-74
+   0194 12                  429 	.byte	18
+   0195 FF                  430 	.byte	-1
+   0196 AC                  431 	.byte	-84
+   0197 15                  432 	.byte	21
+   0198 FF                  433 	.byte	-1
+   0199 B0                  434 	.byte	-80
+   019A 14                  435 	.byte	20
+   019B 00                  436 	.byte	0
+   019C A2                  437 	.byte	-94
+   019D 18                  438 	.byte	24
+   019E 00                  439 	.byte	0
+   019F AA                  440 	.byte	-86
+   01A0 15                  441 	.byte	21
+   01A1 FF                  442 	.byte	-1
+   01A2 84                  443 	.byte	-124
+   01A3 1F                  444 	.byte	31
+   01A4                     445 _vl_term_5_172:
+   01A4 01                  446 	.byte	1
+                            447 	.globl	_vl_map_roadline_right_3
+   01A5                     448 _vl_map_roadline_right_3:
+   01A5 00                  449 	.byte	0
+   01A6 F0                  450 	.byte	-16
+   01A7 04                  451 	.byte	4
+   01A8 FF                  452 	.byte	-1
+   01A9 E4                  453 	.byte	-28
+   01AA 07                  454 	.byte	7
+   01AB 00                  455 	.byte	0
+   01AC D8                  456 	.byte	-40
+   01AD 0A                  457 	.byte	10
+   01AE FF                  458 	.byte	-1
+   01AF CC                  459 	.byte	-52
+   01B0 0D                  460 	.byte	13
+   01B1 00                  461 	.byte	0
+   01B2 C0                  462 	.byte	-64
+   01B3 10                  463 	.byte	16
+   01B4 FF                  464 	.byte	-1
+   01B5 B4                  465 	.byte	-76
+   01B6 13                  466 	.byte	19
+   01B7 00                  467 	.byte	0
+   01B8 A8                  468 	.byte	-88
+   01B9 16                  469 	.byte	22
+   01BA FF                  470 	.byte	-1
+   01BB 9C                  471 	.byte	-100
+   01BC 19                  472 	.byte	25
+   01BD 00                  473 	.byte	0
+   01BE 90                  474 	.byte	-112
+   01BF 1C                  475 	.byte	28
+   01C0 FF                  476 	.byte	-1
+   01C1 84                  477 	.byte	-124
+   01C2 1F                  478 	.byte	31
+   01C3 00                  479 	.byte	0
+   01C4 84                  480 	.byte	-124
+   01C5 1F                  481 	.byte	31
+   01C6 00                  482 	.byte	0
+   01C7 F4                  483 	.byte	-12
+   01C8 03                  484 	.byte	3
+   01C9 FF                  485 	.byte	-1
+   01CA B0                  486 	.byte	-80
+   01CB 14                  487 	.byte	20
+   01CC FF                  488 	.byte	-1
+   01CD BC                  489 	.byte	-68
+   01CE 11                  490 	.byte	17
+   01CF 00                  491 	.byte	0
+   01D0 AA                  492 	.byte	-86
+   01D1 16                  493 	.byte	22
+   01D2 00                  494 	.byte	0
+   01D3 B6                  495 	.byte	-74
+   01D4 12                  496 	.byte	18
+   01D5 FF                  497 	.byte	-1
+   01D6 A4                  498 	.byte	-92
+   01D7 17                  499 	.byte	23
+   01D8 FF                  500 	.byte	-1
+   01D9 B0                  501 	.byte	-80
+   01DA 14                  502 	.byte	20
+   01DB                     503 _vl_term_6_196:
+   01DB 01                  504 	.byte	1
+                            505 	.globl	_vl_map_roadline_right_4
+   01DC                     506 _vl_map_roadline_right_4:
+   01DC FF                  507 	.byte	-1
+   01DD F8                  508 	.byte	-8
+   01DE 02                  509 	.byte	2
+   01DF 00                  510 	.byte	0
+   01E0 F0                  511 	.byte	-16
+   01E1 04                  512 	.byte	4
+   01E2 FF                  513 	.byte	-1
+   01E3 E0                  514 	.byte	-32
+   01E4 08                  515 	.byte	8
+   01E5 00                  516 	.byte	0
+   01E6 D0                  517 	.byte	-48
+   01E7 0C                  518 	.byte	12
+   01E8 FF                  519 	.byte	-1
+   01E9 C8                  520 	.byte	-56
+   01EA 0E                  521 	.byte	14
+   01EB 00                  522 	.byte	0
+   01EC B8                  523 	.byte	-72
+   01ED 12                  524 	.byte	18
+   01EE FF                  525 	.byte	-1
+   01EF B0                  526 	.byte	-80
+   01F0 14                  527 	.byte	20
+   01F1 00                  528 	.byte	0
+   01F2 A0                  529 	.byte	-96
+   01F3 18                  530 	.byte	24
+   01F4 FF                  531 	.byte	-1
+   01F5 98                  532 	.byte	-104
+   01F6 1A                  533 	.byte	26
+   01F7 00                  534 	.byte	0
+   01F8 88                  535 	.byte	-120
+   01F9 1E                  536 	.byte	30
+   01FA FF                  537 	.byte	-1
+   01FB 81                  538 	.byte	-127
+   01FC 20                  539 	.byte	32
+   01FD 00                  540 	.byte	0
+   01FE 84                  541 	.byte	-124
+   01FF 1F                  542 	.byte	31
+   0200 00                  543 	.byte	0
+   0201 EC                  544 	.byte	-20
+   0202 05                  545 	.byte	5
+   0203 FF                  546 	.byte	-1
+   0204 AC                  547 	.byte	-84
+   0205 15                  548 	.byte	21
+   0206 FF                  549 	.byte	-1
+   0207 BC                  550 	.byte	-68
+   0208 11                  551 	.byte	17
+   0209 00                  552 	.byte	0
+   020A A2                  553 	.byte	-94
+   020B 18                  554 	.byte	24
+   020C 00                  555 	.byte	0
+   020D B6                  556 	.byte	-74
+   020E 12                  557 	.byte	18
+   020F FF                  558 	.byte	-1
+   0210 A0                  559 	.byte	-96
+   0211 18                  560 	.byte	24
+   0212 FF                  561 	.byte	-1
+   0213 B0                  562 	.byte	-80
+   0214 14                  563 	.byte	20
+   0215                     564 _vl_term_7_221:
+   0215 01                  565 	.byte	1
+                            566 	.globl	_draw_step1
+   0216                     567 _draw_step1:
+   0216 BD`00`00      [ 8]  568 	jsr	___Intensity_5F
+   0219 BD`00`00      [ 8]  569 	jsr	___Reset0Ref
+   021C C6 7F         [ 2]  570 	ldb	#127
+   021E D7`00         [ 4]  571 	stb	*_dp_VIA_t1_cnt_lo
+   0220 C6 24         [ 2]  572 	ldb	#36
+   0222 E7 E2         [ 6]  573 	stb	,-s
+   0224 C6 F1         [ 2]  574 	ldb	#-15
+   0226 BD`00`00      [ 8]  575 	jsr	__Moveto_d
+   0229 C6 A8         [ 2]  576 	ldb	#-88
+   022B D7`00         [ 4]  577 	stb	*_dp_VIA_t1_cnt_lo
+   022D C6 80         [ 2]  578 	ldb	#-128
+   022F E7 E2         [ 6]  579 	stb	,-s
+   0231 CB 2E         [ 2]  580 	addb	#46
+   0233 BD`00`00      [ 8]  581 	jsr	__Draw_Line_d
+   0236 BD`00`00      [ 8]  582 	jsr	___Reset0Ref
+   0239 C6 7F         [ 2]  583 	ldb	#127
+   023B D7`00         [ 4]  584 	stb	*_dp_VIA_t1_cnt_lo
+   023D C6 24         [ 2]  585 	ldb	#36
+   023F E7 E2         [ 6]  586 	stb	,-s
+   0241 C6 FB         [ 2]  587 	ldb	#-5
+   0243 BD`00`00      [ 8]  588 	jsr	__Moveto_d
+   0246 C6 10         [ 2]  589 	ldb	#16
+   0248 D7`00         [ 4]  590 	stb	*_dp_VIA_t1_cnt_lo
+   024A 8E`00`40      [ 3]  591 	ldx	#_vl_map_roadline_left_1
+   024D BD`00`00      [ 8]  592 	jsr	___Draw_VLp
+   0250 BD`00`00      [ 8]  593 	jsr	___Reset0Ref
+   0253 C6 7F         [ 2]  594 	ldb	#127
+   0255 D7`00         [ 4]  595 	stb	*_dp_VIA_t1_cnt_lo
+   0257 C6 24         [ 2]  596 	ldb	#36
+   0259 E7 E2         [ 6]  597 	stb	,-s
+   025B C6 05         [ 2]  598 	ldb	#5
+   025D BD`00`00      [ 8]  599 	jsr	__Moveto_d
+   0260 C6 10         [ 2]  600 	ldb	#16
+   0262 D7`00         [ 4]  601 	stb	*_dp_VIA_t1_cnt_lo
+   0264 8E`01`2B      [ 3]  602 	ldx	#_vl_map_roadline_right_1
+   0267 BD`00`00      [ 8]  603 	jsr	___Draw_VLp
+   026A BD`00`00      [ 8]  604 	jsr	___Reset0Ref
+   026D C6 7F         [ 2]  605 	ldb	#127
+   026F D7`00         [ 4]  606 	stb	*_dp_VIA_t1_cnt_lo
+   0271 C6 24         [ 2]  607 	ldb	#36
+   0273 E7 E2         [ 6]  608 	stb	,-s
+   0275 C6 0F         [ 2]  609 	ldb	#15
+   0277 BD`00`00      [ 8]  610 	jsr	__Moveto_d
+   027A C6 A8         [ 2]  611 	ldb	#-88
+   027C D7`00         [ 4]  612 	stb	*_dp_VIA_t1_cnt_lo
+   027E C6 80         [ 2]  613 	ldb	#-128
+   0280 E7 E2         [ 6]  614 	stb	,-s
+   0282 C6 52         [ 2]  615 	ldb	#82
+   0284 BD`00`00      [ 8]  616 	jsr	__Draw_Line_d
+   0287 F6`00`00      [ 5]  617 	ldb	_the_map
+   028A 32 66         [ 5]  618 	leas	6,s
+   028C 5D            [ 2]  619 	tstb
+   028D 27 05         [ 3]  620 	beq	L8
+   028F 5A            [ 2]  621 	decb
+   0290 F7`00`00      [ 5]  622 	stb	_the_map
+   0293 39            [ 5]  623 	rts
+   0294                     624 L8:
+   0294 8E`02`A8      [ 3]  625 	ldx	#_draw_step2
+   0297 BF`00`01      [ 6]  626 	stx	_the_map+1
+   029A F6`00`02      [ 5]  627 	ldb	_the_game+2
+   029D 4F            [ 2]  628 	clra		;zero_extendqihi: R:b -> R:d
+   029E 1F 01         [ 6]  629 	tfr	d,x
+   02A0 E6 89`00`0B   [ 8]  630 	ldb	_CNT_DRAW2_LUT,x
+   02A4 F7`00`00      [ 5]  631 	stb	_the_map
+   02A7 39            [ 5]  632 	rts
+                            633 	.globl	_draw_step2
+   02A8                     634 _draw_step2:
+   02A8 BD`00`00      [ 8]  635 	jsr	___Intensity_5F
+   02AB BD`00`00      [ 8]  636 	jsr	___Reset0Ref
+   02AE C6 7F         [ 2]  637 	ldb	#127
+   02B0 D7`00         [ 4]  638 	stb	*_dp_VIA_t1_cnt_lo
+   02B2 C6 24         [ 2]  639 	ldb	#36
+   02B4 E7 E2         [ 6]  640 	stb	,-s
+   02B6 C6 F1         [ 2]  641 	ldb	#-15
+   02B8 BD`00`00      [ 8]  642 	jsr	__Moveto_d
+   02BB C6 A8         [ 2]  643 	ldb	#-88
+   02BD D7`00         [ 4]  644 	stb	*_dp_VIA_t1_cnt_lo
+   02BF C6 80         [ 2]  645 	ldb	#-128
+   02C1 E7 E2         [ 6]  646 	stb	,-s
+   02C3 CB 2E         [ 2]  647 	addb	#46
+   02C5 BD`00`00      [ 8]  648 	jsr	__Draw_Line_d
+   02C8 BD`00`00      [ 8]  649 	jsr	___Reset0Ref
+   02CB C6 7F         [ 2]  650 	ldb	#127
+   02CD D7`00         [ 4]  651 	stb	*_dp_VIA_t1_cnt_lo
+   02CF C6 24         [ 2]  652 	ldb	#36
+   02D1 E7 E2         [ 6]  653 	stb	,-s
+   02D3 C6 FB         [ 2]  654 	ldb	#-5
+   02D5 BD`00`00      [ 8]  655 	jsr	__Moveto_d
+   02D8 C6 10         [ 2]  656 	ldb	#16
+   02DA D7`00         [ 4]  657 	stb	*_dp_VIA_t1_cnt_lo
+   02DC 8E`00`7A      [ 3]  658 	ldx	#_vl_map_roadline_left_2
+   02DF BD`00`00      [ 8]  659 	jsr	___Draw_VLp
+   02E2 BD`00`00      [ 8]  660 	jsr	___Reset0Ref
+   02E5 C6 7F         [ 2]  661 	ldb	#127
+   02E7 D7`00         [ 4]  662 	stb	*_dp_VIA_t1_cnt_lo
+   02E9 C6 24         [ 2]  663 	ldb	#36
+   02EB E7 E2         [ 6]  664 	stb	,-s
+   02ED C6 05         [ 2]  665 	ldb	#5
+   02EF BD`00`00      [ 8]  666 	jsr	__Moveto_d
+   02F2 C6 10         [ 2]  667 	ldb	#16
+   02F4 D7`00         [ 4]  668 	stb	*_dp_VIA_t1_cnt_lo
+   02F6 8E`01`65      [ 3]  669 	ldx	#_vl_map_roadline_right_2
+   02F9 BD`00`00      [ 8]  670 	jsr	___Draw_VLp
+   02FC BD`00`00      [ 8]  671 	jsr	___Reset0Ref
+   02FF C6 7F         [ 2]  672 	ldb	#127
+   0301 D7`00         [ 4]  673 	stb	*_dp_VIA_t1_cnt_lo
+   0303 C6 24         [ 2]  674 	ldb	#36
+   0305 E7 E2         [ 6]  675 	stb	,-s
+   0307 C6 0F         [ 2]  676 	ldb	#15
+   0309 BD`00`00      [ 8]  677 	jsr	__Moveto_d
+   030C C6 A8         [ 2]  678 	ldb	#-88
+   030E D7`00         [ 4]  679 	stb	*_dp_VIA_t1_cnt_lo
+   0310 C6 80         [ 2]  680 	ldb	#-128
+   0312 E7 E2         [ 6]  681 	stb	,-s
+   0314 C6 52         [ 2]  682 	ldb	#82
+   0316 BD`00`00      [ 8]  683 	jsr	__Draw_Line_d
+   0319 F6`00`00      [ 5]  684 	ldb	_the_map
+   031C 32 66         [ 5]  685 	leas	6,s
+   031E 5D            [ 2]  686 	tstb
+   031F 27 05         [ 3]  687 	beq	L13
+   0321 5A            [ 2]  688 	decb
+   0322 F7`00`00      [ 5]  689 	stb	_the_map
+   0325 39            [ 5]  690 	rts
+   0326                     691 L13:
+   0326 8E`03`3A      [ 3]  692 	ldx	#_draw_step3
+   0329 BF`00`01      [ 6]  693 	stx	_the_map+1
+   032C F6`00`02      [ 5]  694 	ldb	_the_game+2
+   032F 4F            [ 2]  695 	clra		;zero_extendqihi: R:b -> R:d
+   0330 1F 01         [ 6]  696 	tfr	d,x
+   0332 E6 89`00`16   [ 8]  697 	ldb	_CNT_DRAW3_LUT,x
+   0336 F7`00`00      [ 5]  698 	stb	_the_map
+   0339 39            [ 5]  699 	rts
+                            700 	.globl	_draw_step3
+   033A                     701 _draw_step3:
+   033A BD`00`00      [ 8]  702 	jsr	___Intensity_5F
+   033D BD`00`00      [ 8]  703 	jsr	___Reset0Ref
+   0340 C6 7F         [ 2]  704 	ldb	#127
+   0342 D7`00         [ 4]  705 	stb	*_dp_VIA_t1_cnt_lo
+   0344 C6 24         [ 2]  706 	ldb	#36
+   0346 E7 E2         [ 6]  707 	stb	,-s
+   0348 C6 F1         [ 2]  708 	ldb	#-15
+   034A BD`00`00      [ 8]  709 	jsr	__Moveto_d
+   034D C6 A8         [ 2]  710 	ldb	#-88
+   034F D7`00         [ 4]  711 	stb	*_dp_VIA_t1_cnt_lo
+   0351 C6 80         [ 2]  712 	ldb	#-128
+   0353 E7 E2         [ 6]  713 	stb	,-s
+   0355 CB 2E         [ 2]  714 	addb	#46
+   0357 BD`00`00      [ 8]  715 	jsr	__Draw_Line_d
+   035A BD`00`00      [ 8]  716 	jsr	___Reset0Ref
+   035D C6 7F         [ 2]  717 	ldb	#127
+   035F D7`00         [ 4]  718 	stb	*_dp_VIA_t1_cnt_lo
+   0361 C6 24         [ 2]  719 	ldb	#36
+   0363 E7 E2         [ 6]  720 	stb	,-s
+   0365 C6 FB         [ 2]  721 	ldb	#-5
+   0367 BD`00`00      [ 8]  722 	jsr	__Moveto_d
+   036A C6 10         [ 2]  723 	ldb	#16
+   036C D7`00         [ 4]  724 	stb	*_dp_VIA_t1_cnt_lo
+   036E 8E`00`BA      [ 3]  725 	ldx	#_vl_map_roadline_left_3
+   0371 BD`00`00      [ 8]  726 	jsr	___Draw_VLp
+   0374 BD`00`00      [ 8]  727 	jsr	___Reset0Ref
+   0377 C6 7F         [ 2]  728 	ldb	#127
+   0379 D7`00         [ 4]  729 	stb	*_dp_VIA_t1_cnt_lo
+   037B C6 24         [ 2]  730 	ldb	#36
+   037D E7 E2         [ 6]  731 	stb	,-s
+   037F C6 05         [ 2]  732 	ldb	#5
+   0381 BD`00`00      [ 8]  733 	jsr	__Moveto_d
+   0384 C6 10         [ 2]  734 	ldb	#16
+   0386 D7`00         [ 4]  735 	stb	*_dp_VIA_t1_cnt_lo
+   0388 8E`01`A5      [ 3]  736 	ldx	#_vl_map_roadline_right_3
+   038B BD`00`00      [ 8]  737 	jsr	___Draw_VLp
+   038E BD`00`00      [ 8]  738 	jsr	___Reset0Ref
+   0391 C6 7F         [ 2]  739 	ldb	#127
+   0393 D7`00         [ 4]  740 	stb	*_dp_VIA_t1_cnt_lo
+   0395 C6 24         [ 2]  741 	ldb	#36
+   0397 E7 E2         [ 6]  742 	stb	,-s
+   0399 C6 0F         [ 2]  743 	ldb	#15
+   039B BD`00`00      [ 8]  744 	jsr	__Moveto_d
+   039E C6 A8         [ 2]  745 	ldb	#-88
+   03A0 D7`00         [ 4]  746 	stb	*_dp_VIA_t1_cnt_lo
+   03A2 C6 80         [ 2]  747 	ldb	#-128
+   03A4 E7 E2         [ 6]  748 	stb	,-s
+   03A6 C6 52         [ 2]  749 	ldb	#82
+   03A8 BD`00`00      [ 8]  750 	jsr	__Draw_Line_d
+   03AB F6`00`00      [ 5]  751 	ldb	_the_map
+   03AE 32 66         [ 5]  752 	leas	6,s
+   03B0 5D            [ 2]  753 	tstb
+   03B1 27 05         [ 3]  754 	beq	L18
+   03B3 5A            [ 2]  755 	decb
+   03B4 F7`00`00      [ 5]  756 	stb	_the_map
+   03B7 39            [ 5]  757 	rts
+   03B8                     758 L18:
+   03B8 8E`03`CC      [ 3]  759 	ldx	#_draw_step4
+   03BB BF`00`01      [ 6]  760 	stx	_the_map+1
+   03BE F6`00`02      [ 5]  761 	ldb	_the_game+2
+   03C1 4F            [ 2]  762 	clra		;zero_extendqihi: R:b -> R:d
+   03C2 1F 01         [ 6]  763 	tfr	d,x
+   03C4 E6 89`00`21   [ 8]  764 	ldb	_CNT_DRAW4_LUT,x
+   03C8 F7`00`00      [ 5]  765 	stb	_the_map
+   03CB 39            [ 5]  766 	rts
+                            767 	.globl	_draw_step4
+   03CC                     768 _draw_step4:
+   03CC BD`00`00      [ 8]  769 	jsr	___Intensity_5F
+   03CF BD`00`00      [ 8]  770 	jsr	___Reset0Ref
+   03D2 C6 7F         [ 2]  771 	ldb	#127
+   03D4 D7`00         [ 4]  772 	stb	*_dp_VIA_t1_cnt_lo
+   03D6 C6 24         [ 2]  773 	ldb	#36
+   03D8 E7 E2         [ 6]  774 	stb	,-s
+   03DA C6 F1         [ 2]  775 	ldb	#-15
+   03DC BD`00`00      [ 8]  776 	jsr	__Moveto_d
+   03DF C6 A8         [ 2]  777 	ldb	#-88
+   03E1 D7`00         [ 4]  778 	stb	*_dp_VIA_t1_cnt_lo
+   03E3 C6 80         [ 2]  779 	ldb	#-128
+   03E5 E7 E2         [ 6]  780 	stb	,-s
+   03E7 CB 2E         [ 2]  781 	addb	#46
+   03E9 BD`00`00      [ 8]  782 	jsr	__Draw_Line_d
+   03EC BD`00`00      [ 8]  783 	jsr	___Reset0Ref
+   03EF C6 7F         [ 2]  784 	ldb	#127
+   03F1 D7`00         [ 4]  785 	stb	*_dp_VIA_t1_cnt_lo
+   03F3 C6 24         [ 2]  786 	ldb	#36
+   03F5 E7 E2         [ 6]  787 	stb	,-s
+   03F7 C6 FB         [ 2]  788 	ldb	#-5
+   03F9 BD`00`00      [ 8]  789 	jsr	__Moveto_d
+   03FC C6 10         [ 2]  790 	ldb	#16
+   03FE D7`00         [ 4]  791 	stb	*_dp_VIA_t1_cnt_lo
+   0400 8E`00`F1      [ 3]  792 	ldx	#_vl_map_roadline_left_4
+   0403 BD`00`00      [ 8]  793 	jsr	___Draw_VLp
+   0406 BD`00`00      [ 8]  794 	jsr	___Reset0Ref
+   0409 C6 7F         [ 2]  795 	ldb	#127
+   040B D7`00         [ 4]  796 	stb	*_dp_VIA_t1_cnt_lo
+   040D C6 24         [ 2]  797 	ldb	#36
+   040F E7 E2         [ 6]  798 	stb	,-s
+   0411 C6 05         [ 2]  799 	ldb	#5
+   0413 BD`00`00      [ 8]  800 	jsr	__Moveto_d
+   0416 C6 10         [ 2]  801 	ldb	#16
+   0418 D7`00         [ 4]  802 	stb	*_dp_VIA_t1_cnt_lo
+   041A 8E`01`DC      [ 3]  803 	ldx	#_vl_map_roadline_right_4
+   041D BD`00`00      [ 8]  804 	jsr	___Draw_VLp
+   0420 BD`00`00      [ 8]  805 	jsr	___Reset0Ref
+   0423 C6 7F         [ 2]  806 	ldb	#127
+   0425 D7`00         [ 4]  807 	stb	*_dp_VIA_t1_cnt_lo
+   0427 C6 24         [ 2]  808 	ldb	#36
+   0429 E7 E2         [ 6]  809 	stb	,-s
+   042B C6 0F         [ 2]  810 	ldb	#15
+   042D BD`00`00      [ 8]  811 	jsr	__Moveto_d
+   0430 C6 A8         [ 2]  812 	ldb	#-88
+   0432 D7`00         [ 4]  813 	stb	*_dp_VIA_t1_cnt_lo
+   0434 C6 80         [ 2]  814 	ldb	#-128
+   0436 E7 E2         [ 6]  815 	stb	,-s
+   0438 C6 52         [ 2]  816 	ldb	#82
+   043A BD`00`00      [ 8]  817 	jsr	__Draw_Line_d
+   043D F6`00`00      [ 5]  818 	ldb	_the_map
+   0440 32 66         [ 5]  819 	leas	6,s
+   0442 5D            [ 2]  820 	tstb
+   0443 27 05         [ 3]  821 	beq	L23
+   0445 5A            [ 2]  822 	decb
+   0446 F7`00`00      [ 5]  823 	stb	_the_map
+   0449 39            [ 5]  824 	rts
+   044A                     825 L23:
+   044A 8E`02`16      [ 3]  826 	ldx	#_draw_step1
+   044D BF`00`01      [ 6]  827 	stx	_the_map+1
+   0450 F6`00`02      [ 5]  828 	ldb	_the_game+2
+   0453 4F            [ 2]  829 	clra		;zero_extendqihi: R:b -> R:d
+   0454 1F 01         [ 6]  830 	tfr	d,x
+   0456 E6 89`00`00   [ 8]  831 	ldb	_CNT_DRAW1_LUT,x
+   045A F7`00`00      [ 5]  832 	stb	_the_map
+   045D 39            [ 5]  833 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L11                0292 R   |   3 L12                029B R
-  3 L14                024A R   |   3 L16                0286 R
-  3 L17                027A R   |   3 L21                0260 R
-  3 L22                0250 R   |   3 L23                0266 R
-  3 L6                 01FE R   |   3 L8                 01F9 R
-  3 L9                 0225 R   |   3 _CNT_SPEED_LUT     02E4 GR
+  3 L13                0326 R   |   3 L18                03B8 R
+  3 L23                044A R   |   3 L8                 0294 R
+  3 _CNT_DRAW1_LUT     0000 GR  |   3 _CNT_DRAW2_LUT     000B GR
+  3 _CNT_DRAW3_LUT     0016 GR  |   3 _CNT_DRAW4_LUT     0021 GR
     __Draw_Line_d      **** GX  |     __Moveto_d         **** GX
     ___Draw_VLp        **** GX  |     ___Intensity_5     **** GX
     ___Reset0Ref       **** GX  |     _dp_VIA_t1_cnt     **** GX
-  3 _draw_left         02A4 GR  |   3 _draw_right        02C4 GR
-  3 _draw_step1        01E1 GR  |   3 _dummy_tick        0000 GR
-  3 _map_init          0001 GR  |   4 _step              0000 GR
-  2 _the_map           0000 GR  |   3 _vl_map_roadli     000B GR
-  3 _vl_map_roadli     0045 GR  |   3 _vl_map_roadli     0085 GR
-  3 _vl_map_roadli     00BC GR  |   3 _vl_map_roadli     00F6 GR
-  3 _vl_map_roadli     0130 GR  |   3 _vl_map_roadli     0170 GR
-  3 _vl_map_roadli     01A7 GR  |   3 _vl_term_0_37      0044 R
-  3 _vl_term_1_64      0084 R   |   3 _vl_term_2_88      00BB R
-  3 _vl_term_3_113     00F5 R   |   3 _vl_term_4_145     012F R
-  3 _vl_term_5_172     016F R   |   3 _vl_term_6_196     01A6 R
-  3 _vl_term_7_221     01E0 R
+  3 _draw_step1        0216 GR  |   3 _draw_step2        02A8 GR
+  3 _draw_step3        033A GR  |   3 _draw_step4        03CC GR
+  3 _map_init          002C GR  |     _the_game          **** GX
+  2 _the_map           0000 GR  |   3 _vl_map_roadli     0040 GR
+  3 _vl_map_roadli     007A GR  |   3 _vl_map_roadli     00BA GR
+  3 _vl_map_roadli     00F1 GR  |   3 _vl_map_roadli     012B GR
+  3 _vl_map_roadli     0165 GR  |   3 _vl_map_roadli     01A5 GR
+  3 _vl_map_roadli     01DC GR  |   3 _vl_term_0_37      0079 R
+  3 _vl_term_1_64      00B9 R   |   3 _vl_term_2_88      00F0 R
+  3 _vl_term_3_113     012A R   |   3 _vl_term_4_145     0164 R
+  3 _vl_term_5_172     01A4 R   |   3 _vl_term_6_196     01DB R
+  3 _vl_term_7_221     0215 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    3   flags    0
-   3 .text            size  2EB   flags  100
-   4 .data            size    1   flags  100
+   3 .text            size  45E   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

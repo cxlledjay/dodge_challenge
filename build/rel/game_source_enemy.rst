@@ -5,14 +5,14 @@
                               5 	.module	enemy.c
                               6 	.area	.bss
                               7 	.globl	_enemy_list
-   C888                       8 _enemy_list:	.blkb	25
+   C887                       8 _enemy_list:	.blkb	25
                               9 	.globl	_queue_ptr
-   C8A1                      10 _queue_ptr:	.blkb	2
+   C8A0                      10 _queue_ptr:	.blkb	2
                              11 	.area	.text
                              12 	.globl	_enemy_init
    0093                      13 _enemy_init:
    0093 34 40         [ 6]   14 	pshs	u
-   0095 8E C8 8A      [ 3]   15 	ldx	#_enemy_list+2
+   0095 8E C8 89      [ 3]   15 	ldx	#_enemy_list+2
    0098                      16 L2:
    0098 6F 84         [ 6]   17 	clr	,x
    009A 6F 1F         [ 7]   18 	clr	-1,x
@@ -20,16 +20,16 @@
    009E CE 00 DB      [ 3]   20 	ldu	#_idle
    00A1 EF 01         [ 6]   21 	stu	1,x
    00A3 30 05         [ 5]   22 	leax	5,x
-   00A5 8C C8 A3      [ 4]   23 	cmpx	#_enemy_list+27	;cmphi:
+   00A5 8C C8 A2      [ 4]   23 	cmpx	#_enemy_list+27	;cmphi:
    00A8 26 EE         [ 3]   24 	bne	L2
-   00AA 8E C8 88      [ 3]   25 	ldx	#_enemy_list
-   00AD BF C8 A1      [ 6]   26 	stx	_queue_ptr
+   00AA 8E C8 87      [ 3]   25 	ldx	#_enemy_list
+   00AD BF C8 A0      [ 6]   26 	stx	_queue_ptr
    00B0 35 C0         [ 7]   27 	puls	u,pc
                              28 	.globl	_enemy_try_spawn
    00B2                      29 _enemy_try_spawn:
    00B2 34 40         [ 6]   30 	pshs	u
    00B4 34 04         [ 6]   31 	pshs	b
-   00B6 BE C8 A1      [ 6]   32 	ldx	_queue_ptr
+   00B6 BE C8 A0      [ 6]   32 	ldx	_queue_ptr
    00B9 C6 FF         [ 2]   33 	ldb	#-1
    00BB EE 03         [ 6]   34 	ldu	3,x
    00BD 11 83 00 DB   [ 5]   35 	cmpu	#_idle	;cmphi:
@@ -54,7 +54,7 @@
    00DC                      54 _tick_dummy:
    00DC 39            [ 5]   55 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
 
 Symbol Table
 
@@ -66,7 +66,7 @@ Symbol Table
   2 _queue_ptr         0019 GR  |   3 _tick_dummy        0049 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Thu Jun 12 23:11:43 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 20:17:37 2025
 
 Area Table
 
