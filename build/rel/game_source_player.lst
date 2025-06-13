@@ -40,9 +40,9 @@
    0018 52                   40 	.byte	82
                              41 	.globl	_PLAYER_DRAW_LUT
    0019                      42 _PLAYER_DRAW_LUT:
-   0019`07`18                43 	.word	__player_draw_left
-   001B`06`E0                44 	.word	__player_draw_mid
-   001D`07`6B                45 	.word	__player_draw_right
+   0019`06`B8                43 	.word	__player_draw_left
+   001B`06`80                44 	.word	__player_draw_mid
+   001D`07`0B                45 	.word	__player_draw_right
                              46 	.globl	__SP1_LEFT_MID_X_LUT_2
    001F                      47 __SP1_LEFT_MID_X_LUT_2:
    001F FA                   48 	.byte	-6
@@ -742,627 +742,571 @@
    02CD 01                  742 	.byte	1
                             743 	.globl	_player_change_left_to_mid_step1
    02CE                     744 _player_change_left_to_mid_step1:
-   02CE 32 7D         [ 5]  745 	leas	-3,s
-   02D0 F6`00`04      [ 5]  746 	ldb	_the_player+4
-   02D3 E7 E4         [ 4]  747 	stb	,s
-   02D5 4F            [ 2]  748 	clra		;zero_extendqihi: R:b -> R:d
-   02D6 ED 61         [ 6]  749 	std	1,s
-   02D8 1F 01         [ 6]  750 	tfr	d,x
-   02DA 1E 01         [ 8]  751 	exg	d,x
-   02DC F3`00`02      [ 7]  752 	addd	_the_player+2; addhi3,3
-   02DF 1E 01         [ 8]  753 	exg	d,x
-   02E1 E6 84         [ 4]  754 	ldb	,x
-   02E3 F7`00`01      [ 5]  755 	stb	_the_player+1
-   02E6 E6 E4         [ 4]  756 	ldb	,s
-   02E8 5A            [ 2]  757 	decb
-   02E9 F7`00`04      [ 5]  758 	stb	_the_player+4
-   02EC BD`00`00      [ 8]  759 	jsr	___Intensity_5F
-   02EF BD`00`00      [ 8]  760 	jsr	___Reset0Ref
-   02F2 C6 7F         [ 2]  761 	ldb	#127
-   02F4 D7`00         [ 4]  762 	stb	*_dp_VIA_t1_cnt_lo
-   02F6 CB 11         [ 2]  763 	addb	#17
-   02F8 E7 E2         [ 6]  764 	stb	,-s
-   02FA F6`00`01      [ 5]  765 	ldb	_the_player+1
-   02FD BD`00`00      [ 8]  766 	jsr	__Moveto_d
-   0300 C6 10         [ 2]  767 	ldb	#16
-   0302 D7`00         [ 4]  768 	stb	*_dp_VIA_t1_cnt_lo
-   0304 8E`00`EE      [ 3]  769 	ldx	#_vl_player_left1
-   0307 BD`00`00      [ 8]  770 	jsr	___Draw_VLp
-   030A BD`00`00      [ 8]  771 	jsr	___Reset0Ref
-   030D C6 7F         [ 2]  772 	ldb	#127
-   030F D7`00         [ 4]  773 	stb	*_dp_VIA_t1_cnt_lo
-   0311 CB 11         [ 2]  774 	addb	#17
-   0313 E7 E2         [ 6]  775 	stb	,-s
-   0315 F6`00`01      [ 5]  776 	ldb	_the_player+1
-   0318 BD`00`00      [ 8]  777 	jsr	__Moveto_d
-   031B C6 10         [ 2]  778 	ldb	#16
-   031D D7`00         [ 4]  779 	stb	*_dp_VIA_t1_cnt_lo
-   031F 8E`01`3A      [ 3]  780 	ldx	#_vl_player_left2
-   0322 BD`00`00      [ 8]  781 	jsr	___Draw_VLp
-   0325 BD`00`00      [ 8]  782 	jsr	___Reset0Ref
-   0328 C6 7F         [ 2]  783 	ldb	#127
-   032A D7`00         [ 4]  784 	stb	*_dp_VIA_t1_cnt_lo
-   032C CB 11         [ 2]  785 	addb	#17
-   032E E7 E2         [ 6]  786 	stb	,-s
-   0330 F6`00`01      [ 5]  787 	ldb	_the_player+1
-   0333 BD`00`00      [ 8]  788 	jsr	__Moveto_d
-   0336 C6 10         [ 2]  789 	ldb	#16
-   0338 D7`00         [ 4]  790 	stb	*_dp_VIA_t1_cnt_lo
-   033A 8E`01`9E      [ 3]  791 	ldx	#_vl_player_left3
-   033D BD`00`00      [ 8]  792 	jsr	___Draw_VLp
-   0340 32 63         [ 5]  793 	leas	3,s
-   0342 7D`00`04      [ 7]  794 	tst	_the_player+4
-   0345 26 19         [ 3]  795 	bne	L7
-   0347 8E`03`63      [ 3]  796 	ldx	#_player_change_left_to_mid_step2
-   034A BF`00`05      [ 6]  797 	stx	_the_player+5
-   034D F6`00`02      [ 5]  798 	ldb	_the_game+2
-   0350 4F            [ 2]  799 	clra		;zero_extendqihi: R:b -> R:d
-   0351 1F 01         [ 6]  800 	tfr	d,x
-   0353 E6 89`00`0B   [ 8]  801 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
-   0357 F7`00`04      [ 5]  802 	stb	_the_player+4
-   035A 8E`00`1F      [ 3]  803 	ldx	#__SP1_LEFT_MID_X_LUT_2
-   035D BF`00`02      [ 6]  804 	stx	_the_player+2
-   0360                     805 L7:
-   0360 32 63         [ 5]  806 	leas	3,s
-   0362 39            [ 5]  807 	rts
-                            808 	.globl	_player_change_left_to_mid_step2
-   0363                     809 _player_change_left_to_mid_step2:
-   0363 32 7D         [ 5]  810 	leas	-3,s
-   0365 F6`00`04      [ 5]  811 	ldb	_the_player+4
-   0368 E7 E4         [ 4]  812 	stb	,s
-   036A 4F            [ 2]  813 	clra		;zero_extendqihi: R:b -> R:d
-   036B ED 61         [ 6]  814 	std	1,s
-   036D 1F 01         [ 6]  815 	tfr	d,x
-   036F 1E 01         [ 8]  816 	exg	d,x
-   0371 F3`00`02      [ 7]  817 	addd	_the_player+2; addhi3,3
-   0374 1E 01         [ 8]  818 	exg	d,x
-   0376 E6 84         [ 4]  819 	ldb	,x
-   0378 F7`00`01      [ 5]  820 	stb	_the_player+1
-   037B E6 E4         [ 4]  821 	ldb	,s
-   037D 5A            [ 2]  822 	decb
-   037E F7`00`04      [ 5]  823 	stb	_the_player+4
-   0381 BD`00`00      [ 8]  824 	jsr	___Intensity_5F
-   0384 BD`00`00      [ 8]  825 	jsr	___Reset0Ref
-   0387 C6 7F         [ 2]  826 	ldb	#127
-   0389 D7`00         [ 4]  827 	stb	*_dp_VIA_t1_cnt_lo
-   038B CB 11         [ 2]  828 	addb	#17
-   038D E7 E2         [ 6]  829 	stb	,-s
-   038F F6`00`01      [ 5]  830 	ldb	_the_player+1
-   0392 BD`00`00      [ 8]  831 	jsr	__Moveto_d
-   0395 C6 10         [ 2]  832 	ldb	#16
-   0397 D7`00         [ 4]  833 	stb	*_dp_VIA_t1_cnt_lo
-   0399 8E`00`65      [ 3]  834 	ldx	#_vl_player_mid1
-   039C BD`00`00      [ 8]  835 	jsr	___Draw_VLp
-   039F BD`00`00      [ 8]  836 	jsr	___Reset0Ref
-   03A2 C6 7F         [ 2]  837 	ldb	#127
-   03A4 D7`00         [ 4]  838 	stb	*_dp_VIA_t1_cnt_lo
-   03A6 CB 11         [ 2]  839 	addb	#17
-   03A8 E7 E2         [ 6]  840 	stb	,-s
-   03AA F6`00`01      [ 5]  841 	ldb	_the_player+1
-   03AD BD`00`00      [ 8]  842 	jsr	__Moveto_d
-   03B0 C6 10         [ 2]  843 	ldb	#16
-   03B2 D7`00         [ 4]  844 	stb	*_dp_VIA_t1_cnt_lo
-   03B4 8E`00`A5      [ 3]  845 	ldx	#_vl_player_mid2
-   03B7 BD`00`00      [ 8]  846 	jsr	___Draw_VLp
-   03BA 32 62         [ 5]  847 	leas	2,s
-   03BC 7D`00`04      [ 7]  848 	tst	_the_player+4
-   03BF 26 0E         [ 3]  849 	bne	L11
-   03C1 C6 01         [ 2]  850 	ldb	#1
-   03C3 F7`00`00      [ 5]  851 	stb	_the_player
-   03C6 7F`00`01      [ 7]  852 	clr	_the_player+1
-   03C9 8E`00`4F      [ 3]  853 	ldx	#_player_draw
-   03CC BF`00`05      [ 6]  854 	stx	_the_player+5
-   03CF                     855 L11:
-   03CF 32 63         [ 5]  856 	leas	3,s
-   03D1 39            [ 5]  857 	rts
-                            858 	.globl	_player_change_mid_to_right_step1
-   03D2                     859 _player_change_mid_to_right_step1:
-   03D2 32 7D         [ 5]  860 	leas	-3,s
-   03D4 F6`00`04      [ 5]  861 	ldb	_the_player+4
-   03D7 E7 E4         [ 4]  862 	stb	,s
-   03D9 4F            [ 2]  863 	clra		;zero_extendqihi: R:b -> R:d
-   03DA ED 61         [ 6]  864 	std	1,s
-   03DC 1F 01         [ 6]  865 	tfr	d,x
-   03DE 1E 01         [ 8]  866 	exg	d,x
-   03E0 F3`00`02      [ 7]  867 	addd	_the_player+2; addhi3,3
-   03E3 1E 01         [ 8]  868 	exg	d,x
-   03E5 E6 84         [ 4]  869 	ldb	,x
-   03E7 F7`00`01      [ 5]  870 	stb	_the_player+1
-   03EA E6 E4         [ 4]  871 	ldb	,s
-   03EC 5A            [ 2]  872 	decb
-   03ED F7`00`04      [ 5]  873 	stb	_the_player+4
-   03F0 BD`00`00      [ 8]  874 	jsr	___Intensity_5F
-   03F3 BD`00`00      [ 8]  875 	jsr	___Reset0Ref
-   03F6 C6 7F         [ 2]  876 	ldb	#127
-   03F8 D7`00         [ 4]  877 	stb	*_dp_VIA_t1_cnt_lo
-   03FA CB 11         [ 2]  878 	addb	#17
-   03FC E7 E2         [ 6]  879 	stb	,-s
-   03FE F6`00`01      [ 5]  880 	ldb	_the_player+1
-   0401 BD`00`00      [ 8]  881 	jsr	__Moveto_d
-   0404 C6 10         [ 2]  882 	ldb	#16
-   0406 D7`00         [ 4]  883 	stb	*_dp_VIA_t1_cnt_lo
-   0408 8E`00`65      [ 3]  884 	ldx	#_vl_player_mid1
-   040B BD`00`00      [ 8]  885 	jsr	___Draw_VLp
-   040E BD`00`00      [ 8]  886 	jsr	___Reset0Ref
-   0411 C6 7F         [ 2]  887 	ldb	#127
-   0413 D7`00         [ 4]  888 	stb	*_dp_VIA_t1_cnt_lo
-   0415 CB 11         [ 2]  889 	addb	#17
-   0417 E7 E2         [ 6]  890 	stb	,-s
-   0419 F6`00`01      [ 5]  891 	ldb	_the_player+1
-   041C BD`00`00      [ 8]  892 	jsr	__Moveto_d
-   041F C6 10         [ 2]  893 	ldb	#16
-   0421 D7`00         [ 4]  894 	stb	*_dp_VIA_t1_cnt_lo
-   0423 8E`00`A5      [ 3]  895 	ldx	#_vl_player_mid2
-   0426 BD`00`00      [ 8]  896 	jsr	___Draw_VLp
-   0429 32 62         [ 5]  897 	leas	2,s
-   042B 7D`00`04      [ 7]  898 	tst	_the_player+4
-   042E 26 19         [ 3]  899 	bne	L14
-   0430 8E`04`4C      [ 3]  900 	ldx	#_player_change_mid_to_right_step2
-   0433 BF`00`05      [ 6]  901 	stx	_the_player+5
-   0436 F6`00`02      [ 5]  902 	ldb	_the_game+2
-   0439 4F            [ 2]  903 	clra		;zero_extendqihi: R:b -> R:d
-   043A 1F 01         [ 6]  904 	tfr	d,x
-   043C E6 89`00`0B   [ 8]  905 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
-   0440 F7`00`04      [ 5]  906 	stb	_the_player+4
-   0443 8E`00`25      [ 3]  907 	ldx	#__SP1_MID_RIGHT_X_LUT_2
-   0446 BF`00`02      [ 6]  908 	stx	_the_player+2
-   0449                     909 L14:
-   0449 32 63         [ 5]  910 	leas	3,s
-   044B 39            [ 5]  911 	rts
-                            912 	.globl	_player_change_mid_to_right_step2
-   044C                     913 _player_change_mid_to_right_step2:
-   044C 32 7D         [ 5]  914 	leas	-3,s
-   044E F6`00`04      [ 5]  915 	ldb	_the_player+4
-   0451 E7 E4         [ 4]  916 	stb	,s
-   0453 4F            [ 2]  917 	clra		;zero_extendqihi: R:b -> R:d
-   0454 ED 61         [ 6]  918 	std	1,s
-   0456 1F 01         [ 6]  919 	tfr	d,x
-   0458 1E 01         [ 8]  920 	exg	d,x
-   045A F3`00`02      [ 7]  921 	addd	_the_player+2; addhi3,3
-   045D 1E 01         [ 8]  922 	exg	d,x
-   045F E6 84         [ 4]  923 	ldb	,x
-   0461 F7`00`01      [ 5]  924 	stb	_the_player+1
-   0464 E6 E4         [ 4]  925 	ldb	,s
-   0466 5A            [ 2]  926 	decb
-   0467 F7`00`04      [ 5]  927 	stb	_the_player+4
-   046A BD`00`00      [ 8]  928 	jsr	___Intensity_5F
-   046D BD`00`00      [ 8]  929 	jsr	___Reset0Ref
-   0470 C6 7F         [ 2]  930 	ldb	#127
-   0472 D7`00         [ 4]  931 	stb	*_dp_VIA_t1_cnt_lo
-   0474 CB 11         [ 2]  932 	addb	#17
-   0476 E7 E2         [ 6]  933 	stb	,-s
-   0478 F6`00`01      [ 5]  934 	ldb	_the_player+1
-   047B BD`00`00      [ 8]  935 	jsr	__Moveto_d
-   047E C6 10         [ 2]  936 	ldb	#16
-   0480 D7`00         [ 4]  937 	stb	*_dp_VIA_t1_cnt_lo
-   0482 8E`01`DE      [ 3]  938 	ldx	#_vl_player_right1
-   0485 BD`00`00      [ 8]  939 	jsr	___Draw_VLp
-   0488 BD`00`00      [ 8]  940 	jsr	___Reset0Ref
-   048B C6 7F         [ 2]  941 	ldb	#127
-   048D D7`00         [ 4]  942 	stb	*_dp_VIA_t1_cnt_lo
-   048F CB 11         [ 2]  943 	addb	#17
-   0491 E7 E2         [ 6]  944 	stb	,-s
-   0493 F6`00`01      [ 5]  945 	ldb	_the_player+1
-   0496 BD`00`00      [ 8]  946 	jsr	__Moveto_d
-   0499 C6 10         [ 2]  947 	ldb	#16
-   049B D7`00         [ 4]  948 	stb	*_dp_VIA_t1_cnt_lo
-   049D 8E`02`2A      [ 3]  949 	ldx	#_vl_player_right2
-   04A0 BD`00`00      [ 8]  950 	jsr	___Draw_VLp
-   04A3 BD`00`00      [ 8]  951 	jsr	___Reset0Ref
-   04A6 C6 7F         [ 2]  952 	ldb	#127
-   04A8 D7`00         [ 4]  953 	stb	*_dp_VIA_t1_cnt_lo
-   04AA CB 11         [ 2]  954 	addb	#17
-   04AC E7 E2         [ 6]  955 	stb	,-s
-   04AE F6`00`01      [ 5]  956 	ldb	_the_player+1
-   04B1 BD`00`00      [ 8]  957 	jsr	__Moveto_d
-   04B4 C6 10         [ 2]  958 	ldb	#16
-   04B6 D7`00         [ 4]  959 	stb	*_dp_VIA_t1_cnt_lo
-   04B8 8E`02`8E      [ 3]  960 	ldx	#_vl_player_right3
-   04BB BD`00`00      [ 8]  961 	jsr	___Draw_VLp
-   04BE 32 63         [ 5]  962 	leas	3,s
-   04C0 7D`00`04      [ 7]  963 	tst	_the_player+4
-   04C3 26 10         [ 3]  964 	bne	L17
-   04C5 C6 02         [ 2]  965 	ldb	#2
-   04C7 F7`00`00      [ 5]  966 	stb	_the_player
-   04CA C6 52         [ 2]  967 	ldb	#82
-   04CC F7`00`01      [ 5]  968 	stb	_the_player+1
-   04CF 8E`00`4F      [ 3]  969 	ldx	#_player_draw
-   04D2 BF`00`05      [ 6]  970 	stx	_the_player+5
-   04D5                     971 L17:
-   04D5 32 63         [ 5]  972 	leas	3,s
-   04D7 39            [ 5]  973 	rts
-                            974 	.globl	_player_change_right_to_mid_step1
-   04D8                     975 _player_change_right_to_mid_step1:
-   04D8 32 7D         [ 5]  976 	leas	-3,s
-   04DA F6`00`04      [ 5]  977 	ldb	_the_player+4
-   04DD E7 E4         [ 4]  978 	stb	,s
-   04DF 4F            [ 2]  979 	clra		;zero_extendqihi: R:b -> R:d
-   04E0 ED 61         [ 6]  980 	std	1,s
-   04E2 1F 01         [ 6]  981 	tfr	d,x
-   04E4 1E 01         [ 8]  982 	exg	d,x
-   04E6 F3`00`02      [ 7]  983 	addd	_the_player+2; addhi3,3
-   04E9 1E 01         [ 8]  984 	exg	d,x
-   04EB E6 84         [ 4]  985 	ldb	,x
-   04ED F7`00`01      [ 5]  986 	stb	_the_player+1
-   04F0 E6 E4         [ 4]  987 	ldb	,s
-   04F2 5A            [ 2]  988 	decb
-   04F3 F7`00`04      [ 5]  989 	stb	_the_player+4
-   04F6 BD`00`00      [ 8]  990 	jsr	___Intensity_5F
-   04F9 BD`00`00      [ 8]  991 	jsr	___Reset0Ref
-   04FC C6 7F         [ 2]  992 	ldb	#127
-   04FE D7`00         [ 4]  993 	stb	*_dp_VIA_t1_cnt_lo
-   0500 CB 11         [ 2]  994 	addb	#17
-   0502 E7 E2         [ 6]  995 	stb	,-s
-   0504 F6`00`01      [ 5]  996 	ldb	_the_player+1
-   0507 BD`00`00      [ 8]  997 	jsr	__Moveto_d
-   050A C6 10         [ 2]  998 	ldb	#16
-   050C D7`00         [ 4]  999 	stb	*_dp_VIA_t1_cnt_lo
-   050E 8E`01`DE      [ 3] 1000 	ldx	#_vl_player_right1
-   0511 BD`00`00      [ 8] 1001 	jsr	___Draw_VLp
-   0514 BD`00`00      [ 8] 1002 	jsr	___Reset0Ref
-   0517 C6 7F         [ 2] 1003 	ldb	#127
-   0519 D7`00         [ 4] 1004 	stb	*_dp_VIA_t1_cnt_lo
-   051B CB 11         [ 2] 1005 	addb	#17
-   051D E7 E2         [ 6] 1006 	stb	,-s
-   051F F6`00`01      [ 5] 1007 	ldb	_the_player+1
-   0522 BD`00`00      [ 8] 1008 	jsr	__Moveto_d
-   0525 C6 10         [ 2] 1009 	ldb	#16
-   0527 D7`00         [ 4] 1010 	stb	*_dp_VIA_t1_cnt_lo
-   0529 8E`02`2A      [ 3] 1011 	ldx	#_vl_player_right2
-   052C BD`00`00      [ 8] 1012 	jsr	___Draw_VLp
-   052F BD`00`00      [ 8] 1013 	jsr	___Reset0Ref
-   0532 C6 7F         [ 2] 1014 	ldb	#127
-   0534 D7`00         [ 4] 1015 	stb	*_dp_VIA_t1_cnt_lo
-   0536 CB 11         [ 2] 1016 	addb	#17
-   0538 E7 E2         [ 6] 1017 	stb	,-s
-   053A F6`00`01      [ 5] 1018 	ldb	_the_player+1
-   053D BD`00`00      [ 8] 1019 	jsr	__Moveto_d
-   0540 C6 10         [ 2] 1020 	ldb	#16
-   0542 D7`00         [ 4] 1021 	stb	*_dp_VIA_t1_cnt_lo
-   0544 8E`02`8E      [ 3] 1022 	ldx	#_vl_player_right3
-   0547 BD`00`00      [ 8] 1023 	jsr	___Draw_VLp
-   054A 32 63         [ 5] 1024 	leas	3,s
-   054C 7D`00`04      [ 7] 1025 	tst	_the_player+4
-   054F 26 19         [ 3] 1026 	bne	L20
-   0551 8E`05`6D      [ 3] 1027 	ldx	#_player_change_right_to_mid_step2
-   0554 BF`00`05      [ 6] 1028 	stx	_the_player+5
-   0557 F6`00`02      [ 5] 1029 	ldb	_the_game+2
-   055A 4F            [ 2] 1030 	clra		;zero_extendqihi: R:b -> R:d
-   055B 1F 01         [ 6] 1031 	tfr	d,x
-   055D E6 89`00`0B   [ 8] 1032 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
-   0561 F7`00`04      [ 5] 1033 	stb	_the_player+4
-   0564 8E`00`2B      [ 3] 1034 	ldx	#__SP1_RIGHT_MID_X_LUT_2
-   0567 BF`00`02      [ 6] 1035 	stx	_the_player+2
-   056A                    1036 L20:
-   056A 32 63         [ 5] 1037 	leas	3,s
-   056C 39            [ 5] 1038 	rts
-                           1039 	.globl	_player_change_right_to_mid_step2
-   056D                    1040 _player_change_right_to_mid_step2:
-   056D 32 7D         [ 5] 1041 	leas	-3,s
-   056F F6`00`04      [ 5] 1042 	ldb	_the_player+4
-   0572 E7 E4         [ 4] 1043 	stb	,s
-   0574 4F            [ 2] 1044 	clra		;zero_extendqihi: R:b -> R:d
-   0575 ED 61         [ 6] 1045 	std	1,s
-   0577 1F 01         [ 6] 1046 	tfr	d,x
-   0579 1E 01         [ 8] 1047 	exg	d,x
-   057B F3`00`02      [ 7] 1048 	addd	_the_player+2; addhi3,3
-   057E 1E 01         [ 8] 1049 	exg	d,x
-   0580 E6 84         [ 4] 1050 	ldb	,x
-   0582 F7`00`01      [ 5] 1051 	stb	_the_player+1
-   0585 E6 E4         [ 4] 1052 	ldb	,s
-   0587 5A            [ 2] 1053 	decb
-   0588 F7`00`04      [ 5] 1054 	stb	_the_player+4
-   058B BD`00`00      [ 8] 1055 	jsr	___Intensity_5F
-   058E BD`00`00      [ 8] 1056 	jsr	___Reset0Ref
-   0591 C6 7F         [ 2] 1057 	ldb	#127
-   0593 D7`00         [ 4] 1058 	stb	*_dp_VIA_t1_cnt_lo
-   0595 CB 11         [ 2] 1059 	addb	#17
-   0597 E7 E2         [ 6] 1060 	stb	,-s
-   0599 F6`00`01      [ 5] 1061 	ldb	_the_player+1
-   059C BD`00`00      [ 8] 1062 	jsr	__Moveto_d
-   059F C6 10         [ 2] 1063 	ldb	#16
-   05A1 D7`00         [ 4] 1064 	stb	*_dp_VIA_t1_cnt_lo
-   05A3 8E`00`65      [ 3] 1065 	ldx	#_vl_player_mid1
-   05A6 BD`00`00      [ 8] 1066 	jsr	___Draw_VLp
-   05A9 BD`00`00      [ 8] 1067 	jsr	___Reset0Ref
-   05AC C6 7F         [ 2] 1068 	ldb	#127
-   05AE D7`00         [ 4] 1069 	stb	*_dp_VIA_t1_cnt_lo
-   05B0 CB 11         [ 2] 1070 	addb	#17
-   05B2 E7 E2         [ 6] 1071 	stb	,-s
-   05B4 F6`00`01      [ 5] 1072 	ldb	_the_player+1
-   05B7 BD`00`00      [ 8] 1073 	jsr	__Moveto_d
-   05BA C6 10         [ 2] 1074 	ldb	#16
-   05BC D7`00         [ 4] 1075 	stb	*_dp_VIA_t1_cnt_lo
-   05BE 8E`00`A5      [ 3] 1076 	ldx	#_vl_player_mid2
-   05C1 BD`00`00      [ 8] 1077 	jsr	___Draw_VLp
-   05C4 32 62         [ 5] 1078 	leas	2,s
-   05C6 7D`00`04      [ 7] 1079 	tst	_the_player+4
-   05C9 26 0E         [ 3] 1080 	bne	L23
-   05CB C6 01         [ 2] 1081 	ldb	#1
-   05CD F7`00`00      [ 5] 1082 	stb	_the_player
-   05D0 7F`00`01      [ 7] 1083 	clr	_the_player+1
-   05D3 8E`00`4F      [ 3] 1084 	ldx	#_player_draw
-   05D6 BF`00`05      [ 6] 1085 	stx	_the_player+5
-   05D9                    1086 L23:
-   05D9 32 63         [ 5] 1087 	leas	3,s
-   05DB 39            [ 5] 1088 	rts
-                           1089 	.globl	_player_change_mid_to_left_step1
-   05DC                    1090 _player_change_mid_to_left_step1:
-   05DC 32 7D         [ 5] 1091 	leas	-3,s
-   05DE F6`00`04      [ 5] 1092 	ldb	_the_player+4
-   05E1 E7 E4         [ 4] 1093 	stb	,s
-   05E3 4F            [ 2] 1094 	clra		;zero_extendqihi: R:b -> R:d
-   05E4 ED 61         [ 6] 1095 	std	1,s
-   05E6 1F 01         [ 6] 1096 	tfr	d,x
-   05E8 1E 01         [ 8] 1097 	exg	d,x
-   05EA F3`00`02      [ 7] 1098 	addd	_the_player+2; addhi3,3
-   05ED 1E 01         [ 8] 1099 	exg	d,x
-   05EF E6 84         [ 4] 1100 	ldb	,x
-   05F1 F7`00`01      [ 5] 1101 	stb	_the_player+1
-   05F4 E6 E4         [ 4] 1102 	ldb	,s
-   05F6 5A            [ 2] 1103 	decb
-   05F7 F7`00`04      [ 5] 1104 	stb	_the_player+4
-   05FA BD`00`00      [ 8] 1105 	jsr	___Intensity_5F
-   05FD BD`00`00      [ 8] 1106 	jsr	___Reset0Ref
-   0600 C6 7F         [ 2] 1107 	ldb	#127
-   0602 D7`00         [ 4] 1108 	stb	*_dp_VIA_t1_cnt_lo
-   0604 CB 11         [ 2] 1109 	addb	#17
-   0606 E7 E2         [ 6] 1110 	stb	,-s
-   0608 F6`00`01      [ 5] 1111 	ldb	_the_player+1
-   060B BD`00`00      [ 8] 1112 	jsr	__Moveto_d
-   060E C6 10         [ 2] 1113 	ldb	#16
-   0610 D7`00         [ 4] 1114 	stb	*_dp_VIA_t1_cnt_lo
-   0612 8E`00`65      [ 3] 1115 	ldx	#_vl_player_mid1
-   0615 BD`00`00      [ 8] 1116 	jsr	___Draw_VLp
-   0618 BD`00`00      [ 8] 1117 	jsr	___Reset0Ref
-   061B C6 7F         [ 2] 1118 	ldb	#127
-   061D D7`00         [ 4] 1119 	stb	*_dp_VIA_t1_cnt_lo
-   061F CB 11         [ 2] 1120 	addb	#17
-   0621 E7 E2         [ 6] 1121 	stb	,-s
-   0623 F6`00`01      [ 5] 1122 	ldb	_the_player+1
-   0626 BD`00`00      [ 8] 1123 	jsr	__Moveto_d
-   0629 C6 10         [ 2] 1124 	ldb	#16
-   062B D7`00         [ 4] 1125 	stb	*_dp_VIA_t1_cnt_lo
-   062D 8E`00`A5      [ 3] 1126 	ldx	#_vl_player_mid2
-   0630 BD`00`00      [ 8] 1127 	jsr	___Draw_VLp
-   0633 32 62         [ 5] 1128 	leas	2,s
-   0635 7D`00`04      [ 7] 1129 	tst	_the_player+4
-   0638 26 19         [ 3] 1130 	bne	L26
-   063A 8E`06`56      [ 3] 1131 	ldx	#_player_change_mid_to_left_step2
-   063D BF`00`05      [ 6] 1132 	stx	_the_player+5
-   0640 F6`00`02      [ 5] 1133 	ldb	_the_game+2
-   0643 4F            [ 2] 1134 	clra		;zero_extendqihi: R:b -> R:d
-   0644 1F 01         [ 6] 1135 	tfr	d,x
-   0646 E6 89`00`0B   [ 8] 1136 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
-   064A F7`00`04      [ 5] 1137 	stb	_the_player+4
-   064D 8E`00`31      [ 3] 1138 	ldx	#__SP1_MID_LEFT_X_LUT_2
-   0650 BF`00`02      [ 6] 1139 	stx	_the_player+2
-   0653                    1140 L26:
-   0653 32 63         [ 5] 1141 	leas	3,s
-   0655 39            [ 5] 1142 	rts
-                           1143 	.globl	_player_change_mid_to_left_step2
-   0656                    1144 _player_change_mid_to_left_step2:
-   0656 32 7D         [ 5] 1145 	leas	-3,s
-   0658 F6`00`04      [ 5] 1146 	ldb	_the_player+4
-   065B E7 E4         [ 4] 1147 	stb	,s
-   065D 4F            [ 2] 1148 	clra		;zero_extendqihi: R:b -> R:d
-   065E ED 61         [ 6] 1149 	std	1,s
-   0660 1F 01         [ 6] 1150 	tfr	d,x
-   0662 1E 01         [ 8] 1151 	exg	d,x
-   0664 F3`00`02      [ 7] 1152 	addd	_the_player+2; addhi3,3
-   0667 1E 01         [ 8] 1153 	exg	d,x
-   0669 E6 84         [ 4] 1154 	ldb	,x
-   066B F7`00`01      [ 5] 1155 	stb	_the_player+1
-   066E E6 E4         [ 4] 1156 	ldb	,s
-   0670 5A            [ 2] 1157 	decb
-   0671 F7`00`04      [ 5] 1158 	stb	_the_player+4
-   0674 BD`00`00      [ 8] 1159 	jsr	___Intensity_5F
-   0677 BD`00`00      [ 8] 1160 	jsr	___Reset0Ref
-   067A C6 7F         [ 2] 1161 	ldb	#127
-   067C D7`00         [ 4] 1162 	stb	*_dp_VIA_t1_cnt_lo
-   067E CB 11         [ 2] 1163 	addb	#17
-   0680 E7 E2         [ 6] 1164 	stb	,-s
-   0682 F6`00`01      [ 5] 1165 	ldb	_the_player+1
-   0685 BD`00`00      [ 8] 1166 	jsr	__Moveto_d
-   0688 C6 10         [ 2] 1167 	ldb	#16
-   068A D7`00         [ 4] 1168 	stb	*_dp_VIA_t1_cnt_lo
-   068C 8E`00`EE      [ 3] 1169 	ldx	#_vl_player_left1
-   068F BD`00`00      [ 8] 1170 	jsr	___Draw_VLp
-   0692 BD`00`00      [ 8] 1171 	jsr	___Reset0Ref
-   0695 C6 7F         [ 2] 1172 	ldb	#127
-   0697 D7`00         [ 4] 1173 	stb	*_dp_VIA_t1_cnt_lo
-   0699 CB 11         [ 2] 1174 	addb	#17
-   069B E7 E2         [ 6] 1175 	stb	,-s
-   069D F6`00`01      [ 5] 1176 	ldb	_the_player+1
-   06A0 BD`00`00      [ 8] 1177 	jsr	__Moveto_d
-   06A3 C6 10         [ 2] 1178 	ldb	#16
-   06A5 D7`00         [ 4] 1179 	stb	*_dp_VIA_t1_cnt_lo
-   06A7 8E`01`3A      [ 3] 1180 	ldx	#_vl_player_left2
-   06AA BD`00`00      [ 8] 1181 	jsr	___Draw_VLp
-   06AD BD`00`00      [ 8] 1182 	jsr	___Reset0Ref
-   06B0 C6 7F         [ 2] 1183 	ldb	#127
-   06B2 D7`00         [ 4] 1184 	stb	*_dp_VIA_t1_cnt_lo
-   06B4 CB 11         [ 2] 1185 	addb	#17
-   06B6 E7 E2         [ 6] 1186 	stb	,-s
-   06B8 F6`00`01      [ 5] 1187 	ldb	_the_player+1
-   06BB BD`00`00      [ 8] 1188 	jsr	__Moveto_d
-   06BE C6 10         [ 2] 1189 	ldb	#16
-   06C0 D7`00         [ 4] 1190 	stb	*_dp_VIA_t1_cnt_lo
-   06C2 8E`01`9E      [ 3] 1191 	ldx	#_vl_player_left3
-   06C5 BD`00`00      [ 8] 1192 	jsr	___Draw_VLp
-   06C8 32 63         [ 5] 1193 	leas	3,s
-   06CA 7D`00`04      [ 7] 1194 	tst	_the_player+4
-   06CD 26 0E         [ 3] 1195 	bne	L29
-   06CF 7F`00`00      [ 7] 1196 	clr	_the_player
-   06D2 C6 AE         [ 2] 1197 	ldb	#-82
-   06D4 F7`00`01      [ 5] 1198 	stb	_the_player+1
-   06D7 8E`00`4F      [ 3] 1199 	ldx	#_player_draw
-   06DA BF`00`05      [ 6] 1200 	stx	_the_player+5
-   06DD                    1201 L29:
-   06DD 32 63         [ 5] 1202 	leas	3,s
-   06DF 39            [ 5] 1203 	rts
-                           1204 	.globl	__player_draw_mid
-   06E0                    1205 __player_draw_mid:
-   06E0 BD`00`00      [ 8] 1206 	jsr	___Reset0Ref
-   06E3 C6 7F         [ 2] 1207 	ldb	#127
-   06E5 D7`00         [ 4] 1208 	stb	*_dp_VIA_t1_cnt_lo
-   06E7 CB 11         [ 2] 1209 	addb	#17
-   06E9 E7 E2         [ 6] 1210 	stb	,-s
-   06EB F6`00`01      [ 5] 1211 	ldb	_the_player+1
-   06EE BD`00`00      [ 8] 1212 	jsr	__Moveto_d
-   06F1 C6 10         [ 2] 1213 	ldb	#16
-   06F3 D7`00         [ 4] 1214 	stb	*_dp_VIA_t1_cnt_lo
-   06F5 8E`00`65      [ 3] 1215 	ldx	#_vl_player_mid1
-   06F8 BD`00`00      [ 8] 1216 	jsr	___Draw_VLp
-   06FB BD`00`00      [ 8] 1217 	jsr	___Reset0Ref
-   06FE C6 7F         [ 2] 1218 	ldb	#127
-   0700 D7`00         [ 4] 1219 	stb	*_dp_VIA_t1_cnt_lo
-   0702 CB 11         [ 2] 1220 	addb	#17
-   0704 E7 E2         [ 6] 1221 	stb	,-s
-   0706 F6`00`01      [ 5] 1222 	ldb	_the_player+1
-   0709 BD`00`00      [ 8] 1223 	jsr	__Moveto_d
-   070C C6 10         [ 2] 1224 	ldb	#16
-   070E D7`00         [ 4] 1225 	stb	*_dp_VIA_t1_cnt_lo
-   0710 32 62         [ 5] 1226 	leas	2,s
-   0712 8E`00`A5      [ 3] 1227 	ldx	#_vl_player_mid2
-   0715 7E`00`00      [ 4] 1228 	jmp	___Draw_VLp
-                           1229 	.globl	__player_draw_left
-   0718                    1230 __player_draw_left:
-   0718 BD`00`00      [ 8] 1231 	jsr	___Reset0Ref
-   071B C6 7F         [ 2] 1232 	ldb	#127
-   071D D7`00         [ 4] 1233 	stb	*_dp_VIA_t1_cnt_lo
-   071F CB 11         [ 2] 1234 	addb	#17
-   0721 E7 E2         [ 6] 1235 	stb	,-s
-   0723 F6`00`01      [ 5] 1236 	ldb	_the_player+1
-   0726 BD`00`00      [ 8] 1237 	jsr	__Moveto_d
-   0729 C6 10         [ 2] 1238 	ldb	#16
-   072B D7`00         [ 4] 1239 	stb	*_dp_VIA_t1_cnt_lo
-   072D 8E`00`EE      [ 3] 1240 	ldx	#_vl_player_left1
-   0730 BD`00`00      [ 8] 1241 	jsr	___Draw_VLp
-   0733 BD`00`00      [ 8] 1242 	jsr	___Reset0Ref
-   0736 C6 7F         [ 2] 1243 	ldb	#127
-   0738 D7`00         [ 4] 1244 	stb	*_dp_VIA_t1_cnt_lo
-   073A CB 11         [ 2] 1245 	addb	#17
-   073C E7 E2         [ 6] 1246 	stb	,-s
-   073E F6`00`01      [ 5] 1247 	ldb	_the_player+1
-   0741 BD`00`00      [ 8] 1248 	jsr	__Moveto_d
-   0744 C6 10         [ 2] 1249 	ldb	#16
-   0746 D7`00         [ 4] 1250 	stb	*_dp_VIA_t1_cnt_lo
-   0748 8E`01`3A      [ 3] 1251 	ldx	#_vl_player_left2
-   074B BD`00`00      [ 8] 1252 	jsr	___Draw_VLp
-   074E BD`00`00      [ 8] 1253 	jsr	___Reset0Ref
-   0751 C6 7F         [ 2] 1254 	ldb	#127
-   0753 D7`00         [ 4] 1255 	stb	*_dp_VIA_t1_cnt_lo
-   0755 CB 11         [ 2] 1256 	addb	#17
-   0757 E7 E2         [ 6] 1257 	stb	,-s
-   0759 F6`00`01      [ 5] 1258 	ldb	_the_player+1
-   075C BD`00`00      [ 8] 1259 	jsr	__Moveto_d
-   075F C6 10         [ 2] 1260 	ldb	#16
-   0761 D7`00         [ 4] 1261 	stb	*_dp_VIA_t1_cnt_lo
-   0763 32 63         [ 5] 1262 	leas	3,s
-   0765 8E`01`9E      [ 3] 1263 	ldx	#_vl_player_left3
-   0768 7E`00`00      [ 4] 1264 	jmp	___Draw_VLp
-                           1265 	.globl	__player_draw_right
-   076B                    1266 __player_draw_right:
-   076B BD`00`00      [ 8] 1267 	jsr	___Reset0Ref
-   076E C6 7F         [ 2] 1268 	ldb	#127
-   0770 D7`00         [ 4] 1269 	stb	*_dp_VIA_t1_cnt_lo
-   0772 CB 11         [ 2] 1270 	addb	#17
-   0774 E7 E2         [ 6] 1271 	stb	,-s
-   0776 F6`00`01      [ 5] 1272 	ldb	_the_player+1
-   0779 BD`00`00      [ 8] 1273 	jsr	__Moveto_d
-   077C C6 10         [ 2] 1274 	ldb	#16
-   077E D7`00         [ 4] 1275 	stb	*_dp_VIA_t1_cnt_lo
-   0780 8E`01`DE      [ 3] 1276 	ldx	#_vl_player_right1
-   0783 BD`00`00      [ 8] 1277 	jsr	___Draw_VLp
-   0786 BD`00`00      [ 8] 1278 	jsr	___Reset0Ref
-   0789 C6 7F         [ 2] 1279 	ldb	#127
-   078B D7`00         [ 4] 1280 	stb	*_dp_VIA_t1_cnt_lo
-   078D CB 11         [ 2] 1281 	addb	#17
-   078F E7 E2         [ 6] 1282 	stb	,-s
-   0791 F6`00`01      [ 5] 1283 	ldb	_the_player+1
-   0794 BD`00`00      [ 8] 1284 	jsr	__Moveto_d
-   0797 C6 10         [ 2] 1285 	ldb	#16
-   0799 D7`00         [ 4] 1286 	stb	*_dp_VIA_t1_cnt_lo
-   079B 8E`02`2A      [ 3] 1287 	ldx	#_vl_player_right2
-   079E BD`00`00      [ 8] 1288 	jsr	___Draw_VLp
-   07A1 BD`00`00      [ 8] 1289 	jsr	___Reset0Ref
-   07A4 C6 7F         [ 2] 1290 	ldb	#127
-   07A6 D7`00         [ 4] 1291 	stb	*_dp_VIA_t1_cnt_lo
-   07A8 CB 11         [ 2] 1292 	addb	#17
-   07AA E7 E2         [ 6] 1293 	stb	,-s
-   07AC F6`00`01      [ 5] 1294 	ldb	_the_player+1
-   07AF BD`00`00      [ 8] 1295 	jsr	__Moveto_d
-   07B2 C6 10         [ 2] 1296 	ldb	#16
-   07B4 D7`00         [ 4] 1297 	stb	*_dp_VIA_t1_cnt_lo
-   07B6 32 63         [ 5] 1298 	leas	3,s
-   07B8 8E`02`8E      [ 3] 1299 	ldx	#_vl_player_right3
-   07BB 7E`00`00      [ 4] 1300 	jmp	___Draw_VLp
-                           1301 	.globl	_check_collision
-   07BE                    1302 _check_collision:
-   07BE 39            [ 5] 1303 	rts
-                           1304 	.globl	__SP1_LEFT_MID_X_LUT_1
-   07BF                    1305 __SP1_LEFT_MID_X_LUT_1:
-   07BF D7                 1306 	.byte	-41
-   07C0 D1                 1307 	.byte	-47
-   07C1 CB                 1308 	.byte	-53
-   07C2 C5                 1309 	.byte	-59
-   07C3 C0                 1310 	.byte	-64
-   07C4 BA                 1311 	.byte	-70
-   07C5 B4                 1312 	.byte	-76
-                           1313 	.globl	__SP1_MID_RIGHT_X_LUT_1
-   07C6                    1314 __SP1_MID_RIGHT_X_LUT_1:
-   07C6 29                 1315 	.byte	41
-   07C7 23                 1316 	.byte	35
-   07C8 1D                 1317 	.byte	29
-   07C9 17                 1318 	.byte	23
-   07CA 12                 1319 	.byte	18
-   07CB 0C                 1320 	.byte	12
-   07CC 06                 1321 	.byte	6
-                           1322 	.globl	__SP1_RIGHT_MID_X_LUT_1
-   07CD                    1323 __SP1_RIGHT_MID_X_LUT_1:
-   07CD 29                 1324 	.byte	41
-   07CE 2F                 1325 	.byte	47
-   07CF 35                 1326 	.byte	53
-   07D0 3B                 1327 	.byte	59
-   07D1 40                 1328 	.byte	64
-   07D2 46                 1329 	.byte	70
-   07D3 4C                 1330 	.byte	76
-                           1331 	.globl	__SP1_MID_LEFT_X_LUT_1
-   07D4                    1332 __SP1_MID_LEFT_X_LUT_1:
-   07D4 D7                 1333 	.byte	-41
-   07D5 DD                 1334 	.byte	-35
-   07D6 E3                 1335 	.byte	-29
-   07D7 E9                 1336 	.byte	-23
-   07D8 EE                 1337 	.byte	-18
-   07D9 F4                 1338 	.byte	-12
-   07DA FA                 1339 	.byte	-6
+   02CE 34 40         [ 6]  745 	pshs	u
+   02D0 7A`00`04      [ 7]  746 	dec	_the_player+4
+   02D3 F6`00`04      [ 5]  747 	ldb	_the_player+4
+   02D6 4F            [ 2]  748 	clra		;zero_extendqihi: R:b -> R:d
+   02D7 FE`00`02      [ 6]  749 	ldu	_the_player+2
+   02DA 30 CB         [ 8]  750 	leax	d,u
+   02DC E6 84         [ 4]  751 	ldb	,x
+   02DE F7`00`01      [ 5]  752 	stb	_the_player+1
+   02E1 BD`00`00      [ 8]  753 	jsr	___Intensity_5F
+   02E4 BD`00`00      [ 8]  754 	jsr	___Reset0Ref
+   02E7 C6 7F         [ 2]  755 	ldb	#127
+   02E9 D7`00         [ 4]  756 	stb	*_dp_VIA_t1_cnt_lo
+   02EB CB 11         [ 2]  757 	addb	#17
+   02ED E7 E2         [ 6]  758 	stb	,-s
+   02EF F6`00`01      [ 5]  759 	ldb	_the_player+1
+   02F2 BD`00`00      [ 8]  760 	jsr	__Moveto_d
+   02F5 C6 10         [ 2]  761 	ldb	#16
+   02F7 D7`00         [ 4]  762 	stb	*_dp_VIA_t1_cnt_lo
+   02F9 8E`00`EE      [ 3]  763 	ldx	#_vl_player_left1
+   02FC BD`00`00      [ 8]  764 	jsr	___Draw_VLp
+   02FF BD`00`00      [ 8]  765 	jsr	___Reset0Ref
+   0302 C6 7F         [ 2]  766 	ldb	#127
+   0304 D7`00         [ 4]  767 	stb	*_dp_VIA_t1_cnt_lo
+   0306 CB 11         [ 2]  768 	addb	#17
+   0308 E7 E2         [ 6]  769 	stb	,-s
+   030A F6`00`01      [ 5]  770 	ldb	_the_player+1
+   030D BD`00`00      [ 8]  771 	jsr	__Moveto_d
+   0310 C6 10         [ 2]  772 	ldb	#16
+   0312 D7`00         [ 4]  773 	stb	*_dp_VIA_t1_cnt_lo
+   0314 8E`01`3A      [ 3]  774 	ldx	#_vl_player_left2
+   0317 BD`00`00      [ 8]  775 	jsr	___Draw_VLp
+   031A BD`00`00      [ 8]  776 	jsr	___Reset0Ref
+   031D C6 7F         [ 2]  777 	ldb	#127
+   031F D7`00         [ 4]  778 	stb	*_dp_VIA_t1_cnt_lo
+   0321 CB 11         [ 2]  779 	addb	#17
+   0323 E7 E2         [ 6]  780 	stb	,-s
+   0325 F6`00`01      [ 5]  781 	ldb	_the_player+1
+   0328 BD`00`00      [ 8]  782 	jsr	__Moveto_d
+   032B C6 10         [ 2]  783 	ldb	#16
+   032D D7`00         [ 4]  784 	stb	*_dp_VIA_t1_cnt_lo
+   032F 8E`01`9E      [ 3]  785 	ldx	#_vl_player_left3
+   0332 BD`00`00      [ 8]  786 	jsr	___Draw_VLp
+   0335 32 63         [ 5]  787 	leas	3,s
+   0337 7D`00`04      [ 7]  788 	tst	_the_player+4
+   033A 26 19         [ 3]  789 	bne	L7
+   033C 8E`03`57      [ 3]  790 	ldx	#_player_change_left_to_mid_step2
+   033F BF`00`05      [ 6]  791 	stx	_the_player+5
+   0342 F6`00`02      [ 5]  792 	ldb	_the_game+2
+   0345 4F            [ 2]  793 	clra		;zero_extendqihi: R:b -> R:d
+   0346 1F 01         [ 6]  794 	tfr	d,x
+   0348 E6 89`00`0B   [ 8]  795 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   034C F7`00`04      [ 5]  796 	stb	_the_player+4
+   034F 8E`00`1F      [ 3]  797 	ldx	#__SP1_LEFT_MID_X_LUT_2
+   0352 BF`00`02      [ 6]  798 	stx	_the_player+2
+   0355                     799 L7:
+   0355 35 C0         [ 7]  800 	puls	u,pc
+                            801 	.globl	_player_change_left_to_mid_step2
+   0357                     802 _player_change_left_to_mid_step2:
+   0357 34 40         [ 6]  803 	pshs	u
+   0359 7A`00`04      [ 7]  804 	dec	_the_player+4
+   035C F6`00`04      [ 5]  805 	ldb	_the_player+4
+   035F 4F            [ 2]  806 	clra		;zero_extendqihi: R:b -> R:d
+   0360 FE`00`02      [ 6]  807 	ldu	_the_player+2
+   0363 30 CB         [ 8]  808 	leax	d,u
+   0365 E6 84         [ 4]  809 	ldb	,x
+   0367 F7`00`01      [ 5]  810 	stb	_the_player+1
+   036A BD`00`00      [ 8]  811 	jsr	___Intensity_5F
+   036D BD`00`00      [ 8]  812 	jsr	___Reset0Ref
+   0370 C6 7F         [ 2]  813 	ldb	#127
+   0372 D7`00         [ 4]  814 	stb	*_dp_VIA_t1_cnt_lo
+   0374 CB 11         [ 2]  815 	addb	#17
+   0376 E7 E2         [ 6]  816 	stb	,-s
+   0378 F6`00`01      [ 5]  817 	ldb	_the_player+1
+   037B BD`00`00      [ 8]  818 	jsr	__Moveto_d
+   037E C6 10         [ 2]  819 	ldb	#16
+   0380 D7`00         [ 4]  820 	stb	*_dp_VIA_t1_cnt_lo
+   0382 8E`00`65      [ 3]  821 	ldx	#_vl_player_mid1
+   0385 BD`00`00      [ 8]  822 	jsr	___Draw_VLp
+   0388 BD`00`00      [ 8]  823 	jsr	___Reset0Ref
+   038B C6 7F         [ 2]  824 	ldb	#127
+   038D D7`00         [ 4]  825 	stb	*_dp_VIA_t1_cnt_lo
+   038F CB 11         [ 2]  826 	addb	#17
+   0391 E7 E2         [ 6]  827 	stb	,-s
+   0393 F6`00`01      [ 5]  828 	ldb	_the_player+1
+   0396 BD`00`00      [ 8]  829 	jsr	__Moveto_d
+   0399 C6 10         [ 2]  830 	ldb	#16
+   039B D7`00         [ 4]  831 	stb	*_dp_VIA_t1_cnt_lo
+   039D 8E`00`A5      [ 3]  832 	ldx	#_vl_player_mid2
+   03A0 BD`00`00      [ 8]  833 	jsr	___Draw_VLp
+   03A3 32 62         [ 5]  834 	leas	2,s
+   03A5 7D`00`04      [ 7]  835 	tst	_the_player+4
+   03A8 26 0E         [ 3]  836 	bne	L11
+   03AA C6 01         [ 2]  837 	ldb	#1
+   03AC F7`00`00      [ 5]  838 	stb	_the_player
+   03AF 7F`00`01      [ 7]  839 	clr	_the_player+1
+   03B2 8E`00`4F      [ 3]  840 	ldx	#_player_draw
+   03B5 BF`00`05      [ 6]  841 	stx	_the_player+5
+   03B8                     842 L11:
+   03B8 35 C0         [ 7]  843 	puls	u,pc
+                            844 	.globl	_player_change_mid_to_right_step1
+   03BA                     845 _player_change_mid_to_right_step1:
+   03BA 34 40         [ 6]  846 	pshs	u
+   03BC 7A`00`04      [ 7]  847 	dec	_the_player+4
+   03BF F6`00`04      [ 5]  848 	ldb	_the_player+4
+   03C2 4F            [ 2]  849 	clra		;zero_extendqihi: R:b -> R:d
+   03C3 FE`00`02      [ 6]  850 	ldu	_the_player+2
+   03C6 30 CB         [ 8]  851 	leax	d,u
+   03C8 E6 84         [ 4]  852 	ldb	,x
+   03CA F7`00`01      [ 5]  853 	stb	_the_player+1
+   03CD BD`00`00      [ 8]  854 	jsr	___Intensity_5F
+   03D0 BD`00`00      [ 8]  855 	jsr	___Reset0Ref
+   03D3 C6 7F         [ 2]  856 	ldb	#127
+   03D5 D7`00         [ 4]  857 	stb	*_dp_VIA_t1_cnt_lo
+   03D7 CB 11         [ 2]  858 	addb	#17
+   03D9 E7 E2         [ 6]  859 	stb	,-s
+   03DB F6`00`01      [ 5]  860 	ldb	_the_player+1
+   03DE BD`00`00      [ 8]  861 	jsr	__Moveto_d
+   03E1 C6 10         [ 2]  862 	ldb	#16
+   03E3 D7`00         [ 4]  863 	stb	*_dp_VIA_t1_cnt_lo
+   03E5 8E`00`65      [ 3]  864 	ldx	#_vl_player_mid1
+   03E8 BD`00`00      [ 8]  865 	jsr	___Draw_VLp
+   03EB BD`00`00      [ 8]  866 	jsr	___Reset0Ref
+   03EE C6 7F         [ 2]  867 	ldb	#127
+   03F0 D7`00         [ 4]  868 	stb	*_dp_VIA_t1_cnt_lo
+   03F2 CB 11         [ 2]  869 	addb	#17
+   03F4 E7 E2         [ 6]  870 	stb	,-s
+   03F6 F6`00`01      [ 5]  871 	ldb	_the_player+1
+   03F9 BD`00`00      [ 8]  872 	jsr	__Moveto_d
+   03FC C6 10         [ 2]  873 	ldb	#16
+   03FE D7`00         [ 4]  874 	stb	*_dp_VIA_t1_cnt_lo
+   0400 8E`00`A5      [ 3]  875 	ldx	#_vl_player_mid2
+   0403 BD`00`00      [ 8]  876 	jsr	___Draw_VLp
+   0406 32 62         [ 5]  877 	leas	2,s
+   0408 7D`00`04      [ 7]  878 	tst	_the_player+4
+   040B 26 19         [ 3]  879 	bne	L14
+   040D 8E`04`28      [ 3]  880 	ldx	#_player_change_mid_to_right_step2
+   0410 BF`00`05      [ 6]  881 	stx	_the_player+5
+   0413 F6`00`02      [ 5]  882 	ldb	_the_game+2
+   0416 4F            [ 2]  883 	clra		;zero_extendqihi: R:b -> R:d
+   0417 1F 01         [ 6]  884 	tfr	d,x
+   0419 E6 89`00`0B   [ 8]  885 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   041D F7`00`04      [ 5]  886 	stb	_the_player+4
+   0420 8E`00`25      [ 3]  887 	ldx	#__SP1_MID_RIGHT_X_LUT_2
+   0423 BF`00`02      [ 6]  888 	stx	_the_player+2
+   0426                     889 L14:
+   0426 35 C0         [ 7]  890 	puls	u,pc
+                            891 	.globl	_player_change_mid_to_right_step2
+   0428                     892 _player_change_mid_to_right_step2:
+   0428 34 40         [ 6]  893 	pshs	u
+   042A 7A`00`04      [ 7]  894 	dec	_the_player+4
+   042D F6`00`04      [ 5]  895 	ldb	_the_player+4
+   0430 4F            [ 2]  896 	clra		;zero_extendqihi: R:b -> R:d
+   0431 FE`00`02      [ 6]  897 	ldu	_the_player+2
+   0434 30 CB         [ 8]  898 	leax	d,u
+   0436 E6 84         [ 4]  899 	ldb	,x
+   0438 F7`00`01      [ 5]  900 	stb	_the_player+1
+   043B BD`00`00      [ 8]  901 	jsr	___Intensity_5F
+   043E BD`00`00      [ 8]  902 	jsr	___Reset0Ref
+   0441 C6 7F         [ 2]  903 	ldb	#127
+   0443 D7`00         [ 4]  904 	stb	*_dp_VIA_t1_cnt_lo
+   0445 CB 11         [ 2]  905 	addb	#17
+   0447 E7 E2         [ 6]  906 	stb	,-s
+   0449 F6`00`01      [ 5]  907 	ldb	_the_player+1
+   044C BD`00`00      [ 8]  908 	jsr	__Moveto_d
+   044F C6 10         [ 2]  909 	ldb	#16
+   0451 D7`00         [ 4]  910 	stb	*_dp_VIA_t1_cnt_lo
+   0453 8E`01`DE      [ 3]  911 	ldx	#_vl_player_right1
+   0456 BD`00`00      [ 8]  912 	jsr	___Draw_VLp
+   0459 BD`00`00      [ 8]  913 	jsr	___Reset0Ref
+   045C C6 7F         [ 2]  914 	ldb	#127
+   045E D7`00         [ 4]  915 	stb	*_dp_VIA_t1_cnt_lo
+   0460 CB 11         [ 2]  916 	addb	#17
+   0462 E7 E2         [ 6]  917 	stb	,-s
+   0464 F6`00`01      [ 5]  918 	ldb	_the_player+1
+   0467 BD`00`00      [ 8]  919 	jsr	__Moveto_d
+   046A C6 10         [ 2]  920 	ldb	#16
+   046C D7`00         [ 4]  921 	stb	*_dp_VIA_t1_cnt_lo
+   046E 8E`02`2A      [ 3]  922 	ldx	#_vl_player_right2
+   0471 BD`00`00      [ 8]  923 	jsr	___Draw_VLp
+   0474 BD`00`00      [ 8]  924 	jsr	___Reset0Ref
+   0477 C6 7F         [ 2]  925 	ldb	#127
+   0479 D7`00         [ 4]  926 	stb	*_dp_VIA_t1_cnt_lo
+   047B CB 11         [ 2]  927 	addb	#17
+   047D E7 E2         [ 6]  928 	stb	,-s
+   047F F6`00`01      [ 5]  929 	ldb	_the_player+1
+   0482 BD`00`00      [ 8]  930 	jsr	__Moveto_d
+   0485 C6 10         [ 2]  931 	ldb	#16
+   0487 D7`00         [ 4]  932 	stb	*_dp_VIA_t1_cnt_lo
+   0489 8E`02`8E      [ 3]  933 	ldx	#_vl_player_right3
+   048C BD`00`00      [ 8]  934 	jsr	___Draw_VLp
+   048F 32 63         [ 5]  935 	leas	3,s
+   0491 7D`00`04      [ 7]  936 	tst	_the_player+4
+   0494 26 10         [ 3]  937 	bne	L17
+   0496 C6 02         [ 2]  938 	ldb	#2
+   0498 F7`00`00      [ 5]  939 	stb	_the_player
+   049B C6 52         [ 2]  940 	ldb	#82
+   049D F7`00`01      [ 5]  941 	stb	_the_player+1
+   04A0 8E`00`4F      [ 3]  942 	ldx	#_player_draw
+   04A3 BF`00`05      [ 6]  943 	stx	_the_player+5
+   04A6                     944 L17:
+   04A6 35 C0         [ 7]  945 	puls	u,pc
+                            946 	.globl	_player_change_right_to_mid_step1
+   04A8                     947 _player_change_right_to_mid_step1:
+   04A8 34 40         [ 6]  948 	pshs	u
+   04AA 7A`00`04      [ 7]  949 	dec	_the_player+4
+   04AD F6`00`04      [ 5]  950 	ldb	_the_player+4
+   04B0 4F            [ 2]  951 	clra		;zero_extendqihi: R:b -> R:d
+   04B1 FE`00`02      [ 6]  952 	ldu	_the_player+2
+   04B4 30 CB         [ 8]  953 	leax	d,u
+   04B6 E6 84         [ 4]  954 	ldb	,x
+   04B8 F7`00`01      [ 5]  955 	stb	_the_player+1
+   04BB BD`00`00      [ 8]  956 	jsr	___Intensity_5F
+   04BE BD`00`00      [ 8]  957 	jsr	___Reset0Ref
+   04C1 C6 7F         [ 2]  958 	ldb	#127
+   04C3 D7`00         [ 4]  959 	stb	*_dp_VIA_t1_cnt_lo
+   04C5 CB 11         [ 2]  960 	addb	#17
+   04C7 E7 E2         [ 6]  961 	stb	,-s
+   04C9 F6`00`01      [ 5]  962 	ldb	_the_player+1
+   04CC BD`00`00      [ 8]  963 	jsr	__Moveto_d
+   04CF C6 10         [ 2]  964 	ldb	#16
+   04D1 D7`00         [ 4]  965 	stb	*_dp_VIA_t1_cnt_lo
+   04D3 8E`01`DE      [ 3]  966 	ldx	#_vl_player_right1
+   04D6 BD`00`00      [ 8]  967 	jsr	___Draw_VLp
+   04D9 BD`00`00      [ 8]  968 	jsr	___Reset0Ref
+   04DC C6 7F         [ 2]  969 	ldb	#127
+   04DE D7`00         [ 4]  970 	stb	*_dp_VIA_t1_cnt_lo
+   04E0 CB 11         [ 2]  971 	addb	#17
+   04E2 E7 E2         [ 6]  972 	stb	,-s
+   04E4 F6`00`01      [ 5]  973 	ldb	_the_player+1
+   04E7 BD`00`00      [ 8]  974 	jsr	__Moveto_d
+   04EA C6 10         [ 2]  975 	ldb	#16
+   04EC D7`00         [ 4]  976 	stb	*_dp_VIA_t1_cnt_lo
+   04EE 8E`02`2A      [ 3]  977 	ldx	#_vl_player_right2
+   04F1 BD`00`00      [ 8]  978 	jsr	___Draw_VLp
+   04F4 BD`00`00      [ 8]  979 	jsr	___Reset0Ref
+   04F7 C6 7F         [ 2]  980 	ldb	#127
+   04F9 D7`00         [ 4]  981 	stb	*_dp_VIA_t1_cnt_lo
+   04FB CB 11         [ 2]  982 	addb	#17
+   04FD E7 E2         [ 6]  983 	stb	,-s
+   04FF F6`00`01      [ 5]  984 	ldb	_the_player+1
+   0502 BD`00`00      [ 8]  985 	jsr	__Moveto_d
+   0505 C6 10         [ 2]  986 	ldb	#16
+   0507 D7`00         [ 4]  987 	stb	*_dp_VIA_t1_cnt_lo
+   0509 8E`02`8E      [ 3]  988 	ldx	#_vl_player_right3
+   050C BD`00`00      [ 8]  989 	jsr	___Draw_VLp
+   050F 32 63         [ 5]  990 	leas	3,s
+   0511 7D`00`04      [ 7]  991 	tst	_the_player+4
+   0514 26 19         [ 3]  992 	bne	L20
+   0516 8E`05`31      [ 3]  993 	ldx	#_player_change_right_to_mid_step2
+   0519 BF`00`05      [ 6]  994 	stx	_the_player+5
+   051C F6`00`02      [ 5]  995 	ldb	_the_game+2
+   051F 4F            [ 2]  996 	clra		;zero_extendqihi: R:b -> R:d
+   0520 1F 01         [ 6]  997 	tfr	d,x
+   0522 E6 89`00`0B   [ 8]  998 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   0526 F7`00`04      [ 5]  999 	stb	_the_player+4
+   0529 8E`00`2B      [ 3] 1000 	ldx	#__SP1_RIGHT_MID_X_LUT_2
+   052C BF`00`02      [ 6] 1001 	stx	_the_player+2
+   052F                    1002 L20:
+   052F 35 C0         [ 7] 1003 	puls	u,pc
+                           1004 	.globl	_player_change_right_to_mid_step2
+   0531                    1005 _player_change_right_to_mid_step2:
+   0531 34 40         [ 6] 1006 	pshs	u
+   0533 7A`00`04      [ 7] 1007 	dec	_the_player+4
+   0536 F6`00`04      [ 5] 1008 	ldb	_the_player+4
+   0539 4F            [ 2] 1009 	clra		;zero_extendqihi: R:b -> R:d
+   053A FE`00`02      [ 6] 1010 	ldu	_the_player+2
+   053D 30 CB         [ 8] 1011 	leax	d,u
+   053F E6 84         [ 4] 1012 	ldb	,x
+   0541 F7`00`01      [ 5] 1013 	stb	_the_player+1
+   0544 BD`00`00      [ 8] 1014 	jsr	___Intensity_5F
+   0547 BD`00`00      [ 8] 1015 	jsr	___Reset0Ref
+   054A C6 7F         [ 2] 1016 	ldb	#127
+   054C D7`00         [ 4] 1017 	stb	*_dp_VIA_t1_cnt_lo
+   054E CB 11         [ 2] 1018 	addb	#17
+   0550 E7 E2         [ 6] 1019 	stb	,-s
+   0552 F6`00`01      [ 5] 1020 	ldb	_the_player+1
+   0555 BD`00`00      [ 8] 1021 	jsr	__Moveto_d
+   0558 C6 10         [ 2] 1022 	ldb	#16
+   055A D7`00         [ 4] 1023 	stb	*_dp_VIA_t1_cnt_lo
+   055C 8E`00`65      [ 3] 1024 	ldx	#_vl_player_mid1
+   055F BD`00`00      [ 8] 1025 	jsr	___Draw_VLp
+   0562 BD`00`00      [ 8] 1026 	jsr	___Reset0Ref
+   0565 C6 7F         [ 2] 1027 	ldb	#127
+   0567 D7`00         [ 4] 1028 	stb	*_dp_VIA_t1_cnt_lo
+   0569 CB 11         [ 2] 1029 	addb	#17
+   056B E7 E2         [ 6] 1030 	stb	,-s
+   056D F6`00`01      [ 5] 1031 	ldb	_the_player+1
+   0570 BD`00`00      [ 8] 1032 	jsr	__Moveto_d
+   0573 C6 10         [ 2] 1033 	ldb	#16
+   0575 D7`00         [ 4] 1034 	stb	*_dp_VIA_t1_cnt_lo
+   0577 8E`00`A5      [ 3] 1035 	ldx	#_vl_player_mid2
+   057A BD`00`00      [ 8] 1036 	jsr	___Draw_VLp
+   057D 32 62         [ 5] 1037 	leas	2,s
+   057F 7D`00`04      [ 7] 1038 	tst	_the_player+4
+   0582 26 0E         [ 3] 1039 	bne	L23
+   0584 C6 01         [ 2] 1040 	ldb	#1
+   0586 F7`00`00      [ 5] 1041 	stb	_the_player
+   0589 7F`00`01      [ 7] 1042 	clr	_the_player+1
+   058C 8E`00`4F      [ 3] 1043 	ldx	#_player_draw
+   058F BF`00`05      [ 6] 1044 	stx	_the_player+5
+   0592                    1045 L23:
+   0592 35 C0         [ 7] 1046 	puls	u,pc
+                           1047 	.globl	_player_change_mid_to_left_step1
+   0594                    1048 _player_change_mid_to_left_step1:
+   0594 34 40         [ 6] 1049 	pshs	u
+   0596 7A`00`04      [ 7] 1050 	dec	_the_player+4
+   0599 F6`00`04      [ 5] 1051 	ldb	_the_player+4
+   059C 4F            [ 2] 1052 	clra		;zero_extendqihi: R:b -> R:d
+   059D FE`00`02      [ 6] 1053 	ldu	_the_player+2
+   05A0 30 CB         [ 8] 1054 	leax	d,u
+   05A2 E6 84         [ 4] 1055 	ldb	,x
+   05A4 F7`00`01      [ 5] 1056 	stb	_the_player+1
+   05A7 BD`00`00      [ 8] 1057 	jsr	___Intensity_5F
+   05AA BD`00`00      [ 8] 1058 	jsr	___Reset0Ref
+   05AD C6 7F         [ 2] 1059 	ldb	#127
+   05AF D7`00         [ 4] 1060 	stb	*_dp_VIA_t1_cnt_lo
+   05B1 CB 11         [ 2] 1061 	addb	#17
+   05B3 E7 E2         [ 6] 1062 	stb	,-s
+   05B5 F6`00`01      [ 5] 1063 	ldb	_the_player+1
+   05B8 BD`00`00      [ 8] 1064 	jsr	__Moveto_d
+   05BB C6 10         [ 2] 1065 	ldb	#16
+   05BD D7`00         [ 4] 1066 	stb	*_dp_VIA_t1_cnt_lo
+   05BF 8E`00`65      [ 3] 1067 	ldx	#_vl_player_mid1
+   05C2 BD`00`00      [ 8] 1068 	jsr	___Draw_VLp
+   05C5 BD`00`00      [ 8] 1069 	jsr	___Reset0Ref
+   05C8 C6 7F         [ 2] 1070 	ldb	#127
+   05CA D7`00         [ 4] 1071 	stb	*_dp_VIA_t1_cnt_lo
+   05CC CB 11         [ 2] 1072 	addb	#17
+   05CE E7 E2         [ 6] 1073 	stb	,-s
+   05D0 F6`00`01      [ 5] 1074 	ldb	_the_player+1
+   05D3 BD`00`00      [ 8] 1075 	jsr	__Moveto_d
+   05D6 C6 10         [ 2] 1076 	ldb	#16
+   05D8 D7`00         [ 4] 1077 	stb	*_dp_VIA_t1_cnt_lo
+   05DA 8E`00`A5      [ 3] 1078 	ldx	#_vl_player_mid2
+   05DD BD`00`00      [ 8] 1079 	jsr	___Draw_VLp
+   05E0 32 62         [ 5] 1080 	leas	2,s
+   05E2 7D`00`04      [ 7] 1081 	tst	_the_player+4
+   05E5 26 19         [ 3] 1082 	bne	L26
+   05E7 8E`06`02      [ 3] 1083 	ldx	#_player_change_mid_to_left_step2
+   05EA BF`00`05      [ 6] 1084 	stx	_the_player+5
+   05ED F6`00`02      [ 5] 1085 	ldb	_the_game+2
+   05F0 4F            [ 2] 1086 	clra		;zero_extendqihi: R:b -> R:d
+   05F1 1F 01         [ 6] 1087 	tfr	d,x
+   05F3 E6 89`00`0B   [ 8] 1088 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE2_LUT,x
+   05F7 F7`00`04      [ 5] 1089 	stb	_the_player+4
+   05FA 8E`00`31      [ 3] 1090 	ldx	#__SP1_MID_LEFT_X_LUT_2
+   05FD BF`00`02      [ 6] 1091 	stx	_the_player+2
+   0600                    1092 L26:
+   0600 35 C0         [ 7] 1093 	puls	u,pc
+                           1094 	.globl	_player_change_mid_to_left_step2
+   0602                    1095 _player_change_mid_to_left_step2:
+   0602 34 40         [ 6] 1096 	pshs	u
+   0604 7A`00`04      [ 7] 1097 	dec	_the_player+4
+   0607 F6`00`04      [ 5] 1098 	ldb	_the_player+4
+   060A 4F            [ 2] 1099 	clra		;zero_extendqihi: R:b -> R:d
+   060B FE`00`02      [ 6] 1100 	ldu	_the_player+2
+   060E 30 CB         [ 8] 1101 	leax	d,u
+   0610 E6 84         [ 4] 1102 	ldb	,x
+   0612 F7`00`01      [ 5] 1103 	stb	_the_player+1
+   0615 BD`00`00      [ 8] 1104 	jsr	___Intensity_5F
+   0618 BD`00`00      [ 8] 1105 	jsr	___Reset0Ref
+   061B C6 7F         [ 2] 1106 	ldb	#127
+   061D D7`00         [ 4] 1107 	stb	*_dp_VIA_t1_cnt_lo
+   061F CB 11         [ 2] 1108 	addb	#17
+   0621 E7 E2         [ 6] 1109 	stb	,-s
+   0623 F6`00`01      [ 5] 1110 	ldb	_the_player+1
+   0626 BD`00`00      [ 8] 1111 	jsr	__Moveto_d
+   0629 C6 10         [ 2] 1112 	ldb	#16
+   062B D7`00         [ 4] 1113 	stb	*_dp_VIA_t1_cnt_lo
+   062D 8E`00`EE      [ 3] 1114 	ldx	#_vl_player_left1
+   0630 BD`00`00      [ 8] 1115 	jsr	___Draw_VLp
+   0633 BD`00`00      [ 8] 1116 	jsr	___Reset0Ref
+   0636 C6 7F         [ 2] 1117 	ldb	#127
+   0638 D7`00         [ 4] 1118 	stb	*_dp_VIA_t1_cnt_lo
+   063A CB 11         [ 2] 1119 	addb	#17
+   063C E7 E2         [ 6] 1120 	stb	,-s
+   063E F6`00`01      [ 5] 1121 	ldb	_the_player+1
+   0641 BD`00`00      [ 8] 1122 	jsr	__Moveto_d
+   0644 C6 10         [ 2] 1123 	ldb	#16
+   0646 D7`00         [ 4] 1124 	stb	*_dp_VIA_t1_cnt_lo
+   0648 8E`01`3A      [ 3] 1125 	ldx	#_vl_player_left2
+   064B BD`00`00      [ 8] 1126 	jsr	___Draw_VLp
+   064E BD`00`00      [ 8] 1127 	jsr	___Reset0Ref
+   0651 C6 7F         [ 2] 1128 	ldb	#127
+   0653 D7`00         [ 4] 1129 	stb	*_dp_VIA_t1_cnt_lo
+   0655 CB 11         [ 2] 1130 	addb	#17
+   0657 E7 E2         [ 6] 1131 	stb	,-s
+   0659 F6`00`01      [ 5] 1132 	ldb	_the_player+1
+   065C BD`00`00      [ 8] 1133 	jsr	__Moveto_d
+   065F C6 10         [ 2] 1134 	ldb	#16
+   0661 D7`00         [ 4] 1135 	stb	*_dp_VIA_t1_cnt_lo
+   0663 8E`01`9E      [ 3] 1136 	ldx	#_vl_player_left3
+   0666 BD`00`00      [ 8] 1137 	jsr	___Draw_VLp
+   0669 32 63         [ 5] 1138 	leas	3,s
+   066B 7D`00`04      [ 7] 1139 	tst	_the_player+4
+   066E 26 0E         [ 3] 1140 	bne	L29
+   0670 7F`00`00      [ 7] 1141 	clr	_the_player
+   0673 C6 AE         [ 2] 1142 	ldb	#-82
+   0675 F7`00`01      [ 5] 1143 	stb	_the_player+1
+   0678 8E`00`4F      [ 3] 1144 	ldx	#_player_draw
+   067B BF`00`05      [ 6] 1145 	stx	_the_player+5
+   067E                    1146 L29:
+   067E 35 C0         [ 7] 1147 	puls	u,pc
+                           1148 	.globl	__player_draw_mid
+   0680                    1149 __player_draw_mid:
+   0680 BD`00`00      [ 8] 1150 	jsr	___Reset0Ref
+   0683 C6 7F         [ 2] 1151 	ldb	#127
+   0685 D7`00         [ 4] 1152 	stb	*_dp_VIA_t1_cnt_lo
+   0687 CB 11         [ 2] 1153 	addb	#17
+   0689 E7 E2         [ 6] 1154 	stb	,-s
+   068B F6`00`01      [ 5] 1155 	ldb	_the_player+1
+   068E BD`00`00      [ 8] 1156 	jsr	__Moveto_d
+   0691 C6 10         [ 2] 1157 	ldb	#16
+   0693 D7`00         [ 4] 1158 	stb	*_dp_VIA_t1_cnt_lo
+   0695 8E`00`65      [ 3] 1159 	ldx	#_vl_player_mid1
+   0698 BD`00`00      [ 8] 1160 	jsr	___Draw_VLp
+   069B BD`00`00      [ 8] 1161 	jsr	___Reset0Ref
+   069E C6 7F         [ 2] 1162 	ldb	#127
+   06A0 D7`00         [ 4] 1163 	stb	*_dp_VIA_t1_cnt_lo
+   06A2 CB 11         [ 2] 1164 	addb	#17
+   06A4 E7 E2         [ 6] 1165 	stb	,-s
+   06A6 F6`00`01      [ 5] 1166 	ldb	_the_player+1
+   06A9 BD`00`00      [ 8] 1167 	jsr	__Moveto_d
+   06AC C6 10         [ 2] 1168 	ldb	#16
+   06AE D7`00         [ 4] 1169 	stb	*_dp_VIA_t1_cnt_lo
+   06B0 32 62         [ 5] 1170 	leas	2,s
+   06B2 8E`00`A5      [ 3] 1171 	ldx	#_vl_player_mid2
+   06B5 7E`00`00      [ 4] 1172 	jmp	___Draw_VLp
+                           1173 	.globl	__player_draw_left
+   06B8                    1174 __player_draw_left:
+   06B8 BD`00`00      [ 8] 1175 	jsr	___Reset0Ref
+   06BB C6 7F         [ 2] 1176 	ldb	#127
+   06BD D7`00         [ 4] 1177 	stb	*_dp_VIA_t1_cnt_lo
+   06BF CB 11         [ 2] 1178 	addb	#17
+   06C1 E7 E2         [ 6] 1179 	stb	,-s
+   06C3 F6`00`01      [ 5] 1180 	ldb	_the_player+1
+   06C6 BD`00`00      [ 8] 1181 	jsr	__Moveto_d
+   06C9 C6 10         [ 2] 1182 	ldb	#16
+   06CB D7`00         [ 4] 1183 	stb	*_dp_VIA_t1_cnt_lo
+   06CD 8E`00`EE      [ 3] 1184 	ldx	#_vl_player_left1
+   06D0 BD`00`00      [ 8] 1185 	jsr	___Draw_VLp
+   06D3 BD`00`00      [ 8] 1186 	jsr	___Reset0Ref
+   06D6 C6 7F         [ 2] 1187 	ldb	#127
+   06D8 D7`00         [ 4] 1188 	stb	*_dp_VIA_t1_cnt_lo
+   06DA CB 11         [ 2] 1189 	addb	#17
+   06DC E7 E2         [ 6] 1190 	stb	,-s
+   06DE F6`00`01      [ 5] 1191 	ldb	_the_player+1
+   06E1 BD`00`00      [ 8] 1192 	jsr	__Moveto_d
+   06E4 C6 10         [ 2] 1193 	ldb	#16
+   06E6 D7`00         [ 4] 1194 	stb	*_dp_VIA_t1_cnt_lo
+   06E8 8E`01`3A      [ 3] 1195 	ldx	#_vl_player_left2
+   06EB BD`00`00      [ 8] 1196 	jsr	___Draw_VLp
+   06EE BD`00`00      [ 8] 1197 	jsr	___Reset0Ref
+   06F1 C6 7F         [ 2] 1198 	ldb	#127
+   06F3 D7`00         [ 4] 1199 	stb	*_dp_VIA_t1_cnt_lo
+   06F5 CB 11         [ 2] 1200 	addb	#17
+   06F7 E7 E2         [ 6] 1201 	stb	,-s
+   06F9 F6`00`01      [ 5] 1202 	ldb	_the_player+1
+   06FC BD`00`00      [ 8] 1203 	jsr	__Moveto_d
+   06FF C6 10         [ 2] 1204 	ldb	#16
+   0701 D7`00         [ 4] 1205 	stb	*_dp_VIA_t1_cnt_lo
+   0703 32 63         [ 5] 1206 	leas	3,s
+   0705 8E`01`9E      [ 3] 1207 	ldx	#_vl_player_left3
+   0708 7E`00`00      [ 4] 1208 	jmp	___Draw_VLp
+                           1209 	.globl	__player_draw_right
+   070B                    1210 __player_draw_right:
+   070B BD`00`00      [ 8] 1211 	jsr	___Reset0Ref
+   070E C6 7F         [ 2] 1212 	ldb	#127
+   0710 D7`00         [ 4] 1213 	stb	*_dp_VIA_t1_cnt_lo
+   0712 CB 11         [ 2] 1214 	addb	#17
+   0714 E7 E2         [ 6] 1215 	stb	,-s
+   0716 F6`00`01      [ 5] 1216 	ldb	_the_player+1
+   0719 BD`00`00      [ 8] 1217 	jsr	__Moveto_d
+   071C C6 10         [ 2] 1218 	ldb	#16
+   071E D7`00         [ 4] 1219 	stb	*_dp_VIA_t1_cnt_lo
+   0720 8E`01`DE      [ 3] 1220 	ldx	#_vl_player_right1
+   0723 BD`00`00      [ 8] 1221 	jsr	___Draw_VLp
+   0726 BD`00`00      [ 8] 1222 	jsr	___Reset0Ref
+   0729 C6 7F         [ 2] 1223 	ldb	#127
+   072B D7`00         [ 4] 1224 	stb	*_dp_VIA_t1_cnt_lo
+   072D CB 11         [ 2] 1225 	addb	#17
+   072F E7 E2         [ 6] 1226 	stb	,-s
+   0731 F6`00`01      [ 5] 1227 	ldb	_the_player+1
+   0734 BD`00`00      [ 8] 1228 	jsr	__Moveto_d
+   0737 C6 10         [ 2] 1229 	ldb	#16
+   0739 D7`00         [ 4] 1230 	stb	*_dp_VIA_t1_cnt_lo
+   073B 8E`02`2A      [ 3] 1231 	ldx	#_vl_player_right2
+   073E BD`00`00      [ 8] 1232 	jsr	___Draw_VLp
+   0741 BD`00`00      [ 8] 1233 	jsr	___Reset0Ref
+   0744 C6 7F         [ 2] 1234 	ldb	#127
+   0746 D7`00         [ 4] 1235 	stb	*_dp_VIA_t1_cnt_lo
+   0748 CB 11         [ 2] 1236 	addb	#17
+   074A E7 E2         [ 6] 1237 	stb	,-s
+   074C F6`00`01      [ 5] 1238 	ldb	_the_player+1
+   074F BD`00`00      [ 8] 1239 	jsr	__Moveto_d
+   0752 C6 10         [ 2] 1240 	ldb	#16
+   0754 D7`00         [ 4] 1241 	stb	*_dp_VIA_t1_cnt_lo
+   0756 32 63         [ 5] 1242 	leas	3,s
+   0758 8E`02`8E      [ 3] 1243 	ldx	#_vl_player_right3
+   075B 7E`00`00      [ 4] 1244 	jmp	___Draw_VLp
+                           1245 	.globl	_check_collision
+   075E                    1246 _check_collision:
+   075E 39            [ 5] 1247 	rts
+                           1248 	.globl	__SP1_LEFT_MID_X_LUT_1
+   075F                    1249 __SP1_LEFT_MID_X_LUT_1:
+   075F D7                 1250 	.byte	-41
+   0760 D1                 1251 	.byte	-47
+   0761 CB                 1252 	.byte	-53
+   0762 C5                 1253 	.byte	-59
+   0763 C0                 1254 	.byte	-64
+   0764 BA                 1255 	.byte	-70
+   0765 B4                 1256 	.byte	-76
+                           1257 	.globl	__SP1_MID_RIGHT_X_LUT_1
+   0766                    1258 __SP1_MID_RIGHT_X_LUT_1:
+   0766 29                 1259 	.byte	41
+   0767 23                 1260 	.byte	35
+   0768 1D                 1261 	.byte	29
+   0769 17                 1262 	.byte	23
+   076A 12                 1263 	.byte	18
+   076B 0C                 1264 	.byte	12
+   076C 06                 1265 	.byte	6
+                           1266 	.globl	__SP1_RIGHT_MID_X_LUT_1
+   076D                    1267 __SP1_RIGHT_MID_X_LUT_1:
+   076D 29                 1268 	.byte	41
+   076E 2F                 1269 	.byte	47
+   076F 35                 1270 	.byte	53
+   0770 3B                 1271 	.byte	59
+   0771 40                 1272 	.byte	64
+   0772 46                 1273 	.byte	70
+   0773 4C                 1274 	.byte	76
+                           1275 	.globl	__SP1_MID_LEFT_X_LUT_1
+   0774                    1276 __SP1_MID_LEFT_X_LUT_1:
+   0774 D7                 1277 	.byte	-41
+   0775 DD                 1278 	.byte	-35
+   0776 E3                 1279 	.byte	-29
+   0777 E9                 1280 	.byte	-23
+   0778 EE                 1281 	.byte	-18
+   0779 F4                 1282 	.byte	-12
+   077A FA                 1283 	.byte	-6
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:49 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L11                03CF R   |   3 L14                0449 R
-  3 L17                04D5 R   |   3 L20                056A R
-  3 L23                05D9 R   |   3 L26                0653 R
-  3 L29                06DD R   |   3 L7                 0360 R
+  3 L11                03B8 R   |   3 L14                0426 R
+  3 L17                04A6 R   |   3 L20                052F R
+  3 L23                0592 R   |   3 L26                0600 R
+  3 L29                067E R   |   3 L7                 0355 R
   3 _PLAYER_ANIMAT     0000 GR  |   3 _PLAYER_ANIMAT     000B GR
   3 _PLAYER_DRAW_L     0019 GR  |   3 _PLAYER_STATIC     0016 GR
-    __Moveto_d         **** GX  |   3 __SP1_LEFT_MID     07BF GR
-  3 __SP1_LEFT_MID     001F GR  |   3 __SP1_MID_LEFT     07D4 GR
-  3 __SP1_MID_LEFT     0031 GR  |   3 __SP1_MID_RIGH     07C6 GR
-  3 __SP1_MID_RIGH     0025 GR  |   3 __SP1_RIGHT_MI     07CD GR
+    __Moveto_d         **** GX  |   3 __SP1_LEFT_MID     075F GR
+  3 __SP1_LEFT_MID     001F GR  |   3 __SP1_MID_LEFT     0774 GR
+  3 __SP1_MID_LEFT     0031 GR  |   3 __SP1_MID_RIGH     0766 GR
+  3 __SP1_MID_RIGH     0025 GR  |   3 __SP1_RIGHT_MI     076D GR
   3 __SP1_RIGHT_MI     002B GR  |     ___Draw_VLp        **** GX
     ___Intensity_5     **** GX  |     ___Reset0Ref       **** GX
-  3 __player_draw_     0718 GR  |   3 __player_draw_     06E0 GR
-  3 __player_draw_     076B GR  |   3 _check_collisi     07BE GR
+  3 __player_draw_     06B8 GR  |   3 __player_draw_     0680 GR
+  3 __player_draw_     070B GR  |   3 _check_collisi     075E GR
     _dp_VIA_t1_cnt     **** GX  |   3 _player_change     02CE GR
-  3 _player_change     0363 GR  |   3 _player_change     05DC GR
-  3 _player_change     0656 GR  |   3 _player_change     03D2 GR
-  3 _player_change     044C GR  |   3 _player_change     04D8 GR
-  3 _player_change     056D GR  |   3 _player_draw       004F GR
+  3 _player_change     0357 GR  |   3 _player_change     0594 GR
+  3 _player_change     0602 GR  |   3 _player_change     03BA GR
+  3 _player_change     0428 GR  |   3 _player_change     04A8 GR
+  3 _player_change     0531 GR  |   3 _player_draw       004F GR
   3 _player_init       0037 GR  |     _the_game          **** GX
   2 _the_player        0000 GR  |   3 _vl_player_lef     00EE GR
   3 _vl_player_lef     013A GR  |   3 _vl_player_lef     019E GR
@@ -1375,14 +1319,14 @@ Symbol Table
   3 _vl_term_7_323     02CD R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:49 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    7   flags    0
-   3 .text            size  7DB   flags  100
+   3 .text            size  77B   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

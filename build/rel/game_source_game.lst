@@ -30,171 +30,148 @@
    0026 8E`00`2D      [ 3]   30 	ldx	#_game_run
    0029 BF`00`03      [ 6]   31 	stx	_the_game+3
    002C 39            [ 5]   32 	rts
-                             33 	.globl	_temp
-                             34 	.area	.data
-   0000                      35 _temp:
-   0000 00                   36 	.byte	0
-                             37 	.area	.text
-                             38 	.globl	_game_run
-   002D                      39 _game_run:
-   002D 32 7F         [ 5]   40 	leas	-1,s
-   002F BD`00`00      [ 8]   41 	jsr	___Wait_Recal
-   0032 F6`00`00      [ 5]   42 	ldb	_temp
-   0035 27 07         [ 3]   43 	beq	L22
-   0037 5A            [ 2]   44 	decb
-   0038 F7`00`00      [ 5]   45 	stb	_temp
-   003B 32 61         [ 5]   46 	leas	1,s
-   003D 39            [ 5]   47 	rts
-   003E                      48 L22:
-   003E C6 0A         [ 2]   49 	ldb	#10
-   0040 F7`00`00      [ 5]   50 	stb	_temp
-   0043 F6`00`01      [ 5]   51 	ldb	_the_player+1
-   0046 E7 E2         [ 6]   52 	stb	,-s
-   0048 C6 EC         [ 2]   53 	ldb	#-20
-   004A E7 E2         [ 6]   54 	stb	,-s
-   004C C6 64         [ 2]   55 	ldb	#100
-   004E BD`00`00      [ 8]   56 	jsr	_print_signed_int
-   0051 BD`00`00      [ 8]   57 	jsr	___Read_Btns
-   0054 F6`00`00      [ 5]   58 	ldb	_Vec_Buttons
-   0057 E7 62         [ 5]   59 	stb	2,s
-   0059 32 62         [ 5]   60 	leas	2,s
-   005B C5 01         [ 2]   61 	bitb	#1
-   005D 26 2D         [ 3]   62 	bne	L23
-   005F C6 08         [ 2]   63 	ldb	#8
-   0061 E4 E4         [ 4]   64 	andb	,s
-   0063 27 03         [ 3]   65 	beq	L12
-   0065 7A`00`02      [ 7]   66 	dec	_the_game+2
-   0068                      67 L12:
-   0068 C6 06         [ 2]   68 	ldb	#6
-   006A E4 E4         [ 4]   69 	andb	,s
-   006C C1 06         [ 2]   70 	cmpb	#6	;cmpqi:
-   006E 27 0E         [ 3]   71 	beq	L13
-   0070 C6 02         [ 2]   72 	ldb	#2
-   0072 E4 E4         [ 4]   73 	andb	,s
-   0074 27 1C         [ 3]   74 	beq	L14
-   0076 BE`00`05      [ 6]   75 	ldx	_the_player+5
-   0079 8C`00`00      [ 4]   76 	cmpx	#_player_draw	;cmphi:
-   007C 27 49         [ 3]   77 	beq	L24
-   007E                      78 L13:
-   007E BD`00`00      [ 8]   79 	jsr	_clock_tick
-   0081 AD 9F`00`01   [12]   80 	jsr	[_the_map+1]
-   0085 AD 9F`00`05   [12]   81 	jsr	[_the_player+5]
-   0089 32 61         [ 5]   82 	leas	1,s
-   008B 39            [ 5]   83 	rts
-   008C                      84 L23:
-   008C 7C`00`02      [ 7]   85 	inc	_the_game+2
-   008F 32 61         [ 5]   86 	leas	1,s
-   0091 39            [ 5]   87 	rts
-   0092                      88 L14:
-   0092 C6 04         [ 2]   89 	ldb	#4
-   0094 E4 E4         [ 4]   90 	andb	,s
-   0096 27 E6         [ 3]   91 	beq	L13
-   0098 BE`00`05      [ 6]   92 	ldx	_the_player+5
-   009B 8C`00`00      [ 4]   93 	cmpx	#_player_draw	;cmphi:
-   009E 26 DE         [ 3]   94 	bne	L13
-   00A0 F6`00`00      [ 5]   95 	ldb	_the_player
-   00A3 10 26 00 6D   [ 6]   96 	lbne	L25
-   00A7 8E`00`00      [ 3]   97 	ldx	#_player_change_left_to_mid_step1
-   00AA BF`00`05      [ 6]   98 	stx	_the_player+5
-   00AD F6`00`02      [ 5]   99 	ldb	_the_game+2
-   00B0 4F            [ 2]  100 	clra		;zero_extendqihi: R:b -> R:d
-   00B1 1F 01         [ 6]  101 	tfr	d,x
-   00B3 E6 89`00`00   [ 8]  102 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
-   00B7 F7`00`04      [ 5]  103 	stb	_the_player+4
-   00BA 8E`00`00      [ 3]  104 	ldx	#__SP1_LEFT_MID_X_LUT_1
-   00BD BF`00`02      [ 6]  105 	stx	_the_player+2
-   00C0 C6 03         [ 2]  106 	ldb	#3
-   00C2 F7`00`00      [ 5]  107 	stb	_the_player
-   00C5 20 B7         [ 3]  108 	bra	L13
-   00C7                     109 L24:
-   00C7 F6`00`00      [ 5]  110 	ldb	_the_player
-   00CA C1 01         [ 2]  111 	cmpb	#1	;cmpqi:
-   00CC 27 25         [ 3]  112 	beq	L15
-   00CE C1 02         [ 2]  113 	cmpb	#2	;cmpqi:
-   00D0 26 AC         [ 3]  114 	bne	L13
-   00D2 8E`00`00      [ 3]  115 	ldx	#_player_change_right_to_mid_step1
-   00D5 BF`00`05      [ 6]  116 	stx	_the_player+5
-   00D8 F6`00`02      [ 5]  117 	ldb	_the_game+2
-   00DB 4F            [ 2]  118 	clra		;zero_extendqihi: R:b -> R:d
-   00DC 1F 01         [ 6]  119 	tfr	d,x
-   00DE E6 89`00`00   [ 8]  120 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
-   00E2 F7`00`04      [ 5]  121 	stb	_the_player+4
-   00E5 8E`00`00      [ 3]  122 	ldx	#__SP1_RIGHT_MID_X_LUT_1
-   00E8 BF`00`02      [ 6]  123 	stx	_the_player+2
-   00EB C6 03         [ 2]  124 	ldb	#3
-   00ED F7`00`00      [ 5]  125 	stb	_the_player
-   00F0 16 FF 8B      [ 5]  126 	lbra	L13
-   00F3                     127 L15:
-   00F3 8E`00`00      [ 3]  128 	ldx	#_player_change_mid_to_left_step1
-   00F6 BF`00`05      [ 6]  129 	stx	_the_player+5
-   00F9 F6`00`02      [ 5]  130 	ldb	_the_game+2
-   00FC 4F            [ 2]  131 	clra		;zero_extendqihi: R:b -> R:d
-   00FD 1F 01         [ 6]  132 	tfr	d,x
-   00FF E6 89`00`00   [ 8]  133 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
-   0103 F7`00`04      [ 5]  134 	stb	_the_player+4
-   0106 8E`00`00      [ 3]  135 	ldx	#__SP1_MID_LEFT_X_LUT_1
-   0109 BF`00`02      [ 6]  136 	stx	_the_player+2
-   010C C6 03         [ 2]  137 	ldb	#3
-   010E F7`00`00      [ 5]  138 	stb	_the_player
-   0111 16 FF 6A      [ 5]  139 	lbra	L13
-   0114                     140 L25:
-   0114 C1 01         [ 2]  141 	cmpb	#1	;cmpqi:
-   0116 10 26 FF 64   [ 6]  142 	lbne	L13
-   011A 8E`00`00      [ 3]  143 	ldx	#_player_change_mid_to_right_step1
-   011D BF`00`05      [ 6]  144 	stx	_the_player+5
-   0120 F6`00`02      [ 5]  145 	ldb	_the_game+2
-   0123 4F            [ 2]  146 	clra		;zero_extendqihi: R:b -> R:d
-   0124 1F 01         [ 6]  147 	tfr	d,x
-   0126 E6 89`00`00   [ 8]  148 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
-   012A F7`00`04      [ 5]  149 	stb	_the_player+4
-   012D 8E`00`00      [ 3]  150 	ldx	#__SP1_MID_RIGHT_X_LUT_1
-   0130 BF`00`02      [ 6]  151 	stx	_the_player+2
-   0133 C6 03         [ 2]  152 	ldb	#3
-   0135 F7`00`00      [ 5]  153 	stb	_the_player
-   0138 16 FF 43      [ 5]  154 	lbra	L13
-                            155 	.globl	_pause_menu
-   013B                     156 _pause_menu:
-   013B 39            [ 5]  157 	rts
-                            158 	.globl	_game_over
-   013C                     159 _game_over:
-   013C 39            [ 5]  160 	rts
+                             33 	.globl	_game_run
+   002D                      34 _game_run:
+   002D 32 7F         [ 5]   35 	leas	-1,s
+   002F BD`00`00      [ 8]   36 	jsr	___Wait_Recal
+   0032 BD`00`00      [ 8]   37 	jsr	___Read_Btns
+   0035 F6`00`00      [ 5]   38 	ldb	_Vec_Buttons
+   0038 E7 E4         [ 4]   39 	stb	,s
+   003A C5 01         [ 2]   40 	bitb	#1
+   003C 26 33         [ 3]   41 	bne	L19
+   003E C6 08         [ 2]   42 	ldb	#8
+   0040 E4 E4         [ 4]   43 	andb	,s
+   0042 27 03         [ 3]   44 	beq	L10
+   0044 7A`00`02      [ 7]   45 	dec	_the_game+2
+   0047                      46 L10:
+   0047 C6 06         [ 2]   47 	ldb	#6
+   0049 E4 E4         [ 4]   48 	andb	,s
+   004B C1 06         [ 2]   49 	cmpb	#6	;cmpqi:
+   004D 27 14         [ 3]   50 	beq	L11
+   004F C6 02         [ 2]   51 	ldb	#2
+   0051 E4 E4         [ 4]   52 	andb	,s
+   0053 26 22         [ 3]   53 	bne	L20
+   0055 C6 04         [ 2]   54 	ldb	#4
+   0057 E4 E4         [ 4]   55 	andb	,s
+   0059 27 08         [ 3]   56 	beq	L11
+   005B BE`00`05      [ 6]   57 	ldx	_the_player+5
+   005E 8C`00`00      [ 4]   58 	cmpx	#_player_draw	;cmphi:
+   0061 27 47         [ 3]   59 	beq	L21
+   0063                      60 L11:
+   0063 BD`00`00      [ 8]   61 	jsr	_clock_tick
+   0066 AD 9F`00`01   [12]   62 	jsr	[_the_map+1]
+   006A AD 9F`00`05   [12]   63 	jsr	[_the_player+5]
+   006E 32 61         [ 5]   64 	leas	1,s
+   0070 39            [ 5]   65 	rts
+   0071                      66 L19:
+   0071 7C`00`02      [ 7]   67 	inc	_the_game+2
+   0074 32 61         [ 5]   68 	leas	1,s
+   0076 39            [ 5]   69 	rts
+   0077                      70 L20:
+   0077 BE`00`05      [ 6]   71 	ldx	_the_player+5
+   007A 8C`00`00      [ 4]   72 	cmpx	#_player_draw	;cmphi:
+   007D 26 E4         [ 3]   73 	bne	L11
+   007F F6`00`00      [ 5]   74 	ldb	_the_player
+   0082 C1 01         [ 2]   75 	cmpb	#1	;cmpqi:
+   0084 27 4A         [ 3]   76 	beq	L13
+   0086 C1 02         [ 2]   77 	cmpb	#2	;cmpqi:
+   0088 26 D9         [ 3]   78 	bne	L11
+   008A 8E`00`00      [ 3]   79 	ldx	#_player_change_right_to_mid_step1
+   008D BF`00`05      [ 6]   80 	stx	_the_player+5
+   0090 F6`00`02      [ 5]   81 	ldb	_the_game+2
+   0093 4F            [ 2]   82 	clra		;zero_extendqihi: R:b -> R:d
+   0094 1F 01         [ 6]   83 	tfr	d,x
+   0096 E6 89`00`00   [ 8]   84 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
+   009A F7`00`04      [ 5]   85 	stb	_the_player+4
+   009D 8E`00`00      [ 3]   86 	ldx	#__SP1_RIGHT_MID_X_LUT_1
+   00A0 BF`00`02      [ 6]   87 	stx	_the_player+2
+   00A3 C6 03         [ 2]   88 	ldb	#3
+   00A5 F7`00`00      [ 5]   89 	stb	_the_player
+   00A8 20 B9         [ 3]   90 	bra	L11
+   00AA                      91 L21:
+   00AA F6`00`00      [ 5]   92 	ldb	_the_player
+   00AD 26 42         [ 3]   93 	bne	L22
+   00AF 8E`00`00      [ 3]   94 	ldx	#_player_change_left_to_mid_step1
+   00B2 BF`00`05      [ 6]   95 	stx	_the_player+5
+   00B5 F6`00`02      [ 5]   96 	ldb	_the_game+2
+   00B8 4F            [ 2]   97 	clra		;zero_extendqihi: R:b -> R:d
+   00B9 1F 01         [ 6]   98 	tfr	d,x
+   00BB E6 89`00`00   [ 8]   99 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
+   00BF F7`00`04      [ 5]  100 	stb	_the_player+4
+   00C2 8E`00`00      [ 3]  101 	ldx	#__SP1_LEFT_MID_X_LUT_1
+   00C5 BF`00`02      [ 6]  102 	stx	_the_player+2
+   00C8 C6 03         [ 2]  103 	ldb	#3
+   00CA F7`00`00      [ 5]  104 	stb	_the_player
+   00CD 16 FF 93      [ 5]  105 	lbra	L11
+   00D0                     106 L13:
+   00D0 8E`00`00      [ 3]  107 	ldx	#_player_change_mid_to_left_step1
+   00D3 BF`00`05      [ 6]  108 	stx	_the_player+5
+   00D6 F6`00`02      [ 5]  109 	ldb	_the_game+2
+   00D9 4F            [ 2]  110 	clra		;zero_extendqihi: R:b -> R:d
+   00DA 1F 01         [ 6]  111 	tfr	d,x
+   00DC E6 89`00`00   [ 8]  112 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
+   00E0 F7`00`04      [ 5]  113 	stb	_the_player+4
+   00E3 8E`00`00      [ 3]  114 	ldx	#__SP1_MID_LEFT_X_LUT_1
+   00E6 BF`00`02      [ 6]  115 	stx	_the_player+2
+   00E9 C6 03         [ 2]  116 	ldb	#3
+   00EB F7`00`00      [ 5]  117 	stb	_the_player
+   00EE 16 FF 72      [ 5]  118 	lbra	L11
+   00F1                     119 L22:
+   00F1 C1 01         [ 2]  120 	cmpb	#1	;cmpqi:
+   00F3 10 26 FF 6C   [ 6]  121 	lbne	L11
+   00F7 8E`00`00      [ 3]  122 	ldx	#_player_change_mid_to_right_step1
+   00FA BF`00`05      [ 6]  123 	stx	_the_player+5
+   00FD F6`00`02      [ 5]  124 	ldb	_the_game+2
+   0100 4F            [ 2]  125 	clra		;zero_extendqihi: R:b -> R:d
+   0101 1F 01         [ 6]  126 	tfr	d,x
+   0103 E6 89`00`00   [ 8]  127 	ldb	_PLAYER_ANIMATION_FRAME_CNT_STAGE1_LUT,x
+   0107 F7`00`04      [ 5]  128 	stb	_the_player+4
+   010A 8E`00`00      [ 3]  129 	ldx	#__SP1_MID_RIGHT_X_LUT_1
+   010D BF`00`02      [ 6]  130 	stx	_the_player+2
+   0110 C6 03         [ 2]  131 	ldb	#3
+   0112 F7`00`00      [ 5]  132 	stb	_the_player
+   0115 16 FF 4B      [ 5]  133 	lbra	L11
+                            134 	.globl	_pause_menu
+   0118                     135 _pause_menu:
+   0118 39            [ 5]  136 	rts
+                            137 	.globl	_game_over
+   0119                     138 _game_over:
+   0119 39            [ 5]  139 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:49 2025
 
 Symbol Table
 
     .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
     .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
-  3 L12                0068 R   |   3 L13                007E R
-  3 L14                0092 R   |   3 L15                00F3 R
-  3 L22                003E R   |   3 L23                008C R
-  3 L24                00C7 R   |   3 L25                0114 R
-    _PLAYER_ANIMAT     **** GX  |     _Vec_Buttons       **** GX
-    __SP1_LEFT_MID     **** GX  |     __SP1_MID_LEFT     **** GX
-    __SP1_MID_RIGH     **** GX  |     __SP1_RIGHT_MI     **** GX
-    ___Read_Btns       **** GX  |     ___Wait_Recal      **** GX
-    _ability_init      **** GX  |     _clock_init        **** GX
-    _clock_tick        **** GX  |     _enemy_init        **** GX
-  3 _game_init         0000 GR  |   3 _game_over         013C GR
-  3 _game_run          002D GR  |     _map_init          **** GX
-  3 _pause_menu        013B GR  |   3 _play_start_an     0026 GR
+  3 L10                0047 R   |   3 L11                0063 R
+  3 L13                00D0 R   |   3 L19                0071 R
+  3 L20                0077 R   |   3 L21                00AA R
+  3 L22                00F1 R   |     _PLAYER_ANIMAT     **** GX
+    _Vec_Buttons       **** GX  |     __SP1_LEFT_MID     **** GX
+    __SP1_MID_LEFT     **** GX  |     __SP1_MID_RIGH     **** GX
+    __SP1_RIGHT_MI     **** GX  |     ___Read_Btns       **** GX
+    ___Wait_Recal      **** GX  |     _ability_init      **** GX
+    _clock_init        **** GX  |     _clock_tick        **** GX
+    _enemy_init        **** GX  |   3 _game_init         0000 GR
+  3 _game_over         0119 GR  |   3 _game_run          002D GR
+    _map_init          **** GX  |   3 _pause_menu        0118 GR
+  3 _play_start_an     0026 GR  |     _player_change     **** GX
     _player_change     **** GX  |     _player_change     **** GX
-    _player_change     **** GX  |     _player_change     **** GX
-    _player_draw       **** GX  |     _player_init       **** GX
-    _print_signed_     **** GX  |   3 _start_menu        001F GR
-  4 _temp              0000 GR  |   2 _the_game          0000 GR
-    _the_map           **** GX  |     _the_player        **** GX
+    _player_change     **** GX  |     _player_draw       **** GX
+    _player_init       **** GX  |   3 _start_menu        001F GR
+  2 _the_game          0000 GR  |     _the_map           **** GX
+    _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:03 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:49 2025
 
 Area Table
 
 [_CSEG]
    0 _CODE            size    0   flags C080
    2 .bss             size    5   flags    0
-   3 .text            size  13D   flags  100
-   4 .data            size    1   flags  100
+   3 .text            size  11A   flags  100
 [_DSEG]
    1 _DATA            size    0   flags C0C0
 

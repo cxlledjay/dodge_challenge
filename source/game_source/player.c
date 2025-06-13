@@ -146,10 +146,10 @@ void player_draw(void)
 /**
  * @brief generic part for all lane change functions
  */
-#define LANE_CHANGE_UPDATE_VARS()													\
-	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */		\
-	check_collision(); /* check for collisions */									\
-	the_player.cnt--; /* count down counter for next frame */						\
+#define LANE_CHANGE_UPDATE_VARS()																						\
+	the_player.cnt--; /* sequence is important... first decrement to match index starting from 0 */						\
+	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */											\
+	check_collision(); /* check for collisions */																		\
 	Intensity_5F();
 
 

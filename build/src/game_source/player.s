@@ -742,20 +742,14 @@ _vl_term_7_323:
 	.byte	1
 	.globl	_player_change_left_to_mid_step1
 _player_change_left_to_mid_step1:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -803,24 +797,17 @@ _player_change_left_to_mid_step1:
 	ldx	#__SP1_LEFT_MID_X_LUT_2
 	stx	_the_player+2
 L7:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_left_to_mid_step2
 _player_change_left_to_mid_step2:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -853,24 +840,17 @@ _player_change_left_to_mid_step2:
 	ldx	#_player_draw
 	stx	_the_player+5
 L11:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_mid_to_right_step1
 _player_change_mid_to_right_step1:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -907,24 +887,17 @@ _player_change_mid_to_right_step1:
 	ldx	#__SP1_MID_RIGHT_X_LUT_2
 	stx	_the_player+2
 L14:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_mid_to_right_step2
 _player_change_mid_to_right_step2:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -969,24 +942,17 @@ _player_change_mid_to_right_step2:
 	ldx	#_player_draw
 	stx	_the_player+5
 L17:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_right_to_mid_step1
 _player_change_right_to_mid_step1:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -1034,24 +1000,17 @@ _player_change_right_to_mid_step1:
 	ldx	#__SP1_RIGHT_MID_X_LUT_2
 	stx	_the_player+2
 L20:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_right_to_mid_step2
 _player_change_right_to_mid_step2:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -1084,24 +1043,17 @@ _player_change_right_to_mid_step2:
 	ldx	#_player_draw
 	stx	_the_player+5
 L23:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_mid_to_left_step1
 _player_change_mid_to_left_step1:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -1138,24 +1090,17 @@ _player_change_mid_to_left_step1:
 	ldx	#__SP1_MID_LEFT_X_LUT_2
 	stx	_the_player+2
 L26:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	_player_change_mid_to_left_step2
 _player_change_mid_to_left_step2:
-	leas	-3,s
+	pshs	u
+	dec	_the_player+4
 	ldb	_the_player+4
-	stb	,s
 	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
-	tfr	d,x
-	exg	d,x
-	addd	_the_player+2; addhi3,3
-	exg	d,x
+	ldu	_the_player+2
+	leax	d,u
 	ldb	,x
 	stb	_the_player+1
-	ldb	,s
-	decb
-	stb	_the_player+4
 	jsr	___Intensity_5F
 	jsr	___Reset0Ref
 	ldb	#127
@@ -1199,8 +1144,7 @@ _player_change_mid_to_left_step2:
 	ldx	#_player_draw
 	stx	_the_player+5
 L29:
-	leas	3,s
-	rts
+	puls	u,pc
 	.globl	__player_draw_mid
 __player_draw_mid:
 	jsr	___Reset0Ref

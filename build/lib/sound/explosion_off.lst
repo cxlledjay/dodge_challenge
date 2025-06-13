@@ -11,7 +11,7 @@
    0002 01                   11 	.byte	1
    0003 80                   12 	.byte	-128
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:02 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:48 2025
 
 Symbol Table
 
@@ -20,7 +20,7 @@ Symbol Table
   2 _explosion_off     0000 GR
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Sat Jun 14 01:03:02 2025
+Hexadecimal [16-Bits]                                 Sat Jun 14 01:20:48 2025
 
 Area Table
 

@@ -84,24 +84,10 @@ void play_start_animation(void)
 //debug
 #include "lib/print/print.h"
 
-unsigned int temp = 0;
-
 void game_run(void)
 {
     /// sync to 50 fps
     Wait_Recal();
-
-    if(temp == 0)
-    {
-        temp = 10;
-    }
-    else
-    {
-        temp--;
-        return;
-    }
-
-    print_signed_int(100,-20,the_player.x);
     
     /// ----------------------------------< calculations >----------------------------------
 
@@ -215,6 +201,10 @@ void game_run(void)
     /// TODO: draw new position of enemies
 
     /// TODO: draw new position of powerups
+    
+
+    /* print_signed_int(100,-20,the_player.x);
+    print_unsigned_int(80,-20,the_player.cnt); */
 
     /// done
     return;
