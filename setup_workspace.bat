@@ -3,4 +3,4 @@
 
 mkdir bin
 mkdir build
-mkdir build/rel
+mkdir build\rel
