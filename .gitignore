@@ -1,7 +1,7 @@
-#bin
-#build
+bin
+build
 # -> for the script to work we need the /bin and the /build/rel folder (empty)
-# so why dont include bin and build...
+# for that execute the setup_workspace.bat script!
 
 # coming soon?
 manual
