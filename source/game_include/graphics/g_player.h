@@ -12,7 +12,7 @@
 // ***************************************************************************
 
 
-const struct packet_t vl_player_mid[] = 
+const struct packet_t vl_player_mid1[] = 
 {
 	{MOVE, {-96,-80}}, //move to left back wheel
 	
@@ -42,8 +42,14 @@ const struct packet_t vl_player_mid[] =
 	{DRAW, {0,40}},
 	{DRAW, {-16,60}},
 
-	/// split?
+	/// split
+	VL_END
+};
 
+const struct packet_t vl_player_mid2[] = 
+{
+	/// starting from mid again
+	{MOVE, {0,80}},
 	//chassis
 	{DRAW, {112,-64}},
 	{DRAW, {0,-32}},
@@ -75,6 +81,44 @@ const struct packet_t vl_player_mid[] =
 	{DRAW, {16,-8}},
 	{DRAW, {0,-24}},
 	{DRAW, {-16,-8}},
+	//done
+	VL_END
+};
+
+
+const struct packet_t vl_player_mid2_enhanced[] = 
+{
+	/// starting from mid again
+	{MOVE, {32,-120}},
+	//front wheel left
+	{DRAW, {40,0}},
+	{DRAW, {0,60}},
+	{DRAW, {-36,0}},
+	//chassis
+	{MOVE, {-32,-20}},
+	{DRAW, {112,64}},
+	{DRAW, {0,32}},
+	{DRAW, {-112,64}},
+	//front wheel right side
+	{MOVE, {32,40}},
+	{DRAW, {40,0}},
+	{DRAW, {0,-60}},
+	{DRAW, {-36,0}},
+	//front wing right
+	{MOVE, {45,-28}}, //< this measurement was taken with one eye closed and pi*thumb
+	{DRAW, {0,48}},
+	{DRAW, {16,-8}},
+	{DRAW, {0,-48}},
+	//front wing left
+	{MOVE, {0,-48}},
+	{DRAW, {0,-48}},
+	{DRAW, {-16,-8}},
+	{DRAW, {0,48}},
+	//driver
+	{MOVE, {-28,12}},
+	{DRAW, {16,8}},
+	{DRAW, {0,24}},
+	{DRAW, {-16,8}},
 	//done
 	VL_END
 };

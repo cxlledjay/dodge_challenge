@@ -29,24 +29,14 @@ _player_init:
 _player_draw:
 	leas	-2,s
 	jsr	___Intensity_5F
-	jsr	___Reset0Ref
-	ldb	#127
-	stb	*_dp_VIA_t1_cnt_lo
 	ldb	_the_player
 	clra		;zero_extendqihi: R:b -> R:d
-	tfr	d,x
-	ldb	#-112
-	stb	,-s
-	ldb	_PLAYER_X_LUT,x
-	jsr	__Moveto_d
-	ldb	_the_player
-	clra		;zero_extendqihi: R:b -> R:d
-	std	1,s
+	std	,s
 	aslb
 	rola
 	tfr	d,x
 	jsr	[_PLAYER_DRAW_LUT,x]
-	leas	3,s
+	leas	2,s
 	rts
 	.globl	_player_change_left
 _player_change_left:
@@ -72,8 +62,8 @@ L10:
 	.globl	_check_collision
 _check_collision:
 	rts
-	.globl	_vl_player_mid
-_vl_player_mid:
+	.globl	_vl_player_mid1
+_vl_player_mid1:
 	.byte	0
 	.byte	-96
 	.byte	-80
@@ -137,6 +127,13 @@ _vl_player_mid:
 	.byte	-1
 	.byte	-16
 	.byte	60
+_vl_term_0_46:
+	.byte	1
+	.globl	_vl_player_mid2
+_vl_player_mid2:
+	.byte	0
+	.byte	0
+	.byte	80
 	.byte	-1
 	.byte	112
 	.byte	-64
@@ -209,7 +206,83 @@ _vl_player_mid:
 	.byte	-1
 	.byte	-16
 	.byte	-8
-_vl_term_0_79:
+_vl_term_1_85:
+	.byte	1
+	.globl	_vl_player_mid2_enhanced
+_vl_player_mid2_enhanced:
+	.byte	0
+	.byte	32
+	.byte	-120
+	.byte	-1
+	.byte	40
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	60
+	.byte	-1
+	.byte	-36
+	.byte	0
+	.byte	0
+	.byte	-32
+	.byte	-20
+	.byte	-1
+	.byte	112
+	.byte	64
+	.byte	-1
+	.byte	0
+	.byte	32
+	.byte	-1
+	.byte	-112
+	.byte	64
+	.byte	0
+	.byte	32
+	.byte	40
+	.byte	-1
+	.byte	40
+	.byte	0
+	.byte	-1
+	.byte	0
+	.byte	-60
+	.byte	-1
+	.byte	-36
+	.byte	0
+	.byte	0
+	.byte	45
+	.byte	-28
+	.byte	-1
+	.byte	0
+	.byte	48
+	.byte	-1
+	.byte	16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	-48
+	.byte	0
+	.byte	0
+	.byte	-48
+	.byte	-1
+	.byte	0
+	.byte	-48
+	.byte	-1
+	.byte	-16
+	.byte	-8
+	.byte	-1
+	.byte	0
+	.byte	48
+	.byte	0
+	.byte	-28
+	.byte	12
+	.byte	-1
+	.byte	16
+	.byte	8
+	.byte	-1
+	.byte	0
+	.byte	24
+	.byte	-1
+	.byte	-16
+	.byte	8
+_vl_term_2_123:
 	.byte	1
 	.globl	_vl_player_left
 _vl_player_left:
@@ -462,7 +535,7 @@ _vl_player_left:
 	.byte	-1
 	.byte	-36
 	.byte	-24
-_vl_term_1_192:
+_vl_term_3_236:
 	.byte	1
 	.globl	_vl_player_right
 _vl_player_right:
@@ -715,23 +788,70 @@ _vl_player_right:
 	.byte	-1
 	.byte	-36
 	.byte	24
-_vl_term_2_305:
+_vl_term_4_349:
 	.byte	1
 	.globl	__player_draw_left
 __player_draw_left:
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
 	ldb	#10
 	stb	*_dp_VIA_t1_cnt_lo
+	leas	1,s
 	ldx	#_vl_player_left
 	jmp	___Draw_VLp
 	.globl	__player_draw_mid
 __player_draw_mid:
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
 	ldb	#16
 	stb	*_dp_VIA_t1_cnt_lo
-	ldx	#_vl_player_mid
+	ldx	#_vl_player_mid1
+	jsr	___Draw_VLp
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
+	ldb	#16
+	stb	*_dp_VIA_t1_cnt_lo
+	leas	2,s
+	ldx	#_vl_player_mid2_enhanced
 	jmp	___Draw_VLp
 	.globl	__player_draw_right
 __player_draw_right:
+	jsr	___Reset0Ref
+	ldb	#127
+	stb	*_dp_VIA_t1_cnt_lo
+	ldb	_the_player
+	clra		;zero_extendqihi: R:b -> R:d
+	tfr	d,x
+	ldb	#-112
+	stb	,-s
+	ldb	_PLAYER_X_LUT,x
+	jsr	__Moveto_d
 	ldb	#10
 	stb	*_dp_VIA_t1_cnt_lo
+	leas	1,s
 	ldx	#_vl_player_right
 	jmp	___Draw_VLp

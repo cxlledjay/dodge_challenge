@@ -39,7 +39,7 @@
    0114 C6 EC         [ 2]   39 	ldb	#-20
    0116 E7 E2         [ 6]   40 	stb	,-s
    0118 C6 64         [ 2]   41 	ldb	#100
-   011A BD 0A 6A      [ 8]   42 	jsr	_print_unsigned_int
+   011A BD 0B 0F      [ 8]   42 	jsr	_print_unsigned_int
    011D BD F1 BA      [ 8]   43 	jsr	___Read_Btns
    0120 F6 C8 11      [ 5]   44 	ldb	_Vec_Buttons
    0123 E7 62         [ 5]   45 	stb	2,s
@@ -61,7 +61,7 @@
    0142 C6 04         [ 2]   61 	ldb	#4
    0144 E4 E4         [ 4]   62 	andb	,s
    0146 27 06         [ 3]   63 	beq	L11
-   0148 8E 07 A6      [ 3]   64 	ldx	#_player_change_right
+   0148 8E 07 8E      [ 3]   64 	ldx	#_player_change_right
    014B BF C8 AC      [ 6]   65 	stx	_the_player+2
    014E                      66 L11:
    014E BD 00 7A      [ 8]   67 	jsr	_clock_tick
@@ -74,7 +74,7 @@
    015F 32 61         [ 5]   74 	leas	1,s
    0161 39            [ 5]   75 	rts
    0162                      76 L16:
-   0162 8E 07 94      [ 3]   77 	ldx	#_player_change_left
+   0162 8E 07 7C      [ 3]   77 	ldx	#_player_change_left
    0165 BF C8 AC      [ 6]   78 	stx	_the_player+2
    0168 20 E4         [ 3]   79 	bra	L11
                              80 	.globl	_pause_menu
@@ -84,7 +84,7 @@
    016B                      84 _game_over:
    016B 39            [ 5]   85 	rts
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
 
 Symbol Table
 
@@ -105,7 +105,7 @@ Symbol Table
     _the_player        **** GX
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
 
 Area Table
 

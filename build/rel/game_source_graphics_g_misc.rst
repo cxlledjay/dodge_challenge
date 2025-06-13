@@ -418,7 +418,7 @@
    02EF                     418 _vl_term_10_236:
    02EF 01                  419 	.byte	1
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 1
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
 
 Symbol Table
 
@@ -438,7 +438,7 @@ Symbol Table
   2 _vl_term_9_193     0141 R
 
 ASxxxx Assembler V05.50  (Motorola 6809)                                Page 2
-Hexadecimal [16-Bits]                                 Fri Jun 13 20:36:16 2025
+Hexadecimal [16-Bits]                                 Fri Jun 13 21:12:40 2025
 
 Area Table
 

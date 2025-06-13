@@ -12,6 +12,10 @@ typedef void (*_player_draw_func)(void);
 const _player_draw_func PLAYER_DRAW_LUT[];
 
 
+/****************************************************
+ * define utils ... TODO: add draw functions as define?? 
+ ***************************************************/
+#define PLAYER_Y		(-112)
 
 
 // init func
@@ -34,12 +38,6 @@ void player_init(void)
  {
 	/// drawing settings
 	Intensity_5F();					//< set brightness of the electron beam
-	Reset0Ref();					//< reset beam to center
-	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
-
-	/// move to correct lane
-	#define PLAYER_Y		(-112)
-	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
 
 	/// draw player vector list (based on lane)
 	(* PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
@@ -142,18 +140,37 @@ const int PLAYER_X_LUT[3] =
 
 void _player_draw_left(void)
 {
+	Reset0Ref();					//< reset beam to center
+	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
+	/// move to correct lane
+	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
 	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_left);
 }
 
 void _player_draw_mid(void)
 {
+	/// draw first part
+	Reset0Ref();					//< reset beam to center
+	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
+	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
+	dp_VIA_t1_cnt_lo = 16;			//< set scaling factor for drawing
+	Draw_VLp(&vl_player_mid1);
+
+	/// draw second part
+	Reset0Ref();
+	dp_VIA_t1_cnt_lo = 0x7f;
+	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]);
 	dp_VIA_t1_cnt_lo = 16;
-	Draw_VLp(&vl_player_mid);
+	Draw_VLp(&vl_player_mid2_enhanced);
 }
 
 void _player_draw_right(void)
 {
+	Reset0Ref();					//< reset beam to center
+	dp_VIA_t1_cnt_lo = 0x7f;		//< set scaling factor for positioning
+	/// move to correct lane
+	Moveto_d(PLAYER_Y, PLAYER_X_LUT[(unsigned int) the_player.lane]); //< use look up table for performance <insert hacker man meme here>
 	dp_VIA_t1_cnt_lo = 10;
 	Draw_VLp(&vl_player_right);
 }
