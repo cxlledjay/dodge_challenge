@@ -6,7 +6,7 @@ typedef void (* enemy_tick_func) (struct _enemy_t * me);
 
 typedef struct _enemy_t
 {
-    struct packet_t * model; //< only set by spawning
+    void * model; //< only set by spawning
 
     /// y pos is stored as uint and converted on the fly
     unsigned int encoded_y; //< only need to store y pos, x pos & scale is derived from LUT in tick()
@@ -30,3 +30,8 @@ void enemy_init(void);
  * @return 0 on success, -1 on error (maybe 1 on lane used in last spawn?, ...)
  */
 int enemy_try_spawn(lane_t lane);
+
+//debug
+extern const unsigned int _CONVERT_EY_TO_SCALE[];
+extern const int _CONVERT_EY_TO_RY1_LUT[];
+extern const int _CONVERT_EY_TO_RY2_LUT[];

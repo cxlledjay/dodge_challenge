@@ -85,45 +85,76 @@ void tick_dummy(__attribute__((unused)) enemy_t* me)
  *********************************************/
 
 
-const unsigned int _ST00_Y_DEC[10] = { 1,1,1,1,1,1,1,1,1,1 };
-const unsigned int _ST01_Y_DEC[10] = { 1,1,2,1,2,1,1,2,1,2 };
-const unsigned int _ST02_Y_DEC[10] = { 1,2,2,1,2,2,1,2,1,2 };
-const unsigned int _ST03_Y_DEC[10] = { 2,2,2,2,2,2,2,2,2,2 };
-const unsigned int _ST04_Y_DEC[10] = { 2,2,3,2,3,2,2,3,2,3 };
-const unsigned int _ST05_Y_DEC[10] = { 3,3,3,2,3,3,2,3,3,2 };
-const unsigned int _ST06_Y_DEC[10] = { 3,4,3,3,3,3,4,3,3,3 };
-const unsigned int _ST07_Y_DEC[10] = { 3,4,3,4,3,3,4,3,4,3 };
-const unsigned int _ST08_Y_DEC[10] = { 4,4,5,4,4,4,5,4,4,5 };
-const unsigned int _ST09_Y_DEC[10] = { 5,6,5,6,5,6,5,6,5,6 };
-const unsigned int _ST10_Y_DEC[10] = { 8,9,8,8,9,8,9,8,9,8 };
+const unsigned int _ST00_EY_INC[10] = { 1,1,1,1,1,1,1,1,1,1 };
+const unsigned int _ST01_EY_INC[10] = { 1,1,2,1,2,1,1,2,1,2 };
+const unsigned int _ST02_EY_INC[10] = { 1,2,2,1,2,2,1,2,1,2 };
+const unsigned int _ST03_EY_INC[10] = { 2,2,2,2,2,2,2,2,2,2 };
+const unsigned int _ST04_EY_INC[10] = { 2,2,3,2,3,2,2,3,2,3 };
+const unsigned int _ST05_EY_INC[10] = { 3,3,3,2,3,3,2,3,3,2 };
+const unsigned int _ST06_EY_INC[10] = { 3,4,3,3,3,3,4,3,3,3 };
+const unsigned int _ST07_EY_INC[10] = { 3,4,3,4,3,3,4,3,4,3 };
+const unsigned int _ST08_EY_INC[10] = { 4,4,5,4,4,4,5,4,4,5 };
+const unsigned int _ST09_EY_INC[10] = { 5,6,5,6,5,6,5,6,5,6 };
+const unsigned int _ST10_EY_INC[10] = { 8,9,8,8,9,8,9,8,9,8 };
 
 #include "game_include/game.h"
-const unsigned int * _ANIMATION_Y_DEC_LUT[STAGE_T_SIZE] =
+const unsigned int * _ANIMATION_EY_INC_LUT[STAGE_T_SIZE] =
 {
-    _ST00_Y_DEC,
-    _ST01_Y_DEC,
-    _ST02_Y_DEC,
-    _ST03_Y_DEC,
-    _ST04_Y_DEC,
-    _ST05_Y_DEC,
-    _ST06_Y_DEC,
-    _ST07_Y_DEC,
-    _ST08_Y_DEC,
-    _ST09_Y_DEC,
-    _ST10_Y_DEC
+    _ST00_EY_INC,
+    _ST01_EY_INC,
+    _ST02_EY_INC,
+    _ST03_EY_INC,
+    _ST04_EY_INC,
+    _ST05_EY_INC,
+    _ST06_EY_INC,
+    _ST07_EY_INC,
+    _ST08_EY_INC,
+    _ST09_EY_INC,
+    _ST10_EY_INC
 };
 
 
 /// encoded Y starts at 0 (real y = 32) and goes to 232 (real y = -195)
 
-/// encoded Y to real X pos LUTs
 
 #define SPAWN_Y                 (32)
-#define DESPAWN_Y               (-200)
-#define CONVERSION_LUT_SIZE     (232u)
+#define DESPAWN_Y               (-178)
+#define CONVERSION_LUT_SIZE     (210u)
+
+
+/// encoded Y to real Y pos LUTs
+
+const int _CONVERT_EY_TO_RY1_LUT[CONVERSION_LUT_SIZE] =
+{
+    32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,
+    -1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,
+    -26,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,
+    -49,-50,-51,-52,-53,-54,-55,-56,-57,-58,-59,-60,-61,-62,-63,-64,-65,-66,-67,-68,-69,-70,-71,
+    -72,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-90,-91,-92,-93,-94,
+    -95,-96,-97,-98,-99,-100,-101,-102,-103,-104,-105,-106,-107,-108,-109,-110,-111,-112,-113,
+    -114,-115,-116,-117,-118,-119,-120,-121,-122,-123,-124,-125,-126,-127,-128,-128,-128,-128,
+    -128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,
+    -128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,-128,
+    -128,-128,-128,-128,-128,-128,-128,-128,-128,-128
+    
+};
+
+const int _CONVERT_EY_TO_RY2_LUT[CONVERSION_LUT_SIZE] =
+{
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,
+    -15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,
+    -38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,-49
+};
+
+
+
+
+/// encoded Y to real X pos LUTs
 
 #define _CONVERT_Y_TO_X_MID_LUT(index)  (0u) //< in case i think i need to calculate something for midlane
-
 
 const int _CONVERT_EY_TO_RX_LEFT_LUT[CONVERSION_LUT_SIZE] =
 {
@@ -181,10 +212,5 @@ const unsigned int _CONVERT_EY_TO_SCALE[CONVERSION_LUT_SIZE] =
     44,44,44,44,44,
     45,45,45,45,45, //200
     46,46,46,46,46,
-    47,47,47,47,47, //210
-    48,48,48,48,48,
-    49,49,49,49,49, //220
-    50,50,50,50,50,
-    51,51,51,51,51, //230
-    52,52           //232
+    47,47,47,47,47  //210
 };
