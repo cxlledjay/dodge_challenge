@@ -5,56 +5,13 @@
 player_t the_player;
 
 
-#include "game_include/game.h"
-
-//fist animation step
-const unsigned int PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[STAGE_T_SIZE] =
-{
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7,
-	7
-};
-
-//second animation step
-const unsigned int PLAYER_ANIMATION_FRAME_CNT_STEP2_LUT[STAGE_T_SIZE] =
-{
-	6,
-	6,
-	6,
-	6,
-	6,
-	6,
-	6,
-	6,
-	6,
-	6,
-	6
-};
-
-
 // fw declarations:
 void check_collision(void);
-const int PLAYER_STATIC_X_LUT[];
+const int _PLAYER_STATIC_X_LUT[];
 typedef void (*_player_draw_func)(void);
-const _player_draw_func PLAYER_DRAW_LUT[];
-
-void player_change_left_to_mid_step2(void);
-void player_change_mid_to_right_step2(void);
-void player_change_right_to_mid_step2(void);
-void player_change_mid_to_left_step2(void);
-
-const int* const PLAYER_LUT_LEFT_MID_STEP2[];
-const int* const PLAYER_LUT_MID_RIGHT_STEP2[];
-const int* const PLAYER_LUT_RIGHT_MID_STEP2[];
-const int* const PLAYER_LUT_MID_LEFT_STEP2[];
+const _player_draw_func _PLAYER_DRAW_LUT[];
+/// @brief the object containing all information for lane change step2
+const player_lane_change_t player_lane_change_step2;
 
 
 /****************************************************
@@ -107,7 +64,7 @@ const int* const PLAYER_LUT_MID_LEFT_STEP2[];
 /// @brief init function
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .x = PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0,  .cnt = 0, .tick = player_draw};
+	player_t fresh_player = {.lane = MID_LANE, .x = _PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0,  .cnt = 0, .tick = player_draw};
 	the_player = fresh_player;
 }
 
@@ -130,7 +87,7 @@ void player_draw(void)
 	Intensity_5F();					//< set brightness of the electron beam
 
 	/// draw player vector list (based on lane)
-	(* PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
+	(* _PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
 
 	/// done
 	return;
@@ -170,9 +127,9 @@ void player_change_left_to_mid_step1(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to second half
-		the_player.tick = player_change_left_to_mid_step2;
-		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP2_LUT[the_game.stage];
-		the_player.x_LUT = PLAYER_LUT_LEFT_MID_STEP2[the_game.stage];
+		the_player.tick = player_lane_change_step2.animation_tick->left_to_mid;
+		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
+		the_player.x_LUT = player_lane_change_step2.x_LUT->left_to_mid[the_game.stage];
 	}
 }
 
@@ -186,7 +143,7 @@ void player_change_left_to_mid_step2(void)
 	{
 		/// transition to normal again
 		the_player.lane = MID_LANE;
-		the_player.x = PLAYER_STATIC_X_LUT[MID_LANE];
+		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
 	}
 }
@@ -204,9 +161,9 @@ void player_change_mid_to_right_step1(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to second half
-		the_player.tick = player_change_mid_to_right_step2;
-		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP2_LUT[the_game.stage];
-		the_player.x_LUT = PLAYER_LUT_MID_RIGHT_STEP2[the_game.stage];
+		the_player.tick = player_lane_change_step2.animation_tick->mid_to_right;
+		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
+		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_right[the_game.stage];
 	}
 }
 
@@ -220,7 +177,7 @@ void player_change_mid_to_right_step2(void)
 	{
 		/// transition to normal again
 		the_player.lane = RIGHT_LANE;
-		the_player.x = PLAYER_STATIC_X_LUT[RIGHT_LANE];
+		the_player.x = _PLAYER_STATIC_X_LUT[RIGHT_LANE];
 		the_player.tick = player_draw;
 	}
 }
@@ -238,9 +195,9 @@ void player_change_right_to_mid_step1(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to second half
-		the_player.tick = player_change_right_to_mid_step2;
-		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP2_LUT[the_game.stage];
-		the_player.x_LUT = PLAYER_LUT_RIGHT_MID_STEP2[the_game.stage];
+		the_player.tick = player_lane_change_step2.animation_tick->right_to_mid;
+		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
+		the_player.x_LUT = player_lane_change_step2.x_LUT->right_to_mid[the_game.stage];
 	}
 }
 
@@ -254,7 +211,7 @@ void player_change_right_to_mid_step2(void)
 	{
 		/// transition to normal again
 		the_player.lane = MID_LANE;
-		the_player.x = PLAYER_STATIC_X_LUT[MID_LANE];
+		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
 	}
 }
@@ -272,9 +229,9 @@ void player_change_mid_to_left_step1(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to second half
-		the_player.tick = player_change_mid_to_left_step2;
-		the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP2_LUT[the_game.stage];
-		the_player.x_LUT = PLAYER_LUT_MID_LEFT_STEP2[the_game.stage];
+		the_player.tick = player_lane_change_step2.animation_tick->mid_to_left;
+		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
+		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_left[the_game.stage];
 	}
 }
 
@@ -288,7 +245,7 @@ void player_change_mid_to_left_step2(void)
 	{
 		/// transition to normal again
 		the_player.lane = LEFT_LANE;
-		the_player.x = PLAYER_STATIC_X_LUT[LEFT_LANE];
+		the_player.x = _PLAYER_STATIC_X_LUT[LEFT_LANE];
 		the_player.tick = player_draw;
 	}
 }
@@ -333,7 +290,7 @@ void _player_draw_right(void)
 	PLAYER_DRAW_RIGHT();
 }
 
-const _player_draw_func PLAYER_DRAW_LUT[3] = 
+const _player_draw_func _PLAYER_DRAW_LUT[3] = 
 {
 	_player_draw_left,
 	_player_draw_mid,
@@ -367,7 +324,7 @@ void check_collision(void) //< TODO: might need to add parameter to determine wh
  ***************************************************/
 
 
-const int PLAYER_STATIC_X_LUT[3] =
+const int _PLAYER_STATIC_X_LUT[3] =
 {
 	-82,
 	0,
@@ -467,130 +424,194 @@ const int _SP1_MID_LEFT_X_LUT_1[7] = //< [speed1] mid -> left (1)
 
 
 /****************************************************
- * LUT interface (indexed)
+ * x pos LUTs
  ***************************************************/
 
-/// .....public:
 
-const int* const PLAYER_LUT_LEFT_MID_STEP1[STAGE_T_SIZE] =
+/// @brief LUTs for x pos (public interface)
+const player_lane_change_x_lut_t _player_lanechange_x_lut_step1 =
 {
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1,
-	_SP1_LEFT_MID_X_LUT_1
+	.left_to_mid = {
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1,
+		_SP1_LEFT_MID_X_LUT_1
+	},
+	.mid_to_right = {
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1,
+		_SP1_MID_RIGHT_X_LUT_1
+	},
+	.right_to_mid = {
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1,
+		_SP1_RIGHT_MID_X_LUT_1
+	},
+	.mid_to_left = {
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1,
+		_SP1_MID_LEFT_X_LUT_1
+	},
 };
 
-const int* const PLAYER_LUT_MID_RIGHT_STEP1[STAGE_T_SIZE] =
+/// @brief LUTs for x pos (private interface)
+const player_lane_change_x_lut_t _player_lanechange_x_lut_step2 =
 {
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1,
-	_SP1_MID_RIGHT_X_LUT_1
+	.left_to_mid = {
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2,
+		_SP1_LEFT_MID_X_LUT_2
+	},
+	.mid_to_right = {
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2,
+		_SP1_MID_RIGHT_X_LUT_2
+	},
+	.right_to_mid = {
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2,
+		_SP1_RIGHT_MID_X_LUT_2
+	},
+	.mid_to_left = {
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2,
+		_SP1_MID_LEFT_X_LUT_2
+	}
 };
 
-const int* const PLAYER_LUT_RIGHT_MID_STEP1[STAGE_T_SIZE] =
+
+/****************************************************
+ * animation tick functions
+ ***************************************************/
+
+/// @brief animation pointers (public interface)
+const player_lane_change_animation_t _player_lanechange_tick_step1 =
 {
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1,
-	_SP1_RIGHT_MID_X_LUT_1
+	.left_to_mid = player_change_left_to_mid_step1,
+	.mid_to_right = player_change_mid_to_right_step1,
+	.right_to_mid = player_change_right_to_mid_step1,
+	.mid_to_left = player_change_mid_to_left_step1
 };
 
-const int* const PLAYER_LUT_MID_LEFT_STEP1[STAGE_T_SIZE] =
+/// @brief animation pointers (private interface)
+const player_lane_change_animation_t _player_lanechange_tick_step2 =
 {
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1,
-	_SP1_MID_LEFT_X_LUT_1
+	.left_to_mid = player_change_left_to_mid_step2,
+	.mid_to_right = player_change_mid_to_right_step2,
+	.right_to_mid = player_change_right_to_mid_step2,
+	.mid_to_left = player_change_mid_to_left_step2
 };
 
 
-/// .....private:
+/*********************************************
+ * interfaces
+ ********************************************/
 
-const int* const PLAYER_LUT_LEFT_MID_STEP2[STAGE_T_SIZE] =
+/**
+ * @brief public interface for lane change initiation
+ */
+const player_lane_change_t player_lane_change =
 {
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2,
-	_SP1_LEFT_MID_X_LUT_2
+	.FRAME_CNT = {
+		7,
+		7,
+		7,
+		7,
+		7,
+		7,
+		7,
+		7,
+		7,
+		7,
+		7
+	},
+	.animation_tick = &_player_lanechange_tick_step1,
+	.x_LUT = &_player_lanechange_x_lut_step1
 };
 
-const int* const PLAYER_LUT_MID_RIGHT_STEP2[STAGE_T_SIZE] =
-{
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2,
-	_SP1_MID_RIGHT_X_LUT_2
-};
 
-const int* const PLAYER_LUT_RIGHT_MID_STEP2[STAGE_T_SIZE] =
-{
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2,
-	_SP1_RIGHT_MID_X_LUT_2
-};
 
-const int* const PLAYER_LUT_MID_LEFT_STEP2[STAGE_T_SIZE] =
+/**
+ * @brief private interface for lane change (step2)
+ */
+const player_lane_change_t player_lane_change_step2 =
 {
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2,
-	_SP1_MID_LEFT_X_LUT_2
+	.FRAME_CNT = {
+		6,
+		6,
+		6,
+		6,
+		6,
+		6,
+		6,
+		6,
+		6,
+		6,
+		6
+	},
+	.animation_tick = &_player_lanechange_tick_step2,
+	.x_LUT = &_player_lanechange_x_lut_step2
 };

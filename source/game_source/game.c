@@ -135,15 +135,15 @@ void game_run(void)
             switch(the_player.lane)
             {
                 case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_change_right_to_mid_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
-                    the_player.x_LUT = PLAYER_LUT_RIGHT_MID_STEP1[the_game.stage];
+                    the_player.tick = player_lane_change.animation_tick->right_to_mid;
+                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change.x_LUT->right_to_mid[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case MID_LANE: //< mid -> left
-                    the_player.tick = player_change_mid_to_left_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
-                    the_player.x_LUT = PLAYER_LUT_MID_LEFT_STEP1[the_game.stage];
+                    the_player.tick = player_lane_change.animation_tick->mid_to_left;
+                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change.x_LUT->mid_to_left[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case LEFT_LANE: //< in left lane
@@ -154,7 +154,7 @@ void game_run(void)
                     /// should never happen!
                     break;
             }
-        } 
+        }
     }
     else if(input & 0b00000100) //< go right
     {
@@ -165,15 +165,15 @@ void game_run(void)
             switch(the_player.lane)
             {
                 case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_change_left_to_mid_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
-                    the_player.x_LUT = PLAYER_LUT_LEFT_MID_STEP1[the_game.stage];
+                    the_player.tick = player_lane_change.animation_tick->left_to_mid;
+                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change.x_LUT->left_to_mid[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case MID_LANE: //< mid -> right
-                    the_player.tick = player_change_mid_to_right_step1;
-                    the_player.cnt = PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[the_game.stage];
-                    the_player.x_LUT = PLAYER_LUT_MID_RIGHT_STEP1[the_game.stage];
+                    the_player.tick = player_lane_change.animation_tick->mid_to_right;
+                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change.x_LUT->mid_to_right[the_game.stage];
                     the_player.lane = CHANGE;
                     break;
                 case RIGHT_LANE: //< in right lane

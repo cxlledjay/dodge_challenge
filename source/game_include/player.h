@@ -2,6 +2,11 @@
 #include "misc.h"
 
 
+/****************************************************************
+ * data structures
+ ****************************************************************/
+
+/// @brief the player object
 typedef struct _player_t
 {
     lane_t lane; //< current lane the player is in
@@ -22,15 +27,38 @@ typedef struct _player_t
  */
 extern player_t the_player;
 
-/**
- * @brief different lane swap animation times (in frames) for different speed stages
- * 
- * @param IN the_game.stage
- * @returns  the frame count of how long the lane swap animation will last
- */
-extern const unsigned int PLAYER_ANIMATION_FRAME_CNT_STEP1_LUT[11];
+/// ---------------------------------------------------------------
 
 
+/// @brief collection of all tick functions for lane change animation (step1 - public)
+typedef struct _player_lane_change_animation_t
+{
+    void (*left_to_mid) (void);
+    void (*mid_to_right) (void);
+    void (*right_to_mid) (void);
+    void (*mid_to_left) (void);
+}player_lane_change_animation_t;
+
+#include "game_include/game.h"
+/// @brief collection of all x position LUTs per animation frame for lane change animation (step1 - public)
+typedef struct _player_lane_change_x_lut_t
+{
+    /// @brief x pos LUT for left -> mid step 1 animation
+    /// @param index the_game.stage
+    /// @return pointer to LUT
+    const int* const left_to_mid[STAGE_T_SIZE];
+    const int* const mid_to_right[STAGE_T_SIZE];
+    const int* const right_to_mid[STAGE_T_SIZE];
+    const int* const mid_to_left[STAGE_T_SIZE];
+}player_lane_change_x_lut_t;
+
+/// @brief collection of everything needed to calculate lane change in one structure
+typedef struct _player_lane_change_t
+{
+    const unsigned int FRAME_CNT[STAGE_T_SIZE];
+    const player_lane_change_animation_t * animation_tick;
+    const player_lane_change_x_lut_t * x_LUT;
+}player_lane_change_t;
 
 
 
@@ -48,48 +76,10 @@ void player_init(void);
  * player tick options interface
  ****************************************************************/
 
- /// @brief driving straight
- void player_draw(void);
+/// @brief driving straight
+void player_draw(void);
 
 
- /// -------------< l a n e   c h a n g e >-------------
-
- /// @brief left -> mid
- void player_change_left_to_mid_step1(void);
-
- /// @brief mid -> right
- void player_change_mid_to_right_step1(void);
-
-
- /// @brief right -> mid
- void player_change_right_to_mid_step1(void);
-
- /// @brief mid -> left
- void player_change_mid_to_left_step1(void);
-
-
-
- 
-/****************************************************************
- * animation LUTs
- ****************************************************************/
-
-/// @brief x pos LUT for left -> mid step 1 animation
-/// @param index the_game.stage
-/// @return pointer to LUT
-extern const int* const PLAYER_LUT_LEFT_MID_STEP1[];
-
-/// @brief x pos LUT for mid -> right step 1 animation
-/// @param index the_game.stage
-/// @return pointer to LUT
-extern const int* const PLAYER_LUT_MID_RIGHT_STEP1[];
-
-/// @brief x pos LUT for right -> mid step 1 animation
-/// @param index the_game.stage
-/// @return pointer to LUT
-extern const int* const PLAYER_LUT_RIGHT_MID_STEP1[];
-
-/// @brief x pos LUT for mid -> left step 1 animation
-/// @param index the_game.stage
-/// @return pointer to LUT
-extern const int* const PLAYER_LUT_MID_LEFT_STEP1[];
+/// @brief constant structure holding everything needed to initiate a lane change
+/// everything else regarding the lane change is processed and calculated locally (in player.c)
+extern const player_lane_change_t player_lane_change;
