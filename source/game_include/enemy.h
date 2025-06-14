@@ -6,13 +6,15 @@ typedef void (* enemy_tick_func) (struct _enemy_t * me);
 
 typedef struct _enemy_t
 {
-    lane_t my_lane; //< only set by spawning
-    int y; //< only need to store y pos, x pos is derived from my_lane via LUT!
-    unsigned int scale; //< scaling factor for "3d like" animation
+    struct packet_t * model; //< only set by spawning
 
-    unsigned int cnt; //< used to count ticks for animation handling
+    /// y pos is stored as uint and converted on the fly
+    unsigned int encoded_y; //< only need to store y pos, x pos & scale is derived from LUT in tick()
+
+    //unsigned int cnt; //< used to count ticks for animation handling
 
     enemy_tick_func tick; //< executed each "tick" --> animation handling (collision detection in player) | set to idle() when unused!
+    /// 3 different ticks: tick_left, tick_mid and tick_right (state about lane in function hardcoded -> and thus LUTs as well)
 } enemy_t;
 
 
