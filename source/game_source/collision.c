@@ -68,11 +68,25 @@ void aabb_draw(void)
     Draw_Line_d((player_aabbs.car.y_bot)-(player_aabbs.car.y_top),0);
 
     /// wing bb
+    Reset0Ref();					/* reset beam to center	*/
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
+    Moveto_d(player_aabbs.wing.y_bot, player_aabbs.wing.x_left);
+    Draw_Line_d(0,(player_aabbs.wing.x_right)-(player_aabbs.wing.x_left));
+    Draw_Line_d((player_aabbs.wing.y_top)-(player_aabbs.wing.y_bot),0);
+    Draw_Line_d(0,(player_aabbs.wing.x_left)-(player_aabbs.wing.x_right));
+    Draw_Line_d((player_aabbs.wing.y_bot)-(player_aabbs.wing.y_top),0);
 
     /// optional part
     if(collision.check != aabb_check_mid)
     {
         /// optional bb
+        Reset0Ref();					/* reset beam to center	*/
+        dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
+        Moveto_d(player_aabbs.optional.y_bot, player_aabbs.optional.x_left);
+        Draw_Line_d(0,(player_aabbs.optional.x_right)-(player_aabbs.optional.x_left));
+        Draw_Line_d((player_aabbs.optional.y_top)-(player_aabbs.optional.y_bot),0);
+        Draw_Line_d(0,(player_aabbs.optional.x_left)-(player_aabbs.optional.x_right));
+        Draw_Line_d((player_aabbs.optional.y_bot)-(player_aabbs.optional.y_top),0);
     }
 }
 
@@ -83,28 +97,61 @@ void aabb_draw(void)
 
 void aabb_calculate_mid(void)
 {
+    /// main car
     player_aabbs.car.y_top = PLAYER_Y + 9;
     player_aabbs.car.y_bot = PLAYER_Y - 12;
     player_aabbs.car.x_left = the_player.x - 20;
     player_aabbs.car.x_right = the_player.x + 20;
+
+    /// front wing
+    player_aabbs.wing.y_top = PLAYER_Y + 15;
+    player_aabbs.wing.y_bot = PLAYER_Y + 9;
+    player_aabbs.wing.x_left = the_player.x - 10;
+    player_aabbs.wing.x_right = the_player.x + 10;
 }
 
 
 void aabb_calculate_left(void)
 {
+    /// main car
     player_aabbs.car.y_top = PLAYER_Y + 11;
     player_aabbs.car.y_bot = PLAYER_Y - 12;
-    player_aabbs.car.x_left = the_player.x - 20;
-    player_aabbs.car.x_right = the_player.x + 27;
+    player_aabbs.car.x_left = the_player.x + 27;
+    player_aabbs.car.x_right = the_player.x - 5;
+
+    /// front wing
+    player_aabbs.wing.y_top = PLAYER_Y + 16;
+    player_aabbs.wing.y_bot = PLAYER_Y + 11;
+    player_aabbs.wing.x_left = the_player.x + 25;
+    player_aabbs.wing.x_right = the_player.x + 9;
+
+    /// optional
+    player_aabbs.optional.y_top = PLAYER_Y + 4;
+    player_aabbs.optional.y_bot = PLAYER_Y - 12;
+    player_aabbs.optional.x_left = the_player.x - 5;
+    player_aabbs.optional.x_right = the_player.x - 20;
 }
 
 
 void aabb_calculate_right(void)
 {
+    /// main car
     player_aabbs.car.y_top = PLAYER_Y + 11;
     player_aabbs.car.y_bot = PLAYER_Y - 12;
     player_aabbs.car.x_left = the_player.x - 27;
-    player_aabbs.car.x_right = the_player.x + 20;
+    player_aabbs.car.x_right = the_player.x + 5;
+
+    /// front wing
+    player_aabbs.wing.y_top = PLAYER_Y + 16;
+    player_aabbs.wing.y_bot = PLAYER_Y + 11;
+    player_aabbs.wing.x_left = the_player.x - 25;
+    player_aabbs.wing.x_right = the_player.x - 9;
+
+    /// optional
+    player_aabbs.optional.y_top = PLAYER_Y + 4;
+    player_aabbs.optional.y_bot = PLAYER_Y - 12;
+    player_aabbs.optional.x_left = the_player.x + 5;
+    player_aabbs.optional.x_right = the_player.x + 20;
 }
 
 
@@ -114,7 +161,7 @@ void aabb_calculate_right(void)
 #include "lib/print/print.h"
 
 
-#define DEBUG
+//#define DEBUG
 void aabb_check_mid(void)
 {
     /// TODO: implement! (ayy)
@@ -125,22 +172,12 @@ void aabb_check_mid(void)
     #endif
 }
 
-void aabb_check_left(void)
+void aabb_check_side(void)
 {
     /// TODO: implement! (ayy)
 
     #ifdef DEBUG
     aabb_draw();
-    print_string(100,-40, "CD:LEFT");
-    #endif
-}
-
-void aabb_check_right(void)
-{
-    /// TODO: implement! (ayy)
-
-    #ifdef DEBUG
-    aabb_draw();
-    print_string(100,-40, "CD:RIGHT");
+    print_string(100,-40, "CD:SIDE");
     #endif
 }

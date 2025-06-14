@@ -31,8 +31,7 @@ void aabb_calculate_left(void);
 void aabb_calculate_right(void);
 
 void aabb_check_mid(void);
-void aabb_check_left(void);
-void aabb_check_right(void);
+void aabb_check_side(void);
 
 
 /// use macros for ease of use...
@@ -42,8 +41,8 @@ void aabb_check_right(void);
 
 #define COLLISION_SET_LEFT()                                 \
     collision.recalculate_player_aabb = aabb_calculate_left; \
-    collision.check = aabb_check_left;
+    collision.check = aabb_check_side;
 
 #define COLLISION_SET_RIGHT()                                 \
     collision.recalculate_player_aabb = aabb_calculate_right; \
-    collision.check = aabb_check_right;
+    collision.check = aabb_check_side;
