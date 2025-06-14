@@ -85,6 +85,7 @@ void play_start_animation(void)
 
 //debug
 #include "lib/print/print.h"
+#include "game_include/graphics/g_enemy.h"
 
 void game_run(void)
 {
@@ -190,7 +191,7 @@ void game_run(void)
     the_map.tick();
 
     /// draw the player & check collisions etc.
-    the_player.tick(); //< keep sequence so the game seems more fair!
+    //the_player.tick(); //< keep sequence so the game seems more fair!
     
     /// TODO: draw new position of enemies
 
@@ -200,6 +201,44 @@ void game_run(void)
     /// DEBUG SECTION
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
+    Intensity_5F();
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(30, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 6;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
+    
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(-20, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 16;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
+    
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(-70, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 26;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
+
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(-120, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 36;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
+    
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(-120, the_player.x);					/* move to player pos */				\
+	Moveto_d(-50, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 46;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
+    
+    Reset0Ref();					/* reset beam to center	*/								\
+	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
+	Moveto_d(-120, the_player.x);					/* move to player pos */				\
+	Moveto_d(-75, the_player.x);					/* move to player pos */								\
+	dp_VIA_t1_cnt_lo = 51;			/* set scaling factor for drawing */					\
+	Draw_VLp(&vl_enemy_dummy);
 
     /// done
     return;

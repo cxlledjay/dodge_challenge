@@ -3,8 +3,8 @@
 
 new_lines = []
 
-x_factor = -1
-y_factor = 1
+x_factor = 2
+y_factor = 2
 
 if __name__ == "__main__":
     # Open the file in read mode

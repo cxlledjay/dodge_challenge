@@ -74,3 +74,25 @@ void tick_dummy(__attribute__((unused)) enemy_t* me)
 {
     return;
 }
+
+
+
+
+
+
+/**********************************************
+ * LUTs
+ *********************************************/
+
+
+const unsigned int _ST00_Y_DEC[10] = { 1,1,1,1,1,1,1,1,1,1 };
+const unsigned int _ST01_Y_DEC[10] = { 1,1,2,1,2,1,1,2,1,2 };
+const unsigned int _ST02_Y_DEC[10] = { 1,2,2,1,2,2,1,2,1,2 };
+const unsigned int _ST03_Y_DEC[10] = { 2,2,2,2,2,2,2,2,2,2 };
+const unsigned int _ST04_Y_DEC[10] = { 2,2,3,2,3,2,2,3,2,3 };
+const unsigned int _ST05_Y_DEC[10] = { 3,3,3,2,3,3,2,3,3,2 };
+const unsigned int _ST06_Y_DEC[10] = { 3,4,3,3,3,3,4,3,3,3 };
+const unsigned int _ST07_Y_DEC[10] = { 3,4,3,4,3,3,4,3,4,3 };
+const unsigned int _ST08_Y_DEC[10] = { 4,4,5,4,4,4,5,4,4,5 };
+const unsigned int _ST09_Y_DEC[10] = { 5,6,5,6,5,6,5,6,5,6 };
+const unsigned int _ST10_Y_DEC[10] = { 8,9,8,8,9,8,9,8,9,8 };

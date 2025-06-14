@@ -8,6 +8,7 @@ typedef struct _enemy_t
 {
     lane_t my_lane; //< only set by spawning
     int y; //< only need to store y pos, x pos is derived from my_lane via LUT!
+    unsigned int scale; //< scaling factor for "3d like" animation
 
     unsigned int cnt; //< used to count ticks for animation handling
 

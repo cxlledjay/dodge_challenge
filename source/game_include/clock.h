@@ -3,8 +3,9 @@
 
 typedef struct _clock_t
 {
-    unsigned int frames;        //< in wich frame in a second am i?
-    unsigned long seconds;      //< seconds since game started
+    unsigned int frames;            //< in wich frame in a second am i?
+    unsigned int object_move_cnt;   //< counter to calculate enemy + ability movement
+    unsigned long seconds;          //< seconds since game started
 }clock_t;
 
 /**
