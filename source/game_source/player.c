@@ -6,7 +6,6 @@ player_t the_player;
 
 
 // fw declarations:
-void check_collision(void);
 const int _PLAYER_STATIC_X_LUT[];
 typedef void (*_player_draw_func)(void);
 const _player_draw_func _PLAYER_DRAW_LUT[];
@@ -17,7 +16,6 @@ const player_lane_change_t player_lane_change_step2;
 /****************************************************
  * define utils ...
  ***************************************************/
-#define PLAYER_Y		(-112)
 
 /**
  * @brief draw one part of the playermodel at the_player.x
@@ -76,12 +74,13 @@ void player_init(void)
 
 
 #include <vectrex.h>
+#include "game_include/collision.h"
 
 /// @brief default drawing function in case of no active lane change
 void player_draw(void)
 {
 	/// check for collision
-	check_collision(); //< if collision occurs -> wont reach rest of function
+	collision_check(); //< if collision occurs -> wont reach rest of function
 
 	/// drawing settings
 	Intensity_5F();					//< set brightness of the electron beam
@@ -107,7 +106,7 @@ void player_draw(void)
 #define LANE_CHANGE_UPDATE_VARS()																						\
 	the_player.cnt--; /* sequence is important... first decrement to match index starting from 0 */						\
 	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */											\
-	check_collision(); /* check for collisions */																		\
+	collision_check(); /* check for collisions */																		\
 	Intensity_5F();
 
 
@@ -130,6 +129,7 @@ void player_change_left_to_mid_step1(void)
 		the_player.tick = player_lane_change_step2.animation_tick->left_to_mid;
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->left_to_mid[the_game.stage];
+		the_player.lane = MID_LANE; //< now use midlane model + aabbcd
 	}
 }
 
@@ -142,7 +142,6 @@ void player_change_left_to_mid_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.lane = MID_LANE;
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
 	}
@@ -164,6 +163,7 @@ void player_change_mid_to_right_step1(void)
 		the_player.tick = player_lane_change_step2.animation_tick->mid_to_right;
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_right[the_game.stage];
+		the_player.lane = RIGHT_LANE;
 	}
 }
 
@@ -176,7 +176,6 @@ void player_change_mid_to_right_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.lane = RIGHT_LANE;
 		the_player.x = _PLAYER_STATIC_X_LUT[RIGHT_LANE];
 		the_player.tick = player_draw;
 	}
@@ -198,6 +197,7 @@ void player_change_right_to_mid_step1(void)
 		the_player.tick = player_lane_change_step2.animation_tick->right_to_mid;
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->right_to_mid[the_game.stage];
+		the_player.lane = MID_LANE;
 	}
 }
 
@@ -210,7 +210,6 @@ void player_change_right_to_mid_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.lane = MID_LANE;
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
 	}
@@ -232,6 +231,7 @@ void player_change_mid_to_left_step1(void)
 		the_player.tick = player_lane_change_step2.animation_tick->mid_to_left;
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_left[the_game.stage];
+		the_player.lane = LEFT_LANE;
 	}
 }
 
@@ -244,7 +244,6 @@ void player_change_mid_to_left_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.lane = LEFT_LANE;
 		the_player.x = _PLAYER_STATIC_X_LUT[LEFT_LANE];
 		the_player.tick = player_draw;
 	}
@@ -296,26 +295,6 @@ const _player_draw_func _PLAYER_DRAW_LUT[3] =
 	_player_draw_mid,
 	_player_draw_right
 };
-
-
- 
-
-/****************************************************
- * collision detection
- ***************************************************/
-
- /**
-  * @brief checking if player collides with an object
-  * 
-  * possible collisions:
-  *  1) ability -> pick it up (call dedicated handler...)
-  *  2) enemy   -> game over! (just change game state...)
-  */
-void check_collision(void) //< TODO: might need to add parameter to determine where player is (x pos)
-{
-	/// TODO: check if bounding box is colliding with objects (enemy / powerup)
-}
-
 
 
  

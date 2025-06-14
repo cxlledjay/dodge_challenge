@@ -9,7 +9,7 @@
 /// @brief the player object
 typedef struct _player_t
 {
-    lane_t lane; //< current lane the player is in
+    lane_t lane; //< used to get correct model + aabbcd (aligned axis bounding box collision detection)
 
     int x; //< player x pos for animation & collision check
     const int * x_LUT; //< pointer for correct LUT for animation (set by game loop)
@@ -26,6 +26,9 @@ typedef struct _player_t
  * execute the_player.tick() each game tick.
  */
 extern player_t the_player;
+
+/// @brief the player y pos (wont ever change)
+#define PLAYER_Y		(-112)
 
 /// ---------------------------------------------------------------
 

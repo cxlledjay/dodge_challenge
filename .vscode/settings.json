@@ -17,6 +17,7 @@
         "g_misc.h": "c",
         "g_map.h": "c",
         "g_player.h": "c",
-        "game.h": "c"
+        "game.h": "c",
+        "collision.h": "c"
     }
 }
