@@ -11,6 +11,7 @@ game_t the_game;
 #include "game_include/enemy.h"
 #include "game_include/map.h"
 #include "game_include/player.h"
+#include "game_include/collision.h"
 
 //fw declarations:
 void start_menu(void);
@@ -34,6 +35,7 @@ void game_init(void)
     player_init();
     ability_init();
     enemy_init();
+    collision_init();
 
     /// go to select screen
     the_game.execute_state = start_menu;
@@ -80,7 +82,6 @@ void play_start_animation(void)
  ****************************************************************************/
 
 #include "utils/controller.h"
-#include "game_include/collision.h"
 
 //debug
 #include "lib/print/print.h"
@@ -199,7 +200,6 @@ void game_run(void)
     /// DEBUG SECTION
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
-    debug_draw_aabb_player();
 
     /// done
     return;

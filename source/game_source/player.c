@@ -80,7 +80,7 @@ void player_init(void)
 void player_draw(void)
 {
 	/// check for collision
-	collision_check(); //< if collision occurs -> wont reach rest of function
+	collision.check(); //< if collision occurs -> wont reach rest of function
 
 	/// drawing settings
 	Intensity_5F();					//< set brightness of the electron beam
@@ -106,7 +106,8 @@ void player_draw(void)
 #define LANE_CHANGE_UPDATE_VARS()																						\
 	the_player.cnt--; /* sequence is important... first decrement to match index starting from 0 */						\
 	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */											\
-	collision_check(); /* check for collisions */																		\
+	collision.recalculate_player_aabb(); /* recalculated player bounding box */													\
+	collision.check(); /* now check for collisions */																	\
 	Intensity_5F();
 
 
@@ -130,6 +131,7 @@ void player_change_left_to_mid_step1(void)
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->left_to_mid[the_game.stage];
 		the_player.lane = MID_LANE; //< now use midlane model + aabbcd
+		COLLISION_SET_MID();
 	}
 }
 
@@ -144,6 +146,7 @@ void player_change_left_to_mid_step2(void)
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
+		collision.recalculate_player_aabb();
 	}
 }
 
@@ -164,6 +167,7 @@ void player_change_mid_to_right_step1(void)
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_right[the_game.stage];
 		the_player.lane = RIGHT_LANE;
+		COLLISION_SET_RIGHT();
 	}
 }
 
@@ -178,6 +182,7 @@ void player_change_mid_to_right_step2(void)
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[RIGHT_LANE];
 		the_player.tick = player_draw;
+		collision.recalculate_player_aabb();
 	}
 }
 
@@ -198,6 +203,7 @@ void player_change_right_to_mid_step1(void)
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->right_to_mid[the_game.stage];
 		the_player.lane = MID_LANE;
+		COLLISION_SET_MID();
 	}
 }
 
@@ -212,6 +218,7 @@ void player_change_right_to_mid_step2(void)
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
 		the_player.tick = player_draw;
+		collision.recalculate_player_aabb();
 	}
 }
 
@@ -232,6 +239,7 @@ void player_change_mid_to_left_step1(void)
 		the_player.cnt = player_lane_change_step2.FRAME_CNT[the_game.stage];
 		the_player.x_LUT = player_lane_change_step2.x_LUT->mid_to_left[the_game.stage];
 		the_player.lane = LEFT_LANE;
+		COLLISION_SET_LEFT();
 	}
 }
 
@@ -246,6 +254,7 @@ void player_change_mid_to_left_step2(void)
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[LEFT_LANE];
 		the_player.tick = player_draw;
+		collision.recalculate_player_aabb();
 	}
 }
 

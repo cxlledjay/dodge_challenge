@@ -1,14 +1,49 @@
 #pragma once
 
 
-/// @brief for debug purpose only
-/// draws the bounding box of the player model
-void debug_draw_aabb_player(void);
-
+typedef struct _collision_check_t
+{
+    void (* recalculate_player_aabb) (void);
+    void (* check) (void);
+} collision_check_t;
 
 /**
- * @brief collision detection for player
+ * @brief public interface for collisions
  * 
- * utilizing tweaked aabb (axis aligned bounding boxes) to check against enemies and spawned abilities
+ * trigger recalculate_player_aabb each time the player moves
+ * trigger check each tick to calculate if the player touched an object
+ * (check uses a tweaked variant of Axis Aligned Bounding Boxes)
  */
-void collision_check(void);
+extern collision_check_t collision;
+
+/// @brief trigger according to player spawn
+void collision_init(void);
+
+
+
+
+/**************************************************
+ * interfaces for different player models
+ *************************************************/
+
+void aabb_calculate_mid(void);
+void aabb_calculate_left(void);
+void aabb_calculate_right(void);
+
+void aabb_check_mid(void);
+void aabb_check_left(void);
+void aabb_check_right(void);
+
+
+/// use macros for ease of use...
+#define COLLISION_SET_MID()                                 \
+    collision.recalculate_player_aabb = aabb_calculate_mid; \
+    collision.check = aabb_check_mid;
+
+#define COLLISION_SET_LEFT()                                 \
+    collision.recalculate_player_aabb = aabb_calculate_left; \
+    collision.check = aabb_check_left;
+
+#define COLLISION_SET_RIGHT()                                 \
+    collision.recalculate_player_aabb = aabb_calculate_right; \
+    collision.check = aabb_check_right;
