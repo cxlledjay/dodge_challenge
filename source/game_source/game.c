@@ -6,11 +6,10 @@
 game_t the_game;
 
 
-#include "game_include/ability.h"
 #include "game_include/clock.h"
-#include "game_include/enemy.h"
 #include "game_include/map.h"
 #include "game_include/player.h"
+#include "game_include/object_manager.h"
 #include "game_include/collision.h"
 
 //fw declarations:
@@ -34,8 +33,7 @@ void game_init(void)
     clock_init();
     map_init();
     player_init();
-    ability_init();
-    enemy_init();
+    object_manager_init();
     collision_init();
 
     /// go to select screen
@@ -190,18 +188,24 @@ void game_run(void)
     /// draw the road
     the_map.tick();
 
-    /// draw the player & check collisions etc.
-    //the_player.tick(); //< keep sequence so the game seems more fair!
-    
-    /// TODO: draw new position of enemies
+    /// draw new position of enemies
+    /// draw new position of powerups
+    object_manager_tick_all();
 
-    /// TODO: draw new position of powerups
+    /// draw the player & check collisions etc.
+    the_player.tick();
+
+    /// spawn new enemies
+    object_manager_tick_spawn();
+
+
+    
     
 
     /// DEBUG SECTION
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
-    enemy_debug();
+    //enemy_debug();
 
     /// done
     return;

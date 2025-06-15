@@ -22,6 +22,9 @@
         "g_enemy.h": "c",
         "random": "c",
         "memory": "c",
-        "gen_object_path.h": "c"
+        "gen_object_path.h": "c",
+        "object.h": "c",
+        "object_manager.h": "c",
+        "functional": "c"
     }
 }
