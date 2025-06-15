@@ -20,6 +20,7 @@
         "game.h": "c",
         "collision.h": "c",
         "g_enemy.h": "c",
-        "random": "c"
+        "random": "c",
+        "memory": "c"
     }
 }

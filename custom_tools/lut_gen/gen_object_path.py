@@ -62,6 +62,8 @@ if __name__ == "__main__":
 
 
 """
+def get_var_name(stage : int, var_name : str):
+    return f"_ST{int(stage)}_{var_name}_LUT[TTL_ST{int(stage)}]"
 
 def generate_stage(stage, frames, file):
     y_arr = []
@@ -110,8 +112,6 @@ def generate_stage(stage, frames, file):
     sc_arr.reverse()
 
     # generate data structure
-    def get_var_name(stage : int, var_name : str):
-        return f"_ST{int(stage)}_{var_name}_LUT[TTL_ST{int(stage)}]"
     
     def print_list(list):
         for i in range(frames):
@@ -122,7 +122,6 @@ def generate_stage(stage, frames, file):
                 file.write("};\n")
 
     file.write("\n\n")
-    file.write(f"#define TTL_ST{stage} \t\t({frames}u)\n")
     file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+" = {")
     print_list(y1_arr)
     file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+" = {")
@@ -144,6 +143,34 @@ def generate_header():
         file.write(" *\n")
         file.write(" *\n")
         file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
+        file.write(" *******************************************************************************************************/\n\n\n")
+
+        speed_per_stage = [196,168,140,119,98,84,77,70,56,42,28]
+        for stage in range(11):
+            file.write(f"#define TTL_ST{stage} \t\t\t\t({speed_per_stage[stage]}u)\n")
+
+        for stage in range(11):
+            file.write("\n\n")
+            file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+";\n")
+            file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+";\n")
+            file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+";\n")
+            file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+";\n")
+            file.write("const unsigned int \t\t"+get_var_name(stage, "SC")+";\n")
+            file.write("\n\n\n")
+        
+        file.write("#include \"../game.h\"\n")
+        file.write("extern const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE];\n")
+
+
+def generate_source():
+    with open('../../source/game_source/gen_data/gen_object_path.c', 'w') as file:
+        file.write("#pragma once\n\n")
+        file.write("/********************************************************************************************************\n")
+        file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
+        file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
+        file.write(" *\n")
+        file.write(" *\n")
+        file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
         file.write(" *******************************************************************************************************/\n")
 
         speed_per_stage = [196,168,140,119,98,84,77,70,56,42,28]
@@ -151,7 +178,7 @@ def generate_header():
             generate_stage(stage,speed_per_stage[stage],file)
 
         file.write("#include \"../game.h\"\n")
-        file.write("const unsigned int ENEMY_TTL_LUT[STAGE_T_SIZE] =\n")
+        file.write("const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE] =\n")
         file.write("{\n")
         for stage in range(11):
             file.write(f"\tTTL_ST{stage}-1")
@@ -164,3 +191,4 @@ def generate_header():
 
 
 generate_header()
+generate_source()

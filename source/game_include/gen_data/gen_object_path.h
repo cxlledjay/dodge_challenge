@@ -129,7 +129,7 @@ const unsigned int 		_ST10_SC_LUT[TTL_ST10] = {54, 51, 47, 44, 41, 38, 35, 32, 3
 
 
 #include "../game.h"
-const unsigned int ENEMY_TTL_LUT[STAGE_T_SIZE] =
+const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE] =
 {
 	TTL_ST0-1,
 	TTL_ST1-1,
