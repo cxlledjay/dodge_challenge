@@ -151,11 +151,11 @@ def generate_header():
 
         for stage in range(11):
             file.write("\n\n")
-            file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+";\n")
-            file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+";\n")
-            file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+";\n")
-            file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+";\n")
-            file.write("const unsigned int \t\t"+get_var_name(stage, "SC")+";\n")
+            file.write("extern const int \t\t\t\t"+get_var_name(stage, "Y1")+";\n")
+            file.write("extern const int \t\t\t\t"+get_var_name(stage, "Y2")+";\n")
+            file.write("extern const int \t\t\t\t"+get_var_name(stage, "XL")+";\n")
+            file.write("extern const int \t\t\t\t"+get_var_name(stage, "XR")+";\n")
+            file.write("extern const unsigned int \t\t"+get_var_name(stage, "SC")+";\n")
             file.write("\n\n\n")
         
         file.write("#include \"../game.h\"\n")
@@ -164,7 +164,7 @@ def generate_header():
 
 def generate_source():
     with open('../../source/game_source/gen_data/gen_object_path.c', 'w') as file:
-        file.write("#pragma once\n\n")
+        file.write("#include \"../../game_include/gen_data/gen_object_path.h\"\n\n")
         file.write("/********************************************************************************************************\n")
         file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
         file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
@@ -177,7 +177,7 @@ def generate_source():
         for stage in range(11):
             generate_stage(stage,speed_per_stage[stage],file)
 
-        file.write("#include \"../game.h\"\n")
+        file.write("#include \"../../game_include/game.h\"\n")
         file.write("const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE] =\n")
         file.write("{\n")
         for stage in range(11):

@@ -21,6 +21,7 @@
         "collision.h": "c",
         "g_enemy.h": "c",
         "random": "c",
-        "memory": "c"
+        "memory": "c",
+        "gen_object_path.h": "c"
     }
 }
