@@ -1,5 +1,6 @@
 #pragma once
 #include "misc.h"
+#include "game.h"
 
 struct _enemy_t;
 typedef void (* enemy_tick_func) (struct _enemy_t * me);
@@ -8,13 +9,13 @@ typedef struct _enemy_t
 {
     void * model; //< only set by spawning
 
-    /// y pos is stored as uint and converted on the fly
-    unsigned int encoded_y; //< only need to store y pos, x pos & scale is derived from LUT in tick()
+    unsigned int ttl; //<y pos, x pos & scale is derived from LUT in tick()
 
     //unsigned int cnt; //< used to count ticks for animation handling
 
     enemy_tick_func tick; //< executed each "tick" --> animation handling (collision detection in player) | set to idle() when unused!
-    /// 3 different ticks: tick_left, tick_mid and tick_right (state about lane in function hardcoded -> and thus LUTs as well)
+    /// 3 different tick categories: tick_left, tick_mid and tick_right (state about lane in function hardcoded -> and thus LUTs as well)
+    /// each category has own tick functions for different speeds
 } enemy_t;
 
 
@@ -31,7 +32,9 @@ void enemy_init(void);
  */
 int enemy_try_spawn(lane_t lane);
 
-//debug
-extern const unsigned int _CONVERT_EY_TO_SCALE[];
-extern const int _CONVERT_EY_TO_RY1_LUT[];
-extern const int _CONVERT_EY_TO_RY2_LUT[];
+
+/***************************************************
+ * interface for spawner
+ **************************************************/
+
+ extern void (* const ENEMY_ST1_TICK_LUT[3]) (enemy_t * me);

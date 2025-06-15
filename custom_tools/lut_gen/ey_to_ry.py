@@ -92,6 +92,10 @@ if __name__ == "__main__":
         sc_rounded = int(sc)
         sc_arr.append(sc_rounded)
         
+    # reverse arrays, because ttl counts backwards
+    n1_arr.reverse()
+    n2_arr.reverse()
+    sc_arr.reverse()
 
     print(f"frames: {frames}\n")
     print("EY_TO_RY1: \n")

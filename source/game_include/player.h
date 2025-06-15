@@ -59,7 +59,7 @@ typedef struct _player_lane_change_x_lut_t
 typedef struct _player_lane_change_t
 {
     const unsigned int FRAME_CNT[STAGE_T_SIZE];
-    const player_lane_change_animation_t * animation_tick;
+    const player_lane_change_animation_t const * animation_tick;
     const player_lane_change_x_lut_t * x_LUT;
 }player_lane_change_t;
 
