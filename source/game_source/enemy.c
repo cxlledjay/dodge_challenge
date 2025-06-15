@@ -69,6 +69,9 @@ int enemy_try_spawn(__attribute__((unused)) lane_t lane)
  * concrete enemy functions
  **************************************************************************/
 
+
+#include "game_include/gen_data/gen_object_path.h"
+
  
 /**
  * @brief do nothing (not yet used / despawned)
@@ -86,6 +89,59 @@ void tick_dummy(__attribute__((unused)) enemy_t* me)
 }
 
 
+#include <vectrex.h>
+#include "game_include/graphics/g_enemy.h"
+
+#define DESPAWN_CHECK(ENEMY_PTR)                                                                                            \
+    if(--(ENEMY_PTR->ttl) == 0) {ENEMY_PTR->tick = idle; return;} /* check if enemy should still be rendered */
+
+#define DECODE_VAR(STAGE, VAR_TYPE) _ST##STAGE##_##VAR_TYPE##_LUT
+
+#define DRAW_ENEMY_MID(ENEMY_PTR, STAGE)                                                                                    \
+    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[ENEMY_PTR->ttl],0);                                                                      \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[ENEMY_PTR->ttl],0); /* two moves because of big range of motion*/                        \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[ENEMY_PTR->ttl]; /* set scaling */                                             \
+    Draw_VLp((struct packet_t *) ENEMY_PTR->model); /* draw */
+
+    
+#define DRAW_ENEMY_LEFT(ENEMY_PTR, STAGE)                                                                                   \
+    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[ENEMY_PTR->ttl],DECODE_VAR(STAGE, XL)[ENEMY_PTR->ttl]);                                  \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[ENEMY_PTR->ttl],0); /* two moves because of big range of motion*/                        \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[ENEMY_PTR->ttl]; /* set scaling */                                             \
+    Draw_VLp((struct packet_t *) ENEMY_PTR->model); /* draw */
+
+    
+#define DRAW_ENEMY_RIGHT(ENEMY_PTR, STAGE)                                                                                  \
+    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[ENEMY_PTR->ttl],DECODE_VAR(STAGE, XR)[ENEMY_PTR->ttl]);                                  \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[ENEMY_PTR->ttl],0); /* two moves because of big range of motion*/                        \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[ENEMY_PTR->ttl]; /* set scaling */                                             \
+    Draw_VLp((struct packet_t *) ENEMY_PTR->model); /* draw */
+
+
+
+
+void _tick_st0_mid(enemy_t * me)
+{
+    DRAW_ENEMY_MID(me, 0);
+    DESPAWN_CHECK(me);
+    return;
+}
+void _tick_st0_left(enemy_t * me)
+{
+    DRAW_ENEMY_LEFT(me, 0);
+    DESPAWN_CHECK(me);
+    return;
+}
+void _tick_st0_right(enemy_t * me)
+{
+    DRAW_ENEMY_RIGHT(me, 0);
+    DESPAWN_CHECK(me);
+    return;
+}
+
 
 
 
@@ -94,18 +150,28 @@ void tick_dummy(__attribute__((unused)) enemy_t* me)
  * LUTs
  *********************************************/
 
-#define TTL_ST1 (112u)
-const int           _ST1_Y1_LUT[TTL_ST1] = {1,2,3};
-const int           _ST1_Y2_LUT[TTL_ST1] = {1,2,3};
-const int           _ST1_XL_LUT[TTL_ST1] = {1,2,3};
-const int           _ST1_XR_LUT[TTL_ST1] = {1,2,3};
-const unsigned int  _ST1_SC_LUT[TTL_ST1] = {1,2,3};
-
-void (* const ENEMY_ST1_TICK_LUT[3]) (enemy_t * me) =
+void (* const ENEMY_TICK_FNC_LUT[STAGE_T_SIZE][3]) (enemy_t * me) =
 {
-    tick_dummy, //< left
-    tick_dummy, //< mid
-    tick_dummy  //< right
+    { //< stage 0
+        _tick_st0_left,
+        _tick_st0_mid,
+        _tick_st0_right
+    }
 };
 
 
+/// debug
+
+enemy_t temp = {.ttl = 0, .tick = idle, .model = &vl_enemy_dummy};
+
+void enemy_debug(void)
+{
+    if(temp.tick == idle)
+    {
+        temp.tick = ENEMY_TICK_FNC_LUT[the_game.stage][MID_LANE];
+        temp.ttl = ENEMY_TTL_LUT[the_game.stage];
+        return;
+    }
+
+    temp.tick(&temp);
+}

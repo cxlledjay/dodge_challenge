@@ -65,16 +65,18 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     y_arr = []
-    frames = 80
+    #user input:
+    stage = 0
+    frames = 150
 
     for x in range (frames):
         a = 210 / (-frames * frames)
-        num = a * (x+frames) * (x-frames) - 178
+        num = a * (x+frames) * (x-frames) - 178 # quadratic function
         num_rounded = int(num)
         y_arr.append(num_rounded)
 
-    n1_arr = []
-    n2_arr = []
+    y1_arr = []
+    y2_arr = []
 
     # convert to data structure
     for num in y_arr:
@@ -83,24 +85,56 @@ if __name__ == "__main__":
         if n1 < -128:
             n1 = -128
             n2 = num+128
-        n1_arr.append(n1)
-        n2_arr.append(n2)
+        y1_arr.append(n1)
+        y2_arr.append(n2)
+
+    # resulting x positions
+    xl_arr = []
+    xr_arr = []
+    for y in y_arr:
+        xl = (72/148) * y - 43 # linear function
+        x = int(xl)
+        xl_arr.append(x)
+        xr_arr.append(-x)
         
+
+    # resulting scaling
     sc_arr = []
     for y in y_arr:
-        sc = -0.25 * y + 14
+        sc = -0.25 * y + 14 # linear function
         sc_rounded = int(sc)
         sc_arr.append(sc_rounded)
         
     # reverse arrays, because ttl counts backwards
-    n1_arr.reverse()
-    n2_arr.reverse()
+    y1_arr.reverse()
+    y2_arr.reverse()
+    xl_arr.reverse()
+    xr_arr.reverse()
     sc_arr.reverse()
 
-    print(f"frames: {frames}\n")
-    print("EY_TO_RY1: \n")
-    print(n1_arr)
-    print("\n\n\nEY_TO_RY2: \n")
-    print(n2_arr)
-    print("\n\n\nEY_TO_SCALE: \n")
-    print(sc_arr)
+    # generate data structure
+    def get_var_name(stage : int, var_name : str):
+        return f"_ST{int(stage)}_{var_name}_LUT[TTL_ST{int(stage)}]"
+    
+    def print_list(list):
+        for i in range(frames):
+            file.write(str(list[i]))
+            if i < frames-1:
+                file.write(", ")
+            else:
+                file.write("};\n")
+
+    with open('output.txt', 'w') as file:
+        file.write("\n\n")
+        file.write(f"#define TTL_ST{stage} \t\t({frames}u)\n")
+        file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+" = {")
+        print_list(y1_arr)
+        file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+" = {")
+        print_list(y2_arr)
+        file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+" = {")
+        print_list(xl_arr)
+        file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+" = {")
+        print_list(xr_arr)
+        file.write("const int \t\t\t\t"+get_var_name(stage, "SC")+" = {")
+        print_list(sc_arr)
+        file.write("\n\n\n")

@@ -201,6 +201,7 @@ void game_run(void)
     /// DEBUG SECTION
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
+    enemy_debug();
 
     /// done
     return;

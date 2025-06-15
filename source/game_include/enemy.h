@@ -37,4 +37,6 @@ int enemy_try_spawn(lane_t lane);
  * interface for spawner
  **************************************************/
 
- extern void (* const ENEMY_ST1_TICK_LUT[3]) (enemy_t * me);
+extern void (* const ENEMY_TICK_FNC_LUT[STAGE_T_SIZE][3]) (enemy_t * me);
+
+void enemy_debug(void);
