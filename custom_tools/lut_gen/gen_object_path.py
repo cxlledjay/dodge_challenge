@@ -63,11 +63,8 @@ if __name__ == "__main__":
 
 """
 
-if __name__ == "__main__":
+def generate_stage(stage, frames, file):
     y_arr = []
-    #user input:
-    stage = 0
-    frames = 150
 
     for x in range (frames):
         a = 210 / (-frames * frames)
@@ -92,7 +89,7 @@ if __name__ == "__main__":
     xl_arr = []
     xr_arr = []
     for y in y_arr:
-        xl = (72/148) * y - 43 # linear function
+        xl = (66/148) * y - 25.5 # linear function
         x = int(xl)
         xl_arr.append(x)
         xr_arr.append(-x)
@@ -124,17 +121,46 @@ if __name__ == "__main__":
             else:
                 file.write("};\n")
 
-    with open('output.txt', 'w') as file:
-        file.write("\n\n")
-        file.write(f"#define TTL_ST{stage} \t\t({frames}u)\n")
-        file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+" = {")
-        print_list(y1_arr)
-        file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+" = {")
-        print_list(y2_arr)
-        file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+" = {")
-        print_list(xl_arr)
-        file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+" = {")
-        print_list(xr_arr)
-        file.write("const int \t\t\t\t"+get_var_name(stage, "SC")+" = {")
-        print_list(sc_arr)
-        file.write("\n\n\n")
+    file.write("\n\n")
+    file.write(f"#define TTL_ST{stage} \t\t({frames}u)\n")
+    file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+" = {")
+    print_list(y1_arr)
+    file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+" = {")
+    print_list(y2_arr)
+    file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+" = {")
+    print_list(xl_arr)
+    file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+" = {")
+    print_list(xr_arr)
+    file.write("const unsigned int \t\t"+get_var_name(stage, "SC")+" = {")
+    print_list(sc_arr)
+    file.write("\n\n\n")
+
+def generate_header():
+    with open('../../source/game_include/gen_data/gen_object_path.h', 'w') as file:
+        file.write("#pragma once\n\n")
+        file.write("/********************************************************************************************************\n")
+        file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
+        file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
+        file.write(" *\n")
+        file.write(" *\n")
+        file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
+        file.write(" *******************************************************************************************************/\n")
+
+        speed_per_stage = [196,168,140,119,98,84,77,70,56,42,28]
+        for stage in range(11):
+            generate_stage(stage,speed_per_stage[stage],file)
+
+        file.write("#include \"../game.h\"\n")
+        file.write("const unsigned int ENEMY_TTL_LUT[STAGE_T_SIZE] =\n")
+        file.write("{\n")
+        for stage in range(11):
+            file.write(f"\tTTL_ST{stage}-1")
+            if stage < 11:
+                file.write(",\n")
+            else:
+                file.write("\n")
+        file.write("};\n")
+
+
+
+generate_header()

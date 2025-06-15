@@ -168,7 +168,7 @@ void enemy_debug(void)
 {
     if(temp.tick == idle)
     {
-        temp.tick = ENEMY_TICK_FNC_LUT[the_game.stage][MID_LANE];
+        temp.tick = ENEMY_TICK_FNC_LUT[the_game.stage][LEFT_LANE];
         temp.ttl = ENEMY_TTL_LUT[the_game.stage];
         return;
     }
