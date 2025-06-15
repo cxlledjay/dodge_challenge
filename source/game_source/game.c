@@ -206,6 +206,7 @@ void game_run(void)
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
     //enemy_debug();
+    print_unsigned_int(80,-20,the_manager.remaining_spawns);
 
     /// done
     return;

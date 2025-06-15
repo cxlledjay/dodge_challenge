@@ -4,7 +4,22 @@
 /// @brief nice posh guy
 object_manager_t the_manager;
 
+/// ------------- temp
 
+#define TEMP_SIZE       (10u)
+const spawn_entry_t temp_pattern[TEMP_SIZE] =
+{
+    0b00000001,
+    0b00000010,
+    0b00000000,
+    0b00000001,
+    0b00000000,
+    0b00000001,
+    0b00000010,
+    0b00000000,
+    0b00000010,
+    0b00000010
+};
 
 
 /**********************************************************************************************************
@@ -26,9 +41,9 @@ void object_manager_init(void)
     the_manager.queue_ptr = the_manager.objects;
 
     /// init spawner stuff
-    the_manager.template = 0;
-    the_manager.remaining_spawns = 0;
-    the_manager.cnt = 0;
+    the_manager.pattern = temp_pattern;
+    the_manager.remaining_spawns = TEMP_SIZE;
+    the_manager.cnt = 150;
 }                          
     
 
@@ -62,9 +77,48 @@ void object_manager_tick_all(void)
  * spawn function
  **********************************************************************************************************/
 
+
+#include "game_include/graphics/g_enemy.h"
+#include "game_include/gen_data/gen_object_path.h"
+
 void spawn_objects(void)
 {
-    /// TODO: implement
+    /// get current entity to spawn
+    if(--(the_manager.remaining_spawns) == 0)
+    {
+        /// TODO: select different pattern
+        //the_manager.pattern = temp_pattern;
+        the_manager.remaining_spawns = TEMP_SIZE;
+    }
+
+    /// retrieve data
+    spawn_entry_t entity = the_manager.pattern[the_manager.remaining_spawns];
+
+    /// get lane from data
+    lane_t lane = entity & 0b00000011;
+
+    /// get model from data
+    moving_object_type_t type = ENEMY_DUMMY; //< temp
+
+    /// spawn
+    if(the_manager.queue_ptr->tick == idle)
+    {
+        /// can spawn
+        the_manager.queue_ptr->model = &vl_enemy_dummy;
+        the_manager.queue_ptr->type = type;
+        the_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
+        the_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
+
+        /// set queue ptr for next spawn
+        if(the_manager.queue_ptr == &the_manager.objects[9])
+        {
+            the_manager.queue_ptr = the_manager.objects;
+        }
+        else
+        {
+            the_manager.queue_ptr++;
+        }
+    }
 }
 
 
