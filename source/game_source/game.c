@@ -206,13 +206,13 @@ void game_run(void)
     print_unsigned_int(80,-20,the_player.cnt); */
     if(cntr == 0){
         temp.encoded_y++;
-        cntr = 2;
+        cntr = 1;
     }
     else{
         cntr = cntr - 1;
     }
 
-    if(temp.encoded_y >= 210) temp.encoded_y = 0;
+    if(temp.encoded_y >= 80) temp.encoded_y = 0;
     Reset0Ref();					/* reset beam to center	*/
     dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
     Moveto_d(_CONVERT_EY_TO_RY1_LUT[temp.encoded_y], 0);					/* move to player pos */
