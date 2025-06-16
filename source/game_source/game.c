@@ -238,12 +238,16 @@ void game_over(void)
     Wait_Recal();
 
     /// write someting
-    print_string(25,-75,    "GAME OVER!");
+    print_string(25,-80,            "--GAME OVER!--\x80");
+    print_string(-10,-90,         "SCORE:\x80");
+    print_long_unsigned_int(-10,0,the_game.score);
+    print_string(-90,-95,         "PRESS BUTTON ONE\x80");
+    print_string(-110,-60,            "TO RESTART\x80");
 
     /// get input
     check_buttons();
     unsigned int input = buttons_pressed();
-    if(input & 0b00001111)
+    if(input & 0b00000001)
     {
         /// restart
         the_game.execute_state = game_init;

@@ -266,7 +266,7 @@ void aabb_check_mid(void)
 
     #ifdef DEBUG
     aabb_draw();
-    print_string(100,-40, "CD:MID");
+    print_string(100,-40, "CD:MID\x80");
     #endif
 
     moving_object_t* obj;
@@ -361,7 +361,7 @@ void aabb_check_side(void)
 
     #ifdef DEBUG
     aabb_draw();
-    print_string(100,-40, "CD:SIDE");
+    print_string(100,-40, "CD:SIDE\x80");
     #endif
 
     
