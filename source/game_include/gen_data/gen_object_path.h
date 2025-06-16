@@ -132,3 +132,12 @@ extern const unsigned int 		_ST10_SC_LUT[TTL_ST10];
 
 #include "../game.h"
 extern const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE];
+
+
+/// --------------------< co l l i s i o n   i n t e r f a c e >--------------------
+
+extern const int * const 			MOVING_OBJECT_Y1_LUT[STAGE_T_SIZE];
+extern const int * const 			MOVING_OBJECT_Y2_LUT[STAGE_T_SIZE];
+extern const int * const 			MOVING_OBJECT_XL_LUT[STAGE_T_SIZE];
+extern const int * const 			MOVING_OBJECT_XR_LUT[STAGE_T_SIZE];
+extern const unsigned int * const 	MOVING_OBJECT_SC_LUT[STAGE_T_SIZE];

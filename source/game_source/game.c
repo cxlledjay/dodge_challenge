@@ -113,6 +113,7 @@ void game_run(void)
 
         //debug only
         if(the_game.stage > 0) the_game.stage--;
+        object_manager_init();
     }
 
     /** ability */
@@ -120,6 +121,7 @@ void game_run(void)
     {
         /// TODO: trigger ability code
         if(the_game.stage < STAGE_T_SIZE-1) the_game.stage++;
+        object_manager_init();
     }
 
     /** movment input */
@@ -188,12 +190,12 @@ void game_run(void)
     /// draw the road
     the_map.tick();
 
-    /// draw new position of enemies
-    /// draw new position of powerups
-    object_manager_tick_all();
-
     /// draw the player & check collisions etc.
     the_player.tick();
+
+    /// draw new position of enemies
+    /// draw new position of powerups
+    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
 
     /// spawn new enemies
     object_manager_tick_spawn();
@@ -206,7 +208,7 @@ void game_run(void)
     /* print_signed_int(100,-20,the_player.x);
     print_unsigned_int(80,-20,the_player.cnt); */
     //enemy_debug();
-    print_unsigned_int(80,-20,the_manager.remaining_spawns);
+    //print_unsigned_int(80,-20,the_manager.remaining_spawns);
 
     /// done
     return;

@@ -105,6 +105,7 @@ void spawn_objects(void)
     {
         /// can spawn
         the_manager.queue_ptr->model = &vl_enemy_dummy;
+        the_manager.queue_ptr->lane = lane;
         the_manager.queue_ptr->type = type;
         the_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
         the_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];

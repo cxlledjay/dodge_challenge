@@ -26,9 +26,11 @@ typedef enum _moving_object_type_t
  * generic moving object parent class (derive classes via type field)
  ******************************************************************************************************/
 
+ #include "misc.h"
 typedef struct _moving_object_t
 {
     moving_object_type_t type; //< what am i?
+    lane_t lane; //< where am i? (<-- for collision check used)
 
     void * model; //< only set by spawning
     unsigned int ttl; //<y pos, x pos & scale is derived from LUT in tick()

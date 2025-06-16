@@ -20,10 +20,11 @@ const struct packet_t vl_enemy_dummy[] =
 
     /// dummy car
     {DRAW, {0,-30}},
-    {DRAW, {100,0}},
-    {DRAW, {0,72}},
-    {DRAW, {0,72}},
-    {DRAW, {-100,0}},
+    {DRAW, {70,0}},
+    {DRAW, {30,42}},
+    {DRAW, {0,60}},
+    {DRAW, {-30,42}},
+    {DRAW, {-70,0}},
     {DRAW, {0,-30}},
     {DRAW, {20,0}},
     {DRAW, {0,-84}},

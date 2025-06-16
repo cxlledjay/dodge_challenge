@@ -65,6 +65,21 @@ if __name__ == "__main__":
 def get_var_name(stage : int, var_name : str):
     return f"_ST{int(stage)}_{var_name}_LUT[TTL_ST{int(stage)}]"
 
+def get_var_name2(stage : int, var_name : str):
+    return f"_ST{int(stage)}_{var_name}_LUT"
+
+
+    
+def print_list(list,count,file):
+    for i in range(count):
+        file.write(str(list[i]))
+        if i < count-1:
+            file.write(", ")
+        else:
+            file.write("};\n")
+
+
+
 def generate_stage(stage, frames, file):
     y_arr = []
 
@@ -112,8 +127,7 @@ def generate_stage(stage, frames, file):
     sc_arr.reverse()
 
     # generate data structure
-    
-    def print_list(list):
+    def print_list_alt(list):
         for i in range(frames):
             file.write(str(list[i]))
             if i < frames-1:
@@ -121,18 +135,18 @@ def generate_stage(stage, frames, file):
             else:
                 file.write("};\n")
 
-    file.write("\n\n")
+    file.write("\n")
     file.write("const int \t\t\t\t"+get_var_name(stage, "Y1")+" = {")
-    print_list(y1_arr)
+    print_list_alt(y1_arr)
     file.write("const int \t\t\t\t"+get_var_name(stage, "Y2")+" = {")
-    print_list(y2_arr)
+    print_list_alt(y2_arr)
     file.write("const int \t\t\t\t"+get_var_name(stage, "XL")+" = {")
-    print_list(xl_arr)
+    print_list_alt(xl_arr)
     file.write("const int \t\t\t\t"+get_var_name(stage, "XR")+" = {")
-    print_list(xr_arr)
+    print_list_alt(xr_arr)
     file.write("const unsigned int \t\t"+get_var_name(stage, "SC")+" = {")
-    print_list(sc_arr)
-    file.write("\n\n\n")
+    print_list_alt(sc_arr)
+    file.write("\n")
 
 def generate_header():
     with open('../../source/game_include/gen_data/gen_object_path.h', 'w') as file:
@@ -161,6 +175,26 @@ def generate_header():
         file.write("#include \"../game.h\"\n")
         file.write("extern const unsigned int MOVING_OBJECT_TTL_LUT[STAGE_T_SIZE];\n")
 
+        file.write("\n\n/// --------------------< co l l i s i o n   i n t e r f a c e >--------------------\n\n")
+        arr_arr = ["Y1","Y2","XL","XR"]
+        for string in arr_arr:
+            file.write(f"extern const int * const \t\t\tMOVING_OBJECT_{string}_LUT[STAGE_T_SIZE];\n")
+        file.write(f"extern const unsigned int * const \tMOVING_OBJECT_SC_LUT[STAGE_T_SIZE];\n")
+
+        
+    with open('../../source/game_include/gen_data/gen_object_hitbox.h', 'w') as file:
+        file.write("#pragma once\n\n")
+        file.write("/********************************************************************************************************\n")
+        file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
+        file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
+        file.write(" *\n")
+        file.write(" *\n")
+        file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
+        file.write(" *******************************************************************************************************/\n\n\n")
+
+        file.write("extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[58];\n")
+        file.write("extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[58];\n")
+
 
 def generate_source():
     with open('../../source/game_source/gen_data/gen_object_path.c', 'w') as file:
@@ -182,11 +216,66 @@ def generate_source():
         file.write("{\n")
         for stage in range(11):
             file.write(f"\tTTL_ST{stage}-1")
-            if stage < 11:
+            if stage < 10:
                 file.write(",\n")
             else:
                 file.write("\n")
         file.write("};\n")
+
+        file.write("\n\n/// --------------------< co l l i s i o n   i n t e r f a c e >--------------------\n\n")
+
+        arr_arr = ["Y1","Y2","XL","XR"]
+        for string in arr_arr:
+            file.write(f"const int * const \t\t\t\tMOVING_OBJECT_{string}_LUT[STAGE_T_SIZE] =\n")
+            file.write("{\n")
+            for stage in range(11):
+                file.write("\t" + get_var_name2(stage, string))
+                if stage < 10:
+                    file.write(",\n")
+                else:
+                    file.write("\n")
+            file.write("};\n\n")
+        
+        file.write("const unsigned int * const \t\tMOVING_OBJECT_SC_LUT[STAGE_T_SIZE] =\n")
+        file.write("{\n")
+        for stage in range(11):
+            file.write("\t" + get_var_name2(stage, "SC"))
+            if stage < 10:
+                file.write(",\n")
+            else:
+                file.write("\n")
+        file.write("};\n\n")
+
+        
+    with open('../../source/game_source/gen_data/gen_object_hitbox.c', 'w') as file:
+        file.write("#include \"../../game_include/gen_data/gen_object_hitbox.h\"\n\n")
+        file.write("/********************************************************************************************************\n")
+        file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
+        file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
+        file.write(" *\n")
+        file.write(" *\n")
+        file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
+        file.write(" *******************************************************************************************************/\n\n\n")
+
+        sc_xh_arr = []
+        for i in range(58):
+            x = i * 1.1
+            xh_r = int(x/2)
+            sc_xh_arr.append(xh_r)
+
+        file.write("const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[58] = {")
+        print_list(sc_xh_arr,58,file)
+
+
+        sc_y_arr = []
+        for i in range(58):
+            y = i * 0.6
+            y_r = int(y)
+            sc_y_arr.append(y_r)
+            
+        file.write("const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[58] = {")
+        print_list(sc_y_arr,58,file)
+        
 
 
 
