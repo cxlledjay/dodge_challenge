@@ -237,8 +237,8 @@ void aabb_calculate_right(void)
  *********************************************************************/
 
 
-#define CHECK_COLLISION(PYTOP, PYBOT, OYTOP, OYBOT, PXLEFT, PXRIGHT, OXLEFT, OXRIGHT)                       \
-    unsigned int axis = 2; /*if one axis doesnt touch -> no hit (its 2d -> so 2 axis = hit)*/               \
+#define CHECK_COLLISION(AXIS, COUNTER, PYTOP, PYBOT, OYTOP, OYBOT, PXLEFT, PXRIGHT, OXLEFT, OXRIGHT)        \
+    AXIS = 2; /*if one axis doesnt touch -> no hit (its 2d -> so 2 axis = hit)*/               \
     /* check if they touch on y axis */                                                                     \
     if(PYBOT < OYBOT){ /* player y lower than object */                                                     \
         if(PYTOP >= OYBOT) {--axis;}                                                                        \
@@ -251,7 +251,7 @@ void aabb_calculate_right(void)
     }else{                                                                                                  \
         if(OXRIGHT >= PXLEFT) {--axis;}                                                                     \
     }                                                                                                       \
-    return (axis == 0);
+    if(AXIS == 0) {++COUNTER;}
 
 
 
@@ -259,7 +259,7 @@ void aabb_calculate_right(void)
 #include "lib/print/print.h"
 
 
-#define DEBUG
+//#define DEBUG
 void aabb_check_mid(void)
 {
     /// TODO: implement! (ayy)
@@ -325,10 +325,32 @@ void aabb_check_mid(void)
 
 
             /// check collision
+            unsigned int axis = 0;
+            unsigned int collsions = 0;
 
             /// check with bb of car
+            CHECK_COLLISION(
+                axis, collsions,
+                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.car.x_left, player_aabbs.car.x_right, bb_xleft, bb_xright
+            );
             
+            /// check with bb of wing
+            CHECK_COLLISION(
+                axis, collsions,
+                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.wing.x_left, player_aabbs.wing.x_right, bb_xleft, bb_xright
+            );
 
+            if(collsions != 0)
+            {
+                /// we hit something
+
+                /// switch the type of object we hit (TODO: implement)
+
+                /// if it was an enemy -> game over
+                the_game.execute_state = game_over;
+            }
         }
     }
 }
@@ -341,4 +363,97 @@ void aabb_check_side(void)
     aabb_draw();
     print_string(100,-40, "CD:SIDE");
     #endif
+
+    
+    moving_object_t* obj;
+    /// loop over all objects
+    for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
+    {
+        obj = &the_manager.objects[i];
+
+        /// only care when object is active
+        if(obj->tick != idle)
+        {
+            /// only care when object is in threshold
+            int y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
+            if(y1 > THRESHOLD_OBJECT_Y)
+            {
+                break;
+            }
+            int y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
+            if (y2 != 0)
+            {
+                break;
+            }
+
+            /// get values
+            
+            /// get x
+            int x = 0;
+            switch(obj->lane)
+            {
+                case LEFT_LANE:
+                    x = MOVING_OBJECT_XL_LUT[the_game.stage][obj->ttl];
+                    break;
+                case RIGHT_LANE:
+                    x = MOVING_OBJECT_XR_LUT[the_game.stage][obj->ttl];
+                    break;
+                case MID_LANE:
+                    x = 0;
+                    break;
+                default:
+                    break;
+            }
+            
+            /// get scaling
+            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
+
+            /// get bb values
+            int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
+            int bb_y  = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
+
+            /// build bb
+            int bb_ybot     = y1;
+            int bb_ytop     = y1+bb_y;
+            int bb_xleft    = x-bb_xh;
+            int bb_xright   = x+bb_xh;
+            
+
+
+            /// check collision
+            unsigned int axis = 0;
+            unsigned int collsions = 0;
+
+            /// check with bb of car
+            CHECK_COLLISION(
+                axis, collsions,
+                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.car.x_left, player_aabbs.car.x_right, bb_xleft, bb_xright
+            );
+            
+            /// check with bb of wing
+            CHECK_COLLISION(
+                axis, collsions,
+                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.wing.x_left, player_aabbs.wing.x_right, bb_xleft, bb_xright
+            );
+            
+            /// check with bb of side
+            CHECK_COLLISION(
+                axis, collsions,
+                player_aabbs.optional.y_top, player_aabbs.optional.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.optional.x_left, player_aabbs.optional.x_right, bb_xleft, bb_xright
+            );
+
+            if(collsions != 0)
+            {
+                /// we hit something
+
+                /// switch the type of object we hit (TODO: implement)
+
+                /// if it was an enemy -> game over
+                the_game.execute_state = game_over;
+            }
+        }
+    }
 }

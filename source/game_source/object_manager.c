@@ -43,7 +43,7 @@ void object_manager_init(void)
     /// init spawner stuff
     the_manager.pattern = temp_pattern;
     the_manager.remaining_spawns = TEMP_SIZE;
-    the_manager.cnt = 150;
+    the_manager.cnt = 50;
 }                          
     
 

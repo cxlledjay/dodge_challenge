@@ -232,6 +232,21 @@ void pause_menu(void)
 
 void game_over(void)
 {
-    /// TODO: implement!
+    /// TODO: implement proper one
+    
+    /// sync to 50 fps
+    Wait_Recal();
+
+    /// write someting
+    print_string(25,-75,    "GAME OVER!");
+
+    /// get input
+    check_buttons();
+    unsigned int input = buttons_pressed();
+    if(input & 0b00001111)
+    {
+        /// restart
+        the_game.execute_state = game_init;
+    }
     return;
 }

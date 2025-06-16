@@ -59,3 +59,5 @@ extern game_t the_game;
  * TODO: implement some fancy starting animation
  */
 void game_init(void);
+
+void game_over(void);
