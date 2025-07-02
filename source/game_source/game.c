@@ -18,6 +18,10 @@ void play_start_animation(void);
 void pause_menu(void);
 void game_run(void);
 
+//macros
+#define GAME_PRINT_VERSION()                \
+    print_string(-120,64,            "v0.1 (alpha)\x80");
+
 /*****************************************************************************
  * init part
  ****************************************************************************/
@@ -27,7 +31,7 @@ void game_init(void)
 {
     /// set game starting values
     the_game.score = 0;
-    the_game.stage = 0; ///< ??
+    the_game.stage = 0;
 
     /// trigger all other init routines
     clock_init();
@@ -36,8 +40,29 @@ void game_init(void)
     object_manager_init();
     collision_init();
 
-    /// go to select screen
+    /// start the game
     the_game.execute_state = start_menu;
+
+    /// done
+    return;
+}
+
+
+void game_reset(void)
+{
+    /// set game starting values
+    the_game.score = 0;
+    //the_game.stage = 0; ///< keep the stage (for alpha release) <- later keep the difficulty here
+
+    /// trigger all other init routines
+    clock_init();
+    map_init();
+    player_init();
+    object_manager_init();
+    collision_init();
+
+    /// go directly to run
+    the_game.execute_state = game_run;
 
     /// done
     return;
@@ -46,20 +71,54 @@ void game_init(void)
 
 
 /*****************************************************************************
- * init subroutines
+ * start menu
  ****************************************************************************/
+
+
+
+/// datatype for keeping track of start menu selection
+typedef union _sm_selection_t
+{
+    /* data */
+}sm_selection_t;
+
+
 
 void start_menu(void)
 {
-    //sync to 50 fps
-    //get input
-    //if settings confirmed -> start animation
-    the_game.execute_state = play_start_animation;
-    //draw selection screen
+    /// sync to 50 fps
+    Wait_Recal();
+
+    /// get input
+    check_buttons();
+    unsigned int input = buttons_pressed();
+
+    /// process input
+
+    /**
+     *  BUTTON 1 = /
+     *  BUTTON 2 = prev
+     *  BUTTON 3 = next
+     *  BUTTON 4 = select
+     */
+
+    /* select button */
+    if(input & 0b00001000)
+    {
+
+
+    }
+    
 
     /// done
     return;
 }
+
+
+
+/*****************************************************************************
+ * start animation (future feature)
+ ****************************************************************************/
 
 void play_start_animation(void)
 {
