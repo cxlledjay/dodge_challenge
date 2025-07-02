@@ -60,4 +60,8 @@ extern game_t the_game;
  */
 void game_init(void);
 
+/// @brief hard reset / for first start
+void game_start(void);
+
+/// @brief state when player crashes
 void game_over(void);

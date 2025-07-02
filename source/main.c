@@ -159,7 +159,7 @@ int main(void)
 	 */
 
 	/// bootstrap init
-	game_t new_game = {.execute_state = game_init};
+	game_t new_game = {.execute_state = game_start};
 	the_game = new_game;
 
 	/// main loop
