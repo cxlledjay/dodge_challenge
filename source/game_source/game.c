@@ -230,11 +230,20 @@ void start_menu(void)
         start_display[6] = ']';
     }
 
+    /// highscore
+    char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
+    highscore_display[11] = Vec_High_score[0];
+    highscore_display[12] = Vec_High_score[1];
+    highscore_display[13] = Vec_High_score[2];
+    highscore_display[14] = Vec_High_score[3];
+    highscore_display[15] = Vec_High_score[4];
+    highscore_display[16] = Vec_High_score[5];
+
 
     /// print screen
     //GAME_PRINT_VERSION();
     print_string(111,-120,"-------------------\x80");
-    print_string(100,-110,"HIGHSCORE: XXXXXX\x80");
+    print_string(100,-110,highscore_display);
     print_string(89,-120,"-------------------\x80");
     print_string(24,-72,"SELECT MODE\x80");
     print_string(-96,-46,start_display);
@@ -459,9 +468,30 @@ void game_over(void)
         gp_menu.selection = (unsigned int) !gp_menu.selection;
     }
 
+    /// highscore handler
+	unsigned int score[7];
+	Clear_Score(&score);
+	Add_Score_d(the_game.score, &score);
+	New_High_Score(&score, (void*) &Vec_High_Score);
+
     /// assemble strings
     char score_display[19] =     "SCORE:     XXXXXX\x80";
     char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
+
+    score_display[11] = score[0];
+    score_display[12] = score[1];
+    score_display[13] = score[2];
+    score_display[14] = score[3];
+    score_display[15] = score[4];
+    score_display[16] = score[5];
+
+    highscore_display[11] = Vec_High_score[0];
+    highscore_display[12] = Vec_High_score[1];
+    highscore_display[13] = Vec_High_score[2];
+    highscore_display[14] = Vec_High_score[3];
+    highscore_display[15] = Vec_High_score[4];
+    highscore_display[16] = Vec_High_score[5];
+
 
     char retry_display[13] =   " TRY AGAIN \x80";
     char start_display[17] = " BACK TO START \x80";
