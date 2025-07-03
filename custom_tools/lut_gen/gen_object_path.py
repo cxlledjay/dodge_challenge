@@ -292,7 +292,7 @@ def generate_source():
         file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
         file.write(" *******************************************************************************************************/\n\n\n")
 
-        lc_steps = [16,12,9,7,5]
+        lc_steps = [16,12,8,5,3]
         step_from_stage = [0,0,0,1,1,1,2,2,3,3,4]
             
         max_x = 82

@@ -15,14 +15,14 @@
 #define LCS1_CNT_P1		(6u)
 #define LCS1_CNT_P2		(6u)
 
-#define LCS2_CNT_P1		(5u)
+#define LCS2_CNT_P1		(4u)
 #define LCS2_CNT_P2		(4u)
 
-#define LCS3_CNT_P1		(4u)
-#define LCS3_CNT_P2		(3u)
+#define LCS3_CNT_P1		(3u)
+#define LCS3_CNT_P2		(2u)
 
-#define LCS4_CNT_P1		(3u)
-#define LCS4_CNT_P2		(2u)
+#define LCS4_CNT_P1		(2u)
+#define LCS4_CNT_P2		(1u)
 
 
 
@@ -45,32 +45,32 @@ const int		 _LCS1_RM_P2[LCS1_CNT_P2] = {11, 17, 23, 29, 35, 41 };
 const int		 _LCS1_ML_P1[LCS1_CNT_P1] = {-35, -29, -23, -17, -11, -5 };
 const int		 _LCS1_ML_P2[LCS1_CNT_P2] = {-70, -64, -58, -52, -46, -41 };
 
-const int		 _LCS2_LM_P1[LCS2_CNT_P1] = {-44, -52, -59, -67, -74 };
-const int		 _LCS2_LM_P2[LCS2_CNT_P2] = {-14, -22, -29, -37 };
-const int		 _LCS2_MR_P1[LCS2_CNT_P1] = {37, 29, 22, 14, 7 };
-const int		 _LCS2_MR_P2[LCS2_CNT_P2] = {67, 59, 52, 44 };
-const int		 _LCS2_RM_P1[LCS2_CNT_P1] = {44, 52, 59, 67, 74 };
-const int		 _LCS2_RM_P2[LCS2_CNT_P2] = {14, 22, 29, 37 };
-const int		 _LCS2_ML_P1[LCS2_CNT_P1] = {-37, -29, -22, -14, -7 };
-const int		 _LCS2_ML_P2[LCS2_CNT_P2] = {-67, -59, -52, -44 };
+const int		 _LCS2_LM_P1[LCS2_CNT_P1] = {-49, -57, -65, -73 };
+const int		 _LCS2_LM_P2[LCS2_CNT_P2] = {-16, -24, -32, -41 };
+const int		 _LCS2_MR_P1[LCS2_CNT_P1] = {32, 24, 16, 8 };
+const int		 _LCS2_MR_P2[LCS2_CNT_P2] = {65, 57, 49, 41 };
+const int		 _LCS2_RM_P1[LCS2_CNT_P1] = {49, 57, 65, 73 };
+const int		 _LCS2_RM_P2[LCS2_CNT_P2] = {16, 24, 32, 41 };
+const int		 _LCS2_ML_P1[LCS2_CNT_P1] = {-32, -24, -16, -8 };
+const int		 _LCS2_ML_P2[LCS2_CNT_P2] = {-65, -57, -49, -41 };
 
-const int		 _LCS3_LM_P1[LCS3_CNT_P1] = {-45, -54, -63, -72 };
-const int		 _LCS3_LM_P2[LCS3_CNT_P2] = {-18, -27, -36 };
-const int		 _LCS3_MR_P1[LCS3_CNT_P1] = {36, 27, 18, 9 };
-const int		 _LCS3_MR_P2[LCS3_CNT_P2] = {63, 54, 45 };
-const int		 _LCS3_RM_P1[LCS3_CNT_P1] = {45, 54, 63, 72 };
-const int		 _LCS3_RM_P2[LCS3_CNT_P2] = {18, 27, 36 };
-const int		 _LCS3_ML_P1[LCS3_CNT_P1] = {-36, -27, -18, -9 };
-const int		 _LCS3_ML_P2[LCS3_CNT_P2] = {-63, -54, -45 };
+const int		 _LCS3_LM_P1[LCS3_CNT_P1] = {-46, -58, -70 };
+const int		 _LCS3_LM_P2[LCS3_CNT_P2] = {-23, -35 };
+const int		 _LCS3_MR_P1[LCS3_CNT_P1] = {35, 23, 11 };
+const int		 _LCS3_MR_P2[LCS3_CNT_P2] = {58, 46 };
+const int		 _LCS3_RM_P1[LCS3_CNT_P1] = {46, 58, 70 };
+const int		 _LCS3_RM_P2[LCS3_CNT_P2] = {23, 35 };
+const int		 _LCS3_ML_P1[LCS3_CNT_P1] = {-35, -23, -11 };
+const int		 _LCS3_ML_P2[LCS3_CNT_P2] = {-58, -46 };
 
-const int		 _LCS4_LM_P1[LCS4_CNT_P1] = {-46, -58, -70 };
-const int		 _LCS4_LM_P2[LCS4_CNT_P2] = {-23, -35 };
-const int		 _LCS4_MR_P1[LCS4_CNT_P1] = {35, 23, 11 };
-const int		 _LCS4_MR_P2[LCS4_CNT_P2] = {58, 46 };
-const int		 _LCS4_RM_P1[LCS4_CNT_P1] = {46, 58, 70 };
-const int		 _LCS4_RM_P2[LCS4_CNT_P2] = {23, 35 };
-const int		 _LCS4_ML_P1[LCS4_CNT_P1] = {-35, -23, -11 };
-const int		 _LCS4_ML_P2[LCS4_CNT_P2] = {-58, -46 };
+const int		 _LCS4_LM_P1[LCS4_CNT_P1] = {-49, -65 };
+const int		 _LCS4_LM_P2[LCS4_CNT_P2] = {-32 };
+const int		 _LCS4_MR_P1[LCS4_CNT_P1] = {32, 16 };
+const int		 _LCS4_MR_P2[LCS4_CNT_P2] = {49 };
+const int		 _LCS4_RM_P1[LCS4_CNT_P1] = {49, 65 };
+const int		 _LCS4_RM_P2[LCS4_CNT_P2] = {32 };
+const int		 _LCS4_ML_P1[LCS4_CNT_P1] = {-32, -16 };
+const int		 _LCS4_ML_P2[LCS4_CNT_P2] = {-49 };
 
 const player_lane_change_t player_lane_change_phase1 =
 {
