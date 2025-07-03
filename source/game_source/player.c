@@ -536,7 +536,7 @@ const player_lane_change_x_lut_t _player_lanechange_x_lut_step2 =
  ***************************************************/
 
 /// @brief animation pointers (public interface)
-const player_lane_change_animation_t _player_lanechange_tick_step1 =
+const player_lane_change_animation_t _player_lanechange_tick_phase1 =
 {
 	.left_to_mid = player_change_left_to_mid_step1,
 	.mid_to_right = player_change_mid_to_right_step1,
@@ -545,7 +545,7 @@ const player_lane_change_animation_t _player_lanechange_tick_step1 =
 };
 
 /// @brief animation pointers (private interface)
-const player_lane_change_animation_t _player_lanechange_tick_step2 =
+const player_lane_change_animation_t _player_lanechange_tick_phase2 =
 {
 	.left_to_mid = player_change_left_to_mid_step2,
 	.mid_to_right = player_change_mid_to_right_step2,
@@ -576,7 +576,7 @@ const player_lane_change_t player_lane_change =
 		7,
 		7
 	},
-	.animation_tick = &_player_lanechange_tick_step1,
+	.animation_tick = &_player_lanechange_tick_phase1,
 	.x_LUT = &_player_lanechange_x_lut_step1
 };
 
@@ -600,6 +600,6 @@ const player_lane_change_t player_lane_change_step2 =
 		6,
 		6
 	},
-	.animation_tick = &_player_lanechange_tick_step2,
+	.animation_tick = &_player_lanechange_tick_phase2,
 	.x_LUT = &_player_lanechange_x_lut_step2
 };

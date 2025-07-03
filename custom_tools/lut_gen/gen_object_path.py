@@ -78,6 +78,11 @@ def print_list(list,count,file):
         else:
             file.write("};\n")
 
+def print_array_entry(file, val, i, i_max):
+    file.write(f"{val}")
+    if(i < i_max-1):
+        file.write(", ")
+
 
 
 def generate_stage(stage, frames, file):
@@ -197,6 +202,7 @@ def generate_header():
 
 
 def generate_source():
+    speed_per_stage = [196,168,140,119,98,84,77,70,56,42,28]
     with open('../../source/game_source/gen_data/gen_object_path.c', 'w') as file:
         file.write("#include \"../../game_include/gen_data/gen_object_path.h\"\n\n")
         file.write("/********************************************************************************************************\n")
@@ -207,7 +213,6 @@ def generate_source():
         file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
         file.write(" *******************************************************************************************************/\n")
 
-        speed_per_stage = [196,168,140,119,98,84,77,70,56,42,28]
         for stage in range(11):
             generate_stage(stage,speed_per_stage[stage],file)
 
@@ -275,6 +280,162 @@ def generate_source():
             
         file.write("const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[58] = {")
         print_list(sc_y_arr,58,file)
+
+    # generate player lane change speed tables
+    with open('../../source/game_source/gen_data/gen_player_lanechange.c', 'w') as file:
+        file.write("#include \"game_include/gen_data/gen_player_lanechange.h\"\n\n")
+        file.write("/********************************************************************************************************\n")
+        file.write(" *   THIS FILE WAS GENERATED          DO NOT EDIT!!! \n")
+        file.write(" *   make changes in custom_tools/lut_gen/gen_object_path.py\n")
+        file.write(" *\n")
+        file.write(" *\n")
+        file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
+        file.write(" *******************************************************************************************************/\n\n\n")
+
+        lc_steps = [16,12,9,7,5]
+        max_x = 82
+
+        lc_p1_frames = []
+        lc_p2_frames = []
+        cnt = 0
+
+        for step in lc_steps:
+            lc_p1 = int(step/2)
+            lc_p2 = int(step/2)
+            if step % 2 != 0:
+                lc_p1 += 1
+                
+            lc_p1_frames.append(lc_p1)
+            lc_p2_frames.append(lc_p2)
+
+            file.write(f"#define LCS{cnt}_CNT_P1\t\t({lc_p1}u)\n")
+            file.write(f"#define LCS{cnt}_CNT_P2\t\t({lc_p2}u)\n\n")
+
+            cnt += 1
+        file.write("\n\n\n")
+
+        #calculate all lane changes
+        #for each step
+        cnt = 0
+        for total_steps in lc_steps:
+
+            left_mid = []
+            mid_right = []
+            right_mid = []
+            mid_left = []
+
+            delta = max_x / (total_steps+2) #float percision
+
+            #for left -> mid -------
+            for i in range(total_steps):
+                x = -max_x + ((1+i)*delta) #get all values in between max_x and 0
+                left_mid.append(int(x)) #round here
+            left_mid.reverse() #reverse for counting down algorithm
+
+            #step1
+            file.write(f"const int\t\t _LCS{cnt}_LM_P1[LCS{cnt}_CNT_P1] = {{")
+            for i in range(lc_p1_frames[cnt]):
+                print_array_entry(file, left_mid[i], i, lc_p1_frames[cnt])
+            file.write(" };\n")
+            #step2
+            file.write(f"const int\t\t _LCS{cnt}_LM_P2[LCS{cnt}_CNT_P2] = {{")
+            for i in range(lc_p2_frames[cnt]):
+                print_array_entry(file, left_mid[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+            file.write(" };\n")
+            
+
+            #for mid -> right -------
+            for i in range(total_steps):
+                x = 0 + ((1+i)*delta) #get all values in between max_x and 0
+                mid_right.append(int(x)) #round here
+            mid_right.reverse() #reverse for counting down algorithm
+
+            #step1
+            file.write(f"const int\t\t _LCS{cnt}_MR_P1[LCS{cnt}_CNT_P1] = {{")
+            for i in range(lc_p1_frames[cnt]):
+                print_array_entry(file, mid_right[i], i, lc_p1_frames[cnt])
+            file.write(" };\n")
+            #step2
+            file.write(f"const int\t\t _LCS{cnt}_MR_P2[LCS{cnt}_CNT_P2] = {{")
+            for i in range(lc_p2_frames[cnt]):
+                print_array_entry(file, mid_right[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+            file.write(" };\n")
+            
+
+            #for right -> mid -------
+            for i in range(total_steps):
+                x = max_x - ((1+i)*delta) #get all values in between max_x and 0
+                right_mid.append(int(x)) #round here
+            right_mid.reverse() #reverse for counting down algorithm
+
+            #step1
+            file.write(f"const int\t\t _LCS{cnt}_RM_P1[LCS{cnt}_CNT_P1] = {{")
+            for i in range(lc_p1_frames[cnt]):
+                print_array_entry(file, right_mid[i], i, lc_p1_frames[cnt])
+            file.write(" };\n")
+            #step2
+            file.write(f"const int\t\t _LCS{cnt}_RM_P2[LCS{cnt}_CNT_P2] = {{")
+            for i in range(lc_p2_frames[cnt]):
+                print_array_entry(file, right_mid[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+            file.write(" };\n")
+            
+
+            #for mid -> left -------
+            for i in range(total_steps):
+                x = 0 - ((1+i)*delta) #get all values in between max_x and 0
+                mid_left.append(int(x)) #round here
+            mid_left.reverse() #reverse for counting down algorithm
+
+            #step1
+            file.write(f"const int\t\t _LCS{cnt}_ML_P1[LCS{cnt}_CNT_P1] = {{")
+            for i in range(lc_p1_frames[cnt]):
+                print_array_entry(file, mid_left[i], i, lc_p1_frames[cnt])
+            file.write(" };\n")
+            #step2
+            file.write(f"const int\t\t _LCS{cnt}_ML_P2[LCS{cnt}_CNT_P2] = {{")
+            for i in range(lc_p2_frames[cnt]):
+                print_array_entry(file, mid_left[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+            file.write(" };\n")
+
+
+
+            # next step
+            file.write("\n")
+            cnt += 1
+
+        # connect the dots
+        for phase in range(2):
+            phase += 1
+            file.write(f"const player_lane_change_t player_lane_change_phase{phase} =\n{{\n\t")
+            file.write(".FRAME_CNT =\n\t{\n\t\t")
+            for step in range(len(lc_steps)):
+                print_array_entry(file, f"LCS{step}_CNT_P1" , step, len(lc_steps))
+            file.write(f"\n\t}},\n\t.animation_tick = &_player_lanechange_tick_phase{phase},")
+            file.write("\n\t.x_LUT =\n\t{")
+            file.write("\n\t\t.left_to_mid =")
+            file.write("\n\t\t{\n\t\t\t")
+            for step in range(len(lc_steps)):
+                print_array_entry(file, f"_LCS{step}_LM_P{phase}" , step, len(lc_steps))
+            file.write("\n\t\t},")
+            file.write("\n\t\t.mid_to_right =")
+            file.write("\n\t\t{\n\t\t\t")
+            for step in range(len(lc_steps)):
+                print_array_entry(file, f"_LCS{step}_MR_P{phase}" , step, len(lc_steps))
+            file.write("\n\t\t},")
+            file.write("\n\t\t.right_to_mid =")
+            file.write("\n\t\t{\n\t\t\t")
+            for step in range(len(lc_steps)):
+                print_array_entry(file, f"_LCS{step}_RM_P{phase}" , step, len(lc_steps))
+            file.write("\n\t\t},")
+            file.write("\n\t\t.mid_to_left =")
+            file.write("\n\t\t{\n\t\t\t")
+            for step in range(len(lc_steps)):
+                print_array_entry(file, f"_LCS{step}_ML_P{phase}" , step, len(lc_steps))
+            file.write("\n\t\t}\n\t}\n};\n\n")
+
+
+
+
         
 
 
