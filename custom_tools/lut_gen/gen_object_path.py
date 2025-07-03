@@ -293,6 +293,8 @@ def generate_source():
         file.write(" *******************************************************************************************************/\n\n\n")
 
         lc_steps = [16,12,9,7,5]
+        step_from_stage = [0,0,0,1,1,1,2,2,3,3,4]
+            
         max_x = 82
 
         lc_p1_frames = []
@@ -408,29 +410,29 @@ def generate_source():
             phase += 1
             file.write(f"const player_lane_change_t player_lane_change_phase{phase} =\n{{\n\t")
             file.write(".FRAME_CNT =\n\t{\n\t\t")
-            for step in range(len(lc_steps)):
-                print_array_entry(file, f"LCS{step}_CNT_P1" , step, len(lc_steps))
+            for game_stage in range(11):
+                print_array_entry(file, f"LCS{step_from_stage[game_stage]}_CNT_P{phase}" , game_stage, 11)
             file.write(f"\n\t}},\n\t.animation_tick = &_player_lanechange_tick_phase{phase},")
             file.write("\n\t.x_LUT =\n\t{")
             file.write("\n\t\t.left_to_mid =")
             file.write("\n\t\t{\n\t\t\t")
-            for step in range(len(lc_steps)):
-                print_array_entry(file, f"_LCS{step}_LM_P{phase}" , step, len(lc_steps))
+            for game_stage in range(11):
+                print_array_entry(file, f"_LCS{step_from_stage[game_stage]}_LM_P{phase}" , game_stage, 11)
             file.write("\n\t\t},")
             file.write("\n\t\t.mid_to_right =")
             file.write("\n\t\t{\n\t\t\t")
-            for step in range(len(lc_steps)):
-                print_array_entry(file, f"_LCS{step}_MR_P{phase}" , step, len(lc_steps))
+            for game_stage in range(11):
+                print_array_entry(file, f"_LCS{step_from_stage[game_stage]}_MR_P{phase}" , game_stage, 11)
             file.write("\n\t\t},")
             file.write("\n\t\t.right_to_mid =")
             file.write("\n\t\t{\n\t\t\t")
-            for step in range(len(lc_steps)):
-                print_array_entry(file, f"_LCS{step}_RM_P{phase}" , step, len(lc_steps))
+            for game_stage in range(11):
+                print_array_entry(file, f"_LCS{step_from_stage[game_stage]}_RM_P{phase}" , game_stage, 11)
             file.write("\n\t\t},")
             file.write("\n\t\t.mid_to_left =")
             file.write("\n\t\t{\n\t\t\t")
-            for step in range(len(lc_steps)):
-                print_array_entry(file, f"_LCS{step}_ML_P{phase}" , step, len(lc_steps))
+            for game_stage in range(11):
+                print_array_entry(file, f"_LCS{step_from_stage[game_stage]}_ML_P{phase}" , game_stage, 11)
             file.write("\n\t\t}\n\t}\n};\n\n")
 
 

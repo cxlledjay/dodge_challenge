@@ -279,9 +279,7 @@ void play_start_animation(void)
  ****************************************************************************/
 
 #include "utils/controller.h"
-
-//debug
-#include "lib/print/print.h"
+#include "game_include/gen_data/gen_player_lanechange.h"
 
 void game_run(void)
 {
@@ -332,14 +330,14 @@ void game_run(void)
             switch(the_player.lane)
             {
                 case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_lane_change.animation_tick->right_to_mid;
-                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change.x_LUT->right_to_mid[the_game.stage];
+                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
                     break;
                 case MID_LANE: //< mid -> left
-                    the_player.tick = player_lane_change.animation_tick->mid_to_left;
-                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change.x_LUT->mid_to_left[the_game.stage];
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
                     break;
                 case LEFT_LANE: //< in left lane
                     break; //< cant go further left
@@ -358,14 +356,14 @@ void game_run(void)
             switch(the_player.lane)
             {
                 case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_lane_change.animation_tick->left_to_mid;
-                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change.x_LUT->left_to_mid[the_game.stage];
+                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
                     break;
                 case MID_LANE: //< mid -> right
-                    the_player.tick = player_lane_change.animation_tick->mid_to_right;
-                    the_player.cnt = player_lane_change.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change.x_LUT->mid_to_right[the_game.stage];
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
                     break;
                 case RIGHT_LANE: //< in right lane
                     break; //< cant go further right

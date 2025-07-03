@@ -76,26 +76,26 @@ const player_lane_change_t player_lane_change_phase1 =
 {
 	.FRAME_CNT =
 	{
-		LCS0_CNT_P1, LCS1_CNT_P1, LCS2_CNT_P1, LCS3_CNT_P1, LCS4_CNT_P1
+		LCS0_CNT_P1, LCS0_CNT_P1, LCS0_CNT_P1, LCS1_CNT_P1, LCS1_CNT_P1, LCS1_CNT_P1, LCS2_CNT_P1, LCS2_CNT_P1, LCS3_CNT_P1, LCS3_CNT_P1, LCS4_CNT_P1
 	},
 	.animation_tick = &_player_lanechange_tick_phase1,
 	.x_LUT =
 	{
 		.left_to_mid =
 		{
-			_LCS0_LM_P1, _LCS1_LM_P1, _LCS2_LM_P1, _LCS3_LM_P1, _LCS4_LM_P1
+			_LCS0_LM_P1, _LCS0_LM_P1, _LCS0_LM_P1, _LCS1_LM_P1, _LCS1_LM_P1, _LCS1_LM_P1, _LCS2_LM_P1, _LCS2_LM_P1, _LCS3_LM_P1, _LCS3_LM_P1, _LCS4_LM_P1
 		},
 		.mid_to_right =
 		{
-			_LCS0_MR_P1, _LCS1_MR_P1, _LCS2_MR_P1, _LCS3_MR_P1, _LCS4_MR_P1
+			_LCS0_MR_P1, _LCS0_MR_P1, _LCS0_MR_P1, _LCS1_MR_P1, _LCS1_MR_P1, _LCS1_MR_P1, _LCS2_MR_P1, _LCS2_MR_P1, _LCS3_MR_P1, _LCS3_MR_P1, _LCS4_MR_P1
 		},
 		.right_to_mid =
 		{
-			_LCS0_RM_P1, _LCS1_RM_P1, _LCS2_RM_P1, _LCS3_RM_P1, _LCS4_RM_P1
+			_LCS0_RM_P1, _LCS0_RM_P1, _LCS0_RM_P1, _LCS1_RM_P1, _LCS1_RM_P1, _LCS1_RM_P1, _LCS2_RM_P1, _LCS2_RM_P1, _LCS3_RM_P1, _LCS3_RM_P1, _LCS4_RM_P1
 		},
 		.mid_to_left =
 		{
-			_LCS0_ML_P1, _LCS1_ML_P1, _LCS2_ML_P1, _LCS3_ML_P1, _LCS4_ML_P1
+			_LCS0_ML_P1, _LCS0_ML_P1, _LCS0_ML_P1, _LCS1_ML_P1, _LCS1_ML_P1, _LCS1_ML_P1, _LCS2_ML_P1, _LCS2_ML_P1, _LCS3_ML_P1, _LCS3_ML_P1, _LCS4_ML_P1
 		}
 	}
 };
@@ -104,26 +104,26 @@ const player_lane_change_t player_lane_change_phase2 =
 {
 	.FRAME_CNT =
 	{
-		LCS0_CNT_P1, LCS1_CNT_P1, LCS2_CNT_P1, LCS3_CNT_P1, LCS4_CNT_P1
+		LCS0_CNT_P2, LCS0_CNT_P2, LCS0_CNT_P2, LCS1_CNT_P2, LCS1_CNT_P2, LCS1_CNT_P2, LCS2_CNT_P2, LCS2_CNT_P2, LCS3_CNT_P2, LCS3_CNT_P2, LCS4_CNT_P2
 	},
 	.animation_tick = &_player_lanechange_tick_phase2,
 	.x_LUT =
 	{
 		.left_to_mid =
 		{
-			_LCS0_LM_P2, _LCS1_LM_P2, _LCS2_LM_P2, _LCS3_LM_P2, _LCS4_LM_P2
+			_LCS0_LM_P2, _LCS0_LM_P2, _LCS0_LM_P2, _LCS1_LM_P2, _LCS1_LM_P2, _LCS1_LM_P2, _LCS2_LM_P2, _LCS2_LM_P2, _LCS3_LM_P2, _LCS3_LM_P2, _LCS4_LM_P2
 		},
 		.mid_to_right =
 		{
-			_LCS0_MR_P2, _LCS1_MR_P2, _LCS2_MR_P2, _LCS3_MR_P2, _LCS4_MR_P2
+			_LCS0_MR_P2, _LCS0_MR_P2, _LCS0_MR_P2, _LCS1_MR_P2, _LCS1_MR_P2, _LCS1_MR_P2, _LCS2_MR_P2, _LCS2_MR_P2, _LCS3_MR_P2, _LCS3_MR_P2, _LCS4_MR_P2
 		},
 		.right_to_mid =
 		{
-			_LCS0_RM_P2, _LCS1_RM_P2, _LCS2_RM_P2, _LCS3_RM_P2, _LCS4_RM_P2
+			_LCS0_RM_P2, _LCS0_RM_P2, _LCS0_RM_P2, _LCS1_RM_P2, _LCS1_RM_P2, _LCS1_RM_P2, _LCS2_RM_P2, _LCS2_RM_P2, _LCS3_RM_P2, _LCS3_RM_P2, _LCS4_RM_P2
 		},
 		.mid_to_left =
 		{
-			_LCS0_ML_P2, _LCS1_ML_P2, _LCS2_ML_P2, _LCS3_ML_P2, _LCS4_ML_P2
+			_LCS0_ML_P2, _LCS0_ML_P2, _LCS0_ML_P2, _LCS1_ML_P2, _LCS1_ML_P2, _LCS1_ML_P2, _LCS2_ML_P2, _LCS2_ML_P2, _LCS3_ML_P2, _LCS3_ML_P2, _LCS4_ML_P2
 		}
 	}
 };
