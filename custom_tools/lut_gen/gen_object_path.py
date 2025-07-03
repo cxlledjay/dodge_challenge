@@ -332,17 +332,16 @@ def generate_source():
             for i in range(total_steps):
                 x = -max_x + ((1+i)*delta) #get all values in between max_x and 0
                 left_mid.append(int(x)) #round here
-            left_mid.reverse() #reverse for counting down algorithm
 
             #step1
             file.write(f"const int\t\t _LCS{cnt}_LM_P1[LCS{cnt}_CNT_P1] = {{")
             for i in range(lc_p1_frames[cnt]):
-                print_array_entry(file, left_mid[i], i, lc_p1_frames[cnt])
+                print_array_entry(file, left_mid[(lc_p1_frames[cnt]-1)-i], i, lc_p1_frames[cnt])
             file.write(" };\n")
             #step2
             file.write(f"const int\t\t _LCS{cnt}_LM_P2[LCS{cnt}_CNT_P2] = {{")
             for i in range(lc_p2_frames[cnt]):
-                print_array_entry(file, left_mid[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+                print_array_entry(file, left_mid[(lc_p1_frames[cnt]+lc_p2_frames[cnt]-1)-i], i, lc_p2_frames[cnt])
             file.write(" };\n")
             
 
@@ -350,17 +349,16 @@ def generate_source():
             for i in range(total_steps):
                 x = 0 + ((1+i)*delta) #get all values in between max_x and 0
                 mid_right.append(int(x)) #round here
-            mid_right.reverse() #reverse for counting down algorithm
 
             #step1
             file.write(f"const int\t\t _LCS{cnt}_MR_P1[LCS{cnt}_CNT_P1] = {{")
             for i in range(lc_p1_frames[cnt]):
-                print_array_entry(file, mid_right[i], i, lc_p1_frames[cnt])
+                print_array_entry(file, mid_right[(lc_p1_frames[cnt]-1)-i], i, lc_p1_frames[cnt])
             file.write(" };\n")
             #step2
             file.write(f"const int\t\t _LCS{cnt}_MR_P2[LCS{cnt}_CNT_P2] = {{")
             for i in range(lc_p2_frames[cnt]):
-                print_array_entry(file, mid_right[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+                print_array_entry(file, mid_right[(lc_p1_frames[cnt]+lc_p2_frames[cnt]-1)-i], i, lc_p2_frames[cnt])
             file.write(" };\n")
             
 
@@ -368,17 +366,16 @@ def generate_source():
             for i in range(total_steps):
                 x = max_x - ((1+i)*delta) #get all values in between max_x and 0
                 right_mid.append(int(x)) #round here
-            right_mid.reverse() #reverse for counting down algorithm
 
             #step1
             file.write(f"const int\t\t _LCS{cnt}_RM_P1[LCS{cnt}_CNT_P1] = {{")
             for i in range(lc_p1_frames[cnt]):
-                print_array_entry(file, right_mid[i], i, lc_p1_frames[cnt])
+                print_array_entry(file, right_mid[(lc_p1_frames[cnt]-1)-i], i, lc_p1_frames[cnt])
             file.write(" };\n")
             #step2
             file.write(f"const int\t\t _LCS{cnt}_RM_P2[LCS{cnt}_CNT_P2] = {{")
             for i in range(lc_p2_frames[cnt]):
-                print_array_entry(file, right_mid[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+                print_array_entry(file, right_mid[(lc_p1_frames[cnt]+lc_p2_frames[cnt]-1)-i], i, lc_p2_frames[cnt])
             file.write(" };\n")
             
 
@@ -386,17 +383,16 @@ def generate_source():
             for i in range(total_steps):
                 x = 0 - ((1+i)*delta) #get all values in between max_x and 0
                 mid_left.append(int(x)) #round here
-            mid_left.reverse() #reverse for counting down algorithm
 
             #step1
             file.write(f"const int\t\t _LCS{cnt}_ML_P1[LCS{cnt}_CNT_P1] = {{")
             for i in range(lc_p1_frames[cnt]):
-                print_array_entry(file, mid_left[i], i, lc_p1_frames[cnt])
+                print_array_entry(file, mid_left[(lc_p1_frames[cnt]-1)-i], i, lc_p1_frames[cnt])
             file.write(" };\n")
             #step2
             file.write(f"const int\t\t _LCS{cnt}_ML_P2[LCS{cnt}_CNT_P2] = {{")
             for i in range(lc_p2_frames[cnt]):
-                print_array_entry(file, mid_left[i+lc_p1_frames[cnt]], i, lc_p2_frames[cnt])
+                print_array_entry(file, mid_left[(lc_p1_frames[cnt]+lc_p2_frames[cnt]-1)-i], i, lc_p2_frames[cnt])
             file.write(" };\n")
 
 

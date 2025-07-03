@@ -26,6 +26,7 @@
         "object.h": "c",
         "object_manager.h": "c",
         "functional": "c",
-        "gen_object_hitbox.h": "c"
+        "gen_object_hitbox.h": "c",
+        "gen_player_lanechange.h": "c"
     }
 }
