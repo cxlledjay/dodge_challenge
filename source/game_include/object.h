@@ -10,14 +10,8 @@ typedef void (* object_tick_func) (struct _moving_object_t * me);
  ******************************************************************************************************/
 typedef enum _moving_object_type_t
 {
-    ENEMY_DUMMY = 0,
-    ABILITY_1,
-    ABILITY_2,
-    ABILITY_3,
-    ABILITY_4,
-    ENEMY_1,
-    ENEMY_2,
-    ENEMY_3,
+    MOT_NULL = 0,
+    MOT_ENEMY_1 = 1
 }moving_object_type_t;
 
 

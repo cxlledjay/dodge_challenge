@@ -6,19 +6,16 @@ object_manager_t the_manager;
 
 /// ------------- temp
 
-#define TEMP_SIZE       (10u)
-const spawn_entry_t temp_pattern[TEMP_SIZE] =
+const spawn_entry_t temp_pattern[] =
 {
-    0b00000001,
-    0b00000010,
-    0b00000000,
-    0b00000001,
-    0b00000000,
-    0b00000001,
-    0b00000010,
-    0b00000000,
-    0b00000010,
-    0b00000010
+    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_NULL},
+    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_ENEMY_1},
+    {.is_last = 0, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL},
+    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_NULL},
+    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_ENEMY_1},
+    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1}, // 16486 byte
+    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1}, // 16488 byte??
+    {.is_last = 1, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL}
 };
 
 
@@ -42,8 +39,7 @@ void object_manager_init(void)
 
     /// init spawner stuff
     the_manager.pattern = temp_pattern;
-    the_manager.remaining_spawns = TEMP_SIZE;
-    the_manager.cnt = 50;
+    the_manager.cnt = 50; //< one second delay at start
 }                          
     
 
@@ -79,47 +75,62 @@ void object_manager_tick_all(void)
 
 
 #include "game_include/graphics/g_enemy.h"
+const void * const MOT_TYPE_TO_MODEL[] =
+{
+    0, //< MOT_NONE
+    &vl_enemy_dummy //< MOT_ENEMY_1
+};
+
+
 #include "game_include/gen_data/gen_object_path.h"
+
+#define SPAWN_OBJECT(TYPE, LANE)                                                                \
+    if(the_manager.queue_ptr->tick == idle){ /* ram is unused */                                \
+        the_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[TYPE];                                 \
+        the_manager.queue_ptr->lane = LANE;                                                     \
+        the_manager.queue_ptr->type = TYPE;                                                     \
+        the_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][LANE];         \
+        the_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];                     \
+        /* set queue ptr for next spawn */                                                      \
+        if(the_manager.queue_ptr == &the_manager.objects[9]){                                   \
+            the_manager.queue_ptr = the_manager.objects;                                        \
+        }else{                                                                                  \
+            the_manager.queue_ptr++;                                                            \
+        }                                                                                       \
+    }
 
 void spawn_objects(void)
 {
-    /// get current entity to spawn
-    if(--(the_manager.remaining_spawns) == 0)
+    /// check if pattern contains entity for each lane and then try to spawn it
+
+    if(the_manager.pattern->left != MOT_NULL)
+    {
+        /// try spawning
+        SPAWN_OBJECT(the_manager.pattern->left, LEFT_LANE);
+    }
+
+    if(the_manager.pattern->mid != MOT_NULL)
+    {
+        /// try spawning
+        SPAWN_OBJECT(the_manager.pattern->mid, MID_LANE);
+    }
+
+    if(the_manager.pattern->right != MOT_NULL)
+    {
+        /// try spawning
+        SPAWN_OBJECT(the_manager.pattern->right, RIGHT_LANE);
+    }
+
+    
+    /// iterate to next pattern entry and check for end of list
+    if((++the_manager.pattern)->is_last == 1)
     {
         /// TODO: select different pattern
-        //the_manager.pattern = temp_pattern;
-        the_manager.remaining_spawns = TEMP_SIZE;
+        the_manager.pattern = temp_pattern;
     }
 
-    /// retrieve data
-    spawn_entry_t entity = the_manager.pattern[the_manager.remaining_spawns];
-
-    /// get lane from data
-    lane_t lane = entity & 0b00000011;
-
-    /// get model from data
-    moving_object_type_t type = ENEMY_DUMMY; //< temp
-
-    /// spawn
-    if(the_manager.queue_ptr->tick == idle)
-    {
-        /// can spawn
-        the_manager.queue_ptr->model = &vl_enemy_dummy;
-        the_manager.queue_ptr->lane = lane;
-        the_manager.queue_ptr->type = type;
-        the_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
-        the_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
-
-        /// set queue ptr for next spawn
-        if(the_manager.queue_ptr == &the_manager.objects[9])
-        {
-            the_manager.queue_ptr = the_manager.objects;
-        }
-        else
-        {
-            the_manager.queue_ptr++;
-        }
-    }
+    /// done
+    return;
 }
 
 

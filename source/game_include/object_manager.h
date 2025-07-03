@@ -6,9 +6,14 @@
  * spawning datastructure
  **********************************************************************************************************/
 
-typedef unsigned int spawn_entry_t;
-
-
+#include "game_include/object.h"
+typedef struct _spawn_entry_t
+{
+    unsigned int is_last : 1;       //< flat to indicate last entry
+    moving_object_type_t left : 5;  //< object spawning on left lane
+    moving_object_type_t mid : 5;   //< object spawning on mid lane
+    moving_object_type_t right : 5; //< object spawning on right lane
+}spawn_entry_t; //< 2byte datastructure for managing spawning patterns
 
 
 
@@ -27,8 +32,7 @@ typedef struct _object_manager_t
     moving_object_t * queue_ptr;                        //< always pointing after last added element
 
     /// spawning management
-    const spawn_entry_t * pattern;                      //< pointer to precompiled spawning pattern 
-    unsigned int remaining_spawns;                      //< counter to keep track of spawner pattern progress
+    const spawn_entry_t * pattern;                            //< pointer to precompiled spawning pattern
     unsigned int cnt;                                   //< counter to regulate spawning intervals 
 }object_manager_t;
 
