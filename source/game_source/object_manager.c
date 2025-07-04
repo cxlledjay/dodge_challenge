@@ -92,7 +92,7 @@ void object_manager_tick_all(void)
 #include "game_include/data/spawn_pattern.h"
 const spawn_entry_t * get_next_pattern()
 {
-    unsigned int idx_bitmasked = rand(&om_rng_obj) &0b00000001;
+    unsigned int idx_bitmasked = rand(&om_rng_obj) &SPAWN_PATTERN_IDX_BITMASK;
     return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
 }
 

@@ -19,7 +19,8 @@ typedef struct _spawn_entry_t
  * precompiled spawn patterns
  ************************************************************/
 
-#define SPAWN_PATTERNS_CNT          (2u)    //< has to be 2^n
+#define SPAWN_PATTERNS_CNT          (4u)    //< has to be 2^n
+#define SPAWN_PATTERN_IDX_BITMASK   (SPAWN_PATTERNS_CNT-1)
 
 /// @brief all spawn patterns accessible by bitmasked rng index (check size of array for bitmask size)
 extern const spawn_entry_t * const SPAWN_PATTERN_PTR_COLLECTION[SPAWN_PATTERNS_CNT];
