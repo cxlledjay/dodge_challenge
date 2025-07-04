@@ -264,7 +264,7 @@ def generate_source():
 
         sc_xh_arr = []
         for i in range(58):
-            x = i * 1.1
+            x = i * 1
             xh_r = int(x/2)
             sc_xh_arr.append(xh_r)
 

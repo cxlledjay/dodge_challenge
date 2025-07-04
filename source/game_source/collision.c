@@ -31,7 +31,7 @@ aabb_player_t player_aabbs;
 
 #include "game_include/player.h"
 #define THRESHOLD_Y_PLAYER_TOP          (PLAYER_Y + 16) //< dont check collision if object y is above this y value
-#define THRESHOLD_Y_OBJECT_TOP          (PLAYER_Y - 12) //< dont check collision if object y_bb_top is below this value
+#define THRESHOLD_Y_OBJECT_TOP          (PLAYER_Y - 6) //< dont check collision if object y_bb_top is below this value
 
 #define AABB_CALC_Y_OFFSET          (64) //< shift 8-bit int value AABB_CALC_Y_OFFSET "pixels" down
 
@@ -251,7 +251,7 @@ void aabb_calculate_right(void)
     if(AXIS == 0) {++COUNTER;}
 
 
-#define DEBUG
+//#define DEBUG
 #include "lib/print/print.h"
 
 
@@ -320,7 +320,7 @@ void aabb_check_mid(void)
             
             /// debug section
             #ifdef DEBUG
-            print_signed_int((int)i*12 +24, -110, y);
+            print_signed_int((int)i*12 +10, -110, y);
             aabb_draw_object(obj);
             #endif
 
@@ -349,7 +349,7 @@ void aabb_check_mid(void)
                 /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
 
                 /// if it was an enemy -> game over
-                //the_game.execute_state = game_over;
+                the_game.execute_state = game_over;
                 #ifdef DEBUG
                 print_string(42,-20,"HIT\x80");
                 #endif
@@ -424,7 +424,7 @@ void aabb_check_side(void)
             
             /// debug section
             #ifdef DEBUG
-            print_signed_int((int)i*12 +24, -110, y);
+            print_signed_int((int)i*12 +10, -110, y);
             aabb_draw_object(obj);
             #endif
 
@@ -460,7 +460,7 @@ void aabb_check_side(void)
                 /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
 
                 /// if it was an enemy -> game over
-                //the_game.execute_state = game_over;
+                the_game.execute_state = game_over;
                 /// debug section
                 #ifdef DEBUG
                 print_string(42,-20,"HIT\x80");
