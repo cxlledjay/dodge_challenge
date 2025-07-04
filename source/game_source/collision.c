@@ -262,8 +262,6 @@ void aabb_calculate_right(void)
 //#define DEBUG
 void aabb_check_mid(void)
 {
-    /// TODO: implement! (ayy)
-
     #ifdef DEBUG
     aabb_draw();
     print_string(100,-40, "CD:MID\x80");
@@ -346,7 +344,7 @@ void aabb_check_mid(void)
             {
                 /// we hit something
 
-                /// switch the type of object we hit (TODO: implement)
+                /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
 
                 /// if it was an enemy -> game over
                 the_game.execute_state = game_over;
@@ -357,8 +355,6 @@ void aabb_check_mid(void)
 
 void aabb_check_side(void)
 {
-    /// TODO: implement! (ayy)
-
     #ifdef DEBUG
     aabb_draw();
     print_string(100,-40, "CD:SIDE\x80");

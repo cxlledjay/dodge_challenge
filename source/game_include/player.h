@@ -14,7 +14,7 @@ typedef struct _player_t
     int x; //< player x pos for animation & collision check
     const int * x_LUT; //< pointer for correct LUT for animation (set by game loop)
 
-    unsigned int cnt; //< if player is changeing lanes, keep track of lane change animation here
+    unsigned int cnt; //< if player is changing lanes, keep track of lane change animation here
 
     void (*tick) (void); //< handle drawing (+animation), collision detection (+game state change), ability pickup
 } player_t;

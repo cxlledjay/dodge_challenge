@@ -4,6 +4,11 @@
 /// @brief nice posh guy
 object_manager_t the_manager;
 
+
+#include "game_include/random.h"
+/// @brief rng object for choosing next spawn pattern (and abilities??)
+rng_t om_rng_obj;
+
 /// ------------- temp
 
 const spawn_entry_t temp_pattern[] =
@@ -13,8 +18,8 @@ const spawn_entry_t temp_pattern[] =
     {.is_last = 0, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL},
     {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_NULL},
     {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_ENEMY_1},
-    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1}, // 16486 byte
-    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1}, // 16488 byte??
+    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1},
+    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1},
     {.is_last = 1, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL}
 };
 
@@ -23,13 +28,39 @@ const spawn_entry_t temp_pattern[] =
  * functions
  **********************************************************************************************************/
 
-void om_dummy (void) {}
+/// includes for rng init
+#include "game_include/clock.h"
+#include "game_include/map.h"
+#include "game_include/player.h"
 
+/// debug
+#include "vectrex.h"
+#include "lib/print/print.h"
 
 /// @brief init function
 void object_manager_init(void)
 {
-    /// init each pre allocated object
+    /// build hard to replicate seed
+    unsigned int seed0 = 42 + the_clock.frames;                                                     //< hard to time
+    unsigned int seed1 = (unsigned int) (the_game.score);                                           //< should always differ
+    unsigned int seed2 = (the_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);   //< might access out of bounds
+    unsigned int seed3 = (the_manager.queue_ptr - 3)->ttl * the_map.cnt;                            //< propably out of bounds but idc
+
+    /// debug out of curiosity
+    for(unsigned int i = 250; i > 0; --i)
+    {
+        Wait_Recal();
+        print_unsigned_int(48,0,seed0);
+        print_unsigned_int(16,0,seed1);
+        print_unsigned_int(-16,0,seed2);
+        print_unsigned_int(-48,0,seed3);
+    }
+
+    /// init random number gen
+    rng_init(&om_rng_obj, seed0, seed1, seed2, seed3);
+
+
+    /// init ram segement for moving object
     moving_object_t new_obj = {.type = 0, .ttl = 0, .model = 0, .tick = idle};
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
@@ -37,11 +68,12 @@ void object_manager_init(void)
     }
     the_manager.queue_ptr = the_manager.objects;
 
-    /// init spawner stuff
-    the_manager.pattern = temp_pattern;
+
+    /// init spawner
+    the_manager.pattern = temp_pattern; //< start pattern
     the_manager.cnt = 50; //< one second delay at start
-}                          
-    
+}
+
 
 
 

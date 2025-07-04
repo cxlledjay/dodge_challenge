@@ -69,17 +69,18 @@ void game_start(void)
 
 void game_init(void)
 {
-    /// set game starting values
-    the_game.score = 0;
-    //the_game.stage = 0; ///< keep the stage (for alpha release) <- later keep the difficulty here
-    gp_menu.selection = 0;
-
-    /// trigger all other init routines
+    /// trigger all init routines
+    object_manager_init(); //< init first for random seed to use past values in ram
+    
     clock_init();
     map_init();
     player_init();
-    object_manager_init();
     collision_init();
+
+    /// game init
+    the_game.score = 0; //< important to set after init of object manager (rng init)
+    //the_game.stage = 0; //< keep the stage (for alpha release) <- later keep the difficulty here
+    gp_menu.selection = 0; //< general purpose menu selection for pause and game over menu 
 
     /// go directly to run
     the_game.execute_state = play_start_animation;
