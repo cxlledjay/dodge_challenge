@@ -30,7 +30,10 @@ aabb_player_t player_aabbs;
  *************************************************/
 
 #include "game_include/player.h"
-#define THRESHOLD_OBJECT_Y     (PLAYER_Y + 16) //< start checking for collision if object y is below this threshold
+#define THRESHOLD_Y_PLAYER_TOP          (PLAYER_Y + 16) //< dont check collision if object y is above this y value
+#define THRESHOLD_Y_OBJECT_TOP          (PLAYER_Y - 12) //< dont check collision if object y_bb_top is below this value
+
+#define AABB_CALC_Y_OFFSET          (64) //< shift 8-bit int value AABB_CALC_Y_OFFSET "pixels" down
 
 
 
@@ -74,20 +77,20 @@ void aabb_draw(void)
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
     
     /// car bb
-    Moveto_d(player_aabbs.car.y_bot, player_aabbs.car.x_left);
+    Moveto_d(player_aabbs.car.y_bot - AABB_CALC_Y_OFFSET, player_aabbs.car.x_left);
     Draw_Line_d(0,(player_aabbs.car.x_right)-(player_aabbs.car.x_left));
-    Draw_Line_d((player_aabbs.car.y_top)-(player_aabbs.car.y_bot),0);
+    Draw_Line_d((player_aabbs.car.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.car.y_bot + AABB_CALC_Y_OFFSET),0);
     Draw_Line_d(0,(player_aabbs.car.x_left)-(player_aabbs.car.x_right));
-    Draw_Line_d((player_aabbs.car.y_bot)-(player_aabbs.car.y_top),0);
+    Draw_Line_d((player_aabbs.car.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.car.y_top + AABB_CALC_Y_OFFSET),0);
 
     /// wing bb
     Reset0Ref();					/* reset beam to center	*/
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-    Moveto_d(player_aabbs.wing.y_bot, player_aabbs.wing.x_left);
+    Moveto_d(player_aabbs.wing.y_bot - AABB_CALC_Y_OFFSET, player_aabbs.wing.x_left);
     Draw_Line_d(0,(player_aabbs.wing.x_right)-(player_aabbs.wing.x_left));
-    Draw_Line_d((player_aabbs.wing.y_top)-(player_aabbs.wing.y_bot),0);
+    Draw_Line_d((player_aabbs.wing.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.wing.y_bot + AABB_CALC_Y_OFFSET),0);
     Draw_Line_d(0,(player_aabbs.wing.x_left)-(player_aabbs.wing.x_right));
-    Draw_Line_d((player_aabbs.wing.y_bot)-(player_aabbs.wing.y_top),0);
+    Draw_Line_d((player_aabbs.wing.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.wing.y_top + AABB_CALC_Y_OFFSET),0);
 
     /// optional part
     if(collision.check != aabb_check_mid)
@@ -95,75 +98,69 @@ void aabb_draw(void)
         /// optional bb
         Reset0Ref();					/* reset beam to center	*/
         dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-        Moveto_d(player_aabbs.optional.y_bot, player_aabbs.optional.x_left);
+        Moveto_d(player_aabbs.optional.y_bot - AABB_CALC_Y_OFFSET, player_aabbs.optional.x_left);
         Draw_Line_d(0,(player_aabbs.optional.x_right)-(player_aabbs.optional.x_left));
-        Draw_Line_d((player_aabbs.optional.y_top)-(player_aabbs.optional.y_bot),0);
+        Draw_Line_d((player_aabbs.optional.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.optional.y_bot + AABB_CALC_Y_OFFSET),0);
         Draw_Line_d(0,(player_aabbs.optional.x_left)-(player_aabbs.optional.x_right));
-        Draw_Line_d((player_aabbs.optional.y_bot)-(player_aabbs.optional.y_top),0);
+        Draw_Line_d((player_aabbs.optional.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.optional.y_top + AABB_CALC_Y_OFFSET),0);
     }
 
     /// draw threshold line top
     Reset0Ref();					/* reset beam to center	*/
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-    Moveto_d(THRESHOLD_OBJECT_Y, -100);
+    Moveto_d(THRESHOLD_Y_PLAYER_TOP, -100);
     Draw_Line_d(0, 100);
     Draw_Line_d(0, 100);
 
-    /// draw threshold line bot (this is meant for enemy y_bot (!! not enemy y_top))
+    /// draw threshold line top (this is meant for enemy y_top
     Reset0Ref();					/* reset beam to center	*/
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-    Moveto_d(-128, -100);
-    Moveto_d(-16, 0);
-    Draw_Line_d(0, 100);
-    Draw_Line_d(0, 100);
-
-    /// draw for objects
-    for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
-    {
-        moving_object_t* obj = &the_manager.objects[i];
-        if(obj->tick != idle)
-        {
-            /// get x
-            int x = 0;
-            switch(obj->lane)
-            {
-                case LEFT_LANE:
-                    x = MOVING_OBJECT_XL_LUT[the_game.stage][obj->ttl];
-                    break;
-                case RIGHT_LANE:
-                    x = MOVING_OBJECT_XR_LUT[the_game.stage][obj->ttl];
-                    break;
-                case MID_LANE:
-                    x = 0;
-                    break;
-                default:
-                    break;
-            }
-
-            int y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
-            int y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
-            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
-
-            /// get bb values
-            int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
-            int bb_y  = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
-
-            if(y2 == 0)
-            {
-                /// draw
-                Reset0Ref();					/* reset beam to center	*/
-                dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-                Moveto_d(y1, x);
-                Draw_Line_d(0,bb_xh);
-                Draw_Line_d(bb_y,0);
-                Draw_Line_d(0,-2* bb_xh);
-                Draw_Line_d(-bb_y,0);
-                Draw_Line_d(0,bb_xh);
-            }
-        }
-    }
+    Moveto_d(THRESHOLD_Y_OBJECT_TOP, -116);
+    Draw_Line_d(0, 116);
+    Draw_Line_d(0, 116);
 }
 
+void aabb_draw_object(moving_object_t * obj)
+{
+    if(obj->tick != idle)
+    {
+        /// get x
+        int x = 0;
+        switch(obj->lane)
+        {
+            case LEFT_LANE:
+                x = MOVING_OBJECT_XL_LUT[the_game.stage][obj->ttl];
+                break;
+            case RIGHT_LANE:
+                x = MOVING_OBJECT_XR_LUT[the_game.stage][obj->ttl];
+                break;
+            case MID_LANE:
+                x = 0;
+                break;
+            default:
+                break;
+        }
+
+        int y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
+        int y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
+        unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
+
+        /// get bb values
+        int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
+        int bb_y  = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
+
+        /// draw
+        Reset0Ref();					/* reset beam to center	*/
+        dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
+        Moveto_d(y1, x);
+        Moveto_d(y2+bb_y, 0);
+        Draw_Line_d(0,bb_xh);
+        Draw_Line_d(-bb_y,0);
+        Draw_Line_d(0,-2* bb_xh);
+        Draw_Line_d(bb_y,0);
+        Draw_Line_d(0,bb_xh);
+    }
+}
 
 
 
@@ -174,14 +171,14 @@ void aabb_draw(void)
 void aabb_calculate_mid(void)
 {
     /// main car
-    player_aabbs.car.y_top = PLAYER_Y + 9;
-    player_aabbs.car.y_bot = PLAYER_Y - 12;
+    player_aabbs.car.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 9);
+    player_aabbs.car.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
     player_aabbs.car.x_left = the_player.x - 20;
     player_aabbs.car.x_right = the_player.x + 20;
 
     /// front wing
-    player_aabbs.wing.y_top = PLAYER_Y + 15;
-    player_aabbs.wing.y_bot = PLAYER_Y + 9;
+    player_aabbs.wing.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 15);
+    player_aabbs.wing.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y + 9);
     player_aabbs.wing.x_left = the_player.x - 10;
     player_aabbs.wing.x_right = the_player.x + 10;
 }
@@ -190,20 +187,20 @@ void aabb_calculate_mid(void)
 void aabb_calculate_left(void)
 {
     /// main car
-    player_aabbs.car.y_top = PLAYER_Y + 11;
-    player_aabbs.car.y_bot = PLAYER_Y - 12;
+    player_aabbs.car.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 11);
+    player_aabbs.car.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
     player_aabbs.car.x_left = the_player.x + 27;
     player_aabbs.car.x_right = the_player.x - 5;
 
     /// front wing
-    player_aabbs.wing.y_top = PLAYER_Y + 16;
-    player_aabbs.wing.y_bot = PLAYER_Y + 11;
+    player_aabbs.wing.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 16);
+    player_aabbs.wing.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y + 11);
     player_aabbs.wing.x_left = the_player.x + 25;
     player_aabbs.wing.x_right = the_player.x + 9;
 
     /// optional
-    player_aabbs.optional.y_top = PLAYER_Y + 4;
-    player_aabbs.optional.y_bot = PLAYER_Y - 12;
+    player_aabbs.optional.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 4);
+    player_aabbs.optional.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
     player_aabbs.optional.x_left = the_player.x - 5;
     player_aabbs.optional.x_right = the_player.x - 20;
 }
@@ -212,20 +209,20 @@ void aabb_calculate_left(void)
 void aabb_calculate_right(void)
 {
     /// main car
-    player_aabbs.car.y_top = PLAYER_Y + 11;
-    player_aabbs.car.y_bot = PLAYER_Y - 12;
+    player_aabbs.car.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 11);
+    player_aabbs.car.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
     player_aabbs.car.x_left = the_player.x - 27;
     player_aabbs.car.x_right = the_player.x + 5;
 
     /// front wing
-    player_aabbs.wing.y_top = PLAYER_Y + 16;
-    player_aabbs.wing.y_bot = PLAYER_Y + 11;
+    player_aabbs.wing.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 16);
+    player_aabbs.wing.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y + 11);
     player_aabbs.wing.x_left = the_player.x - 25;
     player_aabbs.wing.x_right = the_player.x - 9;
 
     /// optional
-    player_aabbs.optional.y_top = PLAYER_Y + 4;
-    player_aabbs.optional.y_bot = PLAYER_Y - 12;
+    player_aabbs.optional.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 4);
+    player_aabbs.optional.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
     player_aabbs.optional.x_left = the_player.x + 5;
     player_aabbs.optional.x_right = the_player.x + 20;
 }
@@ -254,17 +251,15 @@ void aabb_calculate_right(void)
     if(AXIS == 0) {++COUNTER;}
 
 
-
-
+#define DEBUG
 #include "lib/print/print.h"
 
 
-//#define DEBUG
 void aabb_check_mid(void)
 {
     #ifdef DEBUG
     aabb_draw();
-    print_string(100,-40, "CD:MID\x80");
+    print_string(110,-40, "CD:MID\x80");
     #endif
 
     moving_object_t* obj;
@@ -276,21 +271,31 @@ void aabb_check_mid(void)
         /// only care when object is active
         if(obj->tick != idle)
         {
-            /// only care when object is in threshold
-            int y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
-            if(y1 > THRESHOLD_OBJECT_Y)
+            int y = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
+
+            /// only care when object is below y of player aabb top 
+            if(y > THRESHOLD_Y_PLAYER_TOP)
             {
-                break;
+                continue;
             }
-            int y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
-            if (y2 != 0)
+            
+            /// manipulate y to increase performance and keep extended axis system
+            y += AABB_CALC_Y_OFFSET; 
+            y += MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl]; //< now y is real y shifted up AABB_CALC_Y_OFFSET "pixels"
+            
+            /// start building aabb of object
+            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
+            int bb_y        = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
+            int bb_ytop     = y+bb_y; //< adjusted to scaled axis
+
+            /// only care when player is above y of object aabb top (micro optimisation)
+            if(bb_ytop < (THRESHOLD_Y_OBJECT_TOP + AABB_CALC_Y_OFFSET))
             {
-                break;
+                continue;
             }
 
-            /// get values
-            
-            /// get x
+            /// get remaining values for aabb check
+
             int x = 0;
             switch(obj->lane)
             {
@@ -306,21 +311,18 @@ void aabb_check_mid(void)
                 default:
                     break;
             }
-            
-            /// get scaling
-            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
-
-            /// get bb values
             int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
-            int bb_y  = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
 
-            /// build bb
-            int bb_ybot     = y1;
-            int bb_ytop     = y1+bb_y;
+            /// build aabb
+            //int bb_ybot     = y; //< bb_ybot is just y
             int bb_xleft    = x-bb_xh;
             int bb_xright   = x+bb_xh;
             
-
+            /// debug section
+            #ifdef DEBUG
+            print_signed_int((int)i*12 +24, -110, y);
+            aabb_draw_object(obj);
+            #endif
 
             /// check collision
             unsigned int axis = 0;
@@ -329,14 +331,14 @@ void aabb_check_mid(void)
             /// check with bb of car
             CHECK_COLLISION(
                 axis, collsions,
-                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, y,
                 player_aabbs.car.x_left, player_aabbs.car.x_right, bb_xleft, bb_xright
             );
             
             /// check with bb of wing
             CHECK_COLLISION(
                 axis, collsions,
-                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, y,
                 player_aabbs.wing.x_left, player_aabbs.wing.x_right, bb_xleft, bb_xright
             );
 
@@ -347,20 +349,23 @@ void aabb_check_mid(void)
                 /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
 
                 /// if it was an enemy -> game over
-                the_game.execute_state = game_over;
+                //the_game.execute_state = game_over;
+                #ifdef DEBUG
+                print_string(42,-20,"HIT\x80");
+                #endif
             }
         }
     }
 }
 
+
 void aabb_check_side(void)
 {
     #ifdef DEBUG
     aabb_draw();
-    print_string(100,-40, "CD:SIDE\x80");
+    print_string(110,-40, "CD:SIDE\x80");
     #endif
 
-    
     moving_object_t* obj;
     /// loop over all objects
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
@@ -370,21 +375,31 @@ void aabb_check_side(void)
         /// only care when object is active
         if(obj->tick != idle)
         {
-            /// only care when object is in threshold
-            int y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
-            if(y1 > THRESHOLD_OBJECT_Y)
+            int y = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
+
+            /// only care when object is below y of player aabb top 
+            if(y > THRESHOLD_Y_PLAYER_TOP)
             {
-                break;
+                continue;
             }
-            int y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
-            if (y2 != 0)
+            
+            /// manipulate y to increase performance and keep extended axis system
+            y += AABB_CALC_Y_OFFSET; 
+            y += MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl]; //< now y is real y shifted up AABB_CALC_Y_OFFSET "pixels"
+            
+            /// start building aabb of object
+            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
+            int bb_y        = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
+            int bb_ytop     = y+bb_y; //< adjusted to scaled axis
+
+            /// only care when player is above y of object aabb top (micro optimisation)
+            if(bb_ytop < (THRESHOLD_Y_OBJECT_TOP + AABB_CALC_Y_OFFSET))
             {
-                break;
+                continue;
             }
 
-            /// get values
-            
-            /// get x
+            /// get remaining values for aabb check
+
             int x = 0;
             switch(obj->lane)
             {
@@ -400,21 +415,18 @@ void aabb_check_side(void)
                 default:
                     break;
             }
-            
-            /// get scaling
-            unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
-
-            /// get bb values
             int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
-            int bb_y  = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
 
-            /// build bb
-            int bb_ybot     = y1;
-            int bb_ytop     = y1+bb_y;
+            /// build aabb
+            //int bb_ybot     = y; //< bb_ybot is just y
             int bb_xleft    = x-bb_xh;
             int bb_xright   = x+bb_xh;
             
-
+            /// debug section
+            #ifdef DEBUG
+            print_signed_int((int)i*12 +24, -110, y);
+            aabb_draw_object(obj);
+            #endif
 
             /// check collision
             unsigned int axis = 0;
@@ -423,21 +435,21 @@ void aabb_check_side(void)
             /// check with bb of car
             CHECK_COLLISION(
                 axis, collsions,
-                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.car.y_top, player_aabbs.car.y_bot, bb_ytop, y,
                 player_aabbs.car.x_left, player_aabbs.car.x_right, bb_xleft, bb_xright
             );
             
             /// check with bb of wing
             CHECK_COLLISION(
                 axis, collsions,
-                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.wing.y_top, player_aabbs.wing.y_bot, bb_ytop, y,
                 player_aabbs.wing.x_left, player_aabbs.wing.x_right, bb_xleft, bb_xright
             );
             
             /// check with bb of side
             CHECK_COLLISION(
                 axis, collsions,
-                player_aabbs.optional.y_top, player_aabbs.optional.y_bot, bb_ytop, bb_ybot,
+                player_aabbs.optional.y_top, player_aabbs.optional.y_bot, bb_ytop, y,
                 player_aabbs.optional.x_left, player_aabbs.optional.x_right, bb_xleft, bb_xright
             );
 
@@ -445,10 +457,14 @@ void aabb_check_side(void)
             {
                 /// we hit something
 
-                /// switch the type of object we hit (TODO: implement)
+                /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
 
                 /// if it was an enemy -> game over
-                the_game.execute_state = game_over;
+                //the_game.execute_state = game_over;
+                /// debug section
+                #ifdef DEBUG
+                print_string(42,-20,"HIT\x80");
+                #endif
             }
         }
     }
