@@ -1,32 +1,26 @@
 #include "game_include/object_manager.h"
 
 
+
+/**********************************************************************************************************
+ * global objects
+ **********************************************************************************************************/
+
 /// @brief nice posh guy
 object_manager_t the_manager;
-
 
 #include "game_include/random.h"
 /// @brief rng object for choosing next spawn pattern (and abilities??)
 rng_t om_rng_obj;
 
-/// ------------- temp
-
-const spawn_entry_t temp_pattern[] =
-{
-    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_NULL},
-    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_ENEMY_1},
-    {.is_last = 0, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL},
-    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_NULL},
-    {.is_last = 0, .left = MOT_ENEMY_1, .mid = MOT_NULL, .right = MOT_ENEMY_1},
-    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1},
-    {.is_last = 0, .left = MOT_NULL, .mid = MOT_NULL, .right = MOT_ENEMY_1},
-    {.is_last = 1, .left = MOT_NULL, .mid = MOT_ENEMY_1, .right = MOT_NULL}
-};
 
 
 /**********************************************************************************************************
  * functions
  **********************************************************************************************************/
+
+/// fw decl:
+const spawn_entry_t * get_next_pattern();
 
 /// includes for rng init
 #include "game_include/clock.h"
@@ -46,16 +40,6 @@ void object_manager_init(void)
     unsigned int seed2 = (the_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);   //< might access out of bounds
     unsigned int seed3 = (the_manager.queue_ptr - 3)->ttl * the_map.cnt;                            //< propably out of bounds but idc
 
-    /// debug out of curiosity
-    for(unsigned int i = 250; i > 0; --i)
-    {
-        Wait_Recal();
-        print_unsigned_int(48,0,seed0);
-        print_unsigned_int(16,0,seed1);
-        print_unsigned_int(-16,0,seed2);
-        print_unsigned_int(-48,0,seed3);
-    }
-
     /// init random number gen
     rng_init(&om_rng_obj, seed0, seed1, seed2, seed3);
 
@@ -70,7 +54,7 @@ void object_manager_init(void)
 
 
     /// init spawner
-    the_manager.pattern = temp_pattern; //< start pattern
+    the_manager.pattern = get_next_pattern(); //< random start pattern
     the_manager.cnt = 50; //< one second delay at start
 }
 
@@ -102,8 +86,16 @@ void object_manager_tick_all(void)
 
 
 /**********************************************************************************************************
- * spawn function
+ * spawn functions
  **********************************************************************************************************/
+
+#include "game_include/data/spawn_pattern.h"
+const spawn_entry_t * get_next_pattern()
+{
+    unsigned int idx_bitmasked = rand(&om_rng_obj) &0b00000001;
+    return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
+}
+
 
 
 #include "game_include/graphics/g_enemy.h"
@@ -155,10 +147,14 @@ void spawn_objects(void)
 
     
     /// iterate to next pattern entry and check for end of list
-    if((++the_manager.pattern)->is_last == 1)
+    if(the_manager.pattern->is_last == 1)
     {
-        /// TODO: select different pattern
-        the_manager.pattern = temp_pattern;
+        /// select random next pattern
+        the_manager.pattern = get_next_pattern();
+    }
+    else
+    {
+        the_manager.pattern++;
     }
 
     /// done

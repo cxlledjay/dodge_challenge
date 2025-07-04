@@ -1,27 +1,11 @@
 #pragma once
 
-
-
-/**********************************************************************************************************
- * spawning datastructure
- **********************************************************************************************************/
-
-#include "game_include/object.h"
-typedef struct _spawn_entry_t
-{
-    unsigned int is_last : 1;       //< flat to indicate last entry
-    moving_object_type_t left : 5;  //< object spawning on left lane
-    moving_object_type_t mid : 5;   //< object spawning on mid lane
-    moving_object_type_t right : 5; //< object spawning on right lane
-}spawn_entry_t; //< 2byte datastructure for managing spawning patterns
-
-
-
 /**********************************************************************************************************
  * datastructure to save and manage all objects (... a queue with extra steps)
  **********************************************************************************************************/
 
 #include "game_include/object.h"
+#include "game_include/data/spawn_pattern.h"
 #define MAX_MOVING_OBJECTS (10u)
 
 
