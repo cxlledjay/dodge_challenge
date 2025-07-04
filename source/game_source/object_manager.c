@@ -190,5 +190,5 @@ void object_manager_tick_spawn(void)
 #include "game_include/game.h"
 const unsigned int _OM_NEXT_SPAWN_INTERVAL[STAGE_T_SIZE] =
 {
-	49,42,35,30,25,21,19,18,14,11,7
+	49,42,35,30,25,21,19,18,16,14,9
 };
