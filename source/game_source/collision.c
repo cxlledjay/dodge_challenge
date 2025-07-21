@@ -253,6 +253,7 @@ void aabb_calculate_right(void)
 
 /* #define DEBUG */
 #include "lib/print/print.h"
+#include "game_include/sounds/s_animation.h"
 
 
 void aabb_check_mid(void)

@@ -55,7 +55,7 @@ void object_manager_init(void)
 
     /// init spawner
     the_manager.pattern = get_next_pattern(); //< random start pattern
-    the_manager.cnt = 50; //< one second delay at start
+    the_manager.cnt = 1; //< no delay at start, start animation does that for us
 }
 
 

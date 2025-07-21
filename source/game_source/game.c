@@ -14,11 +14,16 @@ game_t the_game;
 #include "utils/controller.h"
 
 //fw declarations:
+
+/* execute functions */
 void start_menu(void);
 void play_start_animation(void);
-void game_run_1_4(void);
-void game_run_2_3(void);
-void game_run_analog(void);
+void game_run(void);
+
+/* process input function */
+void input_1_4(void);
+void input_2_3(void);
+void input_analog(void);
 
 /*****************************************************************************
  * init part
@@ -27,9 +32,18 @@ void game_run_analog(void);
 
 void game_start(void)
 {
-    /// init for menu
-    the_game.options.game_mode = GAME_MODE_EASY;
-    the_game.options.input_method = INPUT_METHOD_1_4;
+    /// init the game (main handler)
+    game_options_t start_selection = {.game_mode = GAME_MODE_EASY, .input_method = INPUT_METHOD_ANALOG};
+    game_t new_game = {
+        .options = start_selection,
+        .score = 0,
+        .stage = 0,
+        .cnt = 0,
+        .process_input = input_1_4,
+        .execute_state = start_menu
+    };
+
+    the_game = new_game;
 
     /// init controller
     disable_controller_1_x();
@@ -37,14 +51,11 @@ void game_start(void)
     disable_controller_2_x();
     disable_controller_2_y();
 
-    /// go to menu
-    the_game.execute_state = start_menu;
-
     /// done
     return;
 }
 
-
+#include "lib/sound/sound.h"
 void game_init(void)
 {
     /// trigger all init routines
@@ -55,38 +66,53 @@ void game_init(void)
     player_init();
     collision_init();
 
-    /// game init
+    /// score reset
     the_game.score = 0;
 
     /// init stage according to game mode
     switch (the_game.options.game_mode) {
 		case GAME_MODE_EASY:
+            the_game.stage = GS_VERY_SLOW;
+            break;
 		case GAME_MODE_MID:
+            the_game.stage = GS_SLOW;
+            break;
 		case GAME_MODE_HARD:
+            the_game.stage = GS_NORMAL;
+            break;
 		case GAME_MODE_HIDDEN:
-		/// dont have any values for now...
+            the_game.stage = GS_HIDDEN;
+            break;
 		default:
-			the_game.stage = VERY_SLOW; //< keep the stage (for alpha release)
+            // should never happen
+            the_game.execute_state = game_start; //< reset
 	}
 
     /// go directly to run depending on input method
     switch (the_game.options.input_method) {
         case INPUT_METHOD_1_4:
             disable_controller_1_x();
-            the_game.execute_state = game_run_1_4;
+            the_game.process_input = input_1_4;
             break;
         case INPUT_METHOD_2_3:
             disable_controller_1_x();
-            the_game.execute_state = game_run_2_3;
+            the_game.process_input = input_2_3;
             break;
         case INPUT_METHOD_ANALOG:
             enable_controller_1_x();
-            the_game.execute_state = game_run_analog;
+            the_game.process_input = input_analog;
             break;
         default:
             // should never happen
             the_game.execute_state = game_start; //< reset
     }
+
+    /// start game w/animation
+    the_game.cnt = 200; //< 3 seconds countdown + 1 second "GO"
+    the_game.execute_state = play_start_animation;
+
+    /// init sound module
+    sound_init();
 
     /// done
     return;
@@ -114,8 +140,6 @@ const char * const _GAME_MODE_DISPLAY_LUT[4] = {
     "[2] MODE  HARD\x80",
     "[2] MODE  #!?-\x80"
 };
-
-
 
 void start_menu(void) {
     
@@ -186,134 +210,14 @@ void start_menu(void) {
 }
 
 
-
 /*****************************************************************************
- * game loop
+ * input methods (chosen by start menu)
  ****************************************************************************/
 
 #include "utils/controller.h"
 #include "game_include/gen_data/gen_player_lanechange.h"
-
-void game_run_2_3(void)
+void input_1_4 (void)
 {
-    /// sync to 50 fps
-    Wait_Recal();
-    
-    /// ----------------------------------< calculations >----------------------------------
-
-    /// get input
-    check_buttons();
-    unsigned int input = buttons_pressed();
-
-    /// process input
-    /**
-     *  BUTTON 1 = use ability
-     *  BUTTON 2 = go left
-     *  BUTTON 3 = go right
-     *  BUTTON 4 = use ability
-     */
-
-    /** ability */
-    if(input & 0b00001001)
-    {
-        /// TODO: trigger ability code
-        ;
-    }
-
-    /** movment input */
-    if(input & 0b00000010) //< go left
-    {
-        /// only initiate lange change if there is no active lane change
-        if(the_player.tick == player_draw)
-        {
-            /// start correct animation
-            switch(the_player.lane)
-            {
-                case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
-                    break;
-                case MID_LANE: //< mid -> left
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
-                    break;
-                case LEFT_LANE: //< in left lane
-                    break; //< cant go further left
-                default:
-                    /// should never happen!
-                    break;
-            }
-        }
-        else
-        {
-            /// there is a lane change ongoing, so we are queuing the input
-            the_player.queued_lane_change = -1;
-        }
-    }
-    else if(input & 0b00000100) //< go right
-    {
-        /// only initiate lange change if there is no active lane change
-        if(the_player.tick == player_draw)
-        {
-            /// start correct animation
-            switch(the_player.lane)
-            {
-                case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
-                    break;
-                case MID_LANE: //< mid -> right
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
-                    break;
-                case RIGHT_LANE: //< in right lane
-                    break; //< cant go further right
-                default:
-                    /// should never happen!
-                    break;
-            }
-        }
-        else
-        {
-            /// there is a lane change ongoing, so we are queuing the input
-            the_player.queued_lane_change = 1;
-        }
-    }
-    
-    
-    /// ----------------------------------< draw screen >----------------------------------
-    
-    /// call state manager tick
-    stage_manager_tick();
-
-    /// draw the road
-    the_map.tick();
-
-    /// draw the player & check collisions etc.
-    the_player.tick();
-
-    /// draw new position of enemies (TODO: and fuel and powerups)
-    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
-
-    /// spawn new enemies
-    object_manager_tick_spawn();
-
-    /// done
-    return;
-}
-
-
-void game_run_1_4(void)
-{
-    /// sync to 50 fps
-    Wait_Recal();
-    
-    /// ----------------------------------< calculations >----------------------------------
-
     /// get input
     check_buttons();
     unsigned int input = buttons_pressed();
@@ -396,43 +300,99 @@ void game_run_1_4(void)
             the_player.queued_lane_change = 1;
         }
     }
-
-    
-    
-    
-    /// ----------------------------------< draw screen >----------------------------------
-    
-    /// call state manager tick
-    stage_manager_tick();
-
-    /// draw the road
-    the_map.tick();
-
-    /// draw the player & check collisions etc.
-    the_player.tick();
-
-    /// draw new position of enemies (TODO: and fuel and powerups)
-    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
-
-    /// spawn new enemies
-    object_manager_tick_spawn();
-
-    /// done
-    return;
 }
 
+void input_2_3 (void)
+{
+    /// get input
+    check_buttons();
+    unsigned int input = buttons_pressed();
+
+    /// process input
+    /**
+     *  BUTTON 1 = use ability
+     *  BUTTON 2 = go left
+     *  BUTTON 3 = go right
+     *  BUTTON 4 = use ability
+     */
+
+    /** ability */
+    if(input & 0b00001001)
+    {
+        /// TODO: trigger ability code
+        ;
+    }
+
+    /** movment input */
+    if(input & 0b00000010) //< go left
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case RIGHT_LANE: //< right -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> left
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+                    break;
+                case LEFT_LANE: //< in left lane
+                    break; //< cant go further left
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = -1;
+        }
+    }
+    else if(input & 0b00000100) //< go right
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case LEFT_LANE: //< left -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> right
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+                    break;
+                case RIGHT_LANE: //< in right lane
+                    break; //< cant go further right
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = 1;
+        }
+    }
+}
 
 const int _ANALOG_PLAYER_X_GAIN[STAGE_T_SIZE] = {
     1, 2, 4, 6, 9, 11, 14, 16, 18, 20, 24
 };
-
-void game_run_analog(void)
+void input_analog (void)
 {
-    /// sync to 50 fps
-    Wait_Recal();
-    
-    /// ----------------------------------< calculations >----------------------------------
-
     /// get input
     check_buttons();
 	check_joysticks();
@@ -508,15 +468,87 @@ void game_run_analog(void)
     }
 
     print_signed_int(100,0,x_offset);
+}
 
 
+/*****************************************************************************
+ * execute start animation and start game
+ ****************************************************************************/
+
+#include "game_include/sounds/s_animation.h"
+
+void play_start_animation(void)
+{
+    /// play sound
+    DP_to_C8();
+    Init_Music_chk(current_music);
+
+    /// sync to 50 fps
+    Wait_Recal();
+    Do_Sound();
+
+    /// display map and player
+    the_game.process_input();
+    the_map.tick();
+    the_player.tick();
+
+    if(--(the_game.cnt) == 0)
+    {
+        /// animation over -> start game
+        the_game.execute_state = game_run;
+    }
+    else
+    {
+
+        /// display countdown
+        if(the_game.cnt < 50)
+        {
+            if (the_game.cnt == 49) play_music(&countdown_go);
+            print_string(0,-16,"GO\x80");
+            object_manager_tick_all();
+            object_manager_tick_spawn();
+        }
+        else if(the_game.cnt < 100)
+        {
+            if (the_game.cnt == 99) play_music(&countdown_number);
+            print_char(0,-9,'1');
+        }
+        else if(the_game.cnt < 150)
+        {
+            if (the_game.cnt == 149) play_music(&countdown_number);
+            print_char(0,-9,'2');
+        }
+        else
+        {
+            if (the_game.cnt == 199) play_music(&countdown_number);
+            print_char(0,-9,'3');
+        }
+    }
+
+    ///next frame
+    return;
+}
+
+
+
+
+/*****************************************************************************
+ * game loop
+ ****************************************************************************/
+
+
+void game_run(void)
+{
+    /// sync to 50 fps
+    Wait_Recal();
     
-    /// ----------------------------------< draw screen >----------------------------------
+    /// get input and move player
+    the_game.process_input();
     
-    /// call state manager tick
+    /// tick stage manager to determine next speed ramp up
     stage_manager_tick();
 
-    /// draw the road
+    /// draw the map (the road)
     the_map.tick();
 
     /// draw the player & check collisions etc.
@@ -534,17 +566,12 @@ void game_run_analog(void)
 
 
 
-
-
-
-
 /*****************************************************************************
- * game loop subroutines
+ * game over screen
  ****************************************************************************/
 
-
 void game_over(void)
-{    
+{
     /// sync to 50 fps
     Wait_Recal();
 

@@ -29,6 +29,8 @@
         "gen_object_hitbox.h": "c",
         "gen_player_lanechange.h": "c",
         "type_traits": "c",
-        "stage_manager.h": "c"
+        "stage_manager.h": "c",
+        "s_animation.h": "c",
+        "sound.h": "c"
     }
 }
