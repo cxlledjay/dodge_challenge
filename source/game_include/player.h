@@ -60,6 +60,13 @@ void player_init(void);
  * player tick options interface
  ****************************************************************/
 
+/// @brief static player position for each lane
+#define PLAYER_X_MIN                (-82)
+#define PLAYER_X_MAX                (82)
+#define PLAYER_X_MID                (0)
+#define PLAYER_X_MIN_HALF           (PLAYER_X_MIN/2)
+#define PLAYER_X_MAX_HALF           (PLAYER_X_MAX/2)
+
 /// @brief driving straight
 void player_draw(void);
 

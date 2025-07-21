@@ -251,7 +251,7 @@ void aabb_calculate_right(void)
     if(AXIS == 0) {++COUNTER;}
 
 
-//#define DEBUG
+/* #define DEBUG */
 #include "lib/print/print.h"
 
 

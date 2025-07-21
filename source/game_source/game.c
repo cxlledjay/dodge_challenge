@@ -422,6 +422,10 @@ void game_run_1_4(void)
 }
 
 
+const int _ANALOG_PLAYER_X_GAIN[STAGE_T_SIZE] = {
+    1, 2, 4, 6, 9, 11, 14, 16, 18, 20, 24
+};
+
 void game_run_analog(void)
 {
     /// sync to 50 fps
@@ -431,89 +435,81 @@ void game_run_analog(void)
 
     /// get input
     check_buttons();
+	check_joysticks();
+
     unsigned int input = buttons_pressed();
 
     /// process input
     /**
-     *  BUTTON 1 = go left
+     *  BUTTON 1 = use ability
      *  BUTTON 2 = use ability
      *  BUTTON 3 = use ability
-     *  BUTTON 4 = go right
+     *  BUTTON 4 = use ability
      */
 
     /** ability */
-    if(input & 0b00000110)
+    if(input & 0b00001111)
     {
         /// TODO: trigger ability code
-        ;
+        the_game.stage++;
     }
 
-    /** movment input */
-    if(input & 0b00000001) //< go left
+    /** movement */
+    
+    int x_offset = joystick_1_x() >> 3;
+
+    if(x_offset < -1) //< deadzone of 1/8
     {
-        /// only initiate lange change if there is no active lane change
-        if(the_player.tick == player_draw)
+        /// analog left
+        the_player.x += x_offset - _ANALOG_PLAYER_X_GAIN[the_game.stage];
+
+        if(the_player.x < PLAYER_X_MIN) //< too low
         {
-            /// start correct animation
-            switch(the_player.lane)
-            {
-                case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
-                    break;
-                case MID_LANE: //< mid -> left
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
-                    break;
-                case LEFT_LANE: //< in left lane
-                    break; //< cant go further left
-                default:
-                    /// should never happen!
-                    break;
-            }
+            /// set to lowest
+            the_player.x = PLAYER_X_MIN;
         }
-        else
+        else if(the_player.x < PLAYER_X_MIN_HALF)
         {
-            /// there is a lane change ongoing, so we are queuing the input
-            the_player.queued_lane_change = -1;
+            /// flag player as in left lane, is important for drawing correct model and keep consistent colision check
+            the_player.lane = LEFT_LANE;
+            collision.recalculate_player_aabb = aabb_calculate_left;
+            collision.check = aabb_check_side;
+        } else if(the_player.x < PLAYER_X_MAX_HALF) {
+            /// flag player as in mid lane, is important for drawing correct model and keep consistent colision check
+            the_player.lane = MID_LANE;
+            collision.recalculate_player_aabb = aabb_calculate_mid;
+            collision.check = aabb_check_mid;
         }
+        collision.recalculate_player_aabb();
     }
-    else if(input & 0b00001000) //< go right
+    else if(x_offset > 1) //< deadzone of 1/8
     {
-        /// only initiate lange change if there is no active lane change
-        if(the_player.tick == player_draw)
+        /// analog right
+        the_player.x += x_offset + _ANALOG_PLAYER_X_GAIN[the_game.stage];
+
+        if(the_player.x > PLAYER_X_MAX) //< too high
         {
-            /// start correct animation
-            switch(the_player.lane)
-            {
-                case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
-                    break;
-                case MID_LANE: //< mid -> right
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
-                    break;
-                case RIGHT_LANE: //< in right lane
-                    break; //< cant go further right
-                default:
-                    /// should never happen!
-                    break;
-            }
+            /// set to highest
+            the_player.x = PLAYER_X_MAX;
         }
-        else
+        else if(the_player.x > PLAYER_X_MAX_HALF)
         {
-            /// there is a lane change ongoing, so we are queuing the input
-            the_player.queued_lane_change = 1;
+            /// flag player as in right lane, is important for drawing correct model and keep consistent colision check
+            the_player.lane = RIGHT_LANE;
+            collision.recalculate_player_aabb = aabb_calculate_right;
+            collision.check = aabb_check_side;
+        } else if(the_player.x > PLAYER_X_MIN_HALF) {
+            /// flag player as in mid lane, is important for drawing correct model and keep consistent colision check
+            the_player.lane = MID_LANE;
+            collision.recalculate_player_aabb = aabb_calculate_mid;
+            collision.check = aabb_check_mid;
         }
+        collision.recalculate_player_aabb();
     }
 
-    
-    
+    print_signed_int(100,0,x_offset);
+
+
     
     /// ----------------------------------< draw screen >----------------------------------
     

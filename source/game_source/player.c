@@ -6,7 +6,6 @@ player_t the_player;
 
 
 // fw declarations:
-const int _PLAYER_STATIC_X_LUT[];
 typedef void (*_player_draw_func)(void);
 const _player_draw_func _PLAYER_DRAW_LUT[];
 
@@ -60,7 +59,7 @@ const _player_draw_func _PLAYER_DRAW_LUT[];
 /// @brief init function
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .x = _PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0, .queued_lane_change = 0,  .cnt = 0, .tick = player_draw};
+	player_t fresh_player = {.lane = MID_LANE, .x = PLAYER_X_MID, .x_LUT = 0, .queued_lane_change = 0,  .cnt = 0, .tick = player_draw};
 	the_player = fresh_player;
 }
 
@@ -142,7 +141,7 @@ void player_change_left_to_mid_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
+		the_player.x = PLAYER_X_MID;
 		collision.recalculate_player_aabb();
 
 		/// check if lane change is queued
@@ -199,7 +198,7 @@ void player_change_mid_to_right_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.x = _PLAYER_STATIC_X_LUT[RIGHT_LANE];
+		the_player.x = PLAYER_X_MAX;
 		collision.recalculate_player_aabb();
 		
 		/// check if lane change is queued
@@ -252,7 +251,7 @@ void player_change_right_to_mid_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
+		the_player.x = PLAYER_X_MID;
 		collision.recalculate_player_aabb();
 		
 		/// check if lane change is queued
@@ -309,7 +308,7 @@ void player_change_mid_to_left_step2(void)
 	if(the_player.cnt == 0)
 	{
 		/// transition to normal again
-		the_player.x = _PLAYER_STATIC_X_LUT[LEFT_LANE];
+		the_player.x = PLAYER_X_MIN;
 		collision.recalculate_player_aabb();
 		
 		/// check if lane change is queued
@@ -380,17 +379,6 @@ const _player_draw_func _PLAYER_DRAW_LUT[3] =
 };
 
 
- 
-/****************************************************
- * static LUT
- ***************************************************/
-
-const int _PLAYER_STATIC_X_LUT[3] =
-{
-	-82,
-	0,
-	82
-};
 
 
 /****************************************************
