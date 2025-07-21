@@ -16,7 +16,8 @@ typedef struct _object_manager_t
     moving_object_t * queue_ptr;                        //< always pointing after last added element
 
     /// spawning management
-    const spawn_entry_t * pattern;                            //< pointer to precompiled spawning pattern
+    unsigned int next_stage;                            //< bit set by stage management, to indicate speed ramp up
+    const spawn_entry_t * pattern;                      //< pointer to precompiled spawning pattern
     unsigned int cnt;                                   //< counter to regulate spawning intervals 
 }object_manager_t;
 

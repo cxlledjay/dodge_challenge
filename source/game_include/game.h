@@ -14,6 +14,7 @@
 
 #include "misc.h"
 
+#define STAGE_T_SIZE (11u)        //< how many different speed levels
 typedef enum _stage_t
 {
    VERY_SLOW      = 0,  //< easy start
@@ -30,16 +31,33 @@ typedef enum _stage_t
 }stage_t;
 
 
+/// @brief persisten storage of start menu selection, gets parsed in init
+typedef struct _game_options_t {
+   unsigned int input_method : 4;
+   unsigned int game_mode : 4;
+} game_options_t;
 
-#define STAGE_T_SIZE (11u)        //< how many different speed levels
+#define GAME_MODE_EASY              (0u)
+#define GAME_MODE_MID               (1u)
+#define GAME_MODE_HARD              (2u)
+#define GAME_MODE_HIDDEN            (3u)
+
+#define INPUT_METHOD_1_4            (0u)
+#define INPUT_METHOD_2_3            (1u)
+#define INPUT_METHOD_ANALOG         (2u)
+
+
+
 
 typedef struct _game_t 
 {
-   unsigned long score;            //< silent tracking
-   unsigned int stage;             //< different stages of speed, advancing through the game. 
-                                   //  selectable in start menu (thus progression is dependant on selection)
+   unsigned long score;             //< silent tracking
+   game_options_t options;          //< storing start menu selection
+   stage_t stage;                   //< different stages of speed, advancing through the game. 
+                                    //  selectable in start menu (thus progression is dependant on selection)
 
-   void (* execute_state) (void);  //< state machine
+
+   void (* execute_state) (void);   //< game state machine
 }game_t;
 
 

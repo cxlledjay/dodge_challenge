@@ -6,7 +6,7 @@
 game_t the_game;
 
 
-#include "game_include/clock.h"
+#include "game_include/stage_manager.h"
 #include "game_include/map.h"
 #include "game_include/player.h"
 #include "game_include/object_manager.h"
@@ -15,37 +15,9 @@ game_t the_game;
 //fw declarations:
 void start_menu(void);
 void play_start_animation(void);
-void pause_menu(void);
-void game_run(void);
-
-//private types
-typedef enum _sm_selection_type_t
-{
-    SM_LEVEL = 0, //< first option
-    SM_START = 1  //< last option
-}sm_selection_type_t;
-
-typedef struct _sm_selection_t
-{
-    sm_selection_type_t type : 7;
-    unsigned int is_selected : 1;
-}sm_selection_t;
-
-/// datatype for keeping track of start menu selection
-sm_selection_t start_menu_selection;
-
-
-typedef union _menu_selection_t
-{
-    unsigned int selection;
-} menu_selection_t;
-
-/// track other menu selections
-menu_selection_t gp_menu;
-
-//macros
-#define GAME_PRINT_VERSION()                \
-    print_string(-120,-19,"V0.1 - ALPHA\x80");
+void game_run_1_4(void);
+void game_run_2_3(void);
+void game_run_analog(void);
 
 /*****************************************************************************
  * init part
@@ -54,10 +26,9 @@ menu_selection_t gp_menu;
 
 void game_start(void)
 {
-    /// init menu
-    sm_selection_t selection = {.type = SM_LEVEL, .is_selected = 0};
-    start_menu_selection = selection;
-    the_game.stage = 0;
+    /// init for menu
+    the_game.options.game_mode = GAME_MODE_EASY;
+    the_game.options.input_method = INPUT_METHOD_2_3;
 
     /// go to menu
     the_game.execute_state = start_menu;
@@ -72,18 +43,25 @@ void game_init(void)
     /// trigger all init routines
     object_manager_init(); //< init first for random seed to use past values in ram
     
-    clock_init();
+    stage_manager_init();
     map_init();
     player_init();
     collision_init();
 
     /// game init
-    the_game.score = 0; //< important to set after init of object manager (rng init)
-    //the_game.stage = 0; //< keep the stage (for alpha release) <- later keep the difficulty here
-    gp_menu.selection = 0; //< general purpose menu selection for pause and game over menu 
+    the_game.score = 0;
+    switch (the_game.options.game_mode) {
+		case GAME_MODE_EASY:
+		case GAME_MODE_MID:
+		case GAME_MODE_HARD:
+		case GAME_MODE_HIDDEN:
+		/// dont have any values for now...
+		default:
+			the_game.stage = VERY_SLOW; //< keep the stage (for alpha release)
+	}
 
     /// go directly to run
-    the_game.execute_state = play_start_animation;
+    the_game.execute_state = game_run_2_3;
 
     /// done
     return;
@@ -99,8 +77,23 @@ void game_init(void)
 #include "utils/controller.h"
 #include "lib/print/print.h"
 
-void start_menu(void)
-{
+/// menu display LUTs
+const char * const _GAME_INPUT_DISPLAY_LUT[3] = {
+    "[1] INPUT BUTTON 1/4\x80",
+    "[1] INPUT BUTTON 2/3\x80",
+    "[1] INPUT ANALOG    \x80"
+};
+const char * const _GAME_MODE_DISPLAY_LUT[4] = {
+    "[2] MODE  EASY\x80",
+    "[2] MODE  MID \x80",
+    "[2] MODE  HARD\x80",
+    "[2] MODE  #!?-\x80"
+};
+
+
+
+void start_menu(void) {
+    
     /// sync to 50 fps
     Wait_Recal();
 
@@ -109,169 +102,63 @@ void start_menu(void)
     unsigned int input = buttons_pressed();
 
     /// process input
-
     /**
-     *  BUTTON 1 = /
-     *  BUTTON 2 = prev
-     *  BUTTON 3 = next
-     *  BUTTON 4 = select
+     *  BUTTON 1 = input: 1/4, 2/3, joy
+     *  BUTTON 2 = mode: easy, mid, hard
+     *  BUTTON 3 = reset highscore
+     *  BUTTON 4 = play
      */
 
-    /* select button */
-    if(input & 0b00001000)
+    if(input & 0b00001000) //< BUTTON 4
     {
-        if(start_menu_selection.type == SM_START)
-        {
-            /// start the game
-            the_game.execute_state = game_init;
-            return;
-        }
-        else
-        {
-            start_menu_selection.is_selected = ++start_menu_selection.is_selected; //< T-FLIPFLOP because of 1 bit long field
+        /// directly start the game with current settings
+        the_game.execute_state = game_init;
+        return;
+    }
+
+    if(input & 0b00000100) //< BUTTON 3
+    {
+        /// reset highscore
+        Clear_Score(&Vec_High_Score);
+    }
+
+    if(input & 0b00000010) //< BUTTON 2
+    {
+        if(the_game.options.game_mode == GAME_MODE_HARD) {
+            the_game.options.game_mode = GAME_MODE_EASY;
+        } else {
+            the_game.options.game_mode++;
         }
     }
 
-    /* next / prev input */
-    int delta = 0;
-    delta += (int) (input & 0b00000100) >> 2; //< next
-    delta -= (int) (input & 0b00000010) >> 1; //< prev
-
-    /* next / prev handler */
-    if(start_menu_selection.is_selected)
+    if(input & 0b00000001) //< BUTTON 1
     {
-        /// individual handling for selected type
-        int new_stage = (int) the_game.stage;
-        switch(start_menu_selection.type)
-        {
-            case SM_LEVEL:
-                /// cycle game stages
-                new_stage += delta;
-
-                //check for overflow
-                if(new_stage > EXPERT_ONLY)
-                {
-                    the_game.stage = VERY_SLOW;
-                }
-                else if(new_stage < VERY_SLOW)
-                {
-                    the_game.stage = EXPERT_ONLY;
-                }
-                else
-                {
-                    the_game.stage = (unsigned int) new_stage;
-                }
-            break;
-
-            case SM_START:
-            default:
-                ;
-            break;
-        }
-    }
-    else
-    {
-        /// generic cycling throug menu
-        if (delta == 0)
-        {
-            ; //< no change
-        }
-        else
-        {
-            int new_state = (int) start_menu_selection.type;
-            new_state += delta;
-
-            //check for overflow
-            if(new_state > SM_START)
-            {
-                start_menu_selection.type = SM_LEVEL;
-            }
-            else if(new_state < SM_LEVEL)
-            {
-                start_menu_selection.type = SM_START;
-            }
-            else
-            {
-                start_menu_selection.type = (sm_selection_type_t) new_state;
-            }
-        }
+        if(the_game.options.input_method == INPUT_METHOD_ANALOG) {
+            the_game.options.input_method = INPUT_METHOD_1_4;
+        } else {
+            the_game.options.input_method++;
+        }        
     }
 
-    /// assemble option strings
-
-    /// speed
-    char speed_display[16] = " SPEED      XX \x80";
-
-    /// uint to char array
-    speed_display[12] = the_game.stage / 10 + '0';
-    speed_display[13] = the_game.stage % 10 + '0';
-
-    /// selection
-    if(start_menu_selection.type == SM_LEVEL)
-    {
-        if(start_menu_selection.is_selected)
-        {
-            speed_display[11] = '<';
-            speed_display[14] = '>';
-        }
-        else
-        {
-            speed_display[0] = '[';
-            speed_display[6] = ']';
-        }
-    }
-
-    /// start game
-    char start_display[9]  = " START \x80";
-
-    /// selection
-    if(start_menu_selection.type == SM_START)
-    {
-        start_display[0] = '[';
-        start_display[6] = ']';
-    }
-
-    /// highscore
-    char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
-    highscore_display[11] = Vec_High_score[0];
-    highscore_display[12] = Vec_High_score[1];
-    highscore_display[13] = Vec_High_score[2];
-    highscore_display[14] = Vec_High_score[3];
-    highscore_display[15] = Vec_High_score[4];
-    highscore_display[16] = Vec_High_score[5];
 
 
-    /// print screen
-    //GAME_PRINT_VERSION();
-    print_string(111,-120,"-------------------\x80");
-    print_string(100,-110,highscore_display);
-    print_string(89,-120,"-------------------\x80");
-    print_string(24,-72,"SELECT MODE\x80");
-    print_string(-96,-46,start_display);
-    print_string(-10,-91,speed_display);
+    /// assemble strings for menu
+    char highscore_display[14] = "BEST: XXXXXX\x80";
+    highscore_display[6] = Vec_High_score[0];
+    highscore_display[7] = Vec_High_score[1];
+    highscore_display[8] = Vec_High_score[2];
+    highscore_display[9] = Vec_High_score[3];
+    highscore_display[10] = Vec_High_score[4];
+    highscore_display[11] = Vec_High_score[5];
 
-    /// done
-    return;
+    /// print the menu
+    print_string(110,-90,highscore_display); //< maybe add some graphic to start menu as well?
+    print_string(50,-91, "SELECT OPTIONS\x80");
+    print_string(20,-120, (char *) _GAME_INPUT_DISPLAY_LUT[the_game.options.input_method]);
+    print_string(-10,-120, (char *) _GAME_MODE_DISPLAY_LUT[the_game.options.game_mode]);
+    print_string(-40,-120, "[3] RESET HIGHSCORE\x80");
+    print_string(-100,-58, "[4] START\x80");
 }
-
-
-
-/*****************************************************************************
- * start animation (future feature)
- ****************************************************************************/
-
-void play_start_animation(void)
-{
-    //sync to 50 fps
-    //draw screen (based on counter)
-    //keep track of animation counter
-    //if counter is done -> start game
-    the_game.execute_state = game_run;
-
-    /// done
-    return;
-}
-
 
 
 
@@ -282,7 +169,7 @@ void play_start_animation(void)
 #include "utils/controller.h"
 #include "game_include/gen_data/gen_player_lanechange.h"
 
-void game_run(void)
+void game_run_2_3(void)
 {
     /// sync to 50 fps
     Wait_Recal();
@@ -296,19 +183,11 @@ void game_run(void)
     /// process input
 
     /**
-     *  BUTTON 1 = ability
+     *  BUTTON 1 = /
      *  BUTTON 2 = go left
      *  BUTTON 3 = go right
      *  BUTTON 4 = use ability
      */
-
-    /** pause */
-    if(input & 0b00000001)
-    {
-        /// the_game.execute_state = pause_menu; //< TODO: implement later on
-        // return;
-        ;
-    }
 
     /** ability */
     if(input & 0b00001000)
@@ -376,7 +255,7 @@ void game_run(void)
     }
     
     /// call clock update handler
-    clock_tick(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
+    stage_manager_tick(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
     
     /// ----------------------------------< draw screen >----------------------------------
     
@@ -416,19 +295,16 @@ void game_run(void)
  ****************************************************************************/
 
 
-
-void pause_menu(void)
-{
-    /// TODO: implement!
-    return;
-}
-
 void game_over(void)
 {    
     /// sync to 50 fps
     Wait_Recal();
 
-    /// TODO: check highscore stuff
+    /// highscore handler
+	unsigned int score[7];
+	Clear_Score(&score);
+	Add_Score_d(the_game.score, &score);
+	New_High_Score(&score, (void*) &Vec_High_Score);
 
     /// get input
     check_buttons();
@@ -437,41 +313,23 @@ void game_over(void)
     /// process input
 
     /**
-     *  BUTTON 1 = /
-     *  BUTTON 2 = prev
-     *  BUTTON 3 = next
-     *  BUTTON 4 = select
-     * 
-     *  selection 0 -> try again
-     *  selection 1 -> menu
+     *  BUTTON 1 = menu
+     *  BUTTON 2 = /
+     *  BUTTON 3 = /
+     *  BUTTON 4 = retry
      */
 
-    /* select */
-    if(input & 0b00001000)
+    if(input & 0b00001000) //< BUTTON 4
     {
-        if(gp_menu.selection == 0)
-        {
-            /// try again
-            the_game.execute_state = game_init;
-        }
-        if(gp_menu.selection == 1)
-        {
-            /// back to start
-            the_game.execute_state = start_menu;
-        }
+        /// retry
+        the_game.execute_state = game_init;
     }
 
-    /* prev / next (hack) */
-    if(input & 0b00000110)
+    if(input & 0b00000001) //< BUTTON 1
     {
-        gp_menu.selection = (unsigned int) !gp_menu.selection;
+        /// back to start
+        the_game.execute_state = start_menu;
     }
-
-    /// highscore handler
-	unsigned int score[7];
-	Clear_Score(&score);
-	Add_Score_d(the_game.score, &score);
-	New_High_Score(&score, (void*) &Vec_High_Score);
 
     /// assemble strings
     char score_display[19] =     "SCORE:     XXXXXX\x80";
@@ -492,32 +350,14 @@ void game_over(void)
     highscore_display[16] = Vec_High_score[5];
 
 
-    char retry_display[13] =   " TRY AGAIN \x80";
-    char start_display[17] = " BACK TO START \x80";
-
-    switch(gp_menu.selection)
-    {
-        case 0:
-            retry_display[0] = '[';
-            retry_display[10] = ']';
-            break;
-        case 1:
-            start_display[0] = '[';
-            start_display[14] = ']';
-            break;
-        default:
-            break;
-    }
-
-
     /// draw game over screen
     print_string(100,-85,"-=GAME OVER=-\x80");
 
     print_string(10,-110, score_display);
     print_string(-10,-110, highscore_display);
 
-    print_string(-90,-72, retry_display);
-    print_string(-110,-94,start_display);
+    print_string(-86,-94,   "[1] BACK TO START\x80");
+    print_string(-110,-72,    "[4] TRY AGAIN\x80");
 
     return;
 }
