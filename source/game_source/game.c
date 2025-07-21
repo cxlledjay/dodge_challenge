@@ -55,6 +55,13 @@ void game_start(void)
     return;
 }
 
+const stage_t game_max_stage[4] = {
+    GS_NORMAL,
+    GS_FAST,
+    GS_SPEEDY,
+    GS_HIDDEN
+};
+
 #include "lib/sound/sound.h"
 void game_init(void)
 {
@@ -75,13 +82,13 @@ void game_init(void)
             the_game.stage = GS_VERY_SLOW;
             break;
 		case GAME_MODE_MID:
-            the_game.stage = GS_SLOW;
+            the_game.stage = GS_SLOWISH;
             break;
 		case GAME_MODE_HARD:
-            the_game.stage = GS_NORMAL;
+            the_game.stage = GS_QUITE_NORMAL;
             break;
 		case GAME_MODE_HIDDEN:
-            the_game.stage = GS_HIDDEN;
+            the_game.stage = GS_QUITE_FAST;
             break;
 		default:
             // should never happen
@@ -411,7 +418,7 @@ void input_analog (void)
     if(input & 0b00001111)
     {
         /// TODO: trigger ability code
-        the_game.stage++;
+        ;
     }
 
     /** movement */
@@ -546,7 +553,7 @@ void game_run(void)
     the_game.process_input();
     
     /// tick stage manager to determine next speed ramp up
-    stage_manager_tick();
+    the_stage_manager.tick();
 
     /// draw the map (the road)
     the_map.tick();

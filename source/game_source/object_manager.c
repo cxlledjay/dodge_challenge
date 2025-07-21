@@ -123,6 +123,9 @@ const void * const MOT_TYPE_TO_MODEL[] =
         }                                                                                       \
     }
 
+
+
+
 void spawn_objects(void)
 {
     /// check if pattern contains entity for each lane and then try to spawn it
@@ -149,8 +152,19 @@ void spawn_objects(void)
     /// iterate to next pattern entry and check for end of list
     if(the_manager.pattern->is_last == 1)
     {
-        /// select random next pattern
-        the_manager.pattern = get_next_pattern();
+        if(the_manager.next_stage)
+        {
+            /// stage transition -> don't spawn enemies for a short amout of time
+            the_manager.pattern = SP_empty;
+
+            the_game.stage++; //< increase stage
+            the_manager.next_stage = 0; //< reset next stage flag
+        }
+        else
+        {
+            /// select random next pattern
+            the_manager.pattern = get_next_pattern();
+        }
     }
     else
     {

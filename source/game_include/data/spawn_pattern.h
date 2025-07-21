@@ -19,6 +19,9 @@ typedef struct _spawn_entry_t
  * precompiled spawn patterns
  ************************************************************/
 
+/// @brief empty spawnpattern for stage transitions
+extern const spawn_entry_t SP_empty[1];
+
 #define SPAWN_PATTERNS_CNT          (4u)    //< has to be 2^n
 #define SPAWN_PATTERN_IDX_BITMASK   (SPAWN_PATTERNS_CNT-1)
 

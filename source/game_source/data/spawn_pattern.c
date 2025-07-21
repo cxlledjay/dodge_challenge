@@ -3,10 +3,21 @@
 
 
 /************************************************************
+ * empty spawn pattern for stage transitions
+ ************************************************************/
+
+const spawn_entry_t SP_empty[1] =
+{
+	{.is_last = 1, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_NULL    }
+};
+
+
+
+/************************************************************
  * all spawn patterns
  ************************************************************/
 
- const spawn_entry_t _SP_alpha_1[] =
+const spawn_entry_t _SP_alpha_1[] =
 {
 	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
 	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },

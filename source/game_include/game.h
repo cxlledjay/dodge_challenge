@@ -71,6 +71,9 @@ typedef struct _game_t
  */
 extern game_t the_game;
 
+/// @brief max stage for stage ramping
+extern const stage_t game_max_stage[4];
+
 
 /**
  * @brief handled by execute_state() internally, interface needed for bootstrap in main
