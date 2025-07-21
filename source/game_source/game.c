@@ -11,6 +11,7 @@ game_t the_game;
 #include "game_include/player.h"
 #include "game_include/object_manager.h"
 #include "game_include/collision.h"
+#include "utils/controller.h"
 
 //fw declarations:
 void start_menu(void);
@@ -28,7 +29,13 @@ void game_start(void)
 {
     /// init for menu
     the_game.options.game_mode = GAME_MODE_EASY;
-    the_game.options.input_method = INPUT_METHOD_2_3;
+    the_game.options.input_method = INPUT_METHOD_1_4;
+
+    /// init controller
+    disable_controller_1_x();
+    disable_controller_1_y();
+    disable_controller_2_x();
+    disable_controller_2_y();
 
     /// go to menu
     the_game.execute_state = start_menu;
@@ -50,6 +57,8 @@ void game_init(void)
 
     /// game init
     the_game.score = 0;
+
+    /// init stage according to game mode
     switch (the_game.options.game_mode) {
 		case GAME_MODE_EASY:
 		case GAME_MODE_MID:
@@ -60,8 +69,24 @@ void game_init(void)
 			the_game.stage = VERY_SLOW; //< keep the stage (for alpha release)
 	}
 
-    /// go directly to run
-    the_game.execute_state = game_run_2_3;
+    /// go directly to run depending on input method
+    switch (the_game.options.input_method) {
+        case INPUT_METHOD_1_4:
+            disable_controller_1_x();
+            the_game.execute_state = game_run_1_4;
+            break;
+        case INPUT_METHOD_2_3:
+            disable_controller_1_x();
+            the_game.execute_state = game_run_2_3;
+            break;
+        case INPUT_METHOD_ANALOG:
+            enable_controller_1_x();
+            the_game.execute_state = game_run_analog;
+            break;
+        default:
+            // should never happen
+            the_game.execute_state = game_start; //< reset
+    }
 
     /// done
     return;
@@ -181,29 +206,24 @@ void game_run_2_3(void)
     unsigned int input = buttons_pressed();
 
     /// process input
-
     /**
-     *  BUTTON 1 = /
+     *  BUTTON 1 = use ability
      *  BUTTON 2 = go left
      *  BUTTON 3 = go right
      *  BUTTON 4 = use ability
      */
 
     /** ability */
-    if(input & 0b00001000)
+    if(input & 0b00001001)
     {
         /// TODO: trigger ability code
         ;
     }
 
     /** movment input */
-    if((input & 0b00000110) == 0b00000110) //< go left + go right
+    if(input & 0b00000010) //< go left
     {
-        ; //< stay in current lane
-    }
-    else if(input & 0b00000010) //< go left
-    {
-        /// only allow lange change if there is no active lane change
+        /// only initiate lange change if there is no active lane change
         if(the_player.tick == player_draw)
         {
             /// start correct animation
@@ -226,10 +246,15 @@ void game_run_2_3(void)
                     break;
             }
         }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = -1;
+        }
     }
     else if(input & 0b00000100) //< go right
     {
-        /// only allow lange change if there is no active lane change
+        /// only initiate lange change if there is no active lane change
         if(the_player.tick == player_draw)
         {
             /// start correct animation
@@ -252,39 +277,266 @@ void game_run_2_3(void)
                     break;
             }
         }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = 1;
+        }
     }
     
-    /// call clock update handler
-    stage_manager_tick(); //< TODO: handle all things depending on certain clock events (e.g. enemy span?)
     
     /// ----------------------------------< draw screen >----------------------------------
     
+    /// call state manager tick
+    stage_manager_tick();
+
     /// draw the road
     the_map.tick();
 
     /// draw the player & check collisions etc.
     the_player.tick();
 
-    /// draw new position of enemies
-    /// draw new position of powerups
+    /// draw new position of enemies (TODO: and fuel and powerups)
     object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
 
     /// spawn new enemies
     object_manager_tick_spawn();
 
+    /// done
+    return;
+}
+
+
+void game_run_1_4(void)
+{
+    /// sync to 50 fps
+    Wait_Recal();
+    
+    /// ----------------------------------< calculations >----------------------------------
+
+    /// get input
+    check_buttons();
+    unsigned int input = buttons_pressed();
+
+    /// process input
+    /**
+     *  BUTTON 1 = go left
+     *  BUTTON 2 = use ability
+     *  BUTTON 3 = use ability
+     *  BUTTON 4 = go right
+     */
+
+    /** ability */
+    if(input & 0b00000110)
+    {
+        /// TODO: trigger ability code
+        ;
+    }
+
+    /** movment input */
+    if(input & 0b00000001) //< go left
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case RIGHT_LANE: //< right -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> left
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+                    break;
+                case LEFT_LANE: //< in left lane
+                    break; //< cant go further left
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = -1;
+        }
+    }
+    else if(input & 0b00001000) //< go right
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case LEFT_LANE: //< left -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> right
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+                    break;
+                case RIGHT_LANE: //< in right lane
+                    break; //< cant go further right
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = 1;
+        }
+    }
 
     
     
+    
+    /// ----------------------------------< draw screen >----------------------------------
+    
+    /// call state manager tick
+    stage_manager_tick();
 
-    /// DEBUG SECTION
-    /* print_signed_int(100,-20,the_player.x);
-    print_unsigned_int(80,-20,the_player.cnt); */
-    //enemy_debug();
-    //print_unsigned_int(80,-20,the_manager.remaining_spawns);
+    /// draw the road
+    the_map.tick();
+
+    /// draw the player & check collisions etc.
+    the_player.tick();
+
+    /// draw new position of enemies (TODO: and fuel and powerups)
+    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
+
+    /// spawn new enemies
+    object_manager_tick_spawn();
 
     /// done
     return;
 }
+
+
+void game_run_analog(void)
+{
+    /// sync to 50 fps
+    Wait_Recal();
+    
+    /// ----------------------------------< calculations >----------------------------------
+
+    /// get input
+    check_buttons();
+    unsigned int input = buttons_pressed();
+
+    /// process input
+    /**
+     *  BUTTON 1 = go left
+     *  BUTTON 2 = use ability
+     *  BUTTON 3 = use ability
+     *  BUTTON 4 = go right
+     */
+
+    /** ability */
+    if(input & 0b00000110)
+    {
+        /// TODO: trigger ability code
+        ;
+    }
+
+    /** movment input */
+    if(input & 0b00000001) //< go left
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case RIGHT_LANE: //< right -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> left
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+                    break;
+                case LEFT_LANE: //< in left lane
+                    break; //< cant go further left
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = -1;
+        }
+    }
+    else if(input & 0b00001000) //< go right
+    {
+        /// only initiate lange change if there is no active lane change
+        if(the_player.tick == player_draw)
+        {
+            /// start correct animation
+            switch(the_player.lane)
+            {
+                case LEFT_LANE: //< left -> mid
+                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+                    break;
+                case MID_LANE: //< mid -> right
+                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+                    break;
+                case RIGHT_LANE: //< in right lane
+                    break; //< cant go further right
+                default:
+                    /// should never happen!
+                    break;
+            }
+        }
+        else
+        {
+            /// there is a lane change ongoing, so we are queuing the input
+            the_player.queued_lane_change = 1;
+        }
+    }
+
+    
+    
+    
+    /// ----------------------------------< draw screen >----------------------------------
+    
+    /// call state manager tick
+    stage_manager_tick();
+
+    /// draw the road
+    the_map.tick();
+
+    /// draw the player & check collisions etc.
+    the_player.tick();
+
+    /// draw new position of enemies (TODO: and fuel and powerups)
+    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
+
+    /// spawn new enemies
+    object_manager_tick_spawn();
+
+    /// done
+    return;
+}
+
+
 
 
 

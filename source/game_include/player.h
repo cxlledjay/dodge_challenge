@@ -9,12 +9,14 @@
 /// @brief the player object
 typedef struct _player_t
 {
+    /* player position parameters */
     lane_t lane; //< used to get correct model + aabbcd (aligned axis bounding box collision detection)
-
     int x; //< player x pos for animation & collision check
-    const int * x_LUT; //< pointer for correct LUT for animation (set by game loop)
 
+    /* parameters for button controls */
+    const int * x_LUT; //< pointer for correct LUT for animation (set by game loop)
     unsigned int cnt; //< if player is changing lanes, keep track of lane change animation here
+    int queued_lane_change; //< if input is given when player is still in animation (-1 = left, 0 = none, 1 = right)
 
     void (*tick) (void); //< handle drawing (+animation), collision detection (+game state change), ability pickup
 } player_t;

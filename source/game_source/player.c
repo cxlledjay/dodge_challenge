@@ -60,7 +60,7 @@ const _player_draw_func _PLAYER_DRAW_LUT[];
 /// @brief init function
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .x = _PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0,  .cnt = 0, .tick = player_draw};
+	player_t fresh_player = {.lane = MID_LANE, .x = _PLAYER_STATIC_X_LUT[MID_LANE], .x_LUT = 0, .queued_lane_change = 0,  .cnt = 0, .tick = player_draw};
 	the_player = fresh_player;
 }
 
@@ -143,8 +143,29 @@ void player_change_left_to_mid_step2(void)
 	{
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
-		the_player.tick = player_draw;
 		collision.recalculate_player_aabb();
+
+		/// check if lane change is queued
+		switch(the_player.queued_lane_change) {
+			default:
+			case 0:
+				/// nothing queued
+				the_player.tick = player_draw;
+				break;
+			case -1:
+				/// left change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+				break;
+			case 1:
+				/// right change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+				break;
+		}
+		the_player.queued_lane_change = 0; //< clear queued
 	}
 }
 
@@ -179,8 +200,25 @@ void player_change_mid_to_right_step2(void)
 	{
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[RIGHT_LANE];
-		the_player.tick = player_draw;
 		collision.recalculate_player_aabb();
+		
+		/// check if lane change is queued
+		switch(the_player.queued_lane_change) {
+			default:
+			case 1:
+				/// not executable
+			case 0:
+				/// nothing queued
+				the_player.tick = player_draw;
+				break;
+			case -1:
+				/// left change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+				break;
+		}
+		the_player.queued_lane_change = 0; //< clear queued
 	}
 }
 
@@ -215,8 +253,29 @@ void player_change_right_to_mid_step2(void)
 	{
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[MID_LANE];
-		the_player.tick = player_draw;
 		collision.recalculate_player_aabb();
+		
+		/// check if lane change is queued
+		switch(the_player.queued_lane_change) {
+			default:
+			case 0:
+				/// nothing queued
+				the_player.tick = player_draw;
+				break;
+			case -1:
+				/// left change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+				break;
+			case 1:
+				/// right change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+				break;
+		}
+		the_player.queued_lane_change = 0; //< clear queued
 	}
 }
 
@@ -251,8 +310,25 @@ void player_change_mid_to_left_step2(void)
 	{
 		/// transition to normal again
 		the_player.x = _PLAYER_STATIC_X_LUT[LEFT_LANE];
-		the_player.tick = player_draw;
 		collision.recalculate_player_aabb();
+		
+		/// check if lane change is queued
+		switch(the_player.queued_lane_change) {
+			default:
+			case -1:
+				/// not possible
+			case 0:
+				/// nothing queued
+				the_player.tick = player_draw;
+				break;
+			case 1:
+				/// right change queued
+				the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
+				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
+				the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+				break;
+		}
+		the_player.queued_lane_change = 0; //< clear queued
 	}
 }
 
