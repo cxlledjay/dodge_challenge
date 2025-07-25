@@ -267,7 +267,7 @@ void aabb_check_mid(void)
     /// loop over all objects
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
-        obj = &the_manager.objects[i];
+        obj = &the_object_manager.objects[i];
 
         /// only care when object is active
         if(obj->tick != idle)
@@ -371,7 +371,7 @@ void aabb_check_side(void)
     /// loop over all objects
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
-        obj = &the_manager.objects[i];
+        obj = &the_object_manager.objects[i];
 
         /// only care when object is active
         if(obj->tick != idle)

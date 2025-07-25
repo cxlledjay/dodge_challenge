@@ -394,15 +394,15 @@ void input_2_3 (void)
         }
     }
 }
-
+/* 
 const int _ANALOG_PLAYER_X_GAIN[STAGE_T_SIZE] = {
     1, 2, 4, 6, 9, 11, 14, 16, 18, 20, 24
-};
+}; */
 void input_analog (void)
 {
     /// get input
     check_buttons();
-	check_joysticks();
+	Joy_Analog();
 
     unsigned int input = buttons_pressed();
 
@@ -423,12 +423,12 @@ void input_analog (void)
 
     /** movement */
     
-    int x_offset = joystick_1_x() >> 3;
+    int x_offset = joystick_1_x() >> 4;
 
     if(x_offset < -1) //< deadzone of 1/8
     {
         /// analog left
-        the_player.x += x_offset - _ANALOG_PLAYER_X_GAIN[the_game.stage];
+        the_player.x += x_offset - (int) the_game.stage;
 
         if(the_player.x < PLAYER_X_MIN) //< too low
         {
@@ -452,7 +452,7 @@ void input_analog (void)
     else if(x_offset > 1) //< deadzone of 1/8
     {
         /// analog right
-        the_player.x += x_offset + _ANALOG_PLAYER_X_GAIN[the_game.stage];
+        the_player.x += x_offset + (int) the_game.stage;
 
         if(the_player.x > PLAYER_X_MAX) //< too high
         {

@@ -7,7 +7,7 @@
  **********************************************************************************************************/
 
 /// @brief nice posh guy
-object_manager_t the_manager;
+object_manager_t the_object_manager;
 
 #include "game_include/random.h"
 /// @brief rng object for choosing next spawn pattern (and abilities??)
@@ -37,8 +37,8 @@ void object_manager_init(void)
     /// build hard to replicate seed
     unsigned int seed0 = 42 + the_stage_manager.frames;                                             //< hard to time
     unsigned int seed1 = (unsigned int) (the_game.score);                                           //< should always differ
-    unsigned int seed2 = (the_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);   //< might access out of bounds
-    unsigned int seed3 = (the_manager.queue_ptr - 3)->ttl * the_map.cnt;                            //< propably out of bounds but idc
+    unsigned int seed2 = (the_object_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);   //< might access out of bounds
+    unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                            //< propably out of bounds but idc
 
     /// init random number gen
     rng_init(&om_rng_obj, seed0, seed1, seed2, seed3);
@@ -48,14 +48,14 @@ void object_manager_init(void)
     moving_object_t new_obj = {.type = 0, .ttl = 0, .model = 0, .tick = idle};
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
-        the_manager.objects[i] = new_obj;
+        the_object_manager.objects[i] = new_obj;
     }
-    the_manager.queue_ptr = the_manager.objects;
+    the_object_manager.queue_ptr = the_object_manager.objects;
 
 
     /// init spawner
-    the_manager.pattern = get_next_pattern(); //< random start pattern
-    the_manager.cnt = 1; //< no delay at start, start animation does that for us
+    the_object_manager.pattern = get_next_pattern(); //< random start pattern
+    the_object_manager.cnt = 1; //< no delay at start, start animation does that for us
 }
 
 
@@ -68,16 +68,16 @@ void object_manager_init(void)
 void object_manager_tick_all(void)
 {
     /// tick all objects (if the object is inactive it will call idle() and return instantly)
-    the_manager.objects[0].tick(&the_manager.objects[0]);
-    the_manager.objects[1].tick(&the_manager.objects[1]);
-    the_manager.objects[2].tick(&the_manager.objects[2]);
-    the_manager.objects[3].tick(&the_manager.objects[3]);
-    the_manager.objects[4].tick(&the_manager.objects[4]);
-    the_manager.objects[5].tick(&the_manager.objects[5]);
-    the_manager.objects[6].tick(&the_manager.objects[6]);
-    the_manager.objects[7].tick(&the_manager.objects[7]);
-    the_manager.objects[8].tick(&the_manager.objects[8]);
-    the_manager.objects[9].tick(&the_manager.objects[9]);
+    the_object_manager.objects[0].tick(&the_object_manager.objects[0]);
+    the_object_manager.objects[1].tick(&the_object_manager.objects[1]);
+    the_object_manager.objects[2].tick(&the_object_manager.objects[2]);
+    the_object_manager.objects[3].tick(&the_object_manager.objects[3]);
+    the_object_manager.objects[4].tick(&the_object_manager.objects[4]);
+    the_object_manager.objects[5].tick(&the_object_manager.objects[5]);
+    the_object_manager.objects[6].tick(&the_object_manager.objects[6]);
+    the_object_manager.objects[7].tick(&the_object_manager.objects[7]);
+    the_object_manager.objects[8].tick(&the_object_manager.objects[8]);
+    the_object_manager.objects[9].tick(&the_object_manager.objects[9]);
 
     /// done
     return;
@@ -109,17 +109,17 @@ const void * const MOT_TYPE_TO_MODEL[] =
 #include "game_include/gen_data/gen_object_path.h"
 
 #define SPAWN_OBJECT(TYPE, LANE)                                                                \
-    if(the_manager.queue_ptr->tick == idle){ /* ram is unused */                                \
-        the_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[TYPE];                                 \
-        the_manager.queue_ptr->lane = LANE;                                                     \
-        the_manager.queue_ptr->type = TYPE;                                                     \
-        the_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][LANE];         \
-        the_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];                     \
+    if(the_object_manager.queue_ptr->tick == idle){ /* ram is unused */                                \
+        the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[TYPE];                                 \
+        the_object_manager.queue_ptr->lane = LANE;                                                     \
+        the_object_manager.queue_ptr->type = TYPE;                                                     \
+        the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][LANE];         \
+        the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];                     \
         /* set queue ptr for next spawn */                                                      \
-        if(the_manager.queue_ptr == &the_manager.objects[9]){                                   \
-            the_manager.queue_ptr = the_manager.objects;                                        \
+        if(the_object_manager.queue_ptr == &the_object_manager.objects[9]){                                   \
+            the_object_manager.queue_ptr = the_object_manager.objects;                                        \
         }else{                                                                                  \
-            the_manager.queue_ptr++;                                                            \
+            the_object_manager.queue_ptr++;                                                            \
         }                                                                                       \
     }
 
@@ -130,45 +130,45 @@ void spawn_objects(void)
 {
     /// check if pattern contains entity for each lane and then try to spawn it
 
-    if(the_manager.pattern->left != MOT_NULL)
+    if(the_object_manager.pattern->left != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_manager.pattern->left, LEFT_LANE);
+        SPAWN_OBJECT(the_object_manager.pattern->left, LEFT_LANE);
     }
 
-    if(the_manager.pattern->mid != MOT_NULL)
+    if(the_object_manager.pattern->mid != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_manager.pattern->mid, MID_LANE);
+        SPAWN_OBJECT(the_object_manager.pattern->mid, MID_LANE);
     }
 
-    if(the_manager.pattern->right != MOT_NULL)
+    if(the_object_manager.pattern->right != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_manager.pattern->right, RIGHT_LANE);
+        SPAWN_OBJECT(the_object_manager.pattern->right, RIGHT_LANE);
     }
 
     
     /// iterate to next pattern entry and check for end of list
-    if(the_manager.pattern->is_last == 1)
+    if(the_object_manager.pattern->is_last == 1)
     {
-        if(the_manager.next_stage)
+        if(the_object_manager.next_stage)
         {
             /// stage transition -> don't spawn enemies for a short amout of time
-            the_manager.pattern = SP_empty;
+            the_object_manager.pattern = SP_empty;
 
             the_game.stage++; //< increase stage
-            the_manager.next_stage = 0; //< reset next stage flag
+            the_object_manager.next_stage = 0; //< reset next stage flag
         }
         else
         {
             /// select random next pattern
-            the_manager.pattern = get_next_pattern();
+            the_object_manager.pattern = get_next_pattern();
         }
     }
     else
     {
-        the_manager.pattern++;
+        the_object_manager.pattern++;
     }
 
     /// done
@@ -184,10 +184,10 @@ const unsigned int _OM_NEXT_SPAWN_INTERVAL[];
 
 void object_manager_tick_spawn(void)
 {
-    if(--(the_manager.cnt) == 0) //< decrease and check at same place
+    if(--(the_object_manager.cnt) == 0) //< decrease and check at same place
     {
         /// reset counter
-        the_manager.cnt = _OM_NEXT_SPAWN_INTERVAL[the_game.stage];
+        the_object_manager.cnt = _OM_NEXT_SPAWN_INTERVAL[the_game.stage];
 
         /// execute spawn algorithm and produce new objects
         spawn_objects();

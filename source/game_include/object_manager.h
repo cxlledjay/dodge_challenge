@@ -22,7 +22,7 @@ typedef struct _object_manager_t
 }object_manager_t;
 
 /// @brief singleton interface for object management
-extern object_manager_t the_manager; 
+extern object_manager_t the_object_manager; 
 
 // you may not speak to the manager right now...
 

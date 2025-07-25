@@ -63,7 +63,7 @@ void stage_manager_tick(void)
 {
 	#ifdef DEBUG
 		print_unsigned_int(100,-64,the_stage_manager.next_stage_timer);
-		print_unsigned_int(100,0,the_manager.next_stage);
+		print_unsigned_int(100,0,the_object_manager.next_stage);
 		print_unsigned_int(80,0,the_game.stage);
 	#endif
 	if(the_stage_manager.frames == 0)
@@ -71,7 +71,7 @@ void stage_manager_tick(void)
 		the_stage_manager.frames = 49;
 		if(--(the_stage_manager.next_stage_timer) == 0) {
 			/// indicate stage transition to object manager
-			the_manager.next_stage = 1;
+			the_object_manager.next_stage = 1;
 			if(the_game.stage + 1 > game_max_stage[the_game.options.game_mode])
 			{
 				/// max stage reached -> stop ramping
