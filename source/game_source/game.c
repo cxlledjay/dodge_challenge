@@ -71,6 +71,7 @@ void game_init(void)
     stages_init();
     map_init();
     player_init();
+    fuel_bar_init();
     collision_init();
 
     /// score reset
@@ -492,10 +493,11 @@ void play_start_animation(void)
     Wait_Recal();
     Do_Sound();
 
-    /// display map and player
+    /// display map and player as usual
     the_game.process_input();
     the_map.tick();
     the_player.tick();
+    fuel_bar_tick();
 
     if(--(the_game.cnt) == 0)
     {
@@ -560,7 +562,7 @@ void game_run(void)
     the_map.tick();
 
     /// draw fuel bar TODO: and current ability
-    fuel_bar_draw();
+    fuel_bar_tick();
 
     /// draw the player & check collisions etc.
     the_player.tick();
