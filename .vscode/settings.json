@@ -32,6 +32,8 @@
         "stage_manager.h": "c",
         "s_animation.h": "c",
         "sound.h": "c",
-        "random.h": "c"
+        "random.h": "c",
+        "ability.h": "c",
+        "fuel.h": "c"
     }
 }

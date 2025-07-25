@@ -14,27 +14,27 @@
 
 #define DECODE_VAR(STAGE, VAR_TYPE) _ST##STAGE##_##VAR_TYPE##_LUT
 
-#define DRAW_OBJECT_MID(OBJECT_PTR, STAGE)                                                                                    \
-    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
-    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],0);                                                                      \
-    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                        \
-    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                             \
+#define DRAW_OBJECT_MID(OBJECT_PTR, STAGE)                                                                                  \
+    Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],0);                                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                       \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                            \
     Draw_VLp((struct packet_t *) OBJECT_PTR->model); /* draw */
 
     
-#define DRAW_OBJECT_LEFT(OBJECT_PTR, STAGE)                                                                                   \
-    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
-    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],DECODE_VAR(STAGE, XL)[OBJECT_PTR->ttl]);                                  \
-    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                        \
-    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                             \
+#define DRAW_OBJECT_LEFT(OBJECT_PTR, STAGE)                                                                                 \
+    Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],DECODE_VAR(STAGE, XL)[OBJECT_PTR->ttl]);                                \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                       \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                            \
     Draw_VLp((struct packet_t *) OBJECT_PTR->model); /* draw */
 
     
-#define DRAW_OBJECT_RIGHT(OBJECT_PTR, STAGE)                                                                                  \
-    Intensity_5F(); Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                     \
-    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],DECODE_VAR(STAGE, XR)[OBJECT_PTR->ttl]);                                  \
-    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                        \
-    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                             \
+#define DRAW_OBJECT_RIGHT(OBJECT_PTR, STAGE)                                                                                \
+    Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f; /* prepare */                                                                     \
+    Moveto_d(DECODE_VAR(STAGE, Y1)[OBJECT_PTR->ttl],DECODE_VAR(STAGE, XR)[OBJECT_PTR->ttl]);                                \
+    Moveto_d(DECODE_VAR(STAGE, Y2)[OBJECT_PTR->ttl],0); /* two moves because of big range of motion*/                       \
+    dp_VIA_t1_cnt_lo = DECODE_VAR(STAGE, SC)[OBJECT_PTR->ttl]; /* set scaling */                                            \
     Draw_VLp((struct packet_t *) OBJECT_PTR->model); /* draw */
 
 

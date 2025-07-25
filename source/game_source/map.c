@@ -71,10 +71,7 @@ void map_init(void)
 #include "game_include/game.h"
 
 void draw_step1(void)
-{
-	/// set brightness
-	Intensity_5F();
-	
+{	
 	/// left roadlines
 	DRAW_LEFT();
 	ANIMATE_LEFT(&vl_map_roadline_left_1);
@@ -100,8 +97,6 @@ void draw_step1(void)
 
 void draw_step2(void)
 {
-	/// set brightness
-	Intensity_5F();
 	
 	/// left roadlines
 	DRAW_LEFT();
@@ -128,8 +123,6 @@ void draw_step2(void)
 
 void draw_step3(void)
 {
-	/// set brightness
-	Intensity_5F();
 	
 	/// left roadlines
 	DRAW_LEFT();
@@ -155,10 +148,7 @@ void draw_step3(void)
 }
 
 void draw_step4(void)
-{
-	/// set brightness
-	Intensity_5F();
-	
+{	
 	/// left roadlines
 	DRAW_LEFT();
 	ANIMATE_LEFT(&vl_map_roadline_left_4);
@@ -283,8 +273,6 @@ void map_calculate_animation(void)
 
 
 void map_draw_road(void){
-
-	Intensity_5F();
 
 
 	//left border

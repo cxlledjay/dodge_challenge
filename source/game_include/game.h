@@ -6,29 +6,10 @@
  * game.h/c handles the
  *  a) current game state (starting, running, stopped, game over)
  *  b) reached score(s) + highscore
- *  c) current speed (aka. level/stage/...)
- *  d) game loop
+ *  c) menus
+ *  d) input handling + game loop
  */
 
-
-
-#include "misc.h"
-
-#define STAGE_T_SIZE (11u)        //< how many different speed levels
-typedef enum _stage_t
-{
-   GS_VERY_SLOW      = 0,  //< easy start
-   GS_QUITE_SLOW     = 1,
-   GS_SLOWISH        = 2,  //< normal start
-   GS_SLOW           = 3,
-   GS_QUITE_NORMAL   = 4,  //< hard start
-   GS_NORMAL         = 5,  //< easy stop
-   GS_QUITE_FAST     = 6,
-   GS_FAST           = 7,  //< normal stop
-   GS_VERY_FAST      = 8,
-   GS_SPEEDY         = 9,  //< hard stop
-   GS_HIDDEN    = 10  //< secret speed
-}stage_t;
 
 
 /// @brief persisten storage of start menu selection, gets parsed in init
@@ -48,6 +29,7 @@ typedef struct _game_options_t {
 
 
 
+#include "stage.h"
 
 typedef struct _game_t 
 {
@@ -70,9 +52,6 @@ typedef struct _game_t
  * execute_state() handles everything from init to the game loop based on internal states
  */
 extern game_t the_game;
-
-/// @brief max stage for stage ramping
-extern const stage_t game_max_stage[4];
 
 
 /**

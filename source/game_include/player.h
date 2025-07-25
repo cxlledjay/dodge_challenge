@@ -1,10 +1,12 @@
 #pragma once
-#include "misc.h"
 
 
 /****************************************************************
  * data structures
  ****************************************************************/
+#include "game_include/ability.h"
+#include "game_include/fuel.h"
+#include "game_include/misc.h"
 
 /// @brief the player object
 typedef struct _player_t
@@ -18,6 +20,11 @@ typedef struct _player_t
     unsigned int cnt; //< if player is changing lanes, keep track of lane change animation here
     int queued_lane_change; //< if input is given when player is still in animation (-1 = left, 0 = none, 1 = right)
 
+    /* ingame attributes */
+    fuel_amount_t fuel; //< amount of fuel, the player is carrying
+    ability_class_t ability; //< the ability the player has picked up
+
+    /* player handling */
     void (*tick) (void); //< handle drawing (+animation), collision detection (+game state change), ability pickup
 } player_t;
 

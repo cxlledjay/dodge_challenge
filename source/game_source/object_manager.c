@@ -23,7 +23,7 @@ rng_t om_rng_obj;
 const spawn_entry_t * get_next_pattern();
 
 /// includes for rng init
-#include "game_include/stage_manager.h"
+#include "game_include/stage.h"
 #include "game_include/map.h"
 #include "game_include/player.h"
 
@@ -35,10 +35,10 @@ const spawn_entry_t * get_next_pattern();
 void object_manager_init(void)
 {
     /// build hard to replicate seed
-    unsigned int seed0 = 42 + the_stage_manager.frames;                                             //< hard to time
-    unsigned int seed1 = (unsigned int) (the_game.score);                                           //< should always differ
-    unsigned int seed2 = (the_object_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);   //< might access out of bounds
-    unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                            //< propably out of bounds but idc
+    unsigned int seed0 = 42 + (unsigned int) the_stage_manager.cnt;                                         //< hard to time
+    unsigned int seed1 = (unsigned int) (the_game.score);                                                   //< should always differ
+    unsigned int seed2 = (the_object_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);    //< might access out of bounds
+    unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                             //< propably out of bounds but idc
 
     /// init random number gen
     rng_init(&om_rng_obj, seed0, seed1, seed2, seed3);

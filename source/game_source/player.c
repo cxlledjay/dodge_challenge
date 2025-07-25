@@ -59,7 +59,15 @@ const _player_draw_func _PLAYER_DRAW_LUT[];
 /// @brief init function
 void player_init(void)
 {
-	player_t fresh_player = {.lane = MID_LANE, .x = PLAYER_X_MID, .x_LUT = 0, .queued_lane_change = 0,  .cnt = 0, .tick = player_draw};
+	player_t fresh_player = {
+		.lane = MID_LANE,
+		.x = PLAYER_X_MID,
+		.x_LUT = 0,
+		.queued_lane_change = 0,
+		.cnt = 0,
+		.fuel = 100,
+		.ability = AB_NONE,
+		.tick = player_draw};
 	the_player = fresh_player;
 }
 
@@ -78,9 +86,6 @@ void player_draw(void)
 {
 	/// check for collision
 	collision.check(); //< if collision occurs -> wont reach rest of function
-
-	/// drawing settings
-	Intensity_5F();					//< set brightness of the electron beam
 
 	/// draw player vector list (based on lane)
 	(* _PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
@@ -104,8 +109,7 @@ void player_draw(void)
 	the_player.cnt--; /* sequence is important... first decrement to match index starting from 0 */						\
 	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */											\
 	collision.recalculate_player_aabb(); /* recalculated player bounding box */													\
-	collision.check(); /* now check for collisions */																	\
-	Intensity_5F();
+	collision.check(); /* now check for collisions */
 
 
 

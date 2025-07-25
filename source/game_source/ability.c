@@ -1,9 +1,8 @@
 #include "game_include/ability.h"
+#include "game_include/player.h"
 
-/// TODO: implement! (very far in future...)
+/// TODO: implement!
 
-
-ability_t the_ability;
 
 
 
@@ -17,6 +16,5 @@ void dummy_tick(void){return;}
  */
 void ability_init(void)
 {
-    ability_t new_ability = {.cnt = 0, .type = NONE, .tick = dummy_tick};
-    the_ability = new_ability;
+    /// TODO: implement
 }

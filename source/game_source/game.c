@@ -6,7 +6,7 @@
 game_t the_game;
 
 
-#include "game_include/stage_manager.h"
+#include "game_include/stage.h"
 #include "game_include/map.h"
 #include "game_include/player.h"
 #include "game_include/object_manager.h"
@@ -68,7 +68,7 @@ void game_init(void)
     /// trigger all init routines
     object_manager_init(); //< init first for random seed to use past values in ram
     
-    stage_manager_init();
+    stages_init();
     map_init();
     player_init();
     collision_init();
@@ -473,8 +473,6 @@ void input_analog (void)
         }
         collision.recalculate_player_aabb();
     }
-
-    print_signed_int(100,0,x_offset);
 }
 
 
@@ -542,21 +540,27 @@ void play_start_animation(void)
 /*****************************************************************************
  * game loop
  ****************************************************************************/
-
+#include "game_include/fuel.h"
 
 void game_run(void)
 {
+    /// refresh brightness
+    Intensity_5F();
+
     /// sync to 50 fps
     Wait_Recal();
     
     /// get input and move player
     the_game.process_input();
     
-    /// tick stage manager to determine next speed ramp up
-    the_stage_manager.tick();
+    /// tick stage object for speed ramping effect over time
+    stages_tick();
 
     /// draw the map (the road)
     the_map.tick();
+
+    /// draw fuel bar TODO: and current ability
+    fuel_bar_draw();
 
     /// draw the player & check collisions etc.
     the_player.tick();

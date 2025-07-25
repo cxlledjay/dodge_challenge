@@ -72,7 +72,6 @@ void collision_init(void)
 void aabb_draw(void)
 {
     /// move to player
-    Intensity_5F();
     Reset0Ref();					/* reset beam to center	*/
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
     
