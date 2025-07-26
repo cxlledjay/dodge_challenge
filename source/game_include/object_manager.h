@@ -18,7 +18,9 @@ typedef struct _object_manager_t
     /// spawning management
     unsigned int next_stage;                            //< bit set by stage management, to indicate speed ramp up
     const spawn_entry_t * pattern;                      //< pointer to precompiled spawning pattern
-    unsigned int cnt;                                   //< counter to regulate spawning intervals 
+    unsigned int cnt;                                   //< counter to regulate spawning intervals
+    unsigned int cnt_next_fuelcan;                      //< counter to track next fuelcan spawning
+    unsigned int cnt_next_ability;                      //< counter to track next ability spawning
 }object_manager_t;
 
 /// @brief singleton interface for object management

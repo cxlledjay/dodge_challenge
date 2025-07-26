@@ -544,8 +544,8 @@ void game_run(void)
     /// draw the player & check collisions etc.
     the_player.tick();
 
-    /// draw new position of enemies (TODO: and fuel and powerups)
-    object_manager_tick_all(); //< tick enemies after player for collision-model sync!!!!
+    /// draw new position of objects
+    object_manager_tick_all();
 
     /// spawn new enemies
     object_manager_tick_spawn();

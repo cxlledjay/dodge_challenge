@@ -36,6 +36,7 @@
         "ability.h": "c",
         "fuel.h": "c",
         "g_gui.h": "c",
-        "g_object.h": "c"
+        "g_object.h": "c",
+        "stage.h": "c"
     }
 }

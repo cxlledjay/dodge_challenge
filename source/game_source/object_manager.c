@@ -20,7 +20,8 @@ rng_t om_rng_obj;
  **********************************************************************************************************/
 
 /// fw decl:
-const spawn_entry_t * get_next_pattern();
+static inline __attribute__((always_inline)) const spawn_entry_t * get_next_pattern (void);
+static inline __attribute__((always_inline)) unsigned int get_next_interval (void);
 
 /// includes for rng init
 #include "game_include/stage.h"
@@ -56,6 +57,8 @@ void object_manager_init(void)
     /// init spawner
     the_object_manager.pattern = get_next_pattern(); //< random start pattern
     the_object_manager.cnt = 1; //< no delay at start, start animation does that for us
+    the_object_manager.cnt_next_fuelcan = get_next_interval();
+    the_object_manager.cnt_next_ability = get_next_interval();
 }
 
 
@@ -90,10 +93,15 @@ void object_manager_tick_all(void)
  **********************************************************************************************************/
 
 #include "game_include/data/spawn_pattern.h"
-const spawn_entry_t * get_next_pattern()
+static inline __attribute__((always_inline)) const spawn_entry_t * get_next_pattern (void)
 {
-    unsigned int idx_bitmasked = rand(&om_rng_obj) &SPAWN_PATTERN_IDX_BITMASK;
+    unsigned int idx_bitmasked = rand(&om_rng_obj) & SPAWN_PATTERN_IDX_BITMASK;
     return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
+}
+
+static inline __attribute__((always_inline)) unsigned int get_next_interval (void)
+{
+    return (rand(&om_rng_obj) >> 3) + 24; //< range: 24-55
 }
 
 
@@ -110,20 +118,51 @@ const void * const MOT_TYPE_TO_MODEL[] =
 
 #include "game_include/gen_data/gen_object_path.h"
 
-#define SPAWN_OBJECT(TYPE, LANE)                                                                \
-    if(the_object_manager.queue_ptr->tick == idle){ /* ram is unused */                                \
-        the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[TYPE];                                 \
-        the_object_manager.queue_ptr->lane = LANE;                                                     \
-        the_object_manager.queue_ptr->type = TYPE;                                                     \
-        the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][LANE];         \
-        the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];                     \
-        /* set queue ptr for next spawn */                                                      \
-        if(the_object_manager.queue_ptr == &the_object_manager.objects[9]){                                   \
-            the_object_manager.queue_ptr = the_object_manager.objects;                                        \
-        }else{                                                                                  \
-            the_object_manager.queue_ptr++;                                                            \
-        }                                                                                       \
+static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_type_t type, lane_t lane)
+{
+    /// check if datastructure has free slot
+    if(the_object_manager.queue_ptr->tick == idle)
+    {
+        /// attempt to replace enemy in pattern with fuelcan
+        if(--(the_object_manager.cnt_next_fuelcan) == 0)
+        {
+            /// reset counter to random value
+            the_object_manager.cnt_next_fuelcan = get_next_interval();
+
+            /// spawn fuelcan
+            the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[MOT_FUELCAN];
+            the_object_manager.queue_ptr->lane = lane;
+            the_object_manager.queue_ptr->type = MOT_FUELCAN;
+            the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
+            the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
+        }
+        /// attempt to replace enemy in pattern with fuelcan
+        else if (--(the_object_manager.cnt_next_ability) == 0)
+        {
+            /// reset counter to random value
+            the_object_manager.cnt_next_ability = get_next_interval();
+
+            ///TODO: spawn ability
+        }
+        /// continue with spawn pattern
+        else
+        {
+            /// spawn object from spawn pattern
+            the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[type];
+            the_object_manager.queue_ptr->lane = lane;
+            the_object_manager.queue_ptr->type = type;
+            the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
+            the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
+        }
+
+        /* set queue ptr for next spawn */
+        if(the_object_manager.queue_ptr == &the_object_manager.objects[9]){
+            the_object_manager.queue_ptr = the_object_manager.objects;
+        }else{
+            the_object_manager.queue_ptr++;
+        }
     }
+}
 
 
 
@@ -135,19 +174,19 @@ void spawn_objects(void)
     if(the_object_manager.pattern->left != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_object_manager.pattern->left, LEFT_LANE);
+        try_spawn_obj(the_object_manager.pattern->left, LEFT_LANE);
     }
 
     if(the_object_manager.pattern->mid != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_object_manager.pattern->mid, MID_LANE);
+        try_spawn_obj(the_object_manager.pattern->mid, MID_LANE);
     }
 
     if(the_object_manager.pattern->right != MOT_NULL)
     {
         /// try spawning
-        SPAWN_OBJECT(the_object_manager.pattern->right, RIGHT_LANE);
+        try_spawn_obj(the_object_manager.pattern->right, RIGHT_LANE);
     }
 
     
@@ -186,8 +225,8 @@ const unsigned int _OM_NEXT_SPAWN_INTERVAL[];
 
 void object_manager_tick_spawn(void)
 {
-    if(--(the_object_manager.cnt) == 0) //< decrease and check at same place
-    {
+    if(--(the_object_manager.cnt) == 0) //< spawn object in this frame?
+    { //< yes
         /// reset counter
         the_object_manager.cnt = _OM_NEXT_SPAWN_INTERVAL[the_game.stage];
 
