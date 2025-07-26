@@ -1,4 +1,5 @@
 #pragma once
+#include "game_include/object.h"
 
 /********************************************************************************************************
  *   THIS FILE WAS GENERATED          DO NOT EDIT!!! 
@@ -9,5 +10,5 @@
  *******************************************************************************************************/
 
 
-extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[37];
-extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_Y[37];
+extern const int 		 MO_SC_TO_BB_X_HALFED[MOT_COUNT-1][37];
+extern const int 		  MO_SC_TO_BB_Y[MOT_COUNT-1][37];

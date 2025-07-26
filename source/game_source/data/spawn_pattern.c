@@ -105,6 +105,21 @@ const spawn_entry_t _SP_alpha_4[] =
 };
 
 
+/************************************************************
+ * testing purposes
+ ************************************************************/
+
+
+const spawn_entry_t _SP_DEBUG_ONLY[] =
+{
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_ENEMY_CAR1   		},
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_ENEMY_CAR2       	},
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK    	},
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_ENEMY_BIKE       	},
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_FUELCAN    		},
+	{.is_last = 0, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_ABILITY       	},
+	{.is_last = 1, .left = MOT_NULL    , .mid = MOT_NULL       , .right = MOT_NULL       		}
+};
 
 
 /************************************************************
@@ -113,8 +128,12 @@ const spawn_entry_t _SP_alpha_4[] =
 
 const spawn_entry_t * const SPAWN_PATTERN_PTR_COLLECTION[SPAWN_PATTERNS_CNT] =
 {
-    _SP_alpha_1,
+    /* _SP_alpha_1,
     _SP_alpha_2,
     _SP_alpha_3,
-    _SP_alpha_4,
+    _SP_alpha_4, */
+	_SP_DEBUG_ONLY,
+	_SP_DEBUG_ONLY,
+	_SP_DEBUG_ONLY,
+	_SP_DEBUG_ONLY
 };

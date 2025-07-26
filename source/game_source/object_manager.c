@@ -97,12 +97,14 @@ const spawn_entry_t * get_next_pattern()
 }
 
 
-
 #include "game_include/graphics/g_object.h"
 const void * const MOT_TYPE_TO_MODEL[] =
 {
-    0, //< MOT_NONE
-    &vl_enemy_car1 //< MOT_ENEMY_CAR1
+    &vl_enemy_car1, //< MOT_ENEMY_CAR1
+    &vl_enemy_dummy, //< MOT_ENEMY_CAR2
+    &vl_enemy_dummy, //< MOT_ENEMY_TRUCK
+    &vl_enemy_dummy, //< MOT_ENEMY_BIKE
+    &vl_enemy_dummy, //< MOT_FUELCAN
 };
 
 

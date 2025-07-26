@@ -20,10 +20,6 @@ typedef struct _aabb_player_t
     /// player bounding box
     /// (only using one, instead of three as before due to performance increase)
     aabb_t car;
-    #if 0
-    aabb_t wing;
-    aabb_t optional; //< only needed for sideview model
-    #endif
 }aabb_player_t;
 
 aabb_player_t player_aabbs;
@@ -85,30 +81,6 @@ void aabb_draw(void)
     Draw_Line_d((player_aabbs.car.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.car.y_bot + AABB_CALC_Y_OFFSET),0);
     Draw_Line_d(0,(player_aabbs.car.x_left)-(player_aabbs.car.x_right));
     Draw_Line_d((player_aabbs.car.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.car.y_top + AABB_CALC_Y_OFFSET),0);
-
-    #if 0
-    /// wing bb
-    Reset0Ref();					/* reset beam to center	*/
-	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-    Moveto_d(player_aabbs.wing.y_bot - AABB_CALC_Y_OFFSET, player_aabbs.wing.x_left);
-    Draw_Line_d(0,(player_aabbs.wing.x_right)-(player_aabbs.wing.x_left));
-    Draw_Line_d((player_aabbs.wing.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.wing.y_bot + AABB_CALC_Y_OFFSET),0);
-    Draw_Line_d(0,(player_aabbs.wing.x_left)-(player_aabbs.wing.x_right));
-    Draw_Line_d((player_aabbs.wing.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.wing.y_top + AABB_CALC_Y_OFFSET),0);
-    
-    /// optional part
-    if(collision.check != aabb_check_mid)
-    {
-        /// optional bb
-        Reset0Ref();					/* reset beam to center	*/
-        dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */
-        Moveto_d(player_aabbs.optional.y_bot - AABB_CALC_Y_OFFSET, player_aabbs.optional.x_left);
-        Draw_Line_d(0,(player_aabbs.optional.x_right)-(player_aabbs.optional.x_left));
-        Draw_Line_d((player_aabbs.optional.y_top + AABB_CALC_Y_OFFSET)-(player_aabbs.optional.y_bot + AABB_CALC_Y_OFFSET),0);
-        Draw_Line_d(0,(player_aabbs.optional.x_left)-(player_aabbs.optional.x_right));
-        Draw_Line_d((player_aabbs.optional.y_bot + AABB_CALC_Y_OFFSET)-(player_aabbs.optional.y_top + AABB_CALC_Y_OFFSET),0);
-    }
-    #endif
 
     /// draw threshold line top
     Reset0Ref();					/* reset beam to center	*/
@@ -180,7 +152,7 @@ void aabb_calculate_right(void)
  * actual collision check function (axis aligned bounding box check)
  *********************************************************************/
 
-/* #define DEBUG */
+#define DEBUG
 #include "lib/print/print.h"
 #include "game_include/sounds/s_animation.h"
 
@@ -214,7 +186,7 @@ void aabb_check_collision(void)
             
             /// start building aabb of object
             unsigned int sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
-            int bb_y        = MO_ENEMY_DUMMY_SC_TO_BB_Y[sc];
+            int bb_y        = MO_SC_TO_BB_Y[obj->type][sc];
             int bb_ytop     = y+bb_y; //< adjusted to scaled axis
 
             /// only care when player is above y of object aabb top (micro optimisation)
@@ -240,7 +212,7 @@ void aabb_check_collision(void)
                 default:
                     break;
             }
-            int bb_xh = MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[sc];
+            int bb_xh = MO_SC_TO_BB_X_HALFED[obj->type][sc];
 
             /// build aabb
             //int bb_ybot     = y; //< bb_ybot is just y
