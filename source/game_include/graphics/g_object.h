@@ -20,3 +20,16 @@
 
 /// @brief dummy enemy to test stuff
 extern const struct packet_t vl_enemy_dummy[];
+
+
+extern const struct packet_t vl_enemy_car1[];
+
+
+
+// ***************************************************************************
+// collectables
+// ***************************************************************************
+
+
+/// @brief spawning fuel can
+extern const struct packet_t vl_object_fuelcan[];

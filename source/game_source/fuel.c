@@ -19,7 +19,7 @@ fuel_bar_t the_fuel_bar;
  * LUT for fuel depletion per stage
  ************************************************************/
 
-unsigned int _FUEL_BAR_INTERVAL_LUT[STAGE_T_SIZE] = {
+const unsigned int _FUEL_BAR_INTERVAL_LUT[STAGE_T_SIZE] = {
     40,37,34,31,27,24,21,19,17,15,11
 };
 
@@ -41,6 +41,8 @@ void fuel_bar_init (void)
  * management object
  ************************************************************/
 
+#include "game_include/graphics/g_gui.h"
+
 void fuel_bar_tick (void)
 {
     /// draw fuel bar
@@ -50,15 +52,17 @@ void fuel_bar_tick (void)
 
     /// draw actual fuel bar
 	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(116, -100);
+	Moveto_d(116, -110);
 	dp_VIA_t1_cnt_lo = the_player.fuel;
 	Draw_Line_d(0,127);
-	dp_VIA_t1_cnt_lo = 0x1;
-	Draw_Line_d(-127, 0);
+	dp_VIA_t1_cnt_lo = 0x6;
+	Draw_Line_d(-20, 0);
 	dp_VIA_t1_cnt_lo = the_player.fuel;
 	Draw_Line_d(0,-127);
-	dp_VIA_t1_cnt_lo = 0x1;
-	Draw_Line_d(127, 0);
+	dp_VIA_t1_cnt_lo = 0x6;
+	Draw_Line_d(20, 0);
+    Moveto_d(41,-125);
+    Draw_VLp(&vl_gui_fuelcan);
 
     /// tick
     if(--(the_fuel_bar.cnt) == 0)
