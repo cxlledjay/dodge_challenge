@@ -93,3 +93,49 @@ const struct packet_t vl_object_fuelcan[] =
     /// done
 	VL_END
 };
+
+
+
+/// ------------------ ability animation ------------------------------------------------
+
+const struct packet_t _vl_ability_step1[] =
+{
+    
+
+    /// done
+	VL_END
+};
+
+const struct packet_t _vl_ability_step2[] =
+{
+    
+
+    /// done
+	VL_END
+};
+
+const struct packet_t _vl_ability_step3[] =
+{
+    
+
+    /// done
+	VL_END
+};
+
+const struct packet_t _vl_ability_step4[] =
+{
+    
+
+    /// done
+	VL_END
+};
+
+
+
+const void* const vl_ability[4] =
+{
+    _vl_ability_step1,
+    _vl_ability_step2,
+    _vl_ability_step3,
+    _vl_ability_step4
+};

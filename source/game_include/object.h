@@ -43,7 +43,7 @@ typedef struct _moving_object_t
 
 
 /******************************************************************************************************
- * moving object tick functions (based on current speed)
+ * [precompiled] moving object tick functions (based on current speed)
  ******************************************************************************************************/
 #include "game.h"
 
@@ -52,4 +52,5 @@ typedef struct _moving_object_t
  */
 void idle(__attribute__((unused)) moving_object_t* me);
 
+extern void (* const MOVING_OBJECT_ABILITY_TICK_FNC_LUT[3]) (moving_object_t * me);
 extern void (* const MOVING_OBJECT_TICK_FNC_LUT[STAGE_T_SIZE][3]) (moving_object_t * me);

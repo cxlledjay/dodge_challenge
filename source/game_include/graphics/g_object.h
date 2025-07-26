@@ -33,3 +33,7 @@ extern const struct packet_t vl_enemy_car1[];
 
 /// @brief spawning fuel can
 extern const struct packet_t vl_object_fuelcan[];
+
+
+/// @brief spawning ability (4 step animation)
+extern const void* const vl_ability[4];
