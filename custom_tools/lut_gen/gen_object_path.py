@@ -84,6 +84,7 @@ def print_array_entry(file, val, i, i_max):
         file.write(", ")
 
 
+max_sc_possible = 37
 
 def generate_stage(stage, frames, file):
     y_arr = []
@@ -186,7 +187,7 @@ def generate_header():
             file.write(f"extern const int * const \t\t\tMOVING_OBJECT_{string}_LUT[STAGE_T_SIZE];\n")
         file.write(f"extern const unsigned int * const \tMOVING_OBJECT_SC_LUT[STAGE_T_SIZE];\n")
 
-        
+    # generate hitboxes (for each object type), depending on scaling factor
     with open('../../source/game_include/gen_data/gen_object_hitbox.h', 'w') as file:
         file.write("#pragma once\n\n")
         file.write("/********************************************************************************************************\n")
@@ -197,8 +198,9 @@ def generate_header():
         file.write(" *   AUTHOR: laserbluejay / cxlledjay, 2025\n")
         file.write(" *******************************************************************************************************/\n\n\n")
 
-        file.write("extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[58];\n")
-        file.write("extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[58];\n")
+        global max_sc_possible
+        file.write(f"extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[{max_sc_possible}];\n")
+        file.write(f"extern const int \t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[{max_sc_possible}];\n")
 
 
 def generate_source():
@@ -252,6 +254,7 @@ def generate_source():
         file.write("};\n\n")
 
         
+    # generate hitboxes (for each object type), depending on scaling factor
     with open('../../source/game_source/gen_data/gen_object_hitbox.c', 'w') as file:
         file.write("#include \"../../game_include/gen_data/gen_object_hitbox.h\"\n\n")
         file.write("/********************************************************************************************************\n")
@@ -263,23 +266,24 @@ def generate_source():
         file.write(" *******************************************************************************************************/\n\n\n")
 
         sc_xh_arr = []
-        for i in range(58):
-            x = i * 1
+        global max_sc_possible
+        for i in range(max_sc_possible):
+            x = i * 1.4
             xh_r = int(x/2)
             sc_xh_arr.append(xh_r)
 
-        file.write("const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[58] = {")
-        print_list(sc_xh_arr,58,file)
+        file.write(f"const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[{max_sc_possible}] = {{")
+        print_list(sc_xh_arr,max_sc_possible,file)
 
 
         sc_y_arr = []
-        for i in range(58):
-            y = i * 0.6
+        for i in range(max_sc_possible):
+            y = i * 0.85
             y_r = int(y)
             sc_y_arr.append(y_r)
             
-        file.write("const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[58] = {")
-        print_list(sc_y_arr,58,file)
+        file.write(f"const int \t\t\t\tMO_ENEMY_DUMMY_SC_TO_BB_Y[{max_sc_possible}] = {{")
+        print_list(sc_y_arr,max_sc_possible,file)
 
     # generate player lane change speed tables
     with open('../../source/game_source/gen_data/gen_player_lanechange.c', 'w') as file:

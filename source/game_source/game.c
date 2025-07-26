@@ -255,14 +255,10 @@ void input_1_4 (void)
             switch(the_player.lane)
             {
                 case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+                    PLAYER_INIT_LC_RIGHT_MID()
                     break;
                 case MID_LANE: //< mid -> left
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+                    PLAYER_INIT_LC_MID_LEFT()
                     break;
                 case LEFT_LANE: //< in left lane
                     break; //< cant go further left
@@ -286,14 +282,10 @@ void input_1_4 (void)
             switch(the_player.lane)
             {
                 case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+                    PLAYER_INIT_LC_LEFT_MID()
                     break;
                 case MID_LANE: //< mid -> right
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+                    PLAYER_INIT_LC_MID_RIGHT()
                     break;
                 case RIGHT_LANE: //< in right lane
                     break; //< cant go further right
@@ -341,14 +333,10 @@ void input_2_3 (void)
             switch(the_player.lane)
             {
                 case RIGHT_LANE: //< right -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+                    PLAYER_INIT_LC_RIGHT_MID()
                     break;
                 case MID_LANE: //< mid -> left
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+                    PLAYER_INIT_LC_MID_LEFT()
                     break;
                 case LEFT_LANE: //< in left lane
                     break; //< cant go further left
@@ -372,14 +360,10 @@ void input_2_3 (void)
             switch(the_player.lane)
             {
                 case LEFT_LANE: //< left -> mid
-                    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+                    PLAYER_INIT_LC_LEFT_MID()
                     break;
                 case MID_LANE: //< mid -> right
-                    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-                    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-                    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+                    PLAYER_INIT_LC_MID_RIGHT()
                     break;
                 case RIGHT_LANE: //< in right lane
                     break; //< cant go further right
@@ -395,10 +379,7 @@ void input_2_3 (void)
         }
     }
 }
-/* 
-const int _ANALOG_PLAYER_X_GAIN[STAGE_T_SIZE] = {
-    1, 2, 4, 6, 9, 11, 14, 16, 18, 20, 24
-}; */
+
 void input_analog (void)
 {
     /// get input
@@ -441,12 +422,10 @@ void input_analog (void)
             /// flag player as in left lane, is important for drawing correct model and keep consistent colision check
             the_player.lane = LEFT_LANE;
             collision.recalculate_player_aabb = aabb_calculate_left;
-            collision.check = aabb_check_side;
         } else if(the_player.x < PLAYER_X_MAX_HALF) {
             /// flag player as in mid lane, is important for drawing correct model and keep consistent colision check
             the_player.lane = MID_LANE;
             collision.recalculate_player_aabb = aabb_calculate_mid;
-            collision.check = aabb_check_mid;
         }
         collision.recalculate_player_aabb();
     }
@@ -465,12 +444,10 @@ void input_analog (void)
             /// flag player as in right lane, is important for drawing correct model and keep consistent colision check
             the_player.lane = RIGHT_LANE;
             collision.recalculate_player_aabb = aabb_calculate_right;
-            collision.check = aabb_check_side;
         } else if(the_player.x > PLAYER_X_MIN_HALF) {
             /// flag player as in mid lane, is important for drawing correct model and keep consistent colision check
             the_player.lane = MID_LANE;
             collision.recalculate_player_aabb = aabb_calculate_mid;
-            collision.check = aabb_check_mid;
         }
         collision.recalculate_player_aabb();
     }

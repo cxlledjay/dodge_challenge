@@ -82,3 +82,30 @@ extern const player_lane_change_animation_t _player_lanechange_tick_phase1;
 
 /// @brief animation function pointers (=> complete lane change)
 extern const player_lane_change_animation_t _player_lanechange_tick_phase2;
+
+
+
+/****************************************************************
+ * macros for initiating lane change
+ * (the complete lane change is handled automatically afterwards)
+ ****************************************************************/
+
+#define PLAYER_INIT_LC_LEFT_MID()                                                       \
+    the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;            \
+    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];               \
+    the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+
+#define PLAYER_INIT_LC_MID_RIGHT()                                                      \
+    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;           \
+    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];               \
+    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+
+#define PLAYER_INIT_LC_RIGHT_MID()                                                      \
+    the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;           \
+    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];               \
+    the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+    
+#define PLAYER_INIT_LC_MID_LEFT()                                                       \
+    the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;            \
+    the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];               \
+    the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];

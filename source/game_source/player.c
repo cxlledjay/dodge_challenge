@@ -85,7 +85,7 @@ void player_init(void)
 void player_draw(void)
 {
 	/// check for collision
-	collision.check(); //< if collision occurs -> wont reach rest of function
+	aabb_check_collision(); //< if collision occurs -> wont reach rest of function
 
 	/// draw player vector list (based on lane)
 	(* _PLAYER_DRAW_LUT[(unsigned int) the_player.lane])();
@@ -109,7 +109,7 @@ void player_draw(void)
 	the_player.cnt--; /* sequence is important... first decrement to match index starting from 0 */						\
 	the_player.x = the_player.x_LUT[the_player.cnt]; /* move to next x coord */											\
 	collision.recalculate_player_aabb(); /* recalculated player bounding box */													\
-	collision.check(); /* now check for collisions */
+	aabb_check_collision(); /* now check for collisions */
 
 
 
@@ -157,15 +157,11 @@ void player_change_left_to_mid_step2(void)
 				break;
 			case -1:
 				/// left change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+				PLAYER_INIT_LC_MID_LEFT()
 				break;
 			case 1:
 				/// right change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+				PLAYER_INIT_LC_MID_RIGHT()
 				break;
 		}
 		the_player.queued_lane_change = 0; //< clear queued
@@ -216,9 +212,7 @@ void player_change_mid_to_right_step2(void)
 				break;
 			case -1:
 				/// left change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->right_to_mid;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.right_to_mid[the_game.stage];
+				PLAYER_INIT_LC_RIGHT_MID()
 				break;
 		}
 		the_player.queued_lane_change = 0; //< clear queued
@@ -267,15 +261,11 @@ void player_change_right_to_mid_step2(void)
 				break;
 			case -1:
 				/// left change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_left;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_left[the_game.stage];
+				PLAYER_INIT_LC_MID_LEFT()
 				break;
 			case 1:
 				/// right change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->mid_to_right;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.mid_to_right[the_game.stage];
+				PLAYER_INIT_LC_MID_RIGHT()
 				break;
 		}
 		the_player.queued_lane_change = 0; //< clear queued
@@ -326,9 +316,7 @@ void player_change_mid_to_left_step2(void)
 				break;
 			case 1:
 				/// right change queued
-				the_player.tick = player_lane_change_phase1.animation_tick->left_to_mid;
-				the_player.cnt = player_lane_change_phase1.FRAME_CNT[the_game.stage];
-				the_player.x_LUT = player_lane_change_phase1.x_LUT.left_to_mid[the_game.stage];
+				PLAYER_INIT_LC_LEFT_MID()
 				break;
 		}
 		the_player.queued_lane_change = 0; //< clear queued

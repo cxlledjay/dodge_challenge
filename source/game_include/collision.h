@@ -4,7 +4,6 @@
 typedef struct _collision_check_t
 {
     void (* recalculate_player_aabb) (void);
-    void (* check) (void);
 } collision_check_t;
 
 /**
@@ -30,19 +29,19 @@ void aabb_calculate_mid(void);
 void aabb_calculate_left(void);
 void aabb_calculate_right(void);
 
-void aabb_check_mid(void);
-void aabb_check_side(void);
+void aabb_check_collision(void);
 
 
 /// use macros for ease of use...
-#define COLLISION_SET_MID()                                 \
-    collision.recalculate_player_aabb = aabb_calculate_mid; \
-    collision.check = aabb_check_mid;
 
-#define COLLISION_SET_LEFT()                                 \
-    collision.recalculate_player_aabb = aabb_calculate_left; \
-    collision.check = aabb_check_side;
+/// recalculate collision of player moved (for midlane model)
+#define COLLISION_SET_MID()                                     \
+    collision.recalculate_player_aabb = aabb_calculate_mid;
 
-#define COLLISION_SET_RIGHT()                                 \
-    collision.recalculate_player_aabb = aabb_calculate_right; \
-    collision.check = aabb_check_side;
+/// recalculate collision of player moved (for leftlane model)
+#define COLLISION_SET_LEFT()                                    \
+    collision.recalculate_player_aabb = aabb_calculate_left;
+
+/// recalculate collision of player moved (for rightlane model)
+#define COLLISION_SET_RIGHT()                                   \
+    collision.recalculate_player_aabb = aabb_calculate_right;

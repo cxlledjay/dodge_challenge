@@ -9,5 +9,5 @@
  *******************************************************************************************************/
 
 
-extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[58];
-extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_Y[58];
+extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_X_HALFED[37];
+extern const int 		MO_ENEMY_DUMMY_SC_TO_BB_Y[37];
