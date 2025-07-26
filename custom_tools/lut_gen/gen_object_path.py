@@ -267,7 +267,7 @@ def generate_source():
         file.write(" *******************************************************************************************************/\n\n\n")
 
         global max_sc_possible
-        enemy_hitbox_sc_xh_factors = [1.4, 0, 0, 0, 0, 0]
+        enemy_hitbox_sc_xh_factors = [1.4, 0, 0, 0, 1, 0]
         file.write(f"const int \t\t\t\t MO_SC_TO_BB_X_HALFED[MOT_COUNT-1][{max_sc_possible}] = \n{{\n\t{{")
         
         cnt = len(enemy_hitbox_sc_xh_factors)
@@ -293,7 +293,7 @@ def generate_source():
 
 
 
-        enemy_hitbox_sc_y_factors = [0.85, 0, 0, 0, 0, 0]
+        enemy_hitbox_sc_y_factors = [0.85, 0, 0, 0, 1, 0]
         file.write(f"const int \t\t\t\t  MO_SC_TO_BB_Y[MOT_COUNT-1][{max_sc_possible}] = \n{{\n\t{{")
         
         cnt = len(enemy_hitbox_sc_y_factors)

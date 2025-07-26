@@ -155,6 +155,7 @@ void aabb_calculate_right(void)
 #define DEBUG
 #include "lib/print/print.h"
 #include "game_include/sounds/s_animation.h"
+#include "game_include/fuel.h"
 
 void aabb_check_collision(void)
 {
@@ -221,7 +222,8 @@ void aabb_check_collision(void)
             
             /// debug section
             #ifdef DEBUG
-            print_signed_int((int)i*12 +10, -120, y);
+            /* print_signed_int((int)i*12 +10, -120, y); */
+            print_unsigned_int((int)i*12 +10, -120, sc);
             aabb_draw_object(obj, x, y, bb_xh, bb_y);
             #endif
 
@@ -261,12 +263,40 @@ void aabb_check_collision(void)
             if(axis == 0)
             {
                 /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
+                switch(obj->type)
+                {
+                    case MOT_FUELCAN:
+                        /// refill player fuel
+                        if( the_player.fuel + FUEL_CAN_REFILL_AMOUNT > 100)
+                        {
+                            /// protect overflow
+                            the_player.fuel = 100;
+                        }
+                        else
+                        {
+                            /// refill
+                            the_player.fuel = the_player.fuel + FUEL_CAN_REFILL_AMOUNT;
+                        }
 
-                /// if it was an enemy -> game over
-                the_game.execute_state = game_over;
-                #ifdef DEBUG
-                print_string(42,-20,"HIT\x80");
-                #endif
+                        /// and despawn the fuel can
+                        obj->tick = idle;
+
+                        /// done
+                        break;
+                    case MOT_ABILITY:
+                        /// TODO: ability logic
+                        break;
+                        
+                    case MOT_ENEMY_CAR1:
+                    case MOT_ENEMY_CAR2:
+                    case MOT_ENEMY_TRUCK:
+                    case MOT_ENEMY_BIKE:
+                    case MOT_NULL:
+                    default:
+                        /// we hit an enemy
+                        /// TODO: tell the game over screen, why it was over (here, reason = hit object)
+                        the_game.execute_state = game_over; //< back to game over screen
+                }
             }
         }
     }

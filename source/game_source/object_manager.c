@@ -104,7 +104,7 @@ const void * const MOT_TYPE_TO_MODEL[] =
     &vl_enemy_dummy, //< MOT_ENEMY_CAR2
     &vl_enemy_dummy, //< MOT_ENEMY_TRUCK
     &vl_enemy_dummy, //< MOT_ENEMY_BIKE
-    &vl_enemy_dummy, //< MOT_FUELCAN
+    &vl_object_fuelcan, //< MOT_FUELCAN
 };
 
 
