@@ -11,7 +11,12 @@ typedef void (* object_tick_func) (struct _moving_object_t * me);
 typedef enum _moving_object_type_t
 {
     MOT_NULL = 0,
-    MOT_ENEMY_1 = 1
+    MOT_ENEMY_CAR1 = 1,
+    MOT_ENEMY_CAR2 = 2,
+    MOT_ENEMY_TRUCK = 3,
+    MOT_ENEMY_BIKE = 4,
+    MOT_ENEMY_FUELCAN = 5,
+    MOT_ENEMY_ABILITY = 6,
 }moving_object_type_t;
 
 

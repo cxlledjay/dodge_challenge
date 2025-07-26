@@ -102,7 +102,7 @@ const spawn_entry_t * get_next_pattern()
 const void * const MOT_TYPE_TO_MODEL[] =
 {
     0, //< MOT_NONE
-    &vl_enemy_car1 //< MOT_ENEMY_1
+    &vl_enemy_car1 //< MOT_ENEMY_CAR1
 };
 
 

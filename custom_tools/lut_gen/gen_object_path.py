@@ -120,7 +120,7 @@ def generate_stage(stage, frames, file):
     # resulting scaling
     sc_arr = []
     for y in y_arr:
-        sc = -0.25 * y + 14 # linear function
+        sc = -0.165 * y + 8 # linear function
         sc_rounded = int(sc)
         sc_arr.append(sc_rounded)
         
