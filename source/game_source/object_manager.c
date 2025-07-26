@@ -143,6 +143,11 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
             the_object_manager.cnt_next_ability = get_next_interval();
 
             ///TODO: spawn ability
+            the_object_manager.queue_ptr->model = (void *) 4;
+            the_object_manager.queue_ptr->lane = lane;
+            the_object_manager.queue_ptr->type = MOT_ABILITY;
+            the_object_manager.queue_ptr->tick = MOVING_OBJECT_ABILITY_TICK_FNC_LUT[lane];
+            the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
         }
         /// continue with spawn pattern
         else

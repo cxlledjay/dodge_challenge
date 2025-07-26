@@ -98,9 +98,19 @@ const struct packet_t vl_object_fuelcan[] =
 
 /// ------------------ ability animation ------------------------------------------------
 
+#define _VL_ABILITY_BASE    \
+    {MOVE, {0,-15}},        \
+    {DRAW, {69,49}},        \
+    {DRAW, {0,-32}},        \
+    {DRAW, {51,15}},        \
+    {DRAW, {-69,-49}},      \
+    {DRAW, {0,32}},         \
+    {DRAW, {-51,-15}},
+
 const struct packet_t _vl_ability_step1[] =
 {
-    
+    /// ability icon
+    _VL_ABILITY_BASE
 
     /// done
 	VL_END
@@ -108,7 +118,8 @@ const struct packet_t _vl_ability_step1[] =
 
 const struct packet_t _vl_ability_step2[] =
 {
-    
+    /// ability icon
+    _VL_ABILITY_BASE
 
     /// done
 	VL_END
@@ -116,7 +127,8 @@ const struct packet_t _vl_ability_step2[] =
 
 const struct packet_t _vl_ability_step3[] =
 {
-    
+    /// ability icon
+    _VL_ABILITY_BASE
 
     /// done
 	VL_END
@@ -124,7 +136,8 @@ const struct packet_t _vl_ability_step3[] =
 
 const struct packet_t _vl_ability_step4[] =
 {
-    
+    /// ability icon
+    _VL_ABILITY_BASE
 
     /// done
 	VL_END

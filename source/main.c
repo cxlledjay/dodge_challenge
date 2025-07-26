@@ -9,7 +9,7 @@
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 // *************************************
 
 
@@ -22,6 +22,8 @@
 	__attribute__((noreturn)) void debug_run(void)
 	{
 		unsigned int mode = 0;
+		static unsigned int cnt = 3;
+		static unsigned int var = 0;
 		do
 		{
 			/// sync
@@ -42,18 +44,29 @@
 					dp_VIA_t1_cnt_lo = 0x7f;
 					Moveto_d(0, 0);
 					dp_VIA_t1_cnt_lo = 32;
-					Draw_VLp(&vl_enemy_dummy);
+					Draw_VLp(&vl_object_fuelcan);
 					break;
 				case 4:
 					/// compare draw 2
 					Reset0Ref();
 					dp_VIA_t1_cnt_lo = 0x7f;
 					Moveto_d(0, 0);
-					dp_VIA_t1_cnt_lo = 20;
+					dp_VIA_t1_cnt_lo = 32;
 					Draw_VLp(&vl_enemy_car1);
 					break;
 				case 8:
 					/// compare draw 3
+					if(--cnt == 0)
+					{
+						cnt = 3;
+						if(++var == 4) var = 0;
+					}
+					
+					Reset0Ref();
+					dp_VIA_t1_cnt_lo = 0x7f;
+					Moveto_d(0, 0);
+					dp_VIA_t1_cnt_lo = 32;
+					Draw_VLp((struct packet_t *) vl_ability[cnt]);
 					break;
 				default:
 					print_string(0,0,"BAD MODE\x80");

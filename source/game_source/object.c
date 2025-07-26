@@ -71,6 +71,7 @@ void (* const MOVING_OBJECT_ABILITY_TICK_FNC_LUT[3]) (moving_object_t * me) =
 
 
 #include "game_include/graphics/g_object.h"
+#include "lib/print/print.h"
 
 
 void _object_tick_ability_mid(moving_object_t * me)
