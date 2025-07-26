@@ -98,7 +98,7 @@ const spawn_entry_t * get_next_pattern()
 
 
 
-#include "game_include/graphics/g_enemy.h"
+#include "game_include/graphics/g_object.h"
 const void * const MOT_TYPE_TO_MODEL[] =
 {
     0, //< MOT_NONE

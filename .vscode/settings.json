@@ -34,6 +34,7 @@
         "sound.h": "c",
         "random.h": "c",
         "ability.h": "c",
-        "fuel.h": "c"
+        "fuel.h": "c",
+        "g_gui.h": "c"
     }
 }

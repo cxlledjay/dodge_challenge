@@ -1,16 +1,9 @@
-// ***************************************************************************
-// graphics/g_enemy.h
-//
-// all vector lists to draw enemies
-// ***************************************************************************
-#pragma once
+#include "game_include/graphics/g_object.h"
 
-#include "utils/vector.h"
 
 // ***************************************************************************
-// vector lists
+// enemy models
 // ***************************************************************************
-
 
 /// @brief dummy enemy to test stuff
 const struct packet_t vl_enemy_dummy[] = 
