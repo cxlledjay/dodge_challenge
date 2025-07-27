@@ -267,7 +267,7 @@ def generate_source():
         file.write(" *******************************************************************************************************/\n\n\n")
 
         global max_sc_possible
-        enemy_hitbox_sc_xh_factors = [1.4, 0, 0, 0, 1, 1.6, 1.4]
+        enemy_hitbox_sc_xh_factors = [1.4, 1.4, 1.4, 0.55, 1, 1.6, 1.4]
         """ idx mapping
         MOT_ENEMY_CAR1 = 0,
         MOT_ENEMY_CAR2 = 1,
@@ -302,7 +302,7 @@ def generate_source():
 
 
 
-        enemy_hitbox_sc_y_factors = [0.85, 0, 0, 0, 1, 1.1, 1.3]
+        enemy_hitbox_sc_y_factors = [0.85, 0.8, 1.1, 0.8, 1, 1.1, 1.3]
         """ idx mapping
         MOT_ENEMY_CAR1 = 0,
         MOT_ENEMY_CAR2 = 1,

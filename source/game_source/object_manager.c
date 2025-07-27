@@ -105,9 +105,9 @@ static inline __attribute__((always_inline)) unsigned int get_next_interval (voi
 const void * const MOT_TYPE_TO_MODEL[] =
 {
     &vl_enemy_car1, //< MOT_ENEMY_CAR1
-    &vl_enemy_dummy, //< MOT_ENEMY_CAR2
-    &vl_enemy_dummy, //< MOT_ENEMY_TRUCK
-    &vl_enemy_dummy, //< MOT_ENEMY_BIKE
+    &vl_enemy_car2, //< MOT_ENEMY_CAR2
+    &vl_enemy_truck, //< MOT_ENEMY_TRUCK
+    &vl_enemy_bike, //< MOT_ENEMY_BIKE
     &vl_object_fuelcan, //< MOT_FUELCAN
     &vl_extralife, //< MOT_EXTRALIFE
     &vl_ac_missile //< MOT_ABILITY_MISSILE

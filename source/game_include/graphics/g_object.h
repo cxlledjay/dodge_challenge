@@ -22,8 +22,17 @@
 /// @brief dummy enemy to test stuff
 extern const struct packet_t vl_enemy_dummy[];
 
-
+/// @brief car model nr 1
 extern const struct packet_t vl_enemy_car1[];
+
+/// @brief car model nr 2
+extern const struct packet_t vl_enemy_car2[];
+
+/// @brief truck model
+extern const struct packet_t vl_enemy_truck[];
+
+/// @brief bike model
+extern const struct packet_t vl_enemy_bike[];
 
 
 

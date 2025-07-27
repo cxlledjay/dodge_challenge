@@ -63,6 +63,118 @@ const struct packet_t vl_enemy_car1[] =
 };
 
 
+const struct packet_t vl_enemy_car2[] =
+{
+    /// move to starting point
+    {MOVE, {0, -53}},
+
+    /// left wheel
+    {DRAW, {0, -50}},
+    {DRAW, {80, 0}},
+    {DRAW, {0, 50}},
+    {DRAW, {-80, 0}},
+
+    /// floor
+    {MOVE, {40, 0}},
+    {DRAW, {0, 106}},
+
+    /// right wheel
+    {MOVE, {40, 0}},
+    {DRAW, {-80, 0}},
+    {DRAW, {0, 50}},
+    {DRAW, {80, 0}},
+    {DRAW, {0, -50}},
+
+    /// cabin
+    {MOVE, {0, 35}},
+    {DRAW, {55, -25}},
+    {DRAW, {0, -126}},
+    {DRAW, {-55, -25}},
+
+    /// done
+    VL_END
+};
+
+
+
+
+
+/// @brief truck model
+const struct packet_t vl_enemy_truck[] =
+{
+    /// move to starting point
+    {MOVE, {15,-53}},
+    
+    /// bottom 1/2
+    {DRAW, {-25,0}},
+    {DRAW, {0,-35}},
+    {DRAW, {25,0}},
+    {DRAW, {0,-15}},
+
+    /// main truck
+    {DRAW, {30,0}},
+    {DRAW, {0,25}},
+    {DRAW, {40,-25}},
+    {DRAW, {70,0}},
+    {DRAW, {0,103}},
+    {DRAW, {0,103}},
+    {DRAW, {-70,0}},
+    {DRAW, {-40,-25}},
+    {DRAW, {0,25}},
+    {DRAW, {-30,0}},
+
+    /// bottom 2/2
+    {DRAW, {0,-15}},
+    {DRAW, {-25,0}},
+    {DRAW, {0,-35}},
+    {DRAW, {25,0}},
+    {DRAW, {0,-106}},
+
+    /// lights
+    {MOVE, {40,-35}},
+    {DRAW, {0,30}},
+    {MOVE, {0,116}},
+    {DRAW, {0,30}},
+
+    VL_END
+};
+
+
+
+
+
+/// @brief bike model
+const struct packet_t vl_enemy_bike[] =
+{
+    /// move to starting point
+    {MOVE, {0,-18}},
+    
+    /// back wheel
+    {DRAW, {60,0}},
+    {DRAW, {0,36}},
+    {DRAW, {-60,0}},
+    {DRAW, {0,-36}},
+
+    /// bike body
+    {MOVE, {30,0}},
+    {DRAW, {80,-22}},
+    {DRAW, {25,15}},
+    {DRAW, {0,50}},
+    {DRAW, {-25,15}},
+    {DRAW, {-80,-22}},
+
+    /// handle bars
+    {MOVE, {118,-68}},
+    {DRAW, {-3,35}},
+    {DRAW, {-10,15}},
+    {DRAW, {10,15}},
+    {DRAW, {3,35}},
+
+    /// done
+    VL_END
+};
+
+
 
 
 // ***************************************************************************
