@@ -101,11 +101,7 @@ const struct packet_t vl_object_fuelcan[] =
 // extralife + abilities (6)
 // ***************************************************************************
 
-
-
-
-
-
+/// temp
 #define _VL_ABILITY_BASE    \
     {MOVE, {0,-15}},        \
     {DRAW, {69,49}},        \
@@ -114,23 +110,58 @@ const struct packet_t vl_object_fuelcan[] =
     {DRAW, {-69,-49}},      \
     {DRAW, {0,32}},         \
     {DRAW, {-51,-15}},
+const struct packet_t _temp[] =
+{
+    _VL_ABILITY_BASE
+    VL_END
+};
 
     
-const struct packet_t vl_extralife[] = {
-    _VL_ABILITY_BASE
-    VL_END
+const struct packet_t vl_extralife[] =
+{ 
+    /// heart
+    {DRAW, {93,93}},
+    {DRAW, {46,-46}},
+    {DRAW, {-46,-46}},
+    {DRAW, {46,-46}},
+    {DRAW, {-46,-46}},
+    {DRAW, {-93,93}},
+
+    /// plus
+    {MOVE, {75,-96}},
+    {DRAW, {0,-45}},
+    {MOVE, {22,22}},
+    {DRAW, {-45,0}},
+
+    /// done
+	VL_END
 };
 
-const struct packet_t _temp[] = {
-    _VL_ABILITY_BASE
-    VL_END
-};
-
-
-/// @brief spawning ability
-const void* const vl_abilities[1] =
+const struct packet_t vl_ac_missile[] =
 {
-    _temp
+    /// align center
+    {MOVE, {41, -12}},
+
+    /// rocket body
+    {DRAW, {30,-30}},
+    {DRAW, {93,93}},
+    {DRAW, {0,30}},
+    {DRAW, {-30,0}},
+    {DRAW, {-93,-93}},
+
+    /// right wing
+    {DRAW, {-41,0}},
+    {DRAW, {41,41}},
+    {DRAW, {41,0}},
+
+    /// left wing
+    {MOVE, {30,-30}},
+    {DRAW, {0,-41}},
+    {DRAW, {-41,-41}},
+    {DRAW, {0,41}},
+
+    /// done
+    VL_END
 };
 
 

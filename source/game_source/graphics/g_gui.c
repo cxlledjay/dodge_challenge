@@ -69,7 +69,7 @@ const struct packet_t _vl_gui_ac_missile[] =
     {DRAW, {55,55}},
     {DRAW, {0,55}},
 
-    /// left wing
+    /// right wing
     {MOVE, {-41,41}},
     {DRAW, {-55,0}},
     {DRAW, {-55,-55}},

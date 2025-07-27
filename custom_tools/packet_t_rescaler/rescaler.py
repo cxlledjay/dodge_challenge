@@ -3,8 +3,8 @@
 
 new_lines = []
 
-x_factor = 2
-y_factor = 2
+x_factor = 0.75
+y_factor = 0.75
 
 if __name__ == "__main__":
     # Open the file in read mode
@@ -32,7 +32,7 @@ if __name__ == "__main__":
                             coords.append(substr)
                 y = int(coords[0]) * y_factor
                 x = int(coords[1]) * x_factor
-                new_lines.append(f"{{{cmd}, {{{y},{x}}}}},\n")
+                new_lines.append(f"{{{cmd}, {{{int(y)},{int(x)}}}}},\n")
                         
         file.close()
     

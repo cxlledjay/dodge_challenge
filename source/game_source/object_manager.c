@@ -110,7 +110,7 @@ const void * const MOT_TYPE_TO_MODEL[] =
     &vl_enemy_dummy, //< MOT_ENEMY_BIKE
     &vl_object_fuelcan, //< MOT_FUELCAN
     &vl_extralife, //< MOT_EXTRALIFE
-    &vl_abilities[0] //< MOT_ABILITY_MISSILE
+    &vl_ac_missile //< MOT_ABILITY_MISSILE
 };
 
 
@@ -140,25 +140,9 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
             /// reset counter to random value
             the_object_manager.cnt_next_ability = get_next_interval() << 1; //< abilities are twice as rare
 
-            /// determine if it is extralife or ability
-            unsigned int type = rand(&random_obj) >> 7; //< either extralife (0) or missiles (1)
-
-            switch (type)
-            {
-                case 0:
-                    /// extralife
-                    the_object_manager.queue_ptr->model = (void *) &vl_extralife;
-                    break;
-                case 1:
-                    /// ability
-                    the_object_manager.queue_ptr->model = (void *) vl_abilities[0];
-                    break;
-                default:
-                    /// should not happen...
-                    ;
-            }
             /// spawn object
-            the_object_manager.queue_ptr->type = type + 5; //< translate ability_class_t to moving_object_t (offset)
+            the_object_manager.queue_ptr->type = (rand(&random_obj) >> 7) + 5; //< generate and translate ability type to moving_object_t
+            the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[the_object_manager.queue_ptr->type];
             the_object_manager.queue_ptr->lane = lane;
             the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
             the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];

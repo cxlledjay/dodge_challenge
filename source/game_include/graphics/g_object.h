@@ -42,11 +42,11 @@ extern const struct packet_t vl_object_fuelcan[];
 // extralife + abilities (6)
 // ***************************************************************************
 
-/// @brief spawning extralife object
+/// @brief spawning extralife object (MOT_EXTRALIFE)
 extern const struct packet_t vl_extralife[];
 
-/// @brief spawning ability objects
-extern const void* const vl_abilities[1];
+/// @brief spawning ability object missile (MOT_ABILITY_MISSILE)
+extern const struct packet_t vl_ac_missile[];
 
 
 

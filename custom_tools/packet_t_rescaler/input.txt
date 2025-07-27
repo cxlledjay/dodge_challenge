@@ -1,12 +1,17 @@
-/// move to middle point touching ground
-{MOVE, {0,-25}},
+/// rocket body
+{DRAW, {41,-41}},
+{DRAW, {125,125}},
+{DRAW, {0,41}},
+{DRAW, {-41,0}},
+{DRAW, {-125,-125}},
 
-/// dummy car
-{DRAW, {0,-15}},
-{DRAW, {50,0}},
-{DRAW, {0,72}},
-{DRAW, {-50,0}},
-{DRAW, {0,-15}},
-{DRAW, {10,0}},
-{DRAW, {0,-42}},
-{DRAW, {-10,0}},
+/// right wing
+{DRAW, {-55,0}},
+{DRAW, {55,55}},
+{DRAW, {55,0}},
+
+/// left wing
+{MOVE, {41,-41}},
+{DRAW, {0,-55}},
+{DRAW, {-55,-55}},
+{DRAW, {0,55}},
