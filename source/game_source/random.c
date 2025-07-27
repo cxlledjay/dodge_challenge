@@ -1,5 +1,9 @@
 #include "game_include/random.h"
 
+
+/// @brief rng object for global use
+rng_t random_obj;
+
 // ---------------------------------------------------------------------------
 // set seeds
 

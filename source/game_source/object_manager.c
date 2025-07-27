@@ -1,5 +1,5 @@
 #include "game_include/object_manager.h"
-
+#include "game_include/random.h"
 
 
 /**********************************************************************************************************
@@ -9,9 +9,6 @@
 /// @brief nice posh guy
 object_manager_t the_object_manager;
 
-#include "game_include/random.h"
-/// @brief rng object for choosing next spawn pattern (and abilities??)
-rng_t om_rng_obj;
 
 
 
@@ -42,11 +39,11 @@ void object_manager_init(void)
     unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                             //< propably out of bounds but idc
 
     /// init random number gen
-    rng_init(&om_rng_obj, seed0, seed1, seed2, seed3);
+    rng_init(&random_obj, seed0, seed1, seed2, seed3);
 
 
     /// init ram segement for moving object
-    moving_object_t new_obj = {.type = 0, .ttl = 0, .model = 0, .tick = idle};
+    moving_object_t new_obj = {.type = 0, .ttl = 0, .cnt = 0, .model = 0, .tick = idle};
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
         the_object_manager.objects[i] = new_obj;
@@ -95,13 +92,13 @@ void object_manager_tick_all(void)
 #include "game_include/data/spawn_pattern.h"
 static inline __attribute__((always_inline)) const spawn_entry_t * get_next_pattern (void)
 {
-    unsigned int idx_bitmasked = rand(&om_rng_obj) & SPAWN_PATTERN_IDX_BITMASK;
+    unsigned int idx_bitmasked = rand(&random_obj) & SPAWN_PATTERN_IDX_BITMASK;
     return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
 }
 
 static inline __attribute__((always_inline)) unsigned int get_next_interval (void)
 {
-    return (rand(&om_rng_obj) >> 3) + 24; //< range: 24-55
+    return (rand(&random_obj) >> 3) + 24; //< range: 24-55
 }
 
 

@@ -19,6 +19,10 @@ typedef struct _rng_t
 }rng_t;
 
 
+/// @brief rng object for global use
+extern rng_t random_obj;
+
+
 /***************************************************
  * functions
  ***************************************************/

@@ -66,7 +66,7 @@ const struct packet_t vl_enemy_car1[] =
 
 
 // ***************************************************************************
-// collectables
+// fuel can (5)
 // ***************************************************************************
 
 
@@ -96,7 +96,13 @@ const struct packet_t vl_object_fuelcan[] =
 
 
 
-/// ------------------ ability animation ------------------------------------------------
+
+
+// ***************************************************************************
+// animations (6-7)
+// ***************************************************************************
+
+/// ------------------ ability animation -------------------------------------
 
 #define _VL_ABILITY_BASE    \
     {MOVE, {0,-15}},        \
@@ -151,4 +157,14 @@ const void* const vl_ability[4] =
     _vl_ability_step2,
     _vl_ability_step3,
     _vl_ability_step4
+};
+
+/// ------------------ explosion animation -------------------------------------
+
+
+const void* const vl_exploded[3] =
+{
+    _vl_ability_step1,
+    _vl_ability_step2,
+    _vl_ability_step3
 };

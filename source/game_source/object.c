@@ -9,7 +9,8 @@
  * 
  * 1) idle
  * 2) ability tick function (animated)
- * 3) generic tick function (no animation)
+ * 3) exploded object tick function (animated)
+ * 4) generic tick function (no animation)
  **************************************************************************/
 
 
@@ -24,34 +25,41 @@ void idle(__attribute__((unused)) moving_object_t* me)
 
 // 2) ---------------------------------------------------------------------
 
-/// utils
+/// utils for animation ///
+
+#define OBJECT_ANIMATION_FRAME_INTERVAL         (10u)
 
 #define DESPAWN_CHECK(OBJECT_PTR)                                                                                            \
     if(--(OBJECT_PTR->ttl) == 0) {OBJECT_PTR->tick = idle;  /* check if enemy should still be rendered */                    \
     ++(the_game.score);  return;} /* and also increase score */ /** TODO: implement score getting even more with higher stage */
 
 
-/// @brief macros for aniating the ability
-/// @param STEP the animation step (0-3)
-
-#define DRAW_ABILITY_MID(STEP)                                              \
+/// @param STEP the animation step (in the given range specified by VL)
+/// @param VL indexed array holding different struct packet_ts (casted to void*). array size determines STEP range
+#define DRAW_ANIMATION_MID(STEP, VL)                                              \
     Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f;                                   \
     Moveto_d(MOVING_OBJECT_Y1_LUT[the_game.stage][me->ttl],0);              \
     Moveto_d(MOVING_OBJECT_Y2_LUT[the_game.stage][me->ttl],0);              \
     dp_VIA_t1_cnt_lo = MOVING_OBJECT_SC_LUT[the_game.stage][me->ttl];       \
-    Draw_VLp((struct packet_t *) vl_ability[(unsigned long) me->model]);
-#define DRAW_ABILITY_LEFT(STEP)                                             \
+    Draw_VLp((struct packet_t *) VL[(unsigned long) me->model]);
+    
+/// @param STEP the animation step (in the given range specified by VL)
+/// @param VL indexed array holding different struct packet_ts (casted to void*). array size determines STEP range
+#define DRAW_ANIMATION_LEFT(STEP, VL)                                             \
     Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f;                                   \
     Moveto_d(MOVING_OBJECT_Y1_LUT[the_game.stage][me->ttl],MOVING_OBJECT_XL_LUT[the_game.stage][me->ttl]); \
     Moveto_d(MOVING_OBJECT_Y2_LUT[the_game.stage][me->ttl],0);              \
     dp_VIA_t1_cnt_lo = MOVING_OBJECT_SC_LUT[the_game.stage][me->ttl];       \
-    Draw_VLp((struct packet_t *) vl_ability[(unsigned long) me->model]);
-#define DRAW_ABILITY_RIGHT(STEP)                                            \
+    Draw_VLp((struct packet_t *) VL[(unsigned long) me->model]);
+    
+/// @param STEP the animation step (in the given range specified by VL)
+/// @param VL indexed array holding different struct packet_ts (casted to void*). array size determines STEP range
+#define DRAW_ANIMATION_RIGHT(STEP, VL)                                            \
     Reset0Ref(); dp_VIA_t1_cnt_lo = 0x7f;                                   \
     Moveto_d(MOVING_OBJECT_Y1_LUT[the_game.stage][me->ttl],MOVING_OBJECT_XR_LUT[the_game.stage][me->ttl]); \
     Moveto_d(MOVING_OBJECT_Y2_LUT[the_game.stage][me->ttl],0);              \
     dp_VIA_t1_cnt_lo = MOVING_OBJECT_SC_LUT[the_game.stage][me->ttl];       \
-    Draw_VLp((struct packet_t *) vl_ability[(unsigned long) me->model]);
+    Draw_VLp((struct packet_t *) VL[(unsigned long) me->model]);
 
 
 //fw decl:
@@ -76,57 +84,190 @@ void (* const MOVING_OBJECT_ABILITY_TICK_FNC_LUT[3]) (moving_object_t * me) =
 
 void _object_tick_ability_mid(moving_object_t * me)
 {
-    DRAW_ABILITY_MID(0);
+    /// draw
+    DRAW_ANIMATION_MID(0, vl_ability);
     DESPAWN_CHECK(me);
-    unsigned long next = (unsigned long) me->model;
-    if(--next == 0)
+    
+    /// animate
+    if(--(me->cnt) == 0)
     {
-        me->model = (void *) 3;
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 3;
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
     }
-    else
-    {
-        me->model = (void *) next;
-    }
+
+    /// done
     return;
 }
 
 void _object_tick_ability_left(moving_object_t * me)
 {
-    DRAW_ABILITY_LEFT(0);
+    /// draw
+    DRAW_ANIMATION_LEFT(0, vl_ability);
     DESPAWN_CHECK(me);
-    unsigned long next = (unsigned long) me->model;
-    if(--next == 0)
+    
+    /// animate
+    if(--(me->cnt) == 0)
     {
-        me->model = (void *) 3;
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 3;
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
     }
-    else
-    {
-        me->model = (void *) next;
-    }
+
+    /// done
     return;
 }
 
 void _object_tick_ability_right(moving_object_t * me)
 {
-    DRAW_ABILITY_RIGHT(0);
+    /// draw
+    DRAW_ANIMATION_RIGHT(0, vl_ability);
     DESPAWN_CHECK(me);
-    unsigned long next = (unsigned long) me->model;
-    if(--next == 0)
+    
+    /// animate
+    if(--(me->cnt) == 0)
     {
-        me->model = (void *) 3;
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 3;
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
     }
-    else
+
+    /// done
+    return;
+}
+
+// 3) ---------------------------------------------------------------------
+
+
+//fw decl:
+void _object_tick_exploded_mid(moving_object_t * me);
+void _object_tick_exploded_left(moving_object_t * me);
+void _object_tick_exploded_right(moving_object_t * me);
+
+/// public interface
+void (* const MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[3]) (moving_object_t * me) =
+{
+    _object_tick_exploded_left,
+    _object_tick_exploded_mid,
+    _object_tick_exploded_right
+};
+
+void _object_tick_exploded_mid(moving_object_t * me)
+{
+    /// draw
+    DRAW_ANIMATION_MID(0, vl_exploded);
+    DESPAWN_CHECK(me);
+    
+    /// animate
+    if(--(me->cnt) == 0)
     {
-        me->model = (void *) next;
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 2; //< 3 step animation
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
     }
+
+    /// done
+    return;
+}
+
+void _object_tick_exploded_left(moving_object_t * me)
+{
+    /// draw
+    DRAW_ANIMATION_LEFT(0, vl_exploded);
+    DESPAWN_CHECK(me);
+    
+    /// animate
+    if(--(me->cnt) == 0)
+    {
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 2; //< 3 step animation
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
+    }
+
+    /// done
+    return;
+}
+
+void _object_tick_exploded_right(moving_object_t * me)
+{
+    /// draw
+    DRAW_ANIMATION_RIGHT(0, vl_exploded);
+    DESPAWN_CHECK(me);
+    
+    /// animate
+    if(--(me->cnt) == 0)
+    {
+        /// reset counter
+        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+
+        /// chose next vl
+        unsigned long next = (unsigned long) me->model;
+        if(--next == 0)
+        {
+            me->model = (void *) 2; //< 3 step animation
+        }
+        else
+        {
+            me->model = (void *) next;
+        }
+    }
+
+    /// done
     return;
 }
 
 
-
-
-
-// 3) ---------------------------------------------------------------------
+// 4) ---------------------------------------------------------------------
 
 #define DECODE_VAR(STAGE, VAR_TYPE) _ST##STAGE##_##VAR_TYPE##_LUT
 

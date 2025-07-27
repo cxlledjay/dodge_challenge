@@ -8,13 +8,14 @@
 // 3) "enemy" truck
 // 4) "enemy" motorcycle
 // 5) fuel can
-// 6) ability
+// 6) ability (animated)
+// 7) explosion (animated)
 // ***************************************************************************
 #pragma once
 #include "utils/vector.h"
 
 // ***************************************************************************
-// enemy models
+// enemy models (1-4)
 // ***************************************************************************
 
 
@@ -27,7 +28,7 @@ extern const struct packet_t vl_enemy_car1[];
 
 
 // ***************************************************************************
-// collectables
+// fuel can (5)
 // ***************************************************************************
 
 
@@ -35,5 +36,15 @@ extern const struct packet_t vl_enemy_car1[];
 extern const struct packet_t vl_object_fuelcan[];
 
 
+
+
+// ***************************************************************************
+// animations (6-7)
+// ***************************************************************************
+
+
 /// @brief spawning ability (4 step animation)
 extern const void* const vl_ability[4];
+
+/// @brief spawning ability (3 step animation)
+extern const void* const vl_exploded[3];

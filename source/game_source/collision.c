@@ -156,6 +156,7 @@ void aabb_calculate_right(void)
 #include "lib/print/print.h"
 #include "game_include/sounds/s_animation.h"
 #include "game_include/fuel.h"
+#include "game_include/random.h"
 
 void aabb_check_collision(void)
 {
@@ -290,8 +291,22 @@ void aabb_check_collision(void)
                         break;
                     case MOT_ABILITY:
                         /// TODO: ability logic
+
+                        /// only pick up ability if player has none
+                        if(the_player.ability == AC_NONE)
+                        {
+                            /// select random ability
+                            the_player.ability = rand(&random_obj) >> 7;
+
+                            /// display ability
+                            the_ability_manager.draw_gui = ABILITY_DRAW_GUI_FNC[the_player.ability];
+                        }
+
+                        /// done
                         break;
-                        
+                    case MOT_EXPLODED:
+                        /// drive trough explosion
+                        break;    
                     case MOT_ENEMY_CAR1:
                     case MOT_ENEMY_CAR2:
                     case MOT_ENEMY_TRUCK:
@@ -299,7 +314,9 @@ void aabb_check_collision(void)
                     case MOT_NULL:
                     default:
                         /// we hit an enemy
+
                         /// TODO: tell the game over screen, why it was over (here, reason = hit object)
+                        
                         the_game.execute_state = game_over; //< back to game over screen
                 }
             }

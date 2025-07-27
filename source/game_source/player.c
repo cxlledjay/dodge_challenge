@@ -66,7 +66,7 @@ void player_init(void)
 		.queued_lane_change = 0,
 		.cnt = 0,
 		.fuel = 100,
-		.ability = AB_NONE,
+		.ability = AC_NONE,
 		.tick = player_draw};
 	the_player = fresh_player;
 }

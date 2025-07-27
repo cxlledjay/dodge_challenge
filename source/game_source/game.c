@@ -538,14 +538,19 @@ void game_run(void)
     /// draw the map (the road)
     the_map.tick();
 
-    /// draw fuel bar TODO: and current ability
+    /// draw gui
     fuel_bar_tick();
+    the_ability_manager.draw_gui();
 
     /// draw the player & check collisions etc.
     the_player.tick();
 
     /// draw new position of objects
     object_manager_tick_all();
+
+    /// tick currently active abilities
+    the_ability_manager.tick1();
+    the_ability_manager.tick2();
 
     /// spawn new enemies
     object_manager_tick_spawn();
