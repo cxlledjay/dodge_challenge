@@ -602,7 +602,6 @@ void game_run(void)
     /// tick currently active abilities
     the_ability_manager.used[0].tick(&the_ability_manager.used[0]);
     the_ability_manager.used[1].tick(&the_ability_manager.used[1]);
-    print_unsigned_int(0,0,the_ability_manager.used[0].cnt);
 
     /// spawn new enemies
     object_manager_tick_spawn();

@@ -152,7 +152,7 @@ void aabb_calculate_right(void)
  * actual collision check function (axis aligned bounding box check)
  *********************************************************************/
 
-#define DEBUG
+/* #define DEBUG */
 #include "lib/print/print.h"
 #include "game_include/sounds/s_animation.h"
 #include "game_include/fuel.h"

@@ -109,7 +109,7 @@ const spawn_entry_t _SP_alpha_4[] =
  * testing purposes
  ************************************************************/
 
-#define DEBUG
+/* #define DEBUG */
 
 #ifdef DEBUG
 const spawn_entry_t _SP_DEBUG_ONLY[] =
