@@ -228,7 +228,7 @@ void start_menu(void) {
 /****************************************************************
  * trigger ability use from player input
  ****************************************************************/
-
+#include "game_include/gen_data/gen_object_path.h"
 /// @brief start ability usage
 static inline __attribute__((always_inline)) void ability_use (void)
 {
@@ -238,13 +238,19 @@ static inline __attribute__((always_inline)) void ability_use (void)
         case AC_MISSILE:
 
             /// TODO: shoot missle (from player x coords, w/ lane model)
-            if(the_ability_manager.tick1 != ability_idle)
+            if(the_ability_manager.used[0].tick == ability_idle)
             {
                 /// first ability "thread" is free
+                the_ability_manager.used[0].cnt = ABILITY_MISSILE_MAX_CNT;
+                calc_path_factor(&the_ability_manager.used[0], the_player.x);
+                the_ability_manager.used[0].tick = ABILITY_TICK_FNC[AC_MISSILE][the_player.lane];
             }
             else
             {
                 /// use second "thread"
+                the_ability_manager.used[1].cnt = ABILITY_MISSILE_MAX_CNT;
+                calc_path_factor(&the_ability_manager.used[1], the_player.x);
+                the_ability_manager.used[1].tick = ABILITY_TICK_FNC[AC_MISSILE][the_player.lane];
             }
 
             /// remove ability
@@ -594,8 +600,9 @@ void game_run(void)
     object_manager_tick_all();
 
     /// tick currently active abilities
-    the_ability_manager.tick1();
-    the_ability_manager.tick2();
+    the_ability_manager.used[0].tick(&the_ability_manager.used[0]);
+    the_ability_manager.used[1].tick(&the_ability_manager.used[1]);
+    print_unsigned_int(0,0,the_ability_manager.used[0].cnt);
 
     /// spawn new enemies
     object_manager_tick_spawn();

@@ -178,3 +178,10 @@ const unsigned int * const 		MOVING_OBJECT_SC_LUT[STAGE_T_SIZE] =
 	_ST10_SC_LUT
 };
 
+
+
+/// --------------------< missile ability    i n t e r f a c e >--------------------
+
+
+const int 				ABILITY_MISSILE_YY_LUT[ABILITY_MISSILE_MAX_CNT] = {32, 31, 31, 29, 28, 26, 23, 20, 17, 13, 8, 4, -1, -6, -13, -19, -26, -34, -42, -51, -60, -69, -79, -89, -100};
+const unsigned int 		ABILITY_MISSILE_SC_LUT[ABILITY_MISSILE_MAX_CNT] = {2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 8, 10, 11, 12, 13, 14, 16, 17, 19, 21, 22, 24};

@@ -10,6 +10,7 @@
 // 5) fuel can
 // 6) extralife + abilities (only missile so far)
 // 7) explosion (animated)
+// 8) fired missiles
 // ***************************************************************************
 #pragma once
 #include "utils/vector.h"
@@ -65,3 +66,16 @@ extern const struct packet_t vl_ac_missile[];
 
 /// @brief spawning ability (3 step animation)
 extern const void* const vl_exploded[3];
+
+
+
+// ***************************************************************************
+// fired missiles (8)
+// ***************************************************************************
+
+/// @brief fired missiles left
+extern const struct packet_t vl_fired_missile_left[];
+/// @brief fired missiles mid
+extern const struct packet_t vl_fired_missile_mid[];
+/// @brief fired missiles right
+extern const struct packet_t vl_fired_missile_right[];

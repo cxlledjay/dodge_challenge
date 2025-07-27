@@ -291,3 +291,55 @@ const void* const vl_exploded[3] =
     _temp,
     _temp
 };
+
+
+
+// ***************************************************************************
+// fired missiles (8)
+// ***************************************************************************
+
+/// @brief fired missiles
+const struct packet_t vl_fired_missile_mid[] =
+{
+    /// left missile
+    {MOVE, {0,-63}},
+    {DRAW, {126,21}},
+
+    /// right missile
+    {MOVE, {0,84}},
+    {DRAW, {-126,21}},
+
+    /// done
+    VL_END
+};
+
+
+/// @brief fired missiles left
+const struct packet_t vl_fired_missile_left[] =
+{
+    /// left missile
+    {MOVE, {0,-68}},
+    {DRAW, {126,53}},
+
+    /// right missile
+    {MOVE, {0,84}},
+    {DRAW, {-126,-39}},
+
+    /// done
+    VL_END
+};
+
+/// @brief fired missiles right
+const struct packet_t vl_fired_missile_right[] =
+{
+    /// left missile
+    {MOVE, {0,68}},
+    {DRAW, {126,-53}},
+
+    /// right missile
+    {MOVE, {0,-84}},
+    {DRAW, {-126,39}},
+
+    /// done
+    VL_END
+};

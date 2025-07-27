@@ -186,6 +186,12 @@ def generate_header():
         for string in arr_arr:
             file.write(f"extern const int * const \t\t\tMOVING_OBJECT_{string}_LUT[STAGE_T_SIZE];\n")
         file.write(f"extern const unsigned int * const \tMOVING_OBJECT_SC_LUT[STAGE_T_SIZE];\n")
+        
+        file.write("\n\n/// --------------------< missile ability    i n t e r f a c e >--------------------\n")
+        file.write("#define ABILITY_MISSILE_MAX_CNT\t\t(25u)\n\n")
+        arr_arr = ["YY","XL","XR"]
+        file.write(f"extern const int \t\t\tABILITY_MISSILE_YY_LUT[ABILITY_MISSILE_MAX_CNT];\n")
+        file.write(f"extern const unsigned int \tABILITY_MISSILE_SC_LUT[ABILITY_MISSILE_MAX_CNT];\n")
 
     # generate hitboxes (for each object type), depending on scaling factor
     with open('../../source/game_include/gen_data/gen_object_hitbox.h', 'w') as file:
@@ -253,6 +259,43 @@ def generate_source():
             else:
                 file.write("\n")
         file.write("};\n\n")
+
+        file.write("\n\n/// --------------------< missile ability    i n t e r f a c e >--------------------\n\n")
+        
+        # generate paths
+        frames = 25
+
+        y_arr = []
+        for x in range (frames):
+            a = (112+32) / (-frames * frames)
+            num = a * (x+frames) * (x-frames) - 112 # quadratic function
+            num_rounded = int(num)
+            y_arr.append(num_rounded)
+            
+
+        # resulting scaling
+        sc_arr = []
+        for y in y_arr:
+            sc = -0.165 * y + 8 # linear function
+            sc_rounded = int(sc)
+            sc_arr.append(sc_rounded)
+
+
+
+        # write to file
+        def print_list_alt(list):
+            for i in range(frames):
+                file.write(str(list[i]))
+                if i < frames-1:
+                    file.write(", ")
+                else:
+                    file.write("};\n")
+
+        file.write("\n")
+        file.write("const int \t\t\t\tABILITY_MISSILE_YY_LUT[ABILITY_MISSILE_MAX_CNT] = {")
+        print_list_alt(y_arr)
+        file.write("const unsigned int \t\tABILITY_MISSILE_SC_LUT[ABILITY_MISSILE_MAX_CNT] = {")
+        print_list_alt(sc_arr)
 
         
     # generate hitboxes (for each object type), depending on scaling factor

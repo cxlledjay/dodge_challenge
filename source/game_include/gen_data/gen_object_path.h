@@ -141,3 +141,10 @@ extern const int * const 			MOVING_OBJECT_Y2_LUT[STAGE_T_SIZE];
 extern const int * const 			MOVING_OBJECT_XL_LUT[STAGE_T_SIZE];
 extern const int * const 			MOVING_OBJECT_XR_LUT[STAGE_T_SIZE];
 extern const unsigned int * const 	MOVING_OBJECT_SC_LUT[STAGE_T_SIZE];
+
+
+/// --------------------< missile ability    i n t e r f a c e >--------------------
+#define ABILITY_MISSILE_MAX_CNT		(25u)
+
+extern const int 			ABILITY_MISSILE_YY_LUT[ABILITY_MISSILE_MAX_CNT];
+extern const unsigned int 	ABILITY_MISSILE_SC_LUT[ABILITY_MISSILE_MAX_CNT];
