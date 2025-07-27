@@ -259,9 +259,11 @@ void aabb_check_collision(void)
                     axis--; //< hit
                 }
             }
-            
+
+            #ifdef DEBUG
             print_signed_int((int)i*12 +10, -120, player_aabbs.car.x_left);
             print_signed_int((int)i*12 +10, -80, bb_xright);
+            #endif
 
             /// if we touch an object on all axis (2 axis - 2 hit per axis = 0) => hit
             if(axis == 0)
@@ -270,6 +272,7 @@ void aabb_check_collision(void)
                 switch(obj->type)
                 {
                     case MOT_FUELCAN:
+
                         /// refill player fuel
                         if( the_player.fuel + FUEL_CAN_REFILL_AMOUNT > 100)
                         {
@@ -289,30 +292,49 @@ void aabb_check_collision(void)
 
                         /// done
                         break;
-                    case MOT_ABILITY:
-                        /// TODO: ability logic
+
+                    case MOT_ABILITY_EXTRALIFE:
 
                         /// only pick up ability if player has none
-                        if(the_player.ability == AC_NONE)
+                        if(the_player.has_extralife == 0)
                         {
-                            /// select random ability
-                            the_player.ability = rand(&random_obj) >> 7;
+                            /// set extralife for player
+                            the_player.has_extralife = 1;
 
-                            /// display ability
-                            the_ability_manager.draw_gui = ABILITY_DRAW_GUI_FNC[the_player.ability];
+                            /// despawn ability object
+                            obj->tick = idle;
                         }
 
                         /// done
                         break;
+
+                    case MOT_ABILITY_MISSILE:
+
+                        /// only pick up ability if player has none
+                        if(the_player.ability == AC_NONE)
+                        {
+                            /// set ability for player
+                            the_player.ability = AC_MISSILE;
+
+                            /// despawn ability object
+                            obj->tick = idle;
+                        }
+
+                        /// done
+                        break;
+
                     case MOT_EXPLODED:
+
                         /// drive trough explosion
-                        break;    
+                        break;
+
                     case MOT_ENEMY_CAR1:
                     case MOT_ENEMY_CAR2:
                     case MOT_ENEMY_TRUCK:
                     case MOT_ENEMY_BIKE:
                     case MOT_NULL:
                     default:
+
                         /// we hit an enemy
 
                         /// TODO: tell the game over screen, why it was over (here, reason = hit object)

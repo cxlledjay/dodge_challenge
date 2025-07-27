@@ -11,6 +11,8 @@ game_t the_game;
 #include "game_include/player.h"
 #include "game_include/object_manager.h"
 #include "game_include/collision.h"
+#include "game_include/ability.h"
+#include "game_include/fuel.h"
 #include "utils/controller.h"
 
 //fw declarations:
@@ -72,6 +74,7 @@ void game_init(void)
     map_init();
     player_init();
     fuel_bar_init();
+    ability_init();
     collision_init();
 
     /// score reset
@@ -218,6 +221,50 @@ void start_menu(void) {
 }
 
 
+
+
+/****************************************************************
+ * trigger ability use from player input
+ ****************************************************************/
+
+/// @brief start ability usage
+static inline __attribute__((always_inline)) void ability_use (void)
+{
+    /// usage code depends on ability type
+    switch (the_player.ability)
+    {
+        case AC_MISSILE:
+            /// TODO: shoot missle (from player x coords, w/ lane model)
+            if(the_ability_manager.tick1 != ability_idle)
+            {
+                /// first ability "thread" is free
+            }
+            else
+            {
+                /// use second "thread"
+            }
+
+            /// remove ability
+            the_player.ability = AC_NONE;
+
+            /// done
+            break;
+
+        case AC_EXTRALIFE:
+            /// cannot "use" extralife... it is passive
+        case AC_NONE:
+            /// cannot use anything...
+        default:
+            /// should not happen...
+            /// => do nothing
+            ;
+    }
+
+    /// done
+    return;
+}
+
+
 /*****************************************************************************
  * input methods (chosen by start menu)
  ****************************************************************************/
@@ -241,8 +288,8 @@ void input_1_4 (void)
     /** ability */
     if(input & 0b00000110)
     {
-        /// TODO: trigger ability code
-        ;
+        /// trigger ability code
+        ability_use();
     }
 
     /** movment input */
@@ -319,8 +366,8 @@ void input_2_3 (void)
     /** ability */
     if(input & 0b00001001)
     {
-        /// TODO: trigger ability code
-        ;
+        /// trigger ability code
+        ability_use();
     }
 
     /** movment input */
@@ -399,8 +446,8 @@ void input_analog (void)
     /** ability */
     if(input & 0b00001111)
     {
-        /// TODO: trigger ability code
-        ;
+        /// trigger ability code
+        ability_use();
     }
 
     /** movement */
@@ -540,7 +587,7 @@ void game_run(void)
 
     /// draw gui
     fuel_bar_tick();
-    the_ability_manager.draw_gui();
+    ability_draw_gui();
 
     /// draw the player & check collisions etc.
     the_player.tick();

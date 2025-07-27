@@ -51,8 +51,8 @@ void fuel_bar_tick (void)
     /// TODO: add fuel icon
 
     /// draw actual fuel bar
-	dp_VIA_t1_cnt_lo = 0x7f;
-	Moveto_d(116, -110);
+    dp_VIA_t1_cnt_lo = 100;
+    Moveto_d(127, -127);
 	dp_VIA_t1_cnt_lo = the_player.fuel;
 	Draw_Line_d(0,127);
 	dp_VIA_t1_cnt_lo = 0x6;

@@ -267,7 +267,16 @@ def generate_source():
         file.write(" *******************************************************************************************************/\n\n\n")
 
         global max_sc_possible
-        enemy_hitbox_sc_xh_factors = [1.4, 0, 0, 0, 1, 0]
+        enemy_hitbox_sc_xh_factors = [1.4, 0, 0, 0, 1, 1.2, 1.2]
+        """ idx mapping
+        MOT_ENEMY_CAR1 = 0,
+        MOT_ENEMY_CAR2 = 1,
+        MOT_ENEMY_TRUCK = 2,
+        MOT_ENEMY_BIKE = 3,
+        MOT_FUELCAN = 4,
+        MOT_ABILITY_EXTRALIFE = 5,
+        MOT_ABILITY_MISSILE = 6
+        """
         file.write(f"const int \t\t\t\t MO_SC_TO_BB_X_HALFED[MOT_COUNT-1][{max_sc_possible}] = \n{{\n\t{{")
         
         cnt = len(enemy_hitbox_sc_xh_factors)
@@ -293,7 +302,16 @@ def generate_source():
 
 
 
-        enemy_hitbox_sc_y_factors = [0.85, 0, 0, 0, 1, 0]
+        enemy_hitbox_sc_y_factors = [0.85, 0, 0, 0, 1, 1, 1]
+        """ idx mapping
+        MOT_ENEMY_CAR1 = 0,
+        MOT_ENEMY_CAR2 = 1,
+        MOT_ENEMY_TRUCK = 2,
+        MOT_ENEMY_BIKE = 3,
+        MOT_FUELCAN = 4,
+        MOT_ABILITY_EXTRALIFE = 5,
+        MOT_ABILITY_MISSILE = 6
+        """
         file.write(f"const int \t\t\t\t  MO_SC_TO_BB_Y[MOT_COUNT-1][{max_sc_possible}] = \n{{\n\t{{")
         
         cnt = len(enemy_hitbox_sc_y_factors)

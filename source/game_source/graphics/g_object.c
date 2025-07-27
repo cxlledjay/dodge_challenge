@@ -53,10 +53,10 @@ const struct packet_t vl_enemy_car1[] =
     {DRAW, {0,-106}},
 
     /// lights
-    {MOVE, {40,-35}},
+    /* {MOVE, {40,-35}},
     {DRAW, {0,30}},
     {MOVE, {0,116}},
-    {DRAW, {0,30}},
+    {DRAW, {0,30}}, */
 
     /// done
     VL_END
@@ -97,12 +97,9 @@ const struct packet_t vl_object_fuelcan[] =
 
 
 
-
 // ***************************************************************************
-// animations (6-7)
+// abilities (6)
 // ***************************************************************************
-
-/// ------------------ ability animation -------------------------------------
 
 #define _VL_ABILITY_BASE    \
     {MOVE, {0,-15}},        \
@@ -113,58 +110,31 @@ const struct packet_t vl_object_fuelcan[] =
     {DRAW, {0,32}},         \
     {DRAW, {-51,-15}},
 
-const struct packet_t _vl_ability_step1[] =
-{
-    /// ability icon
+const struct packet_t _temp[] = {
     _VL_ABILITY_BASE
-
-    /// done
-	VL_END
+    VL_END
 };
 
-const struct packet_t _vl_ability_step2[] =
+
+/// @brief spawning ability
+const void* const vl_abilities[2] =
 {
-    /// ability icon
-    _VL_ABILITY_BASE
-
-    /// done
-	VL_END
-};
-
-const struct packet_t _vl_ability_step3[] =
-{
-    /// ability icon
-    _VL_ABILITY_BASE
-
-    /// done
-	VL_END
-};
-
-const struct packet_t _vl_ability_step4[] =
-{
-    /// ability icon
-    _VL_ABILITY_BASE
-
-    /// done
-	VL_END
+    _temp,
+    _temp
 };
 
 
 
-const void* const vl_ability[4] =
-{
-    _vl_ability_step1,
-    _vl_ability_step2,
-    _vl_ability_step3,
-    _vl_ability_step4
-};
+// ***************************************************************************
+// animations (7)
+// ***************************************************************************
 
 /// ------------------ explosion animation -------------------------------------
 
 
 const void* const vl_exploded[3] =
 {
-    _vl_ability_step1,
-    _vl_ability_step2,
-    _vl_ability_step3
+    _temp,
+    _temp,
+    _temp
 };

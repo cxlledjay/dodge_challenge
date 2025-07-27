@@ -17,5 +17,5 @@ extern const struct packet_t vl_gui_fuelcan[];
 // abilities
 // ***************************************************************************
 
-extern const struct packet_t vl_gui_ab_extralife[];
-extern const struct packet_t vl_gui_ab_missile[];
+
+extern const void* const vl_gui_ac[2];

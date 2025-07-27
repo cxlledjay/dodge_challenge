@@ -26,7 +26,7 @@ const struct packet_t vl_gui_fuelcan[] =
 // ***************************************************************************
 
 
-const struct packet_t vl_gui_ab_extralife[] =
+const struct packet_t vl_gui_ac_extralife[] =
 {
     /// plus
     {DRAW, {0,41}},
@@ -47,11 +47,8 @@ const struct packet_t vl_gui_ab_extralife[] =
 };
 
 
-const struct packet_t vl_gui_ab_missile[] =
+const struct packet_t vl_gui_ac_missile[] =
 {
-    /// match position with extralife
-    {MOVE, {0,97}},
-
     /// rocket body
     {DRAW, {125,125}},
     {DRAW, {0,41}},
@@ -72,4 +69,14 @@ const struct packet_t vl_gui_ab_missile[] =
 
     /// done
     VL_END
+};
+
+
+/// interface
+
+
+const void* const vl_gui_ac[2] =
+{
+    vl_gui_ac_extralife,
+    vl_gui_ac_missile
 };

@@ -8,6 +8,9 @@ typedef void (* object_tick_func) (struct _moving_object_t * me);
 /******************************************************************************************************
  * moving object parent class (all moving objects must derive from this object)
  ******************************************************************************************************/
+
+/// @brief different types of objects
+/// @attention leave the order untouched!!!
 typedef enum _moving_object_type_t
 {
     MOT_ENEMY_CAR1 = 0,
@@ -15,12 +18,13 @@ typedef enum _moving_object_type_t
     MOT_ENEMY_TRUCK = 2,
     MOT_ENEMY_BIKE = 3,
     MOT_FUELCAN = 4,
-    MOT_ABILITY = 5,
-    MOT_EXPLODED = 6,
-    MOT_NULL = 7,
+    MOT_ABILITY_EXTRALIFE = 5,
+    MOT_ABILITY_MISSILE = 6,
+    MOT_EXPLODED = 7,
+    MOT_NULL = 8
 }moving_object_type_t;
 
-#define MOT_COUNT           (7u) //< MOT_NULL not counted
+#define MOT_COUNT           (8u) //< MOT_NULL not counted
 
 
 
@@ -57,6 +61,5 @@ typedef struct _moving_object_t
  */
 void idle(__attribute__((unused)) moving_object_t* me);
 
-extern void (* const MOVING_OBJECT_ABILITY_TICK_FNC_LUT[3]) (moving_object_t * me);
 extern void (* const MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[3]) (moving_object_t * me);
 extern void (* const MOVING_OBJECT_TICK_FNC_LUT[STAGE_T_SIZE][3]) (moving_object_t * me);

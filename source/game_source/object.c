@@ -2,15 +2,15 @@
 #include <vectrex.h>
 #include "game_include/game.h"
 #include "game_include/gen_data/gen_object_path.h"
+#include "game_include/graphics/g_object.h"
 
 
 /**************************************************************************
  * tick functions:
  * 
  * 1) idle
- * 2) ability tick function (animated)
- * 3) exploded object tick function (animated)
- * 4) generic tick function (no animation)
+ * 2) exploded object tick function (animated)
+ * 3) generic tick function (no animation)
  **************************************************************************/
 
 
@@ -25,7 +25,7 @@ void idle(__attribute__((unused)) moving_object_t* me)
 
 // 2) ---------------------------------------------------------------------
 
-/// utils for animation ///
+/// utils for animation
 
 #define OBJECT_ANIMATION_FRAME_INTERVAL         (10u)
 
@@ -61,112 +61,6 @@ void idle(__attribute__((unused)) moving_object_t* me)
     dp_VIA_t1_cnt_lo = MOVING_OBJECT_SC_LUT[the_game.stage][me->ttl];       \
     Draw_VLp((struct packet_t *) VL[(unsigned long) me->model]);
 
-
-//fw decl:
-void _object_tick_ability_mid(moving_object_t * me);
-void _object_tick_ability_left(moving_object_t * me);
-void _object_tick_ability_right(moving_object_t * me);
-
-/// public interface
-void (* const MOVING_OBJECT_ABILITY_TICK_FNC_LUT[3]) (moving_object_t * me) =
-{
-    _object_tick_ability_left,
-    _object_tick_ability_mid,
-    _object_tick_ability_right
-};
-
-
-
-
-#include "game_include/graphics/g_object.h"
-#include "lib/print/print.h"
-
-
-void _object_tick_ability_mid(moving_object_t * me)
-{
-    /// draw
-    DRAW_ANIMATION_MID(0, vl_ability);
-    DESPAWN_CHECK(me);
-    
-    /// animate
-    if(--(me->cnt) == 0)
-    {
-        /// reset counter
-        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
-
-        /// chose next vl
-        unsigned long next = (unsigned long) me->model;
-        if(--next == 0)
-        {
-            me->model = (void *) 3;
-        }
-        else
-        {
-            me->model = (void *) next;
-        }
-    }
-
-    /// done
-    return;
-}
-
-void _object_tick_ability_left(moving_object_t * me)
-{
-    /// draw
-    DRAW_ANIMATION_LEFT(0, vl_ability);
-    DESPAWN_CHECK(me);
-    
-    /// animate
-    if(--(me->cnt) == 0)
-    {
-        /// reset counter
-        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
-
-        /// chose next vl
-        unsigned long next = (unsigned long) me->model;
-        if(--next == 0)
-        {
-            me->model = (void *) 3;
-        }
-        else
-        {
-            me->model = (void *) next;
-        }
-    }
-
-    /// done
-    return;
-}
-
-void _object_tick_ability_right(moving_object_t * me)
-{
-    /// draw
-    DRAW_ANIMATION_RIGHT(0, vl_ability);
-    DESPAWN_CHECK(me);
-    
-    /// animate
-    if(--(me->cnt) == 0)
-    {
-        /// reset counter
-        me->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
-
-        /// chose next vl
-        unsigned long next = (unsigned long) me->model;
-        if(--next == 0)
-        {
-            me->model = (void *) 3;
-        }
-        else
-        {
-            me->model = (void *) next;
-        }
-    }
-
-    /// done
-    return;
-}
-
-// 3) ---------------------------------------------------------------------
 
 
 //fw decl:

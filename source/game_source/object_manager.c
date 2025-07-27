@@ -98,7 +98,7 @@ static inline __attribute__((always_inline)) const spawn_entry_t * get_next_patt
 
 static inline __attribute__((always_inline)) unsigned int get_next_interval (void)
 {
-    return (rand(&random_obj) >> 3) + 24; //< range: 24-55
+    return (rand(&random_obj) >> 3) + 31; //< range: 31-63
 }
 
 
@@ -137,13 +137,14 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
         else if (--(the_object_manager.cnt_next_ability) == 0)
         {
             /// reset counter to random value
-            the_object_manager.cnt_next_ability = get_next_interval();
+            the_object_manager.cnt_next_ability = get_next_interval() << 1; //< abilities are twice as rare
 
             ///TODO: spawn ability
-            the_object_manager.queue_ptr->model = (void *) 4;
+            unsigned int ability_type = rand(&random_obj) >> 7; //< either extralife (0) or missiles (1)
+            the_object_manager.queue_ptr->type = ability_type + 5; //< translate AC to MOT
+            the_object_manager.queue_ptr->model = (void *) vl_abilities[ability_type];
             the_object_manager.queue_ptr->lane = lane;
-            the_object_manager.queue_ptr->type = MOT_ABILITY;
-            the_object_manager.queue_ptr->tick = MOVING_OBJECT_ABILITY_TICK_FNC_LUT[lane];
+            the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
             the_object_manager.queue_ptr->ttl = MOVING_OBJECT_TTL_LUT[the_game.stage];
         }
         /// continue with spawn pattern
