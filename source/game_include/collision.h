@@ -25,10 +25,14 @@ void collision_init(void);
  * interfaces for different player models
  *************************************************/
 
+/// @brief calculate player bounding box for midlane viewmodel 
 void aabb_calculate_mid(void);
+/// @brief calculate player bounding box for leftlane viewmodel 
 void aabb_calculate_left(void);
+/// @brief calculate player bounding box for rightlane viewmodel 
 void aabb_calculate_right(void);
 
+/// @brief only check player collision with moving object
 void aabb_check_collision(void);
 
 

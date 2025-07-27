@@ -133,8 +133,8 @@ void aabb_calculate_left(void)
 {
     player_aabbs.car.y_top = (AABB_CALC_Y_OFFSET + PLAYER_Y + 11);
     player_aabbs.car.y_bot = (AABB_CALC_Y_OFFSET + PLAYER_Y - 12);
-    player_aabbs.car.x_left = the_player.x + 24;
-    player_aabbs.car.x_right = the_player.x - 16;
+    player_aabbs.car.x_left = the_player.x - 16;
+    player_aabbs.car.x_right = the_player.x + 24;
 }
 
 
@@ -223,7 +223,7 @@ void aabb_check_collision(void)
             /// debug section
             #ifdef DEBUG
             /* print_signed_int((int)i*12 +10, -120, y); */
-            print_unsigned_int((int)i*12 +10, -120, sc);
+            /* print_unsigned_int((int)i*12 +10, -120, sc); */
             aabb_draw_object(obj, x, y, bb_xh, bb_y);
             #endif
 
@@ -258,6 +258,9 @@ void aabb_check_collision(void)
                     axis--; //< hit
                 }
             }
+            
+            print_signed_int((int)i*12 +10, -120, player_aabbs.car.x_left);
+            print_signed_int((int)i*12 +10, -80, bb_xright);
 
             /// if we touch an object on all axis (2 axis - 2 hit per axis = 0) => hit
             if(axis == 0)
