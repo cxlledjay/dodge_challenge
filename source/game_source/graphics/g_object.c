@@ -53,10 +53,10 @@ const struct packet_t vl_enemy_car1[] =
     {DRAW, {0,-106}},
 
     /// lights
-    /* {MOVE, {40,-35}},
+    {MOVE, {40,-35}},
     {DRAW, {0,30}},
     {MOVE, {0,116}},
-    {DRAW, {0,30}}, */
+    {DRAW, {0,30}},
 
     /// done
     VL_END

@@ -9,12 +9,12 @@
 
 typedef enum _ability_class_t
 {
-    AC_EXTRALIFE = 0,
-    AC_MISSILE = 1,
-    AC_NONE = 2
+    AC_MISSILE = 0,
+    // could add more here...
+    AC_NONE
 }ability_class_t;
 
-#define ABILITY_COUNT           (2u) //< AC_NONE not counted
+#define ABILITY_COUNT           (1u) //< AC_NONE not counted
 
 
 typedef struct _ability_manager_t {

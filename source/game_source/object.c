@@ -92,10 +92,12 @@ void _object_tick_exploded_mid(moving_object_t * me)
         unsigned long next = (unsigned long) me->model;
         if(--next == 0)
         {
-            me->model = (void *) 2; //< 3 step animation
+            /// animation is over
+            me->tick = idle;
         }
         else
         {
+            /// next animation model
             me->model = (void *) next;
         }
     }
@@ -120,10 +122,12 @@ void _object_tick_exploded_left(moving_object_t * me)
         unsigned long next = (unsigned long) me->model;
         if(--next == 0)
         {
-            me->model = (void *) 2; //< 3 step animation
+            /// animation is over
+            me->tick = idle;
         }
         else
         {
+            /// next animation model
             me->model = (void *) next;
         }
     }
@@ -148,10 +152,12 @@ void _object_tick_exploded_right(moving_object_t * me)
         unsigned long next = (unsigned long) me->model;
         if(--next == 0)
         {
-            me->model = (void *) 2; //< 3 step animation
+            /// animation is over
+            me->tick = idle;
         }
         else
         {
+            /// next animation model
             me->model = (void *) next;
         }
     }

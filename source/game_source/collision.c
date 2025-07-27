@@ -337,9 +337,24 @@ void aabb_check_collision(void)
 
                         /// we hit an enemy
 
-                        /// TODO: tell the game over screen, why it was over (here, reason = hit object)
-                        
-                        the_game.execute_state = game_over; //< back to game over screen
+                        if(the_player.has_extralife)
+                        {
+                            /// second chance for player
+                            the_player.has_extralife = 0;
+
+                            /// enable player to drive trough enemy
+                            obj->type = MOT_EXPLODED;
+                            obj->model = (void *) 2; //< init 3 step explosion
+                            obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
+
+                            /// TODO: play sound
+                        }
+                        else
+                        {
+                            /// TODO: tell the game over screen, why it was over (here, reason = hit object)
+                            
+                            the_game.execute_state = game_over; //< back to game over screen
+                        }
                 }
             }
         }

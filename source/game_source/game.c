@@ -234,6 +234,7 @@ static inline __attribute__((always_inline)) void ability_use (void)
     switch (the_player.ability)
     {
         case AC_MISSILE:
+
             /// TODO: shoot missle (from player x coords, w/ lane model)
             if(the_ability_manager.tick1 != ability_idle)
             {
@@ -250,13 +251,8 @@ static inline __attribute__((always_inline)) void ability_use (void)
             /// done
             break;
 
-        case AC_EXTRALIFE:
-            /// cannot "use" extralife... it is passive
         case AC_NONE:
-            /// cannot use anything...
         default:
-            /// should not happen...
-            /// => do nothing
             ;
     }
 

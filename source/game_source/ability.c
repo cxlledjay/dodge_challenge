@@ -22,11 +22,6 @@ void (* const ABILITY_TICK_FNC[ABILITY_COUNT][3]) (void) =
         ability_idle,
         ability_idle,
         ability_idle
-    },
-    {
-        ability_idle,
-        ability_idle,
-        ability_idle
     }
 };
 
@@ -64,7 +59,7 @@ void ability_draw_gui (void)
         dp_VIA_t1_cnt_lo = 100;
         Moveto_d(127, 106);
         dp_VIA_t1_cnt_lo = 6;
-        Draw_VLp((struct packet_t *) vl_gui_ac[AC_EXTRALIFE]);
+        Draw_VLp(&vl_gui_extralife);
         extralife_drawn = 1;
     }
     
@@ -85,14 +80,12 @@ void ability_draw_gui (void)
             {
                 Reset0Ref();
                 dp_VIA_t1_cnt_lo = 100;
-                Moveto_d(124, -120);
+                Moveto_d(127, 106);
                 dp_VIA_t1_cnt_lo = 6;
             }
             Draw_VLp((struct packet_t *) vl_gui_ac[the_player.ability]);
             break;
 
-        case AC_EXTRALIFE:
-            /// impossible
         case AC_NONE:
             /// well just do nothing
         default:
