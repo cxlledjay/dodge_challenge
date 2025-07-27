@@ -41,7 +41,7 @@ void game_start(void)
         .score = 0,
         .stage = 0,
         .cnt = 0,
-        .process_input = input_1_4,
+        .process_input = input_analog,
         .execute_state = start_menu
     };
 
@@ -184,6 +184,7 @@ void start_menu(void) {
 
     if(input & 0b00000010) //< BUTTON 2
     {
+        /// cycle mode
         if(the_game.options.game_mode == GAME_MODE_HARD) {
             the_game.options.game_mode = GAME_MODE_EASY;
         } else {
@@ -193,6 +194,7 @@ void start_menu(void) {
 
     if(input & 0b00000001) //< BUTTON 1
     {
+        /// cycle input method
         if(the_game.options.input_method == INPUT_METHOD_ANALOG) {
             the_game.options.input_method = INPUT_METHOD_1_4;
         } else {

@@ -18,4 +18,5 @@ extern const struct packet_t vl_gui_fuelcan[];
 // ***************************************************************************
 
 extern const struct packet_t vl_gui_extralife[];
+
 extern const void* const vl_gui_ac[1];

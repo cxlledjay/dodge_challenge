@@ -98,8 +98,13 @@ const struct packet_t vl_object_fuelcan[] =
 
 
 // ***************************************************************************
-// abilities (6)
+// extralife + abilities (6)
 // ***************************************************************************
+
+
+
+
+
 
 #define _VL_ABILITY_BASE    \
     {MOVE, {0,-15}},        \
@@ -110,6 +115,12 @@ const struct packet_t vl_object_fuelcan[] =
     {DRAW, {0,32}},         \
     {DRAW, {-51,-15}},
 
+    
+const struct packet_t vl_extralife[] = {
+    _VL_ABILITY_BASE
+    VL_END
+};
+
 const struct packet_t _temp[] = {
     _VL_ABILITY_BASE
     VL_END
@@ -117,9 +128,8 @@ const struct packet_t _temp[] = {
 
 
 /// @brief spawning ability
-const void* const vl_abilities[2] =
+const void* const vl_abilities[1] =
 {
-    _temp,
     _temp
 };
 

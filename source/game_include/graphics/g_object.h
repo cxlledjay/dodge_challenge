@@ -8,7 +8,7 @@
 // 3) "enemy" truck
 // 4) "enemy" motorcycle
 // 5) fuel can
-// 6) abilities (extralife, missile)
+// 6) extralife + abilities (only missile so far)
 // 7) explosion (animated)
 // ***************************************************************************
 #pragma once
@@ -39,12 +39,14 @@ extern const struct packet_t vl_object_fuelcan[];
 
 
 // ***************************************************************************
-// abilities (6)
+// extralife + abilities (6)
 // ***************************************************************************
 
+/// @brief spawning extralife object
+extern const struct packet_t vl_extralife[];
 
-/// @brief spawning ability
-extern const void* const vl_abilities[2];
+/// @brief spawning ability objects
+extern const void* const vl_abilities[1];
 
 
 

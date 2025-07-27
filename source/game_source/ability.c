@@ -48,9 +48,6 @@ void ability_init(void)
 
 void ability_draw_gui (void)
 {
-    /// "dynamic" ability showcase
-    unsigned int extralife_drawn = 0;
-
     /// draw extralife if available
     if(the_player.has_extralife)
     {
@@ -60,7 +57,6 @@ void ability_draw_gui (void)
         Moveto_d(127, 106);
         dp_VIA_t1_cnt_lo = 6;
         Draw_VLp(&vl_gui_extralife);
-        extralife_drawn = 1;
     }
     
     /// then draw ability, relative to extralife (css flexbox principle
@@ -70,19 +66,18 @@ void ability_draw_gui (void)
         // case AC_...:
 
             /// draw ability
-            if(extralife_drawn)
+            if(the_player.has_extralife)
             {
                 dp_VIA_t1_cnt_lo = 20;
                 Moveto_d(-15, -128);
-                dp_VIA_t1_cnt_lo = 6;
             }
             else
             {
                 Reset0Ref();
                 dp_VIA_t1_cnt_lo = 100;
                 Moveto_d(127, 106);
-                dp_VIA_t1_cnt_lo = 6;
             }
+            dp_VIA_t1_cnt_lo = 6;
             Draw_VLp((struct packet_t *) vl_gui_ac[the_player.ability]);
             break;
 

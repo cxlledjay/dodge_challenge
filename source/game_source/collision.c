@@ -166,6 +166,7 @@ void aabb_check_collision(void)
 
     moving_object_t* obj;
     volatile unsigned int axis; //< axis counter for hit detection (volatile, because the compiler optimization breaks it (idk why))
+
     /// loop over all objects
     for(unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
     {
@@ -221,8 +222,8 @@ void aabb_check_collision(void)
             int bb_xleft    = x-bb_xh;
             int bb_xright   = x+bb_xh;
             
-            /// debug section
             #ifdef DEBUG
+            /// debug section
             /* print_signed_int((int)i*12 +10, -120, y); */
             /* print_unsigned_int((int)i*12 +10, -120, sc); */
             aabb_draw_object(obj, x, y, bb_xh, bb_y);
@@ -268,7 +269,7 @@ void aabb_check_collision(void)
             /// if we touch an object on all axis (2 axis - 2 hit per axis = 0) => hit
             if(axis == 0)
             {
-                /// check the type of object we hit -> ability / enemy / fuel tank / ... ? (TODO: implement)
+                /// check the type of object we hit -> ability / enemy / fuel tank / ... ?
                 switch(obj->type)
                 {
                     case MOT_FUELCAN:
@@ -293,9 +294,9 @@ void aabb_check_collision(void)
                         /// done
                         break;
 
-                    case MOT_ABILITY_EXTRALIFE:
+                    case MOT_EXTRALIFE:
 
-                        /// only pick up ability if player has none
+                        /// only equipable if player has none
                         if(the_player.has_extralife == 0)
                         {
                             /// set extralife for player
@@ -340,11 +341,13 @@ void aabb_check_collision(void)
                         if(the_player.has_extralife)
                         {
                             /// second chance for player
+
+                            /// no more extralife
                             the_player.has_extralife = 0;
 
-                            /// enable player to drive trough enemy
+                            /// enable player to drive trough hit object (MOT_EXPLODED has no hitbox)
                             obj->type = MOT_EXPLODED;
-                            obj->model = (void *) 2; //< init 3 step explosion
+                            obj->model = (void *) 2; //< init 3 step explosion (a bit hacky...)
                             obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
 
                             /// TODO: play sound

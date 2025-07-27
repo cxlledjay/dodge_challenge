@@ -18,7 +18,7 @@ typedef enum _moving_object_type_t
     MOT_ENEMY_TRUCK = 2,
     MOT_ENEMY_BIKE = 3,
     MOT_FUELCAN = 4,
-    MOT_ABILITY_EXTRALIFE = 5,
+    MOT_EXTRALIFE = 5,
     MOT_ABILITY_MISSILE = 6,
     MOT_EXPLODED = 7,
     MOT_NULL = 8
@@ -38,7 +38,7 @@ typedef struct _moving_object_t
     moving_object_type_t type; //< what am i?
     lane_t lane; //< where am i? (<-- for collision check used)
 
-    void * model; //< only set by spawning
+    void * model; //< struct packet_t * (except when used for animation)
     unsigned int ttl; //<y pos, x pos & scale is derived from LUT in tick()
 
     unsigned int cnt; //< generic counter usable for animation (of exploded object / animation of ability)

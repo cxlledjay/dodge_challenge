@@ -23,7 +23,7 @@ typedef struct _player_t
     /* ingame attributes */
     fuel_amount_t fuel; //< amount of fuel, the player is carrying
     ability_class_t ability; //< the ability the player has picked up
-    unsigned int has_extralife;
+    unsigned int has_extralife; //< flag set if player has one extra life
 
     /* player handling */
     void (*tick) (void); //< handle drawing (+animation), collision detection (+game state change), ability pickup
