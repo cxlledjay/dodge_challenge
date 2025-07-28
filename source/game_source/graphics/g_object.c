@@ -213,20 +213,6 @@ const struct packet_t vl_object_fuelcan[] =
 // extralife + abilities (6)
 // ***************************************************************************
 
-/// temp
-#define _VL_ABILITY_BASE    \
-    {MOVE, {0,-15}},        \
-    {DRAW, {69,49}},        \
-    {DRAW, {0,-32}},        \
-    {DRAW, {51,15}},        \
-    {DRAW, {-69,-49}},      \
-    {DRAW, {0,32}},         \
-    {DRAW, {-51,-15}},
-const struct packet_t _temp[] =
-{
-    _VL_ABILITY_BASE
-    VL_END
-};
 
     
 const struct packet_t vl_extralife[] =
@@ -284,12 +270,115 @@ const struct packet_t vl_ac_missile[] =
 
 /// ------------------ explosion animation -------------------------------------
 
-
-const void* const vl_exploded[3] =
+/// temp
+#define _VL_ABILITY_BASE    \
+    {MOVE, {0,-15}},        \
+    {DRAW, {69,49}},        \
+    {DRAW, {0,-32}},        \
+    {DRAW, {51,15}},        \
+    {DRAW, {-69,-49}},      \
+    {DRAW, {0,32}},         \
+    {DRAW, {-51,-15}},
+const struct packet_t _temp[] =
 {
-    _temp,
-    _temp,
-    _temp
+    _VL_ABILITY_BASE
+    VL_END
+};
+
+const struct packet_t _vl_exploded1[] =
+{
+    {MOVE ,{40,-20}},
+
+    {DRAW ,{-20,10}},
+    {DRAW ,{30,30}},
+
+    {DRAW ,{25,-10}},
+    {DRAW ,{-15,-10}},
+
+    {DRAW ,{10,-60}},
+    {DRAW ,{-30,40}},
+
+    VL_END
+};
+
+const struct packet_t _vl_exploded2[] =
+{
+    {MOVE, {40,-20}},
+
+    {DRAW, {-25,-70}},
+    {DRAW, {35,60}},
+
+    {DRAW, {30,-25}},
+    {DRAW, {-10,35}},
+
+    {DRAW, {20,20}},
+    {DRAW, {-35,20}},
+
+    {DRAW, {15,45}},
+    {DRAW, {-35,-35}},
+
+    {DRAW, {-25,20}},
+    {DRAW, {30,-70}},
+
+    VL_END
+};
+
+const struct packet_t _vl_exploded3[] =
+{
+    {MOVE, {40,-30}},
+
+    {DRAW, {-35,-60}},
+    {DRAW, {65,40}},
+
+    {DRAW, {50,-15}},
+    {DRAW, {-35,40}},
+
+    {DRAW, {40,65}},
+    {DRAW, {-35,-15}},
+
+    {DRAW, {-50,40}},
+    {DRAW, {-10,-35}},
+
+    {DRAW, {-35,-25}},
+    {DRAW, {45,-35,}},
+
+    VL_END
+};
+
+const struct packet_t _vl_exploded4[] =
+{
+    {DRAW, {30,-60}},
+
+    {DRAW, {-20,-60}},
+    {DRAW, {40,20}},
+
+    {DRAW, {10,-20}},
+    {DRAW, {20,30}},
+
+    {DRAW, {60,25}},
+    {DRAW, {-25,45}},
+
+    {DRAW, {40,50}},
+    {DRAW, {-35,20}},
+
+    {DRAW, {30,60}},
+    {DRAW, {-70,-25}},
+
+    {DRAW, {-45,30}},
+    {DRAW, {10,-45}},
+    
+
+    {DRAW, {-45,-70}},
+
+    VL_END
+};
+
+const void* const vl_exploded[4] =
+{
+    _vl_exploded4,
+    _vl_exploded3,
+    _vl_exploded2,
+    _vl_exploded1
 };
 
 

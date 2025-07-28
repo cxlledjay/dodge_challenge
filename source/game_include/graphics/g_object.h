@@ -64,8 +64,8 @@ extern const struct packet_t vl_ac_missile[];
 // animations (7)
 // ***************************************************************************
 
-/// @brief spawning ability (3 step animation)
-extern const void* const vl_exploded[3];
+/// @brief spawning ability (4 step animation)
+extern const void* const vl_exploded[4];
 
 
 

@@ -242,7 +242,8 @@ static inline __attribute__((always_inline)) void  _tick_ac_missile (active_abil
                     case MOT_ENEMY_BIKE:
                         /// destroy it
                         obj->type = MOT_EXPLODED;
-                        obj->model = (void *) 2; //< init 3 step explosion (a bit hacky...)
+                        obj->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+                        obj->model = (void *) 3; //< init 4 step explosion (a bit hacky...)
                         obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
 
                         /// and despawn

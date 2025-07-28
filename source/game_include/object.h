@@ -51,6 +51,8 @@ typedef struct _moving_object_t
 
 
 
+#define OBJECT_ANIMATION_FRAME_INTERVAL         (5u) //< frame interval between explosion animation
+
 /******************************************************************************************************
  * [precompiled] moving object tick functions (based on current speed)
  ******************************************************************************************************/

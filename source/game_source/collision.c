@@ -347,7 +347,8 @@ void aabb_check_collision(void)
 
                             /// enable player to drive trough hit object (MOT_EXPLODED has no hitbox)
                             obj->type = MOT_EXPLODED;
-                            obj->model = (void *) 2; //< init 3 step explosion (a bit hacky...)
+                            obj->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
+                            obj->model = (void *) 3; //< init 4 step explosion (a bit hacky...)
                             obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
 
                             /// TODO: play sound
