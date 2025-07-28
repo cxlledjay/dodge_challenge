@@ -41,11 +41,13 @@ typedef struct _game_t
    game_options_t options;          //< storing start menu selection
    game_over_t reason;              //< reason for game over
 
-   unsigned long score;             //< silent tracking
+   unsigned int score[7];           //< tracking
+
    stage_t stage;                   //< different stages of speed, advancing through the game. 
                                     //  selectable in start menu (thus progression is dependant on selection)
 
    unsigned int cnt;                //< tracking animations
+   void (* play_animation) (void);  //< the animation
 
    void (* process_input) (void);   //< get user input and manipulate game
    void (* execute_state) (void);   //< game state machine
@@ -74,3 +76,6 @@ void game_start(void);
 
 /// @brief state when player crashes
 void game_over(void);
+
+/// @brief play no animation
+void game_no_animation(void);

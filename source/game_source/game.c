@@ -27,6 +27,9 @@ void input_1_4(void);
 void input_2_3(void);
 void input_analog(void);
 
+/* animation */
+void game_no_animation(void) { return; }
+
 /*****************************************************************************
  * init part
  ****************************************************************************/
@@ -38,7 +41,7 @@ void game_start(void)
     game_options_t start_selection = {.game_mode = GAME_MODE_EASY, .input_method = INPUT_METHOD_ANALOG};
     game_t new_game = {
         .options = start_selection,
-        .score = 0,
+        .score = {0,0,0,0,0,0,0},
         .stage = 0,
         .cnt = 0,
         .process_input = input_analog,
@@ -78,7 +81,7 @@ void game_init(void)
     collision_init();
 
     /// score reset
-    the_game.score = 0;
+	Clear_Score(the_game.score);
     the_game.reason = 0;
 
     /// init stage according to game mode
@@ -122,6 +125,7 @@ void game_init(void)
     /// start game w/animation
     the_game.cnt = 200; //< 3 seconds countdown + 1 second "GO"
     the_game.execute_state = play_start_animation;
+    the_game.play_animation = game_no_animation;
 
     /// init sound module
     sound_init();
@@ -531,6 +535,9 @@ void input_analog (void)
  ****************************************************************************/
 
 #include "game_include/sounds/s_animation.h"
+#include "game_include/graphics/g_gui.h"
+#include "game_include/graphics/g_player.h"
+#include "game_include/gen_data/gen_object_path.h"
 
 void play_start_animation(void)
 {
@@ -542,11 +549,51 @@ void play_start_animation(void)
     Do_Sound();
     Intensity_5F();
 
-    /// display map and player as usual
-    the_game.process_input();
+    /// draw map
     the_map.tick();
-    the_player.tick();
-    fuel_bar_tick();
+
+    if(the_game.cnt < 130)
+    {
+        /// display player as usual
+        the_game.process_input();
+        the_player.tick();
+    }
+    else
+    {
+        /// animate player driving in
+
+        /// steal y and sc table from objects @attention may break if object paths are changed
+        unsigned int cnt_to_ttl = the_game.cnt - 117; //< start at 83 (goes to 13)
+        int y = _ST5_Y1_LUT[cnt_to_ttl]; //< copy y 1:1
+        unsigned int sc = (_ST5_SC_LUT[cnt_to_ttl] * 3)/5; //< copy and scale to 3/5
+
+        /// draw player
+        Reset0Ref();
+        dp_VIA_t1_cnt_lo = 0x7f;
+        Moveto_d(y, 0);
+        dp_VIA_t1_cnt_lo = sc;
+        Draw_VLp(&vl_player_mid1);
+        Reset0Ref();
+        dp_VIA_t1_cnt_lo = 0x7f;
+        Moveto_d(y, 0);
+        dp_VIA_t1_cnt_lo = sc;
+        Draw_VLp(&vl_player_mid2);
+    }
+
+    /// draw fuelbar (copy paste from fuel.c)
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 100;
+    Moveto_d(127, -127);
+	dp_VIA_t1_cnt_lo = the_player.fuel;
+	Draw_Line_d(0,127);
+	dp_VIA_t1_cnt_lo = 0x6;
+	Draw_Line_d(-20, 0);
+	dp_VIA_t1_cnt_lo = the_player.fuel;
+	Draw_Line_d(0,-127);
+	dp_VIA_t1_cnt_lo = 0x6;
+	Draw_Line_d(20, 0);
+    Moveto_d(41,-125);
+    Draw_VLp(&vl_gui_fuelcan);
 
     if(--(the_game.cnt) == 0)
     {
@@ -629,6 +676,12 @@ void game_run(void)
     /// spawn new enemies
     object_manager_tick_spawn();
 
+    /// display score
+    print_string(116,-60,(char*) &the_game.score);
+
+    /// display animation
+    the_game.play_animation();
+
     /// done
     return;
 }
@@ -648,12 +701,6 @@ void game_over(void)
     Wait_Recal();
     Do_Sound();
     Intensity_5F();
-
-    /// highscore handler
-	unsigned int score[7];
-	Clear_Score(&score);
-	Add_Score_d(the_game.score, &score);
-	New_High_Score(&score, (void*) &Vec_High_Score);
 
     /// get input
     check_buttons();
@@ -684,12 +731,12 @@ void game_over(void)
     char score_display[19] =     "SCORE:     XXXXXX\x80";
     char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
 
-    score_display[11] = score[0];
-    score_display[12] = score[1];
-    score_display[13] = score[2];
-    score_display[14] = score[3];
-    score_display[15] = score[4];
-    score_display[16] = score[5];
+    score_display[11] = the_game.score[0];
+    score_display[12] = the_game.score[1];
+    score_display[13] = the_game.score[2];
+    score_display[14] = the_game.score[3];
+    score_display[15] = the_game.score[4];
+    score_display[16] = the_game.score[5];
 
     highscore_display[11] = Vec_High_score[0];
     highscore_display[12] = Vec_High_score[1];

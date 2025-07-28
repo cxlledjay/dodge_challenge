@@ -360,6 +360,9 @@ void aabb_check_collision(void)
 
                             /// play sound
                             play_explosion(&e_extralife_explosion);
+
+                            /// TODO: decrease score
+                            
                         }
                         else
                         {
@@ -369,6 +372,9 @@ void aabb_check_collision(void)
                             /// play sad sound
                             Clear_Sound();
                             play_music(&game_over_sad);
+                            
+                            /// highscore handler
+                            New_High_Score(the_game.score, (void*) &Vec_High_Score);
 
                             the_game.execute_state = game_over; //< back to game over screen
                         }

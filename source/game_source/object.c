@@ -28,8 +28,7 @@ void idle(__attribute__((unused)) moving_object_t* me)
 /// utils for animation
 
 #define DESPAWN_CHECK(OBJECT_PTR)                                                                                            \
-    if(--(OBJECT_PTR->ttl) == 0) {OBJECT_PTR->tick = idle;  /* check if enemy should still be rendered */                    \
-    ++(the_game.score);  return;} /* and also increase score */ /** TODO: implement score getting even more with higher stage */
+    if(--(OBJECT_PTR->ttl) == 0) {OBJECT_PTR->tick = idle;/* check if enemy should still be rendered */return;}
 
 
 /// @param STEP the animation step (in the given range specified by VL)

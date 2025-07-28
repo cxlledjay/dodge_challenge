@@ -250,6 +250,9 @@ static inline __attribute__((always_inline)) void  _tick_ac_missile (active_abil
                         /// play sound
                         play_explosion(&e_missile_explode_enemy);
 
+                        /// increase score
+                        Add_Score_a(the_game.stage * 10 , the_game.score);
+
                         /// and despawn
                         me->tick = ability_idle;
                         break;

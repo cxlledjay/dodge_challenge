@@ -33,7 +33,7 @@ void object_manager_init(void)
 {
     /// build hard to replicate seed
     unsigned int seed0 = 42 + (unsigned int) the_stage_manager.cnt;                                         //< hard to time
-    unsigned int seed1 = (unsigned int) (the_game.score);                                                   //< should always differ
+    unsigned int seed1 = (unsigned int) (the_game.score[6]);                                                //< should always differ
     unsigned int seed2 = (the_object_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);    //< might access out of bounds
     unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                             //< propably out of bounds but idc
 
@@ -253,6 +253,9 @@ void object_manager_tick_spawn(void)
 
         /// play spawning sound
         play_music((struct sound_music_t *) object_spawn_sound[idx]);
+        
+        /// increase score
+        Add_Score_a(the_game.stage + 1 , the_game.score);
     }
 }
 

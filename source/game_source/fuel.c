@@ -48,10 +48,6 @@ void fuel_bar_tick (void)
 {
     /// draw fuel bar
     Reset0Ref();
-
-    /// TODO: add fuel icon
-
-    /// draw actual fuel bar
     dp_VIA_t1_cnt_lo = 100;
     Moveto_d(127, -127);
 	dp_VIA_t1_cnt_lo = the_player.fuel;
@@ -62,6 +58,8 @@ void fuel_bar_tick (void)
 	Draw_Line_d(0,-127);
 	dp_VIA_t1_cnt_lo = 0x6;
 	Draw_Line_d(20, 0);
+
+    /// draw fuel icon
     Moveto_d(41,-125);
     Draw_VLp(&vl_gui_fuelcan);
 
@@ -83,6 +81,10 @@ void fuel_bar_tick (void)
             /// play sad sound
             play_music(&game_over_sad);
 
+            /// highscore handler
+            New_High_Score(the_game.score, (void*) &Vec_High_Score);
+
+            /// game over
             the_game.execute_state = game_over;
         }
 
