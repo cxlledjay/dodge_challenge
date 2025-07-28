@@ -97,6 +97,8 @@ static inline __attribute__((always_inline)) const spawn_entry_t * get_next_patt
     return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
 }
 
+/// @brief calculate next spawn interval for fuel or ability
+/// @return random value between 31 and 63
 static inline __attribute__((always_inline)) unsigned int get_next_interval (void)
 {
     return (rand(&random_obj) >> 3) + 31; //< range: 31-63
@@ -140,10 +142,17 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
         else if (--(the_object_manager.cnt_next_ability) == 0)
         {
             /// reset counter to random value
-            the_object_manager.cnt_next_ability = get_next_interval() << 1; //< abilities are twice as rare
+            the_object_manager.cnt_next_ability = get_next_interval() +12; //< abilities are a bit rarer than fuel
+
+            /// select type
+            unsigned int type = 1; //< 75% chance for missiles
+            if((rand(&random_obj) >> 6) == 0)
+            {
+                type = 0; //< 25% chance for extralife
+            }
 
             /// spawn object
-            the_object_manager.queue_ptr->type = (rand(&random_obj) >> 7) + 5; //< generate and translate ability type to moving_object_t
+            the_object_manager.queue_ptr->type =  + 5; //< generate and translate ability class to moving_object_t
             the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[the_object_manager.queue_ptr->type];
             the_object_manager.queue_ptr->lane = lane;
             the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];

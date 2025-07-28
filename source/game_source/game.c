@@ -79,6 +79,7 @@ void game_init(void)
 
     /// score reset
     the_game.score = 0;
+    the_game.reason = 0;
 
     /// init stage according to game mode
     switch (the_game.options.game_mode) {
@@ -700,6 +701,17 @@ void game_over(void)
 
     /// draw game over screen
     print_string(100,-85,"-=GAME OVER=-\x80");
+    switch(the_game.reason)
+    {
+        case GO_HIT_ENEMY:
+            print_string(80,-70,"HIT OBJECT\x80");
+            break;
+        case GO_NO_FUEL:
+            print_string(80,-60,"NO FUEL\x80");
+            break;
+        default:
+            ;
+    }
 
     print_string(10,-110, score_display);
     print_string(-10,-110, highscore_display);

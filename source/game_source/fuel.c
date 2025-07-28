@@ -73,7 +73,12 @@ void fuel_bar_tick (void)
         {
             /// no fuel -> game over
 
-            /// TODO: state reason for game over
+            /// state reason for game over
+            the_game.reason = GO_NO_FUEL;
+            
+            /// play sad sound
+            Clear_Sound();
+            play_music(&game_over_sad);
             
             /// play sad sound
             play_music(&game_over_sad);

@@ -363,7 +363,8 @@ void aabb_check_collision(void)
                         }
                         else
                         {
-                            /// TODO: tell the game over screen, why it was over (here, reason = hit object)
+                            /// tell the game over screen, why it was over (here, reason = hit object)
+                            the_game.reason = GO_HIT_ENEMY;
                             
                             /// play sad sound
                             Clear_Sound();

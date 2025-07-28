@@ -27,6 +27,11 @@ typedef struct _game_options_t {
 #define INPUT_METHOD_2_3            (1u)
 #define INPUT_METHOD_ANALOG         (2u)
 
+typedef enum _game_over_t
+{
+   GO_NO_FUEL = 0,
+   GO_HIT_ENEMY = 1
+} game_over_t;
 
 
 #include "stage.h"
@@ -34,6 +39,7 @@ typedef struct _game_options_t {
 typedef struct _game_t 
 {
    game_options_t options;          //< storing start menu selection
+   game_over_t reason;              //< reason for game over
 
    unsigned long score;             //< silent tracking
    stage_t stage;                   //< different stages of speed, advancing through the game. 
