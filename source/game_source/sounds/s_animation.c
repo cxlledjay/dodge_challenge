@@ -41,7 +41,7 @@ const struct sound_music_t _object_spawn_sound1 =
 	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE12,
 	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBE0,
 	{
-		__N_CS4, HALF_NOTE,
+		__N_CS4, QUARTER_NOTE,
 		0, MUSIC_END
 	}
 };
@@ -51,7 +51,7 @@ const struct sound_music_t _object_spawn_sound2 =
 	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE12,
 	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBE0,
 	{
-		__N_GS2, HALF_NOTE,
+		__N_GS2, QUARTER_NOTE,
 		0, MUSIC_END
 	}
 };

@@ -21,6 +21,9 @@ typedef struct _object_manager_t
     unsigned int cnt;                                   //< counter to regulate spawning intervals
     unsigned int cnt_next_fuelcan;                      //< counter to track next fuelcan spawning
     unsigned int cnt_next_ability;                      //< counter to track next ability spawning
+
+    /// sound management
+    unsigned int next_sound;
 }object_manager_t;
 
 /// @brief singleton interface for object management

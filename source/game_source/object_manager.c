@@ -55,6 +55,8 @@ void object_manager_init(void)
     the_object_manager.cnt = 1; //< no delay at start, start animation does that for us
     the_object_manager.cnt_next_fuelcan = get_next_interval();
     the_object_manager.cnt_next_ability = get_next_interval();
+
+    the_object_manager.next_sound = 0;
 }
 
 
@@ -225,16 +227,23 @@ void spawn_objects(void)
 #include "game_include/game.h"
 const unsigned int _OM_NEXT_SPAWN_INTERVAL[];
 
-
+#include "game_include/sounds/s_animation.h"
 void object_manager_tick_spawn(void)
 {
     if(--(the_object_manager.cnt) == 0) //< spawn object in this frame?
     { //< yes
+
         /// reset counter
         the_object_manager.cnt = _OM_NEXT_SPAWN_INTERVAL[the_game.stage];
 
         /// execute spawn algorithm and produce new objects
         spawn_objects();
+
+        /// alternate sound
+        unsigned int idx = ++(the_object_manager.next_sound) & 0x01;
+
+        /// play spawning sound
+        play_music((struct sound_music_t *) object_spawn_sound[idx]);
     }
 }
 
