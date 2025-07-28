@@ -3,6 +3,11 @@
 #include "sound/sound.h"
 
 // **************************************************************
+// menu selection
+// **************************************************************
+extern const struct sound_music_t menu_select_sound;
+
+// **************************************************************
 // start animation
 // **************************************************************
 extern const struct sound_music_t countdown_number;

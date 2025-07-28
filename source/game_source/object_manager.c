@@ -52,7 +52,7 @@ void object_manager_init(void)
 
     /// init spawner
     the_object_manager.pattern = get_next_pattern(); //< random start pattern
-    the_object_manager.cnt = 1; //< no delay at start, start animation does that for us
+    the_object_manager.cnt = 15; //< small delay at start, to keep the sound from start animation
     the_object_manager.cnt_next_fuelcan = get_next_interval();
     the_object_manager.cnt_next_ability = get_next_interval();
 

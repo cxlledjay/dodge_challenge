@@ -366,6 +366,7 @@ void aabb_check_collision(void)
                             /// TODO: tell the game over screen, why it was over (here, reason = hit object)
                             
                             /// play sad sound
+                            Clear_Sound();
                             play_music(&game_over_sad);
 
                             the_game.execute_state = game_over; //< back to game over screen

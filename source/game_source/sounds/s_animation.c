@@ -9,6 +9,18 @@
 #define QUARTER_NOTE        (8)
 #define EIGTH_NOTE        	(4)
 
+
+
+const struct sound_music_t menu_select_sound =
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE4,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBEHL,
+	{
+		__N_CS4, QUARTER_NOTE,
+		0, MUSIC_END
+	}
+};
+
 const struct sound_music_t countdown_number = 
 {
 	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE4,

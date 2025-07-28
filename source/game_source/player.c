@@ -66,8 +66,8 @@ void player_init(void)
 		.queued_lane_change = 0,
 		.cnt = 0,
 		.fuel = 100,
-		.ability = AC_MISSILE,
-		.has_extralife = 1,
+		.ability = AC_NONE,
+		.has_extralife = 0,
 		.tick = player_draw};
 	the_player = fresh_player;
 }

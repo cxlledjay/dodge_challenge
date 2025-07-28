@@ -138,6 +138,7 @@ void game_init(void)
 
 #include "utils/controller.h"
 #include "lib/print/print.h"
+#include "game_include/sounds/s_animation.h"
 
 /// menu display LUTs
 const char * const _GAME_INPUT_DISPLAY_LUT[3] = {
@@ -154,8 +155,13 @@ const char * const _GAME_MODE_DISPLAY_LUT[4] = {
 
 void start_menu(void) {
     
-    /// sync to 50 fps
+    /// game header (professionally stolen :D)
+    DP_to_C8();
+    Explosion_Snd(current_explosion);
+    Init_Music_chk(current_music);
     Wait_Recal();
+    Do_Sound();
+    Intensity_5F();
 
     /// get input
     check_buttons();
@@ -180,6 +186,9 @@ void start_menu(void) {
     {
         /// reset highscore
         Clear_Score(&Vec_High_Score);
+
+        /// play sound
+        play_music(&menu_select_sound);
     }
 
     if(input & 0b00000010) //< BUTTON 2
@@ -190,6 +199,9 @@ void start_menu(void) {
         } else {
             the_game.options.game_mode++;
         }
+
+        /// play sound
+        play_music(&menu_select_sound);
     }
 
     if(input & 0b00000001) //< BUTTON 1
@@ -199,7 +211,10 @@ void start_menu(void) {
             the_game.options.input_method = INPUT_METHOD_1_4;
         } else {
             the_game.options.input_method++;
-        }        
+        }
+
+        /// play sound
+        play_music(&menu_select_sound);
     }
 
 
@@ -518,16 +533,13 @@ void input_analog (void)
 
 void play_start_animation(void)
 {
-    ///temp
-    the_game.execute_state = game_run;
-
-    /// play sound
+    /// game header (professionally stolen :D)
     DP_to_C8();
+    Explosion_Snd(current_explosion);
     Init_Music_chk(current_music);
-
-    /// sync to 50 fps
     Wait_Recal();
     Do_Sound();
+    Intensity_5F();
 
     /// display map and player as usual
     the_game.process_input();
