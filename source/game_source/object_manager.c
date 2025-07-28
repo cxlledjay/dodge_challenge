@@ -54,7 +54,7 @@ void object_manager_init(void)
     the_object_manager.pattern = get_next_pattern(); //< random start pattern
     the_object_manager.cnt = 15; //< small delay at start, to keep the sound from start animation
     the_object_manager.cnt_next_fuelcan = get_next_interval();
-    the_object_manager.cnt_next_ability = get_next_interval();
+    the_object_manager.cnt_next_ability = get_next_interval() >> 1;
 
     the_object_manager.next_sound = 0;
 }
@@ -98,10 +98,10 @@ static inline __attribute__((always_inline)) const spawn_entry_t * get_next_patt
 }
 
 /// @brief calculate next spawn interval for fuel or ability
-/// @return random value between 31 and 63
+/// @return random value between 31 and 47
 static inline __attribute__((always_inline)) unsigned int get_next_interval (void)
 {
-    return (rand(&random_obj) >> 3) + 31; //< range: 31-63
+    return (rand(&random_obj) >> 4) + 31; //< range: 31-47
 }
 
 
@@ -142,7 +142,7 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
         else if (--(the_object_manager.cnt_next_ability) == 0)
         {
             /// reset counter to random value
-            the_object_manager.cnt_next_ability = get_next_interval() +12; //< abilities are a bit rarer than fuel
+            the_object_manager.cnt_next_ability = get_next_interval() >> 1; //< more abilities than fuel ?
 
             /// select type
             unsigned int type = 1; //< 75% chance for missiles
@@ -152,7 +152,7 @@ static inline __attribute__((always_inline)) void try_spawn_obj (moving_object_t
             }
 
             /// spawn object
-            the_object_manager.queue_ptr->type =  + 5; //< generate and translate ability class to moving_object_t
+            the_object_manager.queue_ptr->type = type + 5; //< generate and translate ability class to moving_object_t
             the_object_manager.queue_ptr->model = (void *) MOT_TYPE_TO_MODEL[the_object_manager.queue_ptr->type];
             the_object_manager.queue_ptr->lane = lane;
             the_object_manager.queue_ptr->tick = MOVING_OBJECT_TICK_FNC_LUT[the_game.stage][lane];
