@@ -42,6 +42,7 @@ void fuel_bar_init (void)
  ************************************************************/
 
 #include "game_include/graphics/g_gui.h"
+#include "game_include/sounds/s_animation.h"
 
 void fuel_bar_tick (void)
 {
@@ -71,6 +72,12 @@ void fuel_bar_tick (void)
         if( --(the_player.fuel) == 0)
         {
             /// no fuel -> game over
+
+            /// TODO: state reason for game over
+            
+            /// play sad sound
+            play_music(&game_over_sad);
+
             the_game.execute_state = game_over;
         }
 

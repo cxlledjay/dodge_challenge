@@ -286,7 +286,8 @@ void aabb_check_collision(void)
                             the_player.fuel = the_player.fuel + FUEL_CAN_REFILL_AMOUNT;
                         }
 
-                        /// TODO: play refuel sound
+                        /// play refuel sound
+                        play_music(&pickup_fuel);
 
                         /// and despawn the fuel can
                         obj->tick = idle;
@@ -302,6 +303,9 @@ void aabb_check_collision(void)
                             /// set extralife for player
                             the_player.has_extralife = 1;
 
+                            /// play sound
+                            play_music(&pickup_ability);
+
                             /// despawn ability object
                             obj->tick = idle;
                         }
@@ -316,6 +320,9 @@ void aabb_check_collision(void)
                         {
                             /// set ability for player
                             the_player.ability = AC_MISSILE;
+
+                            /// play sound
+                            play_music(&pickup_ability);
 
                             /// despawn ability object
                             obj->tick = idle;
@@ -358,6 +365,9 @@ void aabb_check_collision(void)
                         {
                             /// TODO: tell the game over screen, why it was over (here, reason = hit object)
                             
+                            /// play sad sound
+                            play_music(&game_over_sad);
+
                             the_game.execute_state = game_over; //< back to game over screen
                         }
                 }

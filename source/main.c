@@ -65,6 +65,47 @@
 					dp_VIA_t1_cnt_lo = 25;
 					Draw_VLp((struct packet_t *) vl_exploded[3]);
 					break;
+				default:
+					print_string(0,0,"BAD MODE\x80");
+			}
+		}
+		while(1);
+	}
+
+	#include "game_include/sounds/s_animation.h"
+	__attribute__((noreturn)) void debug_music(void)
+	{
+		unsigned int mode = 0;
+		do
+		{
+			/// game header (professionally stolen :D)
+			DP_to_C8();
+			Explosion_Snd(current_explosion);
+			Init_Music_chk(current_music);
+			Wait_Recal();
+			Do_Sound();
+			Intensity_5F();
+
+			/// toggle drawing to compare clocks
+			check_buttons();
+			mode = buttons_pressed();
+			
+			switch (mode) {
+				case 1:
+					/// clear sound
+					Clear_Sound();
+					break;
+				case 2:
+					/// sound 1
+					play_music(&pickup_fuel);
+					break;
+				case 4:
+					/// sound 1
+					play_music(&pickup_ability);
+					break;
+				case 8:
+					/// sound 1
+					play_music(&game_over_sad);
 					break;
 				default:
 					print_string(0,0,"BAD MODE\x80");
@@ -81,7 +122,8 @@
 int main(void)
 {	
 	#if DEBUG_MODE
-	debug_run();
+	//debug_run();
+	debug_music();
 	#else
 	
 	/**

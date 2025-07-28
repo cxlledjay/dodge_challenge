@@ -7,6 +7,7 @@
 #define FULL_NOTE           (31)
 #define HALF_NOTE           (16)
 #define QUARTER_NOTE        (8)
+#define EIGTH_NOTE        	(4)
 
 const struct sound_music_t countdown_number = 
 {
@@ -30,10 +31,69 @@ const struct sound_music_t countdown_go =
 };
 
 
+
+
+
+
+const struct sound_music_t pickup_fuel =
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE4,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBEHL,
+	{
+		__N_C3 | NXT_CH, __N_E3 | NXT_CH, __N_G3, EIGTH_NOTE,
+		__N_F3 | NXT_CH, __N_A3 | NXT_CH, __N_C4, EIGTH_NOTE,
+		__N_A3 | NXT_CH, __N_C4 | NXT_CH, __N_E4, EIGTH_NOTE,
+		__N_B3 | NXT_CH, __N_D4 | NXT_CH, __N_F4, EIGTH_NOTE,
+		0, MUSIC_END
+	}
+};
+
+
+const struct sound_music_t pickup_ability =
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE4,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBEHL,
+	{
+		__N_D4 | NXT_CH, __N_F4 | NXT_CH, __N_A4, EIGTH_NOTE,
+		__N_E5 | NXT_CH, __N_C6 | NXT_CH, __N_G6, QUARTER_NOTE,
+		0, MUSIC_END
+	}
+};
+
+
+
+
+
+
+const struct sound_music_t game_over_sad =
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE0,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBENL,
+	{
+		__N_C4, QUARTER_NOTE,
+		__N_C4, QUARTER_NOTE,
+		__N_C4, QUARTER_NOTE,
+		__N_G2, FULL_NOTE,
+		0, MUSIC_END
+	}
+};
+
+
+
+
+
 const struct sound_explosion_t player_death =
 {
 	0b00101010, SOUND_EXPL_RISE, SOUND_VOL_RISE, 1U
 };
+
+
+
+
+
+
+
+
 
 const struct sound_explosion_t e_extralife_explosion =
 {
