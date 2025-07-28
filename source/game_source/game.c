@@ -628,10 +628,13 @@ void game_run(void)
 
 void game_over(void)
 {
-    Clear_Sound();
-    
-    /// sync to 50 fps
+    /// game header (professionally stolen :D)
+    DP_to_C8();
+    Explosion_Snd(current_explosion);
+    Init_Music_chk(current_music);
     Wait_Recal();
+    Do_Sound();
+    Intensity_5F();
 
     /// highscore handler
 	unsigned int score[7];

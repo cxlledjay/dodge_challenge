@@ -35,6 +35,38 @@ const struct sound_music_t countdown_go =
 
 
 
+
+const struct sound_music_t _object_spawn_sound1 = 
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE12,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBE0,
+	{
+		__N_CS4, HALF_NOTE,
+		0, MUSIC_END
+	}
+};
+
+const struct sound_music_t _object_spawn_sound2 = 
+{
+	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE12,
+	.twang_table = (struct sound_twang_table_t*) &Vec_TWANG_VIBE0,
+	{
+		__N_GS2, HALF_NOTE,
+		0, MUSIC_END
+	}
+};
+
+const void * const object_spawn_sound[2] =
+{
+	&_object_spawn_sound1,
+	&_object_spawn_sound2
+};
+
+
+
+
+
+
 const struct sound_music_t pickup_fuel =
 {
 	.adsr_table = (struct sound_adsr_table_t*) &Vec_ADSR_FADE4,

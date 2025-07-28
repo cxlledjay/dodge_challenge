@@ -9,7 +9,7 @@
 
 // *************************************
 // set DEBUG_MODE  [1 = on, 0 = off]
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 // *************************************
 
 
@@ -97,14 +97,14 @@
 					break;
 				case 2:
 					/// sound 1
-					play_music(&pickup_fuel);
+					play_music((struct sound_music_t *) object_spawn_sound[0]);
 					break;
 				case 4:
-					/// sound 1
-					play_music(&pickup_ability);
+					/// sound 2
+					play_music((struct sound_music_t *) object_spawn_sound[1]);
 					break;
 				case 8:
-					/// sound 1
+					/// sound 3
 					play_music(&game_over_sad);
 					break;
 				default:

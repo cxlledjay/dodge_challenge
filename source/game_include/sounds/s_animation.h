@@ -8,6 +8,10 @@
 extern const struct sound_music_t countdown_number;
 extern const struct sound_music_t countdown_go;
 
+// **************************************************************
+// car spawn sounds
+// **************************************************************
+extern const void * const object_spawn_sound[2];
 
 // **************************************************************
 // pickup stuff
