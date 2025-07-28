@@ -122,7 +122,6 @@ void calc_path_factor(active_ability_t * aa, int initial_x)
 /// @param model missiles model to fire
 static inline __attribute__((always_inline)) void  _tick_ac_missile (active_ability_t * me, void * model)
 {
-    print_string (0,0,"BAD! \x80");
     /// iterate to next step and check despawn
     if (--(me->cnt) == 0)
     {
