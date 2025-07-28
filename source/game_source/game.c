@@ -229,6 +229,8 @@ void start_menu(void) {
  * trigger ability use from player input
  ****************************************************************/
 #include "game_include/gen_data/gen_object_path.h"
+#include "game_include/sounds/s_animation.h"
+
 /// @brief start ability usage
 static inline __attribute__((always_inline)) void ability_use (void)
 {
@@ -252,6 +254,9 @@ static inline __attribute__((always_inline)) void ability_use (void)
                 calc_path_factor(&the_ability_manager.used[1], the_player.x);
                 the_ability_manager.used[1].tick = ABILITY_TICK_FNC[AC_MISSILE][the_player.lane];
             }
+
+            /// play shooting sound
+            play_explosion(&e_missile_shoot);
 
             /// remove ability
             the_player.ability = AC_NONE;
@@ -513,6 +518,9 @@ void input_analog (void)
 
 void play_start_animation(void)
 {
+    ///temp
+    the_game.execute_state = game_run;
+
     /// play sound
     DP_to_C8();
     Init_Music_chk(current_music);
@@ -574,11 +582,13 @@ void play_start_animation(void)
 
 void game_run(void)
 {
-    /// refresh brightness
-    Intensity_5F();
-
-    /// sync to 50 fps
+    /// game header (professionally stolen :D)
+    DP_to_C8();
+    Explosion_Snd(current_explosion);
+    Init_Music_chk(current_music);
     Wait_Recal();
+    Do_Sound();
+    Intensity_5F();
     
     /// get input and move player
     the_game.process_input();
@@ -618,6 +628,8 @@ void game_run(void)
 
 void game_over(void)
 {
+    Clear_Sound();
+    
     /// sync to 50 fps
     Wait_Recal();
 

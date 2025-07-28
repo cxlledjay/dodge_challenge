@@ -351,7 +351,8 @@ void aabb_check_collision(void)
                             obj->model = (void *) 3; //< init 4 step explosion (a bit hacky...)
                             obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
 
-                            /// TODO: play sound
+                            /// play sound
+                            play_explosion(&e_extralife_explosion);
                         }
                         else
                         {

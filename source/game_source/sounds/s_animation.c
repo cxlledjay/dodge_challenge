@@ -34,3 +34,18 @@ const struct sound_explosion_t player_death =
 {
 	0b00101010, SOUND_EXPL_RISE, SOUND_VOL_RISE, 1U
 };
+
+const struct sound_explosion_t e_extralife_explosion =
+{
+	0b00000100, SOUND_EXPL_EVEN, SOUND_VOL_RISE, 2U
+};
+
+const struct sound_explosion_t e_missile_explode_enemy =
+{
+	0b00011100, SOUND_EXPL_RISE, SOUND_VOL_RISE, 3U
+};
+
+const struct sound_explosion_t e_missile_shoot =
+{
+	0b00111100, SOUND_EXPL_RISE, SOUND_VOL_RISE, 8U
+};

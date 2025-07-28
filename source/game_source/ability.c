@@ -117,6 +117,7 @@ void calc_path_factor(active_ability_t * aa, int initial_x)
 #include "game_include/object_manager.h"
 #include "game_include/collision.h"
 #include "lib/print/print.h"
+#include "game_include/sounds/s_animation.h"
 
 /// @brief helper function for missile tick
 /// @param model missiles model to fire
@@ -245,6 +246,9 @@ static inline __attribute__((always_inline)) void  _tick_ac_missile (active_abil
                         obj->cnt = OBJECT_ANIMATION_FRAME_INTERVAL;
                         obj->model = (void *) 3; //< init 4 step explosion (a bit hacky...)
                         obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
+
+                        /// play sound
+                        play_explosion(&e_missile_explode_enemy);
 
                         /// and despawn
                         me->tick = ability_idle;
