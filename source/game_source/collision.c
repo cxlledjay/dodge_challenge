@@ -363,6 +363,7 @@ void aabb_check_collision(void)
                             play_explosion(&e_extralife_explosion);
 
                             /// TODO: decrease score
+                            Sub_Score_a(the_game.stage * 10, (void *)the_game.score);
 
                             /// display lost points
                             the_ability_manager.points = -((int)the_game.stage * 10);

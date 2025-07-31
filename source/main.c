@@ -113,6 +113,33 @@
 		}
 		while(1);
 	}
+
+
+	unsigned int score[7];
+
+	#include "game_include/misc.h"
+	__attribute__((noreturn)) void debug_math(void)
+	{
+		Clear_Score((void*) score);
+		for(unsigned int i = 0; i < 100; ++i) Add_Score_a(100, (void*)score);
+		Add_Score_a(41,(void*)score);
+		Sub_Score_a(40, (void*) score);
+		Sub_Score_a(1, (void*) score);
+		Sub_Score_a(1, (void*) score);
+		do
+		{
+			char score_display[19] =     "SCORE:     XXXXXX\x80";
+
+			score_display[11] = score[0];
+			score_display[12] = score[1];
+			score_display[13] = score[2];
+			score_display[14] = score[3];
+			score_display[15] = score[4];
+			score_display[16] = score[5];
+			print_string(10,-110, score_display);
+		}
+		while(1);
+	}
 #endif
 
 // -----------------------------< / d e b u g >------------------------------------
@@ -123,7 +150,8 @@ int main(void)
 {	
 	#if DEBUG_MODE
 	//debug_run();
-	debug_music();
+	//debug_music();
+	debug_math();
 	#else
 	
 	/**

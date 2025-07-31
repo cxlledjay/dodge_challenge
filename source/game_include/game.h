@@ -65,8 +65,6 @@ extern game_t the_game;
  * @brief handled by execute_state() internally, interface needed for bootstrap in main
  * 
  * (re)sets all variables and starts the game
- * TODO: implement start screen select (stage + difficulty??)
- * TODO: implement some fancy starting animation
  */
 void game_init(void);
 

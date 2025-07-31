@@ -259,7 +259,7 @@ static inline __attribute__((always_inline)) void ability_use (void)
     {
         case AC_MISSILE:
 
-            /// TODO: shoot missle (from player x coords, w/ lane model)
+            /// shoot missle (from player x coords, w/ lane model)
             if(the_ability_manager.used[0].tick == ability_idle)
             {
                 /// first ability "thread" is free
@@ -873,25 +873,6 @@ void game_over(void)
         the_game.execute_state = start_menu;
     }
 
-    /// assemble strings
-    char score_display[19] =     "SCORE:     XXXXXX\x80";
-    char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
-
-    score_display[11] = the_game.score[0];
-    score_display[12] = the_game.score[1];
-    score_display[13] = the_game.score[2];
-    score_display[14] = the_game.score[3];
-    score_display[15] = the_game.score[4];
-    score_display[16] = the_game.score[5];
-
-    highscore_display[11] = Vec_High_score[0];
-    highscore_display[12] = Vec_High_score[1];
-    highscore_display[13] = Vec_High_score[2];
-    highscore_display[14] = Vec_High_score[3];
-    highscore_display[15] = Vec_High_score[4];
-    highscore_display[16] = Vec_High_score[5];
-
-
     /// start drawing
 
     /// 1) game over
@@ -1027,6 +1008,24 @@ void game_over(void)
         default:
             ; //< should not happen
     }
+
+    /// assemble strings
+    char score_display[19] =     "SCORE:     XXXXXX\x80";
+    char highscore_display[19] = "HIGHSCORE: XXXXXX\x80";
+
+    score_display[11] = the_game.score[0];
+    score_display[12] = the_game.score[1];
+    score_display[13] = the_game.score[2];
+    score_display[14] = the_game.score[3];
+    score_display[15] = the_game.score[4];
+    score_display[16] = the_game.score[5];
+
+    highscore_display[11] = Vec_High_score[0];
+    highscore_display[12] = Vec_High_score[1];
+    highscore_display[13] = Vec_High_score[2];
+    highscore_display[14] = Vec_High_score[3];
+    highscore_display[15] = Vec_High_score[4];
+    highscore_display[16] = Vec_High_score[5];
 
     /// draw the rest
     print_string(10,-110, score_display);

@@ -33,7 +33,7 @@ void object_manager_init(void)
 {
     /// build hard to replicate seed
     unsigned int seed0 = 42 + (unsigned int) the_stage_manager.cnt;                                         //< hard to time
-    unsigned int seed1 = (unsigned int) (the_game.score[6]);                                                //< should always differ
+    unsigned int seed1 = (unsigned int) (the_game.score[5]);                                                //< should always differ
     unsigned int seed2 = (the_object_manager.queue_ptr - 1)->ttl * ((unsigned int)the_player.lane + 10);    //< might access out of bounds
     unsigned int seed3 = (the_object_manager.queue_ptr - 3)->ttl * the_map.cnt;                             //< propably out of bounds but idc
 
