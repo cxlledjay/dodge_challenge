@@ -369,14 +369,25 @@ void aabb_check_collision(void)
                             /// tell the game over screen, why it was over (here, reason = hit object)
                             the_game.reason = GO_HIT_ENEMY;
                             
-                            /// play sad sound
-                            Clear_Sound();
-                            play_music(&game_over_sad);
-                            
                             /// highscore handler
                             New_High_Score(the_game.score, (void*) &Vec_High_Score);
 
-                            the_game.execute_state = game_over; //< back to game over screen
+                            /// animate the death
+                            the_game.execute_state = game_player_hit_animation;
+                            the_game.cnt = (15*4)-1;
+
+                            /// play explosion sound
+                            play_explosion(&player_death);
+
+                            /// init explosion on player model
+                            the_player.cnt = 15; //< use player counter to track animation
+                            the_player.has_extralife = 3; //< abuse extralife flag for tracking animation stage (hacky...)
+
+                            /// the hit object should also explode
+                            obj->type = MOT_EXPLODED;
+                            obj->cnt = 10;
+                            obj->model = (void *) 3; //< init 4 step explosion (a bit hacky...)
+                            obj->tick = MOVING_OBJECT_EXPLODED_TICK_FNC_LUT[obj->lane];
                         }
                 }
             }

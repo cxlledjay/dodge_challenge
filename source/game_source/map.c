@@ -29,40 +29,6 @@ void map_init(void)
 
 
 /****************************************************
- * macro utils 
- ***************************************************/
-
-#define DRAW_LEFT() 				\
-	Reset0Ref(); 					\
-	dp_VIA_t1_cnt_lo = 0x7f;		\
-	Moveto_d(36, -15);				\
-	dp_VIA_t1_cnt_lo = 187;			\
-	Draw_Line_d(-128,-82);	
-	
-#define DRAW_RIGHT() 				\
-	Reset0Ref(); 					\
-	dp_VIA_t1_cnt_lo = 0x7f;		\
-	Moveto_d(36, 15);				\
-	dp_VIA_t1_cnt_lo = 187;			\
-	Draw_Line_d(-128,82);
-
-#define ANIMATE_LEFT(VECLIST_PTR) 	\
-	Reset0Ref();					\
-	dp_VIA_t1_cnt_lo = 0x7f;		\
-	Moveto_d(36, -5);				\
-	dp_VIA_t1_cnt_lo = 16;			\
-	Draw_VLp(VECLIST_PTR);	
-	
-#define ANIMATE_RIGHT(VECLIST_PTR) 	\
-	Reset0Ref();					\
-	dp_VIA_t1_cnt_lo = 0x7f;		\
-	Moveto_d(36, 5);				\
-	dp_VIA_t1_cnt_lo = 16;			\
-	Draw_VLp(VECLIST_PTR);	
-
-
-
-/****************************************************
  * tick functions 
  ***************************************************/
 

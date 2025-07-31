@@ -46,22 +46,7 @@ void fuel_bar_init (void)
 
 void fuel_bar_tick (void)
 {
-    /// draw fuel bar
-    Reset0Ref();
-    dp_VIA_t1_cnt_lo = 100;
-    Moveto_d(127, -127);
-	dp_VIA_t1_cnt_lo = the_player.fuel;
-	Draw_Line_d(0,127);
-	dp_VIA_t1_cnt_lo = 0x6;
-	Draw_Line_d(-20, 0);
-	dp_VIA_t1_cnt_lo = the_player.fuel;
-	Draw_Line_d(0,-127);
-	dp_VIA_t1_cnt_lo = 0x6;
-	Draw_Line_d(20, 0);
-
-    /// draw fuel icon
-    Moveto_d(41,-125);
-    Draw_VLp(&vl_gui_fuelcan);
+    FUELBAR_DRAW(the_player.fuel);
 
     /// tick
     if(--(the_fuel_bar.cnt) == 0)

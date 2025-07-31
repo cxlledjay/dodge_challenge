@@ -541,7 +541,7 @@ void input_analog (void)
 
 void play_start_animation(void)
 {
-    /// game header (professionally stolen :D)
+    /// game header
     DP_to_C8();
     Explosion_Snd(current_explosion);
     Init_Music_chk(current_music);
@@ -567,7 +567,7 @@ void play_start_animation(void)
         int y = _ST5_Y1_LUT[cnt_to_ttl]; //< copy y 1:1
         unsigned int sc = (_ST5_SC_LUT[cnt_to_ttl] * 3)/5; //< copy and scale to 3/5
 
-        /// draw player
+        /// custom draw player
         Reset0Ref();
         dp_VIA_t1_cnt_lo = 0x7f;
         Moveto_d(y, 0);
@@ -580,20 +580,8 @@ void play_start_animation(void)
         Draw_VLp(&vl_player_mid2);
     }
 
-    /// draw fuelbar (copy paste from fuel.c)
-    Reset0Ref();
-    dp_VIA_t1_cnt_lo = 100;
-    Moveto_d(127, -127);
-	dp_VIA_t1_cnt_lo = the_player.fuel;
-	Draw_Line_d(0,127);
-	dp_VIA_t1_cnt_lo = 0x6;
-	Draw_Line_d(-20, 0);
-	dp_VIA_t1_cnt_lo = the_player.fuel;
-	Draw_Line_d(0,-127);
-	dp_VIA_t1_cnt_lo = 0x6;
-	Draw_Line_d(20, 0);
-    Moveto_d(41,-125);
-    Draw_VLp(&vl_gui_fuelcan);
+    /// draw full fuelbar
+    FUELBAR_DRAW(100);
 
     if(--(the_game.cnt) == 0)
     {
@@ -633,6 +621,13 @@ void play_start_animation(void)
 }
 
 
+/// @brief helper function to draw the score
+static inline __attribute__((always_inline)) void  _draw_score(void)
+{
+    /// FIXME: should be drawn with vector lists
+    print_string(116,-60,(char*) &the_game.score);
+}
+
 
 
 /*****************************************************************************
@@ -642,7 +637,7 @@ void play_start_animation(void)
 
 void game_run(void)
 {
-    /// game header (professionally stolen :D)
+    /// game header
     DP_to_C8();
     Explosion_Snd(current_explosion);
     Init_Music_chk(current_music);
@@ -677,13 +672,159 @@ void game_run(void)
     object_manager_tick_spawn();
 
     /// display score
-    print_string(116,-60,(char*) &the_game.score);
+    _draw_score();
 
     /// display animation
     the_game.play_animation();
 
     /// done
     return;
+}
+
+
+
+
+/*****************************************************************************
+ * player hit enemy animation
+ ****************************************************************************/
+#include "game_include/graphics/g_map.h"
+#include "game_include/graphics/g_object.h"
+
+// MOVING_OBJECT_Y1_LUT
+
+/// @brief helper function to draw objects
+/// @param lane the lane of the object
+static inline __attribute__((always_inline)) void  _draw_object (moving_object_t * obj)
+{
+    int y1, y2, x;
+    unsigned int sc;
+
+    /// fetch current position (not depending on lane)
+    y1 = MOVING_OBJECT_Y1_LUT[the_game.stage][obj->ttl];
+    y2 = MOVING_OBJECT_Y2_LUT[the_game.stage][obj->ttl];
+    sc = MOVING_OBJECT_SC_LUT[the_game.stage][obj->ttl];
+
+    /// fetch current position (depending on lane)
+    switch (obj->lane)
+    {
+        case LEFT_LANE:
+            x = MOVING_OBJECT_XL_LUT[the_game.stage][obj->ttl];
+            break;
+        case MID_LANE:
+            x = 0;
+            break;
+        case RIGHT_LANE:
+            x = MOVING_OBJECT_XR_LUT[the_game.stage][obj->ttl];
+            break;
+        default:
+            ; //< should never happen
+    }
+
+    /// draw at position
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x7f;
+    Moveto_d(y1,x);
+    Moveto_d(y2,0);
+    dp_VIA_t1_cnt_lo = sc;
+    if(obj->type != MOT_EXPLODED)
+    {
+        /// draw as usual
+        Draw_VLp(obj->model);
+    }
+    else
+    {
+        /// draw exploded model
+        Draw_VLp((struct packet_t *) vl_exploded[(unsigned long) obj->model]);
+
+        /// still animate it...
+        if(--(obj->cnt) == 0)
+        {
+            /// reset counter
+            obj->cnt = 10;
+
+            /// chose next vl
+            unsigned long next = (unsigned long) obj->model;
+            if(--next == 0)
+            {
+                /// animation is over
+                obj->tick = idle;
+            }
+            else
+            {
+                /// next animation model
+                obj->model = (void *) next;
+            }
+        }
+    }
+}
+
+void game_player_hit_animation(void)
+{
+    /// game header
+    DP_to_C8();
+    Explosion_Snd(current_explosion);
+    Init_Music_chk(current_music);
+    Wait_Recal();
+    Do_Sound();
+    Intensity_5F();
+    
+    /// keep track of time
+    if(--(the_game.cnt) == 0)
+    {
+        /// animation is over -> show end screen
+        the_game.execute_state = game_over;
+
+        /// play sad sound
+        Clear_Sound();
+        play_music(&game_over_sad);
+    }
+
+    /// draw everything as "freeze frame"
+
+    /// 1) map (may skip one or two animation steps, but it doesn't matter)
+	DRAW_LEFT();
+	ANIMATE_LEFT(&vl_map_roadline_left_1);
+	ANIMATE_RIGHT(&vl_map_roadline_right_1);
+	DRAW_RIGHT();
+
+    /// 2) fuel bar (copy paste from fuel.c)
+    FUELBAR_DRAW(the_player.fuel);
+
+    /// 3) abilities
+    ability_draw_gui();
+
+    /// 4) objects
+    for (unsigned int i = 0; i < MAX_MOVING_OBJECTS; ++i)
+    {
+        moving_object_t * current = &the_object_manager.objects[i];
+        if(current->tick == idle)
+        {
+            continue;
+        }
+
+        /// draw object
+        _draw_object(current);
+    }
+
+    /// 5) score
+    _draw_score();
+
+    /// animate player explosion
+    if(--(the_player.cnt) == 0)
+    {
+        /// next explosion model
+        --(the_player.has_extralife);
+
+        /// reset counter
+        the_player.cnt = 15;
+    }
+
+    /// draw player explosion
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 0x7f;
+    Moveto_d(PLAYER_Y,the_player.x);
+    dp_VIA_t1_cnt_lo = 27;
+    Draw_VLp((struct packet_t *) vl_exploded[the_player.has_extralife]);
 }
 
 

@@ -9,16 +9,15 @@ player_t the_player;
 typedef void (*_player_draw_func)(void);
 const _player_draw_func _PLAYER_DRAW_LUT[];
 
+    
 
-/****************************************************
- * define utils ...
- ***************************************************/
+/****************************************************************
+ * macros for drawing the player
+ ****************************************************************/
 
-/**
- * @brief draw one part of the playermodel at the_player.x
- * 
- * @param VECLIST_PTR pointer to list of packet_t (graphic)
- */
+
+/// @brief draw one part of the playermodel at the_player.x
+/// @param VECLIST_PTR pointer to list of packet_t (graphic)
 #define _DRAW_PLAYER_VL(VECLIST_PTR) 													\
 	Reset0Ref();					/* reset beam to center	*/								\
 	dp_VIA_t1_cnt_lo = 0x7f;		/* set scaling factor for positioning */				\
@@ -44,12 +43,7 @@ const _player_draw_func _PLAYER_DRAW_LUT[];
 	_DRAW_PLAYER_VL(&vl_player_right2);	\
 	_DRAW_PLAYER_VL(&vl_player_right3);
 
-/** the above has to be done in order to accomodate analog errors when drawing big vector lists */
-
-
-
-
-
+/** the above has to be done, in order to accomodate analog errors when drawing big vector lists */
 
 
 /****************************************************

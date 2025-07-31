@@ -74,6 +74,9 @@ void game_init(void);
 /// @brief hard reset / for first start
 void game_start(void);
 
+/// @brief game over with extra steps, trigger this when player hit an enemy causing a game over 
+void game_player_hit_animation(void);
+
 /// @brief state when player crashes
 void game_over(void);
 
