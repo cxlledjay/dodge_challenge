@@ -251,10 +251,10 @@ static inline __attribute__((always_inline)) void  _tick_ac_missile (active_abil
                         play_explosion(&e_missile_explode_enemy);
 
                         /// increase score
-                        Add_Score_a(the_game.stage * 10 , the_game.score);
+                        Add_Score_a(the_game.stage * 5 , the_game.score);
                         
                         /// display scored points
-                        the_ability_manager.points = (int) the_game.stage * 10;
+                        the_ability_manager.points = (int) the_game.stage * 5;
                         the_game.play_animation = ability_play_animation_points;
                         the_game.cnt = 20; //< display animation for 20 frames
 

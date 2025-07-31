@@ -1,5 +1,6 @@
 #include "game_include/misc.h"
 
+/// hacky and most likely nowhere near optimal, but does the job
 
 void Sub_Score_a(unsigned int a, void* x)
 {
@@ -35,7 +36,22 @@ void Sub_Score_a(unsigned int a, void* x)
         if(bot > top)
         {
             top += 10;
-            substr[i-1]++; //< carry
+            if(i == 0) {
+                /// number would drop under zero -> to prevent overflow set score to zero
+                ((unsigned int*)x)[5] = '0';
+                ((unsigned int*)x)[4] = ' ';
+                ((unsigned int*)x)[3] = ' ';
+                ((unsigned int*)x)[2] = ' ';
+                ((unsigned int*)x)[1] = ' ';
+                ((unsigned int*)x)[0] = ' ';
+                
+                /// cancel
+                return;
+            }
+            else
+            {
+                substr[i-1]++; //< carry
+            }
         }
 
         /// write back in ascii format
@@ -44,7 +60,7 @@ void Sub_Score_a(unsigned int a, void* x)
 
     /// strip zeroes
     unsigned int had_a_char = 0;
-    for(int i = 0; i < 6; ++i)
+    for(int i = 0; i < 5; ++i)
     {
         if(!had_a_char)
         {
@@ -58,4 +74,7 @@ void Sub_Score_a(unsigned int a, void* x)
             }
         }
     }
+
+    /// done
+    return;
 }

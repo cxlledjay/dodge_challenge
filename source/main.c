@@ -121,7 +121,7 @@
 	__attribute__((noreturn)) void debug_math(void)
 	{
 		Clear_Score((void*) score);
-		for(unsigned int i = 0; i < 100; ++i) Add_Score_a(100, (void*)score);
+		//for(unsigned int i = 0; i < 100; ++i) Add_Score_a(100, (void*)score);
 		Add_Score_a(41,(void*)score);
 		Sub_Score_a(40, (void*) score);
 		Sub_Score_a(1, (void*) score);

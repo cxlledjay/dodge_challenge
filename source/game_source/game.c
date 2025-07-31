@@ -1031,8 +1031,8 @@ void game_over(void)
     print_string(10,-110, score_display);
     print_string(-10,-110, highscore_display);
 
-    print_string(-86,-96,   "[1] BACK TO START\x80");
-    print_string(-110,-74,     "[4] TRY AGAIN\x80");
+    print_string(-86,-108,   "[1] BACK TO START\x80");
+    print_string(-110,-86,     "[4] TRY AGAIN\x80");
 
     return;
 }
