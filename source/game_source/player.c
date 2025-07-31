@@ -59,9 +59,9 @@ void player_init(void)
 		.x_LUT = 0,
 		.queued_lane_change = 0,
 		.cnt = 0,
-		.fuel = 10,
-		.ability = AC_NONE,
-		.has_extralife = 0,
+		.fuel = 100,
+		.ability = AC_MISSILE,
+		.has_extralife = 1,
 		.tick = player_draw};
 	the_player = fresh_player;
 }

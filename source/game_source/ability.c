@@ -252,6 +252,11 @@ static inline __attribute__((always_inline)) void  _tick_ac_missile (active_abil
 
                         /// increase score
                         Add_Score_a(the_game.stage * 10 , the_game.score);
+                        
+                        /// display scored points
+                        the_ability_manager.points = (int) the_game.stage * 10;
+                        the_game.play_animation = ability_play_animation_points;
+                        the_game.cnt = 20; //< display animation for 20 frames
 
                         /// and despawn
                         me->tick = ability_idle;
@@ -301,6 +306,47 @@ void _tick_ac_missile_right (active_ability_t * me)
 {
     /// use helper function
     _tick_ac_missile(me, &vl_fired_missile_right);
+
+    /// done
+    return;
+}
+
+
+
+/****************************************************************
+ * animation functions
+ ****************************************************************/
+
+
+void ability_play_animation_points(void)
+{
+    if(--(the_game.cnt) == 0)
+    {
+        /// stop animation
+        the_game.play_animation = game_no_animation;
+    }
+    else
+    {
+        /// visibility ramping
+        if(the_game.cnt > 14)
+        {
+            Intensity_7F();
+        }
+        else if(the_game.cnt > 7)
+        {
+            Intensity_5F();
+        }
+        else
+        {
+            Intensity_3F();
+        }
+        
+        /// draw gotten / lost points
+        int y = -((int) the_game.cnt) + 100;
+        print_signed_int(y,-30, the_ability_manager.points);
+
+        Intensity_5F(); //< reset to normal
+    }
 
     /// done
     return;

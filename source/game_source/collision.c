@@ -157,6 +157,7 @@ void aabb_calculate_right(void)
 #include "game_include/sounds/s_animation.h"
 #include "game_include/fuel.h"
 #include "game_include/random.h"
+#include "game_include/ability.h"
 
 void aabb_check_collision(void)
 {
@@ -362,6 +363,11 @@ void aabb_check_collision(void)
                             play_explosion(&e_extralife_explosion);
 
                             /// TODO: decrease score
+
+                            /// display lost points
+                            the_ability_manager.points = -((int)the_game.stage * 10);
+                            the_game.play_animation = ability_play_animation_points;
+                            the_game.cnt = 20; //< display animation for 20 frames
                             
                         }
                         else

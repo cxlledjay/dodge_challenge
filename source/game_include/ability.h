@@ -34,6 +34,7 @@ typedef struct _ability_manager_t
 {
     /// @brief keeping track of active abilities
     active_ability_t used[2];
+    int points; //< tracker for animating gotten points
 } ability_manager_t;
 
 
@@ -50,6 +51,11 @@ void ability_idle(active_ability_t * me);
 
 /// @brief show the current abilities the player has
 void ability_draw_gui(void);
+
+/// @brief animation of scored points
+void ability_play_animation_points(void);
+
+
 
 /// @brief calculate dynamic moving path constant "path_factor" and save it to ram
 /// @param aa the ability object
