@@ -366,8 +366,9 @@ void aabb_check_collision(void)
                         }
                         else
                         {
-                            /// tell the game over screen, why it was over (here, reason = hit object)
-                            the_game.reason = GO_HIT_ENEMY;
+                            /// save metadata of the game over reason
+                            the_game.reason = 0x02; //< actual reason (0x02 = crash)
+                            the_game.reason |= ((obj->type << 4) & 0b11110000); //< save the enemy type
                             
                             /// highscore handler
                             New_High_Score(the_game.score, (void*) &Vec_High_Score);
@@ -381,7 +382,7 @@ void aabb_check_collision(void)
 
                             /// init explosion on player model
                             the_player.cnt = 15; //< use player counter to track animation
-                            the_player.has_extralife = 3; //< abuse extralife flag for tracking animation stage (hacky...)
+                            the_player.queued_lane_change = 3; //< abuse queued_lane_change flag for tracking animation stage (hacky...)
 
                             /// the hit object should also explode
                             obj->type = MOT_EXPLODED;

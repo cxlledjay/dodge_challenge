@@ -774,6 +774,10 @@ void game_player_hit_animation(void)
         /// animation is over -> show end screen
         the_game.execute_state = game_over;
 
+        /// init game over screen
+        the_game.cnt = 20;
+        the_game.play_animation = (void *) &vl_exploded[0];
+
         /// play sad sound
         Clear_Sound();
         play_music(&game_over_sad);
@@ -813,7 +817,7 @@ void game_player_hit_animation(void)
     if(--(the_player.cnt) == 0)
     {
         /// next explosion model
-        --(the_player.has_extralife);
+        --(the_player.queued_lane_change);
 
         /// reset counter
         the_player.cnt = 15;
@@ -824,7 +828,7 @@ void game_player_hit_animation(void)
     dp_VIA_t1_cnt_lo = 0x7f;
     Moveto_d(PLAYER_Y,the_player.x);
     dp_VIA_t1_cnt_lo = 27;
-    Draw_VLp((struct packet_t *) vl_exploded[the_player.has_extralife]);
+    Draw_VLp((struct packet_t *) vl_exploded[(unsigned int) the_player.queued_lane_change]);
 }
 
 
@@ -832,6 +836,7 @@ void game_player_hit_animation(void)
 /*****************************************************************************
  * game over screen
  ****************************************************************************/
+#include "game_include/graphics/g_misc.h"
 
 void game_over(void)
 {
@@ -887,25 +892,128 @@ void game_over(void)
     highscore_display[16] = Vec_High_score[5];
 
 
-    /// draw game over screen
-    print_string(100,-85,"-=GAME OVER=-\x80");
-    switch(the_game.reason)
+    /// start drawing
+
+    /// 1) game over
+    print_string(110,-85,"-=GAME OVER=-\x80");
+
+    /// 2) show the reason
+    unsigned int reason = the_game.reason & 0b00000011;
+
+    /// 2.1) generic "+"
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 57;
+    Moveto_d(119,-113);
+    dp_VIA_t1_cnt_lo = 13;
+    Draw_VLp(&vl_game_over_plus);
+
+    /// 2.2) generic "="
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 57;
+    Moveto_d(127,112);
+    dp_VIA_t1_cnt_lo = 13;
+    Draw_VLp(&vl_game_over_equals);
+
+    /// 2.3) generic car
+    #define _GENERIC_CAR_SC     (96u)
+    #define _GENERIC_CAR_Y      (75)
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+    Moveto_d(_GENERIC_CAR_Y,-127);
+    dp_VIA_t1_cnt_lo = 16;
+
+    switch(the_player.lane)
     {
-        case GO_HIT_ENEMY:
-            print_string(80,-70,"HIT OBJECT\x80");
+        case LEFT_LANE:
+            Draw_VLp(&vl_player_left1);
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+            Moveto_d(_GENERIC_CAR_Y,-127);
+            dp_VIA_t1_cnt_lo = 16;
+            Draw_VLp(&vl_player_left2);
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+            Moveto_d(_GENERIC_CAR_Y,-127);
+            dp_VIA_t1_cnt_lo = 16;
+            Draw_VLp(&vl_player_left3);
             break;
-        case GO_NO_FUEL:
-            print_string(80,-60,"NO FUEL\x80");
+
+        case MID_LANE:
+            Draw_VLp(&vl_player_mid1);
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+            Moveto_d(_GENERIC_CAR_Y,-127);
+            dp_VIA_t1_cnt_lo = 16;
+            Draw_VLp(&vl_player_mid2);
             break;
+
+        case RIGHT_LANE:
+            Draw_VLp(&vl_player_right1);
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+            Moveto_d(_GENERIC_CAR_Y,-127);
+            dp_VIA_t1_cnt_lo = 16;
+            Draw_VLp(&vl_player_right2);
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = _GENERIC_CAR_SC;
+            Moveto_d(_GENERIC_CAR_Y,-127);
+            dp_VIA_t1_cnt_lo = 16;
+            Draw_VLp(&vl_player_right3);
+            break;
+
         default:
-            ;
+            ; //< should never happen
     }
 
+    /// 2.4) generic explosion
+    Reset0Ref();
+    dp_VIA_t1_cnt_lo = 96;
+    Moveto_d(75,127);
+    dp_VIA_t1_cnt_lo = 20;
+
+    if(--(the_game.cnt) == 0)
+    {
+        /// next animation
+
+    }
+    Draw_VLp(&vl_game_over_equals);
+
+
+    /// 2.5) reason specific stuff
+    switch (reason)
+    {
+        case 0x01:
+            /// no fuel left
+
+            /// "0x"
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = 60;
+            Moveto_d(127,-42);
+            dp_VIA_t1_cnt_lo = 13;
+            Draw_VLp(&vl_game_over_zero_times);
+
+            /// fuelcan
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = 47;
+            Moveto_d(126,59);
+            dp_VIA_t1_cnt_lo = 27;
+            Draw_VLp(&vl_object_fuelcan);
+
+            break;
+        case 0x02:
+            /// hit an enemy
+
+            break;
+        default:
+            ; //< should not happen
+    }
+
+    /// draw the rest
     print_string(10,-110, score_display);
     print_string(-10,-110, highscore_display);
 
-    print_string(-86,-94,   "[1] BACK TO START\x80");
-    print_string(-110,-72,    "[4] TRY AGAIN\x80");
+    print_string(-86,-104,   "[1] BACK TO START\x80");
+    print_string(-110,-82,     "[4] TRY AGAIN\x80");
 
     return;
 }

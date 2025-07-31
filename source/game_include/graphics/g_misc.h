@@ -8,10 +8,10 @@
 #include "utils/vector.h"
 
 // ***************************************************************************
-// animated middle line (left and right)
+// game over screen drawings
 // ***************************************************************************
 
-extern const void* const vl_digits[10];
 
-
-extern const struct packet_t vl_speed_display[];
+extern const struct packet_t vl_game_over_plus[];
+extern const struct packet_t vl_game_over_zero_times[];
+extern const struct packet_t vl_game_over_equals[];

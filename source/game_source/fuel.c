@@ -43,6 +43,7 @@ void fuel_bar_init (void)
 
 #include "game_include/graphics/g_gui.h"
 #include "game_include/sounds/s_animation.h"
+#include "game_include/graphics/g_object.h"
 
 void fuel_bar_tick (void)
 {
@@ -57,7 +58,7 @@ void fuel_bar_tick (void)
             /// no fuel -> game over
 
             /// state reason for game over
-            the_game.reason = GO_NO_FUEL;
+            the_game.reason = 0x01; //< no fuel
             
             /// play sad sound
             Clear_Sound();
@@ -71,6 +72,10 @@ void fuel_bar_tick (void)
 
             /// game over
             the_game.execute_state = game_over;
+
+            /// init game over screen
+            the_game.cnt = 20;
+            the_game.play_animation = (void *) &vl_exploded[0];
         }
 
         /// reset timer accordingly

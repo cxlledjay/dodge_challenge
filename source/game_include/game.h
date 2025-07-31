@@ -27,11 +27,10 @@ typedef struct _game_options_t {
 #define INPUT_METHOD_2_3            (1u)
 #define INPUT_METHOD_ANALOG         (2u)
 
-typedef enum _game_over_t
-{
-   GO_NO_FUEL = 0,
-   GO_HIT_ENEMY = 1
-} game_over_t;
+/// @brief information about how the game ended
+/// @param bit0_3 reason (0x1 = no fuel, 0x2 = hit enemy, ...?)
+/// @param bit4_7 hit enemy type (if bit0-3 is 0x2)
+typedef unsigned int game_over_t;
 
 
 #include "stage.h"

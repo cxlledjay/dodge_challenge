@@ -59,7 +59,7 @@ void player_init(void)
 		.x_LUT = 0,
 		.queued_lane_change = 0,
 		.cnt = 0,
-		.fuel = 100,
+		.fuel = 10,
 		.ability = AC_NONE,
 		.has_extralife = 0,
 		.tick = player_draw};
