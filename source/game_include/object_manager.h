@@ -8,6 +8,9 @@
 #include "game_include/data/spawn_pattern.h"
 #define MAX_MOVING_OBJECTS (10u)
 
+/// @brief lookup table to translate MOT to vector list
+extern const void * const MOT_TYPE_TO_MODEL[];
+
 
 typedef struct _object_manager_t
 {

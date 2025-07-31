@@ -43,7 +43,6 @@ void fuel_bar_init (void)
 
 #include "game_include/graphics/g_gui.h"
 #include "game_include/sounds/s_animation.h"
-#include "game_include/graphics/g_object.h"
 
 void fuel_bar_tick (void)
 {
@@ -75,7 +74,7 @@ void fuel_bar_tick (void)
 
             /// init game over screen
             the_game.cnt = 20;
-            the_game.play_animation = (void *) &vl_exploded[0];
+            the_game.play_animation = (void *) 3; //< storing animation stage as void *
         }
 
         /// reset timer accordingly

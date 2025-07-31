@@ -651,6 +651,9 @@ void game_run(void)
     /// tick stage object for speed ramping effect over time
     stages_tick();
 
+    /// display animation
+    the_game.play_animation(); //< needs to be done before fuel_bar_tick() because of the pointer being altert if run out of fuel!!!
+
     /// draw the map (the road)
     the_map.tick();
 
@@ -673,9 +676,6 @@ void game_run(void)
 
     /// display score
     _draw_score();
-
-    /// display animation
-    the_game.play_animation();
 
     /// done
     return;
@@ -776,7 +776,7 @@ void game_player_hit_animation(void)
 
         /// init game over screen
         the_game.cnt = 20;
-        the_game.play_animation = (void *) &vl_exploded[0];
+        the_game.play_animation = (void *) 3; //< storing animation stage as void *
 
         /// play sad sound
         Clear_Sound();
@@ -970,16 +970,29 @@ void game_over(void)
     dp_VIA_t1_cnt_lo = 96;
     Moveto_d(75,127);
     dp_VIA_t1_cnt_lo = 20;
+    Draw_VLp((struct packet_t *) vl_exploded[(unsigned long) the_game.play_animation]);
 
+    /// generic explosion animation
     if(--(the_game.cnt) == 0)
     {
+        /// reset counter
+        the_game.cnt = 20;
+        
         /// next animation
-
+        unsigned long animation_step = (unsigned long) the_game.play_animation;
+        if(animation_step == 0)
+        {
+            the_game.play_animation = (void*) 3;
+        }
+        else
+        {
+            the_game.play_animation = (void*) animation_step-1;
+        }
     }
-    Draw_VLp(&vl_game_over_equals);
-
 
     /// 2.5) reason specific stuff
+    unsigned int enemy_hit_class = the_game.reason >> 4;
+
     switch (reason)
     {
         case 0x01:
@@ -1003,6 +1016,13 @@ void game_over(void)
         case 0x02:
             /// hit an enemy
 
+            /// draw the hit enemy
+            Reset0Ref();
+            dp_VIA_t1_cnt_lo = 47;
+            Moveto_d(127,0);
+            dp_VIA_t1_cnt_lo = 20;
+            Draw_VLp((struct packet_t *) MOT_TYPE_TO_MODEL[enemy_hit_class]);
+
             break;
         default:
             ; //< should not happen
@@ -1012,8 +1032,8 @@ void game_over(void)
     print_string(10,-110, score_display);
     print_string(-10,-110, highscore_display);
 
-    print_string(-86,-104,   "[1] BACK TO START\x80");
-    print_string(-110,-82,     "[4] TRY AGAIN\x80");
+    print_string(-86,-96,   "[1] BACK TO START\x80");
+    print_string(-110,-74,     "[4] TRY AGAIN\x80");
 
     return;
 }
