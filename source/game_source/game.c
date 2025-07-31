@@ -43,7 +43,7 @@ void game_start(void)
         .options = start_selection,
         .score = {0,0,0,0,0,0,0},
         .stage = 0,
-        .cnt = 0,
+        .cnt = 150,
         .process_input = input_analog,
         .execute_state = start_menu
     };
@@ -199,10 +199,21 @@ void start_menu(void) {
     if(input & 0b00000010) //< BUTTON 2
     {
         /// cycle mode
-        if(the_game.options.game_mode == GAME_MODE_HARD) {
+        if(the_game.options.game_mode == GAME_MODE_HARD)
+        {
             the_game.options.game_mode = GAME_MODE_EASY;
-        } else {
-            the_game.options.game_mode++;
+        }
+        else
+        {
+            if(the_game.options.game_mode == GAME_MODE_HIDDEN)
+            {
+                /// keep save state after toggleing hitten mode
+                the_game.options.game_mode = GAME_MODE_EASY;
+            }
+            else
+            {
+                the_game.options.game_mode++;
+            }
         }
 
         /// play sound
@@ -222,6 +233,29 @@ void start_menu(void) {
         play_music(&menu_select_sound);
     }
 
+    /// get secret input
+    unsigned int hidden_input = buttons_held();
+
+    /// track how long secret input is held
+    if((hidden_input & 0x07) == 0x07)
+    {
+        if(--(the_game.cnt) == 0)
+        {
+            /// select hidden input
+            the_game.options.game_mode = GAME_MODE_HIDDEN;
+            
+            /// play sound
+            play_music(&menu_select_sound_hidden);
+
+            /// reset counter for save state
+            the_game.cnt = 150;
+        }
+    }
+    else
+    {
+        /// not pressed (or not long enough)
+        the_game.cnt = 150;
+    }
 
 
     /// assemble strings for menu
@@ -871,6 +905,7 @@ void game_over(void)
     {
         /// back to start
         the_game.execute_state = start_menu;
+        the_game.cnt = 150; //< secret input tracking
     }
 
     /// start drawing

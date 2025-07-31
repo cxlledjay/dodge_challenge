@@ -126,6 +126,8 @@
 		Sub_Score_a(40, (void*) score);
 		Sub_Score_a(1, (void*) score);
 		Sub_Score_a(1, (void*) score);
+		
+		unsigned int input = 0;
 		do
 		{
 			char score_display[19] =     "SCORE:     XXXXXX\x80";
@@ -137,6 +139,11 @@
 			score_display[15] = score[4];
 			score_display[16] = score[5];
 			print_string(10,-110, score_display);
+
+    		check_buttons();
+			input = buttons_held();
+
+			print_unsigned_int(-30,0,input);
 		}
 		while(1);
 	}

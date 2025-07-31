@@ -6,6 +6,7 @@
 // menu selection
 // **************************************************************
 extern const struct sound_music_t menu_select_sound;
+extern const struct sound_music_t menu_select_sound_hidden;
 
 // **************************************************************
 // start animation
