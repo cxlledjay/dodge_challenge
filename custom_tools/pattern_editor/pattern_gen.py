@@ -26,9 +26,18 @@
 
 mot_map = {
     '-' : "MOT_NULL",
-    '1' : "MOT_ENEMY_1"
-    # TODO: add all other possible mappings of moving_object_type_t (object.h)
+    '1' : "MOT_ENEMY_CAR1",
+    '2' : "MOT_ENEMY_CAR2",
+    'T' : "MOT_ENEMY_TRUCK",
+    'B' : "MOT_ENEMY_BIKE",
+    'F' : "MOT_FUELCAN",
+    'E' : "MOT_EXTRALIFE",
+    'M' : "MOT_ABILITY_MISSILE"
 }
+
+
+
+
 
 encoded_data = [] #input data
 
@@ -37,27 +46,46 @@ def read_in():
     global encoded_data
     with open('in.txt', 'r') as in_file:
         # Read each line in the file
+        current_array = "error"
         for line in in_file:
-            encoded_data.append([line[0],line[1],line[2]])
+            if(line.startswith('#')):
+                current_array = line.replace("#","")
+            elif(not line.startswith("\n")):
+                encoded_data.append([current_array,line[0],line[1],line[2]])
 
-def write_out(array_name):
+def write_out():
     global mot_map
     global encoded_data
     ed = encoded_data
+    current_array = "ERROR"
     with open('out.txt', 'w') as out_file:
-        name = f"_SP_{array_name}"
-        out_file.write(f"const spawn_entry_t {name}[] =\n{{")
-        # write type definition
+
         arr_len = len(ed)
         for i in range(arr_len):
-            left  = mot_map[ed[i][0]]
-            mid   = mot_map[ed[i][1]]
-            right = mot_map[ed[i][2]]
-            if i != arr_len-1:
-                out_file.write(f"\n\t{{.is_last = 0, .left = {left:<15}, .mid = {mid:<15}, .right = {right:<15}}},")
+            if(ed[i][0] != current_array):
+                # create new array
+                current_array = ed[i][0]
+                name = f"_SP_{current_array}"
+                out_file.write(f"const spawn_entry_t {name}[] =\n{{")
+             
+            #  and print array
+            left  = mot_map[ed[i][1]]
+            mid   = mot_map[ed[i][2]]
+            right = mot_map[ed[i][3]]
+            if(i != arr_len-1):
+                if(ed[i+1][0] != current_array):
+                    # last one
+                    out_file.write(f"\n\t{{.is_last = 1, .left = {left:<16}, .mid = {mid:<16}, .right = {right:<16}}}")
+                    out_file.write("\n};\n\n")
+                else:
+                    # normal
+                    out_file.write(f"\n\t{{.is_last = 0, .left = {left:<16}, .mid = {mid:<16}, .right = {right:<16}}},")
             else:
-                out_file.write(f"\n\t{{.is_last = 1, .left = {left:<15}, .mid = {mid:<15}, .right = {right:<15}}}")
-        out_file.write("\n};\n")
+                #very last one
+                out_file.write(f"\n\t{{.is_last = 1, .left = {left:<16}, .mid = {mid:<16}, .right = {right:<16}}}")
+                out_file.write("\n};\n\n")
+
+                
 
 
 
@@ -68,4 +96,4 @@ def write_out(array_name):
 
 if __name__ == "__main__":
     read_in()
-    write_out("alpha_4")
+    write_out()

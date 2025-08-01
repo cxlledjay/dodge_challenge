@@ -1,25 +1,27 @@
-const spawn_entry_t _SP_alpha_4[] =
+const spawn_entry_t _SP_heavy_traffic
+[] =
 {
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_1    , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_1    },
-	{.is_last = 0, .left = MOT_ENEMY_1    , .mid = MOT_ENEMY_1    , .right = MOT_NULL       },
-	{.is_last = 1, .left = MOT_ENEMY_1    , .mid = MOT_NULL       , .right = MOT_NULL       }
+	{.is_last = 0, .left = MOT_ENEMY_BIKE  , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_ENEMY_CAR1  , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_ENEMY_BIKE  , .mid = MOT_NULL        , .right = MOT_ENEMY_CAR1  },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_ENEMY_CAR1  , .right = MOT_NULL        },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_ENEMY_CAR1  , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_ENEMY_BIKE  , .mid = MOT_NULL        , .right = MOT_ENEMY_CAR1  },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_ENEMY_CAR1  , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_CAR2  },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_ENEMY_CAR1  , .right = MOT_ENEMY_CAR1  },
+	{.is_last = 0, .left = MOT_ENEMY_BIKE  , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK },
+	{.is_last = 1, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_TRUCK }
 };
+
+const spawn_entry_t _SP_next_test
+[] =
+{
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_NULL        , .right = MOT_ENEMY_CAR1  },
+	{.is_last = 0, .left = MOT_NULL        , .mid = MOT_ENEMY_CAR1  , .right = MOT_NULL        },
+	{.is_last = 1, .left = MOT_ENEMY_CAR1  , .mid = MOT_NULL        , .right = MOT_NULL        }
+};
+

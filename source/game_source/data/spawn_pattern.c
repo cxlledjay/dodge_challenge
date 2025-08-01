@@ -104,6 +104,26 @@ const spawn_entry_t _SP_alpha_4[] =
 	{.is_last = 1, .left = MOT_ENEMY_BIKE    , .mid = MOT_NULL       , .right = MOT_NULL       }
 };
 
+const spawn_entry_t _SP_heavy_traffic[] =
+{
+	{.is_last = 0, .left = MOT_ENEMY_BIKE , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_CAR1 , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_ENEMY_BIKE , .mid = MOT_NULL       , .right = MOT_ENEMY_CAR1 },
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_CAR1 , .right = MOT_NULL       },
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_CAR1 , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_ENEMY_BIKE , .mid = MOT_NULL       , .right = MOT_ENEMY_CAR1 },
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_ENEMY_CAR1 , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_CAR2 },
+	{.is_last = 0, .left = MOT_NULL       , .mid = MOT_ENEMY_CAR1 , .right = MOT_ENEMY_CAR1 },
+	{.is_last = 0, .left = MOT_ENEMY_BIKE , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK},
+	{.is_last = 1, .left = MOT_NULL       , .mid = MOT_NULL       , .right = MOT_ENEMY_TRUCK}
+};
+
+
+
 
 /************************************************************
  * testing purposes
@@ -138,7 +158,7 @@ const spawn_entry_t * const SPAWN_PATTERN_PTR_COLLECTION[SPAWN_PATTERNS_CNT] =
 	_SP_DEBUG_ONLY,
 	_SP_DEBUG_ONLY
 	#else
-    _SP_alpha_1,
+    _SP_heavy_traffic,
     _SP_alpha_2,
     _SP_alpha_3,
     _SP_alpha_4,
