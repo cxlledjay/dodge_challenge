@@ -93,7 +93,7 @@ void object_manager_tick_all(void)
 #include "game_include/data/spawn_pattern.h"
 static inline __attribute__((always_inline)) const spawn_entry_t * get_next_pattern (void)
 {
-    unsigned int idx_bitmasked = 0;//rand(&random_obj) & SPAWN_PATTERN_IDX_BITMASK;
+    unsigned int idx_bitmasked = rand(&random_obj) & SPAWN_PATTERN_IDX_BITMASK;
     return SPAWN_PATTERN_PTR_COLLECTION[idx_bitmasked];
 }
 

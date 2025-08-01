@@ -50,6 +50,7 @@ def read_in():
         for line in in_file:
             if(line.startswith('#')):
                 current_array = line.replace("#","")
+                current_array = current_array.replace("\n","")
             elif(not line.startswith("\n")):
                 encoded_data.append([current_array,line[0],line[1],line[2]])
 

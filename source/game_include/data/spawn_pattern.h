@@ -22,7 +22,7 @@ typedef struct _spawn_entry_t
 /// @brief empty spawnpattern for stage transitions
 extern const spawn_entry_t SP_empty[1];
 
-#define SPAWN_PATTERNS_CNT          (4u)    //< has to be 2^n
+#define SPAWN_PATTERNS_CNT          (16u)    //< has to be 2^n
 #define SPAWN_PATTERN_IDX_BITMASK   (SPAWN_PATTERNS_CNT-1)
 
 /// @brief all spawn patterns accessible by bitmasked rng index (check size of array for bitmask size)

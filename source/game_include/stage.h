@@ -11,15 +11,15 @@ typedef enum _stage_t
 {
    GS_VERY_SLOW      = 0,  //< easy start
    GS_QUITE_SLOW     = 1,
-   GS_SLOWISH        = 2,  //< normal start
-   GS_SLOW           = 3,
-   GS_QUITE_NORMAL   = 4,  //< hard start
+   GS_SLOWISH        = 2,  //< mid start
+   GS_SLOW           = 3,  //< hard start
+   GS_QUITE_NORMAL   = 4,  
    GS_NORMAL         = 5,  //< easy stop
-   GS_QUITE_FAST     = 6,
-   GS_FAST           = 7,  //< normal stop
-   GS_VERY_FAST      = 8,
-   GS_SPEEDY         = 9,  //< hard stop
-   GS_HIDDEN         = 10  //< secret speed
+   GS_QUITE_FAST     = 6,  //< mid stop
+   GS_FAST           = 7,
+   GS_VERY_FAST      = 8,  //< hard stop, secret start
+   GS_SPEEDY         = 9,  
+   GS_HIDDEN         = 10  //< secret stop
 }stage_t;
 
 /// @brief max stage for stage ramping

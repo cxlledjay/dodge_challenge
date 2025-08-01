@@ -62,8 +62,8 @@ void game_start(void)
 
 const stage_t game_max_stage[4] = {
     GS_NORMAL,
-    GS_FAST,
-    GS_SPEEDY,
+    GS_QUITE_FAST,
+    GS_VERY_FAST,
     GS_HIDDEN
 };
 
@@ -93,10 +93,10 @@ void game_init(void)
             the_game.stage = GS_SLOWISH;
             break;
 		case GAME_MODE_HARD:
-            the_game.stage = GS_QUITE_NORMAL;
+            the_game.stage = GS_SLOW;
             break;
 		case GAME_MODE_HIDDEN:
-            the_game.stage = GS_QUITE_FAST;
+            the_game.stage = GS_VERY_FAST;
             break;
 		default:
             // should never happen
